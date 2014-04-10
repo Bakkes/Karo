@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "Tile.h"
 #include "Size.h"
 #include "Vector2D.h"
 #include "IGridTraveller.h"
@@ -42,7 +41,7 @@ namespace karo {
 		}
 
 		// get tile at position
-		Tile<T>* GetTileAt(Vector2D& position) const{
+		T* GetTileAt(Vector2D& position) const{
 			unsigned desiredIndex = GetTileIndex(p.X(), p.Y());
 			if (desiredIndex < 0) {
 				sizeMessage(x, y);
@@ -52,116 +51,25 @@ namespace karo {
 			}
 			return _tiles->at(desiredIndex);
 		}
-
-		// The given function pointer will receive all the tiles and coordinates in the specified row
-		void TraverseRow(unsigned y, IGridTraveller<T>* travellar){
-			for (unsigned x = 0; x < _size->GetWidth(); x++) {
-				Traverse(x, y, traveller);
-			}
-		}
-		// The given function pointer will receive all the tiles and coordinates in the specified collumn
-		void TraverseCollumn(unsigned x, IGridTraveller<T>* travellar){
-			for (unsigned y = 0; y < _size->GetHeight(); y++) {
-				Traverse(x, y, traveller);
-			}
-		}
-		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
-		void TraverseTiles(IGridTraveller<T>* travellar){
-			for (unsigned x = 0; x < _size->GetWidth(); x++) {
-				TraverseCollumn(x, traveller);
-			}
-		}
 		Size* GetSize() const{
 			return _size;
 		}
-		vector<Tile<T>*> GetSurroundingTiles(vector<Tile<T>*>) const{
-			vector<Tile*> allTiles;
-			allTiles.reserve(tiles.size() * 4);
-			for(unsigned i = 0; i < tiles.size(); i++) {
-				Tile* t = tiles.at(i);
-				std::vector<Tile*> surrounding = t->GetSurroundingTiles();
-				allTiles.insert(allTiles.end(), surrounding.begin(), surrounding.end());
-			}
-			std::sort(allTiles.begin(), allTiles.end());
-			std::sort(tiles.begin(), tiles.end());
-			std::vector<Tile*> difference;
-			std::set_difference(allTiles.begin(), allTiles.end(), tiles.begin(), tiles.end(), std::back_inserter(difference));
-			return difference;
-		}
-		vector<Tile<T>*> GetTilesInRectangle(Vector2D topLeft, Vector2D bottomRight) const{
-			GridGraphicTranslator translator = GridGraphicTranslator();
-			vector<Tile*> includedTiles;
-
-			Vector2D p = translator.ToFrom(topLeft);
-			Tile* topLeftTile = GetTileAt(p);
-			Tile* topRightTile = GetTileAt(translator.ToFrom(bottomRight));
-
-			for(double i = topLeftTile->GetPosition()->X(); i <= topRightTile->GetPosition()->X(); i++) {
-				for(double j = topLeftTile->GetPosition()->Y(); j <= topRightTile->GetPosition()->Y(); j++) {
-					includedTiles.push_back(GetTileAt((int)i, (int)j));
-				}
-			}
-			return includedTiles;
-		}
-
 	private:
-		vector<Tile<T>*>* _tiles;
+		vector<T*>* _tiles;
 		unsigned _tilesLength;
 		static const unsigned C_default_w = 20;
 		static const unsigned C_default_h = 20;
 		// size of the grid
 		Size* _size;
-		// final step in the traversal proces, here the cordinates are known and only the
-		// functionpointer has to be called
-		void Traverse(unsigned x, unsigned y, IGridTraveller<T>* travellar){
-			traveller->ReceiveTile(GetTileAt(x, y));
-		}
 		
 		// commen code for both contructors
 		void Init(unsigned width, unsigned height){
 			_tilesLength = (unsigned) (width * height);
 			_size = new Size(width, height);
-			_tiles = new vector<Tile<T>*>();
+			_tiles = new vector<T*>();
 			for (unsigned y = 0; y < height; y++) {
 				for (unsigned x = 0; x < width; x++) {
-					_tiles->push_back(new Tile<T>(new Vector2D(x, y)));
-				}
-			}
-			// bind tiles to each other
-			for (unsigned y = 0; y < height; y++) {
-				for (unsigned x = 0; x < width; x++) {
-
-					if (y < height - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetTop(
-							_tiles->at(
-								GetTileIndex(x, y + 1)
-							)
-						);
-					}
-
-					if (y != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetBottom(
-							_tiles->at(
-								GetTileIndex(x, y - 1)
-							)
-						);
-					}
-
-					if (x < width - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetRight(
-							_tiles->at(
-								GetTileIndex(x + 1, y)
-							)
-						);
-					}
-
-					if (x != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetLeft(
-							_tiles->at(
-								GetTileIndex(x - 1, y)
-							)
-						);
-					}
+					_tiles->push_back(NULL);
 				}
 			}
 		}

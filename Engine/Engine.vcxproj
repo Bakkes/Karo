@@ -73,7 +73,6 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IGridTraveller.h" />
     <ClInclude Include="Size.h" />
-    <ClInclude Include="Tile.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
