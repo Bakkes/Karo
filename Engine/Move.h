@@ -7,6 +7,12 @@ namespace Engine {
 	class Move {
 	public:
 		Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile);
+		MoveType GetMoveType();
+		int GetFromTile();
+		int GetToTile();
+		MoveDirection GetMoveDirection();
+		int GetEmptyTile();
+
 	private:
 		MoveType _moveType;
 		int _fromTile;
