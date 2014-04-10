@@ -6,7 +6,6 @@ namespace karo{
 class Vector2D
 {
 public:
-	Vector2D(int x, int y);
 	Vector2D(const Vector2D&);
 	Vector2D(double x, double y);
 	Vector2D(double both);

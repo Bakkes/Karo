@@ -1,10 +1,8 @@
-
+#include "Board.h"
 namespace karo{
 
-	class Board{
-		Board(){
-			_grid = new Grid()
-		}
+	Board::Board(){
+		_grid = new Grid<int>();
 	}
 
 }

@@ -3,15 +3,14 @@
 #include <vector>
 #include <cstdlib>
 #include "Vector2D.h"
-#include "IPaintable.h"
-#include "ITileData.h"
 
+using namespace std;
 namespace karo {
 	// a container class for stuff in the grid.
 	// this class is for easy navigating the grid, when you get a tile you now
 	// its neighbours
 	template<typename T>
-	class Tile : IPaintable{
+	class Tile{
 	public:
 		// set a tile to the point
 		Tile(Vector2D* p){
@@ -66,8 +65,8 @@ namespace karo {
 		T* GetData() const{
 			return _tiledata;
 		}
-		vector<Tile*> GetSurroundingTiles() const{
-			vector<Tile*> tiles;
+		vector<Tile<T>*> GetSurroundingTiles() const{
+			vector<Tile<T>*> tiles;
 			tiles.push_back(this->GetLeft());
 			tiles.push_back(this->GetTop());
 			tiles.push_back(this->GetRight());
@@ -78,7 +77,6 @@ namespace karo {
 		void Init(Vector2D* p){
 			_position = p;
 			_tiledata = NULL;
-			_hasData = false;
 			_bottom = NULL;
 			_top = NULL;
 			_left = NULL;
@@ -91,7 +89,8 @@ namespace karo {
 		Tile* _right;
 		Tile* _bottom;
 	};
-	inline bool operator==(const Tile& l, const Tile& r){
+	template<typename T>
+	inline bool operator==(const Tile<T>& l, const Tile<T>& r){
 		if(l.GetPosition() != r.GetPosition()){
 			return false;
 		}
@@ -115,5 +114,6 @@ namespace karo {
 		return true;
 	}
 	// forward operations to the once that actualy do somthing
-	inline bool operator!=(const Tile& l, const Tile& r){return !operator==(l,r);}
+	template<typename T>
+	inline bool operator!=(const Tile<T>& l, const Tile<T>& r){return !operator==(l,r);}
 }

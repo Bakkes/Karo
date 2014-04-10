@@ -71,15 +71,15 @@
     <ClInclude Include="DllImportExport.h" />
     <ClInclude Include="ExportedClass.h" />
     <ClInclude Include="Grid.h" />
-    <ClInclude Include="ITileData.h" />
+    <ClInclude Include="IGridTraveller.h" />
+    <ClInclude Include="Size.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
-    <ClCompile Include="Grid.cpp" />
-    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Size.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
