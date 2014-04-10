@@ -15,6 +15,8 @@
 // includes C# projects. ReturnString can be used from within ReturnNumber(),
 // but not from outside the DLL (like the unit test project).
 
+#pragma once
+
 #ifdef ENGINE_EXPORTS
 #define ENGINE_API __declspec(dllexport) 
 #else
