@@ -1,8 +1,7 @@
 #include "Move.h"
 
 namespace Engine {
-	Move::Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)
-	{
+	Move::Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile) {
 		init(moveType, fromTile, toTile, moveDirection, emptyTile);
 	}
 

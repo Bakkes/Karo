@@ -4,10 +4,9 @@ namespace Engine {
 	enum MoveType { INSERT, MOVE, JUMP };
 	enum MoveDirection { NORTH, EAST, SOUTH, WEST };
 	
-	class Move
-	{
+	class Move {
 	public:
-		Move(MoveType, int, int, MoveDirection, int);
+		Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile);
 	private:
 		MoveType _moveType;
 		int _fromTile;
@@ -15,6 +14,6 @@ namespace Engine {
 		MoveDirection _moveDirection;
 		int _emptyTile;
 
-		void init(MoveType, int, int, MoveDirection, int);
+		void init(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile);
 	};
 }
