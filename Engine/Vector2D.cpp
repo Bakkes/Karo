@@ -1,5 +1,5 @@
 #include "Vector2D.h"
-namespace karo{
+namespace engine {
 	Vector2D::Vector2D(void)
 	{
 		init(0,0);

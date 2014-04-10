@@ -1,6 +1,6 @@
 #include "ICommunication.h"
 
-namespace Engine {
+namespace engine {
 	ENGINE_API int ICommunication::Expose() {
 		return 349439;
 	}

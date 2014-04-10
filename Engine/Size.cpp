@@ -1,6 +1,6 @@
 #include "Size.h"
 
-namespace karo {
+namespace engine {
 	Size::Size(unsigned  width,unsigned  height) : Vector2D((double) width,(double) height) {}
 
 	Size::Size() : Vector2D(0,0) {}

@@ -1,5 +1,5 @@
 #include "Board.h"
-namespace karo{
+namespace engine{
 
 	Board::Board(){
 		_grid = new Grid<int>();
