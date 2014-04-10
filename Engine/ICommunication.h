@@ -6,6 +6,6 @@ namespace Engine {
 	class ICommunication
 	{
 	public:
-		static ENGINE_API int  Expose();
+		static ENGINE_API int Expose();
 	};
 }

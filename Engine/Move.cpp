@@ -13,4 +13,29 @@ namespace Engine {
 		_moveDirection = moveDirection;
 		_emptyTile = emptyTile;
 	}
+
+	MoveType Move::GetMoveType() 
+	{
+		return _moveType;
+	}
+
+	int Move::GetFromTile() 
+	{
+		return _fromTile;
+	}
+
+	int Move::GetToTile() 
+	{
+		return _toTile;
+	}
+
+	MoveDirection Move::GetMoveDirection() 
+	{
+		return _moveDirection;
+	}
+
+	int Move::GetEmptyTile() 
+	{
+		return _emptyTile;
+	}
 }
