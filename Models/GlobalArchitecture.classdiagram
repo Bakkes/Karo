@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="d0c7fdd1-c699-43b7-8aee-d45fce867877" name="GlobalArchitecture" linkedPackageId="a9a3be0b-c375-4bd7-abe2-de704e056712" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="142d373e-2afe-4754-8897-9d82caa10689">
+      <profileInstance Id="5f14d36c-f8c5-45e7-a9bc-6cd0bbdd8222" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="65446c37-543c-4cd9-bad7-f6f7e3528b10">
+      <profileInstance Id="a9af00fa-ee10-4167-9cf2-86ec9a24275e" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="ef097fae-6ee1-48a9-a68f-e86340de6f85" name="Board" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="132dd569-718e-4b0e-9aa3-74872203b0cc" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="fdc72a06-92da-43b7-8672-7fc27b9cdc64" name="IComputerPlayer" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="baf23a43-3de6-47b2-aeee-015effd10f16" />
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="a9a3be0b-c375-4bd7-abe2-de704e056712" name="Models">
+    <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
+  </package>
+</logicalClassDesignerModel>

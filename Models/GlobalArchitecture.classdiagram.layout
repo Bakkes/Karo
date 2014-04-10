@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="GlobalArchitecture">
+  <logicalClassDesignerModelMoniker Id="d0c7fdd1-c699-43b7-8aee-d45fce867877" />
+  <nestedChildShapes>
+    <classShape Id="8cc43cde-19e5-4ed1-909e-55bf8a3ae227" absoluteBounds="4.625, 1.5, 1.5, 0.90234373509883881" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="ef097fae-6ee1-48a9-a68f-e86340de6f85" LastKnownName="Board" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="a8d224f9-996d-4020-8109-86e060ab4bbe" absoluteBounds="4.64, 1.8900000000000001, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="54521bd7-9332-4cfe-af1b-355467bbfe68" absoluteBounds="4.64, 2.1011718675494193, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <interfaceShape Id="d2338566-cdbb-43bc-b9f3-308cc2cb8945" absoluteBounds="7.75, 1.875, 1.5, 0.90234373509883881" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
+      <interfaceMoniker Id="fdc72a06-92da-43b7-8672-7fc27b9cdc64" LastKnownName="IComputerPlayer" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="7e172fd9-bef6-4f2a-a16c-96b9525e1705" absoluteBounds="7.765, 2.265, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="6e1e4be7-ec61-49da-9b5b-ce91d9e8cef8" absoluteBounds="7.765, 2.4761718675494193, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </interfaceShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>
