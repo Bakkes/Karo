@@ -1,6 +1,6 @@
 #include "ExportedClass.h"
 
-namespace Engine {
+namespace karo {
 	int ExportedClass::ReturnNumber() {
 		return 5;
 	}

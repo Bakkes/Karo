@@ -2,8 +2,11 @@
 namespace karo{
 
 	class Board{
-	private:
+	public:
+		Board();
 
+	private:
+		Grid* _grid;
 	}
 
 }

@@ -7,7 +7,7 @@
 // For example:
 // class Example {
 // public:
-//     static ENGINE_API int ReturnNumber();
+//     ENGINE_API int ReturnNumber();
 //     static string ReturnString();
 // };
 //

@@ -27,8 +27,8 @@ namespace karo {
 		Grid(unsigned width, unsigned height);
 		~Grid();
 
-		// shorthand for getTileAt(int x, int y)
-		Tile* GetTileAt(Vector2D& p) const;
+		// get tile at position
+		Tile* GetTileAt(Vector2D& position) const;
 
 		// The given function pointer will receive all the tiles and coordinates in the specified row
 		void TraverseRow(unsigned y, IGridTraveller* travellar);
@@ -43,8 +43,8 @@ namespace karo {
 	private:
 		vector<Tile*>* _tiles;
 		unsigned _tilesLength;
-		static const unsigned C_default_h = 20;
 		static const unsigned C_default_w = 20;
+		static const unsigned C_default_h = 20;
 		// size of the grid
 		Size* _size;
 		// final step in the traversal proces, here the cordinates are known and only the

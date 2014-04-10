@@ -17,7 +17,7 @@ namespace karo {
 		_tiles = new vector<Tile*>();
 		for (unsigned y = 0; y < height; y++) {
 			for (unsigned x = 0; x < width; x++) {
-				_tiles->push_back(new Tile(x, y));
+				_tiles->push_back(new Tile(new Vector2D(x, y)));
 			}
 		}
 		// bind tiles to each other
@@ -101,8 +101,9 @@ namespace karo {
 				+ "y: " + StrConverter::IntToString(y);
 	};
 
-	Tile* Grid::GetTileAt(unsigned x, unsigned y) const {
-		unsigned desiredIndex = GetTileIndex(x, y);
+
+	Tile* Grid::GetTileAt(Vector2D& p) const {
+		unsigned desiredIndex = GetTileIndex(p.X(), p.Y());
 		if (desiredIndex < 0) {
 			sizeMessage(x, y);
 		}
@@ -110,10 +111,6 @@ namespace karo {
 			sizeMessage(x, y);
 		}
 		return _tiles->at(desiredIndex);
-	}
-
-	Tile* Grid::GetTileAt(Vector2D& p) const {
-		return GetTileAt((unsigned) p.X(), (unsigned) p.Y());
 	}
 
 	void Grid::TraverseRow(unsigned y, IGridTraveller* traveller) {
