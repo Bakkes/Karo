@@ -1,5 +1,5 @@
 #pragma once
-namespace Engine {
+namespace engine {
 
 	enum MoveType { INSERT, MOVE, JUMP };
 	enum MoveDirection { NORTH, EAST, SOUTH, WEST };

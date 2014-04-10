@@ -2,7 +2,7 @@
 
 #include "DllImportExport.h"
 
-namespace karo {
+namespace engine {
 	class ExportedClass {
 	public:
 		static ENGINE_API int ReturnNumber();

@@ -1,6 +1,6 @@
 #pragma once
 #include <algorithm>
-namespace karo{
+namespace engine {
 // base class for cartesian calculations, holds two numbers and suports a lot of operator
 // overloads for easy calculations
 class Vector2D

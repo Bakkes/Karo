@@ -2,7 +2,7 @@
 #include "Move.h"
 #include "IUnsafeBoard.h"
 #include <vector>
-namespace Engine {
+namespace engine {
 	class IBoard {
 	public:
 		virtual void ExecuteMove(Move* move) = 0;

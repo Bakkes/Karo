@@ -1,6 +1,6 @@
 #include "Grid.h"
 #pragma once
-namespace karo{
+namespace engine{
 
 	class Board{
 	public:

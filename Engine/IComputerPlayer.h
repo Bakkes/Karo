@@ -1,7 +1,7 @@
 #pragma once
 #include "Move.h"
 
-namespace Engine {
+namespace engine {
 	class IComputerPlayer {
 	public:
 		virtual ~IComputerPlayer(void);

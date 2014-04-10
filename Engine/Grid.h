@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace karo {
+namespace engine {
 	// A class for easaly handaling a grid as a one dimensional array, with O(1) accessing speed for positions
 	template<typename T>
 	class Grid {

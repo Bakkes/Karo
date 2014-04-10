@@ -1,6 +1,6 @@
 #pragma once
 #include "Vector2D.h"
-namespace karo {
+namespace engine {
 	// a positive size of somthing
 	// just an extension of vector
 	class Size : public Vector2D{

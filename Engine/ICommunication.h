@@ -2,7 +2,7 @@
 
 #include "DllImportExport.h"
 
-namespace Engine {
+namespace engine {
 	class ICommunication {
 	public:
 		static ENGINE_API int Expose();
