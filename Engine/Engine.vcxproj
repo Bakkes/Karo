@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -67,16 +67,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Board.h" />
     <ClInclude Include="DllImportExport.h" />
+    <ClInclude Include="ExportedClass.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="IBoard.h" />
     <ClInclude Include="ICommunication.h" />
     <ClInclude Include="IComputerPlayer.h" />
     <ClInclude Include="IUnsafeBoard.h" />
     <ClInclude Include="Move.h" />
+    <ClInclude Include="Size.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="ICommunication.cpp" />
     <ClCompile Include="Move.cpp" />
+    <ClCompile Include="Size.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
