@@ -22,7 +22,7 @@ namespace Tests {
 		// ReturnNumber returns 5, so this unit test will fail.
 		TEST_METHOD(ReturnNumber_Void_Returns4) {
 			int expected = 4;
-			int actual = Engine::ExportedClass::ReturnNumber();
+			int actual = karo::ExportedClass::ReturnNumber();
 			Assert::AreEqual(expected, actual);
 		}
 	};

@@ -71,7 +71,6 @@
     <ClInclude Include="DllImportExport.h" />
     <ClInclude Include="ExportedClass.h" />
     <ClInclude Include="Grid.h" />
-    <ClInclude Include="IGridTraveller.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>

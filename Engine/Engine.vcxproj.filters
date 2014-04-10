@@ -30,9 +30,6 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IGridTraveller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Size.h">
       <Filter>Header Files</Filter>
     </ClInclude>
