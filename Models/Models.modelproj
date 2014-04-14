@@ -37,6 +37,9 @@
     <Content Include="ModelDefinition\Package_1120.uml">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="ModelDefinition\Package_1220.uml">
+      <SubType>Content</SubType>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="GlobalArchitecture.classdiagram">
       <SubType>Content</SubType>

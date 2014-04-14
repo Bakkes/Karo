@@ -11,6 +11,13 @@
         LastKnownName="Engine.Wrapper"
         LastKnownLocation="Package1_1118.uml" />
     </dependency>
+    <dependency
+      Id="eef9bee9-f69e-4e12-896b-fc7301b09544">
+      <packageMoniker
+        Id="5256e9d6-364f-4c29-a6bc-de50cceb8efd"
+        LastKnownName="Engine.Wrapper"
+        LastKnownLocation="Package_1220.uml" />
+    </dependency>
   </suppliersInternal>
   <packagedElements>
     <packageHasNamedElement>
@@ -18,6 +25,12 @@
         Id="79a97ae0-eabf-4307-b15d-d4c764588167"
         LastKnownName="Frontend.XNA"
         LastKnownLocation="Package1_1119.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="ac1cd474-8db9-47c9-9ee6-3fafc028d14d"
+        LastKnownName="Engine.Wrapper"
+        LastKnownLocation="Package1_1118.uml" />
     </packageHasNamedElement>
   </packagedElements>
 </package>
