@@ -74,8 +74,8 @@
     <ClInclude Include="IBoard.h" />
     <ClInclude Include="ICommunication.h" />
     <ClInclude Include="IComputerPlayer.h" />
+    <ClInclude Include="ISafeBoard.h" />
     <ClInclude Include="IStaticEvaluation.h" />
-    <ClInclude Include="IUnsafeBoard.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="Size.h" />

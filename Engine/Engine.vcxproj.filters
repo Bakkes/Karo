@@ -42,9 +42,6 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ISafeBoard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -52,6 +49,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Players.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ISafeBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
