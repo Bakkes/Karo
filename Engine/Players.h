@@ -1,5 +1,8 @@
 #pragma once
+
 namespace engine {
-	class IUnsafeBoard {
+	enum Players {
+		Min,
+		Max
 	};
 }

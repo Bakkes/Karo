@@ -1,8 +1,8 @@
 #pragma once
 namespace engine {
 
-	enum MoveType { INSERT, MOVE, JUMP };
-	enum MoveDirection { NORTH, EAST, SOUTH, WEST };
+	enum MoveType { Insert, Move, Jump };
+	enum MoveDirection { North, East, South, West };
 	
 	class Move {
 	public:

@@ -22,7 +22,7 @@ namespace Tests {
 		// ReturnNumber returns 5, so this unit test will fail.
 		TEST_METHOD(ReturnNumber_Void_Returns4) {
 			int expected = 4;
-			int actual = Engine::ICommunication::Expose();
+			int actual = engine::ICommunication::Expose();
 			Assert::AreEqual(expected, actual);
 		}
 	};
