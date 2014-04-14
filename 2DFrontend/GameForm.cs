@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace _2DFrontend
 {
-    public partial class Form1 : Form
+    public partial class Karo : Form
     {
-        public Form1()
+        public Karo()
         {
             InitializeComponent();
         }
