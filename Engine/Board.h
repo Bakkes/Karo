@@ -12,7 +12,7 @@ namespace engine{
 		Board();
 		~Board();
 	private:
-		Grid<TileValue>* _grid;
+		Grid<TileValue >* _grid;
 	};
 
 }

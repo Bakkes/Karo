@@ -67,7 +67,45 @@ namespace engine {
 				for (unsigned x = 0; x < width; x++) {
 					_tiles->push_back(NULL);
 				}
-			}
+			}		
+			// bind tiles to each other
+			for (unsigned y = 0; y < height; y++) {
+				for (unsigned x = 0; x < width; x++) {
+
+					if (y < height - 2) {
+						_tiles->at(GetTileIndex(x, y))->SetTop(
+							_tiles->at(
+								GetTileIndex(x, y + 1)
+							)
+						);
+					}
+
+					if (y != 0) {
+						_tiles->at(GetTileIndex(x, y))->SetBottom(
+							_tiles->at(
+								GetTileIndex(x, y - 1)
+							)
+						);
+					}
+
+					if (x < width - 2) {
+						_tiles->at(GetTileIndex(x, y))->SetRight(
+							_tiles->at(
+								GetTileIndex(x + 1, y)
+							)
+						);
+					}
+
+					if (x != 0) {
+						_tiles->at(GetTileIndex(x, y))->SetLeft(
+							_tiles->at(
+								GetTileIndex(x - 1, y)
+							)
+						);
+					}
+
+				}
+		
 		}
 		// this function prevents the same calculation showing up in several places
 		int GetTileIndex(const unsigned x, const unsigned y) const {
