@@ -78,6 +78,7 @@ Global
 		{00FAFCAC-7CB8-4235-9A1A-EAE08EDDCE7B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{00FAFCAC-7CB8-4235-9A1A-EAE08EDDCE7B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{00FAFCAC-7CB8-4235-9A1A-EAE08EDDCE7B}.Release|Win32.ActiveCfg = Release|Any CPU
+		{00FAFCAC-7CB8-4235-9A1A-EAE08EDDCE7B}.Release|Win32.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
