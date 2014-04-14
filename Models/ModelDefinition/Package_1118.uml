@@ -109,9 +109,9 @@
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="14bedc51-44a7-4877-aeec-31cc70661e60"
-                      LastKnownName="IUnsafeBoard*"
-                      LastKnownLocation="Models.uml" />
+                      Id="6cb753b3-db5d-46f2-8e00-d24c36657641"
+                      LastKnownName="IBoard*"
+                      LastKnownLocation="Package_1118.uml" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -319,6 +319,11 @@
       <undefinedType
         Id="e3a65e52-32e8-4b2c-9796-2c2f505b0286"
         name="MoveDirection" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="6cb753b3-db5d-46f2-8e00-d24c36657641"
+        name="IBoard*" />
     </packageHasNamedElement>
   </packagedElements>
 </package>

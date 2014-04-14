@@ -17,11 +17,6 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="809abd9c-b0a9-4640-8e97-58e03c8dd21a" name="IUnsafeBoard*" isAbstract="false" isLeaf="false" cachedFullName="IUnsafeBoard*">
-        <elementDefinition Id="14bedc51-44a7-4877-aeec-31cc70661e60" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="e3d5dd7d-941a-4912-a364-aae9dff118dc" name="Move" isAbstract="false" isLeaf="false" cachedFullName="Move">
         <elementDefinition Id="b0dd07aa-e95d-42d5-8249-b1fd1974c985" />
       </referencedType>
@@ -98,7 +93,7 @@
                       <parameter Id="109a8430-f3c9-463e-8e14-104bfd241641" direction="Return" isUnique="false">
                         <elementDefinition Id="b10542b0-b0f7-456b-98ec-634d5ecda99b" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="809abd9c-b0a9-4640-8e97-58e03c8dd21a" LastKnownName="IUnsafeBoard*" />
+                          <referencedTypeMoniker Id="e145b63d-bb63-4cc1-b78d-2c2fb21624fe" LastKnownName="IBoard*" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -245,6 +240,11 @@
         </suppliersInternal>
       </package>
     </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="e145b63d-bb63-4cc1-b78d-2c2fb21624fe" name="IBoard*" isAbstract="false" isLeaf="false" cachedFullName="IBoard*">
+        <elementDefinition Id="6cb753b3-db5d-46f2-8e00-d24c36657641" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="a9a3be0b-c375-4bd7-abe2-de704e056712" name="Models">
     <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
