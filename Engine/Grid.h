@@ -37,7 +37,7 @@ namespace engine {
 		}
 
 		// get tile at position
-		T* GetTileAt(Vector2D& position) const {
+		T& GetTileAt(Vector2D& position) const {
 			unsigned desiredIndex = GetTileIndex(p.X(), p.Y());
 			if (desiredIndex < 0) {
 				sizeMessage(x, y);
@@ -45,7 +45,7 @@ namespace engine {
 			if (desiredIndex > _tilesLength) {
 				sizeMessage(x, y);
 			}
-			return _tiles->at(desiredIndex);
+			return *_tiles->at(desiredIndex);
 		}
 		Size* GetSize() const {
 			return _size;

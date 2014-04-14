@@ -1,5 +1,5 @@
 #pragma once
 namespace engine {
-	class IUnsafeBoard {
+	class IUnsafeBoard : IBoard {
 	};
 }

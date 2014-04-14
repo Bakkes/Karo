@@ -2,14 +2,17 @@
 #pragma once
 namespace engine{
 
+	enum TileValue{
+		HasTile = 1,
+		IsMax = 2,
+		IsFlipped = 4
+	};
 	class Board{
 	public:
 		Board();
 		~Board();
-		// assign indexes to each tile
-		void ReIndex();
 	private:
-		Grid<int>* _grid;
+		Grid<TileValue>* _grid;
 	};
 
 }
