@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace _2DFrontend
 {
@@ -16,6 +17,7 @@ namespace _2DFrontend
 		public KaroPanel()
 			: base()
 		{
+			BackColor = Color.CornflowerBlue;
 			DoubleBuffered = true;
 		}
 
