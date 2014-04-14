@@ -10,7 +10,7 @@ namespace isgp {
 	// a container class for stuff in the grid.
 	// this class is for easy navigating the grid, when you get a tile you now
 	// its neighbours
-	class Tile : IPaintable{
+	class Tile{
 	public:
 		// set a tile to the point
 		Tile(Vector2D* p);

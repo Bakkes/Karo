@@ -16,11 +16,10 @@ namespace engine {
 	public:
 		// default constructor will use the C_default_size for initiliztion
 		Grid() {
-			Init(C_default_w, C_default_h);
+			Init(C_default_w, C_default_h, NULL);
 		}
-		// initialize the grid to the specified size
-		Grid(unsigned width, unsigned height) {
-			Init(width, height);
+		Grid(T defaultValue) {
+			Init(C_default_w, C_default_h, defaultValue);
 		}
 		~Grid() {
 			for (auto it = _tiles->begin(); it != _tiles->end(); ++it) {
@@ -59,7 +58,7 @@ namespace engine {
 		Size* _size;
 		
 		// common code for both contructors
-		void Init(unsigned width, unsigned height) {
+		void Init(unsigned width, unsigned height,  T* defaultValue) {
 			_tilesLength = (unsigned) (width * height);
 			_size = new Size(width, height);
 			_tiles = new vector<T*>();
@@ -68,43 +67,6 @@ namespace engine {
 					_tiles->push_back(NULL);
 				}
 			}		
-			// bind tiles to each other
-			for (unsigned y = 0; y < height; y++) {
-				for (unsigned x = 0; x < width; x++) {
-
-					if (y < height - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetTop(
-							_tiles->at(
-								GetTileIndex(x, y + 1)
-							)
-						);
-					}
-
-					if (y != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetBottom(
-							_tiles->at(
-								GetTileIndex(x, y - 1)
-							)
-						);
-					}
-
-					if (x < width - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetRight(
-							_tiles->at(
-								GetTileIndex(x + 1, y)
-							)
-						);
-					}
-
-					if (x != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetLeft(
-							_tiles->at(
-								GetTileIndex(x - 1, y)
-							)
-						);
-					}
-
-				}
 		
 		}
 		// this function prevents the same calculation showing up in several places
