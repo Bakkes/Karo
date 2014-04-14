@@ -117,21 +117,21 @@
                 </dependency>
               </suppliersInternal>
               <targetEnds>
-                <association Id="298d4edc-a0a0-46cd-b261-2570555675ad" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-                  <interfaceMoniker Id="43728da5-f3e6-4356-9709-479d6d99b130" LastKnownName="ISafeBoard" />
+                <association Id="4f488e61-bc1c-4b8c-9624-bf3ac53cd6d7" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+                  <interfaceMoniker Id="15517e53-20b9-4bb9-ad98-34848e6882c1" LastKnownName="IBoard" />
                   <relationshipOwnedElementsInternal>
                     <associationHasOwnedEnds>
-                      <memberEnd Id="74bf3103-6e94-4f0e-8aed-6cb905385815" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                        <elementDefinition Id="be4edbe7-f484-4195-aeb5-3df7319c5b51" />
+                      <memberEnd Id="5b558644-c9b9-4ad6-80a9-74de55f2c6c5" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                        <elementDefinition Id="6d8bb136-7029-438b-898f-38c8bd2bc18d" />
                       </memberEnd>
                     </associationHasOwnedEnds>
                     <associationHasOwnedEnds>
-                      <memberEnd Id="f3c33d80-912f-48ff-b104-6c76215bc1b5" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                        <elementDefinition Id="560ea34f-b61f-4c79-b63d-3622f76d5d97" />
+                      <memberEnd Id="81ee1cbf-ee02-42ba-aace-40df9f24d9b4" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                        <elementDefinition Id="39d138d2-9bf7-4b57-8469-1cbf96641e0c" />
                       </memberEnd>
                     </associationHasOwnedEnds>
                   </relationshipOwnedElementsInternal>
-                  <elementDefinition Id="f65697f2-8239-4066-bc08-7df08deaff47" />
+                  <elementDefinition Id="7ebbbc26-454c-4e64-a564-6bfda05bc4cf" />
                 </association>
               </targetEnds>
               <ownedOperations>

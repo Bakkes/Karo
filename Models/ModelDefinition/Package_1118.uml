@@ -137,20 +137,20 @@
         </suppliersInternal>
         <targetEnds>
           <association
-            Id="f65697f2-8239-4066-bc08-7df08deaff47"
+            Id="7ebbbc26-454c-4e64-a564-6bfda05bc4cf"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <interfaceMoniker
-              Id="a522ce41-f922-415a-8cf6-7cc8612ddc50"
-              LastKnownName="ISafeBoard"
+              Id="98859742-5798-4c2c-936f-6ade65dffac2"
+              LastKnownName="IBoard"
               LastKnownLocation="Package_1118.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="be4edbe7-f484-4195-aeb5-3df7319c5b51"
+                  Id="6d8bb136-7029-438b-898f-38c8bd2bc18d"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -162,7 +162,7 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="560ea34f-b61f-4c79-b63d-3622f76d5d97"
+                  Id="39d138d2-9bf7-4b57-8469-1cbf96641e0c"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
