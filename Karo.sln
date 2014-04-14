@@ -13,6 +13,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine.Wrapper", "Engine.Wrapper\Engine.Wrapper.vcxproj", "{1120B367-B325-4B42-B7F1-754522577572}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2DFrontend", "2DFrontend\2DFrontend.csproj", "{00FAFCAC-7CB8-4235-9A1A-EAE08EDDCE7B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45887401-B8E2-414A-853C-65AAB97C01DA} = {45887401-B8E2-414A-853C-65AAB97C01DA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
