@@ -3,46 +3,94 @@
 #include <vector>
 #include <cstdlib>
 #include "Vector2D.h"
-#include "IPaintable.h"
-#include "ITileData.h"
 
-namespace isgp {
+using namespace std;
+namespace engine {
 	// a container class for stuff in the grid.
 	// this class is for easy navigating the grid, when you get a tile you now
 	// its neighbours
+	template<typename T>
 	class Tile{
 	public:
 		// set a tile to the point
-		Tile(Vector2D* p);
-		// set a tile to x,y
-		Tile(int x, int y);
+		Tile(Vector2D* p){
+			Init(p);
+		}
 
-		~Tile();
+		~Tile(){
+			if(_position){
+				delete _position;
+			}
+			if(_tiledata){
+				delete _tiledata;
+			}
+			_top = NULL;
+			_left = NULL;
+			_right = NULL;
+			_bottom = NULL;
+			_position = NULL;
+			_tiledata = NULL;
+		}
 
-		void SetBottom(Tile* bottom);
-		Tile* GetBottom() const;
-		void SetRight(Tile* right);
-		Tile* GetRight() const;
-		void SetLeft(Tile* left);
-		Tile* GetLeft() const;
-		void SetTop(Tile* top);
-		Tile* GetTop() const;
-		Vector2D* GetPosition() const;
-		void Paint(Graphics* g);
-		void SetData(ITileData*);
-		ITileData* GetData() const;
-		vector<Tile*> GetSurroundingTiles() const;
+		void SetBottom(Tile* bottom){
+			this->_bottom = bottom;
+		}
+		Tile* GetBottom() const{
+			return _bottom;
+		}
+		void SetRight(Tile* right){
+			this->_right = right;
+		}
+		Tile* GetRight() const{
+			return _right;
+		}
+		void SetLeft(Tile* left){
+			this->_left = left;
+		}
+		Tile* GetLeft() const{
+			return _left;
+		}
+		void SetTop(Tile* top){
+			this->_top = top;
+		}
+		Tile* GetTop() const{
+			return _top;
+		}
+		Vector2D* GetPosition() const{
+			return _position;
+		}
+		void SetData(T* data){
+			_tiledata = data;
+		}
+		T* GetData() const{
+			return _tiledata;
+		}
+		vector<Tile<T>*> GetSurroundingTiles() const{
+			vector<Tile<T>*> tiles;
+			tiles.push_back(this->GetLeft());
+			tiles.push_back(this->GetTop());
+			tiles.push_back(this->GetRight());
+			tiles.push_back(this->GetBottom());
+			return tiles;
+		}
 	private:
-		void Init(Vector2D* p);
-		ITileData* _tiledata;
+		void Init(Vector2D* p){
+			_position = p;
+			_tiledata = NULL;
+			_bottom = NULL;
+			_top = NULL;
+			_left = NULL;
+			_right = NULL;
+		}
+		T* _tiledata;
 		Vector2D* _position;
 		Tile* _top;
 		Tile* _left;
 		Tile* _right;
 		Tile* _bottom;
-		bool _hasData;
 	};
-	inline bool operator==(const Tile& l, const Tile& r){
+	template<typename T>
+	inline bool operator==(const Tile<T>& l, const Tile<T>& r){
 		if(l.GetPosition() != r.GetPosition()){
 			return false;
 		}
@@ -66,5 +114,6 @@ namespace isgp {
 		return true;
 	}
 	// forward operations to the once that actualy do somthing
-	inline bool operator!=(const Tile& l, const Tile& r){return !operator==(l,r);}
+	template<typename T>
+	inline bool operator!=(const Tile<T>& l, const Tile<T>& r){return !operator==(l,r);}
 }
