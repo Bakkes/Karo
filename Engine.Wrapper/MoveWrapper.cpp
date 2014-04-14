@@ -6,11 +6,15 @@ namespace wrapper {
 
 MoveWrapper::MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)
 {
-	_move = new Move((engine::MoveType)moveType, fromTile, toTile, (engine::MoveDirection)moveDirection, (engine::MoveType)emptyTile);
+	_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, static_cast<engine::MoveDirection>(moveDirection), emptyTile);
 }
 
-MoveType MoveWrapper::GetMoveType() {
-	return (engine::wrapper::MoveType)_move->GetMoveType();
+MoveWrapper::~MoveWrapper() {
+	delete _move;
+}
+
+engine::wrapper::MoveType MoveWrapper::GetMoveType() {
+	return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
 }
 
 int MoveWrapper::GetFromTile() {
@@ -21,8 +25,8 @@ int MoveWrapper::GetToTile() {
 	return _move->GetToTile();
 }
 
-MoveDirection MoveWrapper::GetMoveDirection() {
-	return (engine::wrapper::MoveDirection)_move->GetMoveDirection();
+engine::wrapper::MoveDirection MoveWrapper::GetMoveDirection() {
+	return static_cast<engine::wrapper::MoveDirection>(_move->GetMoveDirection());
 }
 
 int MoveWrapper::GetEmptyTile() {
