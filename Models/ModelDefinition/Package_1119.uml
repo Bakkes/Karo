@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="2c689fe6-aedf-4fb0-ad8b-22ec2951dda3"
+  name="Frontend.Test" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <suppliersInternal>
+    <dependency
+      Id="c6aef90e-649d-4b6c-9e50-f78b6ee4e432">
+      <packageMoniker
+        Id="ac1cd474-8db9-47c9-9ee6-3fafc028d14d"
+        LastKnownName="Engine.Wrapper"
+        LastKnownLocation="Package1_1118.uml" />
+    </dependency>
+  </suppliersInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="79a97ae0-eabf-4307-b15d-d4c764588167"
+        LastKnownName="Frontend.XNA"
+        LastKnownLocation="Package1_1119.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

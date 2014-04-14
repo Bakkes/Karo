@@ -2,7 +2,7 @@
 <logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="GlobalArchitecture">
   <logicalClassDesignerModelMoniker Id="d0c7fdd1-c699-43b7-8aee-d45fce867877" />
   <nestedChildShapes>
-    <packageShape Id="9fd884e6-04f4-43ff-a2cb-ba671f392b87" absoluteBounds="0.5, 0.5, 5.625, 3.375" customColor="255, 249, 230" hideQualifiedName="false">
+    <packageShape Id="9fd884e6-04f4-43ff-a2cb-ba671f392b87" absoluteBounds="0.5, 0.5, 5.625, 5" customColor="255, 249, 230" hideQualifiedName="false">
       <packageMoniker Id="15399983-99a7-4128-bbd7-c6d660210a56" LastKnownName="Engine" />
       <nestedChildShapes>
         <interfaceShape Id="3ebdbd56-6134-41fc-aa93-39165b1843d2" absoluteBounds="0.75, 2.625, 2.375, 1.0624999801317849" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
@@ -49,6 +49,13 @@
             <interfaceShapeMoniker Id="696b2611-bc0d-4e08-b5b3-f05e283c4456" />
           </nodes>
         </generalizationConnector>
+        <classShape Id="14115b4e-1bec-4379-9ad3-16d66e8d5210" absoluteBounds="2.5, 4, 2.125, 1.3828124701976776" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+          <classMoniker Id="ab9dcd69-4a91-425c-a0aa-0843e6e12006" LastKnownName="Move" />
+          <nestedChildShapes>
+            <AttributeElementListCompartment Id="4ee07f95-afc0-46ca-982c-95d7122cd9f6" absoluteBounds="2.515, 4.39, 2.0949999999999998, 0.68164060264825832" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+            <OperationElementListCompartment Id="2283d870-3ff5-4f6d-b0b1-de8339d5bf54" absoluteBounds="2.515, 5.0816406026482586, 2.0949999999999998, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+          </nestedChildShapes>
+        </classShape>
       </nestedChildShapes>
     </packageShape>
     <associationConnector edgePoints="[(4.5625 : 2.625); (4.5625 : 2.06249998013178)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">

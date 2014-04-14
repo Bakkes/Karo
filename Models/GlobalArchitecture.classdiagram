@@ -179,6 +179,31 @@
               </ownedOperations>
             </Interface>
           </packageHasNamedElement>
+          <packageHasNamedElement>
+            <class Id="ab9dcd69-4a91-425c-a0aa-0843e6e12006" name="Move" isAbstract="false" isLeaf="false" isActiveClass="false">
+              <elementDefinition Id="55bbc0af-9aa4-41fb-a567-7e99b113c6ac" />
+              <ownedAttributesInternal>
+                <property Id="732b236f-fb27-4ca0-a749-94edb921b857" name="FromTile" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="597341ec-40ff-4048-964e-6f8965a9ec67" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="24c4ce61-6b9c-438c-a49f-2bb474d1bfe5" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="94b15ca6-020e-4e5a-ac47-281c2cd3aa9a" name="ToTile" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="01bbfef7-9b05-4247-be8a-fcc02b85886b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="24c4ce61-6b9c-438c-a49f-2bb474d1bfe5" LastKnownName="int" />
+                  </type_NamedElement>
+                </property>
+                <property Id="83772add-f5f3-4d0b-a76b-6eb31e0cc302" name="MoveDirection" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="6420805b-a56f-48b6-92a6-c7f94ae2a8ee" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="79cae0a4-5365-41e7-807e-45dfdd3d3b1c" LastKnownName="MoveDirection" />
+                  </type_NamedElement>
+                </property>
+              </ownedAttributesInternal>
+            </class>
+          </packageHasNamedElement>
         </packagedElements>
       </package>
     </logicalClassDesignerModelHasPackages>
@@ -215,6 +240,11 @@
         </suppliersInternal>
       </package>
     </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="79cae0a4-5365-41e7-807e-45dfdd3d3b1c" name="MoveDirection" isAbstract="false" isLeaf="false" cachedFullName="MoveDirection">
+        <elementDefinition Id="e3a65e52-32e8-4b2c-9796-2c2f505b0286" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="a9a3be0b-c375-4bd7-abe2-de704e056712" name="Models">
     <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
