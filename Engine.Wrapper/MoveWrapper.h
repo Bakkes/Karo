@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Move.h"
 using namespace engine;
 
@@ -11,11 +12,12 @@ namespace wrapper {
 	public ref class MoveWrapper
 	{
 		public:
-			MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile);
-			MoveType GetMoveType();
+			MoveWrapper(engine::wrapper::MoveType moveType, int fromTile, int toTile, engine::wrapper::MoveDirection moveDirection, int emptyTile);
+			~MoveWrapper();
+			engine::wrapper::MoveType GetMoveType();
 			int GetFromTile();
 			int GetToTile();
-			MoveDirection GetMoveDirection();
+			engine::wrapper::MoveDirection GetMoveDirection();
 			int GetEmptyTile();
 		private:
 			Move * _move;
