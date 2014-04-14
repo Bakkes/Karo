@@ -1,11 +1,7 @@
 #pragma once
-#include "Move.h"
-#include "IUnsafeBoard.h"
-#include <vector>
 namespace engine {
-	class IBoard : IUnsafeBoard {
-	public:
-		virtual IUnsafeBoard CopyToUnsafeBoard() = 0;
+	class IBoard {
+		virtual void ExecuteMove(Move* move) = 0;
+		virtual std::vector<Move>* GetLegalMoves() = 0;
 	};
-
 }
