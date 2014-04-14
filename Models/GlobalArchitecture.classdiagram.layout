@@ -35,7 +35,7 @@
           </nestedChildShapes>
         </interfaceShape>
         <interfaceShape Id="696b2611-bc0d-4e08-b5b3-f05e283c4456" absoluteBounds="0.75, 1, 2.25, 1.2226562251647315" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
-          <interfaceMoniker Id="15517e53-20b9-4bb9-ad98-34848e6882c1" LastKnownName="IUnsafeBoard" />
+          <interfaceMoniker Id="15517e53-20b9-4bb9-ad98-34848e6882c1" LastKnownName="IBoard" />
           <nestedChildShapes>
             <AttributeElementListCompartment Id="275208c3-1b60-4935-af13-316e259b8320" absoluteBounds="0.76500000000000057, 1.3900000000000006, 2.2199999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
             <OperationElementListCompartment Id="461487dd-fc0d-4562-8ea5-bbb49bcc7528" absoluteBounds="0.76500000000000057, 1.6011718675494198, 2.2199999999999998, 0.521484357615312" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />

@@ -7,7 +7,7 @@
     <packageHasNamedElement>
       <Interface
         Id="98859742-5798-4c2c-936f-6ade65dffac2"
-        name="IUnsafeBoard"
+        name="IBoard"
         isAbstract="false"
         isLeaf="false">
         <ownedOperations>
@@ -88,7 +88,7 @@
             isSubstitutable="false">
             <interfaceMoniker
               Id="98859742-5798-4c2c-936f-6ade65dffac2"
-              LastKnownName="IUnsafeBoard"
+              LastKnownName="IBoard"
               LastKnownLocation="Package_1118.uml" />
           </generalization>
         </generalsInternal>
@@ -227,7 +227,7 @@
                   <type_NamedElement>
                     <interfaceMoniker
                       Id="98859742-5798-4c2c-936f-6ade65dffac2"
-                      LastKnownName="IUnsafeBoard"
+                      LastKnownName="IBoard"
                       LastKnownLocation="Package_1118.uml" />
                   </type_NamedElement>
                 </parameter>

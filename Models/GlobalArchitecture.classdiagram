@@ -27,7 +27,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="a3e14a4d-fe93-4047-8ff5-593c91a9ab4f" name="IUnsafeBoard" isAbstract="false" isLeaf="false" cachedFullName="Models::Engine::IUnsafeBoard">
+      <referencedType Id="a3e14a4d-fe93-4047-8ff5-593c91a9ab4f" name="IBoard" isAbstract="false" isLeaf="false" cachedFullName="Models::Engine::IBoard">
         <elementDefinition Id="98859742-5798-4c2c-936f-6ade65dffac2" />
       </referencedType>
     </packageHasNamedElement>
@@ -41,7 +41,7 @@
         <elementDefinition Id="8c9a515f-f4bf-4048-96ae-56a4fa78216e" />
         <packagedElements>
           <packageHasNamedElement>
-            <Interface Id="15517e53-20b9-4bb9-ad98-34848e6882c1" name="IUnsafeBoard" isAbstract="false" isLeaf="false">
+            <Interface Id="15517e53-20b9-4bb9-ad98-34848e6882c1" name="IBoard" isAbstract="false" isLeaf="false">
               <elementDefinition Id="98859742-5798-4c2c-936f-6ade65dffac2" />
               <ownedOperations>
                 <operation Id="13d46337-25c0-4342-94f2-1cef34304eca" name="ExecuteMove" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
@@ -86,7 +86,7 @@
               <elementDefinition Id="a522ce41-f922-415a-8cf6-7cc8612ddc50" />
               <generalsInternal>
                 <generalization Id="19a96822-0914-450f-b5b4-d9b5503cfe86" isSubstitutable="false">
-                  <interfaceMoniker Id="15517e53-20b9-4bb9-ad98-34848e6882c1" LastKnownName="IUnsafeBoard" />
+                  <interfaceMoniker Id="15517e53-20b9-4bb9-ad98-34848e6882c1" LastKnownName="IBoard" />
                   <elementDefinition Id="789f23c3-a583-4a3e-a1bc-f467a772f17d" />
                 </generalization>
               </generalsInternal>
@@ -162,7 +162,7 @@
                       <parameter Id="d98ef5db-99f4-4e6e-a6c5-7773f7b4ac14" name="board" direction="In" isUnique="false">
                         <elementDefinition Id="046eaf2c-83c6-4783-babe-8ae5e7040ddc" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="a3e14a4d-fe93-4047-8ff5-593c91a9ab4f" LastKnownName="IUnsafeBoard" />
+                          <referencedTypeMoniker Id="a3e14a4d-fe93-4047-8ff5-593c91a9ab4f" LastKnownName="IBoard" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
