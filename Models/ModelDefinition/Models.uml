@@ -104,7 +104,7 @@
             isAbstract="false">
             <classMoniker
               Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-              LastKnownName="KaroGameManager"
+              LastKnownName="KaroStateMachine"
               LastKnownLocation="Models.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -149,7 +149,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-                LastKnownName="KaroGameManager"
+                LastKnownName="KaroStateMachine"
                 LastKnownLocation="Models.uml" />
             </type_NamedElement>
           </property>
@@ -164,10 +164,86 @@
     <packageHasNamedElement>
       <class
         Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-        name="KaroGameManager"
+        name="KaroStateMachine"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="98653d9a-c02f-4552-8cfe-79bb72043af7"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="7b2c1104-8188-4083-9407-e7d96155bc05"
+              LastKnownName="KaroStateMachine"
+              LastKnownLocation="Models.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="05715c34-f456-4844-b811-211d071928c5"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="297ef2de-4b1f-41ba-adde-0e2801e8c70a"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="27d63960-2dc7-45d9-a861-5699860d26f7"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <interfaceMoniker
+              Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+              LastKnownName="IKaroState"
+              LastKnownLocation="Models.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b1fddcf6-e6d7-4e86-9060-7fe4186219dc"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="caae05b9-4485-4eea-8418-52bbe84efd84"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="68981bc8-61a6-4bce-ba71-267d546f36c4"
@@ -189,9 +265,8 @@
             </type_NamedElement>
           </property>
           <property
-            Id="c6b90b1d-2e44-419e-b1ec-3beb696f4d91"
-            name="StateMachine"
-            visibility="Private"
+            Id="705e915e-b675-43e7-9a04-eebffff877cb"
+            name="CurrentState"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -201,9 +276,9 @@
             aggregation="None"
             isComposite="false">
             <type_NamedElement>
-              <classMoniker
-                Id="7b2c1104-8188-4083-9407-e7d96155bc05"
-                LastKnownName="KaroStateMachine"
+              <interfaceMoniker
+                Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+                LastKnownName="IKaroState"
                 LastKnownLocation="Models.uml" />
             </type_NamedElement>
           </property>
@@ -375,7 +450,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-                      LastKnownName="KaroGameManager"
+                      LastKnownName="KaroStateMachine"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -411,6 +486,45 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="c25c2649-ddd7-4c16-b81a-89b533ad00b2"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <interfaceMoniker
+              Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+              LastKnownName="IKaroState"
+              LastKnownLocation="Models.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="395d5708-bcd8-47a2-875d-84cef1dbc82d"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c496e179-3709-44ee-959f-d328a7f02935"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="d5f3f581-6f47-47f5-afa2-2506c4c0704b"
