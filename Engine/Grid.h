@@ -42,12 +42,12 @@ namespace engine {
 
 		// get tile at position
 		Tile<T>* GetTileAt(Vector2D& position) const{
-			unsigned desiredIndex = GetTileIndex(p.X(), p.Y());
+			unsigned desiredIndex = GetTileIndex((unsigned)position.X(),(unsigned) position.Y());
 			if (desiredIndex < 0) {
-				sizeMessage(x, y);
+				throw "trying to get a tile at a wrong position";
 			}
 			if (desiredIndex > _tilesLength) {
-				sizeMessage(x, y);
+				throw "trying to get a tile at a wrong position";
 			}
 			return _tiles->at(desiredIndex);
 		}
@@ -65,13 +65,80 @@ namespace engine {
 			}
 		}
 		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
-		void TraverseTiles(function< void(Tile<T>*) >& lambda){
+		void TraverseTiles(function< void(Tile<T>*) > lambda){
 			for (unsigned x = 0; x < _size->GetWidth(); x++) {
 				TraverseCollumn(x, lambda);
 			}
 		}
 		Size* GetSize() const{
 			return _size;
+		}
+
+		void BindTilesToEachother(bool wrapArround = false){
+			unsigned height = _size->GetHeight();
+			unsigned width = _size->GetWidth();
+			// bind tiles to each other
+			for (unsigned y = 0; y < height; y++) {
+				for (unsigned x = 0; x < width; x++) {
+
+					if (y < height - 2) {
+						_tiles->at(GetTileIndex(x, y))->SetTop(
+							_tiles->at(
+								GetTileIndex(x, y + 1)
+							)
+						);
+					}else if(wrapArround){
+						_tiles->at(GetTileIndex(x,y))->SetTop(
+							_tiles->at(
+								GetTileIndex(x,0)
+							)
+						);
+					}
+					if (y != 0) {
+						_tiles->at(GetTileIndex(x, y))->SetBottom(
+							_tiles->at(
+								GetTileIndex(x, y - 1)
+							)
+						);
+					}else if(wrapArround){
+						_tiles->at(GetTileIndex(x, y))->SetBottom(
+							_tiles->at(
+								GetTileIndex(x, height - 1)
+							)
+						);
+					}
+
+					if (x < width - 2) {
+						_tiles->at(GetTileIndex(x, y))->SetRight(
+							_tiles->at(
+								GetTileIndex(x + 1, y)
+							)
+						);
+					}else if(wrapArround){
+						_tiles->at(GetTileIndex(x, y))->SetRight(
+							_tiles->at(
+								GetTileIndex(0, y)
+							)
+						);
+
+					}
+
+					if (x != 0) {
+						_tiles->at(GetTileIndex(x, y))->SetLeft(
+							_tiles->at(
+								GetTileIndex(x - 1, y)
+							)
+						);
+					}else if(wrapArround){
+						_tiles->at(GetTileIndex(x, y))->SetLeft(
+							_tiles->at(
+								GetTileIndex(x, width -1)
+							)
+						);
+					}
+				}
+			}
+
 		}
 
 	private:
@@ -83,8 +150,8 @@ namespace engine {
 		Size* _size;
 		// final step in the traversal proces, here the cordinates are known and only the
 		// functionpointer has to be called
-		void Traverse(unsigned x, unsigned y,function< void(Tile<T>*) >& lambda){
-			lambda(ReceiveTile(GetTileAt(x, y)));
+		void Traverse(unsigned x, unsigned y,function< void(Tile<T>*) > lambda){
+			lambda(GetTileAt(Vector2D(x, y)));
 		}
 		
 		// commen code for both contructors
@@ -97,43 +164,7 @@ namespace engine {
 					_tiles->push_back(new Tile<T>(new Vector2D(x, y)));
 				}
 			}
-			// bind tiles to each other
-			for (unsigned y = 0; y < height; y++) {
-				for (unsigned x = 0; x < width; x++) {
-
-					if (y < height - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetTop(
-							_tiles->at(
-								GetTileIndex(x, y + 1)
-							)
-						);
-					}
-
-					if (y != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetBottom(
-							_tiles->at(
-								GetTileIndex(x, y - 1)
-							)
-						);
-					}
-
-					if (x < width - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetRight(
-							_tiles->at(
-								GetTileIndex(x + 1, y)
-							)
-						);
-					}
-
-					if (x != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetLeft(
-							_tiles->at(
-								GetTileIndex(x - 1, y)
-							)
-						);
-					}
-				}
-			}
+			BindTilesToEachother();
 		}
 		// this function prevents the same calculation showing up in several places
 		int GetTileIndex(const unsigned x, const unsigned y) const{

@@ -2,7 +2,7 @@
 namespace engine {
 
 	enum MoveType { INSERT, MOVE, JUMP };
-	enum MoveDirection { NORTH, EAST, SOUTH, WEST };
+	enum MoveDirection { UP, LEFTUP, LEFT, LEFTDOWN, DOWN, RIGHTDOWN, RIGHT, RIGHTUP};
 	
 	class Move {
 	public:

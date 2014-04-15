@@ -2,7 +2,18 @@
 namespace engine{
 
 	Board::Board(){
-		_grid = new Grid<Tile<TileValue>>();
+		_grid = new Grid<Tile<int>>();
+		_grid->BindTilesToEachother(true);
+		_grid->TraverseTiles(
+			[](Tile<int>* tile) -> void{
+				Size boardSize = Size(5,4); // which tiles to init from 0,0
+				int* data = new int(~HasTile);
+				if(tile->GetPosition()->X() < boardSize.GetWidth() && tile->GetPosition()->Y() < boardSize.GetHeight()){
+					*data |= HasTile | IsEmpty;
+				} 
+				tile->SetData(data);
+			}
+		);
 	}
 	Board::~Board(){
 		delete _grid;
