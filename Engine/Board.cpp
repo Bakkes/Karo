@@ -2,7 +2,7 @@
 namespace engine{
 
 	Board::Board(){
-		_grid = new Grid<Tile<int>>();
+		_grid = new Grid<int>();
 		_grid->BindTilesToEachother(true);
 		_grid->TraverseTiles(
 			[](Tile<int>* tile) -> void{

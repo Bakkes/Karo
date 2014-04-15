@@ -8,7 +8,7 @@ namespace engine{
 		Board();
 		~Board();
 	private:
-		Grid<Tile<int>>* _grid;
+		Grid<int>* _grid;
 	};
 
 }
