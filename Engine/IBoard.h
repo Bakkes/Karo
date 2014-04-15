@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "Move.h"
 
 namespace engine {
 	class IBoard {
