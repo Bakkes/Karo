@@ -179,26 +179,56 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="0e1f8ebe-3198-4689-9054-ee7a00a4a70a" name="PlaceState" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="4e5fb2d5-6497-468d-bca1-59d8a3bdd32b" />
+        <suppliersInternal>
+          <interfaceRealization Id="01f0558a-31f1-40ea-8a9f-0613f9fb44e3">
+            <interfaceMoniker Id="660a72be-49e0-4f50-9027-0876ef54cec7" LastKnownName="IKaroState" />
+            <elementDefinition Id="c1b21f06-9bc1-4069-92d8-0c47ea879bd7" />
+          </interfaceRealization>
+        </suppliersInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="2939c0ad-e8f3-4b55-9a78-40afb48967e2" name="PieceDestinationState" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="97b543f8-5276-48d6-8767-a4776978ff30" />
+        <suppliersInternal>
+          <interfaceRealization Id="d9af9d1f-5dd2-4ae8-80dc-8c614bfca890">
+            <interfaceMoniker Id="660a72be-49e0-4f50-9027-0876ef54cec7" LastKnownName="IKaroState" />
+            <elementDefinition Id="225ac902-18f9-4552-97c1-b55741150718" />
+          </interfaceRealization>
+        </suppliersInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="847652a1-ab52-4ac1-b53f-26ab6a090f68" name="PieceSourceState" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="cf65acae-b212-47a2-9ce2-de175eb8c788" />
+        <suppliersInternal>
+          <interfaceRealization Id="34ccbc74-eda4-4a50-9c77-d070ed3289b1">
+            <interfaceMoniker Id="660a72be-49e0-4f50-9027-0876ef54cec7" LastKnownName="IKaroState" />
+            <elementDefinition Id="9ecba466-88d7-49a2-9a90-16cac9b4eba6" />
+          </interfaceRealization>
+        </suppliersInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="78b080fb-722c-4338-b358-36bf99b7d6b5" name="TileSourceState" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="e3f4436b-06dd-4231-bc95-ec9bc771bf05" />
+        <suppliersInternal>
+          <interfaceRealization Id="ac70d9e8-5c4c-4610-bde7-031a4bbe0d70">
+            <interfaceMoniker Id="660a72be-49e0-4f50-9027-0876ef54cec7" LastKnownName="IKaroState" />
+            <elementDefinition Id="4f3a3556-56a3-47cb-8f59-c9c418b8101a" />
+          </interfaceRealization>
+        </suppliersInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="403f24be-29af-4660-b73c-0deab3826f69" name="ComputerState" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="8ac9af43-b532-4309-a536-a60256732ce5" />
+        <suppliersInternal>
+          <interfaceRealization Id="0cf70a96-3de8-4a77-8744-df70d5e8f54e">
+            <interfaceMoniker Id="660a72be-49e0-4f50-9027-0876ef54cec7" LastKnownName="IKaroState" />
+            <elementDefinition Id="185b9066-0d39-4c21-af97-8451869bb8aa" />
+          </interfaceRealization>
+        </suppliersInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
   </packagedElements>

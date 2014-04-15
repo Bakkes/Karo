@@ -480,7 +480,17 @@
         name="PlaceState"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="c1b21f06-9bc1-4069-92d8-0c47ea879bd7">
+            <interfaceMoniker
+              Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+              LastKnownName="IKaroState"
+              LastKnownLocation="Models.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -488,7 +498,17 @@
         name="PieceDestinationState"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="225ac902-18f9-4552-97c1-b55741150718">
+            <interfaceMoniker
+              Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+              LastKnownName="IKaroState"
+              LastKnownLocation="Models.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -496,7 +516,17 @@
         name="PieceSourceState"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="9ecba466-88d7-49a2-9a90-16cac9b4eba6">
+            <interfaceMoniker
+              Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+              LastKnownName="IKaroState"
+              LastKnownLocation="Models.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -504,7 +534,17 @@
         name="TileSourceState"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="4f3a3556-56a3-47cb-8f59-c9c418b8101a">
+            <interfaceMoniker
+              Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+              LastKnownName="IKaroState"
+              LastKnownLocation="Models.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
@@ -512,7 +552,17 @@
         name="ComputerState"
         isAbstract="false"
         isLeaf="false"
-        isActiveClass="false" />
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="185b9066-0d39-4c21-af97-8451869bb8aa">
+            <interfaceMoniker
+              Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+              LastKnownName="IKaroState"
+              LastKnownLocation="Models.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
