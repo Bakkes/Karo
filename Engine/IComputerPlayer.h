@@ -6,7 +6,7 @@ namespace engine {
 	public:
 		virtual ~IComputerPlayer() {
 		}
-		virtual int Eval() = 0;
+
 		virtual Move GetBestMove() = 0;
 	};
 }

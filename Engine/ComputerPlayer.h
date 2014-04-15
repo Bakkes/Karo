@@ -1,18 +1,33 @@
 #pragma once
+#include <stack>
+
 #include "IComputerPlayer.h"
 #include "IStaticEvaluation.h"
+#include "Players.h"
 
 namespace engine {
 
 	class ComputerPlayer : public IComputerPlayer {
 	public:
-		ComputerPlayer();
+		ComputerPlayer(IBoard* board, int maxDepth);
 		~ComputerPlayer() override;
-		virtual int Eval() override;
 		virtual Move GetBestMove() override;
 
 	private:
 		// The Static Evaluation function which will evaluate the board
-		IStaticEvaluation evalulator;
+		IStaticEvaluation _evaluator;
+		// The maximum depth of the minimax search
+		int _maxDepth;
+		// The stack of the moves the AI has executed.
+		std::stack<Move*> _moveHistory;
+		// The unsafe board which is the playground of the AI
+		IBoard* _board;
+		// Executes a single step from the Minimax algorithm
+		Move MinimaxStep(Players player, int depth);
 	};
+
+	// Creates a move which is the exact opposite of the given move
+	Move InvertMove(Move move);
+	// Creates the player which is the exact opposite of the given move
+	Players InvertPlayer();
 }
