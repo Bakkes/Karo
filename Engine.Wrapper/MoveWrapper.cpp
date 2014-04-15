@@ -4,9 +4,9 @@
 namespace engine {
 namespace wrapper {
 
-MoveWrapper::MoveWrapper(Move * move)
+MoveWrapper::MoveWrapper(Move move)
 {
-	_move = move;
+	_move = new Move(move.GetMoveType(), move.GetFromTile(), move.GetToTile(), move.GetMoveDirection(), move.GetEmptyTile());
 }
 
 MoveWrapper::MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)

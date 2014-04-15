@@ -4,7 +4,7 @@
 
 namespace engine {
 
-	class ComputerPlayer : public IComputerPlayer {
+	class ENGINE_API ComputerPlayer : public IComputerPlayer {
 	public:
 		ComputerPlayer();
 		~ComputerPlayer() override;
