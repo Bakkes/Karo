@@ -4,7 +4,7 @@
 namespace engine {
 
 	enum ENGINE_API MoveType { INSERT = 0, MOVE = 1, JUMP = 2};
-	enum ENGINE_API MoveDirection { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3 };
+	enum ENGINE_API MoveDirection { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3, NONE = 4 };
 	
 	class ENGINE_API  Move {
 	public:
