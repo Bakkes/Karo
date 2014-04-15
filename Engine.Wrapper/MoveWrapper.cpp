@@ -4,11 +4,6 @@
 namespace engine {
 namespace wrapper {
 
-MoveWrapper::MoveWrapper(Move move)
-{
-	_move = new Move(move.GetMoveType(), move.GetFromTile(), move.GetToTile(), move.GetMoveDirection(), move.GetEmptyTile());
-}
-
 MoveWrapper::MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)
 {
 	_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, static_cast<engine::MoveDirection>(moveDirection), emptyTile);

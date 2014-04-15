@@ -24,7 +24,9 @@ namespace wrapper {
 
 	MoveWrapper^ KaroGame::GetBestMove() {
 		Move bestMove = _cPlayer->GetBestMove();
-		MoveWrapper^ wrapped = gcnew MoveWrapper(bestMove);
+		MoveWrapper^ wrapped = gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(bestMove.GetMoveType()), 
+			bestMove.GetFromTile(), bestMove.GetToTile(), static_cast<engine::wrapper::MoveDirection>(bestMove.GetMoveDirection()), 
+			bestMove.GetEmptyTile());
 		return wrapped;
 	}
 }
