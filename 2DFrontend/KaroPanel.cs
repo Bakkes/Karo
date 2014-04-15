@@ -66,11 +66,6 @@ namespace _2DFrontend
 
 		private void KaroPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			if (false)
-			{
-				// Clicked on empty space, stop.
-				return;
-			}
 			int x = (e.Location.X - Gap / 2) / (TileSize + Gap);
 			int y = (e.Location.Y - Gap / 2) / (TileSize + Gap);
 			points.Add(new Point(x, y));
