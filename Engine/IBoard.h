@@ -12,7 +12,7 @@ enum TileValue{
 };
 	class IBoard {
 		virtual void ExecuteMove(Move* move, Players player) = 0;
-		virtual std::vector<Move>* GetLegalMoves() = 0;
-		virtual std::vector<Tile<int>>* GetOccupiedTiles(Players player) = 0;
+		virtual std::vector<Move>* GetLegalMoves(Players player) = 0;
+		virtual std::vector<Tile<int>>* GetOccupiedTiles() = 0;
 	};
 }

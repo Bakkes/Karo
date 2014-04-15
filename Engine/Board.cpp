@@ -26,5 +26,8 @@ namespace engine{
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
 		return new vector<Move>();
 	}
+	std::vector<Tile<int>>* Board::GetOccupiedTiles(){
+		return new vector<Tile<int>>();
+	}
 
 }
