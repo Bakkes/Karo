@@ -66,6 +66,12 @@
               <referencedTypeMoniker Id="98f4e0a2-6f31-4fb4-8574-6d463da4bcc3" LastKnownName="IKaroState" />
             </type_NamedElement>
           </property>
+          <property Id="a69aa7a8-61fd-4cd3-9bf8-cd6c2153b980" name="CurrentMove" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="041c0b61-e7ba-4b84-b1c6-96cbb871b659" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="bff0f71d-f9b5-4185-a186-6dbbda8f9271" LastKnownName="MoveWrapper" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="e80c6e04-627a-494d-816f-5f8406e1602d" name="ChangeState" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
@@ -211,6 +217,11 @@
     <packageHasNamedElement>
       <referencedType Id="98f4e0a2-6f31-4fb4-8574-6d463da4bcc3" name="IKaroState" isAbstract="false" isLeaf="false" cachedFullName="Models::IKaroState">
         <elementDefinition Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="bff0f71d-f9b5-4185-a186-6dbbda8f9271" name="MoveWrapper" isAbstract="false" isLeaf="false" cachedFullName="MoveWrapper">
+        <elementDefinition Id="f031722c-5b38-4d7d-978c-ee1b505044bd" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

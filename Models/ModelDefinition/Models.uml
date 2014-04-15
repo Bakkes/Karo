@@ -282,6 +282,24 @@
                 LastKnownLocation="Models.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="041c0b61-e7ba-4b84-b1c6-96cbb871b659"
+            name="CurrentMove"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="f031722c-5b38-4d7d-978c-ee1b505044bd"
+                LastKnownName="MoveWrapper"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -677,6 +695,11 @@
           </interfaceRealization>
         </suppliersInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f031722c-5b38-4d7d-978c-ee1b505044bd"
+        name="MoveWrapper" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
