@@ -42,10 +42,19 @@
     <ClInclude Include="Vector2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IStaticEvaluation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Players.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="ISafeBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IBoard.h">
+    <ClInclude Include="ComputerPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
@@ -69,6 +78,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Vector2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

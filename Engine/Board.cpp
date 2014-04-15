@@ -19,4 +19,12 @@ namespace engine{
 		delete _grid;
 	}
 
+	void Board::ExecuteMove(Move *m, Players player) {
+
+	}
+
+	std::vector<Move>* Board::GetLegalMoves(Players player) {
+		return new vector<Move>();
+	}
+
 }

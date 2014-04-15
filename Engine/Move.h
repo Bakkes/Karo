@@ -1,10 +1,12 @@
 #pragma once
+#include "DllImportExport.h"
+
 namespace engine {
 
-	enum MoveType { INSERT, MOVE, JUMP };
-	enum MoveDirection { UP, LEFTUP, LEFT, LEFTDOWN, DOWN, RIGHTDOWN, RIGHT, RIGHTUP};
+	enum ENGINE_API MoveType { INSERT = 0, MOVE = 1, JUMP = 2};
+	enum ENGINE_API MoveDirection { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3, NONE = 4 };
 	
-	class Move {
+	class ENGINE_API  Move {
 	public:
 		Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile);
 		MoveType GetMoveType();
