@@ -5,6 +5,7 @@
 namespace engine {
 	class Result {
 	public:
+		Result();
 		Result(Move move, int score);
 		~Result();
 

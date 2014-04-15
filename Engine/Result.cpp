@@ -2,7 +2,10 @@
 
 namespace engine {
 
-	Result::Result(Move* move, int score) {
+	Result::Result() : _move(MoveType::DELETE, -1, -1, MoveDirection::NONE, -1) {
+	}
+
+	Result::Result(Move move, int score) : _move(MoveType::DELETE, -1, -1, MoveDirection::NONE, -1) {
 		_move = move;
 		_score = score;
 	}
@@ -10,7 +13,7 @@ namespace engine {
 	Result::~Result() {
 	}
 
-	Move* Result::GetMove() {
+	Move Result::GetMove() {
 		return _move;
 	}
 

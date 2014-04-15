@@ -79,6 +79,7 @@
     <ClInclude Include="IStaticEvaluation.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Players.h" />
+    <ClInclude Include="RandStaticEvail.h" />
     <ClInclude Include="Result.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="Vector2D.h" />
@@ -89,6 +90,7 @@
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="ICommunication.cpp" />
     <ClCompile Include="Move.cpp" />
+    <ClCompile Include="RandStaticEvail.cpp" />
     <ClCompile Include="Result.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Vector2D.cpp" />

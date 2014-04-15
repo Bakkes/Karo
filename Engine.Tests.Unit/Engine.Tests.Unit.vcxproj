@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClassNameTests.cpp" />
+    <ClCompile Include="MoveInvertionTest.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D168262-1045-4B31-9B8D-025ADBDEFD04}</ProjectGuid>

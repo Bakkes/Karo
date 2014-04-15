@@ -8,6 +8,6 @@ namespace engine {
 		virtual ~IStaticEvaluation() {
 		}
 		// Creates a static evaluation from the given board for the given player.
-		int Eval(IBoard* board, Players player);
+		virtual int ENGINE_API Eval(IBoard* board, Players player) = 0;
 	};
 }
