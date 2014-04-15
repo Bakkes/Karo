@@ -3,7 +3,7 @@
 #include "Players.h"
 
 namespace engine {
-	class IStaticEvaluation {
+	class ENGINE_API IStaticEvaluation {
 	public:
 		virtual ~IStaticEvaluation() {
 		}
