@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MoveWrapper.h"
-#include "IBoard.h"
+#include "Board.h"
 using namespace engine;
 
 namespace engine {
@@ -12,7 +12,7 @@ namespace wrapper {
 			KaroGame();
 			~KaroGame();
 		private:
-			IBoard * board;
+			Board * _board;
 	};
 }
 }

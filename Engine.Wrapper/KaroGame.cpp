@@ -7,7 +7,7 @@ namespace engine {
 namespace wrapper {
 
 	KaroGame::KaroGame() {
-		board = new Board();
+		//_board = new Board();
 	}
 
 	KaroGame::~KaroGame() {

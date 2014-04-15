@@ -1,6 +1,9 @@
+#pragma once
+
 #include "Grid.h"
 #include "IBoard.h"
-#pragma once
+#include "Move.h"
+
 namespace engine{
 
 	enum TileValue{
@@ -8,10 +11,14 @@ namespace engine{
 		IsMax = 2,
 		IsFlipped = 4
 	};
-	class Board : IBoard{
+
+	class Board : IBoard {
 	public:
 		Board();
 		~Board();
+
+		void ExecuteMove(Move* move, Players player);
+		std::vector<Move>* GetLegalMoves(Players player);
 	private:
 		Grid<TileValue>* _grid;
 	};
