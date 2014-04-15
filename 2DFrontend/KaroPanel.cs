@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using engine.wrapper;
 
 namespace _2DFrontend
 {
@@ -12,7 +13,7 @@ namespace _2DFrontend
 		/// The current state of the game.
 		/// If it is null, there is no game running at the moment.
 		/// </summary>
-		private object _karoGame;
+		private KaroGame _karoGame;
 
 		public KaroPanel()
 			: base()
@@ -25,7 +26,7 @@ namespace _2DFrontend
 		/// Start tracking a new game.
 		/// </summary>
 		/// <param name="karoGame">The new game this panel should show.</param>
-		public void NewGame(object karoGame)
+		public void NewGame(KaroGame karoGame)
 		{
 			_karoGame = karoGame;
 		}

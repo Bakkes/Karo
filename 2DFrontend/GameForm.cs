@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using engine.wrapper;
 
 namespace _2DFrontend
 {
@@ -7,7 +8,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// The current gamestate.
 		/// </summary>
-		private object _karoGame;
+		private KaroGame _karoGame;
 
 		public Karo()
 		{
