@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.Wrapper.h" />
+    <ClInclude Include="KaroGame.h" />
     <ClInclude Include="MoveWrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
@@ -86,6 +87,7 @@
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="Engine.Wrapper.cpp" />
+    <ClCompile Include="KaroGame.cpp" />
     <ClCompile Include="MoveWrapper.cpp" />
     <ClCompile Include="Stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
