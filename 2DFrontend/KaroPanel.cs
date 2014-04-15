@@ -15,6 +15,11 @@ namespace _2DFrontend
 		/// </summary>
 		private KaroGame _karoGame;
 
+		/// <summary>
+		/// The backcolor of Karo tiles.
+		/// </summary>
+		private Brush _tileBackColor = Brushes.White;
+
 		public KaroPanel()
 			: base()
 		{
@@ -29,6 +34,12 @@ namespace _2DFrontend
 		public void NewGame(KaroGame karoGame)
 		{
 			_karoGame = karoGame;
+		}
+
+		protected override void OnPaint(PaintEventArgs e)
+		{
+			Graphics g = e.Graphics;
+			g.FillRectangle(_tileBackColor, 100, 100, 50, 50);
 		}
 	}
 }
