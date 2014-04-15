@@ -16,15 +16,15 @@ namespace wrapper {
 		delete _cPlayer;
 	}
 
-	void KaroGame::ExecuteMove(MoveWrapper moveWrapper, engine::wrapper::Players player) {
+	void KaroGame::ExecuteMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
 		//Where do we clean this up
-		Move * m = new engine::Move(static_cast<engine::MoveType>(moveWrapper.GetMoveType()), moveWrapper.GetFromTile(), moveWrapper.GetToTile(), static_cast<engine::MoveDirection>(moveWrapper.GetMoveDirection()), moveWrapper.GetEmptyTile());
+		Move * m = new engine::Move(static_cast<engine::MoveType>(moveWrapper->GetMoveType()), moveWrapper->GetFromTile(), moveWrapper->GetToTile(), static_cast<engine::MoveDirection>(moveWrapper->GetMoveDirection()), moveWrapper->GetEmptyTile());
 		_board->ExecuteMove(m, static_cast<engine::Players>(player));
 	}
 
-	MoveWrapper ^ KaroGame::GetBestMove() {
+	MoveWrapper^ KaroGame::GetBestMove() {
 		Move bestMove = _cPlayer->GetBestMove();
-		MoveWrapper ^ wrapped = gcnew MoveWrapper(bestMove);
+		MoveWrapper^ wrapped = gcnew MoveWrapper(bestMove);
 		return wrapped;
 	}
 }

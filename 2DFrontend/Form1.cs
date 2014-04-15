@@ -19,7 +19,8 @@ namespace _2DFrontend
             MoveWrapper mv;
             mv = new MoveWrapper(MoveType.JUMP, 0, 1, MoveDirection.NORTH, 2);
             KaroGame game = new KaroGame();
-            
+            game.ExecuteMove(new MoveWrapper(MoveType.JUMP, -20, 30, MoveDirection.SOUTH, 99), Players.Max);
+            int test = 2;
         }
     }
 }

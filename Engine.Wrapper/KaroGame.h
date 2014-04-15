@@ -13,8 +13,8 @@ namespace wrapper {
 		public:
 			KaroGame();
 			~KaroGame();
-			MoveWrapper ^ GetBestMove();
-			void ExecuteMove(MoveWrapper w, engine::wrapper::Players player);
+			MoveWrapper^ GetBestMove();
+			void ExecuteMove(MoveWrapper^ w, engine::wrapper::Players player);
 		private:
 			Board * _board;
 			ComputerPlayer * _cPlayer;
