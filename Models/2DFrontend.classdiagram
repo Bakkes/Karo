@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="70aff829-ab2e-430c-8201-59d339e1a93c" name="2DFrontend" linkedPackageId="ed113513-2b6c-4ba1-8a09-cfa10a21ce21" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="c838b28b-be49-470d-93af-7296a15853f4">
+      <profileInstance Id="a14c6b73-deb5-47f1-8c63-6f2bbb5f8193" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="43eb1173-b9f9-4c32-8ef3-2c6843aa991e">
+      <profileInstance Id="e8ba37a3-6d13-4cd9-9e9e-b0227dc6fef3" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="df68be13-2a5d-4bb7-9d59-d8d3fb6294ba" name="KaroPanel" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0e148cea-7150-4516-a454-10ceb0d17724" />
+        <ownedAttributesInternal>
+          <property Id="134e3a77-b90d-4698-9ee1-435e523c0c40" name="Manager" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b560337b-0f30-4e97-9f57-eb473f54ba0f" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="4f6e6f53-a20c-45f2-9a52-8984a6855c91" LastKnownName="KaroGameManager" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="4f6e6f53-a20c-45f2-9a52-8984a6855c91" name="KaroGameManager" isAbstract="false" isLeaf="false" cachedFullName="KaroGameManager">
+        <elementDefinition Id="2e8a09c0-2810-4953-bdcb-d87a9d00e6c8" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="19ef45dc-093e-4f44-b130-d35d0cc55137" name="KaroGameManager" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="430f92c3-232a-4634-8ef0-7639cee35b62" />
+        <ownedOperationsInternal>
+          <operation Id="e80c6e04-627a-494d-816f-5f8406e1602d" name="ChangeState" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c0eb7bb3-5cd9-4cfe-a91c-c9a7d2082a9c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="fbf77474-add8-4046-9119-e18a13a667ac" direction="Return" isUnique="false">
+                  <elementDefinition Id="7f3d67b3-670c-4014-8de9-785247f48170" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5f46b1b7-a027-4954-a5c4-fb2927542b72" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="84cd0a6a-d4b6-4062-a44c-211d3425b2e5" name="state" direction="In" isUnique="false">
+                  <elementDefinition Id="548a0437-fc39-4064-8fe6-04746ecae244" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0e2d48b7-2d55-474d-a92d-2f90c6e986dd" LastKnownName="KaroState" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="0e2d48b7-2d55-474d-a92d-2f90c6e986dd" name="KaroState" isAbstract="false" isLeaf="false" cachedFullName="KaroState">
+        <elementDefinition Id="c321953d-b0a9-4b56-8840-bc836d20c3d0" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="5f46b1b7-a027-4954-a5c4-fb2927542b72" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="ed113513-2b6c-4ba1-8a09-cfa10a21ce21" name="Models">
+    <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
+  </package>
+</logicalClassDesignerModel>
