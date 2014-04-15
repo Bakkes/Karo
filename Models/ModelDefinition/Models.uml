@@ -188,6 +188,25 @@
                 LastKnownLocation="Models.uml" />
             </type_NamedElement>
           </property>
+          <property
+            Id="c6b90b1d-2e44-419e-b1ec-3beb696f4d91"
+            name="StateMachine"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="7b2c1104-8188-4083-9407-e7d96155bc05"
+                LastKnownName="KaroStateMachine"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
@@ -324,26 +343,6 @@
         name="IKaroState"
         isAbstract="false"
         isLeaf="false">
-        <ownedAttributes>
-          <property
-            Id="412ca34b-b8e3-42b5-abff-dd5be47c2103"
-            name="Instance"
-            isLeaf="false"
-            isStatic="false"
-            isReadOnly="false"
-            isUnique="false"
-            isDerived="false"
-            isDerivedUnion="false"
-            aggregation="None"
-            isComposite="false">
-            <type_NamedElement>
-              <interfaceMoniker
-                Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
-                LastKnownName="IKaroState"
-                LastKnownLocation="Models.uml" />
-            </type_NamedElement>
-          </property>
-        </ownedAttributes>
         <ownedOperations>
           <operation
             Id="dd99d4c3-9e33-438d-bf44-eeda4b108dda"
@@ -474,6 +473,46 @@
           </operation>
         </ownedOperationsInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4e5fb2d5-6497-468d-bca1-59d8a3bdd32b"
+        name="PlaceState"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="97b543f8-5276-48d6-8767-a4776978ff30"
+        name="PieceDestinationState"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="cf65acae-b212-47a2-9ce2-de175eb8c788"
+        name="PieceSourceState"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="e3f4436b-06dd-4231-bc95-ec9bc771bf05"
+        name="TileSourceState"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="8ac9af43-b532-4309-a536-a60256732ce5"
+        name="ComputerState"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
