@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 using engine.wrapper;
 
@@ -23,7 +24,12 @@ namespace _2DFrontend
 		/// <summary>
 		/// Width/height of the tiles in pixels.
 		/// </summary>
-		private const int TileSize = 20;
+		private const int TileSize = 50;
+
+		/// <summary>
+		/// Gap between tiles in pixels.
+		/// </summary>
+		private const int Gap = 5;
 
 		public KaroPanel()
 			: base()
@@ -48,11 +54,26 @@ namespace _2DFrontend
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			g.FillRectangle(_tileBackColor, 100, 100, TileSize, TileSize);
+			foreach (Point p in points)
+			{
+				int x = p.X * (TileSize + Gap) + Gap;
+				int y = p.Y * (TileSize + Gap) + Gap;
+				g.FillRectangle(_tileBackColor, x, y, TileSize, TileSize);
+			}
 		}
+
+		List<Point> points = new List<Point>();
 
 		private void KaroPanel_MouseClick(object sender, MouseEventArgs e)
 		{
+			if (false)
+			{
+				// Clicked on empty space, stop.
+				return;
+			}
+			int x = (e.Location.X - Gap / 2) / (TileSize + Gap);
+			int y = (e.Location.Y - Gap / 2) / (TileSize + Gap);
+			points.Add(new Point(x, y));
 			Invalidate();
 		}
 	}
