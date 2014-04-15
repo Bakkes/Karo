@@ -1,4 +1,5 @@
 #include "Grid.h"
+#include "IBoard.h"
 #pragma once
 namespace engine{
 
@@ -7,7 +8,7 @@ namespace engine{
 		IsMax = 2,
 		IsFlipped = 4
 	};
-	class Board{
+	class Board : IBoard{
 	public:
 		Board();
 		~Board();
