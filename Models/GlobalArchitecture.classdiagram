@@ -17,11 +17,6 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="809abd9c-b0a9-4640-8e97-58e03c8dd21a" name="IUnsafeBoard*" isAbstract="false" isLeaf="false" cachedFullName="IUnsafeBoard*">
-        <elementDefinition Id="14bedc51-44a7-4877-aeec-31cc70661e60" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="e3d5dd7d-941a-4912-a364-aae9dff118dc" name="Move" isAbstract="false" isLeaf="false" cachedFullName="Move">
         <elementDefinition Id="b0dd07aa-e95d-42d5-8249-b1fd1974c985" />
       </referencedType>
@@ -98,7 +93,7 @@
                       <parameter Id="109a8430-f3c9-463e-8e14-104bfd241641" direction="Return" isUnique="false">
                         <elementDefinition Id="b10542b0-b0f7-456b-98ec-634d5ecda99b" />
                         <type_NamedElement>
-                          <referencedTypeMoniker Id="809abd9c-b0a9-4640-8e97-58e03c8dd21a" LastKnownName="IUnsafeBoard*" />
+                          <referencedTypeMoniker Id="e145b63d-bb63-4cc1-b78d-2c2fb21624fe" LastKnownName="IBoard*" />
                         </type_NamedElement>
                       </parameter>
                     </operationHasOwnedParameters>
@@ -208,23 +203,12 @@
       </package>
     </logicalClassDesignerModelHasPackages>
     <logicalClassDesignerModelHasPackages>
-      <package Id="97cc7310-2677-4639-8cec-6efc4069c8d5" name="Engine.Wrapper">
-        <elementDefinition Id="ac1cd474-8db9-47c9-9ee6-3fafc028d14d" />
-        <suppliersInternal>
-          <dependency Id="b9e4ce0a-6482-4461-a9db-c7597aad911b">
-            <packageMoniker Id="15399983-99a7-4128-bbd7-c6d660210a56" LastKnownName="Engine" />
-            <elementDefinition Id="ec033d46-f9c6-4d5a-a158-550b73acab53" />
-          </dependency>
-        </suppliersInternal>
-      </package>
-    </logicalClassDesignerModelHasPackages>
-    <logicalClassDesignerModelHasPackages>
       <package Id="51428922-5b59-488b-af4e-bd370c5124f1" name="Frontend.Test">
         <elementDefinition Id="2c689fe6-aedf-4fb0-ad8b-22ec2951dda3" />
         <suppliersInternal>
-          <dependency Id="13900038-e588-4e82-9eb5-e73ebdc175e4">
-            <packageMoniker Id="97cc7310-2677-4639-8cec-6efc4069c8d5" LastKnownName="Engine.Wrapper" />
-            <elementDefinition Id="c6aef90e-649d-4b6c-9e50-f78b6ee4e432" />
+          <dependency Id="95a27ef2-37a3-4860-8c46-010f91342ccb">
+            <packageMoniker Id="2a6feb00-5bf5-4315-83d5-4eb2364615e3" LastKnownName="Engine.Wrapper" />
+            <elementDefinition Id="eef9bee9-f69e-4e12-896b-fc7301b09544" />
           </dependency>
         </suppliersInternal>
       </package>
@@ -233,9 +217,9 @@
       <package Id="752b9949-c40a-47da-8d1f-9af870967f28" name="Frontend.XNA">
         <elementDefinition Id="e6245030-0a14-4244-bb57-ddd076fce7a6" />
         <suppliersInternal>
-          <dependency Id="fd3f3efd-e3b4-4944-9ffd-8ccae6b27b6c">
-            <packageMoniker Id="97cc7310-2677-4639-8cec-6efc4069c8d5" LastKnownName="Engine.Wrapper" />
-            <elementDefinition Id="9256adc2-ec32-4b09-b360-2de32e49b556" />
+          <dependency Id="45038d32-5b22-432a-ac15-076837582551">
+            <packageMoniker Id="2a6feb00-5bf5-4315-83d5-4eb2364615e3" LastKnownName="Engine.Wrapper" />
+            <elementDefinition Id="bf1e72da-1ec6-4f3f-bf09-f9ca40b281f7" />
           </dependency>
         </suppliersInternal>
       </package>
@@ -243,6 +227,22 @@
     <packageHasNamedElement>
       <referencedType Id="79cae0a4-5365-41e7-807e-45dfdd3d3b1c" name="MoveDirection" isAbstract="false" isLeaf="false" cachedFullName="MoveDirection">
         <elementDefinition Id="e3a65e52-32e8-4b2c-9796-2c2f505b0286" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="2a6feb00-5bf5-4315-83d5-4eb2364615e3" name="Engine.Wrapper">
+        <elementDefinition Id="5256e9d6-364f-4c29-a6bc-de50cceb8efd" />
+        <suppliersInternal>
+          <dependency Id="aa0d02d0-470f-424b-9eec-875717125a92">
+            <packageMoniker Id="15399983-99a7-4128-bbd7-c6d660210a56" LastKnownName="Engine" />
+            <elementDefinition Id="53af7f84-1e8e-429d-a24a-f9964bceb1fe" />
+          </dependency>
+        </suppliersInternal>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <packageHasNamedElement>
+      <referencedType Id="e145b63d-bb63-4cc1-b78d-2c2fb21624fe" name="IBoard*" isAbstract="false" isLeaf="false" cachedFullName="IBoard*">
+        <elementDefinition Id="6cb753b3-db5d-46f2-8e00-d24c36657641" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

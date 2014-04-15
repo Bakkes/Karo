@@ -71,12 +71,6 @@
     </packageHasNamedElement>
     <packageHasNamedElement>
       <packageMoniker
-        Id="ac1cd474-8db9-47c9-9ee6-3fafc028d14d"
-        LastKnownName="Engine.Wrapper"
-        LastKnownLocation="Package1_1118.uml" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <packageMoniker
         Id="2c689fe6-aedf-4fb0-ad8b-22ec2951dda3"
         LastKnownName="Frontend.Test"
         LastKnownLocation="Package_1119.uml" />
@@ -86,6 +80,12 @@
         Id="e6245030-0a14-4244-bb57-ddd076fce7a6"
         LastKnownName="Frontend.XNA"
         LastKnownLocation="Package_1120.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="5256e9d6-364f-4c29-a6bc-de50cceb8efd"
+        LastKnownName="Engine.Wrapper"
+        LastKnownLocation="Package_1220.uml" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
