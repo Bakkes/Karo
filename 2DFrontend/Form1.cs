@@ -18,6 +18,8 @@ namespace _2DFrontend
             InitializeComponent();
             MoveWrapper mv;
             mv = new MoveWrapper(MoveType.JUMP, 0, 1, MoveDirection.NORTH, 2);
+            KaroGame game = new KaroGame();
+            
         }
     }
 }

@@ -6,13 +6,13 @@
 
 namespace engine{
 
-	enum TileValue{
+	enum ENGINE_API TileValue{
 		HasTile = 1,
 		IsMax = 2,
 		IsFlipped = 4
 	};
 
-	class Board : IBoard {
+	class ENGINE_API Board : IBoard {
 	public:
 		Board();
 		~Board();
