@@ -12,6 +12,7 @@ namespace wrapper {
 	public ref class MoveWrapper
 	{
 		public:
+			MoveWrapper(Move * m);
 			MoveWrapper(engine::wrapper::MoveType moveType, int fromTile, int toTile, engine::wrapper::MoveDirection moveDirection, int emptyTile);
 			~MoveWrapper();
 			engine::wrapper::MoveType GetMoveType();

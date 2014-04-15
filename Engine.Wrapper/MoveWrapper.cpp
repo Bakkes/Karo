@@ -4,6 +4,11 @@
 namespace engine {
 namespace wrapper {
 
+MoveWrapper::MoveWrapper(Move * move)
+{
+	_move = move;
+}
+
 MoveWrapper::MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)
 {
 	_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, static_cast<engine::MoveDirection>(moveDirection), emptyTile);

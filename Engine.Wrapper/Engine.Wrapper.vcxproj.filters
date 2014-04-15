@@ -27,6 +27,9 @@
     <ClInclude Include="MoveWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="KaroGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.Wrapper.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MoveWrapper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KaroGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
