@@ -20,11 +20,17 @@ namespace _2DFrontend
 		/// </summary>
 		private Brush _tileBackColor = Brushes.White;
 
+		/// <summary>
+		/// Width/height of the tiles in pixels.
+		/// </summary>
+		private const int TileSize = 20;
+
 		public KaroPanel()
 			: base()
 		{
 			BackColor = Color.CornflowerBlue;
 			DoubleBuffered = true;
+			MouseClick += KaroPanel_MouseClick;
 		}
 
 		/// <summary>
@@ -36,10 +42,18 @@ namespace _2DFrontend
 			_karoGame = karoGame;
 		}
 
+		/// <summary>
+		/// Draw the current state of the karo game.
+		/// </summary>
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			g.FillRectangle(_tileBackColor, 100, 100, 50, 50);
+			g.FillRectangle(_tileBackColor, 100, 100, TileSize, TileSize);
+		}
+
+		private void KaroPanel_MouseClick(object sender, MouseEventArgs e)
+		{
+			Invalidate();
 		}
 	}
 }
