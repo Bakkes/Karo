@@ -95,6 +95,27 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="9515009a-5ef7-486b-9149-d651779e9c81" name="Update" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b299bdb0-1b44-4907-878c-e345e247d1dd" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="687cc036-850e-479d-9de4-8f9bb73e84d9" name="click" direction="In" isUnique="false">
+                  <elementDefinition Id="fe5c827d-860f-4fdb-a158-89002184f010" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="870215cd-fbbc-4192-a662-211bd57b0d94" LastKnownName="Point" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="fef8dc23-258c-407f-ae9c-0693c09868d7" direction="Return" isUnique="false">
+                  <elementDefinition Id="5c46faa8-ca47-4c3e-aa70-44931e94fd2f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5f46b1b7-a027-4954-a5c4-fb2927542b72" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
