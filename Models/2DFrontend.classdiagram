@@ -18,24 +18,45 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="df68be13-2a5d-4bb7-9d59-d8d3fb6294ba" name="KaroPanel" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="0e148cea-7150-4516-a454-10ceb0d17724" />
+        <targetEnds>
+          <association Id="d7fe4cb9-8c58-4ee6-b829-aac0bd4c6341" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="19ef45dc-093e-4f44-b130-d35d0cc55137" LastKnownName="KaroGameManager" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3ff46979-736f-456d-a2d7-55df3c7dc242" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1fc29e8a-1d2d-4fa2-821b-f80a566e0533" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3fa67e53-5da2-497a-a6a5-2866cb7bc47d" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="63cc9170-b096-4e09-8a6c-779b62c44efb" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d33a4597-cc62-4173-b3ea-6742928195e6" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
-          <property Id="134e3a77-b90d-4698-9ee1-435e523c0c40" name="Manager" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+          <property Id="134e3a77-b90d-4698-9ee1-435e523c0c40" name="Manager" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b560337b-0f30-4e97-9f57-eb473f54ba0f" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="4f6e6f53-a20c-45f2-9a52-8984a6855c91" LastKnownName="KaroGameManager" />
+              <referencedTypeMoniker Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" LastKnownName="KaroGameManager" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
-    <packageHasNamedElement>
-      <referencedType Id="4f6e6f53-a20c-45f2-9a52-8984a6855c91" name="KaroGameManager" isAbstract="false" isLeaf="false" cachedFullName="KaroGameManager">
-        <elementDefinition Id="2e8a09c0-2810-4953-bdcb-d87a9d00e6c8" />
-      </referencedType>
-    </packageHasNamedElement>
     <logicalClassDesignerModelHasTypes>
       <class Id="19ef45dc-093e-4f44-b130-d35d0cc55137" name="KaroGameManager" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="430f92c3-232a-4634-8ef0-7639cee35b62" />
+        <ownedAttributesInternal>
+          <property Id="23364a1e-2e6d-470b-a056-c93836a1812c" name="Game" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="68981bc8-61a6-4bce-ba71-267d546f36c4" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="9baf87b7-ca22-445b-8374-87280f02e9f0" LastKnownName="KaroGame" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="e80c6e04-627a-494d-816f-5f8406e1602d" name="ChangeState" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="c0eb7bb3-5cd9-4cfe-a91c-c9a7d2082a9c" />
@@ -49,10 +70,10 @@
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="84cd0a6a-d4b6-4062-a44c-211d3425b2e5" name="state" direction="In" isUnique="false">
-                  <elementDefinition Id="548a0437-fc39-4064-8fe6-04746ecae244" />
+                <parameter Id="e86c8098-51b6-4652-bdf0-c054f726cd1b" name="state" direction="In" isUnique="false">
+                  <elementDefinition Id="f47c9b36-a6fd-476e-b307-8dbdee78c866" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="0e2d48b7-2d55-474d-a92d-2f90c6e986dd" LastKnownName="KaroState" />
+                    <referencedTypeMoniker Id="0d8dc142-e4c6-47c2-8e02-21b90fd592ba" LastKnownName="IKaroState" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -62,15 +83,110 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
-      <referencedType Id="0e2d48b7-2d55-474d-a92d-2f90c6e986dd" name="KaroState" isAbstract="false" isLeaf="false" cachedFullName="KaroState">
-        <elementDefinition Id="c321953d-b0a9-4b56-8840-bc836d20c3d0" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="5f46b1b7-a027-4954-a5c4-fb2927542b72" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
         <elementDefinition Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="660a72be-49e0-4f50-9027-0876ef54cec7" name="IKaroState" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16" />
+        <ownedAttributes>
+          <property Id="fd7dace3-d1d0-48f6-8837-b95b9a8de743" name="Instance" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="412ca34b-b8e3-42b5-abff-dd5be47c2103" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="0d8dc142-e4c6-47c2-8e02-21b90fd592ba" LastKnownName="IKaroState" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="3827d7c2-abac-4efd-a270-4e15b2dd12d7" name="Update" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="dd99d4c3-9e33-438d-bf44-eeda4b108dda" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f6ae283a-2210-4260-bed3-bd18980e6603" direction="Return" isUnique="false">
+                  <elementDefinition Id="0253e582-c53d-49a1-9c4f-dd80e1a70090" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5f46b1b7-a027-4954-a5c4-fb2927542b72" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1195689e-b61a-45f6-ba13-f41f12d7c918" name="manager" direction="In" isUnique="false">
+                  <elementDefinition Id="f749cb47-dcb3-424b-96e0-0628fdde8d47" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" LastKnownName="KaroGameManager" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1327efd8-4c12-4150-b265-2cc3384a9d45" name="click" direction="In" isUnique="false">
+                  <elementDefinition Id="fa793368-7e55-437c-8276-0c0e3a8ad16a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="870215cd-fbbc-4192-a662-211bd57b0d94" LastKnownName="Point" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="0d8dc142-e4c6-47c2-8e02-21b90fd592ba" name="IKaroState" isAbstract="false" isLeaf="false" cachedFullName="Models::IKaroState">
+        <elementDefinition Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="870215cd-fbbc-4192-a662-211bd57b0d94" name="Point" isAbstract="false" isLeaf="false" cachedFullName="Point">
+        <elementDefinition Id="689db31b-b52c-4948-bc0e-5221ce1fb526" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="9baf87b7-ca22-445b-8374-87280f02e9f0" name="KaroGame" isAbstract="false" isLeaf="false" cachedFullName="KaroGame">
+        <elementDefinition Id="9b32c012-848d-4706-b934-32b5da09731f" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" name="KaroGameManager" isAbstract="false" isLeaf="false" cachedFullName="Models::KaroGameManager">
+        <elementDefinition Id="430f92c3-232a-4634-8ef0-7639cee35b62" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6b5cb6fa-39e3-4323-95f5-413f92773d54" name="KaroStateMachine" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7b2c1104-8188-4083-9407-e7d96155bc05" />
+        <ownedAttributesInternal>
+          <property Id="2779fa40-4a22-45c6-8eba-a498643bd2fb" name="CurrentState" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="d5f3f581-6f47-47f5-afa2-2506c4c0704b" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="0d8dc142-e4c6-47c2-8e02-21b90fd592ba" LastKnownName="IKaroState" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="d821ccf1-8658-4eb2-81e9-7f736dd97707" name="ChangeState" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f36f181a-b076-420c-abb5-872e2d8f2131" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7e3e98c0-ef29-4061-98c0-0aab8d926124" name="state" direction="In" isUnique="false">
+                  <elementDefinition Id="0aec9428-17b9-48c9-9245-81d2972f58a6" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0d8dc142-e4c6-47c2-8e02-21b90fd592ba" LastKnownName="IKaroState" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3b8a73b9-e439-4f32-9699-620182d6a96d" direction="Return" isUnique="false">
+                  <elementDefinition Id="6d22bbae-7ebf-426a-92eb-835b570b3af3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="5f46b1b7-a027-4954-a5c4-fb2927542b72" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="ed113513-2b6c-4ba1-8a09-cfa10a21ce21" name="Models">
     <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />

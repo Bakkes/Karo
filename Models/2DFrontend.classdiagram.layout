@@ -1,19 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="2DFrontend">
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.625, 8.5" name="2DFrontend">
   <logicalClassDesignerModelMoniker Id="70aff829-ab2e-430c-8201-59d339e1a93c" />
   <nestedChildShapes>
-    <classShape Id="394a2d3a-3e06-4bb4-bb7d-386b397c46a4" absoluteBounds="2.875, 1, 2, 1.0624999801317849" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+    <classShape Id="394a2d3a-3e06-4bb4-bb7d-386b397c46a4" absoluteBounds="2.125, 1, 2, 1.0624999801317849" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
       <classMoniker Id="df68be13-2a5d-4bb7-9d59-d8d3fb6294ba" LastKnownName="KaroPanel" />
       <nestedChildShapes>
-        <AttributeElementListCompartment Id="5f54f12c-d5c5-4395-8160-ebbe56bfa576" absoluteBounds="2.89, 1.3900000000000001, 1.9700000000000002, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-        <OperationElementListCompartment Id="f73b8d50-9635-40d7-bcff-107663ae38ca" absoluteBounds="2.89, 1.7613281125823657, 1.9700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <AttributeElementListCompartment Id="5f54f12c-d5c5-4395-8160-ebbe56bfa576" absoluteBounds="2.14, 1.3900000000000001, 1.9700000000000002, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="f73b8d50-9635-40d7-bcff-107663ae38ca" absoluteBounds="2.14, 1.7613281125823657, 1.9700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="619bcd5c-b774-4b62-b0f3-60010007c85d" absoluteBounds="5.25, 1, 2.375, 1.0624999801317849" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+    <classShape Id="619bcd5c-b774-4b62-b0f3-60010007c85d" absoluteBounds="4.625, 0.875, 2.375, 1.2226562251647315" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
       <classMoniker Id="19ef45dc-093e-4f44-b130-d35d0cc55137" LastKnownName="KaroGameManager" />
       <nestedChildShapes>
-        <AttributeElementListCompartment Id="ebc816ab-a405-44ba-94f6-a24b4de2c1e8" absoluteBounds="5.265, 1.3900000000000001, 2.3449999999999998, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-        <OperationElementListCompartment Id="40a64de8-576b-42ec-a6e8-2e7a616d2c24" absoluteBounds="5.265, 1.6011718675494193, 2.3449999999999998, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <AttributeElementListCompartment Id="ebc816ab-a405-44ba-94f6-a24b4de2c1e8" absoluteBounds="4.64, 1.2650000000000001, 2.3449999999999998, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="40a64de8-576b-42ec-a6e8-2e7a616d2c24" absoluteBounds="4.64, 1.6363281125823657, 2.3449999999999998, 0.36132811258236575" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.125 : 1.53124999006589); (4.625 : 1.53124999006589)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+      <associationMoniker Id="d7fe4cb9-8c58-4ee6-b829-aac0bd4c6341" />
+      <relativeChildShapes />
+      <nodes>
+        <classShapeMoniker Id="394a2d3a-3e06-4bb4-bb7d-386b397c46a4" />
+        <classShapeMoniker Id="619bcd5c-b774-4b62-b0f3-60010007c85d" />
+      </nodes>
+    </associationConnector>
+    <interfaceShape Id="4d65ae7d-749c-4afe-baaa-65049a2d44ea" absoluteBounds="8, 0.875, 3.375, 1.2226562251647315" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
+      <interfaceMoniker Id="660a72be-49e0-4f50-9027-0876ef54cec7" LastKnownName="IKaroState" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="6daff765-1099-40be-8f6b-1ac3d05ff0f8" absoluteBounds="8.015, 1.2650000000000001, 3.3449999999999998, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="154af3a5-9325-446d-898c-beb4052d84d5" absoluteBounds="8.015, 1.6363281125823657, 3.3449999999999998, 0.36132811258236575" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </interfaceShape>
+    <classShape Id="34194505-86c7-4866-9939-db944a455625" absoluteBounds="5.75, 4, 2.375, 1.2226562251647311" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="6b5cb6fa-39e3-4323-95f5-413f92773d54" LastKnownName="KaroStateMachine" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="43427e0a-6155-487d-b2de-a1ed7d2622e8" absoluteBounds="5.765, 4.3900000000000006, 2.3449999999999998, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="0547c811-fb1d-496e-8abc-a1c67d34809c" absoluteBounds="5.765, 4.7613281125823654, 2.3449999999999998, 0.36132811258236575" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

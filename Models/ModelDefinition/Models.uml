@@ -94,10 +94,50 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="d33a4597-cc62-4173-b3ea-6742928195e6"
+            isDerived="false"
+            sourceEndRoleName=""
+            targetEndRoleName=""
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="430f92c3-232a-4634-8ef0-7639cee35b62"
+              LastKnownName="KaroGameManager"
+              LastKnownLocation="Models.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1fc29e8a-1d2d-4fa2-821b-f80a566e0533"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="63cc9170-b096-4e09-8a6c-779b62c44efb"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property
             Id="b560337b-0f30-4e97-9f57-eb473f54ba0f"
             name="Manager"
+            visibility="Private"
             isLeaf="false"
             isStatic="false"
             isReadOnly="false"
@@ -107,8 +147,8 @@
             aggregation="None"
             isComposite="false">
             <type_NamedElement>
-              <undefinedTypeMoniker
-                Id="2e8a09c0-2810-4953-bdcb-d87a9d00e6c8"
+              <classMoniker
+                Id="430f92c3-232a-4634-8ef0-7639cee35b62"
                 LastKnownName="KaroGameManager"
                 LastKnownLocation="Models.uml" />
             </type_NamedElement>
@@ -128,6 +168,27 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="68981bc8-61a6-4bce-ba71-267d546f36c4"
+            name="Game"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="9b32c012-848d-4706-b934-32b5da09731f"
+                LastKnownName="KaroGame"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
             Id="c0eb7bb3-5cd9-4cfe-a91c-c9a7d2082a9c"
@@ -153,14 +214,14 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="548a0437-fc39-4064-8fe6-04746ecae244"
+                  Id="f47c9b36-a6fd-476e-b307-8dbdee78c866"
                   name="state"
                   direction="In"
                   isUnique="false">
                   <type_NamedElement>
-                    <undefinedTypeMoniker
-                      Id="c321953d-b0a9-4b56-8840-bc836d20c3d0"
-                      LastKnownName="KaroState"
+                    <interfaceMoniker
+                      Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+                      LastKnownName="IKaroState"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -174,6 +235,245 @@
       <undefinedType
         Id="c321953d-b0a9-4b56-8840-bc836d20c3d0"
         name="KaroState" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="5194a87c-990b-4a7b-9338-9daa6162a9f6"
+        name="KaroState"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="70f4a7e1-892d-4adb-b968-28e9c44c29e8"
+        name="KaroState"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="6107fd8d-84dc-4c8a-9cdc-0651dfaf853c"
+            name="Instance"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="5194a87c-990b-4a7b-9338-9daa6162a9f6"
+                LastKnownName="KaroState"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="ee11370e-2d41-4626-b6ce-e140f5dd4a3b"
+            name="Update"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9f801353-ed2f-47a3-8b10-fd9210c4341c"
+                  name="click"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="689db31b-b52c-4948-bc0e-5221ce1fb526"
+                      LastKnownName="Point"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="93d2791f-a084-42dc-a58a-14fada1239c8"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="689db31b-b52c-4948-bc0e-5221ce1fb526"
+        name="Point" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+        name="IKaroState"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedAttributes>
+          <property
+            Id="412ca34b-b8e3-42b5-abff-dd5be47c2103"
+            name="Instance"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+                LastKnownName="IKaroState"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation
+            Id="dd99d4c3-9e33-438d-bf44-eeda4b108dda"
+            name="Update"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0253e582-c53d-49a1-9c4f-dd80e1a70090"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f749cb47-dcb3-424b-96e0-0628fdde8d47"
+                  name="manager"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="430f92c3-232a-4634-8ef0-7639cee35b62"
+                      LastKnownName="KaroGameManager"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fa793368-7e55-437c-8276-0c0e3a8ad16a"
+                  name="click"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="689db31b-b52c-4948-bc0e-5221ce1fb526"
+                      LastKnownName="Point"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="9b32c012-848d-4706-b934-32b5da09731f"
+        name="KaroGame" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="7b2c1104-8188-4083-9407-e7d96155bc05"
+        name="KaroStateMachine"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="d5f3f581-6f47-47f5-afa2-2506c4c0704b"
+            name="CurrentState"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+                LastKnownName="IKaroState"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="f36f181a-b076-420c-abb5-872e2d8f2131"
+            name="ChangeState"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0aec9428-17b9-48c9-9245-81d2972f58a6"
+                  name="state"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="55af3da2-b13e-418c-aaa8-a4d4251a5e16"
+                      LastKnownName="IKaroState"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="6d22bbae-7ebf-426a-92eb-835b570b3af3"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
