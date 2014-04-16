@@ -46,6 +46,7 @@ namespace _2DFrontend
 		public void NewGame(KaroGameManager manager)
 		{
 			_manager = manager;
+			Invalidate();
 		}
 
 		/// <summary>
@@ -54,6 +55,14 @@ namespace _2DFrontend
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
+			for (int i = 0; i < 5; i++)
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					Point topleft = TileToPixel(i, j);
+					g.FillRectangle(_tileBackColor, topleft.X, topleft.Y, TileSize, TileSize);
+				}
+			}
 		}
 
 		private void KaroPanel_MouseClick(object sender, MouseEventArgs e)
@@ -61,8 +70,8 @@ namespace _2DFrontend
 			if (_manager != null)
 			{
 				_manager.Update(PixelToTile(e.Location.X, e.Location.Y));
+				Invalidate();
 			}
-			Invalidate();
 		}
 
 		/// <summary>
@@ -72,6 +81,20 @@ namespace _2DFrontend
 		{
 			return new Point(x % (TileSize + Gap),
 				y % (TileSize + Gap));
+		}
+
+		/// <summary>
+		/// Translates tile coordinates to the topleft pixel coordinate of a tile.
+		/// </summary>
+		private Point TileToPixel(int x, int y)
+		{
+			// This makes sure there's always one empty row/colum at the top/left.
+			// This is necessary to place your piece on the top/left nonexisting row.
+			x++;
+			y++;
+
+			return new Point(x * (TileSize + Gap * 2) + Gap,
+				y * (TileSize + Gap * 2) + Gap);
 		}
 	}
 }
