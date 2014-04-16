@@ -26,7 +26,7 @@ namespace engine {
 			_board->ExecuteMove(&move, player);
 
 			EvalResult score;
-			if (depth + 1 < _maxDepth) {
+			if (depth + 1 <= _maxDepth) {
 				// We are allowed to go deeper, take the result of the next step
 				score = MinimaxStep(InvertPlayer(player), depth + 1);
 			} else {
