@@ -65,9 +65,11 @@ namespace _2DFrontend
 					for (int y = 0; y < maxPotentialSize; y++)
 					{
 						TileWrapper tile = board.GetRelativeTileAt(new Vector2DWrapper(x, y));
+                        System.Console.WriteLine(tile.GetPosition().X + " + (" + x + ") - " + tile.GetPosition().Y + "(" + y + ")");
 						int o = tile.GetData();
-						if ((tile.GetData() & 1) == 1)
+						if ((tile.GetData() & (int)TileValue.HasTile) == (int)TileValue.HasTile)
 						{
+                            System.Console.WriteLine(tile.GetData());
 							Point paintPos = TileToPixel(x, y);
 							g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
 								TileSize, TileSize);
