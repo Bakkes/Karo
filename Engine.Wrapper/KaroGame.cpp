@@ -8,7 +8,7 @@ namespace engine {
 namespace wrapper {
 
 	KaroGame::KaroGame() {
-		_board = new Board();
+		_board = gcnew BoardWrapper();
 		_cPlayer = new ComputerPlayer();
 	}
 
@@ -17,10 +17,12 @@ namespace wrapper {
 		delete _cPlayer;
 	}
 
+	BoardWrapper^ KaroGame::GetBoard() {
+		return _board;
+	}
+
 	void KaroGame::ExecuteMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
-		//Where do we clean this up
-		Move * m = WrapperConversionUtility().ConvertMove(moveWrapper);
-		_board->ExecuteMove(m, static_cast<engine::Players>(player));
+		_board->ExecuteMove(moveWrapper, player);
 	}
 
 	MoveWrapper^ KaroGame::GetBestMove() {

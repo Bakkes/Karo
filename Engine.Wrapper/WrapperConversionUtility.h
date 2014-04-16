@@ -19,13 +19,13 @@ public:
 	static MoveWrapper^ ConvertMove(Move* move) {
 		return gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(move->GetMoveType()), 
 			move->GetFromTile(), move->GetToTile(), static_cast<engine::wrapper::MoveDirection>(move->GetMoveDirection()), 
-			move->GetEmptyTile());;
+			move->GetEmptyTile());
 	}
 
 	static MoveWrapper^ ConvertMove(Move move) {
 		return gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(move.GetMoveType()), 
 			move.GetFromTile(), move.GetToTile(), static_cast<engine::wrapper::MoveDirection>(move.GetMoveDirection()), 
-			move.GetEmptyTile());;
+			move.GetEmptyTile());
 	}
 
 	static TileWrapper^ ConvertTile(Tile<int> tile) {
