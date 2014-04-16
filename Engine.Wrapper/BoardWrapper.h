@@ -12,6 +12,14 @@ using namespace System::Collections::Generic;
 
 namespace engine {
 namespace wrapper {
+
+public enum class TileValue {
+	HasTile = 1,
+	IsEmpty = 2,
+	IsMax = 4,
+	IsFlipped = 8
+};
+
 public ref class BoardWrapper
 {
 public:
