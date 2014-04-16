@@ -24,12 +24,12 @@ namespace _2DFrontend
 		/// <summary>
 		/// Width/height of the tiles in pixels.
 		/// </summary>
-		private const int TileSize = 50;
+		private const int TileSize = 10;
 
 		/// <summary>
 		/// Gap left and right of every tile.
 		/// </summary>
-		private const int Gap = 3;
+		private const int Gap = 1;
 
 		public KaroPanel()
 			: base()
@@ -66,6 +66,12 @@ namespace _2DFrontend
 					{
 						TileWrapper tile = board.GetRelativeTileAt(new Vector2DWrapper(x, y));
 						int o = tile.GetData();
+						if ((tile.GetData() & 1) == 1)
+						{
+							Point paintPos = TileToPixel(x, y);
+							g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
+								TileSize, TileSize);
+						}
 					}
 				}
 			}
