@@ -29,5 +29,5 @@ namespace engine {
 	// Creates a move which is the exact opposite of the given move
 	Move ENGINE_API InvertMove(Move move);
 	// Creates the player which is the exact opposite of the given player
-	Players ENGINE_API InvertPlayer();
+	Players ENGINE_API InvertPlayer(Players player);
 }
