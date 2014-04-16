@@ -13,6 +13,7 @@ namespace engine {
 		ComputerPlayer(IBoard* board, int maxDepth);
 		~ComputerPlayer() override;
 		virtual Move GetBestMove(Players player) override;
+		void SetEvaluator(IStaticEvaluation* evaluator);
 
 	private:
 		// The Static Evaluation function which will evaluate the board

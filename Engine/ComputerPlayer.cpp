@@ -50,6 +50,10 @@ namespace engine {
 		return result;
 	}
 
+	void ComputerPlayer::SetEvaluator(IStaticEvaluation* evaluator) {
+		_evaluator = evaluator;
+	}
+
 	Move InvertMove(Move move) {
 		switch (move.GetMoveType()) {
 		case INSERT:
