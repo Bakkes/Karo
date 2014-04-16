@@ -52,7 +52,7 @@ private:
 		if (moveA.HasUsedTile() != moveB.HasUsedTile())
 			return false;
 
-		if (moveA.GetUsedTile() != moveB.GetUsedTile())
+		if (moveA.HasUsedTile() && moveA.GetUsedTile() != moveB.GetUsedTile())
 			return false;
 
 		return true;
