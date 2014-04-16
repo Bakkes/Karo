@@ -3,7 +3,6 @@
 #include "ICommunication.h"
 #include "Board.h"
 #include <string>
-#include <iostream>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -23,7 +22,7 @@ namespace Tests {
 			/** the board should be constructed as a empty 5*4*/
 			Board* board = new Board();
 			string result = board->ToString();
-			cout << result;
+			int i = 4;
 			Assert::IsTrue(
 			   "3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\
 				3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\

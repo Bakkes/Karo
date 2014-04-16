@@ -82,26 +82,26 @@ namespace engine {
 				for (unsigned x = 0; x < width; x++) {
 
 					if (y < height - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetTop(
+						_tiles->at(GetTileIndex(x, y))->SetBottom(
 							_tiles->at(
 								GetTileIndex(x, y + 1)
 							)
 						);
 					}else if(wrapArround){
-						_tiles->at(GetTileIndex(x,y))->SetTop(
+						_tiles->at(GetTileIndex(x,y))->SetBottom(
 							_tiles->at(
 								GetTileIndex(x,0)
 							)
 						);
 					}
 					if (y != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetBottom(
+						_tiles->at(GetTileIndex(x, y))->SetTop(
 							_tiles->at(
 								GetTileIndex(x, y - 1)
 							)
 						);
 					}else if(wrapArround){
-						_tiles->at(GetTileIndex(x, y))->SetBottom(
+						_tiles->at(GetTileIndex(x, y))->SetTop(
 							_tiles->at(
 								GetTileIndex(x, height - 1)
 							)

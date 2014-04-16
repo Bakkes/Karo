@@ -45,11 +45,11 @@ namespace engine{
 		std::stringstream result;
 		_grid->TraverseTiles(
 			[&, this](Tile<int>* tile) -> void{
-				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
-					result << std::endl;
-				}
 				int data = *tile->GetData();
 				result << *tile->GetData() << ",";
+				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
+					result << std::endl << "L";
+				}
 			}
 		);
 		return result.str();
