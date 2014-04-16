@@ -7,7 +7,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
 
 namespace Tests {
-	TEST_CLASS(MoveInvertionTest) {
+	TEST_CLASS(Minimax) {
 	public:
 		TEST_METHOD(MiniMaxDepth_0) {
 			IBoard* board = new Board();
