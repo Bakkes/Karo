@@ -33,7 +33,7 @@ public:
 	}
 
 	static Tile<int>* ConvertTile(TileWrapper^ tile) {
-		return new Tile<int>(new Vector2D(tile->GetX(), tile->GetY()));
+		return new Tile<int>(new Vector2D(tile->GetPosition()->Y, tile->GetPosition()->X));
 	}
 };
 

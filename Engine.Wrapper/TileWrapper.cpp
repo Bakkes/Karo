@@ -17,12 +17,8 @@ namespace wrapper {
 		return *(_tile->GetData());
 	}
 
-	double TileWrapper::GetX() {
-		return _tile->GetPosition()->X();
-	}
-
-	double TileWrapper::GetY() {
-		return _tile->GetPosition()->Y();
+	Vector2DWrapper^ TileWrapper::GetPosition() {
+		return gcnew Vector2DWrapper(_tile->GetPosition()->X(), _tile->GetPosition()->Y());
 	}
 }
 }
