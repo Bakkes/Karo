@@ -66,8 +66,8 @@ namespace engine {
 		}
 		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
 		void TraverseTiles(function< void(Tile<T>*) > lambda){
-			for (unsigned x = 0; x < _size->GetWidth(); x++) {
-				TraverseRow(x, lambda);
+			for (unsigned y = 0; y < _size->GetHeight(); y++) {
+				TraverseRow(y, lambda);
 			}
 		}
 		Size* GetSize() const{
