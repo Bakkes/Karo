@@ -42,17 +42,17 @@ namespace engine{
 		return tiles;
 	}
 	std::string Board::ToString(){
-		std::string result = "";
+		std::stringstream result;
 		_grid->TraverseTiles(
 			[&, this](Tile<int>* tile) -> void{
-				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
-					result += "\r\n";
-				}
 				int data = *tile->GetData();
-				result += *tile->GetData() + ",";
+				result << *tile->GetData() << ",";
+				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
+					result << std::endl;
+				}
 			}
 		);
-		return result;
+		return result.str();
 		
 	}
 	Tile<int>* Board::GetRelativeTileAt(const Vector2D relativePosition) const{
