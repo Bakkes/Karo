@@ -3,7 +3,7 @@
 #include "Players.h"
 
 namespace engine {
-	class IComputerPlayer {
+	class ENGINE_API IComputerPlayer {
 	public:
 		virtual ~IComputerPlayer() {
 		}

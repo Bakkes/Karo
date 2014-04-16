@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="ac1cd474-8db9-47c9-9ee6-3fafc028d14d"
+  name="Engine.Wrapper" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <appliedStereotypesInternal>
+    <stereotypeInstance
+      Id="170e2b01-8367-4c63-8b45-5e80cf1a5da0"
+      name="TextTemplateBindings"
+      profile="TextTemplateBindings">
+      <propertyInstances>
+        <stereotypeInstanceHasPropertyInstances
+          Id="b2c98fbe-f7ca-4843-92b8-e1385f02a0de">
+          <propertyInstance
+            Id="cfdea7f6-8a92-414d-9354-f99612877f5e"
+            name="Alias" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances
+          Id="5c8e87eb-8f14-429d-98c9-0280ec2da5d9">
+          <propertyInstance
+            Id="76e24b06-85f1-4df3-8fd1-ec9022eb2cdb"
+            name="TemplateFilePath" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances
+          Id="adb41521-75a9-4ad1-a5ee-169c58dd07b7">
+          <propertyInstance
+            Id="51305357-05a1-4567-ab85-e4f8ba456a54"
+            name="ProjectPath" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances
+          Id="495c58fb-ab22-4bab-904c-78f49c643607">
+          <propertyInstance
+            Id="19cfff5f-b2ac-47a1-b4ef-fe4dfb166e3c"
+            name="TargetDirectory" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances
+          Id="a59997a2-e56c-4a27-9a1a-073975caf1db">
+          <propertyInstance
+            Id="bb501c04-c322-4e8a-b774-c7e66ec065b9"
+            name="TargetName" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances
+          Id="1bd9d351-ea67-4820-be28-9e2edfd467e6">
+          <propertyInstance
+            Id="39713d0c-a701-4ec3-a835-1630006a175d"
+            name="Overwrite" />
+        </stereotypeInstanceHasPropertyInstances>
+        <stereotypeInstanceHasPropertyInstances
+          Id="33fb1616-8357-4280-ab6e-9ad477508e8a">
+          <propertyInstance
+            Id="f968e459-871b-4c2c-8b26-2c468dc18489"
+            name="Parameters" />
+        </stereotypeInstanceHasPropertyInstances>
+      </propertyInstances>
+    </stereotypeInstance>
+  </appliedStereotypesInternal>
+  <suppliersInternal>
+    <dependency
+      Id="ec033d46-f9c6-4d5a-a158-550b73acab53">
+      <packageMoniker
+        Id="8c9a515f-f4bf-4048-96ae-56a4fa78216e"
+        LastKnownName="Engine"
+        LastKnownLocation="Package_1118.uml" />
+    </dependency>
+  </suppliersInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="13b07b97-1279-4fce-ae57-92c620b60c14">
+      <profileInstance
+        Id="67aecf85-0dd0-427c-8d2e-586ccc484de6"
+        name="TextTemplateBindings" />
+    </packageHasProfileInstances>
+  </profileInstances>
+</package>

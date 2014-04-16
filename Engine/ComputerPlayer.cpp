@@ -5,11 +5,13 @@ namespace engine {
 	ComputerPlayer::ComputerPlayer(IBoard* board, int maxDepth) {
 		_maxDepth = maxDepth;
 		_evaluator = NULL;
+		_moveHistory = new std::stack<Move*>();
 	}
 
 	ComputerPlayer::~ComputerPlayer() {
 		if (_evaluator != NULL)
 			delete _evaluator;
+		delete _moveHistory;
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
@@ -17,13 +19,13 @@ namespace engine {
 	}
 
 	Move ComputerPlayer::MinimaxStep(Players player, int depth) {
-		std::vector<Move>* possibleMoves = _board->GetLegalMoves();
+		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
 		for (auto move = possibleMoves->begin(); move != possibleMoves->end(); move++) {
-			_board->ExecuteMove(&(*move));
+			_board->ExecuteMove(&(*move), player);
 
 			_evaluator->Eval(_board, player);
 
-			_board->ExecuteMove(&(*move));
+			_board->ExecuteMove(&(*move), player);
 		}
 		delete possibleMoves;
 

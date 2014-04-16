@@ -7,7 +7,7 @@
 
 namespace engine {
 
-	class ComputerPlayer : public IComputerPlayer {
+	class ENGINE_API ComputerPlayer : public IComputerPlayer {
 	public:
 		ComputerPlayer(IBoard* board, int maxDepth);
 		~ComputerPlayer() override;
@@ -19,11 +19,11 @@ namespace engine {
 		// The maximum depth of the minimax search
 		int _maxDepth;
 		// The stack of the moves the AI has executed.
-		std::stack<Move*> _moveHistory;
+		std::stack<Move*>* _moveHistory;
 		// The unsafe board which is the playground of the AI
 		IBoard* _board;
 		// Executes a single step from the Minimax algorithm
-		Move ENGINE_API MinimaxStep(Players player, int depth);
+		Move MinimaxStep(Players player, int depth);
 	};
 
 	// Creates a move which is the exact opposite of the given move
