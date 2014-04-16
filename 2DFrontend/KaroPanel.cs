@@ -62,6 +62,7 @@ namespace _2DFrontend
 			{
 				for (int y = 0; y < maxPotentialSize; y++)
 				{
+					TileWrapper tile = board.GetRelativeTileAt(new Vector2DWrapper(x, y));
 				}
 			}
 		}
