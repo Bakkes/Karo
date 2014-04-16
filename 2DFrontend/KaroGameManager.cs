@@ -1,4 +1,5 @@
-﻿using _2DFrontend.State;
+﻿using System.Drawing;
+using _2DFrontend.State;
 using engine.wrapper;
 
 namespace _2DFrontend
@@ -32,6 +33,17 @@ namespace _2DFrontend
 		public void ChangeState(IKaroState state)
 		{
 			CurrentState = state;
+		}
+
+		/// <summary>
+		/// Perform actions depending on the current state and the click location.
+		/// </summary>
+		public void Update(Point tileLocation)
+		{
+			if (CurrentState != null)
+			{
+				CurrentState.Update(this, tileLocation);
+			}
 		}
 	}
 }

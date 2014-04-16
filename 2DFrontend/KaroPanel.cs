@@ -27,9 +27,9 @@ namespace _2DFrontend
 		private const int TileSize = 50;
 
 		/// <summary>
-		/// Gap between tiles in pixels.
+		/// Gap left and right of every tile.
 		/// </summary>
-		private const int Gap = 5;
+		private const int Gap = 3;
 
 		public KaroPanel()
 			: base()
@@ -62,14 +62,19 @@ namespace _2DFrontend
 			}
 		}
 
-		List<Point> points = new List<Point>();
-
 		private void KaroPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			int x = (e.Location.X - Gap / 2) / (TileSize + Gap);
-			int y = (e.Location.Y - Gap / 2) / (TileSize + Gap);
-			points.Add(new Point(x, y));
+			_manager.Update(PixelToTile(e.Location.X, e.Location.Y));
 			Invalidate();
+		}
+
+		/// <summary>
+		/// Translates pixel coordinates to tile coordinates.
+		/// </summary>
+		private Point PixelToTile(int x, int y)
+		{
+			return new Point(x % (TileSize + Gap),
+				y % (TileSize + Gap));
 		}
 	}
 }
