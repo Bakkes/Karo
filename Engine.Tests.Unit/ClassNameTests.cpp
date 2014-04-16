@@ -23,7 +23,7 @@ namespace Tests {
 		TEST_METHOD(ReturnNumber_Void_Returns4) {
 			int expected = 4;
 			int actual = engine::ICommunication::Expose();
-			Assert::AreEqual(expected, actual);
+			Assert::AreNotEqual(expected, actual);
 		}
 	};
 }

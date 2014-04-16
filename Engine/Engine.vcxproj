@@ -87,6 +87,7 @@
     <ClInclude Include="Move.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="Size.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>

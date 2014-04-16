@@ -1,26 +1,19 @@
-#pragma once
-
 #include "Grid.h"
 #include "IBoard.h"
-#include "Move.h"
-
+#include <string>
+#pragma once
 namespace engine{
 
-	enum ENGINE_API TileValue{
-		HasTile = 1,
-		IsMax = 2,
-		IsFlipped = 4
-	};
-
-	class ENGINE_API Board : IBoard {
+	class ENGINE_API Board : IBoard{
 	public:
 		Board();
 		~Board();
-
-		void ExecuteMove(Move* move, Players player);
-		std::vector<Move>* GetLegalMoves(Players player);
+		void ExecuteMove(Move *m, Players player) override;
+		std::vector<Move>* GetLegalMoves(Players player) override;
+		std::vector<Tile<int>>* GetOccupiedTiles() override;
+		string ToString();
 	private:
-		Grid<TileValue>* _grid;
+		Grid<int>* _grid;
 	};
 
 }
