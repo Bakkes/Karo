@@ -35,6 +35,10 @@ namespace engine {
 	}
 
 	Vector2D Move::GetUsedTile(){
+#ifdef _DEBUG
+		if (!HasUsedTile())
+			throw "Called GetUsedTile whilst no tile is being used";
+#endif
 		return _usedTile;
 	}
 
