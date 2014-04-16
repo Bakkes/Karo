@@ -8,7 +8,7 @@ namespace _2DFrontend.State
 	/// </summary>
 	class PlaceState : IKaroState
 	{
-		private IKaroState _instance;
+		private PlaceState _instance;
 
 		public IKaroState Instance
 		{
