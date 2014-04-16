@@ -27,9 +27,12 @@ namespace wrapper {
 			wrapped->Add(WrapperConversionUtility().ConvertTile(native->at(i)));
 		}
 		return wrapped;
-		//for each(Tile<int> tile in native) {
-		//	wrapped->Add(WrapperConversionUtility().ConvertTile(tile));
-		//}
+	}
+
+	TileWrapper^ BoardWrapper::GetRelativeTileAt(Vector2DWrapper^ relativePosition) {
+		Vector2D* position = WrapperConversionUtility().ConvertVector2D(relativePosition);
+		Tile<int>* relativeTileAt = _board->GetRelativeTileAt(*position);
+		return WrapperConversionUtility().ConvertTile(relativeTileAt);
 	}
 }
 }

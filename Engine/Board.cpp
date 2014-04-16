@@ -55,7 +55,7 @@ namespace engine{
 		return result;
 		
 	}
-	Tile<int>* Board::GetRelativeTileAt(const Vector2D& relativePosition) const{
+	Tile<int>* Board::GetRelativeTileAt(const Vector2D relativePosition) const{
 		/** BUG: this code should be relative to a topleft */
 		return _grid->GetTileAt(relativePosition);
 	}

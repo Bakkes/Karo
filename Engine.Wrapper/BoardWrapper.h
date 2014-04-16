@@ -19,6 +19,7 @@ public:
 	~BoardWrapper(void);
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
 	List<TileWrapper^>^ GetOccupiedTiles();
+	TileWrapper^ GetRelativeTileAt(Vector2DWrapper^ relativePosition);
 private:
 	Board * _board;
 };
