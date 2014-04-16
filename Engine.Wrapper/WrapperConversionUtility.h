@@ -32,8 +32,20 @@ public:
 		return gcnew TileWrapper(tile.GetPosition()->X(), tile.GetPosition()->Y());
 	}
 
+	static TileWrapper^ ConvertTile(Tile<int>* tile) {
+		return gcnew TileWrapper(tile->GetPosition()->X(), tile->GetPosition()->Y());
+	}
+
 	static Tile<int>* ConvertTile(TileWrapper^ tile) {
-		return new Tile<int>(new Vector2D(tile->GetX(), tile->GetY()));
+		return new Tile<int>(new Vector2D(tile->GetPosition()->Y, tile->GetPosition()->X));
+	}
+
+	static Vector2DWrapper^ ConvertVector2D(Vector2D* vector2d) {
+		return gcnew Vector2DWrapper(vector2d->X(), vector2d->Y());
+	}
+
+	static Vector2D* ConvertVector2D(Vector2DWrapper^ vector2d) {
+		return new Vector2D(vector2d->X, vector2d->Y);
 	}
 };
 

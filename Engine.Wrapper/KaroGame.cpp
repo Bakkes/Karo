@@ -28,7 +28,6 @@ namespace wrapper {
 	MoveWrapper^ KaroGame::GetBestMove() {
 		Move bestMove = _cPlayer->GetBestMove();
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
-
 		return wrapped;
 	}
 }

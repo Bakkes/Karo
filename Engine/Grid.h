@@ -41,7 +41,7 @@ namespace engine {
 		}
 
 		// get tile at position
-		Tile<T>* GetTileAt(Vector2D& position) const{
+		Tile<T>* GetTileAt(const Vector2D& position) const{
 			unsigned desiredIndex = GetTileIndex((unsigned)position.X(),(unsigned) position.Y());
 			if (desiredIndex < 0) {
 				throw "trying to get a tile at a wrong position";
