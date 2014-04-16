@@ -1,4 +1,5 @@
-﻿using engine.wrapper;
+﻿using _2DFrontend.State;
+using engine.wrapper;
 
 namespace _2DFrontend
 {
@@ -21,5 +22,10 @@ namespace _2DFrontend
 		/// Current state of the game.
 		/// </summary>
 		private KaroGame Game { get; set; }
+
+		public void ChangeState(IKaroState state)
+		{
+			CurrentState = state;
+		}
 	}
 }

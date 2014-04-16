@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace _2DFrontend
+namespace _2DFrontend.State
 {
 	/// <summary>
 	/// Interface for karo game states. Takes a tile coordinate and

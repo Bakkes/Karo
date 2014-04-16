@@ -50,7 +50,7 @@
     <Compile Include="GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="IKaroState.cs" />
+    <Compile Include="State\IKaroState.cs" />
     <Compile Include="KaroGameManager.cs" />
     <Compile Include="KaroPanel.cs">
       <SubType>Component</SubType>
