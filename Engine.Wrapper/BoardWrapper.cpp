@@ -34,5 +34,9 @@ namespace wrapper {
 		Tile<int>* relativeTileAt = _board->GetRelativeTileAt(*position);
 		return WrapperConversionUtility().ConvertTile(relativeTileAt);
 	}
+
+	Board* BoardWrapper::GetInternalBoard() {
+		return _board;
+	}
 }
 }

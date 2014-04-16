@@ -6,12 +6,8 @@ using namespace System;
 
 namespace engine {
 namespace wrapper {
-<<<<<<< HEAD
-ref class Vector2DWrapper
-=======
-public ref class Vector2DWrapper
->>>>>>> master
-{
+
+public ref class Vector2DWrapper {
 public:
 	Vector2DWrapper(double x, double y);
 	~Vector2DWrapper();
