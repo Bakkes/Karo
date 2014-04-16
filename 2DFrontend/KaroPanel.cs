@@ -22,6 +22,21 @@ namespace _2DFrontend
 		private Brush _tileBackColor = Brushes.White;
 
 		/// <summary>
+		/// Color of the circle accent on pieces.
+		/// </summary>
+		private Pen _pieceAccentColor = Pens.White;
+
+		/// <summary>
+		/// Color of max's pieces.
+		/// </summary>
+		private Brush _pieceMaxColor = Brushes.Green;
+
+		/// <summary>
+		/// Color of min's pieces.
+		/// </summary>
+		private Brush _pieceMinColor = Brushes.Red;
+
+		/// <summary>
 		/// Width/height of the tiles in pixels.
 		/// </summary>
 		private const int TileSize = 50;
