@@ -1,27 +1,41 @@
 #pragma once
-#include "DllImportExport.h"
+#include "Vector2D.h"
 
 namespace engine {
 
-	enum ENGINE_API MoveType { INSERT = 0, MOVE = 1, JUMP = 2};
-	enum ENGINE_API MoveDirection { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3, NONE = 4 };
+	enum MoveType { INSERT, MOVE, JUMP, DELETE };
 	
-	class ENGINE_API  Move {
+	class ENGINE_API Move {
 	public:
-		Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile);
+		// Creates either a INSERT or DELETE move
+		Move(MoveType type, Vector2D toTile);
+		// Creates either a MOVE or JUMP move which does NOT change the board structure
+		Move(MoveType type, Vector2D fromTile, Vector2D toTile);
+		// Creates either a MOVE or JUMP move which DOES change the board structure
+		Move(MoveType type, Vector2D fromTile, Vector2D toTile, Vector2D usedTile);
+		// The type of the move
 		MoveType GetMoveType();
-		int GetFromTile();
-		int GetToTile();
-		MoveDirection GetMoveDirection();
-		int GetEmptyTile();
+		// The location from which the piece will come from
+		Vector2D GetFromTile();
+		// The location to which the piece will go to
+		Vector2D GetToTile();
+		// The location of the tile used to jump to (OPTIONAL: Test with HasUsedTile to see if it is set!)
+		Vector2D GetUsedTile();
+		// If a tile was moved to make this move possible
+		bool HasUsedTile();
 
 	private:
+		// The type of the move
 		MoveType _moveType;
-		int _fromTile;
-		int _toTile;
-		MoveDirection _moveDirection;
-		int _emptyTile;
+		// The location from which the piece will come from
+		Vector2D _fromTile;
+		// The location to which the piece will go to
+		Vector2D _toTile;
+		// The location of the tile used to jump to (OPTIONAL: Test with HasUsedTile to see if it is set!)
+		Vector2D _usedTile;
+		// If a tile was moved to make this move possible
+		bool _hasUsedTile;
 
-		void init(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile);
+		void Init(MoveType moveType, Vector2D fromTile, Vector2D toTile, Vector2D tile, bool hasUsedTile);
 	};
 }

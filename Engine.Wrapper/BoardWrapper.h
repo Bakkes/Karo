@@ -28,6 +28,8 @@ public:
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
 	List<TileWrapper^>^ GetOccupiedTiles();
 	TileWrapper^ GetRelativeTileAt(Vector2DWrapper^ relativePosition);
+	// Gets the C++ Board (unwrapped)
+	Board* GetInternalBoard();
 private:
 	Board * _board;
 };
