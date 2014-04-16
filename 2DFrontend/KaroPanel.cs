@@ -14,7 +14,7 @@ namespace _2DFrontend
 		/// The current state of the game.
 		/// If it is null, there is no game running at the moment.
 		/// </summary>
-		private KaroGame _karoGame;
+		private KaroGameManager _manager;
 
 		/// <summary>
 		/// The backcolor of Karo tiles.
@@ -43,9 +43,9 @@ namespace _2DFrontend
 		/// Start tracking a new game.
 		/// </summary>
 		/// <param name="karoGame">The new game this panel should show.</param>
-		public void NewGame(KaroGame karoGame)
+		public void NewGame(KaroGameManager manager)
 		{
-			_karoGame = karoGame;
+			_manager = manager;
 		}
 
 		/// <summary>
