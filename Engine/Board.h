@@ -16,6 +16,7 @@ namespace engine{
 		string ToString();
 	private:
 		Grid<int>* _grid;
+		Tile<int>* absoluteTopLeft;
 	};
 
 }

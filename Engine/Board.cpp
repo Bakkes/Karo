@@ -14,6 +14,7 @@ namespace engine{
 				tile->SetData(data);
 			}
 		);
+		absoluteTopLeft = _grid->GetTileAt(Vector2D(0,0));
 	}
 	Board::~Board(){
 		delete _grid;
