@@ -30,6 +30,4 @@ namespace engine {
 	Move ENGINE_API InvertMove(Move move);
 	// Creates the player which is the exact opposite of the given player
 	Players ENGINE_API InvertPlayer();
-	// Creates a move direction which is the exact opposite of the give move direction
-	MoveDirection ENGINE_API InvertDirection(MoveDirection direction);
 }

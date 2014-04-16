@@ -15,7 +15,7 @@ namespace engine {
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
-		return Move(MoveType::JUMP, 0, 1, MoveDirection::NORTH, -1);
+		return Move(INSERT, Vector2D(3,4));
 	}
 
 	Move ComputerPlayer::MinimaxStep(Players player, int depth) {
@@ -29,35 +29,30 @@ namespace engine {
 		}
 		delete possibleMoves;
 
-		return Move(MoveType::DELETE, -1, -1, MoveDirection::NONE, -1); 
+		return Move(INSERT, Vector2D(3,4));
 	}
-
-	//Move::Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile) {
 
 	Move InvertMove(Move move) {
 		switch (move.GetMoveType()) {
-		case MoveType::INSERT:
-			return Move(MoveType::DELETE, -1, move.GetToTile(), MoveDirection::NONE, -1);
-		case MoveType::JUMP:
-			if (move.GetEmptyTile() != -1) {
-				// Grabbed a tile, put it back and undo the jump
-				// TODO Fix this function once the board API is final
-				return Move(MoveType::DELETE, -1, -1, MoveDirection::NONE, -1); 
+		case INSERT:
+			return Move(DELETE, move.GetToTile());
+		case MOVE: {
+			if (move.HasUsedTile()) {
+				return Move(MOVE, move.GetUsedTile(), move.GetFromTile(), move.GetToTile());
 			} else {
-				// Normal jump
-				return Move(MoveType::JUMP, move.GetToTile(), move.GetFromTile(), MoveDirection::NONE, -1);
-			}
-		case MoveType::MOVE:
-			if (move.GetEmptyTile() != -1) {
-				// Grabbed a tile, put it back and undo the move
-				// TODO Fix this function once the board API is final
-				return Move(MoveType::DELETE, -1, -1, MoveDirection::NONE, -1); 
-			} else {
-				// Normal move
-				return Move(MoveType::MOVE, move.GetToTile(), move.GetFromTile(), MoveDirection::NONE, -1);
+				return Move(MOVE, move.GetToTile(), move.GetFromTile());
 			}
 		}
-		return Move(MoveType::DELETE, -1, -1, MoveDirection::NONE, -1); 
+		case JUMP: {
+			if (move.HasUsedTile()) {
+				return Move(JUMP, move.GetUsedTile(), move.GetFromTile(), move.GetToTile());
+			} else {
+				return Move(JUMP, move.GetToTile(), move.GetFromTile());
+			}
+		}
+		}
+
+		return Move(INSERT, Vector2D(-1,-1));
 	}
 
 	Players InvertPlayer(Players player) {

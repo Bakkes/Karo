@@ -4,34 +4,33 @@
 namespace engine {
 namespace wrapper {
 
-MoveWrapper::MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)
-{
-	_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, static_cast<engine::MoveDirection>(moveDirection), emptyTile);
-}
+	MoveWrapper::MoveWrapper(MoveType moveType, Vector2D fromTile, Vector2D toTile, Vector2D usedTile) {
+		_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, usedTile);
+	}
 
-MoveWrapper::~MoveWrapper() {
-	delete _move;
-}
+	MoveWrapper::~MoveWrapper() {
+		delete _move;
+	}
 
-engine::wrapper::MoveType MoveWrapper::GetMoveType() {
-	return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
-}
+	engine::wrapper::MoveType MoveWrapper::GetMoveType() {
+		return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
+	}
 
-int MoveWrapper::GetFromTile() {
-	return _move->GetFromTile();
-}
+	Vector2D MoveWrapper::GetFromTile() {
+		return _move->GetFromTile();
+	}
 
-int MoveWrapper::GetToTile() {
-	return _move->GetToTile();
-}
+	Vector2D MoveWrapper::GetToTile() {
+		return _move->GetToTile();
+	}
 
-engine::wrapper::MoveDirection MoveWrapper::GetMoveDirection() {
-	return static_cast<engine::wrapper::MoveDirection>(_move->GetMoveDirection());
-}
+	Vector2D MoveWrapper::GetUsedTile() {
+		return _move->GetUsedTile();
+	}
 
-int MoveWrapper::GetEmptyTile() {
-	return _move->GetEmptyTile();
-}
+	bool MoveWrapper::HasUsedTile() {
+		return _move->HasUsedTile();
+	}
 
 }
 }

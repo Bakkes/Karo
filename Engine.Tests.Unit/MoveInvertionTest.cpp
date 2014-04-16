@@ -9,29 +9,38 @@ namespace Tests {
 	TEST_CLASS(MoveInvertionTest) {
 	public:
 		TEST_METHOD(InvertSimpleMove) {
-			Move move = Move(MoveType::MOVE, 1, 2, MoveDirection::NONE, -1);
-			Move invertedMove = InvertMove(move);
-			Assert::IsTrue(MovesAreEqual(invertedMove, Move(MoveType::MOVE, 2, 1, MoveDirection::NONE, -1)));
+			Move move = Move(MOVE, Vector2D(3, 4), Vector2D(3, 5));
+			Move invertedMove = Move(MOVE, Vector2D(3, 5), Vector2D(3, 4));
+			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
+		}
+
+		TEST_METHOD(InvertBoardChangingMove) {
+			Move move = Move(MOVE, Vector2D(3, 4), Vector2D(3, 5), Vector2D(1, 2));
+			Move invertedMove = Move(MOVE, Vector2D(1, 2), Vector2D(3, 4), Vector2D(3, 5));
+			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
 		}
 
 		TEST_METHOD(InvertSimpleJump) {
-			Move move = Move(MoveType::JUMP, 1, 2, MoveDirection::NONE, -1);
-			Move invertedMove = InvertMove(move);
-			Assert::IsTrue(MovesAreEqual(invertedMove, Move(MoveType::JUMP, 2, 1, MoveDirection::NONE, -1)));
+			Move move = Move(JUMP, Vector2D(3, 4), Vector2D(3, 6));
+			Move invertedMove = Move(JUMP, Vector2D(3, 6), Vector2D(3, 4));
+			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
+		}
+
+		TEST_METHOD(InvertBoardChangingJump) {
+			Move move = Move(JUMP, Vector2D(3, 4), Vector2D(3, 6), Vector2D(1, 2));
+			Move invertedMove = Move(JUMP, Vector2D(1, 2), Vector2D(3, 4), Vector2D(3, 6));
+			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
 		}
 
 		TEST_METHOD(InvertInsertion) {
-			Move move = Move(MoveType::INSERT, -1, 2, MoveDirection::NONE, -1);
-			Move invertedMove = InvertMove(move);
-			Assert::IsTrue(MovesAreEqual(invertedMove, Move(MoveType::DELETE, -1, 2, MoveDirection::NONE, -1)));
+			Move move = Move(INSERT, Vector2D(3, 4));
+			Move invertedMove = Move(DELETE, Vector2D(3, 4));
+			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
 		}
 
 private:
 	bool MovesAreEqual(Move moveA, Move moveB) {
 		if (moveA.GetMoveType() != moveB.GetMoveType())
-			return false;
-
-		if (moveA.GetEmptyTile() != moveB.GetEmptyTile())
 			return false;
 
 		if (moveA.GetFromTile() != moveB.GetFromTile())
@@ -40,7 +49,10 @@ private:
 		if (moveA.GetToTile() != moveB.GetToTile())
 			return false;
 
-		if (moveA.GetMoveDirection() != moveB.GetMoveDirection())
+		if (moveA.HasUsedTile() != moveB.HasUsedTile())
+			return false;
+
+		if (moveA.GetUsedTile() != moveB.GetUsedTile())
 			return false;
 
 		return true;

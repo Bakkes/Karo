@@ -19,8 +19,7 @@ namespace wrapper {
 	void KaroGame::ExecuteMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
 		//Where do we clean this up
 		Move * m = new engine::Move(static_cast<engine::MoveType>(moveWrapper->GetMoveType()), 
-			moveWrapper->GetFromTile(), moveWrapper->GetToTile(), 
-			static_cast<engine::MoveDirection>(moveWrapper->GetMoveDirection()), moveWrapper->GetEmptyTile());
+			moveWrapper->GetFromTile(), moveWrapper->GetToTile(), moveWrapper->GetUsedTile());
 
 		_board->ExecuteMove(m, static_cast<engine::Players>(player));
 	}
@@ -28,8 +27,7 @@ namespace wrapper {
 	MoveWrapper^ KaroGame::GetBestMove() {
 		Move bestMove = _cPlayer->GetBestMove(static_cast<engine::Players>(Players::Max));
 		MoveWrapper^ wrapped = gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(bestMove.GetMoveType()), 
-			bestMove.GetFromTile(), bestMove.GetToTile(), static_cast<engine::wrapper::MoveDirection>(bestMove.GetMoveDirection()), 
-			bestMove.GetEmptyTile());
+			bestMove.GetFromTile(), bestMove.GetToTile(), bestMove.GetUsedTile());
 
 		return wrapped;
 	}
