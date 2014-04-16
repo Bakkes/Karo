@@ -4,7 +4,7 @@
 
 namespace engine {
 
-	class RandStaticEvail : public IStaticEvaluation {
+	class ENGINE_API RandStaticEvail : public IStaticEvaluation {
 	public:
 		RandStaticEvail();
 		~RandStaticEvail();

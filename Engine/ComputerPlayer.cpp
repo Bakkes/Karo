@@ -3,6 +3,7 @@
 namespace engine {
 
 	ComputerPlayer::ComputerPlayer(IBoard* board, int maxDepth) {
+		_board = board;
 		_maxDepth = maxDepth;
 		_evaluator = NULL;
 		_moveHistory = new std::stack<Move*>();

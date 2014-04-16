@@ -18,6 +18,7 @@
   <ItemGroup>
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
+    <ClCompile Include="MinimaxTest.cpp" />
     <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="PlayerInvertionTest.cpp" />
   </ItemGroup>

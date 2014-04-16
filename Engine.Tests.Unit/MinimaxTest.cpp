@@ -1,0 +1,24 @@
+#include "Board.h"
+#include "CppUnitTest.h"
+#include "ComputerPlayer.h"
+#include "RandStaticEvail.h"
+
+using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace engine;
+
+namespace Tests {
+	TEST_CLASS(MoveInvertionTest) {
+	public:
+		TEST_METHOD(MiniMaxDepth_0) {
+			IBoard* board = new Board();
+			ComputerPlayer* ai = new ComputerPlayer(board, 0);
+
+			ai->SetEvaluator(new RandStaticEvail());
+			Move move = ai->GetBestMove(Max);
+			Assert::IsTrue(move.GetToTile() == Vector2D(-1));
+
+			delete board;
+			delete ai;
+		}
+	};
+}
