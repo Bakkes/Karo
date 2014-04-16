@@ -27,7 +27,33 @@ namespace engine{
 		return new vector<Move>();
 	}
 	std::vector<Tile<int>>* Board::GetOccupiedTiles(){
-		return new vector<Tile<int>>();
+		auto tiles = new vector<Tile<int>>();
+		_grid->TraverseTiles(
+			[&](Tile<int>* tile) -> void{
+				if(!*tile->GetData() & HasTile){
+					return;
+				}
+				if(*tile->GetData() & IsEmpty){
+					return;
+				}
+				tiles->push_back(*tile);
+			}
+		);
+		return tiles;
 	}
+	std::string Board::ToString(){
+		std::string result = "";
+		_grid->TraverseTiles(
+			[&, this](Tile<int>* tile) -> void{
+				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
+					result += "\r\n";
+				}
+				result += *tile->GetData() + ",";
+			}
+		);
+		return result;
+		
+	}
+
 
 }

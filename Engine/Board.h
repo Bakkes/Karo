@@ -1,5 +1,6 @@
 #include "Grid.h"
 #include "IBoard.h"
+#include <string>
 #pragma once
 namespace engine{
 
@@ -10,6 +11,7 @@ namespace engine{
 		void ExecuteMove(Move *m, Players player) override;
 		std::vector<Move>* GetLegalMoves(Players player) override;
 		std::vector<Tile<int>>* GetOccupiedTiles() override;
+		string ToString();
 	private:
 		Grid<int>* _grid;
 	};
