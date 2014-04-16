@@ -3,6 +3,7 @@
 #include "Tile.h"
 #include <vector>
 #include "Players.h"
+#include "Vector2D.h"
 namespace engine {
 enum TileValue{
 	HasTile = 1,
@@ -15,5 +16,6 @@ enum TileValue{
 		virtual void ExecuteMove(Move* move, Players player) = 0;
 		virtual std::vector<Move>* GetLegalMoves(Players player) = 0;
 		virtual std::vector<Tile<int>>* GetOccupiedTiles() = 0;
+		virtual Tile<int>* GetRelativeTileAt(const Vector2D relativePosition) const = 0;
 	};
 }

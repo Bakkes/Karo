@@ -4,13 +4,15 @@
 #include <cstdlib>
 #include "Vector2D.h"
 
+#include "DllImportExport.h"
+
 using namespace std;
 namespace engine {
 	// a container class for stuff in the grid.
 	// this class is for easy navigating the grid, when you get a tile you now
 	// its neighbours
 	template<typename T>
-	class Tile{
+	class ENGINE_API Tile{
 	public:
 		// set a tile to the point
 		Tile(Vector2D* p){
@@ -32,28 +34,28 @@ namespace engine {
 			_tiledata = NULL;
 		}
 
-		void SetBottom(Tile* bottom){
+		void SetBottom(Tile<T>* bottom){
 			this->_bottom = bottom;
 		}
-		Tile* GetBottom() const{
+		Tile<T>* GetBottom() const{
 			return _bottom;
 		}
-		void SetRight(Tile* right){
+		void SetRight(Tile<T>* right){
 			this->_right = right;
 		}
-		Tile* GetRight() const{
+		Tile<T>* GetRight() const{
 			return _right;
 		}
-		void SetLeft(Tile* left){
+		void SetLeft(Tile<T>* left){
 			this->_left = left;
 		}
-		Tile* GetLeft() const{
+		Tile<T>* GetLeft() const{
 			return _left;
 		}
-		void SetTop(Tile* top){
+		void SetTop(Tile<T>* top){
 			this->_top = top;
 		}
-		Tile* GetTop() const{
+		Tile<T>* GetTop() const{
 			return _top;
 		}
 		Vector2D* GetPosition() const{
@@ -84,10 +86,10 @@ namespace engine {
 		}
 		T* _tiledata;
 		Vector2D* _position;
-		Tile* _top;
-		Tile* _left;
-		Tile* _right;
-		Tile* _bottom;
+		Tile<T>* _top;
+		Tile<T>* _left;
+		Tile<T>* _right;
+		Tile<T>* _bottom;
 	};
 	template<typename T>
 	inline bool operator==(const Tile<T>& l, const Tile<T>& r){

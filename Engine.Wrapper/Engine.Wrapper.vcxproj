@@ -78,16 +78,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoardWrapper.h" />
     <ClInclude Include="Engine.Wrapper.h" />
     <ClInclude Include="KaroGame.h" />
     <ClInclude Include="MoveWrapper.h" />
     <ClInclude Include="PlayersWrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="TileWrapper.h" />
     <ClInclude Include="Vector2DWrapper.h" />
+    <ClInclude Include="WrapperConversionUtility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
+    <ClCompile Include="BoardWrapper.cpp" />
     <ClCompile Include="Engine.Wrapper.cpp" />
     <ClCompile Include="KaroGame.cpp" />
     <ClCompile Include="MoveWrapper.cpp" />
@@ -96,6 +100,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TileWrapper.cpp" />
     <ClCompile Include="Vector2DWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>

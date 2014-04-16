@@ -41,7 +41,6 @@ inline bool operator==(const Vector2D& lhs,const Vector2D& rhs){
 }
 inline bool operator!=(const Vector2D& lhs, const Vector2D& rhs){return !operator==(lhs,rhs);}
 inline bool operator< (const Vector2D& lhs, const Vector2D& rhs){
-	/* do actual comparison */
 	return lhs.X() * lhs.Y() < rhs.X() * rhs.Y();
 }
 inline bool operator> (const Vector2D& lhs, const Vector2D& rhs){return  operator< (rhs,lhs);}
