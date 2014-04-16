@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Drawing;
+using engine.wrapper;
 
 namespace _2DFrontend.State
 {
@@ -31,7 +34,20 @@ namespace _2DFrontend.State
 
 		public void Update(KaroGameManager manager, Point click)
 		{
-			throw new NotImplementedException();
+			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
+			MoveWrapper move = legalMoves.FirstOrDefault(m =>
+				m.GetToTile() == new Vector2DWrapper(click.X, click.Y));
+			// We have a valid move.
+			if (move != null)
+			{
+				manager.ExecuteMove(move);
+			}
+
+			// Change state to Piece source state if all 6 pieces are on the board.
+			if (manager.Board.GetOccupiedTiles().Count == 6)
+			{
+				manager.ChangeState(PieceSourceState.Instance);
+			}
 		}
 	}
 }

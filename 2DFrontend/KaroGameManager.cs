@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using _2DFrontend.State;
 using engine.wrapper;
 
@@ -12,7 +13,12 @@ namespace _2DFrontend
 		/// <summary>
 		/// Current state of the game.
 		/// </summary>
-		public IKaroState CurrentState { get; set; }
+		public IKaroState CurrentState { get; private set; }
+
+		/// <summary>
+		/// The player whose turn it is.
+		/// </summary>
+		public Players CurrentPlayer { get; private set; }
 
 		/// <summary>
 		/// Access the board of the current game.
@@ -22,6 +28,14 @@ namespace _2DFrontend
 			get
 			{
 				return Game.GetBoard();
+			}
+		}
+
+		public IEnumerable<MoveWrapper> LegalMoves
+		{
+			get
+			{
+				return Board.GetLegalMoves(CurrentPlayer);
 			}
 		}
 
@@ -55,6 +69,18 @@ namespace _2DFrontend
 			{
 				CurrentState.Update(this, tileLocation);
 			}
+		}
+
+		public void ExecuteMove(MoveWrapper move)
+		{
+			Game.ExecuteMove(move, CurrentPlayer);
+			SwapCurrentPlayer();
+		}
+
+		private void SwapCurrentPlayer()
+		{
+			// Swap the player to the other player with the ternary operator.
+			CurrentPlayer = CurrentPlayer == Players.Max ? Players.Min : Players.Max;
 		}
 	}
 }
