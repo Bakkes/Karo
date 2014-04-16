@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MoveWrapper.h"
+#include "WrapperConversionUtility.h"
 
 namespace engine {
 namespace wrapper {
@@ -16,16 +17,16 @@ namespace wrapper {
 		return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
 	}
 
-	Vector2D MoveWrapper::GetFromTile() {
-		return _move->GetFromTile();
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetFromTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetFromTile());
 	}
 
-	Vector2D MoveWrapper::GetToTile() {
-		return _move->GetToTile();
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetToTile());
 	}
 
-	Vector2D MoveWrapper::GetUsedTile() {
-		return _move->GetUsedTile();
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedTile());
 	}
 
 	bool MoveWrapper::HasUsedTile() {

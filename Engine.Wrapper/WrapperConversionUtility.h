@@ -11,8 +11,12 @@ namespace wrapper{
 class WrapperConversionUtility {
 public:
 	static Move* ConvertMove(MoveWrapper^ moveWrapper) {
-		return new engine::Move(static_cast<engine::MoveType>(moveWrapper->GetMoveType()), 
-			moveWrapper->GetFromTile(), moveWrapper->GetToTile(), moveWrapper->GetUsedTile());
+		return new engine::Move(
+			static_cast<engine::MoveType>(moveWrapper->GetMoveType()), 
+			ConvertVector2DStack(moveWrapper->GetFromTile()),
+			ConvertVector2DStack(moveWrapper->GetToTile()),
+			ConvertVector2DStack(moveWrapper->GetUsedTile())
+			);
 	}
 
 	static MoveWrapper^ ConvertMove(Move* move) {
@@ -37,12 +41,20 @@ public:
 		return new Tile<int>(new Vector2D(tile->GetPosition()->Y, tile->GetPosition()->X));
 	}
 
+	static Vector2DWrapper^ ConvertVector2D(Vector2D vector2d) {
+		return gcnew Vector2DWrapper(vector2d.X(), vector2d.Y());
+	}
+
 	static Vector2DWrapper^ ConvertVector2D(Vector2D* vector2d) {
 		return gcnew Vector2DWrapper(vector2d->X(), vector2d->Y());
 	}
 
 	static Vector2D* ConvertVector2D(Vector2DWrapper^ vector2d) {
 		return new Vector2D(vector2d->X, vector2d->Y);
+	}
+
+	static Vector2D ConvertVector2DStack(Vector2DWrapper^ vector2d) {
+		return Vector2D(vector2d->X, vector2d->Y);
 	}
 };
 

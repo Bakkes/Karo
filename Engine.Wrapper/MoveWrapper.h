@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Move.h"
+#include "Vector2DWrapper.h"
 using namespace engine;
 
 namespace engine {
@@ -14,9 +15,9 @@ namespace wrapper {
 			MoveWrapper(engine::wrapper::MoveType moveType, Vector2D fromTile, Vector2D toTile, Vector2D usedTile);
 			~MoveWrapper();
 			engine::wrapper::MoveType GetMoveType();
-			Vector2D GetFromTile();
-			Vector2D GetToTile();
-			Vector2D GetUsedTile();
+			engine::wrapper::Vector2DWrapper^ GetFromTile();
+			engine::wrapper::Vector2DWrapper^ GetToTile();
+			engine::wrapper::Vector2DWrapper^ GetUsedTile();
 			bool HasUsedTile();
 		private:
 			Move * _move;
