@@ -60,6 +60,12 @@
     <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RandStaticEvail.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EvalResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Move.cpp">
@@ -81,6 +87,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ComputerPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandStaticEvail.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EvalResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

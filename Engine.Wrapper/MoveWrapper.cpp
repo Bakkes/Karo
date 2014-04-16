@@ -1,37 +1,37 @@
 #include "stdafx.h"
 #include "MoveWrapper.h"
+#include "WrapperConversionUtility.h"
 
 namespace engine {
 namespace wrapper {
 
-MoveWrapper::MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)
-{
-	_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, static_cast<engine::MoveDirection>(moveDirection), emptyTile);
-}
+	MoveWrapper::MoveWrapper(MoveType moveType, Vector2D fromTile, Vector2D toTile, Vector2D usedTile) {
+		_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, usedTile);
+	}
 
-MoveWrapper::~MoveWrapper() {
-	delete _move;
-}
+	MoveWrapper::~MoveWrapper() {
+		delete _move;
+	}
 
-engine::wrapper::MoveType MoveWrapper::GetMoveType() {
-	return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
-}
+	engine::wrapper::MoveType MoveWrapper::GetMoveType() {
+		return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
+	}
 
-int MoveWrapper::GetFromTile() {
-	return _move->GetFromTile();
-}
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetFromTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetFromTile());
+	}
 
-int MoveWrapper::GetToTile() {
-	return _move->GetToTile();
-}
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetToTile());
+	}
 
-engine::wrapper::MoveDirection MoveWrapper::GetMoveDirection() {
-	return static_cast<engine::wrapper::MoveDirection>(_move->GetMoveDirection());
-}
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedTile());
+	}
 
-int MoveWrapper::GetEmptyTile() {
-	return _move->GetEmptyTile();
-}
+	bool MoveWrapper::HasUsedTile() {
+		return _move->HasUsedTile();
+	}
 
 }
 }

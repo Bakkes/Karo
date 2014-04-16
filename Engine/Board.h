@@ -5,7 +5,7 @@
 #pragma once
 namespace engine{
 
-	class ENGINE_API Board : IBoard{
+	class ENGINE_API Board : public IBoard{
 	public:
 		Board();
 		~Board();

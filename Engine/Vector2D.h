@@ -4,8 +4,7 @@
 namespace engine {
 // base class for cartesian calculations, holds two numbers and suports a lot of operator
 // overloads for easy calculations
-class ENGINE_API Vector2D
-{
+class ENGINE_API Vector2D {
 public:
 	Vector2D(const Vector2D&);
 	Vector2D(double x, double y);

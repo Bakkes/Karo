@@ -1,24 +1,24 @@
 #pragma once
 
 #include "Move.h"
+#include "Vector2DWrapper.h"
 using namespace engine;
 
 namespace engine {
 namespace wrapper {
 
 	public enum class MoveType { INSERT = 0, MOVE = 1, JUMP = 2};
-	public enum class MoveDirection { NORTH = 0, EAST = 1, SOUTH = 2, WEST = 3, NONE = 4 };
 
 	public ref class MoveWrapper
 	{
 		public:
-			MoveWrapper(engine::wrapper::MoveType moveType, int fromTile, int toTile, engine::wrapper::MoveDirection moveDirection, int emptyTile);
+			MoveWrapper(engine::wrapper::MoveType moveType, Vector2D fromTile, Vector2D toTile, Vector2D usedTile);
 			~MoveWrapper();
 			engine::wrapper::MoveType GetMoveType();
-			int GetFromTile();
-			int GetToTile();
-			engine::wrapper::MoveDirection GetMoveDirection();
-			int GetEmptyTile();
+			engine::wrapper::Vector2DWrapper^ GetFromTile();
+			engine::wrapper::Vector2DWrapper^ GetToTile();
+			engine::wrapper::Vector2DWrapper^ GetUsedTile();
+			bool HasUsedTile();
 		private:
 			Move * _move;
 	};

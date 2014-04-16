@@ -12,6 +12,14 @@ using namespace System::Collections::Generic;
 
 namespace engine {
 namespace wrapper {
+
+public enum class TileValue {
+	HasTile = 1,
+	IsEmpty = 2,
+	IsMax = 4,
+	IsFlipped = 8
+};
+
 public ref class BoardWrapper
 {
 public:
@@ -20,6 +28,8 @@ public:
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
 	List<TileWrapper^>^ GetOccupiedTiles();
 	TileWrapper^ GetRelativeTileAt(Vector2DWrapper^ relativePosition);
+	// Gets the C++ Board (unwrapped)
+	Board* GetInternalBoard();
 private:
 	Board * _board;
 };
