@@ -3,7 +3,7 @@
 #include "Vector2DWrapper.h"
 namespace engine {
 namespace wrapper {
-ref class TileWrapper
+public ref class TileWrapper
 {
 public:
 	TileWrapper(double x, double y);
