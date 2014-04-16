@@ -46,6 +46,7 @@ namespace _2DFrontend.State
 			if (move != null)
 			{
 				manager.CurrentMove = move;
+				manager.ChangeState(PieceDestinationState.Instance);
 			}
 		}
 	}
