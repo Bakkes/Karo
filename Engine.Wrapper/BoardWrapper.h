@@ -4,6 +4,8 @@
 #include "MoveWrapper.h"
 #include "PlayersWrapper.h"
 #include "TileWrapper.h"
+#include "WrapperConversionUtility.h"
+#include <vector>
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -16,7 +18,7 @@ public:
 	BoardWrapper(void);
 	~BoardWrapper(void);
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
-	List<TileWrapper^> GetOccupiedTiles();
+	List<TileWrapper^>^ GetOccupiedTiles();
 private:
 	Board * _board;
 };

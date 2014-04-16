@@ -22,7 +22,7 @@ namespace wrapper {
 	}
 
 	double TileWrapper::GetY() {
-		return _tile->GetPosition->Y();
+		return _tile->GetPosition()->Y();
 	}
 }
 }
