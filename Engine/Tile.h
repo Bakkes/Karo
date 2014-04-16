@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include "Vector2D.h"
 
-#include "DllImportExport.h"
-
 using namespace std;
 namespace engine {
 	// a container class for stuff in the grid.
@@ -91,8 +89,7 @@ namespace engine {
 		Tile<T>* _right;
 		Tile<T>* _bottom;
 	};
-	template<typename T>
-	inline bool operator==(const Tile<T>& l, const Tile<T>& r){
+	inline bool ENGINE_API operator==(const Tile<int>& l, const Tile<int>& r){
 		if(l.GetPosition() != r.GetPosition()){
 			return false;
 		}
@@ -115,7 +112,5 @@ namespace engine {
 		}
 		return true;
 	}
-	// forward operations to the once that actualy do somthing
-	template<typename T>
-	inline bool operator!=(const Tile<T>& l, const Tile<T>& r){return !operator==(l,r);}
+	inline bool ENGINE_API operator!=(const Tile<int>& l, const Tile<int>& r){return !operator==(l,r);}
 }
