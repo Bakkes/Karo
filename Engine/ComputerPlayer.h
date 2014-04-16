@@ -23,7 +23,7 @@ namespace engine {
 		// The unsafe board which is the playground of the AI
 		IBoard* _board;
 		// Executes a single step from the Minimax algorithm
-		Move MinimaxStep(Players player, int depth);
+		int MinimaxStep(Players player, int depth);
 	};
 
 	// Creates a move which is the exact opposite of the given move
