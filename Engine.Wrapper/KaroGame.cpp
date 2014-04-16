@@ -28,7 +28,6 @@ namespace wrapper {
 		Move bestMove = _cPlayer->GetBestMove(static_cast<engine::Players>(Players::Max));
 		MoveWrapper^ wrapped = gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(bestMove.GetMoveType()), 
 			bestMove.GetFromTile(), bestMove.GetToTile(), bestMove.GetUsedTile());
-
 		return wrapped;
 	}
 }
