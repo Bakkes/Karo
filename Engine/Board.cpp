@@ -48,7 +48,7 @@ namespace engine{
 				int data = *tile->GetData();
 				result << *tile->GetData() << ",";
 				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
-					result << std::endl << "L";
+					result << std::endl;
 				}
 			}
 		);

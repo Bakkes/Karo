@@ -3,6 +3,8 @@
 #include "ICommunication.h"
 #include "Board.h"
 #include <string>
+#include <iostream>
+#include "Windows.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -23,6 +25,7 @@ namespace Tests {
 			Board* board = new Board();
 			string result = board->ToString();
 			int i = 4;
+			OutputDebugString(result.c_str());
 			Assert::IsTrue(
 			   "3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\
 				3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\
@@ -48,13 +51,6 @@ namespace Tests {
 				" ==
 				result
 			);
-		}
-
-		// ReturnNumber returns 5, so this unit test will fail.
-		TEST_METHOD(ReturnNumber_Void_Returns4) {
-			int expected = 4;
-			int actual = engine::ICommunication::Expose();
-			Assert::AreNotEqual(expected, actual);
 		}
 	};
 }
