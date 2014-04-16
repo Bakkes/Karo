@@ -18,18 +18,21 @@ namespace engine {
 		return Move(INSERT, Vector2D(3,4));
 	}
 
-	Move ComputerPlayer::MinimaxStep(Players player, int depth) {
+	int ComputerPlayer::MinimaxStep(Players player, int depth) {
 		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
-		for (auto move = possibleMoves->begin(); move != possibleMoves->end(); move++) {
-			_board->ExecuteMove(&(*move), player);
+		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); --it) {
+			Move move = (*it);
+			_board->ExecuteMove(&move, player);
 
-			_evaluator->Eval(_board, player);
+			int score = _evaluator->Eval(_board, player);
 
-			_board->ExecuteMove(&(*move), player);
+
+			_board->ExecuteMove(&InvertMove(move), player);
 		}
 		delete possibleMoves;
 
-		return Move(INSERT, Vector2D(3,4));
+		//return Move(INSERT, Vector2D(3,4));
+		return 0;
 	}
 
 	Move InvertMove(Move move) {
