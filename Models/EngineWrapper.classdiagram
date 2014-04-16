@@ -91,6 +91,27 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="7e3d2fa6-b86e-4d60-b817-25e05f71e118" name="GetLegalMoves" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="cbd493e7-94b0-497d-999a-471267739d01" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a32fc27a-7d83-4e7f-afae-4b45dc00da1a" name="player" direction="In" isUnique="false">
+                  <elementDefinition Id="6f6065f3-c235-4750-80f0-8c0a047aba94" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="805082d6-e9a8-4b25-9463-da80ae810e9f" LastKnownName="Players" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="38425ae7-4455-4fb1-bb3d-ff7598866bc6" direction="Return" isUnique="false">
+                  <elementDefinition Id="83f13f10-3cff-4210-ba6d-0199c0a7d1df" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="f2049065-6345-4b25-a259-1b50b7c75769" LastKnownName="IEnumerable&lt;MoveWrapper^&gt;^" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -830,6 +851,11 @@
     <packageHasNamedElement>
       <referencedType Id="4708693c-153c-4390-bc2d-7483d3279df3" name="Vector2D*" isAbstract="false" isLeaf="false" cachedFullName="Vector2D*">
         <elementDefinition Id="7a15f763-eea7-49c9-a1d6-9d982c016853" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="f2049065-6345-4b25-a259-1b50b7c75769" name="IEnumerable&lt;MoveWrapper^&gt;^" isAbstract="false" isLeaf="false" cachedFullName="IEnumerable&lt;MoveWrapper^&gt;^">
+        <elementDefinition Id="9c115bb5-4f47-4eab-963b-756777603ec3" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>

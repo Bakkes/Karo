@@ -234,6 +234,44 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="cbd493e7-94b0-497d-999a-471267739d01"
+            name="GetLegalMoves"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="6f6065f3-c235-4750-80f0-8c0a047aba94"
+                  name="player"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="b23cd53c-0a82-45f8-88c9-13de04cb416b"
+                      LastKnownName="Players"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="83f13f10-3cff-4210-ba6d-0199c0a7d1df"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9c115bb5-4f47-4eab-963b-756777603ec3"
+                      LastKnownName="IEnumerable&lt;MoveWrapper^&gt;^"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -1465,6 +1503,11 @@
       <undefinedType
         Id="7a15f763-eea7-49c9-a1d6-9d982c016853"
         name="Vector2D*" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="9c115bb5-4f47-4eab-963b-756777603ec3"
+        name="IEnumerable&lt;MoveWrapper^&gt;^" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

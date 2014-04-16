@@ -2,11 +2,11 @@
 <logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.125, 10.375" name="EngineWrapper">
   <logicalClassDesignerModelMoniker Id="5bf96fa2-d0d6-4f38-8d79-dd1450718aea" />
   <nestedChildShapes>
-    <classShape Id="c0d1b5a9-3360-4476-aa22-7d43513a0803" absoluteBounds="5.375, 3, 3.625, 1.7031249602635699" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+    <classShape Id="c0d1b5a9-3360-4476-aa22-7d43513a0803" absoluteBounds="5.375, 3, 3.625, 1.8632812052965155" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
       <classMoniker Id="76ed6eee-0717-49aa-8dce-cd2bff121a17" LastKnownName="BoardWrapper" />
       <nestedChildShapes>
         <AttributeElementListCompartment Id="c4768e8b-60c1-4f22-97c4-dc4fdef8ca95" absoluteBounds="5.3900000000000006, 3.3900000000000006, 3.5949999999999998, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
-        <OperationElementListCompartment Id="3d8d2a02-a868-4d6c-aa12-f3051614df3a" absoluteBounds="5.3900000000000006, 3.7613281125823654, 3.5949999999999998, 0.84179684768120455" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="3d8d2a02-a868-4d6c-aa12-f3051614df3a" absoluteBounds="5.3900000000000006, 3.7613281125823654, 3.5949999999999998, 1.0019530927141507" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="b593bfc4-6aa0-49ae-ab72-d00dc3eea2f5" absoluteBounds="2.5, 0.5, 4, 1.8632812052965164" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
@@ -75,7 +75,7 @@
         <classShapeMoniker Id="51c4dbd0-cccf-4024-b009-ce990d84e97c" />
       </nodes>
     </dependencyConnector>
-    <dependencyConnector edgePoints="[(6.75 : 4.70312496026357); (6.75 : 5.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+    <dependencyConnector edgePoints="[(6.75 : 4.86328120529652); (6.75 : 5.875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
       <dependencyMoniker Id="7287eb27-92fa-46ad-876d-7d5d63ce903f" />
       <relativeChildShapes />
       <nodes>
