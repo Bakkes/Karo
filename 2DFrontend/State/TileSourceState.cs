@@ -8,9 +8,9 @@ namespace _2DFrontend.State
 	/// </summary>
 	class TileSourceState : IKaroState
 	{
-		private TileSourceState _instance;
+		private static TileSourceState _instance;
 
-		public IKaroState Instance
+		public static IKaroState Instance
 		{
 			get
 			{

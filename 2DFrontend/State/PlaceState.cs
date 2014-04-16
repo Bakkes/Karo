@@ -8,9 +8,9 @@ namespace _2DFrontend.State
 	/// </summary>
 	class PlaceState : IKaroState
 	{
-		private PlaceState _instance;
+		private static PlaceState _instance;
 
-		public IKaroState Instance
+		public static IKaroState Instance
 		{
 			get
 			{

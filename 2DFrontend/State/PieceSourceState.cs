@@ -10,9 +10,9 @@ namespace _2DFrontend.State
 	/// </summary>
 	class PieceSourceState : IKaroState
 	{
-		private PieceSourceState _instance;
+		private static PieceSourceState _instance;
 
-		public IKaroState Instance
+		public static IKaroState Instance
 		{
 			get
 			{

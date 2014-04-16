@@ -23,6 +23,12 @@ namespace _2DFrontend
 		/// </summary>
 		private KaroGame Game { get; set; }
 
+		public KaroGameManager()
+		{
+			Game = new KaroGame();
+			CurrentState = PlaceState.Instance;
+		}
+
 		public void ChangeState(IKaroState state)
 		{
 			CurrentState = state;
