@@ -23,7 +23,7 @@ namespace Tests {
 			Board* board = new Board();
 			string result = board->ToString();
 			Assert::IsTrue(
-				"0000000000" ==
+				"" ==
 				result
 			);
 		}
