@@ -19,6 +19,7 @@ namespace engine {
 		Vector2D GetFromTile();
 		// The location to which the piece will go to
 		Vector2D GetToTile();
+		void SetToTile(Vector2D location);
 		// The location of the tile used to jump to (OPTIONAL: Test with HasUsedTile to see if it is set!)
 		Vector2D GetUsedTile();
 		// If a tile was moved to make this move possible
