@@ -9,7 +9,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// The current gamestate.
 		/// </summary>
-		private KaroGame _karoGame;
+		private KaroGameManager _manager;
 
 		public Karo()
 		{
@@ -18,8 +18,7 @@ namespace _2DFrontend
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_karoGame = new KaroGame();
-			karoPanel.NewGame(_karoGame);
+			_manager = new KaroGameManager();
 		}
 
 		private void exitToolStripMenuItem_Click(object sender, EventArgs e)
