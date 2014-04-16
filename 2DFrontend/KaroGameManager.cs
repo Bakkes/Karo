@@ -17,7 +17,13 @@ namespace _2DFrontend
 		/// <summary>
 		/// Access the board of the current game.
 		/// </summary>
-		public BoardWrapper Board { get; set; }
+		public BoardWrapper Board
+		{
+			get
+			{
+				return Game.GetBoard();
+			}
+		}
 
 		/// <summary>
 		/// The current state of the current player's move.

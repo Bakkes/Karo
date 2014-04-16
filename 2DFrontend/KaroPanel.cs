@@ -56,13 +56,17 @@ namespace _2DFrontend
 		{
 			Graphics g = e.Graphics;
 
-			BoardWrapper board = _manager.Board;
-			const int maxPotentialSize = 20;
-			for (int x = 0; x < maxPotentialSize; x++)
+			if (_manager != null)
 			{
-				for (int y = 0; y < maxPotentialSize; y++)
+				BoardWrapper board = _manager.Board;
+				const int maxPotentialSize = 20;
+				for (int x = 0; x < maxPotentialSize; x++)
 				{
-					TileWrapper tile = board.GetRelativeTileAt(new Vector2DWrapper(x, y));
+					for (int y = 0; y < maxPotentialSize; y++)
+					{
+						TileWrapper tile = board.GetRelativeTileAt(new Vector2DWrapper(x, y));
+						int o = tile.GetData();
+					}
 				}
 			}
 		}
