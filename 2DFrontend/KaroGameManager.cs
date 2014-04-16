@@ -15,6 +15,11 @@ namespace _2DFrontend
 		public IKaroState CurrentState { get; set; }
 
 		/// <summary>
+		/// Access the board of the current game.
+		/// </summary>
+		public BoardWrapper Board { get; set; }
+
+		/// <summary>
 		/// The current state of the current player's move.
 		/// </summary>
 		private MoveWrapper CurrentMove { get; set; }

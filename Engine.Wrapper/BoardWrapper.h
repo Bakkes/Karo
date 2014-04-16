@@ -12,7 +12,7 @@ using namespace System::Collections::Generic;
 
 namespace engine {
 namespace wrapper {
-ref class BoardWrapper
+public ref class BoardWrapper
 {
 public:
 	BoardWrapper(void);

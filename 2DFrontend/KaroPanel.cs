@@ -55,12 +55,13 @@ namespace _2DFrontend
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			for (int i = 0; i < 5; i++)
+
+			BoardWrapper board = _manager.Board;
+			const int maxPotentialSize = 20;
+			for (int x = 0; x < maxPotentialSize; x++)
 			{
-				for (int j = 0; j < 4; j++)
+				for (int y = 0; y < maxPotentialSize; y++)
 				{
-					Point topleft = TileToPixel(i, j);
-					g.FillRectangle(_tileBackColor, topleft.X, topleft.Y, TileSize, TileSize);
 				}
 			}
 		}
@@ -79,8 +80,10 @@ namespace _2DFrontend
 		/// </summary>
 		private Point PixelToTile(int x, int y)
 		{
-			return new Point(x % (TileSize + Gap),
-				y % (TileSize + Gap));
+			// The +1 is because all tiles are offest by one tile to the bottom/right.
+			// See comments in TileToPixel for further explanation.
+			return new Point(x % (TileSize + Gap) + 1,
+				y % (TileSize + Gap) + 1);
 		}
 
 		/// <summary>
