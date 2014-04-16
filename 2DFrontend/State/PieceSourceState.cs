@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Drawing;
+using engine.wrapper;
 
 namespace _2DFrontend.State
 {
@@ -33,7 +36,17 @@ namespace _2DFrontend.State
 
 		public void Update(KaroGameManager manager, Point click)
 		{
-			throw new NotImplementedException();
+			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
+
+			// See if there is any move with the same source as the clicked tile.
+			MoveWrapper move = legalMoves.FirstOrDefault(m =>
+				m.GetFromTile() == new Vector2DWrapper(click.X, click.Y));
+
+			// Valid source piece clicked, save the move.
+			if (move != null)
+			{
+				manager.CurrentMove = move;
+			}
 		}
 	}
 }

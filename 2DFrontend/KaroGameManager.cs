@@ -42,7 +42,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// The current state of the current player's move.
 		/// </summary>
-		private MoveWrapper CurrentMove { get; set; }
+		public MoveWrapper CurrentMove { get; set; }
 
 		/// <summary>
 		/// Current state of the game.
