@@ -1,6 +1,7 @@
 #pragma once
 #include <stack>
 
+#include "EvalResult.h"
 #include "IComputerPlayer.h"
 #include "IStaticEvaluation.h"
 #include "Players.h"
@@ -23,7 +24,7 @@ namespace engine {
 		// The unsafe board which is the playground of the AI
 		IBoard* _board;
 		// Executes a single step from the Minimax algorithm
-		int MinimaxStep(Players player, int depth);
+		EvalResult MinimaxStep(Players player, int depth);
 	};
 
 	// Creates a move which is the exact opposite of the given move
