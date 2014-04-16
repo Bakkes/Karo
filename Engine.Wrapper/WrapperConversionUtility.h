@@ -30,11 +30,11 @@ public:
 	}
 
 	static TileWrapper^ ConvertTile(Tile<int> tile) {
-		return gcnew TileWrapper(tile.GetPosition()->X(), tile.GetPosition()->Y());
+		return gcnew TileWrapper(tile.GetPosition()->X(), tile.GetPosition()->Y(), *(tile.GetData()));
 	}
 
 	static TileWrapper^ ConvertTile(Tile<int>* tile) {
-		return gcnew TileWrapper(tile->GetPosition()->X(), tile->GetPosition()->Y());
+		return gcnew TileWrapper(tile->GetPosition()->X(), tile->GetPosition()->Y(), *(tile->GetData()));
 	}
 
 	static Tile<int>* ConvertTile(TileWrapper^ tile) {
