@@ -6,7 +6,7 @@
         <elementDefinition Id="0e148cea-7150-4516-a454-10ceb0d17724" />
         <targetEnds>
           <association Id="d7fe4cb9-8c58-4ee6-b829-aac0bd4c6341" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
-            <classMoniker Id="19ef45dc-093e-4f44-b130-d35d0cc55137" LastKnownName="KaroStateMachine" />
+            <classMoniker Id="19ef45dc-093e-4f44-b130-d35d0cc55137" LastKnownName="KaroGameManager" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="3ff46979-736f-456d-a2d7-55df3c7dc242" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -26,14 +26,14 @@
           <property Id="134e3a77-b90d-4698-9ee1-435e523c0c40" name="Manager" visibility="Private" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="b560337b-0f30-4e97-9f57-eb473f54ba0f" />
             <type_NamedElement>
-              <referencedTypeMoniker Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" LastKnownName="KaroStateMachine" />
+              <referencedTypeMoniker Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" LastKnownName="KaroGameManager" />
             </type_NamedElement>
           </property>
         </ownedAttributesInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="19ef45dc-093e-4f44-b130-d35d0cc55137" name="KaroStateMachine" isAbstract="false" isLeaf="false" isActiveClass="false">
+      <class Id="19ef45dc-093e-4f44-b130-d35d0cc55137" name="KaroGameManager" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="430f92c3-232a-4634-8ef0-7639cee35b62" />
         <targetEnds>
           <association Id="f30989dd-ded4-40da-a7db-614d656b975a" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
@@ -143,7 +143,7 @@
                 <parameter Id="1195689e-b61a-45f6-ba13-f41f12d7c918" name="manager" direction="In" isUnique="false">
                   <elementDefinition Id="f749cb47-dcb3-424b-96e0-0628fdde8d47" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" LastKnownName="KaroStateMachine" />
+                    <referencedTypeMoniker Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" LastKnownName="KaroGameManager" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -176,7 +176,7 @@
       </referencedType>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <referencedType Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" name="KaroStateMachine" isAbstract="false" isLeaf="false" cachedFullName="Models::KaroStateMachine">
+      <referencedType Id="a9fb5bfc-1e97-43bf-99ae-e2fb02172d7e" name="KaroGameManager" isAbstract="false" isLeaf="false" cachedFullName="Models::KaroGameManager">
         <elementDefinition Id="430f92c3-232a-4634-8ef0-7639cee35b62" />
       </referencedType>
     </packageHasNamedElement>

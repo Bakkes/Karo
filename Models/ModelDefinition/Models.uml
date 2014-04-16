@@ -104,7 +104,7 @@
             isAbstract="false">
             <classMoniker
               Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-              LastKnownName="KaroStateMachine"
+              LastKnownName="KaroGameManager"
               LastKnownLocation="Models.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
@@ -149,7 +149,7 @@
             <type_NamedElement>
               <classMoniker
                 Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-                LastKnownName="KaroStateMachine"
+                LastKnownName="KaroGameManager"
                 LastKnownLocation="Models.uml" />
             </type_NamedElement>
           </property>
@@ -164,7 +164,7 @@
     <packageHasNamedElement>
       <class
         Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-        name="KaroStateMachine"
+        name="KaroGameManager"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
@@ -506,7 +506,7 @@
                   <type_NamedElement>
                     <classMoniker
                       Id="430f92c3-232a-4634-8ef0-7639cee35b62"
-                      LastKnownName="KaroStateMachine"
+                      LastKnownName="KaroGameManager"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
                 </parameter>
