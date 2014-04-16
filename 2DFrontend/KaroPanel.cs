@@ -54,17 +54,14 @@ namespace _2DFrontend
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
-			foreach (Point p in points)
-			{
-				int x = p.X * (TileSize + Gap) + Gap;
-				int y = p.Y * (TileSize + Gap) + Gap;
-				g.FillRectangle(_tileBackColor, x, y, TileSize, TileSize);
-			}
 		}
 
 		private void KaroPanel_MouseClick(object sender, MouseEventArgs e)
 		{
-			_manager.Update(PixelToTile(e.Location.X, e.Location.Y));
+			if (_manager != null)
+			{
+				_manager.Update(PixelToTile(e.Location.X, e.Location.Y));
+			}
 			Invalidate();
 		}
 
