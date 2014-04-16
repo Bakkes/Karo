@@ -3,11 +3,12 @@
 #include "stdafx.h"
 #include "KaroGame.h"
 #include "Board.h"
+#include "WrapperConversionUtility.h"
 namespace engine {
 namespace wrapper {
 
 	KaroGame::KaroGame() {
-		_board = new Board();
+		_board = gcnew BoardWrapper();
 		_cPlayer = new ComputerPlayer();
 	}
 
@@ -16,21 +17,17 @@ namespace wrapper {
 		delete _cPlayer;
 	}
 
-	void KaroGame::ExecuteMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
-		//Where do we clean this up
-		Move * m = new engine::Move(static_cast<engine::MoveType>(moveWrapper->GetMoveType()), 
-			moveWrapper->GetFromTile(), moveWrapper->GetToTile(), 
-			static_cast<engine::MoveDirection>(moveWrapper->GetMoveDirection()), moveWrapper->GetEmptyTile());
+	BoardWrapper^ KaroGame::GetBoard() {
+		return _board;
+	}
 
-		_board->ExecuteMove(m, static_cast<engine::Players>(player));
+	void KaroGame::ExecuteMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
+		_board->ExecuteMove(moveWrapper, player);
 	}
 
 	MoveWrapper^ KaroGame::GetBestMove() {
 		Move bestMove = _cPlayer->GetBestMove();
-		MoveWrapper^ wrapped = gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(bestMove.GetMoveType()), 
-			bestMove.GetFromTile(), bestMove.GetToTile(), static_cast<engine::wrapper::MoveDirection>(bestMove.GetMoveDirection()), 
-			bestMove.GetEmptyTile());
-
+		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 		return wrapped;
 	}
 }
