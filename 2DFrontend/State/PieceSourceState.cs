@@ -1,9 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Drawing;
-using engine.wrapper;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using engine.wrapper;
 
 namespace _2DFrontend.State
 {
