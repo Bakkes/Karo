@@ -50,7 +50,7 @@ namespace _2DFrontend.State
 			}
 			else
 			{
-				Debug.WriteLine("Can't place a new piece at {0}", click);
+				Debug.WriteLine("Can't place a new piece");
 			}
 
 			// Change state to Piece source state if all 6 pieces are on the board.

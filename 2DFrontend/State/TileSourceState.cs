@@ -42,11 +42,13 @@ namespace _2DFrontend.State
 			if (move != null)
 			{
 				// We now have a valid move. Execute it!
+				Debug.WriteLine("Clicked on moveable tile.");
 				manager.ExecuteMove(move);
 			}
 			else
 			{
 				// Clicked on invalid tile. Back to PieceSourceState.
+				Debug.WriteLine("Clicked on a non moveable tile.");
 				manager.CurrentMove = null;
 				manager.ChangeState(PieceSourceState.Instance);
 			}
