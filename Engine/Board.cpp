@@ -14,16 +14,79 @@ namespace engine{
 				tile->SetData(data);
 			}
 		);
-		absoluteTopLeft = _grid->GetTileAt(Vector2D(0,0));
+		absoluteTopLeft = *_grid->GetTileAt(Vector2D(0,0))->GetPosition();
 	}
 	Board::~Board(){
 		delete _grid;
 	}
 
-	void Board::ExecuteMove(Move *m, Players player) {
-
+	void Board::ExecuteMove(Move *move, Players player) {
+		switch(move->GetMoveType()){
+			case INSERT:
+				InsertPiece(*_grid->GetTileAt(move->GetToTile()), player);
+			return;
+			case DELETE:
+				DeletePiece(*_grid->GetTileAt(move->GetToTile()));
+			return;
+			case MOVE:
+				if(move->HasUsedTile()){
+					MovePiece(
+						*_grid->GetTileAt(move->GetFromTile()), 
+						*_grid->GetTileAt(move->GetToTile()), 
+						player, 
+						*_grid->GetTileAt(move->GetUsedTile()) 
+					);
+					return;
+				}
+				MovePiece(
+					*_grid->GetTileAt(move->GetFromTile()), 
+					*_grid->GetTileAt(move->GetToTile()), 
+					player
+				);
+			return; 
+			case JUMP:
+				if(move->HasUsedTile()){
+					JumpPiece(
+						*_grid->GetTileAt(move->GetFromTile()), 
+						*_grid->GetTileAt(move->GetToTile()), 
+						player, 
+						*_grid->GetTileAt(move->GetUsedTile()) 
+					);
+					return;
+				}
+				JumpPiece(
+					*_grid->GetTileAt(move->GetFromTile()), 
+					*_grid->GetTileAt(move->GetToTile()), 
+					player
+				);
+			return; 
+		}
+		
 	}
 
+	void Board::InsertPiece(const Tile<int>& on, Players owner){
+		*on.GetData() &= ~IsEmpty;
+		if(owner == Max){
+			*on.GetData() |= IsMax;
+			return;
+		}
+		*on.GetData() &= ~IsMax;
+	}
+	void Board::DeletePiece(const Tile<int>& on){
+		*on.GetData() |= IsEmpty;
+	}
+	void Board::MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed){
+		*tileUsed.GetData() &= ~HasTile;
+		*to.GetData() |= HasTile;
+		MovePiece(from, to, owner);
+	}
+	void Board::MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner){
+		DeletePiece(from);
+	}
+	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed){
+	}
+	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner){
+	}
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
 		return new vector<Move>();
 	}
@@ -57,8 +120,14 @@ namespace engine{
 		
 	}
 	Tile<int>* Board::GetRelativeTileAt(const Vector2D relativePosition) const{
-		/** BUG: this code should be relative to a topleft */
-		return _grid->GetTileAt(relativePosition);
+		Vector2D position = relativePosition + absoluteTopLeft;
+		if(position.X() < 0){
+			position.X(position.X() + _grid->GetSize()->GetWidth());
+		}
+		if(position.Y() < 0){
+			position.Y(position.Y() + _grid->GetSize()->GetWidth());
+		}
+		return _grid->GetTileAt(position);
 	}
 
 

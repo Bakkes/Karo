@@ -5,6 +5,7 @@ namespace engine {
 
 	enum MoveType { INSERT, MOVE, JUMP, DELETE };
 	
+	/** NOTE: Move positions use the absolute coordinates */
 	class ENGINE_API Move {
 	public:
 		// Creates either a INSERT or DELETE move
@@ -31,7 +32,7 @@ namespace engine {
 		Vector2D _fromTile;
 		// The location to which the piece will go to
 		Vector2D _toTile;
-		// The location of the tile used to jump to (OPTIONAL: Test with HasUsedTile to see if it is set!)
+		// The location of the tile used to go to an empty (OPTIONAL: Test with HasUsedTile to see if it is set!)
 		Vector2D _usedTile;
 		// If a tile was moved to make this move possible
 		bool _hasUsedTile;

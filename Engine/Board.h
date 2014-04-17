@@ -16,7 +16,13 @@ namespace engine{
 		string ToString();
 	private:
 		Grid<int>* _grid;
-		Tile<int>* absoluteTopLeft;
+		Vector2D absoluteTopLeft;
+		void InsertPiece(const Tile<int>& on, Players owner);
+		void DeletePiece(const Tile<int>& on);
+		void MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed);
+		void MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner);
+		void JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed);
+		void JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner);
 	};
 
 }
