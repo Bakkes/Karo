@@ -32,8 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommunicationProtocol">
-      <HintPath>C:\Users\Chris\Dropbox\ISGP\ELO\Communicatiemodule\Communicatie DLL\CommunicationProtocol.dll</HintPath>
+    <Reference Include="CommunicationProtocol, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Chris\Dropbox\ISGP\ELO\Communicatiemodule\SourceCode\CommunicationProtocol\CommunicationProtocol\bin\Debug\CommunicationProtocol.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,6 +54,13 @@
     <Compile Include="GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KaroCommunicatedGameManager.cs" />
     <Compile Include="State\ComputerState.cs" />
     <Compile Include="State\IKaroState.cs" />
     <Compile Include="KaroGameManager.cs" />
@@ -67,6 +75,9 @@
     <Compile Include="State\TileSourceState.cs" />
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

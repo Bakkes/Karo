@@ -10,14 +10,10 @@ namespace _2DFrontend
 	class KaroCommunicatedGameManager : KaroGameManager
 	{
 		private ICommunication _communication;
-		public KaroCommunicatedGameManager()
+		public KaroCommunicatedGameManager(ICommunication communication)
 			: base()
 		{
-			CurrentState = null;
-
-		}
-
-		public void SetCommunication(ICommunication communication) {
+			//CurrentState = null;
 			_communication = communication;
 			_communication.Connected += _communication_Connected;
 			_communication.Disconnected += _communication_Disconnected;
@@ -27,6 +23,7 @@ namespace _2DFrontend
 			_communication.WinAccepted += _communication_WinAccepted;
 			_communication.WinDetected += _communication_WinDetected;
 			_communication.WinRejected += _communication_WinRejected;
+			
 		}
 
 		void _communication_WinRejected()
