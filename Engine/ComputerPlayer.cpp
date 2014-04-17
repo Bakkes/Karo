@@ -5,14 +5,15 @@ namespace engine {
 	ComputerPlayer::ComputerPlayer(IBoard* board, int maxDepth) {
 		_board = board;
 		_maxDepth = maxDepth;
-		_evaluator = NULL;
+		_evaluator = nullptr;
 		_moveHistory = new std::stack<Move*>();
 	}
 
 	ComputerPlayer::~ComputerPlayer() {
-		if (_evaluator != NULL)
-			delete _evaluator;
+		delete _evaluator;
+		_evaluator = nullptr;
 		delete _moveHistory;
+		_moveHistory = nullptr;
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
@@ -79,8 +80,9 @@ namespace engine {
 	}
 
 	Players InvertPlayer(Players player) {
-		if (player == Players::Min)
+		if (player == Players::Min) {
 			return Players::Max;
+		}
 		return Players::Min;
 	}
 }
