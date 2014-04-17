@@ -81,11 +81,14 @@ namespace engine{
 		MovePiece(from, to, owner);
 	}
 	void Board::MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner){
+		*to.GetData() = *from.GetData();
 		DeletePiece(from);
 	}
 	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed){
+		MovePiece(from, to, owner, tileUsed);
 	}
 	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner){
+		MovePiece(from, to, owner);
 	}
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
 		return new vector<Move>();
