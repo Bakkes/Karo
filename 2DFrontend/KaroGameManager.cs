@@ -19,7 +19,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// The player whose turn it is.
 		/// </summary>
-		public Players CurrentPlayer { get; private set; }
+		public Players CurrentPlayer { get; protected set; }
 
 		/// <summary>
 		/// Access the board of the current game.
@@ -48,7 +48,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Current state of the game.
 		/// </summary>
-		private KaroGame Game { get; set; }
+		protected KaroGame Game { get; set; }
 
 		public KaroGameManager()
 		{

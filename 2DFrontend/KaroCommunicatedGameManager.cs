@@ -14,7 +14,7 @@ namespace _2DFrontend
 		public KaroCommunicatedGameManager(ICommunication communication)
 			: base()
 		{
-			//CurrentState = null;
+			CurrentPlayer = Players.Min;
 			_communication = communication;
 			_communication.Connected += _communication_Connected;
 			_communication.Disconnected += _communication_Disconnected;
@@ -45,17 +45,40 @@ namespace _2DFrontend
 		void _communication_TurnReceived(Turn t)
 		{
 			Console.WriteLine("Opponent took a turn");
-			//MoveWrapper received = new MoveWrapper();
+			MoveWrapper received = ConvertTurnToMove(t);
+
+			// Get the move with the correct source tile from the last click.
+			IEnumerable<MoveWrapper> sourceLegalMoves = LegalMoves.Where(m =>
+				m.GetFromTile() == received.GetFromTile());
+
+			// Get the move (if it exists) with the correct destination tile.
+			IEnumerable<MoveWrapper> move = sourceLegalMoves.Where(m =>
+				m.GetToTile() == received.GetToTile());
+
+			MoveWrapper mv = move.FirstOrDefault(m => m.GetUsedTile() == received.GetUsedTile());
+			if (mv == null)
+			{
+				_communication.SendMoveInvalid(t);
+				return;
+			}
+			ExecuteMove(mv);
+			_communication.SendTurn(ConvertMoveToTurn(mv));
+
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
 		{
-			Console.WriteLine("Opponent says our move if wrong");
+			Console.WriteLine("Opponent says our move is wrong.");
+			
 		}
 
 		void communication_RequestFirstMove()
 		{
 			Console.WriteLine("We're first.");
+			CurrentPlayer = Players.Max;
+			MoveWrapper bm = Game.GetBestMove();
+			ExecuteMove(bm);
+			_communication.SendTurn(ConvertMoveToTurn(bm));
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)
@@ -75,25 +98,54 @@ namespace _2DFrontend
 
 		private static MoveWrapper ConvertTurnToMove(Turn t)
 		{
-			engine.wrapper.MoveType mt;
+			engine.wrapper.MoveType mt = engine.wrapper.MoveType.INSERT;
 			switch (t.MoveType)
 			{
 				case CommunicationProtocol.MoveType.Insert:
-					mt = engine.wrapper.MoveType.Insert;
+					mt = engine.wrapper.MoveType.INSERT;
 					break;
 				case CommunicationProtocol.MoveType.Jump:
-					mt = engine.wrapper.MoveType.Jump;
+					mt = engine.wrapper.MoveType.JUMP;
 					break;
 				case CommunicationProtocol.MoveType.Move:
-					mt = engine.wrapper.MoveType.Move;
+					mt = engine.wrapper.MoveType.MOVE;
 					break;
 			}
 			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
 				ConvertIntToBoardPosition(t.ToTile), ConvertIntToBoardPosition(t.EmptyTile));
 		}
-		private static Vector2DWrapper ConvertIntToBoardPosition(int number)
+
+		private static Turn ConvertMoveToTurn(MoveWrapper mw)
 		{
-			return Vector2DWrapper(number, number);
+			CommunicationProtocol.MoveType mt = CommunicationProtocol.MoveType.Insert;
+			switch (mw.GetMoveType())
+			{
+				case engine.wrapper.MoveType.INSERT:
+					mt = CommunicationProtocol.MoveType.Insert;
+					break;
+				case engine.wrapper.MoveType.JUMP:
+					mt = CommunicationProtocol.MoveType.Jump;
+					break;
+				case engine.wrapper.MoveType.MOVE:
+					mt = CommunicationProtocol.MoveType.Move;
+					break;
+			}
+			Turn t = new Turn();
+			t.MoveType = mt;
+			t.EmptyTile = IntToVector2D(mw.GetUsedTile());
+			t.FromTile = IntToVector2D(mw.GetFromTile());
+			t.ToTile = IntToVector2D(mw.GetToTile());
+			return t;
+		}
+
+		private static Vector2DWrapper ConvertIntToBoardPosition(int? number)
+		{
+			return new Vector2DWrapper(0.0, 0.0);
+		}
+
+		private static int IntToVector2D(Vector2DWrapper vector2D)
+		{
+			return (int)vector2D.X;
 		}
 	}
 }
