@@ -86,6 +86,18 @@ namespace _2DFrontend
 							g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
 								TileSize, TileSize);
 						}
+						if ((tile.GetData() & (int)TileValue.IsEmpty) == (int)TileValue.IsEmpty)
+						{
+							Brush pieceBrush;
+							if ((tile.GetData() & (int)TileValue.IsMax) == (int)TileValue.IsMax)
+							{
+								pieceBrush = _pieceMaxColor;
+							}
+							else
+							{
+								pieceBrush = _pieceMinColor;
+							}
+						}
 					}
 				}
 			}
