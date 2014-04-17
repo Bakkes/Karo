@@ -91,6 +91,69 @@ namespace engine{
 		MovePiece(from, to, owner);
 	}
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
+		std::vector<Tile<int>>* CheckMoves = this->GetOccupiedTiles();
+		std::vector<Tile<int>> resultsortof = std::vector<Tile<int>>();
+		std::vector<Tile<int>> possiblity = std::vector<Tile<int>>();
+
+		vector<Tile<int>>::iterator iterPos = CheckMoves->begin();
+		while(iterPos != CheckMoves->end())
+		{
+			int data = *(*iterPos).GetData();
+			if(player == Max)
+			{
+				if (data & IsMax)
+				{
+					resultsortof.push_back(*iterPos);
+				}
+			}else
+			{
+				if (!(data & IsMax))
+				{
+					resultsortof.push_back(*iterPos);
+				}
+
+			}
+			iterPos++;
+		}
+
+		vector<Tile<int>>::iterator iterPos2 = resultsortof.begin();
+		while(iterPos != resultsortof.end())
+		{
+			if(player == Max)
+			{
+				int checkRight = *(*iterPos2).GetRight; 
+				int checkLeft = *(*iterPos2).GetLeft;
+				if(!( checkRight & IsEmpty))
+				{
+					int jumpRight = *(*iterPos2).GetRight.GetRight;
+					if(jumpRight & IsMax)
+						possiblity.push_back(*(*iterPos2).GetRight.GetRight);
+				}
+				else
+					possiblity.push_back(*(*iterPos2).GetRight);
+
+				if(!( checkLeft& IsEmpty))
+				{
+					int jumpLeft = *(*iterPos2).GetLeft.GetLeft;
+					if(jumpLeft & IsMax)
+						possiblity.push_back(*(*iterPos2).GetLeft.GetLeft);
+				}
+				else
+					possiblity.push_back((*iterPos2).GetLeft);
+
+				iterPos2++;
+			}
+		}
+
+
+
+
+
+
+
+
+
+
 		return new vector<Move>();
 	}
 	std::vector<Tile<int>>* Board::GetOccupiedTiles(){
