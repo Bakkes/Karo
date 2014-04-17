@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using engine.wrapper;
 
@@ -19,27 +20,34 @@ namespace _2DFrontend
 		/// <summary>
 		/// The backcolor of Karo tiles.
 		/// </summary>
-		private Brush _tileBackColor = Brushes.White;
+		private Brush _tileBackColor = Brushes.Linen;
+
+		private const int PieceAccentWidth = 5;
 
 		/// <summary>
 		/// Color of the circle accent on pieces.
 		/// </summary>
-		private Pen _pieceAccentColor = Pens.White;
+		private Pen _pieceAccentColor = new Pen(Color.Black, PieceAccentWidth);
 
 		/// <summary>
 		/// Color of max's pieces.
 		/// </summary>
-		private Brush _pieceMaxColor = Brushes.Green;
+		private Brush _pieceMaxColor = Brushes.OliveDrab;
 
 		/// <summary>
 		/// Color of min's pieces.
 		/// </summary>
-		private Brush _pieceMinColor = Brushes.Red;
+		private Brush _pieceMinColor = Brushes.OrangeRed;
 
 		/// <summary>
 		/// Width/height of the tiles in pixels.
 		/// </summary>
 		private const int TileSize = 50;
+
+		/// <summary>
+		/// Width/height of the pieces in pixels.
+		/// </summary>
+		private const int PieceSize = 30;
 
 		/// <summary>
 		/// Gap left and right of every tile.
@@ -49,7 +57,7 @@ namespace _2DFrontend
 		public KaroPanel()
 			: base()
 		{
-			BackColor = Color.CornflowerBlue;
+			BackColor = Color.LightSlateGray;
 			DoubleBuffered = true;
 			MouseClick += KaroPanel_MouseClick;
 		}
@@ -69,36 +77,56 @@ namespace _2DFrontend
 		/// </summary>
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			Graphics g = e.Graphics;
-
 			if (_manager != null)
 			{
+				e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 				BoardWrapper board = _manager.Board;
 				const int maxPotentialSize = 20;
 				for (int x = 0; x < maxPotentialSize; x++)
 				{
 					for (int y = 0; y < maxPotentialSize; y++)
 					{
-						TileWrapper tile = board.GetRelativeTileAt(new Vector2DWrapper(x, y));
-						if ((tile.GetData() & (int)TileValue.HasTile) == (int)TileValue.HasTile)
-						{
-							Point paintPos = TileToPixel(x, y);
-							g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
-								TileSize, TileSize);
-						}
-						if ((tile.GetData() & (int)TileValue.IsEmpty) == (int)TileValue.IsEmpty)
-						{
-							Brush pieceBrush;
-							if ((tile.GetData() & (int)TileValue.IsMax) == (int)TileValue.IsMax)
-							{
-								pieceBrush = _pieceMaxColor;
-							}
-							else
-							{
-								pieceBrush = _pieceMinColor;
-							}
-						}
+						PaintTile(board.GetRelativeTileAt(
+							new Vector2DWrapper(x, y)).GetData(),
+							x, y, e.Graphics);
 					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Paints the specified tiledata on the specified location.
+		/// </summary>
+		private void PaintTile(int tileData, int x, int y, Graphics g)
+		{
+			Point pos = TileToPixel(x, y);
+			// Draw the tile.
+			if ((tileData & (int)TileValue.HasTile) == (int)TileValue.HasTile)
+			{
+				g.FillRectangle(_tileBackColor, pos.X + Gap, pos.Y + Gap,
+					TileSize, TileSize);
+			}
+			// Draw the piece.
+			if ((tileData & (int)TileValue.IsEmpty) != (int)TileValue.IsEmpty)
+			{
+				Brush pieceBrush;
+				if ((tileData & (int)TileValue.IsMax) == (int)TileValue.IsMax)
+				{
+					pieceBrush = _pieceMaxColor;
+				}
+				else
+				{
+					pieceBrush = _pieceMinColor;
+				}
+				int pieceOffset = Gap + (TileSize - PieceSize) / 2;
+				g.FillEllipse(pieceBrush, pos.X + pieceOffset, pos.Y + pieceOffset,
+					PieceSize, PieceSize);
+
+				// Draw the accent.
+				if ((tileData & (int)TileValue.IsFlipped) == (int)TileValue.IsFlipped)
+				{
+					g.DrawEllipse(_pieceAccentColor, pos.X + pieceOffset, pos.Y + pieceOffset,
+						PieceSize, PieceSize);
 				}
 			}
 		}
@@ -133,8 +161,8 @@ namespace _2DFrontend
 			x++;
 			y++;
 
-			return new Point(x * (TileSize + Gap * 2) + Gap,
-				y * (TileSize + Gap * 2) + Gap);
+			return new Point(x * (TileSize + Gap * 2),
+				y * (TileSize + Gap * 2));
 		}
 	}
 }
