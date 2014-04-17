@@ -107,8 +107,8 @@ namespace _2DFrontend
 		{
 			// The +1 is because all tiles are offest by one tile to the bottom/right.
 			// See comments in TileToPixel for further explanation.
-			return new Point(x % (TileSize + Gap) + 1,
-				y % (TileSize + Gap) + 1);
+			return new Point(x / (TileSize + Gap) - 1,
+				y / (TileSize + Gap) - 1);
 		}
 
 		/// <summary>
