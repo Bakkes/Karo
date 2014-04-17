@@ -79,7 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardWrapper.h" />
-    <ClInclude Include="Engine.Wrapper.h" />
     <ClInclude Include="KaroGame.h" />
     <ClInclude Include="MoveWrapper.h" />
     <ClInclude Include="PlayersWrapper.h" />
@@ -92,7 +91,6 @@
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="BoardWrapper.cpp" />
-    <ClCompile Include="Engine.Wrapper.cpp" />
     <ClCompile Include="KaroGame.cpp" />
     <ClCompile Include="MoveWrapper.cpp" />
     <ClCompile Include="PlayersWrapper.cpp" />
