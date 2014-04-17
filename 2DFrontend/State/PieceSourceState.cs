@@ -45,8 +45,13 @@ namespace _2DFrontend.State
 			// Valid source piece clicked, save the move.
 			if (move != null)
 			{
+				Debug.WriteLine("Valid source piece selected at {0}", click);
 				manager.CurrentMove = move;
 				manager.ChangeState(PieceDestinationState.Instance);
+			}
+			else
+			{
+				Debug.WriteLine("Clicked tile does not have a moveable piece at {0}", click);
 			}
 		}
 
