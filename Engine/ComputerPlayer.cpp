@@ -20,7 +20,7 @@ namespace engine {
 		return MinimaxStep(player, 0, INT_MAX, INT_MIN).GetMove();
 	}
 
-	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth, int alpha, int beta) {
+	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth, int bestForMax, int bestForMin) {
 		EvalResult result;
 		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
 		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); --it) {
@@ -30,7 +30,11 @@ namespace engine {
 			EvalResult score;
 			if (depth + 1 <= _maxDepth) {
 				// We are allowed to go deeper, take the result of the next step
-				score = MinimaxStep(InvertPlayer(player), depth + 1, alpha, beta);
+				score = MinimaxStep(InvertPlayer(player), depth + 1, bestForMax, bestForMin);
+				// Propogade the values up tree -> So swap them
+				int temp = score.GetLowerBound();
+				score.SetLowerBound(score.GetUpperBound());
+				score.SetUpperBound(temp);
 			} else {
 				// We can't go deeper, evaluate the board
 				score.SetMove(move);
@@ -38,15 +42,15 @@ namespace engine {
 			}
 
 			if (!result.IsSet() || // We don't have a result yet, copy it
-				(player == Max && score.GetScore() < alpha) || // Result is better if we are the max player
-				(player == Min && score.GetScore() > beta)) { // Result is better if we are the min player
+				(player == Max && score.GetScore() < bestForMax) || // Result is better if we are the max player
+				(player == Min && score.GetScore() > bestForMin)) { // Result is better if we are the min player
 
-				if (player == Max) { // Modify the alpha (lowerBound) value for the max player
-					beta = score.GetScore();
-					result.SetUpperBound(beta);
-				} else { // Modify the beta (upperBound) value for the min player
-					alpha = score.GetScore();
-					result.SetLowerBound(alpha);
+				if (player == Max) { // Modify the bestForMax (lowerBound) value for the max player
+					bestForMin = score.GetScore();
+					result.SetUpperBound(bestForMin);
+				} else { // Modify the bestForMin (upperBound) value for the min player
+					bestForMax = score.GetScore();
+					result.SetLowerBound(bestForMax);
 				}
 
 				result.SetMove(score.GetMove());
