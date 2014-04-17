@@ -93,8 +93,8 @@ namespace engine{
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
 		std::vector<Tile<int>>* CheckMoves = this->GetOccupiedTiles();
 		std::vector<Tile<int>> resultsortof = std::vector<Tile<int>>();
-		std::vector<Tile<int>> possiblity = std::vector<Tile<int>>();
-
+		std::vector<Move> possiblity = std::vector<Move>();
+	
 		vector<Tile<int>>::iterator iterPos = CheckMoves->begin();
 		while(iterPos != CheckMoves->end())
 		{
@@ -121,25 +121,46 @@ namespace engine{
 		{
 			if(player == Max)
 			{
-				int checkRight = *(*iterPos2).GetRight; 
-				int checkLeft = *(*iterPos2).GetLeft;
+				int checkRight = *(*iterPos2).GetRight()->GetData(); 
+				int checkLeft = *(*iterPos2).GetLeft()->GetData();
+				int checkTop = *(*iterPos2).GetTop()->GetData();
+				int checkBottom = *(*iterPos2).GetBottom()->GetData();
+
 				if(!( checkRight & IsEmpty))
 				{
-					int jumpRight = *(*iterPos2).GetRight.GetRight;
-					if(jumpRight & IsMax)
-						possiblity.push_back(*(*iterPos2).GetRight.GetRight);
+					int jumpRight = *(*iterPos2).GetRight()->GetRight()->GetData();
+					if(jumpRight & IsEmpty)
+						possiblity.push_back(Move(JUMP,*(*iterPos2).GetRight()->GetRight()->GetPosition()));
 				}
 				else
-					possiblity.push_back(*(*iterPos2).GetRight);
+					possiblity.push_back(Move(MOVE,*(*iterPos2).GetRight()->GetPosition()));
 
 				if(!( checkLeft& IsEmpty))
 				{
-					int jumpLeft = *(*iterPos2).GetLeft.GetLeft;
-					if(jumpLeft & IsMax)
-						possiblity.push_back(*(*iterPos2).GetLeft.GetLeft);
+					int jumpLeft = *(*iterPos2).GetRight()->GetRight()->GetData();
+					if(jumpLeft & IsEmpty)
+						possiblity.push_back(Move(JUMP,*(*iterPos2).GetRight()->GetRight()->GetPosition()));
 				}
 				else
-					possiblity.push_back((*iterPos2).GetLeft);
+					possiblity.push_back(Move(MOVE,*(*iterPos2).GetLeft()->GetPosition()));
+
+				if(!( checkTop & IsEmpty))
+				{
+					int jumpTop = *(*iterPos2).GetTop()->GetTop()->GetData();
+					if(jumpTop & IsEmpty)
+						possiblity.push_back(Move(JUMP,*(*iterPos2).GetTop()->GetTop()->GetPosition()));
+				}
+				else
+					possiblity.push_back(Move(MOVE,*(*iterPos2).GetTop()->GetPosition()));
+
+				if(!( checkBottom& IsEmpty))
+				{
+					int jumpBottom = *(*iterPos2).GetBottom()->GetBottom()->GetData();
+					if(jumpBottom & IsEmpty)
+						possiblity.push_back(Move(JUMP,*(*iterPos2).GetBottom()->GetBottom()->GetPosition()));
+				}
+				else
+					possiblity.push_back(Move(MOVE,*(*iterPos2).GetBottom()->GetPosition()));
 
 				iterPos2++;
 			}
