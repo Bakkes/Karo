@@ -17,6 +17,14 @@ namespace engine {
 		_move = move;
 	}
 
+	void EvalResult::SetBestForMax(int bestForMax) {
+		_bestForMax = bestForMax;
+	}
+
+	void EvalResult::SetBestForMin(int bestForMin) {
+		_bestForMin = bestForMin;
+	}
+
 	int EvalResult::GetScore() {
 		_isSet = true;
 		return _score;
@@ -26,12 +34,12 @@ namespace engine {
 		return _move;
 	}
 
-	int EvalResult::GetLowerBound() {
-		return _lowerBound;
+	int EvalResult::GetBestForMax() {
+		return _bestForMax;
 	}
 
-	int EvalResult::GetUpperBound() {
-		return _upperBound;
+	int EvalResult::GetBestForMin() {
+		return _bestForMin;
 	}
 
 	bool EvalResult::IsSet() {

@@ -11,20 +11,20 @@ namespace engine {
 
 		void SetScore(int score);
 		void SetMove(Move move);
-		void SetLowerBound(int lowerBound);
-		void SetUpperBound(int upperBound);
+		void SetBestForMax(int bestForMax);
+		void SetBestForMin(int bestForMin);
 
 		int GetScore();
 		Move GetMove();
-		int GetLowerBound();
-		int GetUpperBound();
+		int GetBestForMax();
+		int GetBestForMin();
 		bool IsSet();
 
 	private:
 		int _score;
 		Move _move;
-		int _lowerBound;
-		int _upperBound;
+		int _bestForMax;
+		int _bestForMin;
 		bool _isSet;
 	};
 }

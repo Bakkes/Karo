@@ -32,9 +32,9 @@ namespace engine {
 				// We are allowed to go deeper, take the result of the next step
 				score = MinimaxStep(InvertPlayer(player), depth + 1, bestForMax, bestForMin);
 				// Propogade the values up tree -> So swap them
-				int temp = score.GetLowerBound();
-				score.SetLowerBound(score.GetUpperBound());
-				score.SetUpperBound(temp);
+				int temp = score.GetBestForMax();
+				score.SetBestForMax(score.GetBestForMin());
+				score.SetBestForMin(temp);
 			} else {
 				// We can't go deeper, evaluate the board
 				score.SetMove(move);
@@ -47,10 +47,10 @@ namespace engine {
 
 				if (player == Max) { // Modify the bestForMax (lowerBound) value for the max player
 					bestForMin = score.GetScore();
-					result.SetUpperBound(bestForMin);
+					result.SetBestForMin(bestForMin);
 				} else { // Modify the bestForMin (upperBound) value for the min player
 					bestForMax = score.GetScore();
-					result.SetLowerBound(bestForMax);
+					result.SetBestForMax(bestForMax);
 				}
 
 				result.SetMove(score.GetMove());
