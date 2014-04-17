@@ -4,10 +4,10 @@
 
 namespace engine {
 
-	class ENGINE_API RandStaticEvail : public IStaticEvaluation {
+	class ENGINE_API RandStaticEval : public IStaticEvaluation {
 	public:
-		RandStaticEvail();
-		~RandStaticEvail();
+		RandStaticEval();
+		~RandStaticEval();
 
 		int Eval(IBoard* board, Players player) override;
 	};
