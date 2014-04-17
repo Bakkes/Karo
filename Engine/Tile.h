@@ -38,6 +38,19 @@ namespace engine {
 		Tile<T>* GetBottom() const{
 			return _bottom;
 		}
+		Tile<T>* GetBottomLeft() const{
+			return _bottom->GetLeft();
+		}
+		Tile<T>* GetBottomRight() const{
+			return _bottom->GetRight();
+		}
+		Tile<T>* GetTopLeft() const{
+			return _top->GetLeft();
+		}
+		Tile<T>* GetTopRight() const{
+			return _top->GetRight();
+		}
+
 		void SetRight(Tile<T>* right){
 			this->_right = right;
 		}

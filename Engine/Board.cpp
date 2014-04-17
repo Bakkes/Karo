@@ -90,10 +90,118 @@ namespace engine{
 	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner){
 		MovePiece(from, to, owner);
 	}
+
+
+	std::vector<Move> Board::FindMove(Tile<int> one,Tile<int> two)
+	{
+		std::vector<Move> possibility = std::vector<Move>();
+
+		int checkRight = *one.GetData(); 
+
+		if(!( checkRight & IsEmpty))
+		{
+			int jumpRight = *two.GetData();
+			if(jumpRight & IsEmpty)
+			{
+				if(jumpRight & HasTile)
+					possibility.push_back(Move(JUMP,*two.GetPosition()));
+				else 
+					ForPickableTiles([&](Tile<int>* tile) -> void{
+						possibility.push_back(*tile);
+				});
+			}
+		}
+		else
+			possibility.push_back(Move(MOVE,*one.GetPosition()));
+
+		return possibility;
+	}
+
+
+	std::vector<Move> Board::GetLegalMoves(Tile<int> iterPos2, Players Player ) 
+	{
+		std::vector<Move> possibility = std::vector<Move>();
+	
+
+		if(Player == Max)
+			{
+				std::vector<Move> possibility2 = FindMove(*iterPos2.GetRight(),*iterPos2.GetRight()->GetRight());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+				possibility2 = FindMove(*iterPos2.GetLeft(),*iterPos2.GetLeft()->GetLeft());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+				possibility2 = FindMove(*iterPos2.GetTop(),*iterPos2.GetTop()->GetTop());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+				possibility2 = FindMove(*iterPos2.GetBottom(),*iterPos2.GetBottom()->GetBottom());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+				possibility2 = FindMove(*iterPos2.GetBottomLeft(),*iterPos2.GetBottomLeft()->GetBottomLeft());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+				possibility2 = FindMove(*iterPos2.GetBottomRight(),*iterPos2.GetBottomRight()->GetBottomRight());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+				possibility2 = FindMove(*iterPos2.GetTopLeft(),*iterPos2.GetTopLeft()->GetTopLeft());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+				possibility2 = FindMove(*iterPos2.GetTopRight(),*iterPos2.GetTopRight()->GetTopRight());
+				possibility.insert(possibility.end(),possibility2.begin(),possibility2.end());
+
+
+
+				
+			} 
+		return possibility;
+	}
+
+	void Board::ForPickableTiles(function< void(Tile<int>*) >& lambda)
+	{
+		
+
+		_grid->TraverseTiles(
+			[&](Tile<int>* tile) -> void{
+				if(!(*tile->GetData() & IsEmpty)) 
+				{
+					return;
+				}
+				if(!HasTile & *tile->GetData())
+				{
+					return;
+				}
+				int attatchCount =0;
+				if(*tile->GetLeft()->GetData() & HasTile)
+				{
+					attatchCount ++;
+				}
+				
+				if(*tile->GetRight() ->GetData() & HasTile)
+				{
+					attatchCount++;
+				}
+				
+				if(*tile->GetRight() ->GetData() & HasTile)
+				{
+					attatchCount++;
+				}
+				
+				if(*tile->GetRight() ->GetData() & HasTile)
+				{
+					attatchCount++;
+				}
+
+				if(attatchCount <=2)
+					lambda(tile);
+			}
+		);
+		
+
+	}
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
 		std::vector<Tile<int>>* CheckMoves = this->GetOccupiedTiles();
 		std::vector<Tile<int>> resultsortof = std::vector<Tile<int>>();
-		std::vector<Move> possiblity = std::vector<Move>();
+		std::vector<Move> *possibility = new std::vector<Move>();
 	
 		vector<Tile<int>>::iterator iterPos = CheckMoves->begin();
 		while(iterPos != CheckMoves->end())
@@ -117,65 +225,14 @@ namespace engine{
 		}
 
 		vector<Tile<int>>::iterator iterPos2 = resultsortof.begin();
-		while(iterPos != resultsortof.end())
+		while(iterPos2 != resultsortof.end())
 		{
-			if(player == Max)
-			{
-				int checkRight = *(*iterPos2).GetRight()->GetData(); 
-				int checkLeft = *(*iterPos2).GetLeft()->GetData();
-				int checkTop = *(*iterPos2).GetTop()->GetData();
-				int checkBottom = *(*iterPos2).GetBottom()->GetData();
-
-				if(!( checkRight & IsEmpty))
-				{
-					int jumpRight = *(*iterPos2).GetRight()->GetRight()->GetData();
-					if(jumpRight & IsEmpty)
-						possiblity.push_back(Move(JUMP,*(*iterPos2).GetRight()->GetRight()->GetPosition()));
-				}
-				else
-					possiblity.push_back(Move(MOVE,*(*iterPos2).GetRight()->GetPosition()));
-
-				if(!( checkLeft& IsEmpty))
-				{
-					int jumpLeft = *(*iterPos2).GetRight()->GetRight()->GetData();
-					if(jumpLeft & IsEmpty)
-						possiblity.push_back(Move(JUMP,*(*iterPos2).GetRight()->GetRight()->GetPosition()));
-				}
-				else
-					possiblity.push_back(Move(MOVE,*(*iterPos2).GetLeft()->GetPosition()));
-
-				if(!( checkTop & IsEmpty))
-				{
-					int jumpTop = *(*iterPos2).GetTop()->GetTop()->GetData();
-					if(jumpTop & IsEmpty)
-						possiblity.push_back(Move(JUMP,*(*iterPos2).GetTop()->GetTop()->GetPosition()));
-				}
-				else
-					possiblity.push_back(Move(MOVE,*(*iterPos2).GetTop()->GetPosition()));
-
-				if(!( checkBottom& IsEmpty))
-				{
-					int jumpBottom = *(*iterPos2).GetBottom()->GetBottom()->GetData();
-					if(jumpBottom & IsEmpty)
-						possiblity.push_back(Move(JUMP,*(*iterPos2).GetBottom()->GetBottom()->GetPosition()));
-				}
-				else
-					possiblity.push_back(Move(MOVE,*(*iterPos2).GetBottom()->GetPosition()));
-
-				iterPos2++;
-			}
+			std::vector<Move> possibility2 = GetLegalMoves(*iterPos2,player);
+			possibility->insert(possibility->end(),possibility2.begin(),possibility2.end());
+			iterPos2++;
 		}
 
-
-
-
-
-
-
-
-
-
-		return new vector<Move>();
+		return possibility;
 	}
 	std::vector<Tile<int>>* Board::GetOccupiedTiles(){
 		auto tiles = new vector<Tile<int>>();
