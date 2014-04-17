@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using _2DFrontend.State;
 using engine.wrapper;
@@ -57,7 +58,12 @@ namespace _2DFrontend
 
 		public void ChangeState(IKaroState state)
 		{
+			if (CurrentState != null)
+			{
+				CurrentState.Exit(this);
+			}
 			CurrentState = state;
+			CurrentState.Enter(this);
 		}
 
 		/// <summary>
@@ -65,6 +71,7 @@ namespace _2DFrontend
 		/// </summary>
 		public void Update(Point tileLocation)
 		{
+			Debug.WriteLine("Click received at tile {0}.", tileLocation);
 			if (CurrentState != null)
 			{
 				CurrentState.Update(this, tileLocation);
