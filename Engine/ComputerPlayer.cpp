@@ -46,9 +46,15 @@ namespace engine {
 				(player == Min && score.GetScore() > bestForMin)) { // Result is better if we are the min player
 
 				if (player == Max) { // Modify the bestForMax (lowerBound) value for the max player
+					if (score.GetScore() > bestForMax) {
+						break;
+					}
 					bestForMin = score.GetScore();
 					result.SetBestForMin(bestForMin);
 				} else { // Modify the bestForMin (upperBound) value for the min player
+					if (bestForMin > score.GetScore()) {
+						break;
+					}
 					bestForMax = score.GetScore();
 					result.SetBestForMax(bestForMax);
 				}
