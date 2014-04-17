@@ -26,5 +26,11 @@ namespace _2DFrontend
 		{
 			Close();
 		}
+
+		private void computerVSComputerToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			_manager = new KaroGameManager();
+			karoPanel.NewGame(_manager);
+		}
 	}
 }

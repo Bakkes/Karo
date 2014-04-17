@@ -33,6 +33,8 @@
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.karoPanel = new _2DFrontend.KaroPanel();
+			this.playerVSComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.computerVSComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -57,6 +59,9 @@
 			// 
 			// newToolStripMenuItem
 			// 
+			this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.playerVSComputerToolStripMenuItem,
+            this.computerVSComputerToolStripMenuItem});
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
 			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.newToolStripMenuItem.Text = "New";
@@ -77,6 +82,19 @@
 			this.karoPanel.Name = "karoPanel";
 			this.karoPanel.Size = new System.Drawing.Size(800, 530);
 			this.karoPanel.TabIndex = 0;
+			// 
+			// playerVSComputerToolStripMenuItem
+			// 
+			this.playerVSComputerToolStripMenuItem.Name = "playerVSComputerToolStripMenuItem";
+			this.playerVSComputerToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+			this.playerVSComputerToolStripMenuItem.Text = "Player VS Computer";
+			// 
+			// computerVSComputerToolStripMenuItem
+			// 
+			this.computerVSComputerToolStripMenuItem.Name = "computerVSComputerToolStripMenuItem";
+			this.computerVSComputerToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+			this.computerVSComputerToolStripMenuItem.Text = "Computer VS Computer";
+			this.computerVSComputerToolStripMenuItem.Click += new System.EventHandler(this.computerVSComputerToolStripMenuItem_Click);
 			// 
 			// Karo
 			// 
@@ -103,6 +121,8 @@
 		private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem playerVSComputerToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem computerVSComputerToolStripMenuItem;
 
 	}
 }
