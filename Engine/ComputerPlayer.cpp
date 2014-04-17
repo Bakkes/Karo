@@ -46,19 +46,20 @@ namespace engine {
 				(player == Min && score.GetScore() > bestForMin)) { // Result is better if we are the min player
 
 				if (player == Max) { // Modify the bestForMax (lowerBound) value for the max player
-					if (score.GetScore() > bestForMax) {
+					if (score.GetScore() > bestForMax) { // The ranges no longer overlap, prune it
 						break;
 					}
 					bestForMin = score.GetScore();
 					result.SetBestForMin(bestForMin);
 				} else { // Modify the bestForMin (upperBound) value for the min player
-					if (bestForMin > score.GetScore()) {
+					if (bestForMin > score.GetScore()) { // The ranges no longer overlap, prune it
 						break;
 					}
 					bestForMax = score.GetScore();
 					result.SetBestForMax(bestForMax);
 				}
 
+				// Set the move and score to the result which is "the best move" from this node
 				result.SetMove(score.GetMove());
 				result.SetScore(score.GetScore());
 			}
