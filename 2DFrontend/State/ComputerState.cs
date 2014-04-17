@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace _2DFrontend.State
@@ -35,6 +36,16 @@ namespace _2DFrontend.State
 		/// </summary>
 		public void Update(KaroGameManager manager, Point click)
 		{
+		}
+
+		public void Enter(KaroGameManager manager)
+		{
+			Debug.WriteLine("Entering ComputerState...");
+		}
+
+		public void Exit(KaroGameManager manager)
+		{
+			Debug.WriteLine("Exiting ComputerState...");
 		}
 	}
 }

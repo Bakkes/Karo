@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using engine.wrapper;
@@ -49,6 +50,16 @@ namespace _2DFrontend.State
 				manager.CurrentMove = null;
 				manager.ChangeState(PieceSourceState.Instance);
 			}
+		}
+
+		public void Enter(KaroGameManager manager)
+		{
+			Debug.WriteLine("Entering TileSourceState...");
+		}
+
+		public void Exit(KaroGameManager manager)
+		{
+			Debug.WriteLine("Exiting TileSourceState...");
 		}
 	}
 }

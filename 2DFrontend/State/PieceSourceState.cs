@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Drawing;
 using engine.wrapper;
+using System.Diagnostics;
 
 namespace _2DFrontend.State
 {
@@ -48,6 +49,16 @@ namespace _2DFrontend.State
 				manager.CurrentMove = move;
 				manager.ChangeState(PieceDestinationState.Instance);
 			}
+		}
+
+		public void Enter(KaroGameManager manager)
+		{
+			Debug.WriteLine("Entering PieceSourceState...");
+		}
+
+		public void Exit(KaroGameManager manager)
+		{
+			Debug.WriteLine("Exiting PieceSourceState...");
 		}
 	}
 }

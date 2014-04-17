@@ -57,7 +57,12 @@ namespace _2DFrontend
 
 		public void ChangeState(IKaroState state)
 		{
+			if (CurrentState != null)
+			{
+				CurrentState.Exit(this);
+			}
 			CurrentState = state;
+			CurrentState.Enter(this);
 		}
 
 		/// <summary>
