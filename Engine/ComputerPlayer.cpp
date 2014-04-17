@@ -17,10 +17,10 @@ namespace engine {
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
-		return MinimaxStep(player, 0).GetMove();
+		return MinimaxStep(player, 0, INT_MAX, INT_MIN).GetMove();
 	}
 
-	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth) {
+	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth, int alpha, int beta) {
 		EvalResult result;
 		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
 		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); --it) {
@@ -30,7 +30,7 @@ namespace engine {
 			EvalResult score;
 			if (depth + 1 <= _maxDepth) {
 				// We are allowed to go deeper, take the result of the next step
-				score = MinimaxStep(InvertPlayer(player), depth + 1);
+				score = MinimaxStep(InvertPlayer(player), depth + 1, alpha, beta);
 			} else {
 				// We can't go deeper, evaluate the board
 				score.SetMove(move);
@@ -38,8 +38,16 @@ namespace engine {
 			}
 
 			if (!result.IsSet() || // We don't have a result yet, copy it
-				(player == Max && result.GetScore() < score.GetScore()) || // Result is better if we are the max player
-				(player == Min && result.GetScore() > score.GetScore())) { // Result is better if we are the min player
+				(player == Max && score.GetScore() < alpha) || // Result is better if we are the max player
+				(player == Min && score.GetScore() > beta)) { // Result is better if we are the min player
+
+				if (player == Max) { // Modify the alpha (lowerBound) value for the max player
+					beta = score.GetScore();
+					result.SetUpperBound(beta);
+				} else { // Modify the beta (upperBound) value for the min player
+					alpha = score.GetScore();
+					result.SetLowerBound(alpha);
+				}
 
 				result.SetMove(score.GetMove());
 				result.SetScore(score.GetScore());

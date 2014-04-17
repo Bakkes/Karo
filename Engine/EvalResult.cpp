@@ -26,6 +26,14 @@ namespace engine {
 		return _move;
 	}
 
+	int EvalResult::GetLowerBound() {
+		return _lowerBound;
+	}
+
+	int EvalResult::GetUpperBound() {
+		return _upperBound;
+	}
+
 	bool EvalResult::IsSet() {
 		return _isSet;
 	}
