@@ -29,10 +29,26 @@ namespace wrapper {
 		return wrapped;
 	}
 
+	IEnumerable<MoveWrapper^>^ BoardWrapper::GetLegalMoves(Players player)
+	{
+		List<MoveWrapper^>^ managedMoves = gcnew List<MoveWrapper^>();
+		vector<Move>* nativeMoves = _board->GetLegalMoves(static_cast<engine::Players>(player));
+
+		for (auto it = nativeMoves->begin(); it != nativeMoves->end(); ++it)
+		{
+			managedMoves->Add(WrapperConversionUtility::ConvertMove(*it));
+		}
+		return managedMoves;
+	}
+
 	TileWrapper^ BoardWrapper::GetRelativeTileAt(Vector2DWrapper^ relativePosition) {
 		Vector2D* position = WrapperConversionUtility().ConvertVector2D(relativePosition);
 		Tile<int>* relativeTileAt = _board->GetRelativeTileAt(*position);
 		return WrapperConversionUtility().ConvertTile(relativeTileAt);
+	}
+
+	Board* BoardWrapper::GetInternalBoard() {
+		return _board;
 	}
 }
 }

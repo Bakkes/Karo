@@ -9,7 +9,7 @@ namespace wrapper {
 
 	KaroGame::KaroGame() {
 		_board = gcnew BoardWrapper();
-		_cPlayer = new ComputerPlayer();
+		_cPlayer = new ComputerPlayer(_board->GetInternalBoard(), 5);
 	}
 
 	KaroGame::~KaroGame() {
@@ -26,7 +26,7 @@ namespace wrapper {
 	}
 
 	MoveWrapper^ KaroGame::GetBestMove() {
-		Move bestMove = _cPlayer->GetBestMove();
+		Move bestMove = _cPlayer->GetBestMove(Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 		return wrapped;
 	}

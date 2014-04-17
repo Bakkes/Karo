@@ -1,35 +1,44 @@
 #include "Move.h"
 
 namespace engine {
-	Move::Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile) {
-		init(moveType, fromTile, toTile, moveDirection, emptyTile);
+
+	Move::Move(MoveType type, Vector2D toTile) {
+		Init(type, Vector2D(-1), toTile, Vector2D(-1), false);
 	}
 
-	void Move::init(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile) {
-		_moveType = moveType;
+	Move::Move(MoveType type, Vector2D fromTile, Vector2D toTile) {
+		Init(type, fromTile, toTile, Vector2D(-1), false);
+	}
+
+	Move::Move(MoveType type, Vector2D fromTile, Vector2D toTile, Vector2D usedTile) {
+		Init(type, fromTile, toTile, usedTile, true);
+	}
+
+	void Move::Init(MoveType type, Vector2D fromTile, Vector2D toTile, Vector2D usedTile, bool hasUsedTile) {
+		_moveType = type;
 		_fromTile = fromTile;
 		_toTile = toTile;
-		_moveDirection = moveDirection;
-		_emptyTile = emptyTile;
+		_usedTile = usedTile;
+		_hasUsedTile = hasUsedTile;
 	}
 
 	MoveType Move::GetMoveType() {
 		return _moveType;
 	}
 
-	int Move::GetFromTile() {
+	Vector2D Move::GetFromTile() {
 		return _fromTile;
 	}
 
-	int Move::GetToTile() {
+	Vector2D Move::GetToTile(){ 
 		return _toTile;
 	}
 
-	MoveDirection Move::GetMoveDirection() {
-		return _moveDirection;
+	Vector2D Move::GetUsedTile(){
+		return _usedTile;
 	}
 
-	int Move::GetEmptyTile() {
-		return _emptyTile;
+	bool Move::HasUsedTile() {
+		return _hasUsedTile;
 	}
 }

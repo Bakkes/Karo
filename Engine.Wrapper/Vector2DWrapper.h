@@ -6,8 +6,8 @@ using namespace System;
 
 namespace engine {
 namespace wrapper {
-public ref class Vector2DWrapper
-{
+
+public ref class Vector2DWrapper {
 public:
 	Vector2DWrapper(double x, double y);
 	~Vector2DWrapper();
