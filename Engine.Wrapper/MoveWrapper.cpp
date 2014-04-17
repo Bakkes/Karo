@@ -25,6 +25,10 @@ namespace wrapper {
 		return WrapperConversionUtility::ConvertVector2D(_move->GetToTile());
 	}
 
+	void MoveWrapper::SetToTile(engine::wrapper::Vector2DWrapper^ location) {
+		_move->SetToTile(WrapperConversionUtility::ConvertVector2DStack(location));
+	}
+
 	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedTile() {
 		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedTile());
 	}

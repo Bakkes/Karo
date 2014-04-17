@@ -17,6 +17,7 @@ namespace wrapper {
 			engine::wrapper::MoveType GetMoveType();
 			engine::wrapper::Vector2DWrapper^ GetFromTile();
 			engine::wrapper::Vector2DWrapper^ GetToTile();
+			void SetToTile(engine::wrapper::Vector2DWrapper^ location);
 			engine::wrapper::Vector2DWrapper^ GetUsedTile();
 			bool HasUsedTile();
 		private:

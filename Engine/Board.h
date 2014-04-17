@@ -1,6 +1,7 @@
 #include "Grid.h"
 #include "IBoard.h"
 #include <string>
+#include <sstream>
 #pragma once
 namespace engine{
 
