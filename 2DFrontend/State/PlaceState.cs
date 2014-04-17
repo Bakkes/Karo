@@ -11,6 +11,11 @@ namespace _2DFrontend.State
 	/// </summary>
 	class PlaceState : IKaroState
 	{
+		/// <summary>
+		/// The amount of pieces that have to be on the board in order for the
+		/// game to advance to the next state.
+		/// </summary>
+		private const int MaxPieceCount = 6;
 		private static PlaceState _instance;
 
 		public static IKaroState Instance
@@ -37,15 +42,21 @@ namespace _2DFrontend.State
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetToTile() == new Vector2DWrapper(click.X, click.Y));
+
 			// We have a valid move.
 			if (move != null)
 			{
 				manager.ExecuteMove(move);
 			}
+			else
+			{
+				Debug.WriteLine("Can't place a new piece at {0}", click);
+			}
 
 			// Change state to Piece source state if all 6 pieces are on the board.
-			if (manager.Board.GetOccupiedTiles().Count == 6)
+			if (manager.Board.GetOccupiedTiles().Count == MaxPieceCount)
 			{
+				Debug.WriteLine("All {0} pieces are placed at the board.", MaxPieceCount);
 				manager.ChangeState(PieceSourceState.Instance);
 			}
 		}
