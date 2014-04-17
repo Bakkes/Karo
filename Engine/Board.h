@@ -10,6 +10,7 @@ namespace engine{
 		void ExecuteMove(Move *m, Players player) override;
 		std::vector<Move>* GetLegalMoves(Players player) override;
 		std::vector<Tile<int>>* GetOccupiedTiles() override;
+		int GetNumberOfEdges(Tile<int>*) override;
 	private:
 		Grid<int>* _grid;
 	};

@@ -30,4 +30,23 @@ namespace engine{
 		return new vector<Tile<int>>();
 	}
 
+	int Board::GetNumberOfEdges(Tile<int>* tile) {
+		int edges = 0;
+
+		if (!*tile->GetLeft()->GetData() & IsEmpty == IsEmpty) {
+			edges++;
+		}
+		if (!*tile->GetRight()->GetData() & IsEmpty == IsEmpty) {
+			edges++;
+		}
+		if (!*tile->GetTop()->GetData() & IsEmpty == IsEmpty) {
+			edges++;
+		}
+		if (!*tile->GetBottom()->GetData() & IsEmpty == IsEmpty) {
+			edges++;
+		}
+
+		return edges;
+	}
+
 }
