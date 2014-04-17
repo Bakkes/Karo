@@ -1,5 +1,7 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using engine.wrapper;
 
 namespace _2DFrontend.State
 {
@@ -31,7 +33,22 @@ namespace _2DFrontend.State
 
 		public void Update(KaroGameManager manager, Point click)
 		{
-			throw new NotImplementedException();
+			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
+			MoveWrapper move = legalMoves.FirstOrDefault(m =>
+				m.GetFromTile() == manager.CurrentMove.GetFromTile() &&
+				m.GetToTile() == manager.CurrentMove.GetToTile() &&
+				m.GetUsedTile() == new Vector2DWrapper(click.X, click.Y));
+			if (move != null)
+			{
+				// We now have a valid move. Execute it!
+				manager.ExecuteMove(move);
+			}
+			else
+			{
+				// Clicked on invalid tile. Back to PieceSourceState.
+				manager.CurrentMove = null;
+				manager.ChangeState(PieceSourceState.Instance);
+			}
 		}
 	}
 }

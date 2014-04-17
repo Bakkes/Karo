@@ -29,9 +29,12 @@ namespace _2DFrontend.State
 		{
 		}
 
+		/// <summary>
+		/// ComputerState doesn't listen to clickevents. The entry method will
+		/// do everything AI related.
+		/// </summary>
 		public void Update(KaroGameManager manager, Point click)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }
