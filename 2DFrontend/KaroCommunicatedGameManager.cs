@@ -1,4 +1,5 @@
 ﻿using CommunicationProtocol;
+using engine.wrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,42 +29,71 @@ namespace _2DFrontend
 
 		void _communication_WinRejected()
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("Opponent did not accept win.");
 		}
 
 		void _communication_WinDetected(Turn t, Player p)
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("Opponent thinks he won, going to check.");
 		}
 
 		void _communication_WinAccepted()
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("We won!");
 		}
 
 		void _communication_TurnReceived(Turn t)
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("Opponent took a turn");
+			//MoveWrapper received = new MoveWrapper();
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("Opponent says our move if wrong");
 		}
 
 		void communication_RequestFirstMove()
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("We're first.");
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("Opponent disconnected, reason: " + reason.ToString());
 		}
 
 		void _communication_Connected()
 		{
-			throw new NotImplementedException();
+			Console.WriteLine("Connected to opponent");
+		}
+
+		public override void Update(System.Drawing.Point tileLocation)
+		{
+			
+		}
+
+		private static MoveWrapper ConvertTurnToMove(Turn t)
+		{
+			engine.wrapper.MoveType mt;
+			switch (t.MoveType)
+			{
+				case CommunicationProtocol.MoveType.Insert:
+					mt = engine.wrapper.MoveType.Insert;
+					break;
+				case CommunicationProtocol.MoveType.Jump:
+					mt = engine.wrapper.MoveType.Jump;
+					break;
+				case CommunicationProtocol.MoveType.Move:
+					mt = engine.wrapper.MoveType.Move;
+					break;
+			}
+			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
+				ConvertIntToBoardPosition(t.ToTile), ConvertIntToBoardPosition(t.EmptyTile));
+		}
+		private static Vector2DWrapper ConvertIntToBoardPosition(int number)
+		{
+			return Vector2DWrapper(number, number);
 		}
 	}
 }

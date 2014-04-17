@@ -13,6 +13,8 @@ namespace wrapper {
 	{
 		public:
 			MoveWrapper(engine::wrapper::MoveType moveType, Vector2D fromTile, Vector2D toTile, Vector2D usedTile);
+			MoveWrapper(engine::wrapper::MoveType moveType, Vector2DWrapper^ fromTile, Vector2DWrapper^ toTile, Vector2DWrapper^ usedTile);
+			
 			~MoveWrapper();
 			engine::wrapper::MoveType GetMoveType();
 			engine::wrapper::Vector2DWrapper^ GetFromTile();

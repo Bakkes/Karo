@@ -69,7 +69,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Perform actions depending on the current state and the click location.
 		/// </summary>
-		public void Update(Point tileLocation)
+		public virtual void Update(Point tileLocation)
 		{
 			Debug.WriteLine("Click received at tile {0}.", tileLocation);
 			if (CurrentState != null)
