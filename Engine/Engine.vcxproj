@@ -77,6 +77,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="ComputerPlayer.h" />
     <ClInclude Include="DllImportExport.h" />
+    <ClInclude Include="EvalResult.h" />
     <ClInclude Include="ExportedClass.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IBoard.h" />
@@ -86,7 +87,7 @@
     <ClInclude Include="IStaticEvaluation.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="Players.h" />
-    <ClInclude Include="RandStaticEvail.h" />
+    <ClInclude Include="RandStaticEval.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Vector2D.h" />
@@ -94,10 +95,11 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="ComputerPlayer.cpp" />
+    <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="ICommunication.cpp" />
     <ClCompile Include="Move.cpp" />
-    <ClCompile Include="RandStaticEvail.cpp" />
+    <ClCompile Include="RandStaticEval.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>
