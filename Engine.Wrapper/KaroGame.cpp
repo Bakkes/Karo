@@ -1,6 +1,5 @@
 #pragma once
 
-#include "stdafx.h"
 #include "KaroGame.h"
 #include "Board.h"
 #include "WrapperConversionUtility.h"

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "MoveWrapper.h"
 #include "WrapperConversionUtility.h"
 
