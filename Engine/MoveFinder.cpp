@@ -8,10 +8,14 @@ namespace engine {
 	MoveFinder::~MoveFinder(void) {
 	}
 
+	std::vector<Move>* MoveFinder::GetLegalMoves(Players player) {
+		return nullptr;
+	}
+
 	std::vector<Move> MoveFinder::FindMove(Tile<int> one,Tile<int> two) {
 		std::vector<Move> possibility = std::vector<Move>();
 
-		int checkRight = *one.GetData(); 
+		int checkRight = *one.GetData();
 		if(!( checkRight & IsEmpty)) {
 			int jumpRight = *two.GetData();
 			if(jumpRight & IsEmpty) {

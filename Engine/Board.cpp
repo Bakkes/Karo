@@ -203,12 +203,7 @@ namespace engine{
 
 	}
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
-		// if (board.PieceCount(player) != 3) {
-		//     return GetLegalPlaceMoves(player);
-		// }
-		// else {
-		//     return GetLegalMoveMoves(player);
-		// }
+		return _moveFinder.GetLegalMoves(player);
 
 
 

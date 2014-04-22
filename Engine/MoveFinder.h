@@ -2,6 +2,7 @@
 
 #include "DllImportExport.h"
 #include "IBoard.h"
+#include "Players.h"
 #include "Move.h"
 
 namespace engine{
@@ -10,6 +11,7 @@ namespace engine{
 	public:
 		MoveFinder(IBoard* board);
 		~MoveFinder(void);
+		std::vector<Move>* GetLegalMoves(Players player);
 		std::vector<Move> FindMove(Tile<int>,Tile<int>);
 	private:
 		IBoard* _board;
