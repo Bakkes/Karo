@@ -14,6 +14,7 @@ namespace engine {
 	}
 
 	void EvalResult::SetMove(Move move) {
+		_isSet = true;
 		_move = move;
 	}
 
@@ -26,7 +27,6 @@ namespace engine {
 	}
 
 	int EvalResult::GetScore() {
-		_isSet = true;
 		return _score;
 	}
 
