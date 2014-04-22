@@ -62,8 +62,10 @@ namespace _2DFrontend
 				return;
 			}
 			ExecuteMove(mv);
-			_communication.SendTurn(ConvertMoveToTurn(mv));
+			//Handled their move, moving on to ours now
 
+			MoveWrapper bm = Game.GetBestMove();
+			ExecuteMove(bm);
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
@@ -84,11 +86,12 @@ namespace _2DFrontend
 		void _communication_Disconnected(DisconnectReason reason)
 		{
 			Console.WriteLine("Opponent disconnected, reason: " + reason.ToString());
+
 		}
 
 		void _communication_Connected()
 		{
-			Console.WriteLine("Connected to opponent");
+			Console.WriteLine("Connected to opponent, GLHF");
 		}
 
 		public override void Update(System.Drawing.Point tileLocation)
