@@ -13,6 +13,7 @@ enum CellValue{
 };
 	class IBoard {
 	public:
+		virtual int GetPieceCountFor(Players player) = 0;
 		virtual void ExecuteMove(Move* move, Players player) = 0;
 		virtual std::vector<Move>* GetLegalMoves(Players player) = 0;
 		virtual std::vector<Cell<int>>* GetOccupiedCells() = 0;

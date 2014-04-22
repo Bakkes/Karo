@@ -23,6 +23,11 @@ namespace engine{
 		delete _grid;
 	}
 
+	int Board::GetPieceCountFor(Players player) {
+		// TODO: Actual counting.
+		return 0;
+	}
+
 	void Board::ExecuteMove(Move *move, Players player) {
 		switch(move->GetMoveType()){
 			case INSERT:

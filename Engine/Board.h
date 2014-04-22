@@ -12,6 +12,7 @@ namespace engine{
 	public:
 		Board();
 		~Board();
+		int GetPieceCountFor(Players player) override;
 		void ExecuteMove(Move *m, Players player) override;
 		vector<Move>* GetLegalMoves(Players player) override;
 		vector<Cell<int>>* GetOccupiedCells() override;
