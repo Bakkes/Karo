@@ -19,6 +19,8 @@ namespace engine{
 
 		// Get all legal moves for the move state.
 		std::vector<Move>* GetLegalMoveMoves(Players player);
+		void AddAdjecentMovesToVector(std::vector<Move>* moves, Cell<int> cell);
+		void AddAdjecentMoveIfValidDestination(std::vector<Move>* moves, const Cell<int> &from, const Cell<int> &to);
 		IBoard* _board;
 	};
 }
