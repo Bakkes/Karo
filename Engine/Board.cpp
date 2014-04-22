@@ -3,8 +3,8 @@
 namespace engine{
 
 	const Size Board::initSize(5,4);
-	Board::Board()
-		: _moveFinder(MoveFinder(this)) {
+	Board::Board() {
+		_moveFinder = new MoveFinder(this);
 		_grid = new Grid<int>();
 		_grid->BindCellsToEachother(true);
 		_grid->TraverseCells(
@@ -20,7 +20,10 @@ namespace engine{
 		absoluteTopLeft = *_grid->GetCellAt(Vector2D(0,0))->GetPosition();
 	}
 	Board::~Board(){
+		delete _moveFinder;
+		_moveFinder = nullptr;
 		delete _grid;
+		_grid = nullptr;
 	}
 
 	int Board::GetPieceCountFor(Players player) {

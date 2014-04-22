@@ -1,12 +1,14 @@
+#pragma once
+
 #include "Grid.h"
 #include "IBoard.h"
 #include "MoveFinder.h"
 #include <string>
 #include <sstream>
 
-#pragma once
 using namespace std;
 namespace engine{
+	class MoveFinder;
 
 	class ENGINE_API Board : public IBoard{
 	public:
@@ -20,7 +22,7 @@ namespace engine{
 		string ToString();
 		static Board* CreateBoard(string from);
 	private:
-		MoveFinder _moveFinder;
+		MoveFinder* _moveFinder;
 		Grid<int>* _grid;
 		Vector2D absoluteTopLeft;
 		void InsertPiece(const Cell<int>& on, Players owner);

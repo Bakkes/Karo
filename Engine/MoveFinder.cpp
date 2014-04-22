@@ -2,7 +2,7 @@
 #include "Cell.h"
 
 namespace engine {
-	MoveFinder::MoveFinder(IBoard* board) {
+	MoveFinder::MoveFinder(Board* board) {
 		_board = board;
 	}
 

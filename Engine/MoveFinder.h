@@ -1,15 +1,17 @@
 #pragma once
 
 #include "DllImportExport.h"
-#include "IBoard.h"
+#include "Board.h"
 #include "Players.h"
 #include "Move.h"
 
 namespace engine{
+	class Board;
+
 	class ENGINE_API MoveFinder
 	{
 	public:
-		MoveFinder(IBoard* board);
+		MoveFinder(Board* board);
 		~MoveFinder(void);
 		std::vector<Move>* GetLegalMoves(Players player);
 		std::vector<Move> FindMove(Cell<int>, Cell<int>);
@@ -26,6 +28,6 @@ namespace engine{
 			const Cell<int> &from,
 			const Cell<int> &to,
 			MoveType type);
-		IBoard* _board;
+		Board* _board;
 	};
 }
