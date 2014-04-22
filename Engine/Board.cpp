@@ -199,9 +199,8 @@ namespace engine{
 					lambda(tile);
 			}
 		);
-		
-
 	}
+
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
 		return _moveFinder.GetLegalMoves(player);
 
