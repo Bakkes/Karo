@@ -1,7 +1,8 @@
 #include "Board.h"
 namespace engine{
-
-	Board::Board(){
+	Board::Board()
+		:_moveFinder(MoveFinder(this))
+	{
 		_grid = new Grid<int>();
 		_grid->BindTilesToEachother(true);
 		_grid->TraverseTiles(
@@ -103,12 +104,14 @@ namespace engine{
 			int jumpRight = *two.GetData();
 			if(jumpRight & IsEmpty)
 			{
-				if(jumpRight & HasTile)
+				if(jumpRight & HasTile) {
 					possibility.push_back(Move(JUMP,*two.GetPosition()));
-				else 
-					ForPickableTiles([&](Tile<int>* tile) -> void{
-						possibility.push_back(*tile);
-				});
+				}
+				else {
+				//	ForPickableTiles([&](Tile<int>* tile) -> void{
+				//		//possibility.push_back(*tile);
+				//});
+				}
 			}
 		}
 		else {

@@ -1,17 +1,17 @@
-#include "Board.h"
+#pragma once
+
+#include "DllImportExport.h"
+#include "IBoard.h"
 #include "Move.h"
 
-#pragma once
 namespace engine{
-class MoveFinder
-{
-public:
-	MoveFinder(void);
-	~MoveFinder(void);
-
-
-	std::vector<Move> FindMove(Tile<int>,Tile<int>);
-
-};
-
+	class ENGINE_API MoveFinder
+	{
+	public:
+		MoveFinder(IBoard* board);
+		~MoveFinder(void);
+		std::vector<Move> FindMove(Tile<int>,Tile<int>);
+	private:
+		IBoard* _board;
+	};
 }

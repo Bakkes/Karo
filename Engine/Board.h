@@ -1,8 +1,11 @@
+#pragma once
+
 #include "Grid.h"
+#include "MoveFinder.h"
 #include "IBoard.h"
 #include <string>
 #include <sstream>
-#pragma once
+
 namespace engine{
 
 	class ENGINE_API Board : public IBoard{
@@ -19,6 +22,7 @@ namespace engine{
 	private:
 		void ForPickableTiles(function< void(Tile<int>*) >& lambda);
 		Grid<int>* _grid;
+		MoveFinder _moveFinder;
 		Vector2D absoluteTopLeft;
 
 		// Gets the amount of pieces on the board of the specified player.
