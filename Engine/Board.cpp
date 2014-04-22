@@ -1,8 +1,10 @@
 #include "Board.h"
+
 namespace engine{
 
 	const Size Board::initSize(5,4);
-	Board::Board(){
+	Board::Board()
+		: _moveFinder(MoveFinder(this)) {
 		_grid = new Grid<int>();
 		_grid->BindCellsToEachother(true);
 		_grid->TraverseCells(
