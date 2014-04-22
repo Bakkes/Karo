@@ -34,6 +34,28 @@ namespace _2DFrontend
 
 		void _communication_WinDetected(Turn t, Player p)
 		{
+			if (p == Player.You)
+			{
+				if (Game.HasWon(Players.Min))
+				{
+					_communication.SendWinAccepted();
+				}
+				else
+				{
+					_communication.SendWinDisputed();
+				}
+			}
+			else if (p == Player.Me)
+			{
+				if (Game.HasWon(Players.Max))
+				{
+					_communication.SendWinAccepted();
+				}
+				else
+				{
+					_communication.SendWinDisputed();
+				}
+			}
 			Console.WriteLine("Opponent thinks he won, going to check.");
 		}
 
@@ -64,8 +86,17 @@ namespace _2DFrontend
 			ExecuteMove(mv);
 			//Handled their move, moving on to ours now
 
+
 			MoveWrapper bm = Game.GetBestMove();
 			ExecuteMove(bm);
+			if (Game.HasWon(Players.Max))
+			{
+				_communication.SendWinDetected(Player.Me, ConvertMoveToTurn(bm));
+			}
+			else
+			{
+				_communication.SendTurn(ConvertMoveToTurn(bm));
+			}
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
