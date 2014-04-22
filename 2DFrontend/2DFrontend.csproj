@@ -61,7 +61,7 @@
     <Compile Include="State\PieceSourceState.cs" />
     <Compile Include="State\PieceDestinationState.cs" />
     <Compile Include="State\PlaceState.cs" />
-    <Compile Include="State\TileSourceState.cs" />
+    <Compile Include="State\CellSourceState.cs" />
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>

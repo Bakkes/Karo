@@ -40,7 +40,7 @@ namespace _2DFrontend.State
 
 			// See if there is any move with the same source as the clicked tile.
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
-				m.GetFromTile() == new Vector2DWrapper(click.X, click.Y));
+				m.GetFromCell() == new Vector2DWrapper(click.X, click.Y));
 
 			// Valid source piece clicked, save the move.
 			if (move != null)

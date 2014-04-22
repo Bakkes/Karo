@@ -10,14 +10,14 @@ namespace engine {
 	// this class is for easy navigating the grid, when you get a tile you now
 	// its neighbours
 	template<typename T>
-	class ENGINE_API Tile{
+	class ENGINE_API Cell{
 	public:
 		// set a tile to the point
-		Tile(Vector2D* p){
+		Cell(Vector2D* p){
 			Init(p);
 		}
 
-		~Tile(){
+		~Cell(){
 			if(_position){
 				delete _position;
 			}
@@ -32,41 +32,28 @@ namespace engine {
 			_tiledata = NULL;
 		}
 
-		void SetBottom(Tile<T>* bottom){
+		void SetBottom(Cell<T>* bottom){
 			this->_bottom = bottom;
 		}
-		Tile<T>* GetBottom() const{
+		Cell<T>* GetBottom() const{
 			return _bottom;
 		}
-		Tile<T>* GetBottomLeft() const{
-			return _bottom->GetLeft();
-		}
-		Tile<T>* GetBottomRight() const{
-			return _bottom->GetRight();
-		}
-		Tile<T>* GetTopLeft() const{
-			return _top->GetLeft();
-		}
-		Tile<T>* GetTopRight() const{
-			return _top->GetRight();
-		}
-
-		void SetRight(Tile<T>* right){
+		void SetRight(Cell<T>* right){
 			this->_right = right;
 		}
-		Tile<T>* GetRight() const{
+		Cell<T>* GetRight() const{
 			return _right;
 		}
-		void SetLeft(Tile<T>* left){
+		void SetLeft(Cell<T>* left){
 			this->_left = left;
 		}
-		Tile<T>* GetLeft() const{
+		Cell<T>* GetLeft() const{
 			return _left;
 		}
-		void SetTop(Tile<T>* top){
+		void SetTop(Cell<T>* top){
 			this->_top = top;
 		}
-		Tile<T>* GetTop() const{
+		Cell<T>* GetTop() const{
 			return _top;
 		}
 		Vector2D* GetPosition() const{
@@ -78,8 +65,8 @@ namespace engine {
 		T* GetData() const{
 			return _tiledata;
 		}
-		vector<Tile<T>*> GetSurroundingTiles() const{
-			vector<Tile<T>*> tiles;
+		vector<Cell<T>*> GetSurroundingCells() const{
+			vector<Cell<T>*> tiles;
 			tiles.push_back(this->GetLeft());
 			tiles.push_back(this->GetTop());
 			tiles.push_back(this->GetRight());
@@ -97,12 +84,12 @@ namespace engine {
 		}
 		T* _tiledata;
 		Vector2D* _position;
-		Tile<T>* _top;
-		Tile<T>* _left;
-		Tile<T>* _right;
-		Tile<T>* _bottom;
+		Cell<T>* _top;
+		Cell<T>* _left;
+		Cell<T>* _right;
+		Cell<T>* _bottom;
 	};
-	inline bool ENGINE_API operator==(const Tile<int>& l, const Tile<int>& r){
+	inline bool ENGINE_API operator==(const Cell<int>& l, const Cell<int>& r){
 		if(l.GetPosition() != r.GetPosition()){
 			return false;
 		}
@@ -125,5 +112,5 @@ namespace engine {
 		}
 		return true;
 	}
-	inline bool ENGINE_API operator!=(const Tile<int>& l, const Tile<int>& r){return !operator==(l,r);}
+	inline bool ENGINE_API operator!=(const Cell<int>& l, const Cell<int>& r){return !operator==(l,r);}
 }

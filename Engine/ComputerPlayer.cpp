@@ -59,19 +59,19 @@ namespace engine {
 	Move InvertMove(Move move) {
 		switch (move.GetMoveType()) {
 		case INSERT:
-			return Move(DELETE, move.GetToTile());
+			return Move(DELETE, move.GetToCell());
 		case MOVE: {
-			if (move.HasUsedTile()) {
-				return Move(MOVE, move.GetUsedTile(), move.GetFromTile(), move.GetToTile());
+			if (move.HasUsedCell()) {
+				return Move(MOVE, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
 			} else {
-				return Move(MOVE, move.GetToTile(), move.GetFromTile());
+				return Move(MOVE, move.GetToCell(), move.GetFromCell());
 			}
 		}
 		case JUMP: {
-			if (move.HasUsedTile()) {
-				return Move(JUMP, move.GetUsedTile(), move.GetFromTile(), move.GetToTile());
+			if (move.HasUsedCell()) {
+				return Move(JUMP, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
 			} else {
-				return Move(JUMP, move.GetToTile(), move.GetFromTile());
+				return Move(JUMP, move.GetToCell(), move.GetFromCell());
 			}
 		}
 		}

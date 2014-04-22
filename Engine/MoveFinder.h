@@ -12,7 +12,7 @@ namespace engine{
 		MoveFinder(IBoard* board);
 		~MoveFinder(void);
 		std::vector<Move>* GetLegalMoves(Players player);
-		std::vector<Move> FindMove(Tile<int>,Tile<int>);
+		std::vector<Move> FindMove(Cell<int>, Cell<int>);
 	private:
 		IBoard* _board;
 	};

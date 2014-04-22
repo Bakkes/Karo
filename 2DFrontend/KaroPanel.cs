@@ -39,7 +39,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Width/height of the tiles in pixels.
 		/// </summary>
-		private const int TileSize = 50;
+		private const int CellSize = 50;
 
 		/// <summary>
 		/// Gap left and right of every tile.
@@ -79,12 +79,12 @@ namespace _2DFrontend
 				{
 					for (int y = 0; y < maxPotentialSize; y++)
 					{
-						TileWrapper tile = board.GetRelativeTileAt(new Vector2DWrapper(x, y));
-						if ((tile.GetData() & (int)TileValue.HasTile) == (int)TileValue.HasTile)
+						CellWrapper tile = board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+						if ((tile.GetData() & (int)CellValue.HasCell) == (int)CellValue.HasCell)
 						{
-							Point paintPos = TileToPixel(x, y);
+							Point paintPos = CellToPixel(x, y);
 							g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
-								TileSize, TileSize);
+								CellSize, CellSize);
 						}
 					}
 				}
@@ -95,7 +95,7 @@ namespace _2DFrontend
 		{
 			if (_manager != null)
 			{
-				_manager.Update(PixelToTile(e.Location.X, e.Location.Y));
+				_manager.Update(PixelToCell(e.Location.X, e.Location.Y));
 				Invalidate();
 			}
 		}
@@ -103,26 +103,26 @@ namespace _2DFrontend
 		/// <summary>
 		/// Translates pixel coordinates to tile coordinates.
 		/// </summary>
-		private Point PixelToTile(int x, int y)
+		private Point PixelToCell(int x, int y)
 		{
 			// The +1 is because all tiles are offest by one tile to the bottom/right.
-			// See comments in TileToPixel for further explanation.
-			return new Point(x % (TileSize + Gap) + 1,
-				y % (TileSize + Gap) + 1);
+			// See comments in CellToPixel for further explanation.
+			return new Point(x % (CellSize + Gap) + 1,
+				y % (CellSize + Gap) + 1);
 		}
 
 		/// <summary>
 		/// Translates tile coordinates to the topleft pixel coordinate of a tile.
 		/// </summary>
-		private Point TileToPixel(int x, int y)
+		private Point CellToPixel(int x, int y)
 		{
 			// This makes sure there's always one empty row/colum at the top/left.
 			// This is necessary to place your piece on the top/left nonexisting row.
 			x++;
 			y++;
 
-			return new Point(x * (TileSize + Gap * 2) + Gap,
-				y * (TileSize + Gap * 2) + Gap);
+			return new Point(x * (CellSize + Gap * 2) + Gap,
+				y * (CellSize + Gap * 2) + Gap);
 		}
 	}
 }

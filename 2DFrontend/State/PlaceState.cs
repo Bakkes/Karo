@@ -36,7 +36,7 @@ namespace _2DFrontend.State
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
-				m.GetToTile() == new Vector2DWrapper(click.X, click.Y));
+				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
 			// We have a valid move.
 			if (move != null)
 			{
@@ -44,7 +44,7 @@ namespace _2DFrontend.State
 			}
 
 			// Change state to Piece source state if all 6 pieces are on the board.
-			if (manager.Board.GetOccupiedTiles().Count == 6)
+			if (manager.Board.GetOccupiedCells().Count == 6)
 			{
 				manager.ChangeState(PieceSourceState.Instance);
 			}
