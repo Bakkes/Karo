@@ -1,17 +1,17 @@
 #pragma once
-#include "Tile.h"
+#include "Cell.h"
 #include "Vector2DWrapper.h"
 namespace engine {
 namespace wrapper {
-public ref class TileWrapper
+public ref class CellWrapper
 {
 public:
-	TileWrapper(double x, double y, int data);
-	~TileWrapper(void);
+	CellWrapper(double x, double y, int data);
+	~CellWrapper(void);
 	int GetData();
 	Vector2DWrapper^ GetPosition();
 private:
-	Tile<int> * _tile;
+	Cell<int> * _tile;
 	int _data;
 };
 

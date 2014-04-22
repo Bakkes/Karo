@@ -3,7 +3,7 @@
 #include "Board.h"
 #include "MoveWrapper.h"
 #include "PlayersWrapper.h"
-#include "TileWrapper.h"
+#include "CellWrapper.h"
 #include "WrapperConversionUtility.h"
 #include <vector>
 
@@ -13,8 +13,8 @@ using namespace System::Collections::Generic;
 namespace engine {
 namespace wrapper {
 
-public enum class TileValue {
-	HasTile = 1,
+public enum class CellValue {
+	HasCell = 1,
 	IsEmpty = 2,
 	IsMax = 4,
 	IsFlipped = 8
@@ -26,8 +26,8 @@ public:
 	BoardWrapper(void);
 	~BoardWrapper(void);
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
-	List<TileWrapper^>^ GetOccupiedTiles();
-	TileWrapper^ GetRelativeTileAt(Vector2DWrapper^ relativePosition);
+	List<CellWrapper^>^ GetOccupiedCells();
+	CellWrapper^ GetRelativeCellAt(Vector2DWrapper^ relativePosition);
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();
 private:

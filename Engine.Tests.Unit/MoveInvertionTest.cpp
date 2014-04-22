@@ -43,16 +43,16 @@ private:
 		if (moveA.GetMoveType() != moveB.GetMoveType())
 			return false;
 
-		if (moveA.GetFromTile() != moveB.GetFromTile())
+		if (moveA.GetFromCell() != moveB.GetFromCell())
 			return false;
 
-		if (moveA.GetToTile() != moveB.GetToTile())
+		if (moveA.GetToCell() != moveB.GetToCell())
 			return false;
 
-		if (moveA.HasUsedTile() != moveB.HasUsedTile())
+		if (moveA.HasUsedCell() != moveB.HasUsedCell())
 			return false;
 
-		if (moveA.GetUsedTile() != moveB.GetUsedTile())
+		if (moveA.GetUsedCell() != moveB.GetUsedCell())
 			return false;
 
 		return true;

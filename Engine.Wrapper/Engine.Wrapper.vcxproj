@@ -85,7 +85,7 @@
     <ClInclude Include="PlayersWrapper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stdafx.h" />
-    <ClInclude Include="TileWrapper.h" />
+    <ClInclude Include="CellWrapper.h" />
     <ClInclude Include="Vector2DWrapper.h" />
     <ClInclude Include="WrapperConversionUtility.h" />
   </ItemGroup>
@@ -100,7 +100,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TileWrapper.cpp" />
+    <ClCompile Include="CellWrapper.cpp" />
     <ClCompile Include="Vector2DWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>

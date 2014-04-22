@@ -2,43 +2,43 @@
 
 namespace engine {
 
-	Move::Move(MoveType type, Vector2D toTile) {
-		Init(type, Vector2D(-1), toTile, Vector2D(-1), false);
+	Move::Move(MoveType type, Vector2D toCell) {
+		Init(type, Vector2D(-1), toCell, Vector2D(-1), false);
 	}
 
-	Move::Move(MoveType type, Vector2D fromTile, Vector2D toTile) {
-		Init(type, fromTile, toTile, Vector2D(-1), false);
+	Move::Move(MoveType type, Vector2D fromCell, Vector2D toCell) {
+		Init(type, fromCell, toCell, Vector2D(-1), false);
 	}
 
-	Move::Move(MoveType type, Vector2D fromTile, Vector2D toTile, Vector2D usedTile) {
-		Init(type, fromTile, toTile, usedTile, true);
+	Move::Move(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell) {
+		Init(type, fromCell, toCell, usedCell, true);
 	}
 
-	void Move::Init(MoveType type, Vector2D fromTile, Vector2D toTile, Vector2D usedTile, bool hasUsedTile) {
+	void Move::Init(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell, bool hasUsedCell) {
 		_moveType = type;
-		_fromTile = fromTile;
-		_toTile = toTile;
-		_usedTile = usedTile;
-		_hasUsedTile = hasUsedTile;
+		_fromCell = fromCell;
+		_toCell = toCell;
+		_usedCell = usedCell;
+		_hasUsedCell = hasUsedCell;
 	}
 
 	MoveType Move::GetMoveType() {
 		return _moveType;
 	}
 
-	Vector2D Move::GetFromTile() {
-		return _fromTile;
+	Vector2D Move::GetFromCell() {
+		return _fromCell;
 	}
 
-	Vector2D Move::GetToTile(){ 
-		return _toTile;
+	Vector2D Move::GetToCell(){ 
+		return _toCell;
 	}
 
-	Vector2D Move::GetUsedTile(){
-		return _usedTile;
+	Vector2D Move::GetUsedCell(){
+		return _usedCell;
 	}
 
-	bool Move::HasUsedTile() {
-		return _hasUsedTile;
+	bool Move::HasUsedCell() {
+		return _hasUsedCell;
 	}
 }

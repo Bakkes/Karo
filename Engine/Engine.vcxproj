@@ -89,7 +89,7 @@
     <ClInclude Include="Players.h" />
     <ClInclude Include="RandStaticEvail.h" />
     <ClInclude Include="Size.h" />
-    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>

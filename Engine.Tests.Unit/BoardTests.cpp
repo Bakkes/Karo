@@ -2,7 +2,7 @@
 #include "CppUnitTest.h"
 #include "ICommunication.h"
 #include "Board.h"
-#include "Tile.h"
+#include "Cell.h"
 #include <string>
 #include <iostream>
 #include "Windows.h"
@@ -81,8 +81,8 @@ namespace Tests {
 			x ++;
 		}
 		TEST_METHOD(IsInitialBoardEmpty) {
-			vector<Tile<int>>* result = board->GetOccupiedTiles();
-			Assert::IsTrue(*result == vector<Tile<int>>());
+			vector<Cell<int>>* result = board->GetOccupiedCells();
+			Assert::IsTrue(*result == vector<Cell<int>>());
 			delete result;
 		};
 	};

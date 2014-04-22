@@ -4,18 +4,18 @@ namespace engine{
 	const Size Board::initSize(5,4);
 	Board::Board(){
 		_grid = new Grid<int>();
-		_grid->BindTilesToEachother(true);
-		_grid->TraverseTiles(
-			[](Tile<int>* tile) -> void{
+		_grid->BindCellsToEachother(true);
+		_grid->TraverseCells(
+			[](Cell<int>* tile) -> void{
 				int* data = new int(0);
 				if( tile->GetPosition()->X() < Board::initSize.GetWidth() && 
 					tile->GetPosition()->Y() < Board::initSize.GetHeight()){
-					*data |= HasTile | IsEmpty;
+					*data |= HasCell | IsEmpty;
 				} 
 				tile->SetData(data);
 			}
 		);
-		absoluteTopLeft = *_grid->GetTileAt(Vector2D(0,0))->GetPosition();
+		absoluteTopLeft = *_grid->GetCellAt(Vector2D(0,0))->GetPosition();
 	}
 	Board::~Board(){
 		delete _grid;
@@ -24,40 +24,40 @@ namespace engine{
 	void Board::ExecuteMove(Move *move, Players player) {
 		switch(move->GetMoveType()){
 			case INSERT:
-				InsertPiece(*_grid->GetTileAt(move->GetToTile()), player);
+				InsertPiece(*_grid->GetCellAt(move->GetToCell()), player);
 			return;
 			case DELETE:
-				DeletePiece(*_grid->GetTileAt(move->GetToTile()));
+				DeletePiece(*_grid->GetCellAt(move->GetToCell()));
 			return;
 			case MOVE:
-				if(move->HasUsedTile()){
+				if(move->HasUsedCell()){
 					MovePiece(
-						*_grid->GetTileAt(move->GetFromTile()), 
-						*_grid->GetTileAt(move->GetToTile()), 
+						*_grid->GetCellAt(move->GetFromCell()), 
+						*_grid->GetCellAt(move->GetToCell()), 
 						player, 
-						*_grid->GetTileAt(move->GetUsedTile()) 
+						*_grid->GetCellAt(move->GetUsedCell()) 
 					);
 					return;
 				}
 				MovePiece(
-					*_grid->GetTileAt(move->GetFromTile()), 
-					*_grid->GetTileAt(move->GetToTile()), 
+					*_grid->GetCellAt(move->GetFromCell()), 
+					*_grid->GetCellAt(move->GetToCell()), 
 					player
 				);
 			return; 
 			case JUMP:
-				if(move->HasUsedTile()){
+				if(move->HasUsedCell()){
 					JumpPiece(
-						*_grid->GetTileAt(move->GetFromTile()), 
-						*_grid->GetTileAt(move->GetToTile()), 
+						*_grid->GetCellAt(move->GetFromCell()), 
+						*_grid->GetCellAt(move->GetToCell()), 
 						player, 
-						*_grid->GetTileAt(move->GetUsedTile()) 
+						*_grid->GetCellAt(move->GetUsedCell()) 
 					);
 					return;
 				}
 				JumpPiece(
-					*_grid->GetTileAt(move->GetFromTile()), 
-					*_grid->GetTileAt(move->GetToTile()), 
+					*_grid->GetCellAt(move->GetFromCell()), 
+					*_grid->GetCellAt(move->GetToCell()), 
 					player
 				);
 			return; 
@@ -65,7 +65,7 @@ namespace engine{
 		
 	}
 
-	void Board::InsertPiece(const Tile<int>& on, Players owner){
+	void Board::InsertPiece(const Cell<int>& on, Players owner){
 		*on.GetData() &= ~IsEmpty;
 		if(owner == Max){
 			*on.GetData() |= IsMax;
@@ -73,32 +73,32 @@ namespace engine{
 		}
 		*on.GetData() &= ~IsMax;
 	}
-	void Board::DeletePiece(const Tile<int>& on){
+	void Board::DeletePiece(const Cell<int>& on){
 		*on.GetData() |= IsEmpty;
 	}
-	void Board::MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed){
-		*tileUsed.GetData() &= ~HasTile;
-		*to.GetData() |= HasTile;
+	void Board::MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed){
+		*tileUsed.GetData() &= ~HasCell;
+		*to.GetData() |= HasCell;
 		MovePiece(from, to, owner);
 	}
-	void Board::MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner){
+	void Board::MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner){
 		*to.GetData() = *from.GetData();
 		DeletePiece(from);
 	}
-	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed){
+	void Board::JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed){
 		MovePiece(from, to, owner, tileUsed);
 	}
-	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner){
+	void Board::JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner){
 		MovePiece(from, to, owner);
 	}
 	vector<Move>* Board::GetLegalMoves(Players player) {
 		return new vector<Move>();
 	}
-	vector<Tile<int>>* Board::GetOccupiedTiles(){
-		auto tiles = new vector<Tile<int>>();
-		_grid->TraverseTiles(
-			[&](Tile<int>* tile) -> void{
-				if(!*tile->GetData() & HasTile){
+	vector<Cell<int>>* Board::GetOccupiedCells(){
+		auto tiles = new vector<Cell<int>>();
+		_grid->TraverseCells(
+			[&](Cell<int>* tile) -> void{
+				if(!*tile->GetData() & HasCell){
 					return;
 				}
 				if(*tile->GetData() & IsEmpty){
@@ -111,8 +111,8 @@ namespace engine{
 	}
 	string Board::ToString(){
 		stringstream result;
-		_grid->TraverseTiles(
-			[&, this](Tile<int>* tile) -> void{
+		_grid->TraverseCells(
+			[&, this](Cell<int>* tile) -> void{
 				int data = *tile->GetData();
 				result << *tile->GetData() << ",";
 				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
@@ -123,7 +123,7 @@ namespace engine{
 		return result.str();
 		
 	}
-	Tile<int>* Board::GetRelativeTileAt(const Vector2D relativePosition) const{
+	Cell<int>* Board::GetRelativeCellAt(const Vector2D relativePosition) const{
 		Vector2D position = relativePosition + absoluteTopLeft;
 		if(position.X() < 0){
 			position.X(position.X() + _grid->GetSize()->GetWidth());
@@ -131,7 +131,7 @@ namespace engine{
 		if(position.Y() < 0){
 			position.Y(position.Y() + _grid->GetSize()->GetWidth());
 		}
-		return _grid->GetTileAt(position);
+		return _grid->GetCellAt(position);
 	}
 
 	Board* Board::CreateBoard(string from){
@@ -152,7 +152,7 @@ namespace engine{
 				x = 0;
 				continue;
 			}
-			*result->_grid->GetTileAt(Vector2D(x,y))->GetData() = subject -'0';
+			*result->_grid->GetCellAt(Vector2D(x,y))->GetData() = subject -'0';
 		}
 		int pause = 0;
 		return result;

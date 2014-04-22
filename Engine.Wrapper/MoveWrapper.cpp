@@ -5,8 +5,8 @@
 namespace engine {
 namespace wrapper {
 
-	MoveWrapper::MoveWrapper(MoveType moveType, Vector2D fromTile, Vector2D toTile, Vector2D usedTile) {
-		_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, usedTile);
+	MoveWrapper::MoveWrapper(MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D usedCell) {
+		_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromCell, toCell, usedCell);
 	}
 
 	MoveWrapper::~MoveWrapper() {
@@ -17,20 +17,20 @@ namespace wrapper {
 		return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
 	}
 
-	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetFromTile() {
-		return WrapperConversionUtility::ConvertVector2D(_move->GetFromTile());
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetFromCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetFromCell());
 	}
 
-	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToTile() {
-		return WrapperConversionUtility::ConvertVector2D(_move->GetToTile());
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetToCell());
 	}
 
-	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedTile() {
-		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedTile());
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedCell());
 	}
 
-	bool MoveWrapper::HasUsedTile() {
-		return _move->HasUsedTile();
+	bool MoveWrapper::HasUsedCell() {
+		return _move->HasUsedCell();
 	}
 
 }
