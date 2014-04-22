@@ -111,8 +111,9 @@ namespace engine{
 				});
 			}
 		}
-		else
+		else {
 			possibility.push_back(Move(MOVE,*one.GetPosition()));
+		}
 
 		return possibility;
 	}
