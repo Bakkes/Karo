@@ -1,14 +1,15 @@
 #include "Board.h"
 namespace engine{
 
+	const Size Board::initSize(5,4);
 	Board::Board(){
 		_grid = new Grid<int>();
 		_grid->BindTilesToEachother(true);
 		_grid->TraverseTiles(
 			[](Tile<int>* tile) -> void{
-				Size boardSize = Size(5,4); // which tiles to init from 0,0
 				int* data = new int(0);
-				if(tile->GetPosition()->X() < boardSize.GetWidth() && tile->GetPosition()->Y() < boardSize.GetHeight()){
+				if( tile->GetPosition()->X() < Board::initSize.GetWidth() && 
+					tile->GetPosition()->Y() < Board::initSize.GetHeight()){
 					*data |= HasTile | IsEmpty;
 				} 
 				tile->SetData(data);
@@ -90,10 +91,10 @@ namespace engine{
 	void Board::JumpPiece(const Tile<int>& from, const Tile<int>& to, Players owner){
 		MovePiece(from, to, owner);
 	}
-	std::vector<Move>* Board::GetLegalMoves(Players player) {
+	vector<Move>* Board::GetLegalMoves(Players player) {
 		return new vector<Move>();
 	}
-	std::vector<Tile<int>>* Board::GetOccupiedTiles(){
+	vector<Tile<int>>* Board::GetOccupiedTiles(){
 		auto tiles = new vector<Tile<int>>();
 		_grid->TraverseTiles(
 			[&](Tile<int>* tile) -> void{
@@ -108,14 +109,14 @@ namespace engine{
 		);
 		return tiles;
 	}
-	std::string Board::ToString(){
-		std::stringstream result;
+	string Board::ToString(){
+		stringstream result;
 		_grid->TraverseTiles(
 			[&, this](Tile<int>* tile) -> void{
 				int data = *tile->GetData();
 				result << *tile->GetData() << ",";
 				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
-					result << std::endl;
+					result << endl;
 				}
 			}
 		);
@@ -133,5 +134,28 @@ namespace engine{
 		return _grid->GetTileAt(position);
 	}
 
+	Board* Board::CreateBoard(string from){
+		Board* result = new Board();
+		int y = 0, x = 0;
+		for (
+			string::iterator it = from.begin();
+			it < from.end();
+			it++ ,x++
+		){
+			char subject = *it;
+			if(subject == ','){
+				x--;
+				continue;
+			}
+			if(subject == '\n'){
+				y++;
+				x = 0;
+				continue;
+			}
+			*result->_grid->GetTileAt(Vector2D(x,y))->GetData() = subject -'0';
+		}
+		int pause = 0;
+		return result;
+	}
 
 }

@@ -46,7 +46,7 @@ namespace engine {
 			if (desiredIndex < 0) {
 				throw "trying to get a tile at a wrong position";
 			}
-			if (desiredIndex > _tilesLength) {
+			if (desiredIndex >= _tilesLength) {
 				throw "trying to get a tile at a wrong position";
 			}
 			return _tiles->at(desiredIndex);
