@@ -18,7 +18,8 @@ namespace engine {
 	}
 
 	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
-		return nullptr;
+		std::vector<Move>* moves = new std::vector<Move>();
+		return moves;
 	}
 
 	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
