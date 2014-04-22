@@ -20,6 +20,15 @@ namespace engine{
 		void ForPickableTiles(function< void(Tile<int>*) >& lambda);
 		Grid<int>* _grid;
 		Vector2D absoluteTopLeft;
+
+		// Gets the amount of pieces on the board of the specified player.
+		int PieceCount(Players player);
+
+		// Get all legal moves during the piece place state.
+		std::vector<Move> GetLegalPlaceMoves(Players player);
+
+		// Get all legal moves after the piece place state.
+		std::vector<Move> GetLegalMoveMoves(Players player);
 		void InsertPiece(const Tile<int>& on, Players owner);
 		void DeletePiece(const Tile<int>& on);
 		void MovePiece(const Tile<int>& from, const Tile<int>& to, Players owner, const Tile<int>& tileUsed);

@@ -200,6 +200,16 @@ namespace engine{
 
 	}
 	std::vector<Move>* Board::GetLegalMoves(Players player) {
+		// if (board.PieceCount(player) != 3) {
+		//     return GetLegalPlaceMoves(player);
+		// }
+		// else {
+		//     return GetLegalMoveMoves(player);
+		// }
+
+
+
+
 		std::vector<Tile<int>>* CheckMoves = this->GetOccupiedTiles();
 		std::vector<Tile<int>> resultsortof = std::vector<Tile<int>>();
 		std::vector<Move> *possibility = new std::vector<Move>();
