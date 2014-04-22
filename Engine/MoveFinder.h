@@ -14,6 +14,11 @@ namespace engine{
 		std::vector<Move>* GetLegalMoves(Players player);
 		std::vector<Move> FindMove(Cell<int>, Cell<int>);
 	private:
+		// Get all legal moves for the place state.
+		std::vector<Move>* GetLegalPlaceMoves(Players player);
+
+		// Get all legal moves for the move state.
+		std::vector<Move>* GetLegalMoveMoves(Players player);
 		IBoard* _board;
 	};
 }

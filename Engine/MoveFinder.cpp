@@ -12,6 +12,14 @@ namespace engine {
 		return nullptr;
 	}
 
+	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
+		return nullptr;
+	}
+
+	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
+		return nullptr;
+	}
+
 	std::vector<Move> MoveFinder::FindMove(Cell<int> one,Cell<int> two) {
 		std::vector<Move> possibility = std::vector<Move>();
 
