@@ -3,15 +3,17 @@
 namespace engine {
 
 	ComputerPlayer::ComputerPlayer(IBoard* board, int maxDepth) {
+		_board = board;
 		_maxDepth = maxDepth;
-		_evaluator = NULL;
+		_evaluator = nullptr;
 		_moveHistory = new std::stack<Move*>();
 	}
 
 	ComputerPlayer::~ComputerPlayer() {
-		if (_evaluator != NULL)
-			delete _evaluator;
+		delete _evaluator;
+		_evaluator = nullptr;
 		delete _moveHistory;
+		_moveHistory = nullptr;
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
@@ -26,7 +28,7 @@ namespace engine {
 			_board->ExecuteMove(&move, player);
 
 			EvalResult score;
-			if (depth + 1 < _maxDepth) {
+			if (depth + 1 <= _maxDepth) {
 				// We are allowed to go deeper, take the result of the next step
 				score = MinimaxStep(InvertPlayer(player), depth + 1);
 			} else {
@@ -48,6 +50,10 @@ namespace engine {
 		delete possibleMoves;
 
 		return result;
+	}
+
+	void ComputerPlayer::SetEvaluator(IStaticEvaluation* evaluator) {
+		_evaluator = evaluator;
 	}
 
 	Move InvertMove(Move move) {
@@ -74,8 +80,9 @@ namespace engine {
 	}
 
 	Players InvertPlayer(Players player) {
-		if (player == Players::Min)
+		if (player == Players::Min) {
 			return Players::Max;
+		}
 		return Players::Min;
 	}
 }

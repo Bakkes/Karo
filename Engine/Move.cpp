@@ -30,12 +30,20 @@ namespace engine {
 		return _fromCell;
 	}
 
-	Vector2D Move::GetToCell(){ 
-		return _toCell;
+	Vector2D Move::GetToTile(){
+		return _toTile;
 	}
 
-	Vector2D Move::GetUsedCell(){
-		return _usedCell;
+	void Move::SetToTile(Vector2D location) {
+		_toTile = location;
+	}
+
+	Vector2D Move::GetUsedTile(){
+#ifdef _DEBUG
+		if (!HasUsedTile())
+			throw "Called GetUsedTile whilst no tile is being used";
+#endif
+		return _usedTile;
 	}
 
 	bool Move::HasUsedCell() {

@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "MoveWrapper.h"
 #include "WrapperConversionUtility.h"
 
@@ -21,12 +20,16 @@ namespace wrapper {
 		return WrapperConversionUtility::ConvertVector2D(_move->GetFromCell());
 	}
 
-	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToCell() {
-		return WrapperConversionUtility::ConvertVector2D(_move->GetToCell());
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetToTile());
 	}
 
-	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {
-		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedCell());
+	void MoveWrapper::SetToTile(engine::wrapper::Vector2DWrapper^ location) {
+		_move->SetToTile(WrapperConversionUtility::ConvertVector2DStack(location));
+	}
+
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedTile() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedTile());
 	}
 
 	bool MoveWrapper::HasUsedCell() {

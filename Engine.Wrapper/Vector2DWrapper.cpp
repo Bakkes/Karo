@@ -26,12 +26,12 @@ void Vector2DWrapper::X::set(double value)
 
 double Vector2DWrapper::Y::get()
 {
-	return _vector2D->X();
+	return _vector2D->Y();
 }
 
 void Vector2DWrapper::Y::set(double value)
 {
-	_vector2D->X(value);
+	_vector2D->Y(value);
 }
 
 }

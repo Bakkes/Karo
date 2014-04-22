@@ -19,9 +19,9 @@ namespace wrapper {
 		_board->ExecuteMove(mv, static_cast<engine::Players>(player));
 	}
 
-	List<CellWrapper^>^ BoardWrapper::GetOccupiedCells() {
-		vector<Cell<int>>* native = _board->GetOccupiedCells();
-		List<CellWrapper^> ^wrapped = gcnew List<CellWrapper^>();
+	List<TileWrapper^>^ BoardWrapper::GetOccupiedTiles() {
+		vector<Tile<int>>* native = _board->GetOccupiedTiles();
+		List<TileWrapper^> ^wrapped = gcnew List<TileWrapper^>();
 
 		for(unsigned i = 0; i < native->size(); i++) {
 			wrapped->Add(WrapperConversionUtility().ConvertCell(native->at(i)));
@@ -29,7 +29,19 @@ namespace wrapper {
 		return wrapped;
 	}
 
-	CellWrapper^ BoardWrapper::GetRelativeCellAt(Vector2DWrapper^ relativePosition) {
+	IEnumerable<MoveWrapper^>^ BoardWrapper::GetLegalMoves(Players player)
+	{
+		List<MoveWrapper^>^ managedMoves = gcnew List<MoveWrapper^>();
+		vector<Move>* nativeMoves = _board->GetLegalMoves(static_cast<engine::Players>(player));
+
+		for (auto it = nativeMoves->begin(); it != nativeMoves->end(); ++it)
+		{
+			managedMoves->Add(WrapperConversionUtility::ConvertMove(*it));
+		}
+		return managedMoves;
+	}
+
+	TileWrapper^ BoardWrapper::GetRelativeTileAt(Vector2DWrapper^ relativePosition) {
 		Vector2D* position = WrapperConversionUtility().ConvertVector2D(relativePosition);
 		Cell<int>* relativeCellAt = _board->GetRelativeCellAt(*position);
 		return WrapperConversionUtility().ConvertCell(relativeCellAt);

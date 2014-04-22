@@ -1,6 +1,6 @@
-
 #include "CppUnitTest.h"
 #include "ComputerPlayer.h"
+#include "MoveUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -37,25 +37,6 @@ namespace Tests {
 			Move invertedMove = Move(DELETE, Vector2D(3, 4));
 			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
 		}
-
-private:
-	bool MovesAreEqual(Move moveA, Move moveB) {
-		if (moveA.GetMoveType() != moveB.GetMoveType())
-			return false;
-
-		if (moveA.GetFromCell() != moveB.GetFromCell())
-			return false;
-
-		if (moveA.GetToCell() != moveB.GetToCell())
-			return false;
-
-		if (moveA.HasUsedCell() != moveB.HasUsedCell())
-			return false;
-
-		if (moveA.GetUsedCell() != moveB.GetUsedCell())
-			return false;
-
-		return true;
-	}
+	
 	};
 }
