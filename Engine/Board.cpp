@@ -97,7 +97,7 @@ namespace engine{
 	{
 		std::vector<Move> possibility = std::vector<Move>();
 
-		int checkRight = *one.GetData(); 
+		int checkRight = *one.GetData();
 
 		if(!( checkRight & IsEmpty))
 		{
