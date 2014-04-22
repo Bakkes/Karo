@@ -26,8 +26,8 @@ public:
 	BoardWrapper(void);
 	~BoardWrapper(void);
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
-	List<TileWrapper^>^ GetOccupiedTiles();
-	TileWrapper^ GetRelativeTileAt(Vector2DWrapper^ relativePosition);
+	List<CellWrapper^>^ GetOccupiedCells();
+	CellWrapper^ GetRelativeCellAt(Vector2DWrapper^ relativePosition);
 	IEnumerable<MoveWrapper^>^ GetLegalMoves(Players player);
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();

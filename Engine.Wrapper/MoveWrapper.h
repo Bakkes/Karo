@@ -15,11 +15,11 @@ namespace wrapper {
 			MoveWrapper(engine::wrapper::MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D usedCell);
 			~MoveWrapper();
 			engine::wrapper::MoveType GetMoveType();
-			engine::wrapper::Vector2DWrapper^ GetFromTile();
-			engine::wrapper::Vector2DWrapper^ GetToTile();
-			void SetToTile(engine::wrapper::Vector2DWrapper^ location);
-			engine::wrapper::Vector2DWrapper^ GetUsedTile();
-			bool HasUsedTile();
+			engine::wrapper::Vector2DWrapper^ GetFromCell();
+			engine::wrapper::Vector2DWrapper^ GetToCell();
+			void SetToCell(engine::wrapper::Vector2DWrapper^ location);
+			engine::wrapper::Vector2DWrapper^ GetUsedCell();
+			bool HasUsedCell();
 		private:
 			Move * _move;
 	};

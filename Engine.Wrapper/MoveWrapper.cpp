@@ -20,16 +20,16 @@ namespace wrapper {
 		return WrapperConversionUtility::ConvertVector2D(_move->GetFromCell());
 	}
 
-	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToTile() {
-		return WrapperConversionUtility::ConvertVector2D(_move->GetToTile());
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetToCell());
 	}
 
-	void MoveWrapper::SetToTile(engine::wrapper::Vector2DWrapper^ location) {
-		_move->SetToTile(WrapperConversionUtility::ConvertVector2DStack(location));
+	void MoveWrapper::SetToCell(engine::wrapper::Vector2DWrapper^ location) {
+		_move->SetToCell(WrapperConversionUtility::ConvertVector2DStack(location));
 	}
 
-	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedTile() {
-		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedTile());
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedCell());
 	}
 
 	bool MoveWrapper::HasUsedCell() {

@@ -6,9 +6,9 @@ namespace _2DFrontend.State
 	/// <summary>
 	/// In this state, the player will choose an empty tile that will be moved.
 	/// </summary>
-	class TileSourceState : IKaroState
+	class CellSourceState : IKaroState
 	{
-		private static TileSourceState _instance;
+		private static CellSourceState _instance;
 
 		public static IKaroState Instance
 		{
@@ -16,7 +16,7 @@ namespace _2DFrontend.State
 			{
 				if (_instance == null)
 				{
-					_instance = new TileSourceState();
+					_instance = new CellSourceState();
 				}
 				return _instance;
 			}
@@ -25,7 +25,7 @@ namespace _2DFrontend.State
 		/// <summary>
 		/// Private constructor for singleton.
 		/// </summary>
-		private TileSourceState()
+		private CellSourceState()
 		{
 		}
 

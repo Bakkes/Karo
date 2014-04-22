@@ -19,9 +19,9 @@ namespace wrapper {
 		_board->ExecuteMove(mv, static_cast<engine::Players>(player));
 	}
 
-	List<TileWrapper^>^ BoardWrapper::GetOccupiedTiles() {
-		vector<Tile<int>>* native = _board->GetOccupiedTiles();
-		List<TileWrapper^> ^wrapped = gcnew List<TileWrapper^>();
+	List<CellWrapper^>^ BoardWrapper::GetOccupiedCells() {
+		vector<Cell<int>>* native = _board->GetOccupiedCells();
+		List<CellWrapper^> ^wrapped = gcnew List<CellWrapper^>();
 
 		for(unsigned i = 0; i < native->size(); i++) {
 			wrapped->Add(WrapperConversionUtility().ConvertCell(native->at(i)));
@@ -41,7 +41,7 @@ namespace wrapper {
 		return managedMoves;
 	}
 
-	TileWrapper^ BoardWrapper::GetRelativeTileAt(Vector2DWrapper^ relativePosition) {
+	CellWrapper^ BoardWrapper::GetRelativeCellAt(Vector2DWrapper^ relativePosition) {
 		Vector2D* position = WrapperConversionUtility().ConvertVector2D(relativePosition);
 		Cell<int>* relativeCellAt = _board->GetRelativeCellAt(*position);
 		return WrapperConversionUtility().ConvertCell(relativeCellAt);
