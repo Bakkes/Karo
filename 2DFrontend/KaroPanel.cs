@@ -100,33 +100,33 @@ namespace _2DFrontend
 		private void PaintTile(int tileData, int x, int y, Graphics g)
 		{
 			Point pos = TileToPixel(x, y);
-			// Draw the tile.
 			if ((tileData & (int)TileValue.HasTile) == (int)TileValue.HasTile)
 			{
+				// Draw the tile.
 				g.FillRectangle(_tileBackColor, pos.X + Gap, pos.Y + Gap,
 					TileSize, TileSize);
-			}
-			// Draw the piece.
-			if ((tileData & (int)TileValue.IsEmpty) != (int)TileValue.IsEmpty)
-			{
-				Brush pieceBrush;
-				if ((tileData & (int)TileValue.IsMax) == (int)TileValue.IsMax)
+				// Draw the piece.
+				if ((tileData & (int)TileValue.IsEmpty) != (int)TileValue.IsEmpty)
 				{
-					pieceBrush = _pieceMaxColor;
-				}
-				else
-				{
-					pieceBrush = _pieceMinColor;
-				}
-				int pieceOffset = Gap + (TileSize - PieceSize) / 2;
-				g.FillEllipse(pieceBrush, pos.X + pieceOffset, pos.Y + pieceOffset,
-					PieceSize, PieceSize);
-
-				// Draw the accent.
-				if ((tileData & (int)TileValue.IsFlipped) == (int)TileValue.IsFlipped)
-				{
-					g.DrawEllipse(_pieceAccentColor, pos.X + pieceOffset, pos.Y + pieceOffset,
+					Brush pieceBrush;
+					if ((tileData & (int)TileValue.IsMax) == (int)TileValue.IsMax)
+					{
+						pieceBrush = _pieceMaxColor;
+					}
+					else
+					{
+						pieceBrush = _pieceMinColor;
+					}
+					int pieceOffset = Gap + (TileSize - PieceSize) / 2;
+					g.FillEllipse(pieceBrush, pos.X + pieceOffset, pos.Y + pieceOffset,
 						PieceSize, PieceSize);
+
+					// Draw the accent.
+					if ((tileData & (int)TileValue.IsFlipped) == (int)TileValue.IsFlipped)
+					{
+						g.DrawEllipse(_pieceAccentColor, pos.X + pieceOffset, pos.Y + pieceOffset,
+							PieceSize, PieceSize);
+					}
 				}
 			}
 		}
