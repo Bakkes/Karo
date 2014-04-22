@@ -17,7 +17,7 @@ namespace Tests {
 
 			ai->SetEvaluator(new RandStaticEval());
 			Move move = ai->GetBestMove(Max);
-			Assert::IsFalse(move.GetToTile() == Vector2D(-1));
+			Assert::IsFalse(move.GetToCell() == Vector2D(-1));
 			Assert::IsTrue(IsLegalMove(board, move, Max));
 
 			delete board;

@@ -2,51 +2,51 @@
 
 namespace engine {
 
-	Move::Move(MoveType type, Vector2D toTile) {
-		Init(type, Vector2D(-1), toTile, Vector2D(-1), false);
+	Move::Move(MoveType type, Vector2D toCell) {
+		Init(type, Vector2D(-1), toCell, Vector2D(-1), false);
 	}
 
-	Move::Move(MoveType type, Vector2D fromTile, Vector2D toTile) {
-		Init(type, fromTile, toTile, Vector2D(-1), false);
+	Move::Move(MoveType type, Vector2D fromCell, Vector2D toCell) {
+		Init(type, fromCell, toCell, Vector2D(-1), false);
 	}
 
-	Move::Move(MoveType type, Vector2D fromTile, Vector2D toTile, Vector2D usedTile) {
-		Init(type, fromTile, toTile, usedTile, true);
+	Move::Move(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell) {
+		Init(type, fromCell, toCell, usedCell, true);
 	}
 
-	void Move::Init(MoveType type, Vector2D fromTile, Vector2D toTile, Vector2D usedTile, bool hasUsedTile) {
+	void Move::Init(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell, bool hasUsedCell) {
 		_moveType = type;
-		_fromTile = fromTile;
-		_toTile = toTile;
-		_usedTile = usedTile;
-		_hasUsedTile = hasUsedTile;
+		_fromCell = fromCell;
+		_toCell = toCell;
+		_usedCell = usedCell;
+		_hasUsedCell = hasUsedCell;
 	}
 
 	MoveType Move::GetMoveType() {
 		return _moveType;
 	}
 
-	Vector2D Move::GetFromTile() {
-		return _fromTile;
+	Vector2D Move::GetFromCell() {
+		return _fromCell;
 	}
 
-	Vector2D Move::GetToTile(){
-		return _toTile;
+	Vector2D Move::GetToCell(){
+		return _toCell;
 	}
 
-	void Move::SetToTile(Vector2D location) {
-		_toTile = location;
+	void Move::SetToCell(Vector2D location) {
+		_toCell = location;
 	}
 
-	Vector2D Move::GetUsedTile(){
+	Vector2D Move::GetUsedCell(){
 #ifdef _DEBUG
-		if (!HasUsedTile())
-			throw "Called GetUsedTile whilst no tile is being used";
+		if (!HasUsedCell())
+			throw "Called GetUsedCell whilst no tile is being used";
 #endif
-		return _usedTile;
+		return _usedCell;
 	}
 
-	bool Move::HasUsedTile() {
-		return _hasUsedTile;
+	bool Move::HasUsedCell() {
+		return _hasUsedCell;
 	}
 }
