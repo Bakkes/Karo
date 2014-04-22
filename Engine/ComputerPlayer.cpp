@@ -45,13 +45,13 @@ namespace engine {
 				(player == Max && score.GetScore() < bestForMax) || // Result is better if we are the max player
 				(player == Min && score.GetScore() > bestForMin)) { // Result is better if we are the min player
 
-				if (player == Max) { // Modify the bestForMax (lowerBound) value for the max player
+				if (player == Max) { // Modify the bestForMax) value for the max player
 					if (score.GetScore() > bestForMax) { // The ranges no longer overlap, prune it
 						break;
 					}
 					bestForMin = score.GetScore();
 					result.SetBestForMin(bestForMin);
-				} else { // Modify the bestForMin (upperBound) value for the min player
+				} else { // Modify the bestForMin value for the min player
 					if (bestForMin > score.GetScore()) { // The ranges no longer overlap, prune it
 						break;
 					}
