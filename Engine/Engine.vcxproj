@@ -88,8 +88,7 @@
     <ClInclude Include="Move.h" />
     <ClInclude Include="MoveFinder.h" />
     <ClInclude Include="Players.h" />
-    <ClInclude Include="PossibleMove.h" />
-    <ClInclude Include="RandStaticEvail.h" />
+    <ClInclude Include="RandStaticEval.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Vector2D.h" />
@@ -102,7 +101,7 @@
     <ClCompile Include="ICommunication.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
-    <ClCompile Include="RandStaticEvail.cpp" />
+    <ClCompile Include="RandStaticEval.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="Vector2D.cpp" />
   </ItemGroup>

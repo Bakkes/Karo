@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 11.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/ReverseEngineeringLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2014-04-16T15:52:28" Importance="High" Text="Reverse Engineering Started." />
+  <Error Timestamp="2014-04-16T15:52:29" Importance="High" Text="Reverse engineer C++ type is not supported. Some DGML node(s) will be skipped during the process. Please see warnings for details." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'MoveWrapper' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'Players' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'TileValue' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'TileWrapper' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'Vector2DWrapper' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'WrapperConversionUtility' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'BoardWrapper' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'KaroGame' is skipped." />
+  <Warning Timestamp="2014-04-16T15:52:29" Importance="Medium" Text="Reverse engineer C++ type 'MoveType' is skipped." />
+  <Message Timestamp="2014-04-16T15:52:29" Importance="High" Text="(0) type(s) fully reverse engineered." />
+  <Message Timestamp="2014-04-16T15:52:29" Importance="High" Text="The reverse engineering operation completed with (1) error(s), and (9) warning(s)." />
+</Log>

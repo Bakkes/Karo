@@ -60,16 +60,13 @@
     <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RandStaticEvail.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EvalResult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveFinder.h">
+    <ClInclude Include="RandStaticEval.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PossibleMove.h">
+    <ClInclude Include="MoveFinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,10 +92,10 @@
     <ClCompile Include="ComputerPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RandStaticEvail.cpp">
+    <ClCompile Include="EvalResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EvalResult.cpp">
+    <ClCompile Include="RandStaticEval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MoveFinder.cpp">
