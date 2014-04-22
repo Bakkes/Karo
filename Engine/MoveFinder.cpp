@@ -9,7 +9,12 @@ namespace engine {
 	}
 
 	std::vector<Move>* MoveFinder::GetLegalMoves(Players player) {
-		return nullptr;
+		if (_board->GetPieceCountFor(player) < 3) {
+			return GetLegalPlaceMoves(player);
+		}
+		else {
+			return GetLegalMoveMoves(player);
+		}
 	}
 
 	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
