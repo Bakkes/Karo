@@ -42,20 +42,20 @@ namespace engine {
 
 	// Adds all adjecent move options.
 	void MoveFinder::AddAdjecentMovesToVector(std::vector<Move>* moves, Cell<int> cell) {
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetLeft());
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetRight());
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetTop());
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetBottom());
+		AddMoveIfValidDestination(moves, cell, *cell.GetLeft());
+		AddMoveIfValidDestination(moves, cell, *cell.GetRight());
+		AddMoveIfValidDestination(moves, cell, *cell.GetTop());
+		AddMoveIfValidDestination(moves, cell, *cell.GetBottom());
 
 		// Diagonal
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetTop()->GetLeft());
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetTop()->GetRight());
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetLeft());
-		AddAdjecentMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetRight());
+		AddMoveIfValidDestination(moves, cell, *cell.GetTop()->GetLeft());
+		AddMoveIfValidDestination(moves, cell, *cell.GetTop()->GetRight());
+		AddMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetLeft());
+		AddMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetRight());
 	}
 
 	// Assumes that the fromtile has a piece on it.
-	void MoveFinder::AddAdjecentMoveIfValidDestination(std::vector<Move>* moves, const Cell<int> &from, const Cell<int> &to) {
+	void MoveFinder::AddMoveIfValidDestination(std::vector<Move>* moves, const Cell<int> &from, const Cell<int> &to) {
 		Move* move = nullptr;
 		if (((*to.GetData()) & IsEmpty) == IsEmpty) {
 			// TODO: If the destination is not a tile yet, move an unused tile.
