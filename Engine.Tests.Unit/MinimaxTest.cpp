@@ -11,14 +11,14 @@ using namespace engine;
 namespace Tests {
 	TEST_CLASS(Minimax) {
 	public:
-		TEST_METHOD(MiniMaxDepth_0) {
+		TEST_METHOD(MiniMaxDepth_2) {
 			IBoard* board = new Board();
-			ComputerPlayer* ai = new ComputerPlayer(board, 0);
+			ComputerPlayer* ai = new ComputerPlayer(board, 2);
 
 			ai->SetEvaluator(new RandStaticEval());
 			Move move = ai->GetBestMove(Max);
-			Assert::IsFalse(move.GetToCell() == Vector2D(-1));
-			Assert::IsTrue(IsLegalMove(board, move, Max));
+			Assert::IsFalse(move.GetToCell() == Vector2D(-1)); // Invalid move structure
+			Assert::IsTrue(IsLegalMove(board, move, Max)); // Not legal move
 
 			delete board;
 			delete ai;

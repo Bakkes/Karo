@@ -72,6 +72,7 @@ namespace engine {
 	}
 
 	void ComputerPlayer::SetEvaluator(IStaticEvaluation* evaluator) {
+		delete _evaluator;
 		_evaluator = evaluator;
 	}
 

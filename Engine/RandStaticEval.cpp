@@ -2,22 +2,13 @@
 
 namespace engine {
 	RandStaticEval::RandStaticEval() {
-		_lowestScore = INT_MAX;
-		_highestScore = INT_MIN;
+		srand(0);
 	}
 
 	RandStaticEval::~RandStaticEval()	{
 	}
 
 	int RandStaticEval::Eval(IBoard* board, Players player) {
-		int score = rand();
-		
-		if (score > _highestScore) {
-			_highestScore = score;
-		} else if (score < _lowestScore) {
-			_lowestScore = score;
-		}
-
-		return score;
+		return rand();
 	}
 }

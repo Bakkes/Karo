@@ -11,11 +11,5 @@ namespace engine {
 
 		int Eval(IBoard* board, Players player) override;
 
-		int GetLowestScore();
-		int GetHighestScore();
-
-	private:
-		int _lowestScore;
-		int _highestScore;
 	};
 }
