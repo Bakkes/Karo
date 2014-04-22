@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Tile.h"
+#include "Cell.h"
 #include "Size.h"
 #include "Vector2D.h"
 #include <iostream>
@@ -41,31 +41,31 @@ namespace engine {
 		}
 
 		// get tile at position
-		Tile<T>* GetTileAt(const Vector2D& position) const{
-			unsigned desiredIndex = GetTileIndex((unsigned)position.X(),(unsigned) position.Y());
+		Cell<T>* GetCellAt(const Vector2D& position) const{
+			unsigned desiredIndex = GetCellIndex((unsigned)position.X(),(unsigned) position.Y());
 			if (desiredIndex < 0) {
 				throw "trying to get a tile at a wrong position";
 			}
-			if (desiredIndex > _tilesLength) {
+			if (desiredIndex >= _tilesLength) {
 				throw "trying to get a tile at a wrong position";
 			}
 			return _tiles->at(desiredIndex);
 		}
 
 		// The given function pointer will receive all the tiles and coordinates in the specified row
-		void TraverseRow(unsigned y, function< void(Tile<T>*) >& lambda){
+		void TraverseRow(unsigned y, function< void(Cell<T>*) >& lambda){
 			for (unsigned x = 0; x < _size->GetWidth(); x++) {
 				Traverse(x, y, lambda);
 			}
 		}
 		// The given function pointer will receive all the tiles and coordinates in the specified collumn
-		void TraverseCollumn(unsigned x, function< void(Tile<T>*) >& lambda){
+		void TraverseCollumn(unsigned x, function< void(Cell<T>*) >& lambda){
 			for (unsigned y = 0; y < _size->GetHeight(); y++) {
 				Traverse(x, y, lambda);
 			}
 		}
 		// The given function pointer will receive all the tiles in the grid and the cordiantes of them.
-		void TraverseTiles(function< void(Tile<T>*) > lambda){
+		void TraverseCells(function< void(Cell<T>*) > lambda){
 			for (unsigned y = 0; y < _size->GetHeight(); y++) {
 				TraverseRow(y, lambda);
 			}
@@ -74,7 +74,7 @@ namespace engine {
 			return _size;
 		}
 
-		void BindTilesToEachother(bool wrapArround = false){
+		void BindCellsToEachother(bool wrapArround = false){
 			unsigned height = _size->GetHeight();
 			unsigned width = _size->GetWidth();
 			// bind tiles to each other
@@ -82,57 +82,57 @@ namespace engine {
 				for (unsigned x = 0; x < width; x++) {
 
 					if (y < height - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetBottom(
+						_tiles->at(GetCellIndex(x, y))->SetBottom(
 							_tiles->at(
-								GetTileIndex(x, y + 1)
+								GetCellIndex(x, y + 1)
 							)
 						);
 					}else if(wrapArround){
-						_tiles->at(GetTileIndex(x,y))->SetBottom(
+						_tiles->at(GetCellIndex(x,y))->SetBottom(
 							_tiles->at(
-								GetTileIndex(x,0)
+								GetCellIndex(x,0)
 							)
 						);
 					}
 					if (y != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetTop(
+						_tiles->at(GetCellIndex(x, y))->SetTop(
 							_tiles->at(
-								GetTileIndex(x, y - 1)
+								GetCellIndex(x, y - 1)
 							)
 						);
 					}else if(wrapArround){
-						_tiles->at(GetTileIndex(x, y))->SetTop(
+						_tiles->at(GetCellIndex(x, y))->SetTop(
 							_tiles->at(
-								GetTileIndex(x, height - 1)
+								GetCellIndex(x, height - 1)
 							)
 						);
 					}
 
 					if (x < width - 2) {
-						_tiles->at(GetTileIndex(x, y))->SetRight(
+						_tiles->at(GetCellIndex(x, y))->SetRight(
 							_tiles->at(
-								GetTileIndex(x + 1, y)
+								GetCellIndex(x + 1, y)
 							)
 						);
 					}else if(wrapArround){
-						_tiles->at(GetTileIndex(x, y))->SetRight(
+						_tiles->at(GetCellIndex(x, y))->SetRight(
 							_tiles->at(
-								GetTileIndex(0, y)
+								GetCellIndex(0, y)
 							)
 						);
 
 					}
 
 					if (x != 0) {
-						_tiles->at(GetTileIndex(x, y))->SetLeft(
+						_tiles->at(GetCellIndex(x, y))->SetLeft(
 							_tiles->at(
-								GetTileIndex(x - 1, y)
+								GetCellIndex(x - 1, y)
 							)
 						);
 					}else if(wrapArround){
-						_tiles->at(GetTileIndex(x, y))->SetLeft(
+						_tiles->at(GetCellIndex(x, y))->SetLeft(
 							_tiles->at(
-								GetTileIndex(x, width -1)
+								GetCellIndex(x, width -1)
 							)
 						);
 					}
@@ -142,7 +142,7 @@ namespace engine {
 		}
 
 	private:
-		vector<Tile<T>*>* _tiles;
+		vector<Cell<T>*>* _tiles;
 		unsigned _tilesLength;
 		static const unsigned C_default_w = 20;
 		static const unsigned C_default_h = 20;
@@ -150,24 +150,24 @@ namespace engine {
 		Size* _size;
 		// final step in the traversal proces, here the cordinates are known and only the
 		// functionpointer has to be called
-		void Traverse(unsigned x, unsigned y,function< void(Tile<T>*) > lambda){
-			lambda(GetTileAt(Vector2D(x, y)));
+		void Traverse(unsigned x, unsigned y,function< void(Cell<T>*) > lambda){
+			lambda(GetCellAt(Vector2D(x, y)));
 		}
 		
 		// commen code for both contructors
 		void Init(unsigned width, unsigned height){
 			_tilesLength = (unsigned) (width * height);
 			_size = new Size(width, height);
-			_tiles = new vector<Tile<T>*>();
+			_tiles = new vector<Cell<T>*>();
 			for (unsigned y = 0; y < height; y++) {
 				for (unsigned x = 0; x < width; x++) {
-					_tiles->push_back(new Tile<T>(new Vector2D(x, y)));
+					_tiles->push_back(new Cell<T>(new Vector2D(x, y)));
 				}
 			}
-			BindTilesToEachother();
+			BindCellsToEachother();
 		}
 		// this function prevents the same calculation showing up in several places
-		int GetTileIndex(const unsigned x, const unsigned y) const{
+		int GetCellIndex(const unsigned x, const unsigned y) const{
 			return x + y * _size->GetWidth();
 		}
 	};
