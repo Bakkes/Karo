@@ -17,7 +17,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2DFrontend", "2DFrontend\2D
 		{45887401-B8E2-414A-853C-65AAB97C01DA} = {45887401-B8E2-414A-853C-65AAB97C01DA}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationProtocol", "C:\Users\Chris\Dropbox\ISGP\ELO\Communicatiemodule\SourceCode\CommunicationProtocol\CommunicationProtocol\CommunicationProtocol.csproj", "{249EBC5B-8ADF-49C3-BDFE-72E9BABE7EB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationProtocol", "CommunicationProtocol\CommunicationProtocol.csproj", "{249EBC5B-8ADF-49C3-BDFE-72E9BABE7EB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
