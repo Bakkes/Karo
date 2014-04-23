@@ -119,6 +119,25 @@ namespace engine{
 		);
 		return tiles;
 	}
+
+	vector<Cell<int>>* Board::GetEmptyTiles() {
+		vector<Cell<int>>* emptyTiles = new vector<Cell<int>>();
+		_grid->TraverseCells(
+			[&](Cell<int>* tile) -> void{
+				// Stop if cell does not contain a tile.
+				if(!*tile->GetData() & HasCell){
+					return;
+				}
+				// Stop if tile is not empty.
+				if((*tile->GetData() & IsEmpty) == 0){
+					return;
+				}
+				emptyTiles->push_back(*tile);
+			}
+		);
+		return emptyTiles;
+	}
+
 	string Board::ToString(){
 		stringstream result;
 		_grid->TraverseCells(

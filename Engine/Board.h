@@ -18,6 +18,7 @@ namespace engine{
 		void ExecuteMove(Move *m, Players player) override;
 		vector<Move>* GetLegalMoves(Players player) override;
 		vector<Cell<int>>* GetOccupiedCells() override;
+		vector<Cell<int>>* GetEmptyTiles();
 		Cell<int>* GetRelativeCellAt(const Vector2D relativePosition) const override;
 		string ToString();
 		static Board* CreateBoard(string from);
