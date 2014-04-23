@@ -148,20 +148,35 @@ namespace engine{
 		for (
 			string::iterator it = from.begin();
 			it < from.end();
-			it++ ,x++
+			it++ 
 		){
 			char subject = *it;
-			if(subject == ','){
-				x--;
-				continue;
+			int myWonderfolNumber = 0;
+			bool inWhile = false;
+
+			while(subject >= '0' && subject <= '9'){
+				myWonderfolNumber *= 10;
+				myWonderfolNumber += subject - '0';
+				it++;
+				subject = *it;
+				inWhile = true;
 			}
-			if(subject == '\n'){
-				y++;
-				x = -1; // because one increase next cycle
-				continue;
+			
+			if(!inWhile){
+				if(subject == ','){
+					x++;
+					continue;
+				}
+				if(subject == '\n'){
+					y++;
+					x = 0; // because one increase next cycle
+					continue;
+				}
+			}else{
+				it--;
 			}
-			result->_grid->GetCellAt(Vector2D(x,y))->SetData(new int());
-			*result->_grid->GetCellAt(Vector2D(x,y))->GetData() = subject -'0';
+
+			result->_grid->GetCellAt(Vector2D(x,y))->SetData(new int(myWonderfolNumber));
 		}
 		int pause = 0;
 		return result;
