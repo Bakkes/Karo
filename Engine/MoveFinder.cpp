@@ -20,6 +20,11 @@ namespace engine {
 
 	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
 		std::vector<Move>* moves = new std::vector<Move>();
+		std::vector<Cell<int>>* emptyTiles = _board->GetEmptyTiles();
+		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
+			// Add insertion move to an empty tile.
+			moves->push_back(Move(INSERT, Vector2D(), *(*it).GetPosition()));
+		}
 		return moves;
 	}
 
