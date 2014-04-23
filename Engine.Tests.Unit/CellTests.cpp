@@ -20,5 +20,21 @@ namespace Tests {
 			delete cellOld;
 			delete cellNew;
 		}
+
+		// Same stuff as the copy constructor test, but for the assignment operator here.
+		TEST_METHOD(AssignmentOperatorMakesCopyOfReferences) {
+			// Create one cell.
+			engine::Cell<int>* cellOld = new engine::Cell<int>(new engine::Vector2D());
+
+			// Copy the cell using the assignment operator overload.
+			engine::Cell<int>* cellNew = new engine::Cell<int>(new engine::Vector2D());
+
+			// Use the copy constructor to copy cellOld to cellNew.
+			*cellNew = *cellOld;
+
+			// Delete both instances. Should not fail.
+			delete cellOld;
+			delete cellNew;
+		}
 	};
 }

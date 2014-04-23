@@ -21,6 +21,17 @@ namespace engine {
 			_bottom = src._bottom;
 			_tiledata = src._tiledata;
 		}
+		
+		// Overload assignment operator.
+		Cell<T>& Cell::operator=(const Cell<T>& src) {
+			_position = new Vector2D(*(src._position));
+			_left = src._left;
+			_right = src._right;
+			_top = src._top;
+			_bottom = src._bottom;
+			_tiledata = src._tiledata;
+			return *this;
+		}
 
 		// set a tile to the point
 		Cell(Vector2D* p){
