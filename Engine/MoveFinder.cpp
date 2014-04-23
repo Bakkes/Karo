@@ -85,7 +85,20 @@ namespace engine {
 		}
 		// If there is no tile, we have to pick a tile to move to it.
 		if (((*to.GetData()) & HasCell) == 0) {
-			AddTileMoveMoves(moves, from, to);
+			AddTileMoveMoves(moves, type, from, to);
+		}
+	}
+
+	void MoveFinder::AddTileMoveMoves(std::vector<Move>* moves, MoveType type, Cell<int> from, Cell<int> to) {
+		std::vector<Cell<int>*>* emptyCells = nullptr;
+		Move* move;
+		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
+			move = new Move(
+				type,
+				*from.GetPosition(),
+				*to.GetPosition(),
+				*(*it)->GetPosition()
+			);
 		}
 	}
 

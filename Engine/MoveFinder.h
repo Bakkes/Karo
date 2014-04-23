@@ -23,6 +23,7 @@ namespace engine{
 		std::vector<Move>* GetLegalMoveMoves(Players player);
 		void AddAdjecentMovesToVector(std::vector<Move>* moves, Cell<int> source);
 		void AddJumpMovesToVector(std::vector<Move>* moves, Cell<int> source);
+		void AddTileMoveMoves(std::vector<Move>* moves, MoveType type, Cell<int> from, Cell<int> to);
 		void AddMoveIfValidDestination(
 			std::vector<Move>* moves,
 			const Cell<int> &from,
