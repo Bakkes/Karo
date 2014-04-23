@@ -174,6 +174,32 @@ namespace _2DFrontend
             throw new Exception("Failed to translate int to board position");
 		}
 
+		private int ConvertBoardPositionToInt(Vector2DWrapper vector2D)
+		{
+            int number = -1;
+            for (int x = 0; x <= vector2D.X; x++)
+            {
+                for (int y = 0; y <= vector2D.Y; y++)
+                {
+                    CellWrapper cell = Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+                    if ((cell.GetData() & (int)CellValue.IsEmpty) == 0)
+                    {
+                        continue;
+                    }
+
+                    // There is a tile here, update the number
+                    number++;
+                }
+            }
+
+            if (number == -1)
+            {
+                throw new Exception("No tiles found before this position, invalid position to relate from");
+            }
+
+			return number;
+		}
+
 		private static Turn ConvertMoveToTurn(MoveWrapper mw)
 		{
 			CommunicationProtocol.MoveType mt = CommunicationProtocol.MoveType.Insert;
@@ -191,15 +217,11 @@ namespace _2DFrontend
 			}
 			Turn t = new Turn();
 			t.MoveType = mt;
-			t.EmptyTile = IntToVector2D(mw.GetUsedCell());
-			t.FromTile = IntToVector2D(mw.GetFromCell());
-			t.ToTile = IntToVector2D(mw.GetToCell());
+			t.EmptyTile = ConvertBoardPositionToInt(mw.GetUsedCell());
+			t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
+			t.ToTile = ConvertBoardPositionToInt(mw.GetToCell());
 			return t;
 		}
 
-		private static int IntToVector2D(Vector2DWrapper vector2D)
-		{
-			return (int)vector2D.X;
-		}
 	}
 }
