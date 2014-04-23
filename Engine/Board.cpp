@@ -22,7 +22,7 @@ namespace engine{
 					tile->SetData(data);
 				}
 			);
-			absoluteTopLeft = *_grid->GetCellAt(Vector2D(0,0))->GetPosition();
+			_absoluteTopLeft = Vector2D(0,0);
 		}
 	}
 	Board::~Board(){
@@ -132,7 +132,7 @@ namespace engine{
 		
 	}
 	Cell<int>* Board::GetRelativeCellAt(const Vector2D relativePosition) const{
-		Vector2D position = relativePosition + absoluteTopLeft;
+		Vector2D position = relativePosition + _absoluteTopLeft;
 		if(position.X() < 0){
 			position.X(position.X() + _grid->GetSize()->GetWidth());
 		}
@@ -143,6 +143,9 @@ namespace engine{
 	}
 
 	Board* Board::CreateBoard(string from){
+		return Board::CreateBoard(from, Vector2D(0,0));
+	}
+	Board* Board::CreateBoard(string from, Vector2D absoluteTopLeft){
 		Board* result = new Board(false);
 		int y = 0, x = 0;
 		for (
@@ -178,7 +181,8 @@ namespace engine{
 
 			result->_grid->GetCellAt(Vector2D(x,y))->SetData(new int(myWonderfolNumber));
 		}
-		int pause = 0;
+
+		result->_absoluteTopLeft = absoluteTopLeft;
 		return result;
 	}
 
