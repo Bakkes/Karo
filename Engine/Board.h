@@ -17,6 +17,8 @@ namespace engine{
 		string ToString();
 		static Board* CreateBoard(string from);
 	private:
+		Board(bool init);
+		void Init(bool);
 		Grid<int>* _grid;
 		Vector2D absoluteTopLeft;
 		void InsertPiece(const Cell<int>& on, Players owner);
