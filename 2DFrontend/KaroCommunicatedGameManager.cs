@@ -125,7 +125,7 @@ namespace _2DFrontend
 			
 		}
 
-		private static MoveWrapper ConvertTurnToMove(Turn t)
+		private MoveWrapper ConvertTurnToMove(Turn t)
 		{
 			engine.wrapper.MoveType mt = engine.wrapper.MoveType.INSERT;
 			switch (t.MoveType)
@@ -142,6 +142,36 @@ namespace _2DFrontend
 			}
 			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
 				ConvertIntToBoardPosition(t.ToTile), ConvertIntToBoardPosition(t.EmptyTile));
+		}
+
+		private Vector2DWrapper ConvertIntToBoardPosition(int? number)
+		{
+            if (number < 0 || number > 20) 
+            {
+                throw new ArgumentException(String.Format("Number {0} can not exist on the board"));
+            }
+
+            int currentNumber = -1;
+            for (int x = 0; x < 20; x++)
+            {
+                for (int y = 0; y < 20; y++)
+                {
+                    CellWrapper cell = Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+                    if ((cell.GetData() & (int)CellValue.IsEmpty) == 0)
+                    {
+                        continue;
+                    }
+
+                    // This cell has a tile, increment the number
+                    currentNumber++;
+                    if (currentNumber == number)
+                    {
+                        return new Vector2DWrapper(x, y);
+                    }
+                }
+            }
+
+            throw new Exception("Failed to translate int to board position");
 		}
 
 		private static Turn ConvertMoveToTurn(MoveWrapper mw)
@@ -165,11 +195,6 @@ namespace _2DFrontend
 			t.FromTile = IntToVector2D(mw.GetFromCell());
 			t.ToTile = IntToVector2D(mw.GetToCell());
 			return t;
-		}
-
-		private static Vector2DWrapper ConvertIntToBoardPosition(int? number)
-		{
-			return new Vector2DWrapper(0.0, 0.0);
 		}
 
 		private static int IntToVector2D(Vector2DWrapper vector2D)
