@@ -101,9 +101,12 @@ namespace engine{
 	void Board::JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner){
 		MovePiece(from, to, owner);
 	}
+
+	// Returns all legal moves for the current state of the game for the specified player.
 	vector<Move>* Board::GetLegalMoves(Players player) {
-		return new vector<Move>();
+		return _moveFinder->GetLegalMoves(player);
 	}
+
 	vector<Cell<int>>* Board::GetOccupiedCells(){
 		auto tiles = new vector<Cell<int>>();
 		_grid->TraverseCells(
