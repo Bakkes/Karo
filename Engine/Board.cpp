@@ -102,7 +102,7 @@ namespace engine{
 		MovePiece(from, to, owner);
 	}
 
-	// Returns all legal moves for the current state of the game for the specified player.
+
 	vector<Move>* Board::GetLegalMoves(Players player) {
 		return _moveFinder->GetLegalMoves(player);
 	}
