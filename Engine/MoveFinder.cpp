@@ -75,13 +75,9 @@ namespace engine {
 		const Cell<int> &to,
 		MoveType type)
 	{
-		Move* move = nullptr;
 		// If there is a tile and it is empty, we can move the piece to it.
 		if (((*to.GetData()) & (IsEmpty | HasCell)) != 0) {
-			move = new Move(type, *(from.GetPosition()), *(to.GetLeft()->GetPosition()));
-			moves->push_back(*move);
-			delete move;
-			move = nullptr;
+			moves->push_back(Move(type, *(from.GetPosition()), *(to.GetLeft()->GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
 		if (((*to.GetData()) & HasCell) == 0) {
