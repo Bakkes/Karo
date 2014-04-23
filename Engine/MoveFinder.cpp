@@ -91,14 +91,13 @@ namespace engine {
 
 	void MoveFinder::AddTileMoveMoves(std::vector<Move>* moves, MoveType type, Cell<int> from, Cell<int> to) {
 		std::vector<Cell<int>*>* emptyCells = nullptr;
-		Move* move;
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
-			move = new Move(
+			moves->push_back(Move(
 				type,
 				*from.GetPosition(),
 				*to.GetPosition(),
 				*(*it)->GetPosition()
-			);
+			));
 		}
 	}
 
