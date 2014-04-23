@@ -34,7 +34,8 @@ namespace engine {
 			if ((player == Max && (*(it->GetData()) & IsMax) == IsMax) ||
 				(player == Min && (*(it->GetData()) & IsMax) != IsMax))
 			{
-
+				AddJumpMovesToVector(moves, *it);
+				AddAdjecentMovesToVector(moves, *it);
 			}
 		}
 		return moves;
