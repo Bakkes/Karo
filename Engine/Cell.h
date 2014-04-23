@@ -12,18 +12,24 @@ namespace engine {
 	template<typename T>
 	class ENGINE_API Cell{
 	public:
+		// Copy constructor
+		Cell(const Cell<T> &src) {
+			_position = new Vector2D(*(src._position));
+			_left = src._left;
+			_right = src._right;
+			_top = src._top;
+			_bottom = src._bottom;
+			_tiledata = src._tiledata;
+		}
+
 		// set a tile to the point
 		Cell(Vector2D* p){
 			Init(p);
 		}
 
 		~Cell(){
-			if(_position){
-				delete _position;
-			}
-			if(_tiledata){
-				delete _tiledata;
-			}
+			delete _position;
+			delete _tiledata;
 			_top = NULL;
 			_left = NULL;
 			_right = NULL;
