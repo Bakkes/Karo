@@ -36,9 +36,9 @@ namespace _2DFrontend.State
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
-				m.GetFromTile() == manager.CurrentMove.GetFromTile() &&
-				m.GetToTile() == manager.CurrentMove.GetToTile() &&
-				m.GetUsedTile() == new Vector2DWrapper(click.X, click.Y));
+				m.GetFromCell() == manager.CurrentMove.GetFromCell() &&
+				m.GetToCell() == manager.CurrentMove.GetToCell() &&
+				m.GetUsedCell() == new Vector2DWrapper(click.X, click.Y));
 			if (move != null)
 			{
 				// We now have a valid move. Execute it!

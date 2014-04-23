@@ -70,14 +70,10 @@ namespace _2DFrontend
 			MoveWrapper received = ConvertTurnToMove(t);
 
 			// Get the move with the correct source tile from the last click.
-			IEnumerable<MoveWrapper> sourceLegalMoves = LegalMoves.Where(m =>
-				m.GetFromTile() == received.GetFromTile());
-
-			// Get the move (if it exists) with the correct destination tile.
-			IEnumerable<MoveWrapper> move = sourceLegalMoves.Where(m =>
-				m.GetToTile() == received.GetToTile());
-
-			MoveWrapper mv = move.FirstOrDefault(m => m.GetUsedTile() == received.GetUsedTile());
+			MoveWrapper mv = LegalMoves.Where(m =>
+				m.GetFromCell() == received.GetFromCell() && 
+				m.GetToCell() == received.GetToCell() &&
+				m.GetUsedCell() == received.GetUsedCell()).FirstOrDefault();
 			if (mv == null)
 			{
 				_communication.SendMoveInvalid(t);
@@ -102,7 +98,6 @@ namespace _2DFrontend
 		void _communication_SentMoveInvalid(Turn t)
 		{
 			Console.WriteLine("Opponent says our move is wrong.");
-			
 		}
 
 		void communication_RequestFirstMove()
@@ -166,9 +161,9 @@ namespace _2DFrontend
 			}
 			Turn t = new Turn();
 			t.MoveType = mt;
-			t.EmptyTile = IntToVector2D(mw.GetUsedTile());
-			t.FromTile = IntToVector2D(mw.GetFromTile());
-			t.ToTile = IntToVector2D(mw.GetToTile());
+			t.EmptyTile = IntToVector2D(mw.GetUsedCell());
+			t.FromTile = IntToVector2D(mw.GetFromCell());
+			t.ToTile = IntToVector2D(mw.GetToCell());
 			return t;
 		}
 

@@ -32,10 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommunicationProtocol, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Chris\Dropbox\ISGP\ELO\Communicatiemodule\SourceCode\CommunicationProtocol\CommunicationProtocol\bin\Debug\CommunicationProtocol.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -105,6 +101,10 @@
     <ProjectReference Include="..\Engine.Wrapper\Engine.Wrapper.vcxproj">
       <Project>{1120b367-b325-4b42-b7f1-754522577572}</Project>
       <Name>Engine.Wrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\Chris\Dropbox\ISGP\ELO\Communicatiemodule\SourceCode\CommunicationProtocol\CommunicationProtocol\CommunicationProtocol.csproj">
+      <Project>{249ebc5b-8adf-49c3-bdfe-72e9babe7eb7}</Project>
+      <Name>CommunicationProtocol</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

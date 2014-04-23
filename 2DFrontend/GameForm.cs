@@ -34,6 +34,7 @@ namespace _2DFrontend
 		{
 			ICommunication communication = new Server(43594);
 			_manager = new KaroCommunicatedGameManager(communication);
+			karoPanel.NewGame(_manager);
 		}
 
 		private void clientToolStripMenuItem_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace _2DFrontend
 				_manager = new KaroCommunicatedGameManager(communication);
 				communication.OnConnectionFailed += CommunicationFailed;
 				communication.StartCommunicating();
+				karoPanel.NewGame(_manager);
 			} catch(Exception ex) {
 				MessageBox.Show("IP incorrect");
 			}
