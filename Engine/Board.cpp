@@ -102,7 +102,7 @@ namespace engine{
 	vector<Move>* Board::GetLegalMoves(Players player) {
 		return new vector<Move>();
 	}
-	vector<Cell<int>>* Board::GetOccupiedCells(){
+	vector<Cell<int>>* Board::GetOccupiedTiles(){
 		auto tiles = new vector<Cell<int>>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{

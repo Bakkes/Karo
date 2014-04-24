@@ -15,7 +15,7 @@ enum CellValue{
 	public:
 		virtual void ExecuteMove(Move* move, Players player) = 0;
 		virtual std::vector<Move>* GetLegalMoves(Players player) = 0;
-		virtual std::vector<Cell<int>>* GetOccupiedCells() = 0;
+		virtual std::vector<Cell<int>>* GetOccupiedTiles() = 0;
 		virtual Cell<int>* GetRelativeCellAt(const Vector2D relativePosition) const = 0;
 	};
 }

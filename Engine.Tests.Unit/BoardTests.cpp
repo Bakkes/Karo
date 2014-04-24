@@ -44,13 +44,6 @@ namespace Tests {
 			delete board;
 		}
 
-		TEST_METHOD(TestGetRelativeTile) {
-			Vector2D input = Vector2D(3,2);
-			board = Board::CreateBoard(
-				standartBoard,
-				input);
-			Assert::IsTrue(*board->GetRelativeCellAt(Vector2D(0,0))->GetPosition() == input);
-		}
 		TEST_METHOD(TestGetRelativeTileEdgeCase) {
 			Vector2D input = Vector2D(19,2);
 			board = Board::CreateBoard(
@@ -91,6 +84,77 @@ namespace Tests {
 			string result = board->ToString();
 			Assert::IsTrue(result == standartBoard);
 		}
+
+		TEST_METHOD(TestGetRelativeTile) {
+			Vector2D input = Vector2D(3,2);
+			board = Board::CreateBoard(
+				standartBoard,
+				input);
+			Assert::IsTrue(*board->GetRelativeCellAt(Vector2D(0,0))->GetPosition() == input);
+		}
+
+		TEST_METHOD(WrapArroundTopLeft) {
+			Vector2D input = Vector2D(0);
+			Cell<int>* result = board->GetRelativeCellAt(input);
+			Assert::IsTrue(
+				*result->GetPosition()
+					== 
+				input
+			);
+			Assert::IsTrue(
+				*result->GetLeft()->GetPosition()
+					== 
+				Vector2D(19,0)
+			);
+			Assert::IsTrue(
+				*result->GetTop()->GetPosition()
+					== 
+				Vector2D(0,19)
+			);
+		}
+		TEST_METHOD(WrapArroundBottomRight) {
+			Vector2D input = Board::initSize; // i want the outer most absolute postion
+			board = Board::CreateBoard(
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,\n",
+				Vector2D(14, 15) // set the absolute topleft
+			);
+			Cell<int>* result = board->GetRelativeCellAt(input);
+			Assert::IsTrue(
+				*result->GetPosition()
+					== 
+				Vector2D(19,19)
+			);
+			Assert::IsTrue(
+				*result->GetRight()->GetPosition()
+					== 
+				Vector2D(0,19)
+			);
+			Assert::IsTrue(
+				*result->GetBottom()->GetPosition()
+					== 
+				Vector2D(19,0)
+			);
+		}
+
 		TEST_METHOD(MoreThanOneCharlenNumberTest) {
 			string input = string(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -119,7 +183,7 @@ namespace Tests {
 			Assert::IsTrue(result == input);
 		}
 		TEST_METHOD(IsInitialBoardEmpty) {
-			vector<Cell<int>>* result = board->GetOccupiedCells();
+			vector<Cell<int>>* result = board->GetOccupiedTiles();
 			Assert::IsTrue(*result == vector<Cell<int>>());
 			delete result;
 		};
