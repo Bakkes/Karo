@@ -28,8 +28,8 @@ namespace engine{
 		Vector2D absoluteTopLeft;
 		void InsertPiece(const Cell<int>& on, Players owner);
 		void DeletePiece(const Cell<int>& on);
-		void MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed);
-		void MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner);
+		void MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed);
+		void MovePiece(Cell<int>& from, Cell<int>& to, Players owner);
 		void JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed);
 		void JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner);
 		static const Size initSize;

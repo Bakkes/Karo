@@ -75,23 +75,24 @@ namespace engine{
 		
 	}
 
-	void Board::InsertPiece(const Cell<int>& on, Players owner){
-		*on.GetData() &= ~IsEmpty;
-		if(owner == Max){
-			*on.GetData() |= IsMax;
+	void Board::InsertPiece(Cell<int>& on, Players owner){
+		on.SetData(on.GetData() & ~IsEmpty);
+		if(owner == Max) {
+			on.SetData(on.GetData() | IsMax);
 			return;
 		}
-		*on.GetData() &= ~IsMax;
+		on.SetData(on.GetData() & ~IsMax);
 	}
-	void Board::DeletePiece(const Cell<int>& on){
-		*on.GetData() |= IsEmpty;
+	void Board::DeletePiece(Cell<int>& on){
+		on.SetData(on.GetData() | IsEmpty);
 	}
-	void Board::MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed){
-		*tileUsed.GetData() &= ~HasCell;
-		*to.GetData() |= HasCell;
+	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
+		tileUsed.SetData(tileUsed.GetData() & ~HasCell);
+		tileUsed.SetData(to.GetData() | HasCell);
 		MovePiece(from, to, owner);
 	}
 	void Board::MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner){
+
 		*to.GetData() = *from.GetData();
 		DeletePiece(from);
 	}
@@ -184,7 +185,8 @@ namespace engine{
 				x = 0;
 				continue;
 			}
-			*result->_grid->GetCellAt(Vector2D(x,y))->GetData() = subject -'0';
+			Cell<int>* cell = result->_grid->GetCellAt(Vector2D(x, y));
+			cell->SetData(subject - '0');
 		}
 		int pause = 0;
 		return result;

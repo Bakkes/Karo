@@ -34,7 +34,6 @@ namespace engine {
 			_right = NULL;
 			_bottom = NULL;
 			_position = NULL;
-			_tiledata = NULL;
 		}
 
 		void SetBottom(Cell<T>* bottom){
@@ -64,12 +63,14 @@ namespace engine {
 		const Vector2D& GetPosition() const {
 			return _position;
 		}
-		void SetData(T* data){
+		void SetData(T data){
 			_tiledata = data;
 		}
-		T* GetData() const{
+
+		const T& GetData() const {
 			return _tiledata;
 		}
+
 		vector<Cell<T>*> GetSurroundingCells() const{
 			vector<Cell<T>*> tiles;
 			tiles.push_back(this->GetLeft());
@@ -87,7 +88,7 @@ namespace engine {
 			_left = NULL;
 			_right = NULL;
 		}
-		T* _tiledata;
+		T _tiledata;
 		Vector2D _position;
 		Cell<T>* _top;
 		Cell<T>* _left;
