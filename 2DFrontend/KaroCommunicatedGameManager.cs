@@ -67,6 +67,12 @@ namespace _2DFrontend
 		void _communication_TurnReceived(Turn t)
 		{
 			Console.WriteLine("Opponent took a turn");
+			if (t == null)
+			{
+				Console.WriteLine("Turn is null, sending back");
+				_communication.SendMoveInvalid(t);
+				return;
+			}
 			MoveWrapper received = ConvertTurnToMove(t);
 
 			// Get the move with the correct source tile from the last click.
@@ -76,6 +82,7 @@ namespace _2DFrontend
 				m.GetUsedCell() == received.GetUsedCell()).FirstOrDefault();
 			if (mv == null)
 			{
+				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
 				return;
 			}
@@ -87,10 +94,12 @@ namespace _2DFrontend
 			ExecuteMove(bm);
 			if (Game.HasWon(Players.Max))
 			{
+				Console.WriteLine("We won, sending to opponent");
 				_communication.SendWinDetected(Player.Me, ConvertMoveToTurn(bm));
 			}
 			else
 			{
+				Console.WriteLine("Turn chosen, sending turn to opponent");
 				_communication.SendTurn(ConvertMoveToTurn(bm));
 			}
 		}
