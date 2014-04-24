@@ -28,7 +28,6 @@ namespace engine {
 		}
 
 		~Cell(){
-			delete _tiledata;
 			_top = NULL;
 			_left = NULL;
 			_right = NULL;

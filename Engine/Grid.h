@@ -132,7 +132,7 @@ namespace engine {
 					}else if(wrapArround){
 						_tiles->at(GetCellIndex(x, y))->SetLeft(
 							_tiles->at(
-								GetCellIndex(x, width -1)
+								GetCellIndex(width -1, y)
 							)
 						);
 					}

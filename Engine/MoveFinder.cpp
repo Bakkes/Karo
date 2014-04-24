@@ -30,14 +30,14 @@ namespace engine {
 
 	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
 		std::vector<Move>* moves = new std::vector<Move>();
-		std::vector<Cell<int>>* occupiedCells = _board->GetOccupiedCells();
+		std::vector<Cell<int>>* occupiedCells = _board->GetOccupiedTiles();
 
 		// Loop through all occupied cells.
 		for (auto it = occupiedCells->begin(); it != occupiedCells->end(); ++it) {
 
 			// If this cells contain a piece owned by player, continue.
-			if ((player == Max && (*(it->GetData()) & IsMax) == IsMax) ||
-				(player == Min && (*(it->GetData()) & IsMax) != IsMax))
+			if ((player == Max && ((it->GetData()) & IsMax) == IsMax) ||
+				(player == Min && ((it->GetData()) & IsMax) != IsMax))
 			{
 				AddJumpMovesToVector(moves, *it);
 				AddAdjecentMovesToVector(moves, *it);
@@ -81,11 +81,11 @@ namespace engine {
 		MoveType type)
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
-		if (((*to.GetData()) & (IsEmpty | HasCell)) != 0) {
+		if (((to.GetData()) & (IsEmpty | HasCell)) != 0) {
 			moves->push_back(Move(type, (from.GetPosition()), (to.GetLeft()->GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		if (((*to.GetData()) & HasCell) == 0) {
+		if (((to.GetData()) & HasCell) == 0) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}
@@ -105,9 +105,9 @@ namespace engine {
 	std::vector<Move> MoveFinder::FindMove(Cell<int> one,Cell<int> two) {
 		std::vector<Move> possibility = std::vector<Move>();
 
-		int checkRight = *one.GetData();
+		int checkRight = one.GetData();
 		if(!( checkRight & IsEmpty)) {
-			int jumpRight = *two.GetData();
+			int jumpRight = two.GetData();
 			if(jumpRight & IsEmpty) {
 				if(jumpRight & HasCell) {
 					possibility.push_back(Move(JUMP, two.GetPosition()));

@@ -20,7 +20,7 @@ namespace wrapper {
 	}
 
 	List<CellWrapper^>^ BoardWrapper::GetOccupiedCells() {
-		vector<Cell<int>>* native = _board->GetOccupiedCells();
+		vector<Cell<int>>* native = _board->GetOccupiedTiles();
 		List<CellWrapper^> ^wrapped = gcnew List<CellWrapper^>();
 
 		for(unsigned i = 0; i < native->size(); i++) {

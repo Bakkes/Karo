@@ -9,6 +9,8 @@ namespace _2DFrontend.State
 	/// </summary>
 	interface IKaroState
 	{
+		void Enter(KaroGameManager manager);
 		void Update(KaroGameManager manager, Point click);
+		void Exit(KaroGameManager manager);
 	}
 }

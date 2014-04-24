@@ -30,11 +30,11 @@ public:
 	}
 
 	static CellWrapper^ ConvertCell(Cell<int> tile) {
-		return gcnew CellWrapper(tile.GetPosition().X(), tile.GetPosition().Y(), *(tile.GetData()));
+		return gcnew CellWrapper(tile.GetPosition().X(), tile.GetPosition().Y(), (tile.GetData()));
 	}
 
 	static CellWrapper^ ConvertCell(Cell<int>* tile) {
-		return gcnew CellWrapper(tile->GetPosition().X(), tile->GetPosition().Y(), *(tile->GetData()));
+		return gcnew CellWrapper(tile->GetPosition().X(), tile->GetPosition().Y(), tile->GetData());
 	}
 
 	static Cell<int>* ConvertCell(CellWrapper^ tile) {
