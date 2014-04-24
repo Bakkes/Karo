@@ -14,5 +14,9 @@ namespace engine {
 		int cornerValue;
 		int neighborValue;
 		int lineValue;
+		int centerValue;
+		int semiCenterValue;
+		int centerColumnValue;
+		int bottomOrTopRowValue;
 	};
 }
