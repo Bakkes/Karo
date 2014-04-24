@@ -12,24 +12,27 @@ namespace engine {
 	template<typename T>
 	class ENGINE_API Cell{
 	public:
+		// Copy constructor
+		Cell(const Cell<T> &src) {
+			_position = Vector2D(src._position);
+			_left = src._left;
+			_right = src._right;
+			_top = src._top;
+			_bottom = src._bottom;
+			_tiledata = src._tiledata;
+		}
+
 		// set a tile to the point
-		Cell(Vector2D* p){
+		Cell(Vector2D& p){
 			Init(p);
 		}
 
 		~Cell(){
-			if(_position){
-				delete _position;
-			}
-			if(_tiledata){
-				delete _tiledata;
-			}
 			_top = NULL;
 			_left = NULL;
 			_right = NULL;
 			_bottom = NULL;
 			_position = NULL;
-			_tiledata = NULL;
 		}
 
 		void SetBottom(Cell<T>* bottom){
@@ -56,15 +59,17 @@ namespace engine {
 		Cell<T>* GetTop() const{
 			return _top;
 		}
-		Vector2D* GetPosition() const{
+		const Vector2D& GetPosition() const {
 			return _position;
 		}
-		void SetData(T* data){
+		void SetData(T data){
 			_tiledata = data;
 		}
-		T* GetData() const{
+
+		const T& GetData() const {
 			return _tiledata;
 		}
+
 		vector<Cell<T>*> GetSurroundingCells() const{
 			vector<Cell<T>*> tiles;
 			tiles.push_back(this->GetLeft());
@@ -74,7 +79,7 @@ namespace engine {
 			return tiles;
 		}
 	private:
-		void Init(Vector2D* p){
+		void Init(Vector2D& p){
 			_position = p;
 			_tiledata = NULL;
 			_bottom = NULL;
@@ -82,8 +87,8 @@ namespace engine {
 			_left = NULL;
 			_right = NULL;
 		}
-		T* _tiledata;
-		Vector2D* _position;
+		T _tiledata;
+		Vector2D _position;
 		Cell<T>* _top;
 		Cell<T>* _left;
 		Cell<T>* _right;

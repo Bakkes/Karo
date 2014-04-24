@@ -85,6 +85,7 @@
     <ClInclude Include="ISafeBoard.h" />
     <ClInclude Include="IStaticEvaluation.h" />
     <ClInclude Include="Move.h" />
+    <ClInclude Include="MoveFinder.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="RandStaticEval.h" />
     <ClInclude Include="Size.h" />
@@ -98,6 +99,7 @@
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />
+    <ClCompile Include="MoveFinder.cpp" />
     <ClCompile Include="RandStaticEval.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />

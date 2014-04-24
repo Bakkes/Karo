@@ -36,27 +36,32 @@ namespace _2DFrontend
 		{
 			if (p == Player.You)
 			{
+				Console.WriteLine("Opponent thinks he won, going to check.");
 				if (Game.HasWon(Players.Min))
 				{
+					Console.WriteLine("Opponent did win, we lose.");
 					_communication.SendWinAccepted();
 				}
 				else
 				{
+					Console.WriteLine("Opponent thinks he won but didnt according to us.");
 					_communication.SendWinDisputed();
 				}
 			}
 			else if (p == Player.Me)
 			{
+				Console.WriteLine("Opponent thinks I won, going to check.");
 				if (Game.HasWon(Players.Max))
 				{
+					Console.WriteLine("We actually won without noticing?");
 					_communication.SendWinAccepted();
 				}
 				else
 				{
+					Console.WriteLine("We didnt win according to our calculations.");
 					_communication.SendWinDisputed();
 				}
 			}
-			Console.WriteLine("Opponent thinks he won, going to check.");
 		}
 
 		void _communication_WinAccepted()
@@ -87,10 +92,12 @@ namespace _2DFrontend
 			ExecuteMove(bm);
 			if (Game.HasWon(Players.Max))
 			{
+				Console.WriteLine("We won, sending message to opponent.");
 				_communication.SendWinDetected(Player.Me, ConvertMoveToTurn(bm));
 			}
 			else
 			{
+				Console.WriteLine("Move made, sending move to opponent.");
 				_communication.SendTurn(ConvertMoveToTurn(bm));
 			}
 		}
@@ -146,6 +153,11 @@ namespace _2DFrontend
 
 		private Vector2DWrapper ConvertIntToBoardPosition(int? number)
 		{
+			if (number == null)
+			{
+				return new Vector2DWrapper(0, 0);
+			}
+
             if (number < 0 || number > 20) 
             {
                 throw new ArgumentException(String.Format("Number {0} can not exist on the board"));
