@@ -146,6 +146,11 @@ namespace _2DFrontend
 
 		private Vector2DWrapper ConvertIntToBoardPosition(int? number)
 		{
+			if (number == null)
+			{
+				return new Vector2DWrapper(0, 0);
+			}
+
             if (number < 0 || number > 20) 
             {
                 throw new ArgumentException(String.Format("Number {0} can not exist on the board"));
