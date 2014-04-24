@@ -11,6 +11,7 @@ namespace engine {
 	// its neighbours
 	template<typename T>
 	class ENGINE_API Cell{
+
 	public:
 		// Copy constructor
 		Cell(const Cell<T> &src) {
@@ -38,30 +39,39 @@ namespace engine {
 		void SetBottom(Cell<T>* bottom){
 			this->_bottom = bottom;
 		}
+
 		Cell<T>* GetBottom() const{
 			return _bottom;
 		}
+
 		void SetRight(Cell<T>* right){
 			this->_right = right;
 		}
+
 		Cell<T>* GetRight() const{
 			return _right;
 		}
+		
 		void SetLeft(Cell<T>* left){
 			this->_left = left;
 		}
+		
 		Cell<T>* GetLeft() const{
 			return _left;
 		}
+
 		void SetTop(Cell<T>* top){
 			this->_top = top;
 		}
+
 		Cell<T>* GetTop() const{
 			return _top;
 		}
+
 		const Vector2D& GetPosition() const {
 			return _position;
 		}
+
 		void SetData(T data){
 			_tiledata = data;
 		}
@@ -78,6 +88,7 @@ namespace engine {
 			tiles.push_back(this->GetBottom());
 			return tiles;
 		}
+
 	private:
 		void Init(Vector2D& p){
 			_position = p;
@@ -94,6 +105,7 @@ namespace engine {
 		Cell<T>* _right;
 		Cell<T>* _bottom;
 	};
+
 	inline bool ENGINE_API operator==(const Cell<int>& l, const Cell<int>& r){
 		if(l.GetPosition() != r.GetPosition()){
 			return false;
@@ -117,5 +129,6 @@ namespace engine {
 		}
 		return true;
 	}
+
 	inline bool ENGINE_API operator!=(const Cell<int>& l, const Cell<int>& r){return !operator==(l,r);}
 }
