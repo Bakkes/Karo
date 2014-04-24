@@ -81,7 +81,6 @@
     <ClInclude Include="ExportedClass.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IBoard.h" />
-    <ClInclude Include="ICommunication.h" />
     <ClInclude Include="IComputerPlayer.h" />
     <ClInclude Include="ISafeBoard.h" />
     <ClInclude Include="IStaticEvaluation.h" />
@@ -98,7 +97,6 @@
     <ClCompile Include="ComputerPlayer.cpp" />
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
-    <ClCompile Include="ICommunication.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="RandStaticEval.cpp" />
     <ClCompile Include="Size.cpp" />
