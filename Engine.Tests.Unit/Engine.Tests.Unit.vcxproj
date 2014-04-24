@@ -16,7 +16,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
+    <ClCompile Include="MinimaxTest.cpp" />
+    <ClCompile Include="MoveInvertionTest.cpp" />
+    <ClCompile Include="MoveUtils.cpp" />
+    <ClCompile Include="PlayerInvertionTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MoveUtils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D168262-1045-4B31-9B8D-025ADBDEFD04}</ProjectGuid>
@@ -28,7 +36,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v110</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

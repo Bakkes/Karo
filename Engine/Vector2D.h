@@ -1,10 +1,10 @@
 #pragma once
 #include <algorithm>
+#include "DllImportExport.h"
 namespace engine {
 // base class for cartesian calculations, holds two numbers and suports a lot of operator
 // overloads for easy calculations
-class Vector2D
-{
+class ENGINE_API Vector2D {
 public:
 	Vector2D(const Vector2D&);
 	Vector2D(double x, double y);
@@ -41,7 +41,6 @@ inline bool operator==(const Vector2D& lhs,const Vector2D& rhs){
 }
 inline bool operator!=(const Vector2D& lhs, const Vector2D& rhs){return !operator==(lhs,rhs);}
 inline bool operator< (const Vector2D& lhs, const Vector2D& rhs){
-	/* do actual comparison */
 	return lhs.X() * lhs.Y() < rhs.X() * rhs.Y();
 }
 inline bool operator> (const Vector2D& lhs, const Vector2D& rhs){return  operator< (rhs,lhs);}

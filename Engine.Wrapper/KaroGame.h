@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "ComputerPlayer.h"
 #include "PlayersWrapper.h"
+#include "BoardWrapper.h"
 using namespace engine;
 
 namespace engine {
@@ -15,8 +16,10 @@ namespace wrapper {
 			~KaroGame();
 			MoveWrapper^ GetBestMove();
 			void ExecuteMove(MoveWrapper^ w, engine::wrapper::Players player);
+			bool HasWon(engine::wrapper::Players player);
+			BoardWrapper^ GetBoard();
 		private:
-			Board * _board;
+			BoardWrapper^ _board;
 			ComputerPlayer * _cPlayer;
 	};
 }

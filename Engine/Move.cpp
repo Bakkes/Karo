@@ -1,35 +1,52 @@
 #include "Move.h"
 
 namespace engine {
-	Move::Move(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile) {
-		init(moveType, fromTile, toTile, moveDirection, emptyTile);
+
+	Move::Move(MoveType type, Vector2D toCell) {
+		Init(type, Vector2D(-1), toCell, Vector2D(-1), false);
 	}
 
-	void Move::init(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile) {
-		_moveType = moveType;
-		_fromTile = fromTile;
-		_toTile = toTile;
-		_moveDirection = moveDirection;
-		_emptyTile = emptyTile;
+	Move::Move(MoveType type, Vector2D fromCell, Vector2D toCell) {
+		Init(type, fromCell, toCell, Vector2D(-1), false);
+	}
+
+	Move::Move(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell) {
+		Init(type, fromCell, toCell, usedCell, true);
+	}
+
+	void Move::Init(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell, bool hasUsedCell) {
+		_moveType = type;
+		_fromCell = fromCell;
+		_toCell = toCell;
+		_usedCell = usedCell;
+		_hasUsedCell = hasUsedCell;
 	}
 
 	MoveType Move::GetMoveType() {
 		return _moveType;
 	}
 
-	int Move::GetFromTile() {
-		return _fromTile;
+	Vector2D Move::GetFromCell() {
+		return _fromCell;
 	}
 
-	int Move::GetToTile() {
-		return _toTile;
+	Vector2D Move::GetToCell(){
+		return _toCell;
 	}
 
-	MoveDirection Move::GetMoveDirection() {
-		return _moveDirection;
+	void Move::SetToCell(Vector2D location) {
+		_toCell = location;
 	}
 
-	int Move::GetEmptyTile() {
-		return _emptyTile;
+	Vector2D Move::GetUsedCell(){
+#ifdef _DEBUG
+		if (!HasUsedCell())
+			throw "Called GetUsedCell whilst no tile is being used";
+#endif
+		return _usedCell;
+	}
+
+	bool Move::HasUsedCell() {
+		return _hasUsedCell;
 	}
 }

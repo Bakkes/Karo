@@ -1,37 +1,47 @@
-#include "stdafx.h"
 #include "MoveWrapper.h"
+#include "WrapperConversionUtility.h"
 
 namespace engine {
 namespace wrapper {
 
-MoveWrapper::MoveWrapper(MoveType moveType, int fromTile, int toTile, MoveDirection moveDirection, int emptyTile)
-{
-	_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromTile, toTile, static_cast<engine::MoveDirection>(moveDirection), emptyTile);
-}
+	MoveWrapper::MoveWrapper(MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D usedCell) {
+		_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromCell, toCell, usedCell);
+	}
 
-MoveWrapper::~MoveWrapper() {
-	delete _move;
-}
+	MoveWrapper::MoveWrapper(MoveType moveType, Vector2DWrapper^ fromTile, Vector2DWrapper^ toTile, Vector2DWrapper^ usedTile) {
+		_move = new engine::Move(static_cast<engine::MoveType>(moveType), 
+			WrapperConversionUtility().ConvertVector2DStack(fromTile), 
+			WrapperConversionUtility().ConvertVector2DStack(toTile), 
+			WrapperConversionUtility().ConvertVector2DStack(usedTile));
+	}
 
-engine::wrapper::MoveType MoveWrapper::GetMoveType() {
-	return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
-}
+	MoveWrapper::~MoveWrapper() {
+		delete _move;
+	}
 
-int MoveWrapper::GetFromTile() {
-	return _move->GetFromTile();
-}
+	engine::wrapper::MoveType MoveWrapper::GetMoveType() {
+		return static_cast<engine::wrapper::MoveType>(_move->GetMoveType());
+	}
 
-int MoveWrapper::GetToTile() {
-	return _move->GetToTile();
-}
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetFromCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetFromCell());
+	}
 
-engine::wrapper::MoveDirection MoveWrapper::GetMoveDirection() {
-	return static_cast<engine::wrapper::MoveDirection>(_move->GetMoveDirection());
-}
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetToCell());
+	}
 
-int MoveWrapper::GetEmptyTile() {
-	return _move->GetEmptyTile();
-}
+	void MoveWrapper::SetToCell(engine::wrapper::Vector2DWrapper^ location) {
+		_move->SetToCell(WrapperConversionUtility::ConvertVector2DStack(location));
+	}
+
+	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {
+		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedCell());
+	}
+
+	bool MoveWrapper::HasUsedCell() {
+		return _move->HasUsedCell();
+	}
 
 }
 }
