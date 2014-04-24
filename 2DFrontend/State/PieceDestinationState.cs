@@ -40,21 +40,21 @@ namespace _2DFrontend.State
 
 			// Get the move with the correct source tile from the last click.
 			IEnumerable<MoveWrapper> sourceLegalMoves = legalMoves.Where(m =>
-				m.GetFromTile() == manager.CurrentMove.GetFromTile());
+				m.GetFromCell() == manager.CurrentMove.GetFromCell());
 
 			// Get the move (if it exists) with the correct destination tile.
 			MoveWrapper move = sourceLegalMoves.FirstOrDefault(m =>
-				m.GetToTile() == new Vector2DWrapper(click.X, click.Y));
+				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
 
 			if (move != null)
 			{
 				Debug.WriteLine("Clicked on valid destination");
 				// Check if the destination tile exists or if a tile has to be moved.
-				if (move.HasUsedTile())
+				if (move.HasUsedCell())
 				{
 					Debug.WriteLine("Empty tile must be moved to destination");
 					manager.CurrentMove = move;
-					manager.ChangeState(TileSourceState.Instance);
+					manager.ChangeState(CellSourceState.Instance);
 				}
 			}
 			else

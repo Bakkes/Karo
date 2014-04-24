@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using engine.wrapper;
 
@@ -20,34 +19,27 @@ namespace _2DFrontend
 		/// <summary>
 		/// The backcolor of Karo tiles.
 		/// </summary>
-		private Brush _tileBackColor = Brushes.Linen;
-
-		private const int PieceAccentWidth = 5;
+		private Brush _tileBackColor = Brushes.White;
 
 		/// <summary>
 		/// Color of the circle accent on pieces.
 		/// </summary>
-		private Pen _pieceAccentColor = new Pen(Color.Black, PieceAccentWidth);
+		private Pen _pieceAccentColor = Pens.White;
 
 		/// <summary>
 		/// Color of max's pieces.
 		/// </summary>
-		private Brush _pieceMaxColor = Brushes.OliveDrab;
+		private Brush _pieceMaxColor = Brushes.Green;
 
 		/// <summary>
 		/// Color of min's pieces.
 		/// </summary>
-		private Brush _pieceMinColor = Brushes.OrangeRed;
+		private Brush _pieceMinColor = Brushes.Red;
 
 		/// <summary>
 		/// Width/height of the tiles in pixels.
 		/// </summary>
-		private const int TileSize = 50;
-
-		/// <summary>
-		/// Width/height of the pieces in pixels.
-		/// </summary>
-		private const int PieceSize = 30;
+		private const int CellSize = 50;
 
 		/// <summary>
 		/// Gap left and right of every tile.
@@ -57,7 +49,7 @@ namespace _2DFrontend
 		public KaroPanel()
 			: base()
 		{
-			BackColor = Color.LightSlateGray;
+			BackColor = Color.CornflowerBlue;
 			DoubleBuffered = true;
 			MouseClick += KaroPanel_MouseClick;
 		}
@@ -77,55 +69,23 @@ namespace _2DFrontend
 		/// </summary>
 		protected override void OnPaint(PaintEventArgs e)
 		{
+			Graphics g = e.Graphics;
+
 			if (_manager != null)
 			{
-				e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 				BoardWrapper board = _manager.Board;
 				const int maxPotentialSize = 20;
 				for (int x = 0; x < maxPotentialSize; x++)
 				{
 					for (int y = 0; y < maxPotentialSize; y++)
 					{
-						PaintTile(board.GetRelativeTileAt(
-							new Vector2DWrapper(x, y)).GetData(),
-							x, y, e.Graphics);
-					}
-				}
-			}
-		}
-
-		/// <summary>
-		/// Paints the specified tiledata on the specified location.
-		/// </summary>
-		private void PaintTile(int tileData, int x, int y, Graphics g)
-		{
-			Point pos = TileToPixel(x, y);
-			if ((tileData & (int)TileValue.HasTile) == (int)TileValue.HasTile)
-			{
-				// Draw the tile.
-				g.FillRectangle(_tileBackColor, pos.X + Gap, pos.Y + Gap,
-					TileSize, TileSize);
-				// Draw the piece.
-				if ((tileData & (int)TileValue.IsEmpty) != (int)TileValue.IsEmpty)
-				{
-					Brush pieceBrush;
-					if ((tileData & (int)TileValue.IsMax) == (int)TileValue.IsMax)
-					{
-						pieceBrush = _pieceMaxColor;
-					}
-					else
-					{
-						pieceBrush = _pieceMinColor;
-					}
-					int pieceOffset = Gap + (TileSize - PieceSize) / 2;
-					g.FillEllipse(pieceBrush, pos.X + pieceOffset, pos.Y + pieceOffset,
-						PieceSize, PieceSize);
-
-					// Draw the accent.
-					if ((tileData & (int)TileValue.IsFlipped) == (int)TileValue.IsFlipped)
-					{
-						g.DrawEllipse(_pieceAccentColor, pos.X + pieceOffset, pos.Y + pieceOffset,
-							PieceSize, PieceSize);
+						CellWrapper tile = board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+						if ((tile.GetData() & (int)CellValue.HasCell) == (int)CellValue.HasCell)
+						{
+							Point paintPos = CellToPixel(x, y);
+							g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
+								CellSize, CellSize);
+						}
 					}
 				}
 			}
@@ -135,7 +95,7 @@ namespace _2DFrontend
 		{
 			if (_manager != null)
 			{
-				_manager.Update(PixelToTile(e.Location.X, e.Location.Y));
+				_manager.Update(PixelToCell(e.Location.X, e.Location.Y));
 				Invalidate();
 			}
 		}
@@ -143,26 +103,26 @@ namespace _2DFrontend
 		/// <summary>
 		/// Translates pixel coordinates to tile coordinates.
 		/// </summary>
-		private Point PixelToTile(int x, int y)
+		private Point PixelToCell(int x, int y)
 		{
 			// The +1 is because all tiles are offest by one tile to the bottom/right.
-			// See comments in TileToPixel for further explanation.
-			return new Point(x / (TileSize + Gap) - 1,
-				y / (TileSize + Gap) - 1);
+			// See comments in CellToPixel for further explanation.
+			return new Point(x % (CellSize + Gap) + 1,
+				y % (CellSize + Gap) + 1);
 		}
 
 		/// <summary>
 		/// Translates tile coordinates to the topleft pixel coordinate of a tile.
 		/// </summary>
-		private Point TileToPixel(int x, int y)
+		private Point CellToPixel(int x, int y)
 		{
 			// This makes sure there's always one empty row/colum at the top/left.
 			// This is necessary to place your piece on the top/left nonexisting row.
 			x++;
 			y++;
 
-			return new Point(x * (TileSize + Gap * 2),
-				y * (TileSize + Gap * 2));
+			return new Point(x * (CellSize + Gap * 2) + Gap,
+				y * (CellSize + Gap * 2) + Gap);
 		}
 	}
 }

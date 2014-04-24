@@ -25,5 +25,34 @@ namespace Tests {
 			int actual = engine::ICommunication::Expose();
 			Assert::AreNotEqual(expected, actual);
 		}
+
+		// proofs that asigning somthing from a defrenced value wil be a copy
+		TEST_METHOD(StackVsHeapLogic) {
+			int* d = new int(3);
+			int* b = new int(5);
+			{
+				int c = *d;
+				*b = c;
+				c += 5;
+			}
+			Assert::AreEqual(3, *b);
+		};
+		TEST_METHOD(CopyOnDerefernce) {
+			int* d = new int(3);
+			int* b = new int(5);
+
+			*b = *d;
+			*d += 5;
+
+			Assert::AreEqual(3, *b);
+			Assert::AreEqual(8, *d);
+		};
+		TEST_METHOD(CopyOnDeclare) {
+			int* d = new int(3);
+			int* b = new int(*d);
+			*d += 5;
+			Assert::AreEqual(3, *b);
+			Assert::AreEqual(8, *d);
+		};
 	};
 }

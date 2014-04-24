@@ -64,7 +64,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(SolutionDir)Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -79,11 +79,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoardWrapper.h" />
+    <ClInclude Include="Engine.Wrapper.h" />
     <ClInclude Include="KaroGame.h" />
     <ClInclude Include="MoveWrapper.h" />
     <ClInclude Include="PlayersWrapper.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="TileWrapper.h" />
+    <ClInclude Include="Stdafx.h" />
+    <ClInclude Include="CellWrapper.h" />
     <ClInclude Include="Vector2DWrapper.h" />
     <ClInclude Include="WrapperConversionUtility.h" />
   </ItemGroup>
@@ -93,7 +95,7 @@
     <ClCompile Include="KaroGame.cpp" />
     <ClCompile Include="MoveWrapper.cpp" />
     <ClCompile Include="PlayersWrapper.cpp" />
-    <ClCompile Include="TileWrapper.cpp" />
+    <ClCompile Include="CellWrapper.cpp" />
     <ClCompile Include="Vector2DWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>

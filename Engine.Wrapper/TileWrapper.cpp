@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "TileWrapper.h"
 
 namespace engine {

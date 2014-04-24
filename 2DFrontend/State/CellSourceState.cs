@@ -9,9 +9,9 @@ namespace _2DFrontend.State
 	/// <summary>
 	/// In this state, the player will choose an empty tile that will be moved.
 	/// </summary>
-	class TileSourceState : IKaroState
+	class CellSourceState : IKaroState
 	{
-		private static TileSourceState _instance;
+		private static CellSourceState _instance;
 
 		public static IKaroState Instance
 		{
@@ -19,7 +19,7 @@ namespace _2DFrontend.State
 			{
 				if (_instance == null)
 				{
-					_instance = new TileSourceState();
+					_instance = new CellSourceState();
 				}
 				return _instance;
 			}
@@ -28,7 +28,7 @@ namespace _2DFrontend.State
 		/// <summary>
 		/// Private constructor for singleton.
 		/// </summary>
-		private TileSourceState()
+		private CellSourceState()
 		{
 		}
 
@@ -36,9 +36,9 @@ namespace _2DFrontend.State
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
-				m.GetFromTile() == manager.CurrentMove.GetFromTile() &&
-				m.GetToTile() == manager.CurrentMove.GetToTile() &&
-				m.GetUsedTile() == new Vector2DWrapper(click.X, click.Y));
+				m.GetFromCell() == manager.CurrentMove.GetFromCell() &&
+				m.GetToCell() == manager.CurrentMove.GetToCell() &&
+				m.GetUsedCell() == new Vector2DWrapper(click.X, click.Y));
 			if (move != null)
 			{
 				// We now have a valid move. Execute it!

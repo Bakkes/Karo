@@ -50,6 +50,13 @@
     <Compile Include="GameForm.Designer.cs">
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KaroCommunicatedGameManager.cs" />
     <Compile Include="State\ComputerState.cs" />
     <Compile Include="State\IKaroState.cs" />
     <Compile Include="KaroGameManager.cs" />
@@ -61,9 +68,12 @@
     <Compile Include="State\PieceSourceState.cs" />
     <Compile Include="State\PieceDestinationState.cs" />
     <Compile Include="State\PlaceState.cs" />
-    <Compile Include="State\TileSourceState.cs" />
+    <Compile Include="State\CellSourceState.cs" />
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -88,6 +98,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommunicationProtocol\CommunicationProtocol.csproj">
+      <Project>{249ebc5b-8adf-49c3-bdfe-72e9babe7eb7}</Project>
+      <Name>CommunicationProtocol</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Engine.Wrapper\Engine.Wrapper.vcxproj">
       <Project>{1120b367-b325-4b42-b7f1-754522577572}</Project>
       <Name>Engine.Wrapper</Name>
