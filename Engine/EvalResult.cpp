@@ -15,10 +15,10 @@ namespace engine {
 
 	void EvalResult::SetMove(Move move) {
 		_move = move;
+		_isSet = true;
 	}
 
 	int EvalResult::GetScore() {
-		_isSet = true;
 		return _score;
 	}
 

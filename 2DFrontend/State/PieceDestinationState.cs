@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using engine.wrapper;
 
 namespace _2DFrontend.State
@@ -48,9 +48,11 @@ namespace _2DFrontend.State
 
 			if (move != null)
 			{
+				Debug.WriteLine("Clicked on valid destination");
 				// Check if the destination tile exists or if a tile has to be moved.
 				if (move.HasUsedCell())
 				{
+					Debug.WriteLine("Empty tile must be moved to destination");
 					manager.CurrentMove = move;
 					manager.ChangeState(CellSourceState.Instance);
 				}
@@ -59,9 +61,20 @@ namespace _2DFrontend.State
 			{
 				// Clicked on invalid destination tile. Get rid of the current
 				// move and go back to PieceSourceState.
+				Debug.WriteLine("Can't move selected piece to tile.", click);
 				manager.CurrentMove = null;
 				manager.ChangeState(PieceSourceState.Instance);
 			}
+		}
+
+		public void Enter(KaroGameManager manager)
+		{
+			Debug.WriteLine("Entering PieceDestinationState...");
+		}
+
+		public void Exit(KaroGameManager manager)
+		{
+			Debug.WriteLine("Exiting PieceDestinationState...");
 		}
 	}
 }
