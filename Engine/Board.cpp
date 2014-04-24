@@ -186,19 +186,19 @@ namespace engine{
 		return result;
 	}
 
-	int Board::GetNumberOfEdges(Tile<int>* tile) {
+	int Board::GetNumberOfEdges(Cell<int>* tile) {
 		int edges = 0;
 
-		if (!*tile->GetLeft()->GetData() & IsEmpty == IsEmpty) {
+		if (!((*tile->GetLeft()->GetData() & IsEmpty) == IsEmpty)) {
 			edges++;
 		}
-		if (!*tile->GetRight()->GetData() & IsEmpty == IsEmpty) {
+		if (!((*tile->GetRight()->GetData() & IsEmpty) == IsEmpty)) {
 			edges++;
 		}
-		if (!*tile->GetTop()->GetData() & IsEmpty == IsEmpty) {
+		if (!((*tile->GetTop()->GetData() & IsEmpty) == IsEmpty)) {
 			edges++;
 		}
-		if (!*tile->GetBottom()->GetData() & IsEmpty == IsEmpty) {
+		if (!((*tile->GetBottom()->GetData() & IsEmpty) == IsEmpty)) {
 			edges++;
 		}
 
