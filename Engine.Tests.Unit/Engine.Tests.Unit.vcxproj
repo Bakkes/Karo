@@ -16,6 +16,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoardMoveTests.cpp" />
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
     <ClCompile Include="MinimaxTest.cpp" />

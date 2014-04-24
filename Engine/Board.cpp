@@ -37,7 +37,7 @@ namespace engine{
 			case DELETE:
 				DeletePiece(*_grid->GetCellAt(move->GetToCell()));
 			return;
-			case MOVE:
+			case STEP:
 				if(move->HasUsedCell()){
 					MovePiece(
 						*_grid->GetCellAt(move->GetFromCell()), 

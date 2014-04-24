@@ -3,7 +3,7 @@
 
 namespace engine {
 
-	enum MoveType { INSERT, MOVE, JUMP, DELETE };
+	enum MoveType { INSERT, STEP, JUMP, DELETE };
 	
 	/** NOTE: Move positions use the absolute coordinates */
 	class ENGINE_API Move {

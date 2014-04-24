@@ -14,6 +14,7 @@ namespace Tests {
 	TEST_CLASS(BoardMoveTests) {
 	private:
 		Board* board;
+
 		string standartBoard;
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
@@ -45,9 +46,7 @@ namespace Tests {
 			delete board;
 		}
 
-		TEST_METHOD(IsInitialBoardEmpty) {
-			vector<Cell<int>>* result = board->GetOccupiedTiles();
-			Assert::IsTrue(*result == vector<Cell<int>>());
+		TEST_METHOD(InsertPiece) {
 			delete result;
 		};
 	};
