@@ -30,15 +30,15 @@ public:
 	}
 
 	static CellWrapper^ ConvertCell(Cell<int> tile) {
-		return gcnew CellWrapper(tile.GetPosition()->X(), tile.GetPosition()->Y(), *(tile.GetData()));
+		return gcnew CellWrapper(tile.GetPosition().X(), tile.GetPosition().Y(), *(tile.GetData()));
 	}
 
 	static CellWrapper^ ConvertCell(Cell<int>* tile) {
-		return gcnew CellWrapper(tile->GetPosition()->X(), tile->GetPosition()->Y(), *(tile->GetData()));
+		return gcnew CellWrapper(tile->GetPosition().X(), tile->GetPosition().Y(), *(tile->GetData()));
 	}
 
 	static Cell<int>* ConvertCell(CellWrapper^ tile) {
-		return new Cell<int>(new Vector2D(tile->GetPosition()->Y, tile->GetPosition()->X));
+		return new Cell<int>(Vector2D(tile->GetPosition()->Y, tile->GetPosition()->X));
 	}
 
 	static Vector2DWrapper^ ConvertVector2D(Vector2D vector2d) {

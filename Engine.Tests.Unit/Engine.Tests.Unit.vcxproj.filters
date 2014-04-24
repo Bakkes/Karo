@@ -33,9 +33,6 @@
     <ClCompile Include="MoveUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CellTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveUtils.h">

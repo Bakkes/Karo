@@ -10,14 +10,14 @@ namespace engine{
 		_grid->TraverseCells(
 			[](Cell<int>* tile) -> void{
 				int* data = new int(0);
-				if( tile->GetPosition()->X() < Board::initSize.GetWidth() && 
-					tile->GetPosition()->Y() < Board::initSize.GetHeight()){
+				if (tile->GetPosition().X() < Board::initSize.GetWidth() && 
+					tile->GetPosition().Y() < Board::initSize.GetHeight()){
 					*data |= HasCell | IsEmpty;
 				} 
 				tile->SetData(data);
 			}
 		);
-		absoluteTopLeft = *_grid->GetCellAt(Vector2D(0,0))->GetPosition();
+		absoluteTopLeft = _grid->GetCellAt(Vector2D(0,0))->GetPosition();
 	}
 	Board::~Board(){
 		delete _moveFinder;
@@ -147,7 +147,7 @@ namespace engine{
 			[&, this](Cell<int>* tile) -> void{
 				int data = *tile->GetData();
 				result << *tile->GetData() << ",";
-				if(tile->GetPosition()->X() +1 == this->_grid->GetSize()->GetWidth()){
+				if(tile->GetPosition().X() +1 == this->_grid->GetSize()->GetWidth()){
 					result << endl;
 				}
 			}

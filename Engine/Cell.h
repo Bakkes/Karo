@@ -14,32 +14,20 @@ namespace engine {
 	public:
 		// Copy constructor
 		Cell(const Cell<T> &src) {
-			_position = new Vector2D(*(src._position));
+			_position = Vector2D(src._position);
 			_left = src._left;
 			_right = src._right;
 			_top = src._top;
 			_bottom = src._bottom;
 			_tiledata = src._tiledata;
-		}
-		
-		// Overload assignment operator.
-		Cell<T>& Cell::operator=(const Cell<T>& src) {
-			_position = new Vector2D(*(src._position));
-			_left = src._left;
-			_right = src._right;
-			_top = src._top;
-			_bottom = src._bottom;
-			_tiledata = src._tiledata;
-			return *this;
 		}
 
 		// set a tile to the point
-		Cell(Vector2D* p){
+		Cell(Vector2D& p){
 			Init(p);
 		}
 
 		~Cell(){
-			delete _position;
 			delete _tiledata;
 			_top = NULL;
 			_left = NULL;
@@ -73,7 +61,7 @@ namespace engine {
 		Cell<T>* GetTop() const{
 			return _top;
 		}
-		Vector2D* GetPosition() const{
+		const Vector2D& GetPosition() const {
 			return _position;
 		}
 		void SetData(T* data){
@@ -91,7 +79,7 @@ namespace engine {
 			return tiles;
 		}
 	private:
-		void Init(Vector2D* p){
+		void Init(Vector2D& p){
 			_position = p;
 			_tiledata = NULL;
 			_bottom = NULL;
@@ -100,7 +88,7 @@ namespace engine {
 			_right = NULL;
 		}
 		T* _tiledata;
-		Vector2D* _position;
+		Vector2D _position;
 		Cell<T>* _top;
 		Cell<T>* _left;
 		Cell<T>* _right;

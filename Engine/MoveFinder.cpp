@@ -23,7 +23,7 @@ namespace engine {
 		std::vector<Cell<int>>* emptyTiles = _board->GetEmptyTiles();
 		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
 			// Add insertion move to an empty tile.
-			moves->push_back(Move(INSERT, Vector2D(), *(*it).GetPosition()));
+			moves->push_back(Move(INSERT, Vector2D(), (*it).GetPosition()));
 		}
 		return moves;
 	}
@@ -82,7 +82,7 @@ namespace engine {
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
 		if (((*to.GetData()) & (IsEmpty | HasCell)) != 0) {
-			moves->push_back(Move(type, *(from.GetPosition()), *(to.GetLeft()->GetPosition())));
+			moves->push_back(Move(type, (from.GetPosition()), (to.GetLeft()->GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
 		if (((*to.GetData()) & HasCell) == 0) {
@@ -95,9 +95,9 @@ namespace engine {
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
 			moves->push_back(Move(
 				type,
-				*from.GetPosition(),
-				*to.GetPosition(),
-				*(*it)->GetPosition()
+				from.GetPosition(),
+				to.GetPosition(),
+				(*it)->GetPosition()
 			));
 		}
 	}
@@ -110,7 +110,7 @@ namespace engine {
 			int jumpRight = *two.GetData();
 			if(jumpRight & IsEmpty) {
 				if(jumpRight & HasCell) {
-					possibility.push_back(Move(JUMP,*two.GetPosition()));
+					possibility.push_back(Move(JUMP, two.GetPosition()));
 				}
 				else {
 				//	ForPickableTiles(
@@ -121,7 +121,7 @@ namespace engine {
 			}
 		}
 		else {
-			possibility.push_back(Move(MOVE,*one.GetPosition()));
+			possibility.push_back(Move(MOVE, one.GetPosition()));
 		}
 		return possibility;
 	}
