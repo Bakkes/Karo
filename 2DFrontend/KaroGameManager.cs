@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using _2DFrontend.State;
 using engine.wrapper;
@@ -18,7 +19,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// The player whose turn it is.
 		/// </summary>
-		public Players CurrentPlayer { get; private set; }
+		public Players CurrentPlayer { get; protected set; }
 
 		/// <summary>
 		/// Access the board of the current game.
@@ -47,7 +48,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Current state of the game.
 		/// </summary>
-		private KaroGame Game { get; set; }
+		protected KaroGame Game { get; set; }
 
 		public KaroGameManager()
 		{
@@ -57,14 +58,20 @@ namespace _2DFrontend
 
 		public void ChangeState(IKaroState state)
 		{
+			if (CurrentState != null)
+			{
+				CurrentState.Exit(this);
+			}
 			CurrentState = state;
+			CurrentState.Enter(this);
 		}
 
 		/// <summary>
 		/// Perform actions depending on the current state and the click location.
 		/// </summary>
-		public void Update(Point tileLocation)
+		public virtual void Update(Point tileLocation)
 		{
+			Debug.WriteLine("Click received at tile {0}.", tileLocation);
 			if (CurrentState != null)
 			{
 				CurrentState.Update(this, tileLocation);

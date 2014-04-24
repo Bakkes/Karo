@@ -30,5 +30,9 @@ namespace wrapper {
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 		return wrapped;
 	}
+
+	bool KaroGame::HasWon(engine::wrapper::Players player) {
+		return false;
+	}
 }
 }
