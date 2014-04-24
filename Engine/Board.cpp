@@ -3,19 +3,27 @@ namespace engine{
 
 	const Size Board::initSize(5,4);
 	Board::Board(){
+		Init(true);
+	}
+	Board::Board(bool init){
+		Init(init);
+	}
+	void Board::Init(bool init){
 		_grid = new Grid<int>();
 		_grid->BindCellsToEachother(true);
-		_grid->TraverseCells(
-			[](Cell<int>* tile) -> void{
-				int* data = new int(0);
-				if( tile->GetPosition()->X() < Board::initSize.GetWidth() && 
-					tile->GetPosition()->Y() < Board::initSize.GetHeight()){
-					*data |= HasCell | IsEmpty;
-				} 
-				tile->SetData(data);
-			}
-		);
-		absoluteTopLeft = *_grid->GetCellAt(Vector2D(0,0))->GetPosition();
+		if(init){
+			_grid->TraverseCells(
+				[](Cell<int>* tile) -> void{
+					int* data = new int(0);
+					if( tile->GetPosition()->X() < Board::initSize.GetWidth() && 
+						tile->GetPosition()->Y() < Board::initSize.GetHeight()){
+						*data |= HasCell | IsEmpty;
+					} 
+					tile->SetData(data);
+				}
+			);
+			_absoluteTopLeft = Vector2D(0,0);
+		}
 	}
 	Board::~Board(){
 		delete _grid;
@@ -124,7 +132,7 @@ namespace engine{
 		
 	}
 	Cell<int>* Board::GetRelativeCellAt(const Vector2D relativePosition) const{
-		Vector2D position = relativePosition + absoluteTopLeft;
+		Vector2D position = relativePosition + _absoluteTopLeft;
 		if(position.X() < 0){
 			position.X(position.X() + _grid->GetSize()->GetWidth());
 		}
@@ -135,26 +143,46 @@ namespace engine{
 	}
 
 	Board* Board::CreateBoard(string from){
-		Board* result = new Board();
+		return Board::CreateBoard(from, Vector2D(0,0));
+	}
+	Board* Board::CreateBoard(string from, Vector2D absoluteTopLeft){
+		Board* result = new Board(false);
 		int y = 0, x = 0;
 		for (
 			string::iterator it = from.begin();
 			it < from.end();
-			it++ ,x++
+			it++ 
 		){
 			char subject = *it;
-			if(subject == ','){
-				x--;
-				continue;
+			int myWonderfolNumber = 0;
+			bool inWhile = false;
+
+			while(subject >= '0' && subject <= '9'){
+				myWonderfolNumber *= 10;
+				myWonderfolNumber += subject - '0';
+				it++;
+				subject = *it;
+				inWhile = true;
 			}
-			if(subject == '\n'){
-				y++;
-				x = 0;
-				continue;
+			
+			if(!inWhile){
+				if(subject == ','){
+					x++;
+					continue;
+				}
+				if(subject == '\n'){
+					y++;
+					x = 0; // because one increase next cycle
+					continue;
+				}
+			}else{
+				it--;
 			}
-			*result->_grid->GetCellAt(Vector2D(x,y))->GetData() = subject -'0';
+
+			result->_grid->GetCellAt(Vector2D(x,y))->SetData(new int(myWonderfolNumber));
 		}
-		int pause = 0;
+
+		result->_absoluteTopLeft = absoluteTopLeft;
 		return result;
 	}
 
