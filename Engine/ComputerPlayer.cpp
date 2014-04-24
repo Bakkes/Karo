@@ -6,14 +6,11 @@ namespace engine {
 		_board = board;
 		_maxDepth = maxDepth;
 		_evaluator = nullptr;
-		_moveHistory = new std::stack<Move*>();
 	}
 
 	ComputerPlayer::~ComputerPlayer() {
 		delete _evaluator;
 		_evaluator = nullptr;
-		delete _moveHistory;
-		_moveHistory = nullptr;
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
