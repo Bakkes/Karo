@@ -151,7 +151,7 @@ namespace _2DFrontend
                 throw new ArgumentException(String.Format("Number {0} can not exist on the board"));
             }
 
-            int currentNumber = -1;
+            int currentNumber = 0;
             for (int x = 0; x < 20; x++)
             {
                 for (int y = 0; y < 20; y++)
@@ -176,7 +176,7 @@ namespace _2DFrontend
 
 		private int ConvertBoardPositionToInt(Vector2DWrapper vector2D)
 		{
-            int number = -1;
+            int number = 0;
             for (int x = 0; x <= vector2D.X; x++)
             {
                 for (int y = 0; y <= vector2D.Y; y++)
@@ -192,7 +192,7 @@ namespace _2DFrontend
                 }
             }
 
-            if (number == -1)
+            if (number == 0)
             {
                 throw new Exception("No tiles found before this position, invalid position to relate from");
             }
@@ -200,7 +200,7 @@ namespace _2DFrontend
 			return number;
 		}
 
-		private static Turn ConvertMoveToTurn(MoveWrapper mw)
+		private Turn ConvertMoveToTurn(MoveWrapper mw)
 		{
 			CommunicationProtocol.MoveType mt = CommunicationProtocol.MoveType.Insert;
 			switch (mw.GetMoveType())
