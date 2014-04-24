@@ -20,6 +20,7 @@ namespace engine{
 		vector<Move>* GetLegalMoves(Players player) override;
 		vector<Cell<int>>* GetOccupiedTiles() override;
 		vector<Cell<int>>* GetEmptyTiles();
+		int GetNumberOfEdges(Cell<int>*) override;
 		Cell<int>* GetRelativeCellAt(const Vector2D relativePosition) const override;
 		string ToString();
 		// create a board from a string with topleft at 0,0
