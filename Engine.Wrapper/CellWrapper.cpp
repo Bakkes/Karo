@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "CellWrapper.h"
 
 namespace engine {

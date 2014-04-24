@@ -40,6 +40,7 @@ namespace _2DFrontend.State
 		public void Update(KaroGameManager manager, Point click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
+			MoveWrapper first = legalMoves.ElementAt(3);
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
 
@@ -47,6 +48,7 @@ namespace _2DFrontend.State
 			if (move != null)
 			{
 				manager.ExecuteMove(move);
+				Debug.WriteLine("Placed a new piece.");
 			}
 			else
 			{
