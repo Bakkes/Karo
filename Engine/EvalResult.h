@@ -12,8 +12,8 @@ namespace engine {
 		void SetScore(int score);
 		void SetMove(Move move);
 
-		int GetScore() const;
-		Move GetMove() const;
+		const int& GetScore() const;
+		const Move& GetMove() const;
 		bool IsSet();
 
 	private:
