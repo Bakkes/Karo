@@ -34,10 +34,6 @@ namespace engine {
 		return _toCell;
 	}
 
-	void Move::SetToCell(Vector2D location) {
-		_toCell = location;
-	}
-
 	Vector2D Move::GetUsedCell(){
 #ifdef _DEBUG
 		if (!HasUsedCell())

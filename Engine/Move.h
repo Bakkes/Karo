@@ -20,7 +20,6 @@ namespace engine {
 		Vector2D GetFromCell();
 		// The location to which the piece will go to
 		Vector2D GetToCell();
-		void SetToCell(Vector2D location);
 		// The location of the tile used to jump to (OPTIONAL: Test with HasUsedCell to see if it is set!)
 		Vector2D GetUsedCell();
 		// If a tile was moved to make this move possible
