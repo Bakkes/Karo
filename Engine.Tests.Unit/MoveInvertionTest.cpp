@@ -9,14 +9,14 @@ namespace Tests {
 	TEST_CLASS(MoveInvertionTest) {
 	public:
 		TEST_METHOD(InvertSimpleMove) {
-			Move move = Move(MOVE, Vector2D(3, 4), Vector2D(3, 5));
-			Move invertedMove = Move(MOVE, Vector2D(3, 5), Vector2D(3, 4));
+			Move move = Move(STEP, Vector2D(3, 4), Vector2D(3, 5));
+			Move invertedMove = Move(STEP, Vector2D(3, 5), Vector2D(3, 4));
 			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
 		}
 
 		TEST_METHOD(InvertBoardChangingMove) {
-			Move move = Move(MOVE, Vector2D(3, 4), Vector2D(3, 5), Vector2D(1, 2));
-			Move invertedMove = Move(MOVE, Vector2D(1, 2), Vector2D(3, 4), Vector2D(3, 5));
+			Move move = Move(STEP, Vector2D(3, 4), Vector2D(3, 5), Vector2D(1, 2));
+			Move invertedMove = Move(STEP, Vector2D(1, 2), Vector2D(3, 4), Vector2D(3, 5));
 			Assert::IsTrue(MovesAreEqual(invertedMove, InvertMove(move)));
 		}
 
