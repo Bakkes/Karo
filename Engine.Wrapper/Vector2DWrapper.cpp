@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Vector2DWrapper.h"
 
 namespace engine {

@@ -20,8 +20,6 @@ namespace engine {
 		IStaticEvaluation* _evaluator;
 		// The maximum depth of the minimax search
 		int _maxDepth;
-		// The stack of the moves the AI has executed.
-		std::stack<Move*>* _moveHistory;
 		// The unsafe board which is the playground of the AI
 		IBoard* _board;
 		// Executes a single step from the Minimax algorithm

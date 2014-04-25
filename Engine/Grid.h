@@ -132,7 +132,7 @@ namespace engine {
 					}else if(wrapArround){
 						_tiles->at(GetCellIndex(x, y))->SetLeft(
 							_tiles->at(
-								GetCellIndex(x, width -1)
+								GetCellIndex(width -1, y)
 							)
 						);
 					}
@@ -161,13 +161,13 @@ namespace engine {
 			_tiles = new vector<Cell<T>*>();
 			for (unsigned y = 0; y < height; y++) {
 				for (unsigned x = 0; x < width; x++) {
-					_tiles->push_back(new Cell<T>(new Vector2D(x, y)));
+					_tiles->push_back(new Cell<T>(Vector2D(x, y)));
 				}
 			}
 			BindCellsToEachother();
 		}
 		// this function prevents the same calculation showing up in several places
-		int GetCellIndex(const unsigned x, const unsigned y) const{
+		int GetCellIndex(const unsigned x, const unsigned y) const {
 			return x + y * _size->GetWidth();
 		}
 	};

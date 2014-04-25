@@ -18,11 +18,11 @@ namespace engine {
 		_isSet = true;
 	}
 
-	int EvalResult::GetScore() {
+	const int& EvalResult::GetScore() const {
 		return _score;
 	}
 
-	Move EvalResult::GetMove() {
+	const Move& EvalResult::GetMove() const {
 		return _move;
 	}
 
