@@ -38,6 +38,7 @@ namespace _2DFrontend.State
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetFromCell() == manager.CurrentMove.GetFromCell() &&
 				m.GetToCell() == manager.CurrentMove.GetToCell() &&
+				m.HasUsedCell() &&
 				m.GetUsedCell() == new Vector2DWrapper(click.X, click.Y));
 			if (move != null)
 			{

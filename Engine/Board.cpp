@@ -40,8 +40,22 @@ namespace engine{
 	}
 
 	int Board::GetPieceCountFor(Players player) {
-		// TODO: Actual counting.
-		return 0;
+
+		int playerCount = 0;
+		int isMax = player == Max ? IsMax : 0;
+
+		// Traverse the board and count all players.
+		_grid->TraverseCells(
+			[&](Cell<int>* tile) -> void {
+				int data = tile->GetData();
+				if ((data & HasCell) && (data & IsEmpty) == 0) {
+					if ((data & IsMax) == isMax) {
+						playerCount++;
+					}
+				}
+			}
+		);
+		return playerCount;
 	}
 
 	void Board::ExecuteMove(Move *move, Players player) {

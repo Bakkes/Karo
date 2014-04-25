@@ -4,8 +4,13 @@
 namespace engine {
 namespace wrapper {
 
-	MoveWrapper::MoveWrapper(MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D usedCell) {
-		_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromCell, toCell, usedCell);
+	MoveWrapper::MoveWrapper(MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D usedCell, bool hasUsedTile) {
+		if (hasUsedTile) {
+			_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromCell, toCell, usedCell);
+		}
+		else {
+			_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromCell, toCell);
+		}
 	}
 
 	MoveWrapper::MoveWrapper(MoveType moveType, Vector2DWrapper^ fromTile, Vector2DWrapper^ toTile, Vector2DWrapper^ usedTile) {
@@ -32,6 +37,9 @@ namespace wrapper {
 	}
 
 	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {
+		if (!_move->HasUsedCell()) {
+			return gcnew Vector2DWrapper(0, 0);
+		}
 		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedCell());
 	}
 
