@@ -42,6 +42,14 @@ namespace _2DFrontend.State
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetFromCell() == new Vector2DWrapper(click.X, click.Y));
 
+			foreach (MoveWrapper mw in legalMoves)
+			{
+				var from = mw.GetFromCell();
+				var to = mw.GetToCell();
+				var type = mw.GetMoveType();
+				int i = 5;
+			}
+
 			// Valid source piece clicked, save the move.
 			if (move != null)
 			{

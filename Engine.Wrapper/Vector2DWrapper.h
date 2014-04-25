@@ -27,6 +27,11 @@ public:
 		double get();
 		void set(double);
 	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("({0}, {1})", X, Y);
+	}
 private:
 	Vector2D * _vector2D;
 };

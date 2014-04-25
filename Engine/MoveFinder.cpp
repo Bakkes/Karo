@@ -10,7 +10,7 @@ namespace engine {
 	}
 
 	std::vector<Move>* MoveFinder::GetLegalMoves(Players player) {
-		if (_board->GetPieceCountFor(player) < 3) {
+		if (_board->GetPieceCountFor(player) < 6) {
 			return GetLegalPlaceMoves(player);
 		}
 		else {
@@ -81,23 +81,23 @@ namespace engine {
 		MoveType type)
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
-		if (((to.GetData()) & (IsEmpty | HasCell)) != 0) {
-			moves->push_back(Move(type, (from.GetPosition()), (to.GetLeft()->GetPosition())));
+		if (((to.GetData()) & (IsEmpty | HasCell)) == (IsEmpty | HasCell)) {
+			moves->push_back(Move(type, (from.GetPosition()), (to.GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		if (((to.GetData()) & HasCell) == 0) {
+		else if (((to.GetData()) & HasCell) == 0) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}
 
 	void MoveFinder::AddTileMoveMoves(std::vector<Move>* moves, MoveType type, Cell<int> from, Cell<int> to) {
-		std::vector<Cell<int>*>* emptyCells = nullptr;
+		std::vector<Cell<int>>* emptyCells = _board->GetEmptyTiles();
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
 			moves->push_back(Move(
 				type,
 				from.GetPosition(),
 				to.GetPosition(),
-				(*it)->GetPosition()
+				it->GetPosition()
 			));
 		}
 	}
