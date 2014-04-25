@@ -16,6 +16,7 @@ namespace wrapper {
 			~KaroGame();
 			MoveWrapper^ GetBestMove();
 			void ExecuteMove(MoveWrapper^ w, engine::wrapper::Players player);
+			bool HasWon(engine::wrapper::Players player);
 			BoardWrapper^ GetBoard();
 		private:
 			BoardWrapper^ _board;

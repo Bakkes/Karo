@@ -16,6 +16,7 @@ namespace engine {
 	void EvalResult::SetMove(Move move) {
 		_isSet = true;
 		_move = move;
+		_isSet = true;
 	}
 
 	void EvalResult::SetBestForMax(int bestForMax) {
@@ -26,11 +27,11 @@ namespace engine {
 		_bestForMin = bestForMin;
 	}
 
-	int EvalResult::GetScore() {
+	const int& EvalResult::GetScore() const {
 		return _score;
 	}
 
-	Move EvalResult::GetMove() {
+	const Move& EvalResult::GetMove() const {
 		return _move;
 	}
 

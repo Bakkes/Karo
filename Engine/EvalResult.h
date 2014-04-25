@@ -14,8 +14,8 @@ namespace engine {
 		void SetBestForMax(int bestForMax);
 		void SetBestForMin(int bestForMin);
 
-		int GetScore();
-		Move GetMove();
+		const int& GetScore() const;
+		const Move& GetMove() const;
 		int GetBestForMax();
 		int GetBestForMin();
 		bool IsSet();

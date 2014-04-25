@@ -8,6 +8,13 @@ namespace wrapper {
 		_move = new engine::Move(static_cast<engine::MoveType>(moveType), fromCell, toCell, usedCell);
 	}
 
+	MoveWrapper::MoveWrapper(MoveType moveType, Vector2DWrapper^ fromTile, Vector2DWrapper^ toTile, Vector2DWrapper^ usedTile) {
+		_move = new engine::Move(static_cast<engine::MoveType>(moveType), 
+			WrapperConversionUtility().ConvertVector2DStack(fromTile), 
+			WrapperConversionUtility().ConvertVector2DStack(toTile), 
+			WrapperConversionUtility().ConvertVector2DStack(usedTile));
+	}
+
 	MoveWrapper::~MoveWrapper() {
 		delete _move;
 	}
@@ -22,10 +29,6 @@ namespace wrapper {
 
 	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetToCell() {
 		return WrapperConversionUtility::ConvertVector2D(_move->GetToCell());
-	}
-
-	void MoveWrapper::SetToCell(engine::wrapper::Vector2DWrapper^ location) {
-		_move->SetToCell(WrapperConversionUtility::ConvertVector2DStack(location));
 	}
 
 	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {

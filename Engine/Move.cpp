@@ -22,23 +22,19 @@ namespace engine {
 		_hasUsedCell = hasUsedCell;
 	}
 
-	MoveType Move::GetMoveType() {
+	const MoveType& Move::GetMoveType() const {
 		return _moveType;
 	}
 
-	Vector2D Move::GetFromCell() {
+	const Vector2D& Move::GetFromCell() const {
 		return _fromCell;
 	}
 
-	Vector2D Move::GetToCell(){
+	const Vector2D& Move::GetToCell() const {
 		return _toCell;
 	}
 
-	void Move::SetToCell(Vector2D location) {
-		_toCell = location;
-	}
-
-	Vector2D Move::GetUsedCell(){
+	const Vector2D& Move::GetUsedCell() const {
 #ifdef _DEBUG
 		if (!HasUsedCell())
 			throw "Called GetUsedCell whilst no tile is being used";
@@ -46,7 +42,7 @@ namespace engine {
 		return _usedCell;
 	}
 
-	bool Move::HasUsedCell() {
+	const bool& Move::HasUsedCell() const {
 		return _hasUsedCell;
 	}
 }

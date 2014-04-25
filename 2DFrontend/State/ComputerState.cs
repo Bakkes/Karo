@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics;
 using System.Drawing;
 
 namespace _2DFrontend.State
@@ -29,9 +29,22 @@ namespace _2DFrontend.State
 		{
 		}
 
+		/// <summary>
+		/// ComputerState doesn't listen to clickevents. The entry method will
+		/// do everything AI related.
+		/// </summary>
 		public void Update(KaroGameManager manager, Point click)
 		{
-			throw new NotImplementedException();
+		}
+
+		public void Enter(KaroGameManager manager)
+		{
+			Debug.WriteLine("Entering ComputerState...");
+		}
+
+		public void Exit(KaroGameManager manager)
+		{
+			Debug.WriteLine("Exiting ComputerState...");
 		}
 	}
 }

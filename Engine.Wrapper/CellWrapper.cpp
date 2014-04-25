@@ -1,11 +1,10 @@
-#include "stdafx.h"
 #include "CellWrapper.h"
 
 namespace engine {
 namespace wrapper {
 	CellWrapper::CellWrapper(double x, double y, int data)
 	{
-		_tile = new Cell<int>(new Vector2D(x, y));
+		_tile = new Cell<int>(Vector2D(x, y));
 		_data = data;
 	}
 
@@ -19,7 +18,7 @@ namespace wrapper {
 	}
 
 	Vector2DWrapper^ CellWrapper::GetPosition() {
-		return gcnew Vector2DWrapper(_tile->GetPosition()->X(), _tile->GetPosition()->Y());
+		return gcnew Vector2DWrapper(_tile->GetPosition().X(), _tile->GetPosition().Y());
 	}
 }
 }

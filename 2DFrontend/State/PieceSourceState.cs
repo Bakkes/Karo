@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using engine.wrapper;
 
 namespace _2DFrontend.State
@@ -45,9 +45,24 @@ namespace _2DFrontend.State
 			// Valid source piece clicked, save the move.
 			if (move != null)
 			{
+				Debug.WriteLine("Valid source piece selected");
 				manager.CurrentMove = move;
 				manager.ChangeState(PieceDestinationState.Instance);
 			}
+			else
+			{
+				Debug.WriteLine("Clicked tile does not have a moveable piece");
+			}
+		}
+
+		public void Enter(KaroGameManager manager)
+		{
+			Debug.WriteLine("Entering PieceSourceState...");
+		}
+
+		public void Exit(KaroGameManager manager)
+		{
+			Debug.WriteLine("Exiting PieceSourceState...");
 		}
 	}
 }

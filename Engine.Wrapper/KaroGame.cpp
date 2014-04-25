@@ -1,6 +1,5 @@
 #pragma once
 
-#include "stdafx.h"
 #include "KaroGame.h"
 #include "Board.h"
 #include "WrapperConversionUtility.h"
@@ -29,6 +28,10 @@ namespace wrapper {
 		Move bestMove = _cPlayer->GetBestMove(Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 		return wrapped;
+	}
+
+	bool KaroGame::HasWon(engine::wrapper::Players player) {
+		return false;
 	}
 }
 }
