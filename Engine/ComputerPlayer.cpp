@@ -20,7 +20,7 @@ namespace engine {
 	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth) {
 		EvalResult result;
 		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
-		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); --it) {
+		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(&move, player);
 
