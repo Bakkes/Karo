@@ -47,16 +47,32 @@ namespace engine {
 	}
 
 	void MoveFinder::AddJumpMovesToVector(std::vector<Move>* moves, Cell<int> source) {
-		AddMoveIfValidDestination(moves, source, *source.GetLeft()->GetLeft(), JUMP);
-		AddMoveIfValidDestination(moves, source, *source.GetRight()->GetRight(), JUMP);
-		AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop(), JUMP);
-		AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom(), JUMP);
+		if ((source.GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetLeft()->GetLeft(), JUMP);
+		}
+		if ((source.GetRight()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetRight()->GetRight(), JUMP);
+		}
+		if ((source.GetTop()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop(), JUMP);
+		}
+		if ((source.GetBottom()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom(), JUMP);
+		}
 
 		// Diagonal
-		AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop()->GetLeft()->GetLeft(), JUMP);
-		AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop()->GetRight()->GetRight(), JUMP);
-		AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom()->GetLeft()->GetLeft(), JUMP);
-		AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom()->GetRight()->GetRight(), JUMP);
+		if ((source.GetTop()->GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop()->GetLeft()->GetLeft(), JUMP);
+		}
+		if ((source.GetTop()->GetRight()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop()->GetRight()->GetRight(), JUMP);
+		}
+		if ((source.GetBottom()->GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom()->GetLeft()->GetLeft(), JUMP);
+		}
+		if ((source.GetBottom()->GetRight()->GetData() & (HasTile | IsEmpty)) == HasTile) {
+			AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom()->GetRight()->GetRight(), JUMP);
+		}
 	}
 
 	// Adds all adjecent move options.
