@@ -48,7 +48,7 @@ namespace engine{
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void {
 				int data = tile->GetData();
-				if ((data & HasCell) && (data & IsEmpty) == 0) {
+				if ((data & HasTile) && (data & IsEmpty) == 0) {
 					if ((data & IsMax) == isMax) {
 						playerCount++;
 					}

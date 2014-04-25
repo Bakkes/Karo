@@ -81,11 +81,11 @@ namespace engine {
 		MoveType type)
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
-		if (((to.GetData()) & (IsEmpty | HasCell)) == (IsEmpty | HasCell)) {
+		if (((to.GetData()) & (IsEmpty | HasTile)) == (IsEmpty | HasTile)) {
 			moves->push_back(Move(type, (from.GetPosition()), (to.GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		else if (((to.GetData()) & HasCell) == 0) {
+		else if (((to.GetData()) & HasTile) == 0) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}
