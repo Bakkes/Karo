@@ -1,14 +1,23 @@
 #include "StubStaticEval.h"
 
 namespace engine {
-	StubStaticEval::StubStaticEval() {
-		srand(0);
+	StubStaticEval::StubStaticEval(int results[], int size) {
+		_results = results;
+		_resultCount = size;
+		_pointer = -1;
+		_callCount = 0;
 	}
 
-	StubStaticEval::~StubStaticEval()	{
+	StubStaticEval::~StubStaticEval() {
+		delete _results;
 	}
 
 	int StubStaticEval::Eval(IBoard* board, Players player) {
-		return rand();
+		++_callCount;
+		return _results[(++_pointer) % _resultCount];
+	}
+
+	const int& StubStaticEval::GetCallCount() const {
+		return _callCount;
 	}
 }
