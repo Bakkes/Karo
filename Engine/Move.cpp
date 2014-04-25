@@ -36,8 +36,9 @@ namespace engine {
 
 	const Vector2D& Move::GetUsedCell() const {
 #ifdef _DEBUG
-		if (!HasUsedCell())
+		if (!HasUsedCell()) {
 			throw "Called GetUsedCell whilst no tile is being used";
+		}
 #endif
 		return _usedCell;
 	}

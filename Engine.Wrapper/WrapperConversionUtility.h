@@ -21,12 +21,12 @@ public:
 
 	static MoveWrapper^ ConvertMove(Move* move) {
 		return gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(move->GetMoveType()), 
-			move->GetFromCell(), move->GetToCell(), move->HasUsedCell() ? move->GetUsedCell() : 0);
+			move->GetFromCell(), move->GetToCell(), move->HasUsedCell() ? move->GetUsedCell() : 0, move->HasUsedCell());
 	}
 
 	static MoveWrapper^ ConvertMove(Move move) {
 		return gcnew MoveWrapper(static_cast<engine::wrapper::MoveType>(move.GetMoveType()), 
-			move.GetFromCell(), move.GetToCell(), move.HasUsedCell() ? move.GetUsedCell() : 0);
+			move.GetFromCell(), move.GetToCell(), move.HasUsedCell() ? move.GetUsedCell() : 0, move.HasUsedCell());
 	}
 
 	static CellWrapper^ ConvertCell(Cell<int> tile) {
