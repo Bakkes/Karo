@@ -1,7 +1,7 @@
 #include <vector>
-#include "Board.h"
 #include "CppUnitTest.h"
 #include "ComputerPlayer.h"
+#include "StubBoard.h"
 #include "StubStaticEval.h"
 #include "MoveUtils.h"
 
@@ -12,7 +12,7 @@ namespace Tests {
 	TEST_CLASS(Minimax) {
 	public:
 		TEST_METHOD(MiniMaxDepth_2_ReturnsTrue) {
-			IBoard* board = new Board();
+			IBoard* board = new StubBoard();
 			ComputerPlayer* ai = new ComputerPlayer(board, 2);
 
 			ai->SetEvaluator(new StubStaticEval());
