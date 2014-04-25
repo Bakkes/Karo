@@ -11,6 +11,11 @@ public ref class Vector2DWrapper {
 public:
 	Vector2DWrapper(double x, double y);
 	~Vector2DWrapper();
+
+	static bool operator ==(Vector2DWrapper^ a, Vector2DWrapper^ b) {
+		return (a->X == b->X && a->Y == b->Y);
+	}
+
 	property double X
 	{
 		double get();
@@ -21,6 +26,11 @@ public:
 	{
 		double get();
 		void set(double);
+	}
+
+	virtual String^ ToString() override
+	{
+		return String::Format("({0}, {1})", X, Y);
 	}
 private:
 	Vector2D * _vector2D;

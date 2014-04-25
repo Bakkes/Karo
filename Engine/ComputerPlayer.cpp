@@ -6,14 +6,11 @@ namespace engine {
 		_board = board;
 		_maxDepth = maxDepth;
 		_evaluator = nullptr;
-		_moveHistory = new std::stack<Move*>();
 	}
 
 	ComputerPlayer::~ComputerPlayer() {
 		delete _evaluator;
 		_evaluator = nullptr;
-		delete _moveHistory;
-		_moveHistory = nullptr;
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
@@ -60,11 +57,11 @@ namespace engine {
 		switch (move.GetMoveType()) {
 		case INSERT:
 			return Move(DELETE, move.GetToCell());
-		case MOVE: {
+		case STEP: {
 			if (move.HasUsedCell()) {
-				return Move(MOVE, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
+				return Move(STEP, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
 			} else {
-				return Move(MOVE, move.GetToCell(), move.GetFromCell());
+				return Move(STEP, move.GetToCell(), move.GetFromCell());
 			}
 		}
 		case JUMP: {

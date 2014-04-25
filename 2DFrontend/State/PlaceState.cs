@@ -15,7 +15,7 @@ namespace _2DFrontend.State
 		/// The amount of pieces that have to be on the board in order for the
 		/// game to advance to the next state.
 		/// </summary>
-		private const int MaxPieceCount = 6;
+		private const int MaxPieceCount = 6 * 2;
 		private static PlaceState _instance;
 
 		public static IKaroState Instance
@@ -40,6 +40,7 @@ namespace _2DFrontend.State
 		public void Update(KaroGameManager manager, Point click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
+			MoveWrapper first = legalMoves.ElementAt(3);
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
 
@@ -47,6 +48,7 @@ namespace _2DFrontend.State
 			if (move != null)
 			{
 				manager.ExecuteMove(move);
+				Debug.WriteLine("Placed a new piece.");
 			}
 			else
 			{
@@ -54,7 +56,7 @@ namespace _2DFrontend.State
 			}
 
 			// Change state to Piece source state if all 6 pieces are on the board.
-			if (manager.Board.GetOccupiedCells().Count == 6)
+			if (manager.Board.GetOccupiedCells().Count == MaxPieceCount)
 			{
 				Debug.WriteLine("All {0} pieces are placed at the board.", MaxPieceCount);
 				manager.ChangeState(PieceSourceState.Instance);

@@ -2,6 +2,7 @@
 using engine.wrapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,44 +30,49 @@ namespace _2DFrontend
 
 		void _communication_WinRejected()
 		{
-			Console.WriteLine("Opponent did not accept win.");
+			Debug.WriteLine("Opponent did not accept win.");
 		}
 
 		void _communication_WinDetected(Turn t, Player p)
 		{
 			if (p == Player.You)
 			{
+				Debug.WriteLine("Opponent thinks he won, going to check.");
 				if (Game.HasWon(Players.Min))
 				{
+					Debug.WriteLine("Opponent did win, we lose.");
 					_communication.SendWinAccepted();
 				}
 				else
 				{
+					Debug.WriteLine("Opponent thinks he won but didnt according to us.");
 					_communication.SendWinDisputed();
 				}
 			}
 			else if (p == Player.Me)
 			{
+				Debug.WriteLine("Opponent thinks I won, going to check.");
 				if (Game.HasWon(Players.Max))
 				{
+					Debug.WriteLine("We actually won without noticing?");
 					_communication.SendWinAccepted();
 				}
 				else
 				{
+					Debug.WriteLine("We didnt win according to our calculations.");
 					_communication.SendWinDisputed();
 				}
 			}
-			Console.WriteLine("Opponent thinks he won, going to check.");
 		}
 
 		void _communication_WinAccepted()
 		{
-			Console.WriteLine("We won!");
+			Debug.WriteLine("We won!");
 		}
 
 		void _communication_TurnReceived(Turn t)
 		{
-			Console.WriteLine("Opponent took a turn");
+			Debug.WriteLine("Opponent took a turn");
 			MoveWrapper received = ConvertTurnToMove(t);
 
 			// Get the move with the correct source tile from the last click.
@@ -87,22 +93,24 @@ namespace _2DFrontend
 			ExecuteMove(bm);
 			if (Game.HasWon(Players.Max))
 			{
+				Debug.WriteLine("We won, sending message to opponent.");
 				_communication.SendWinDetected(Player.Me, ConvertMoveToTurn(bm));
 			}
 			else
 			{
+				Debug.WriteLine("Move made, sending move to opponent.");
 				_communication.SendTurn(ConvertMoveToTurn(bm));
 			}
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
 		{
-			Console.WriteLine("Opponent says our move is wrong.");
+			Debug.WriteLine("Opponent says our move is wrong.");
 		}
 
 		void communication_RequestFirstMove()
 		{
-			Console.WriteLine("We're first.");
+			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
 			MoveWrapper bm = Game.GetBestMove();
 			ExecuteMove(bm);
@@ -111,13 +119,13 @@ namespace _2DFrontend
 
 		void _communication_Disconnected(DisconnectReason reason)
 		{
-			Console.WriteLine("Opponent disconnected, reason: " + reason.ToString());
+			Debug.WriteLine("Opponent disconnected, reason: " + reason.ToString());
 
 		}
 
 		void _communication_Connected()
 		{
-			Console.WriteLine("Connected to opponent, GLHF");
+			Debug.WriteLine("Connected to opponent, GLHF");
 		}
 
 		public override void Update(System.Drawing.Point tileLocation)
@@ -137,15 +145,20 @@ namespace _2DFrontend
 					mt = engine.wrapper.MoveType.JUMP;
 					break;
 				case CommunicationProtocol.MoveType.Move:
-					mt = engine.wrapper.MoveType.MOVE;
+					mt = engine.wrapper.MoveType.STEP;
 					break;
 			}
 			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
-				ConvertIntToBoardPosition(t.ToTile), ConvertIntToBoardPosition(t.EmptyTile));
+				ConvertIntToBoardPosition(t.ToTile), t.EmptyTile == -1 ? null : ConvertIntToBoardPosition(t.EmptyTile));
 		}
 
 		private Vector2DWrapper ConvertIntToBoardPosition(int? number)
 		{
+			if (number == null)
+			{
+				return new Vector2DWrapper(0, 0);
+			}
+
             if (number < 0 || number > 20) 
             {
                 throw new ArgumentException(String.Format("Number {0} can not exist on the board"));
@@ -211,13 +224,20 @@ namespace _2DFrontend
 				case engine.wrapper.MoveType.JUMP:
 					mt = CommunicationProtocol.MoveType.Jump;
 					break;
-				case engine.wrapper.MoveType.MOVE:
+				case engine.wrapper.MoveType.STEP:
 					mt = CommunicationProtocol.MoveType.Move;
 					break;
 			}
 			Turn t = new Turn();
 			t.MoveType = mt;
-			t.EmptyTile = ConvertBoardPositionToInt(mw.GetUsedCell());
+			if (mw.HasUsedCell())
+			{
+				t.EmptyTile = ConvertBoardPositionToInt(mw.GetUsedCell());
+			}
+			else
+			{
+				t.EmptyTile = null;
+			}
 			t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
 			t.ToTile = ConvertBoardPositionToInt(mw.GetToCell());
 			return t;

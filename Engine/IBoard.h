@@ -6,13 +6,14 @@
 #include "Vector2D.h"
 namespace engine {
 enum CellValue{
-	HasCell = 1,
+	HasTile = 1,
 	IsEmpty = 2,
 	IsMax = 4,
 	IsFlipped = 8
 };
 	class IBoard {
 	public:
+		virtual int GetPieceCountFor(Players player) = 0;
 		virtual void ExecuteMove(Move* move, Players player) = 0;
 		virtual std::vector<Move>* GetLegalMoves(Players player) = 0;
 		virtual std::vector<Cell<int>>* GetOccupiedTiles() = 0;

@@ -48,12 +48,21 @@ namespace _2DFrontend.State
 
 			if (move != null)
 			{
+				var usedTile = move.HasUsedCell();
 				Debug.WriteLine("Clicked on valid destination");
 				// Check if the destination tile exists or if a tile has to be moved.
 				if (move.HasUsedCell())
 				{
 					Debug.WriteLine("Empty tile must be moved to destination");
 					manager.CurrentMove = move;
+					manager.ChangeState(CellSourceState.Instance);
+				}
+				// Valid move, execute it.
+				else
+				{
+					Debug.WriteLine("Moving tile at {0} to {1}",
+						move.GetFromCell(), move.GetToCell());
+					manager.ExecuteMove(move);
 					manager.ChangeState(CellSourceState.Instance);
 				}
 			}
