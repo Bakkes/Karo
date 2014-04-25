@@ -1,6 +1,9 @@
 #include "ComputerPlayer.h"
 
 namespace engine {
+	/*
+	 * Computer AI with the Alpha Beta Pruning
+	 */
 
 	ComputerPlayer::ComputerPlayer(IBoard* board, int maxDepth) {
 		_board = board;
@@ -18,7 +21,7 @@ namespace engine {
 	}
 
 	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth, int bestForMax, int bestForMin) {
-		EvalResult result;
+		EvalResult result(bestForMax, bestForMin);
 		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
 		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
 			Move move = (*it);
@@ -42,7 +45,7 @@ namespace engine {
 				(player == Max && score.GetScore() < bestForMax) || // Result is better if we are the max player
 				(player == Min && score.GetScore() > bestForMin)) { // Result is better if we are the min player
 
-				if (player == Max) { // Modify the bestForMax) value for the max player
+				if (player == Max) { // Modify the bestForMax value for the max player
 					if (score.GetScore() > bestForMax) { // The ranges no longer overlap, prune it
 						break;
 					}
