@@ -9,7 +9,6 @@ namespace engine {
 	}
 
 	StubStaticEval::~StubStaticEval() {
-		delete _results;
 	}
 
 	int StubStaticEval::Eval(IBoard* board, Players player) {

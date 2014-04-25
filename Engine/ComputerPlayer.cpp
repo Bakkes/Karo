@@ -21,12 +21,12 @@ namespace engine {
 	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth) {
 		EvalResult result;
 		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
-		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); --it) {
+		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(&move, player);
 
 			EvalResult score;
-			if (depth + 1 <= _maxDepth) {
+			if (depth + 1 < _maxDepth) {
 				// We are allowed to go deeper, take the result of the next step
 				score = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1);
 			} else {
