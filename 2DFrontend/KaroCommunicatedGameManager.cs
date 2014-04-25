@@ -85,7 +85,7 @@ namespace _2DFrontend
 			MoveWrapper mv = LegalMoves.Where(m =>
 				m.GetFromCell() == received.GetFromCell() && 
 				m.GetToCell() == received.GetToCell() &&
-				m.GetUsedCell() == received.GetUsedCell()).FirstOrDefault();
+				(!m.HasUsedCell() || m.GetUsedCell() == received.GetUsedCell())).FirstOrDefault();
 			if (mv == null)
 			{
 				Console.WriteLine("Move is illegal, sending back");
@@ -155,8 +155,17 @@ namespace _2DFrontend
 					mt = engine.wrapper.MoveType.MOVE;
 					break;
 			}
-			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
-				ConvertIntToBoardPosition(t.ToTile), t.EmptyTile == -1 ? null : ConvertIntToBoardPosition(t.EmptyTile));
+			if (t.EmptyTile == null)
+			{
+				return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
+					ConvertIntToBoardPosition(t.ToTile));
+			}
+			else
+			{
+				return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
+					ConvertIntToBoardPosition(t.ToTile), ConvertIntToBoardPosition(t.EmptyTile));
+
+			}
 		}
 
 		private Vector2DWrapper ConvertIntToBoardPosition(int? number)
