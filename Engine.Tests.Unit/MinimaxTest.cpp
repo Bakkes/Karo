@@ -30,8 +30,8 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
-			Assert::AreEqual(81, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0))), L"Returned not the expected move");
+			Assert::AreEqual(81, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 
 			delete board;
 			delete ai;
@@ -55,8 +55,8 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
-			Assert::AreEqual(37, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0))), L"Returned not the expected move");
+			Assert::AreEqual(37, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 
 			delete board;
 			delete ai;
