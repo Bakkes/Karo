@@ -76,6 +76,8 @@
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="ComputerPlayer.h" />
+    <ClInclude Include="ComputerPlayerAB.h" />
+    <ClInclude Include="ComputerPlayerUtils.h" />
     <ClInclude Include="DllImportExport.h" />
     <ClInclude Include="EvalResult.h" />
     <ClInclude Include="ExportedClass.h" />
@@ -94,7 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="ComputerPlayer.cpp" />
     <ClCompile Include="ComputerPlayerAB.cpp" />
+    <ClCompile Include="ComputerPlayerUtils.cpp" />
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />

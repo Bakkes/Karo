@@ -6,6 +6,10 @@ namespace engine {
 		_isSet = false;
 	}
 
+	EvalResult::EvalResult(int bestForMax, int bestForMin) : _move(INSERT, Vector2D(-1)) {
+		_isSet = false;
+	}
+
 	EvalResult::~EvalResult() {
 	}
 

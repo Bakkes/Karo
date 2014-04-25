@@ -7,6 +7,7 @@ namespace engine {
 	class EvalResult {
 	public:
 		EvalResult();
+		EvalResult(int bestForMax, int bestForMin);
 		~EvalResult();
 
 		void SetScore(int score);
