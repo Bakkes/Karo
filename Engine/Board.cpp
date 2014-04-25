@@ -110,10 +110,15 @@ namespace engine{
 		DeletePiece(from);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
+		Flip(from);
 		MovePiece(from, to, owner, tileUsed);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner){
+		Flip(from);
 		MovePiece(from, to, owner);
+	}
+	void Board::Flip(Cell<int>& which){
+		which.SetData(which.GetData() ^ IsFlipped);
 	}
 
 
@@ -154,7 +159,6 @@ namespace engine{
 		);
 		return emptyTiles;
 	}
-
 	string Board::ToString(){
 		stringstream result;
 		_grid->TraverseCells(

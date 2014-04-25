@@ -42,5 +42,6 @@ namespace engine{
 		void MovePiece(Cell<int>& from, Cell<int>& to, Players owner);
 		void JumpPiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed);
 		void JumpPiece(Cell<int>& from, Cell<int>& to, Players owner);
+		void Flip(Cell<int>& which);
 	};
 }
