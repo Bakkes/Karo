@@ -84,7 +84,6 @@
     <ClInclude Include="MoveWrapper.h" />
     <ClInclude Include="PlayersWrapper.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Stdafx.h" />
     <ClInclude Include="CellWrapper.h" />
     <ClInclude Include="Vector2DWrapper.h" />
     <ClInclude Include="WrapperConversionUtility.h" />
@@ -92,14 +91,9 @@
   <ItemGroup>
     <ClCompile Include="AssemblyInfo.cpp" />
     <ClCompile Include="BoardWrapper.cpp" />
-    <ClCompile Include="Engine.Wrapper.cpp" />
     <ClCompile Include="KaroGame.cpp" />
     <ClCompile Include="MoveWrapper.cpp" />
     <ClCompile Include="PlayersWrapper.cpp" />
-    <ClCompile Include="Stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="CellWrapper.cpp" />
     <ClCompile Include="Vector2DWrapper.cpp" />
   </ItemGroup>

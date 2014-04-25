@@ -21,8 +21,8 @@ namespace engine {
 		int score = 0;
 
 		for(auto it = tiles->begin(); it != tiles->end(); ++it) {
-			if((*it->GetData() & IsMax) == IsMax && players == Max) { //friendly: max
-				if ((*it->GetData() & IsFlipped) == IsFlipped) {
+			if((it->GetData() & IsMax) == IsMax && players == Max) { //friendly: max
+				if ((it->GetData() & IsFlipped) == IsFlipped) {
 					score += flippedValue;
 
 					if (board->GetNumberOfEdges(&*it) == 2) {
@@ -33,11 +33,11 @@ namespace engine {
 
 					//check left/right
 					bool tmpBool = false;
-					if ((*it->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -47,11 +47,11 @@ namespace engine {
 
 					//check up/down
 					tmpBool = false;
-					if ((*it->GetTop()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetTop()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetBottom()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -61,11 +61,11 @@ namespace engine {
 
 					//check upleft/downright
 					tmpBool = false;
-					if ((*it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -75,11 +75,11 @@ namespace engine {
 
 					//check upright/downleft
 					tmpBool = false;
-					if ((*it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -87,8 +87,8 @@ namespace engine {
 						else { score += neighborValue; }
 					}
 				}
-			} else if((*it->GetData() & IsMax) != IsMax && players == Min) { //friendly: min
-				if ((*it->GetData() & IsFlipped) == IsFlipped) {
+			} else if((it->GetData() & IsMax) != IsMax && players == Min) { //friendly: min
+				if ((it->GetData() & IsFlipped) == IsFlipped) {
 					score += flippedValue;
 
 					if (board->GetNumberOfEdges(&*it) == 2) {
@@ -99,11 +99,11 @@ namespace engine {
 
 					//check left/right
 					bool tmpBool = false;
-					if ((*it->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -113,11 +113,11 @@ namespace engine {
 
 					//check up/down
 					tmpBool = false;
-					if ((*it->GetTop()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetTop()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetBottom()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -127,11 +127,11 @@ namespace engine {
 
 					//check upleft/downright
 					tmpBool = false;
-					if ((*it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -141,11 +141,11 @@ namespace engine {
 
 					//check upright/downleft
 					tmpBool = false;
-					if ((*it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score += neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score -= neighborValue;
 							score += lineValue;
@@ -153,8 +153,8 @@ namespace engine {
 						else { score += neighborValue; }
 					}
 				}
-			} else if((*it->GetData() & IsMax) != IsMax && players == Max) { //hostile: min
-				if ((*it->GetData() & IsFlipped) == IsFlipped) {
+			} else if((it->GetData() & IsMax) != IsMax && players == Max) { //hostile: min
+				if ((it->GetData() & IsFlipped) == IsFlipped) {
 					score -= flippedValue;
 
 					if (board->GetNumberOfEdges(&*it) == 2) {
@@ -165,11 +165,11 @@ namespace engine {
 
 					//check left/right
 					bool tmpBool = false;
-					if ((*it->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;
@@ -179,11 +179,11 @@ namespace engine {
 
 					//check up/down
 					tmpBool = false;
-					if ((*it->GetTop()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetTop()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetBottom()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;
@@ -193,11 +193,11 @@ namespace engine {
 
 					//check upleft/downright
 					tmpBool = false;
-					if ((*it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;
@@ -207,11 +207,11 @@ namespace engine {
 
 					//check upright/downleft
 					tmpBool = false;
-					if ((*it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+					if ((it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;
@@ -219,8 +219,8 @@ namespace engine {
 						else { score -= neighborValue; }
 					}
 				}
-			} else if((*it->GetData() & IsMax) == IsMax && players == Min) { //hostile: max
-				if ((*it->GetData() & IsFlipped) == IsFlipped) {
+			} else if((it->GetData() & IsMax) == IsMax && players == Min) { //hostile: max
+				if ((it->GetData() & IsFlipped) == IsFlipped) {
 					score -= flippedValue;
 
 					if (board->GetNumberOfEdges(&*it) == 2) {
@@ -231,11 +231,11 @@ namespace engine {
 
 					//check left/right
 					bool tmpBool = false;
-					if ((*it->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;
@@ -245,11 +245,11 @@ namespace engine {
 
 					//check up/down
 					tmpBool = false;
-					if ((*it->GetTop()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetTop()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetBottom()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;
@@ -259,11 +259,11 @@ namespace engine {
 
 					//check upleft/downright
 					tmpBool = false;
-					if ((*it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;
@@ -273,11 +273,11 @@ namespace engine {
 
 					//check upright/downleft
 					tmpBool = false;
-					if ((*it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						score -= neighborValue;
 						tmpBool = true;
 					}
-					if ((*it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+					if ((it->GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 						if (tmpBool) {
 							score += neighborValue;
 							score -= lineValue;

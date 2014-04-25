@@ -80,13 +80,32 @@ namespace _2DFrontend
 					for (int y = 0; y < maxPotentialSize; y++)
 					{
 						CellWrapper tile = board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-						if ((tile.GetData() & (int)CellValue.HasCell) == (int)CellValue.HasCell)
-						{
-							Point paintPos = CellToPixel(x, y);
-							g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
-								CellSize, CellSize);
-						}
+						PaintTile(tile, g, x, y);
 					}
+				}
+			}
+		}
+
+		private void PaintTile(CellWrapper tile, Graphics g, int x, int y)
+		{
+			int tileData = tile.GetData();
+			if ((tileData & (int)CellValue.HasCell) == 0)
+			{
+				// No cel, return.
+				return;
+			}
+			Point paintPos = CellToPixel(x, y);
+			g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
+				CellSize, CellSize);
+			if ((tileData & (int)CellValue.IsEmpty) == 0)
+			{
+				if ((tileData & (int)CellValue.IsMax) != 0)
+				{
+					g.FillEllipse(_pieceMaxColor, paintPos.X, paintPos.Y, CellSize, CellSize);
+				}
+				else
+				{
+					g.FillEllipse(_pieceMinColor, paintPos.X, paintPos.Y, CellSize, CellSize);
 				}
 			}
 		}
@@ -107,8 +126,8 @@ namespace _2DFrontend
 		{
 			// The +1 is because all tiles are offest by one tile to the bottom/right.
 			// See comments in CellToPixel for further explanation.
-			return new Point(x % (CellSize + Gap) + 1,
-				y % (CellSize + Gap) + 1);
+			return new Point(x / (CellSize + Gap) - 1,
+				y / (CellSize + Gap) - 1);
 		}
 
 		/// <summary>
