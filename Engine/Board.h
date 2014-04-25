@@ -31,7 +31,6 @@ namespace engine{
 	private:
 		MoveFinder* _moveFinder;
 		Grid<int>* _grid;
-		Vector2D absoluteTopLeft;
 		void Init(bool init);
 		void InsertPiece(const Cell<int>& on, Players owner);
 		void DeletePiece(const Cell<int>& on);

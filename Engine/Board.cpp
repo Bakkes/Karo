@@ -174,7 +174,7 @@ namespace engine{
 		
 	}
 	Cell<int>* Board::GetRelativeCellAt(const Vector2D relativePosition) const{
-		Vector2D position = relativePosition + absoluteTopLeft;
+		Vector2D position = relativePosition + _absoluteTopLeft;
 		if(position.X() < 0){
 			position.X(position.X() + _grid->GetSize()->GetWidth());
 		}

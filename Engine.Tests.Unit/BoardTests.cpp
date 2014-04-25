@@ -89,7 +89,8 @@ namespace Tests {
 			board = Board::CreateBoard(
 				standartBoard,
 				input);
-			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0,0))->GetPosition() == input);
+			Vector2D result = board->GetRelativeCellAt(Vector2D(0,0))->GetPosition();
+			Assert::IsTrue(result == input);
 		}
 
 		TEST_METHOD(WrapArroundTopLeft) {
