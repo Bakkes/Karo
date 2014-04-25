@@ -36,10 +36,6 @@ namespace wrapper {
 		return WrapperConversionUtility::ConvertVector2D(_move->GetToCell());
 	}
 
-	void MoveWrapper::SetToCell(engine::wrapper::Vector2DWrapper^ location) {
-		_move->SetToCell(WrapperConversionUtility::ConvertVector2DStack(location));
-	}
-
 	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {
 		if (!_move->HasUsedCell()) {
 			return gcnew Vector2DWrapper(0, 0);

@@ -18,9 +18,9 @@ namespace engine {
 			return *this;
 		}
 		void SetHeight(unsigned);
-		unsigned  GetHeight() const;
+		unsigned GetHeight() const;
 		void SetWidth(unsigned);
-		unsigned  GetWidth() const;
+		unsigned GetWidth() const;
 		operator Vector2D() {return Vector2D(X(), Y());}
 	};
 
