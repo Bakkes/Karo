@@ -7,7 +7,7 @@ using namespace engine;
 namespace engine {
 namespace wrapper {
 
-	public enum class MoveType { INSERT = 0, MOVE = 1, JUMP = 2};
+	public enum class MoveType { INSERT = 0, STEP = 1, JUMP = 2};
 
 	public ref class MoveWrapper
 	{

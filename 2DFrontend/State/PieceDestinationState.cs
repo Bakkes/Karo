@@ -42,20 +42,9 @@ namespace _2DFrontend.State
 			IEnumerable<MoveWrapper> sourceLegalMoves = legalMoves.Where(m =>
 				m.GetFromCell() == manager.CurrentMove.GetFromCell());
 
-			foreach (MoveWrapper m in legalMoves)
-			{
-				string s = "";
-				if (m.HasUsedCell())
-				{
-					s += string.Format(" ({0})", m.GetUsedCell());
-				}
-				Debug.WriteLine("{0} -> {1}{2} ({3})", m.GetFromCell(), m.GetToCell(), s, m.GetMoveType().ToString());
-			}
-
 			// Get the move (if it exists) with the correct destination tile.
 			MoveWrapper move = sourceLegalMoves.FirstOrDefault(m =>
 				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
-
 
 			if (move != null)
 			{
@@ -73,6 +62,8 @@ namespace _2DFrontend.State
 				{
 					Debug.WriteLine("Moving tile at {0} to {1}",
 						move.GetFromCell(), move.GetToCell());
+					manager.ExecuteMove(move);
+					manager.ChangeState(CellSourceState.Instance);
 				}
 			}
 			else

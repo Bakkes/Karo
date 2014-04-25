@@ -44,7 +44,7 @@ namespace wrapper {
 
 	engine::wrapper::Vector2DWrapper^ MoveWrapper::GetUsedCell() {
 		if (!_move->HasUsedCell()) {
-			return gcnew Vector2DWrapper(-1, -1);
+			return gcnew Vector2DWrapper(0, 0);
 		}
 		return WrapperConversionUtility::ConvertVector2D(_move->GetUsedCell());
 	}
