@@ -192,12 +192,12 @@ namespace engine{
 		int y = 0, x = 0;
 		for (string::iterator it = from.begin(); it < from.end(); it++) {
 			char subject = *it;
-			int myWonderfolNumber = 0;
+			int myWonderfulNumber = 0;
 			bool inWhile = false;
 
 			while(subject >= '0' && subject <= '9') {
-				myWonderfolNumber *= 10;
-				myWonderfolNumber += subject - '0';
+				myWonderfulNumber *= 10;
+				myWonderfulNumber += subject - '0';
 				it++;
 				subject = *it;
 				inWhile = true;
@@ -216,7 +216,7 @@ namespace engine{
 			} else {
 				it--;
 			}
-			result->_grid->GetCellAt(Vector2D(x,y))->SetData(myWonderfolNumber);
+			result->_grid->GetCellAt(Vector2D(x,y))->SetData(myWonderfulNumber);
 		}
 
 		result->_absoluteTopLeft = absoluteTopLeft;
