@@ -19,7 +19,7 @@ namespace engine{
 					if( tile->GetPosition().X() < Board::initSize.GetWidth() &&
 						tile->GetPosition().Y() < Board::initSize.GetHeight())
 					{
-						data |= HasCell | IsEmpty;
+						data |= HasTile | IsEmpty;
 					}
 					tile->SetData(data);
 				}
@@ -52,7 +52,7 @@ namespace engine{
 			case DELETE:
 				DeletePiece(*_grid->GetCellAt(move->GetToCell()));
 			return;
-			case MOVE:
+			case STEP:
 				if(move->HasUsedCell()){
 					MovePiece(
 						*_grid->GetCellAt(move->GetFromCell()), 
@@ -100,8 +100,8 @@ namespace engine{
 		on.SetData(on.GetData() | IsEmpty);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
-		tileUsed.SetData(tileUsed.GetData() & ~HasCell);
-		tileUsed.SetData(to.GetData() | HasCell);
+		tileUsed.SetData(tileUsed.GetData() & ~HasTile);
+		tileUsed.SetData(to.GetData() | HasTile);
 		MovePiece(from, to, owner);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner){
@@ -125,7 +125,7 @@ namespace engine{
 		auto tiles = new vector<Cell<int>>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
-				if(!tile->GetData() & HasCell){
+				if(!tile->GetData() & HasTile){
 					return;
 				}
 				if(tile->GetData() & IsEmpty){
@@ -142,7 +142,7 @@ namespace engine{
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
 				// Stop if cell does not contain a tile.
-				if(!tile->GetData() & HasCell){
+				if(!tile->GetData() & HasTile){
 					return;
 				}
 				// Stop if tile is not empty.
@@ -180,6 +180,9 @@ namespace engine{
 		return _grid->GetCellAt(position);
 	}
 
+	Board* Board::CreateBoard(string from) {
+		return Board::CreateBoard(from, Vector2D(0));
+	}
 	Board* Board::CreateBoard(string from, Vector2D absoluteTopLeft) {
 		Board* result = new Board(false);
 		int y = 0, x = 0;
@@ -215,5 +218,22 @@ namespace engine{
 		result->_absoluteTopLeft = absoluteTopLeft;
 		return result;
 	}
+	int Board::GetNumberOfEdges(Cell<int>* tile) {
+		int edges = 0;
+		
+		if (!((tile->GetLeft()->GetData() & IsEmpty) == IsEmpty)) {
+			edges++;
+		}
+		if (!((tile->GetRight()->GetData() & IsEmpty) == IsEmpty)) {
+			edges++;
+		}
+		if (!((tile->GetTop()->GetData() & IsEmpty) == IsEmpty)) {
+			edges++;
+		}
+		if (!((tile->GetBottom()->GetData() & IsEmpty) == IsEmpty)) {
+			edges++;
+		}
 
+		return edges;
+	}
 }

@@ -26,7 +26,7 @@ namespace engine{
 		// create a board from a string with topleft at 0,0
 		static Board* CreateBoard(string from);
 		// allows you to specify the top left position, the string from is still absolute
-		static Board* CreateBoard(string from, Vector2D absoluteTopLeft);
+		static Board*  CreateBoard(string from, Vector2D absoluteTopLeft);
 		static const Size initSize;
 	private:
 		MoveFinder* _moveFinder;

@@ -1,6 +1,5 @@
 
 #include "CppUnitTest.h"
-#include "ICommunication.h"
 #include "Board.h"
 #include "Cell.h"
 #include <string>
