@@ -10,7 +10,7 @@ namespace engine {
 	}
 
 	std::vector<Move>* MoveFinder::GetLegalMoves(Players player) {
-		if (_board->GetPieceCountFor(player) < 6) {
+		if (_board->GetPieceCountFor(player) < Board::MaxPiecesPerPlayer) {
 			return GetLegalPlaceMoves(player);
 		}
 		else {
@@ -100,29 +100,5 @@ namespace engine {
 				it->GetPosition()
 			));
 		}
-	}
-
-	std::vector<Move> MoveFinder::FindMove(Cell<int> one,Cell<int> two) {
-		std::vector<Move> possibility = std::vector<Move>();
-
-		int checkRight = one.GetData();
-		if(!( checkRight & IsEmpty)) {
-			int jumpRight = two.GetData();
-			if(jumpRight & IsEmpty) {
-				if(jumpRight & HasTile) {
-					possibility.push_back(Move(JUMP, two.GetPosition()));
-				}
-				else {
-				//	ForPickableTiles(
-				//	[&](Tile<int>* tile) -> void{
-				//		possibility.push_back(Move(JUMP,*two.GetPosition()));
-				//});
-				}
-			}
-		}
-		else {
-			possibility.push_back(Move(STEP, one.GetPosition()));
-		}
-		return possibility;
 	}
 }

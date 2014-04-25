@@ -14,7 +14,6 @@ namespace engine{
 		MoveFinder(Board* board);
 		~MoveFinder(void);
 		std::vector<Move>* GetLegalMoves(Players player);
-		std::vector<Move> FindMove(Cell<int>, Cell<int>);
 	private:
 		// Get all legal moves for the place state.
 		std::vector<Move>* GetLegalPlaceMoves(Players player);

@@ -12,6 +12,8 @@ namespace engine{
 
 	class ENGINE_API Board : public IBoard{
 	public:
+		static const int MaxPiecesPerPlayer = 6;
+
 		Board();
 		Board(bool init);
 		~Board();
