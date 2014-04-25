@@ -30,7 +30,8 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1)); // Invalid move structure
 			Assert::IsTrue(IsLegalMove(board, move, Max)); // Not legal move
-			Assert::AreEqual(81, staticEval->GetCallCount());
+			Assert::AreEqual(81, staticEval->GetCallCount()); // Correct depth
+			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0)))); // Not the correct move has been returned
 
 			delete board;
 			delete ai;
@@ -54,7 +55,8 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1)); // Invalid move structure
 			Assert::IsTrue(IsLegalMove(board, move, Max)); // Not legal move
-			Assert::AreEqual(37, staticEval->GetCallCount());
+			Assert::AreEqual(37, staticEval->GetCallCount()); // Correct depth
+			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0)))); // Not the correct move has been returned
 
 			delete board;
 			delete ai;
