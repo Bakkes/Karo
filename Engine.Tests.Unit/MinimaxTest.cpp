@@ -11,9 +11,9 @@ using namespace engine;
 namespace Tests {
 	TEST_CLASS(Minimax) {
 	public:
-		TEST_METHOD(MiniMaxDepth_2_ReturnsTrue) {
+		TEST_METHOD(MiniMax_ReturnsTrue) {
 			IBoard* board = new StubBoard();
-			ComputerPlayer* ai = new ComputerPlayer(board, 2);
+			ComputerPlayer* ai = new ComputerPlayer(board, 8);
 
 			ai->SetEvaluator(new StubStaticEval());
 			Move move = ai->GetBestMove(Max);
