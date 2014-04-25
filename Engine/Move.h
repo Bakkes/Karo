@@ -15,16 +15,15 @@ namespace engine {
 		// Creates either a MOVE or JUMP move which DOES change the board structure
 		Move(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell);
 		// The type of the move
-		MoveType GetMoveType();
+		const MoveType& GetMoveType() const;
 		// The location from which the piece will come from
-		Vector2D GetFromCell();
+		const Vector2D& GetFromCell() const;
 		// The location to which the piece will go to
-		Vector2D GetToCell();
-		void SetToCell(Vector2D location);
+		const Vector2D& GetToCell() const;
 		// The location of the tile used to jump to (OPTIONAL: Test with HasUsedCell to see if it is set!)
-		Vector2D GetUsedCell();
+		const Vector2D& GetUsedCell() const;
 		// If a tile was moved to make this move possible
-		bool HasUsedCell();
+		const bool& HasUsedCell() const;
 
 	private:
 		// The type of the move

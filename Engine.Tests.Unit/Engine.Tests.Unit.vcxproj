@@ -16,10 +16,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BoardMoveChange.cpp" />
-    <ClCompile Include="BoardMoveInsert.cpp" />
-    <ClCompile Include="BoardMoveJump.cpp" />
-    <ClCompile Include="BoardMoveStep.cpp" />
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
     <ClCompile Include="MinimaxTest.cpp" />
@@ -105,4 +101,5 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+>>>>>>> master
 </Project>
