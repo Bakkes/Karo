@@ -57,13 +57,13 @@
     <ClInclude Include="EvalResult.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RandStaticEval.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StaticEvaluation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveFinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -92,7 +92,7 @@
     <ClCompile Include="EvalResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RandStaticEval.cpp">
+    <ClCompile Include="MoveFinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

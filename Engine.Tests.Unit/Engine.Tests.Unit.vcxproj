@@ -22,9 +22,11 @@
     <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="MoveUtils.cpp" />
     <ClCompile Include="PlayerInvertionTest.cpp" />
+    <ClCompile Include="StubStaticEval.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveUtils.h" />
+    <ClInclude Include="StubStaticEval.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2D168262-1045-4B31-9B8D-025ADBDEFD04}</ProjectGuid>

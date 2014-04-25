@@ -2,7 +2,7 @@
 #include "Board.h"
 #include "CppUnitTest.h"
 #include "ComputerPlayer.h"
-#include "RandStaticEval.h"
+#include "StubStaticEval.h"
 #include "MoveUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -11,11 +11,11 @@ using namespace engine;
 namespace Tests {
 	TEST_CLASS(Minimax) {
 	public:
-		TEST_METHOD(MiniMaxDepth_2) {
+		TEST_METHOD(MiniMaxDepth_2_ReturnsTrue) {
 			IBoard* board = new Board();
 			ComputerPlayer* ai = new ComputerPlayer(board, 2);
 
-			ai->SetEvaluator(new RandStaticEval());
+			ai->SetEvaluator(new StubStaticEval());
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1)); // Invalid move structure
 			Assert::IsTrue(IsLegalMove(board, move, Max)); // Not legal move
