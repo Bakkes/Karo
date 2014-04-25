@@ -101,7 +101,7 @@ namespace engine{
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
 		tileUsed.SetData(tileUsed.GetData() & ~HasTile);
-		tileUsed.SetData(to.GetData() | HasTile);
+		to.SetData(to.GetData() | HasTile);
 		MovePiece(from, to, owner);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner){
