@@ -20,22 +20,22 @@ namespace _2DFrontend
 		/// <summary>
 		/// The backcolor of Karo tiles.
 		/// </summary>
-		private Brush _tileBackColor = Brushes.White;
+		private Brush _tileBackColor = new SolidBrush(Color.FromArgb(78, 78, 78));
 
 		/// <summary>
 		/// Color of the circle accent on pieces.
 		/// </summary>
-		private Pen _pieceAccentColor = new Pen(Color.White, 5);
+		private Pen _pieceAccentColor = new Pen(Color.FromArgb(34, 34, 34), 5);
 
 		/// <summary>
 		/// Color of max's pieces.
 		/// </summary>
-		private Brush _pieceMaxColor = Brushes.Green;
+		private Brush _pieceMaxColor = new SolidBrush(Color.FromArgb(234, 78, 67));
 
 		/// <summary>
 		/// Color of min's pieces.
 		/// </summary>
-		private Brush _pieceMinColor = Brushes.Red;
+		private Brush _pieceMinColor = new SolidBrush(Color.FromArgb(67, 212, 78));
 
 		/// <summary>
 		/// Width/height of the tiles in pixels.
@@ -43,6 +43,8 @@ namespace _2DFrontend
 		private const int CellSize = 50;
 
 		private const int AccentSize = 30;
+
+		private const int PieceSize = 40;
 
 		/// <summary>
 		/// Gap left and right of every tile.
@@ -52,7 +54,7 @@ namespace _2DFrontend
 		public KaroPanel()
 			: base()
 		{
-			BackColor = Color.CornflowerBlue;
+			BackColor = Color.FromArgb(12, 12, 12);
 			DoubleBuffered = true;
 			MouseClick += KaroPanel_MouseClick;
 		}
@@ -103,14 +105,21 @@ namespace _2DFrontend
 				CellSize, CellSize);
 			if ((tileData & (int)CellValue.IsEmpty) == 0)
 			{
+				Brush brush;
 				if ((tileData & (int)CellValue.IsMax) != 0)
 				{
-					g.FillEllipse(_pieceMaxColor, paintPos.X, paintPos.Y, CellSize, CellSize);
+					brush = _pieceMaxColor;
 				}
 				else
 				{
-					g.FillEllipse(_pieceMinColor, paintPos.X, paintPos.Y, CellSize, CellSize);
+					brush = _pieceMinColor;
 				}
+				g.FillEllipse(
+					brush,
+					paintPos.X + (CellSize - PieceSize) / 2,
+					paintPos.Y + (CellSize - PieceSize) / 2,
+					PieceSize, PieceSize
+				);
 				if ((tileData & (int)CellValue.IsFlipped) != 0)
 				{
 					g.DrawEllipse(
