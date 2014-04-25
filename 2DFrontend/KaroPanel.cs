@@ -25,7 +25,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Color of the circle accent on pieces.
 		/// </summary>
-		private Pen _pieceAccentColor = Pens.White;
+		private Pen _pieceAccentColor = new Pen(Color.White, 5);
 
 		/// <summary>
 		/// Color of max's pieces.
@@ -41,6 +41,8 @@ namespace _2DFrontend
 		/// Width/height of the tiles in pixels.
 		/// </summary>
 		private const int CellSize = 50;
+
+		private const int AccentSize = 30;
 
 		/// <summary>
 		/// Gap left and right of every tile.
@@ -108,6 +110,15 @@ namespace _2DFrontend
 				else
 				{
 					g.FillEllipse(_pieceMinColor, paintPos.X, paintPos.Y, CellSize, CellSize);
+				}
+				if ((tileData & (int)CellValue.IsFlipped) != 0)
+				{
+					g.DrawEllipse(
+						_pieceAccentColor,
+						paintPos.X + (CellSize - AccentSize) / 2,
+						paintPos.Y + (CellSize - AccentSize) / 2,
+						AccentSize, AccentSize
+					);
 				}
 			}
 		}
