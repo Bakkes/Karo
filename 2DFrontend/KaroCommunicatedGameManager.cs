@@ -145,7 +145,7 @@ namespace _2DFrontend
 					mt = engine.wrapper.MoveType.JUMP;
 					break;
 				case CommunicationProtocol.MoveType.Move:
-					mt = engine.wrapper.MoveType.MOVE;
+					mt = engine.wrapper.MoveType.STEP;
 					break;
 			}
 			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
@@ -224,7 +224,7 @@ namespace _2DFrontend
 				case engine.wrapper.MoveType.JUMP:
 					mt = CommunicationProtocol.MoveType.Jump;
 					break;
-				case engine.wrapper.MoveType.MOVE:
+				case engine.wrapper.MoveType.STEP:
 					mt = CommunicationProtocol.MoveType.Move;
 					break;
 			}

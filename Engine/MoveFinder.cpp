@@ -61,16 +61,16 @@ namespace engine {
 
 	// Adds all adjecent move options.
 	void MoveFinder::AddAdjecentMovesToVector(std::vector<Move>* moves, Cell<int> cell) {
-		AddMoveIfValidDestination(moves, cell, *cell.GetLeft(), MOVE);
-		AddMoveIfValidDestination(moves, cell, *cell.GetRight(), MOVE);
-		AddMoveIfValidDestination(moves, cell, *cell.GetTop(), MOVE);
-		AddMoveIfValidDestination(moves, cell, *cell.GetBottom(), MOVE);
+		AddMoveIfValidDestination(moves, cell, *cell.GetLeft(), STEP);
+		AddMoveIfValidDestination(moves, cell, *cell.GetRight(), STEP);
+		AddMoveIfValidDestination(moves, cell, *cell.GetTop(), STEP);
+		AddMoveIfValidDestination(moves, cell, *cell.GetBottom(), STEP);
 
 		// Diagonal
-		AddMoveIfValidDestination(moves, cell, *cell.GetTop()->GetLeft(), MOVE);
-		AddMoveIfValidDestination(moves, cell, *cell.GetTop()->GetRight(), MOVE);
-		AddMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetLeft(), MOVE);
-		AddMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetRight(), MOVE);
+		AddMoveIfValidDestination(moves, cell, *cell.GetTop()->GetLeft(), STEP);
+		AddMoveIfValidDestination(moves, cell, *cell.GetTop()->GetRight(), STEP);
+		AddMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetLeft(), STEP);
+		AddMoveIfValidDestination(moves, cell, *cell.GetBottom()->GetRight(), STEP);
 	}
 
 	// Assumes that the fromtile has a piece on it.
@@ -81,11 +81,11 @@ namespace engine {
 		MoveType type)
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
-		if (((to.GetData()) & (IsEmpty | HasCell)) == (IsEmpty | HasCell)) {
+		if (((to.GetData()) & (IsEmpty | HasTile)) == (IsEmpty | HasTile)) {
 			moves->push_back(Move(type, (from.GetPosition()), (to.GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		else if (((to.GetData()) & HasCell) == 0) {
+		else if (((to.GetData()) & HasTile) == 0) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}
@@ -109,7 +109,7 @@ namespace engine {
 		if(!( checkRight & IsEmpty)) {
 			int jumpRight = two.GetData();
 			if(jumpRight & IsEmpty) {
-				if(jumpRight & HasCell) {
+				if(jumpRight & HasTile) {
 					possibility.push_back(Move(JUMP, two.GetPosition()));
 				}
 				else {
@@ -121,7 +121,7 @@ namespace engine {
 			}
 		}
 		else {
-			possibility.push_back(Move(MOVE, one.GetPosition()));
+			possibility.push_back(Move(STEP, one.GetPosition()));
 		}
 		return possibility;
 	}
