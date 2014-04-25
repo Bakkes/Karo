@@ -28,10 +28,10 @@ namespace Tests {
 
 			ai->SetEvaluator(staticEval);
 			Move move = ai->GetBestMove(Max);
-			Assert::IsFalse(move.GetToCell() == Vector2D(-1)); // Invalid move structure
-			Assert::IsTrue(IsLegalMove(board, move, Max)); // Not legal move
-			Assert::AreEqual(81, staticEval->GetCallCount()); // Correct depth
-			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0)))); // Not the correct move has been returned
+			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
+			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
+			Assert::AreEqual(81, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
+			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0))), L"Returned not the expected move");
 
 			delete board;
 			delete ai;
@@ -53,10 +53,10 @@ namespace Tests {
 
 			ai->SetEvaluator(staticEval);
 			Move move = ai->GetBestMove(Max);
-			Assert::IsFalse(move.GetToCell() == Vector2D(-1)); // Invalid move structure
-			Assert::IsTrue(IsLegalMove(board, move, Max)); // Not legal move
-			Assert::AreEqual(37, staticEval->GetCallCount()); // Correct depth
-			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0)))); // Not the correct move has been returned
+			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
+			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
+			Assert::AreEqual(37, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
+			Assert::IsTrue(MovesAreEqual(move, Move(MOVE, Vector2D(0), Vector2D(1, 0))), L"Returned not the expected move");
 
 			delete board;
 			delete ai;
