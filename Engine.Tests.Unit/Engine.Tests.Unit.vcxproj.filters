@@ -33,7 +33,13 @@
     <ClCompile Include="MoveUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BoardMoveTests.cpp">
+    <ClCompile Include="BoardMoveStep.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardMoveInsert.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardMoveJump.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

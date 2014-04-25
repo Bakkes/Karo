@@ -17,7 +17,7 @@ namespace engine{
 					int* data = new int(0);
 					if( tile->GetPosition()->X() < Board::initSize.GetWidth() && 
 						tile->GetPosition()->Y() < Board::initSize.GetHeight()){
-						*data |= HasCell | IsEmpty;
+						*data |= HasTile | IsEmpty;
 					} 
 					tile->SetData(data);
 				}
@@ -85,8 +85,8 @@ namespace engine{
 		*on.GetData() |= IsEmpty;
 	}
 	void Board::MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed){
-		*tileUsed.GetData() &= ~HasCell;
-		*to.GetData() |= HasCell;
+		*tileUsed.GetData() &= ~HasTile;
+		*to.GetData() |= HasTile;
 		MovePiece(from, to, owner);
 	}
 	void Board::MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner){
@@ -94,19 +94,25 @@ namespace engine{
 		DeletePiece(from);
 	}
 	void Board::JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed){
+		Flip(from);
 		MovePiece(from, to, owner, tileUsed);
 	}
 	void Board::JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner){
+		Flip(from);
 		MovePiece(from, to, owner);
 	}
 	vector<Move>* Board::GetLegalMoves(Players player) {
 		return new vector<Move>();
 	}
+
+	void Board::Flip(const Cell<int>& which){
+		*which.GetData() ^= IsFlipped;
+	}
 	vector<Cell<int>>* Board::GetOccupiedTiles(){
 		auto tiles = new vector<Cell<int>>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
-				if(!*tile->GetData() & HasCell){
+				if(!*tile->GetData() & HasTile){
 					return;
 				}
 				if(*tile->GetData() & IsEmpty){

@@ -11,7 +11,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
 using namespace std;
 namespace Tests {
-	TEST_CLASS(BoardMoveTests) {
+	TEST_CLASS(BoardMoveInsert) {
 	private:
 		Board* board;
 		Move* move;

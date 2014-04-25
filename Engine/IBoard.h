@@ -6,7 +6,7 @@
 #include "Vector2D.h"
 namespace engine {
 enum CellValue{
-	HasCell = 1,
+	HasTile = 1,
 	IsEmpty = 2,
 	IsMax = 4,
 	IsFlipped = 8

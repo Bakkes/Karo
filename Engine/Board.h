@@ -31,6 +31,7 @@ namespace engine{
 		void MovePiece(const Cell<int>& from, const Cell<int>& to, Players owner);
 		void JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner, const Cell<int>& tileUsed);
 		void JumpPiece(const Cell<int>& from, const Cell<int>& to, Players owner);
+		void Flip(const Cell<int>& which);
 	};
 
 }
