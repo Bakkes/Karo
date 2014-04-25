@@ -16,6 +16,7 @@ namespace engine {
 
 	int StaticEvaluation::Eval(IBoard* board, Players players)
 	{
+		return rand();
 		vector<Cell<int>>* tiles = board->GetOccupiedTiles();
 
 		int score = 0;

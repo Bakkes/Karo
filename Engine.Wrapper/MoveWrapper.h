@@ -2,6 +2,7 @@
 
 #include "Move.h"
 #include "Vector2DWrapper.h"
+
 using namespace engine;
 
 namespace engine {
