@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using engine.wrapper;
 
@@ -70,6 +71,7 @@ namespace _2DFrontend
 		protected override void OnPaint(PaintEventArgs e)
 		{
 			Graphics g = e.Graphics;
+			g.SmoothingMode = SmoothingMode.AntiAlias;
 
 			if (_manager != null)
 			{
