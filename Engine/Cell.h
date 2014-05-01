@@ -36,6 +36,24 @@ namespace engine {
 			_position = NULL;
 		}
 
+		int NonDiagonalNeighbors() const
+		{
+			int count = 0;
+			if ((_top->GetData() & HasTile) == HasTile) {
+				count++;
+			}
+			if ((_right->GetData() & HasTile) == HasTile) {
+				count++;
+			}
+			if ((_left->GetData() & HasTile) == HasTile) {
+				count++;
+			}
+			if ((_bottom->GetData() & HasTile) == HasTile) {
+				count++;
+			}
+			return count;
+		}
+
 		void SetBottom(Cell<T>* bottom){
 			this->_bottom = bottom;
 		}

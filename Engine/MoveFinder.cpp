@@ -47,6 +47,10 @@ namespace engine {
 	}
 
 	void MoveFinder::AddJumpMovesToVector(std::vector<Move>* moves, Cell<int> source) {
+		if (source.NonDiagonalNeighbors() > 2) {
+			// Source tile has too many neighbors.
+			return;
+		}
 		if ((source.GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
 			AddMoveIfValidDestination(moves, source, *source.GetLeft()->GetLeft(), JUMP);
 		}
@@ -101,7 +105,7 @@ namespace engine {
 			moves->push_back(Move(type, (from.GetPosition()), (to.GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		else if (((to.GetData()) & HasTile) == 0) {
+		else if (((to.GetData()) & HasTile) == 0 && to.NonDiagonalNeighbors() > 0) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}
