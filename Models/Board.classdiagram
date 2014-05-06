@@ -46,6 +46,14 @@
             <elementDefinition Id="eb563473-c8cb-436f-bf6a-95461b6aac1c" />
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="507924c3-989f-48dd-bf85-6890950fd8f3" name="relativeTopLeft" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="a8dbde98-e6ae-430d-8fa7-72c47e128257" />
+            <type_NamedElement>
+              <referencedTypeMoniker Id="799d8a91-dae3-49e6-94be-42a76e778094" LastKnownName="Vector2D" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation Id="03ae7793-0dda-4a6b-a8c7-894269d94027" name="Move" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="18d363a7-5eeb-4334-85f0-98e6a17552bc" />
@@ -457,6 +465,11 @@
         </ownedLiterals>
       </enumeration>
     </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="799d8a91-dae3-49e6-94be-42a76e778094" name="Vector2D" isAbstract="false" isLeaf="false" cachedFullName="Vector2D">
+        <elementDefinition Id="d44f383f-1bb6-471e-a410-d546eec2a954" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="4923fa95-8eef-48cb-a64e-5a0f5625e474" name="Models">
     <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
