@@ -1,11 +1,11 @@
 #pragma once
+#include "Grid.h"
 #include "IBoard.h"
 #include "Size.h"
 namespace engine{
-	class Grid;
 	class RelativeAbsoluteConverter{
 	public:
-		RelativeAbsoluteConverter(Grid* parseable);
+		RelativeAbsoluteConverter(Grid<int>* parseable);
 		~RelativeAbsoluteConverter();
 		Vector2D ToRelative(const Vector2D&)const;
 		Vector2D ToAbsolute(const Vector2D&)const; 

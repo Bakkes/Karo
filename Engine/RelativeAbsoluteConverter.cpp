@@ -1,8 +1,7 @@
 #include "RelativeAbsoluteConverter.h"
-#include "Grid.h"
 namespace engine{
 
-	RelativeAbsoluteConverter::RelativeAbsoluteConverter(Grid* parsable){
+	RelativeAbsoluteConverter::RelativeAbsoluteConverter(Grid<int>* parsable){
 		Vector2D _topLeft = Vector2D();
 		_rowTileCount = vector<int>();
 		_colTileCount = vector<int>();
@@ -15,8 +14,8 @@ namespace engine{
 		parsable->TraverseCells(
 			[this](Cell<int>* tile) -> void {
 				if(tile->GetData() & HasTile){
-					this->_rowTileCount.at(tile->GetPosition().X())+=1;
-					this->_rowTileCount.at(tile->GetPosition().Y())+=1;
+					this->_rowTileCount.at((int)tile->GetPosition().X())+=1;
+					this->_rowTileCount.at((int)tile->GetPosition().Y())+=1;
 				}
 			}
 		);
@@ -30,10 +29,10 @@ namespace engine{
 
 	Vector2D& RelativeAbsoluteConverter::WrapArround(Vector2D& input)const{
 		if(input.X() < 0){
-			input.X(input.X() + GetWidth());
+			input.X(input.X() + GridWidth());
 		}
 		if(input.Y() < 0){
-			input.Y(input.Y() + GetHeight());
+			input.Y(input.Y() + GridHeight());
 		}
 		if(input.X() >= GridWidth()){
 			input.X(0);
@@ -45,7 +44,7 @@ namespace engine{
 	}
 	// allows the converter to be kept up to date with board
 	void RelativeAbsoluteConverter::MoveTile(const Vector2D& from, const Vector2D& to){
-		_rowTileCount.at(from.X());
+		_rowTileCount.at((int)from.X());
 	}
 
 
