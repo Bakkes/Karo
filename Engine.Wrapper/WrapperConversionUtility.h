@@ -11,12 +11,21 @@ namespace wrapper{
 class WrapperConversionUtility {
 public:
 	static Move* ConvertMove(MoveWrapper^ moveWrapper) {
-		return new engine::Move(
-			static_cast<engine::MoveType>(moveWrapper->GetMoveType()), 
-			ConvertVector2DStack(moveWrapper->GetFromCell()),
-			ConvertVector2DStack(moveWrapper->GetToCell()),
-			ConvertVector2DStack(moveWrapper->GetUsedCell())
+		if (moveWrapper->HasUsedCell()) {
+			return new engine::Move(
+				static_cast<engine::MoveType>(moveWrapper->GetMoveType()), 
+				ConvertVector2DStack(moveWrapper->GetFromCell()),
+				ConvertVector2DStack(moveWrapper->GetToCell()),
+				ConvertVector2DStack(moveWrapper->GetUsedCell())
 			);
+		}
+		else {
+			return new engine::Move(
+				static_cast<engine::MoveType>(moveWrapper->GetMoveType()), 
+				ConvertVector2DStack(moveWrapper->GetFromCell()),
+				ConvertVector2DStack(moveWrapper->GetToCell())
+			);
+		}
 	}
 
 	static MoveWrapper^ ConvertMove(Move* move) {

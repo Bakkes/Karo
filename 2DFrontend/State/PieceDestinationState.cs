@@ -63,7 +63,7 @@ namespace _2DFrontend.State
 					Debug.WriteLine("Moving tile at {0} to {1}",
 						move.GetFromCell(), move.GetToCell());
 					manager.ExecuteMove(move);
-					manager.ChangeState(CellSourceState.Instance);
+					manager.ChangeState(PieceSourceState.Instance);
 				}
 			}
 			else
