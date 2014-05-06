@@ -47,10 +47,6 @@ namespace engine {
 	}
 
 	void MoveFinder::AddJumpMovesToVector(std::vector<Move>* moves, Cell<int> source) {
-		if (source.NonDiagonalNeighbors() > 2) {
-			// Source tile has too many neighbors.
-			return;
-		}
 		if ((source.GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
 			AddMoveIfValidDestination(moves, source, *source.GetLeft()->GetLeft(), JUMP);
 		}
