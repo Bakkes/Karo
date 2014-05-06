@@ -801,6 +801,26 @@
             </relationshipOwnedElementsInternal>
           </association>
         </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="a8dbde98-e6ae-430d-8fa7-72c47e128257"
+            name="relativeTopLeft"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="d44f383f-1bb6-471e-a410-d546eec2a954"
+                LastKnownName="Vector2D"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
         <ownedOperationsInternal>
           <operation
             Id="18d363a7-5eeb-4334-85f0-98e6a17552bc"
@@ -1470,6 +1490,11 @@
             name="Max" />
         </ownedLiterals>
       </enumeration>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d44f383f-1bb6-471e-a410-d546eec2a954"
+        name="Vector2D" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
