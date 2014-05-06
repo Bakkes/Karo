@@ -73,15 +73,25 @@ namespace _2DFrontend
 		void _communication_TurnReceived(Turn t)
 		{
 			Debug.WriteLine("Opponent took a turn");
+			if (t == null)
+			{
+				Console.WriteLine("Turn is null, sending back");
+				_communication.SendMoveInvalid(t);
+				return;
+			}
+			Debug.WriteLine("Received turn: " + TurnToString(t));
 			MoveWrapper received = ConvertTurnToMove(t);
+			Debug.WriteLine("Converted turn to move: " + MoveWrapperToString(received));
 
 			// Get the move with the correct source tile from the last click.
 			MoveWrapper mv = LegalMoves.Where(m =>
 				m.GetFromCell() == received.GetFromCell() && 
 				m.GetToCell() == received.GetToCell() &&
-				m.GetUsedCell() == received.GetUsedCell()).FirstOrDefault();
+				(!m.HasUsedCell() || m.GetUsedCell() == received.GetUsedCell())).FirstOrDefault();
+
 			if (mv == null)
 			{
+				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
 				return;
 			}
@@ -101,6 +111,8 @@ namespace _2DFrontend
 				Debug.WriteLine("Move made, sending move to opponent.");
 				_communication.SendTurn(ConvertMoveToTurn(bm));
 			}
+			Debug.WriteLine("Move sent to opponent: " + MoveWrapperToString(bm));
+			Debug.WriteLine("Converted move to turn: " + TurnToString(ConvertMoveToTurn(bm)));
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
@@ -115,6 +127,8 @@ namespace _2DFrontend
 			MoveWrapper bm = Game.GetBestMove();
 			ExecuteMove(bm);
 			_communication.SendTurn(ConvertMoveToTurn(bm));
+			Debug.WriteLine("Move sent to opponent: " + MoveWrapperToString(bm));
+			Debug.WriteLine("Converted move to turn: " + TurnToString(ConvertMoveToTurn(bm)));
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)
@@ -148,8 +162,17 @@ namespace _2DFrontend
 					mt = engine.wrapper.MoveType.STEP;
 					break;
 			}
-			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
-				ConvertIntToBoardPosition(t.ToTile), t.EmptyTile == -1 ? null : ConvertIntToBoardPosition(t.EmptyTile));
+			if (t.EmptyTile == null)
+			{
+				return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
+					ConvertIntToBoardPosition(t.ToTile));
+			}
+			else
+			{
+				return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
+					ConvertIntToBoardPosition(t.ToTile), ConvertIntToBoardPosition(t.EmptyTile));
+
+			}
 		}
 
 		private Vector2DWrapper ConvertIntToBoardPosition(int? number)
@@ -190,18 +213,29 @@ namespace _2DFrontend
 		private int ConvertBoardPositionToInt(Vector2DWrapper vector2D)
 		{
             int number = 0;
-            for (int x = 0; x <= vector2D.X; x++)
+            for (int x = 0; x < 20; x++)
             {
-                for (int y = 0; y <= vector2D.Y; y++)
+                for (int y = 0; y < 20; y++)
                 {
                     CellWrapper cell = Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+					bool reachedEnd = x == vector2D.X && y == vector2D.Y;
+
                     if ((cell.GetData() & (int)CellValue.IsEmpty) == 0)
                     {
+						if (reachedEnd)
+						{
+							return number;
+						}
                         continue;
                     }
 
                     // There is a tile here, update the number
                     number++;
+
+					if (reachedEnd)
+					{
+						return number;
+					}
                 }
             }
 
@@ -241,6 +275,16 @@ namespace _2DFrontend
 			t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
 			t.ToTile = ConvertBoardPositionToInt(mw.GetToCell());
 			return t;
+		}
+
+		public static String MoveWrapperToString(MoveWrapper mw)
+		{
+			return String.Format("MOVE: Type {0}, FTU: {1},{2},{3}", mw.GetMoveType(), mw.GetFromCell(), mw.GetToCell(), mw.GetUsedCell());
+		}
+
+		public static String TurnToString(Turn t)
+		{
+			return String.Format("TURN: Type: {0}, FTU: {1},{2},{3}", t.MoveType, t.FromTile, t.ToTile, t.EmptyTile);
 		}
 
 	}

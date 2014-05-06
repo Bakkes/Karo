@@ -6,6 +6,10 @@ namespace engine {
 		_isSet = false;
 	}
 
+	EvalResult::EvalResult(int bestForMax, int bestForMin) : _move(INSERT, Vector2D(-1)) {
+		_isSet = false;
+	}
+
 	EvalResult::~EvalResult() {
 	}
 
@@ -14,8 +18,16 @@ namespace engine {
 	}
 
 	void EvalResult::SetMove(Move move) {
-		_move = move;
 		_isSet = true;
+		_move = move;
+	}
+
+	void EvalResult::SetBestForMax(int bestForMax) {
+		_bestForMax = bestForMax;
+	}
+
+	void EvalResult::SetBestForMin(int bestForMin) {
+		_bestForMin = bestForMin;
 	}
 
 	const int& EvalResult::GetScore() const {
@@ -24,6 +36,14 @@ namespace engine {
 
 	const Move& EvalResult::GetMove() const {
 		return _move;
+	}
+
+	int EvalResult::GetBestForMax() {
+		return _bestForMax;
+	}
+
+	int EvalResult::GetBestForMin() {
+		return _bestForMin;
 	}
 
 	bool EvalResult::IsSet() {

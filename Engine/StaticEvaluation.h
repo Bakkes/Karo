@@ -1,8 +1,8 @@
 #pragma once
 #include "IStaticEvaluation.h"
-
+#include "DllImportExport.h"
 namespace engine {
-	class StaticEvaluation : public IStaticEvaluation
+	class ENGINE_API StaticEvaluation : public IStaticEvaluation
 	{
 	public:
 		StaticEvaluation(void);

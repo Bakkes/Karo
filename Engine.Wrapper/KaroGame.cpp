@@ -3,12 +3,14 @@
 #include "KaroGame.h"
 #include "Board.h"
 #include "WrapperConversionUtility.h"
+#include "StaticEvaluation.h"
 namespace engine {
 namespace wrapper {
 
 	KaroGame::KaroGame() {
 		_board = gcnew BoardWrapper();
 		_cPlayer = new ComputerPlayer(_board->GetInternalBoard(), 5);
+		_cPlayer->SetEvaluator(new StaticEvaluation());
 	}
 
 	KaroGame::~KaroGame() {
