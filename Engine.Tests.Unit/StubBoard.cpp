@@ -3,6 +3,11 @@
 namespace Tests {
 
 	StubBoard::StubBoard() {
+		_minimalMoves = false;
+	}
+
+	StubBoard::StubBoard(bool minimalMoves) {
+		_minimalMoves = minimalMoves;
 	}
 
 	StubBoard::~StubBoard() {
@@ -20,7 +25,9 @@ namespace Tests {
 
 		legalMoves->push_back(Move(MOVE, Vector2D(0), Vector2D(0, 1)));
 		legalMoves->push_back(Move(MOVE, Vector2D(0), Vector2D(1, 0)));
-		legalMoves->push_back(Move(JUMP, Vector2D(0), Vector2D(0, 2)));
+		if (!_minimalMoves) {
+			legalMoves->push_back(Move(JUMP, Vector2D(0), Vector2D(0, 2)));
+		}
 
 		return legalMoves;
 	}

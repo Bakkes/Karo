@@ -23,7 +23,10 @@ namespace engine {
 		// The unsafe board which is the playground of the AI
 		IBoard* _board;
 		// Executes a single step from the Minimax algorithm
-		EvalResult MinimaxStep(Players player, int depth, int lowerBound, int upperBound);
+		EvalResult& MinimaxStep(Players player, int depth, EvalResult& result);
+		// Gets the score for the current phase, it either iterates deeper and takes that result
+		// or executes the static evaluation and uses that result.
+		EvalResult GetScore(Players player, Move move, int depth, EvalResult& result);
 	};
 
 }

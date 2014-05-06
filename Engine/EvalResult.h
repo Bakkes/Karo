@@ -7,6 +7,7 @@ namespace engine {
 	class EvalResult {
 	public:
 		EvalResult();
+		EvalResult(const EvalResult& er);
 		EvalResult(int bestForMax, int bestForMin);
 		~EvalResult();
 
