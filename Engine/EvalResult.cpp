@@ -26,6 +26,15 @@ namespace engine {
 	EvalResult::~EvalResult() {
 	}
 
+	EvalResult& EvalResult::operator = (const EvalResult& er) {
+		_bestForMax = er._bestForMax;
+		_bestForMin = er._bestForMin;
+		_score = er._score;
+		_isSet = er._isSet;
+		_move = er._move;
+		return *this; 
+	}
+
 	void EvalResult::SetScore(int score) {
 		_score = score;
 	}

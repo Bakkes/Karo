@@ -11,6 +11,8 @@ namespace engine {
 		EvalResult(int bestForMax, int bestForMin);
 		~EvalResult();
 
+		EvalResult& operator=(const EvalResult& other);
+
 		void SetScore(int score);
 		void SetMove(Move move);
 		void SetBestForMax(int bestForMax);
