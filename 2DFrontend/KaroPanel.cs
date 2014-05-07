@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using _2DFrontend.State;
 using engine.wrapper;
 
 namespace _2DFrontend
@@ -36,6 +38,8 @@ namespace _2DFrontend
 		/// Color of min's pieces.
 		/// </summary>
 		private Brush _pieceMinColor = new SolidBrush(Color.FromArgb(67, 212, 78));
+
+		private Brush _suggestionColor = new SolidBrush(Color.FromArgb(78, 150, 150));
 
 		/// <summary>
 		/// Width/height of the tiles in pixels.
@@ -79,6 +83,8 @@ namespace _2DFrontend
 
 			if (_manager != null)
 			{
+				PaintLegalMove(g);
+
 				BoardWrapper board = _manager.Board;
 				const int maxPotentialSize = 20;
 				for (int x = 0; x < maxPotentialSize; x++)
@@ -88,6 +94,47 @@ namespace _2DFrontend
 						CellWrapper tile = board.GetRelativeCellAt(new Vector2DWrapper(x, y));
 						PaintTile(tile, g, x, y);
 					}
+				}
+			}
+		}
+
+		private void PaintLegalMove(Graphics g)
+		{
+			MoveWrapper currentMove = _manager.CurrentMove;
+			if (_manager.CurrentState is PlaceState)
+			{
+				foreach (MoveWrapper move in _manager.LegalMoves)
+				{
+					Point paintPos = CellToPixel((int)move.GetToCell().X, (int)move.GetToCell().Y);
+					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
+						CellSize + 4, CellSize + 4);
+				}
+			}
+			else if (_manager.CurrentState is PieceSourceState)
+			{
+				foreach (MoveWrapper move in _manager.LegalMoves)
+				{
+					Point paintPos = CellToPixel((int)move.GetFromCell().X, (int)move.GetFromCell().Y);
+					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
+						CellSize + 4, CellSize + 4);
+				}
+			}
+			else if (_manager.CurrentState is PieceDestinationState)
+			{
+				foreach (MoveWrapper move in _manager.LegalMoves.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
+				{
+					Point paintPos = CellToPixel((int)move.GetToCell().X, (int)move.GetToCell().Y);
+					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
+						CellSize + 4, CellSize + 4);
+				}
+			}
+			else if (_manager.CurrentState is CellSourceState)
+			{
+				foreach (MoveWrapper move in _manager.LegalMoves.Where(m => m.GetToCell() == currentMove.GetToCell()))
+				{
+					Point paintPos = CellToPixel((int)move.GetUsedCell().X, (int)move.GetUsedCell().Y);
+					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
+						CellSize + 4, CellSize + 4);
 				}
 			}
 		}
