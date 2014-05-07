@@ -148,11 +148,11 @@ namespace _2DFrontend
 			
 		}
 
-		private int CalculateToCell(Turn t)
+		private Vector2DWrapper CalculateToCell(Turn t)
 		{
 			BoardWrapper b = Game.GetBoard();
-			Vector2DWrapper fromPosition = IntToBoardPosition(t.FromTile);
-			int moveSize = t.MoveType == MoveType.Jump ? 2 : 1;
+			Vector2DWrapper fromPosition = ConvertIntToBoardPosition(t.FromTile);
+			int moveSize = t.MoveType == CommunicationProtocol.MoveType.Jump ? 2 : 1;
 
 			switch (t.Direction)
 			{
@@ -320,7 +320,6 @@ namespace _2DFrontend
 				t.EmptyTile = null;
 			}
 			t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
-			t.ToTile = ConvertBoardPositionToInt(mw.GetToCell());
 			return t;
 		}
 
