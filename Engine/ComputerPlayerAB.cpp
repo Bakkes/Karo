@@ -33,6 +33,7 @@ namespace engine {
 			if (player == Max) {
 				if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
 					// Cut off
+					OutputDebugStringW(L"Max Node Cut off\n");
 					break;
 				} else if (score.GetScore() < result.GetBestForMax()) {
 					result.SetBestForMax(score.GetScore());
@@ -42,6 +43,7 @@ namespace engine {
 			} else  if (player == Min)  {
 				if (score.GetScore() <= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
 					// Cut off
+					OutputDebugStringW(L"Min Node Cut off\n");
 					break;
 				} else if (score.GetScore() < result.GetBestForMin()) {
 					result.SetBestForMin(score.GetScore());
@@ -58,6 +60,8 @@ namespace engine {
 
 	EvalResult ComputerPlayerAB::GetScore(Players player, Move move, int depth, EvalResult& result) {
 		if (depth + 1 < _maxDepth) {
+			OutputDebugStringW(L"Going Down\n");
+
 			// We are allowed to go deeper, take the result of the next step
 			EvalResult score = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
 
