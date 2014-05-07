@@ -83,6 +83,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CommunicationProtocol\CommunicationProtocol.csproj">
+      <Project>{249ebc5b-8adf-49c3-bdfe-72e9babe7eb7}</Project>
+      <Name>CommunicationProtocol</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Engine.Wrapper\Engine.Wrapper.vcxproj">
+      <Project>{1120b367-b325-4b42-b7f1-754522577572}</Project>
+      <Name>Engine.Wrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XNAFrontendContent\XNAFrontendContent.contentproj">
       <Name>XNAFrontendContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
