@@ -44,12 +44,8 @@ namespace engine{
 		if(input.Y() < 0){
 			input.Y(input.Y() + GridHeight());
 		}
-		if(input.X() >= GridWidth()){
-			input.X(0);
-		}
-		if(input.Y() >= GridHeight()){
-			input.Y(0);
-		}
+		input.X(fmod(input.X(), GridWidth()));
+		input.Y(fmod(input.Y(), GridHeight()));
 		return input;
 	}
 	// allows the converter to be kept up to date with board
