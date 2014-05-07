@@ -9,6 +9,7 @@ namespace engine {
 	MoveFinder::~MoveFinder(void) {
 	}
 
+	// Returns all legal moves for the current state of this._board.
 	std::vector<Move>* MoveFinder::GetLegalMoves(Players player) {
 		if (_board->GetPieceCountFor(player) < Board::MaxPiecesPerPlayer) {
 			return GetLegalPlaceMoves(player);
@@ -18,6 +19,7 @@ namespace engine {
 		}
 	}
 
+	// Returns all place moves for the specified player.
 	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
 		std::vector<Move>* moves = new std::vector<Move>();
 		std::vector<Cell<int>>* emptyTiles = _board->GetEmptyTiles();
@@ -28,6 +30,7 @@ namespace engine {
 		return moves;
 	}
 
+	// Returns all moves that are either a jump or move type of move.
 	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
 		std::vector<Move>* moves = new std::vector<Move>();
 		std::vector<Cell<int>>* occupiedCells = _board->GetOccupiedTiles();
@@ -46,36 +49,69 @@ namespace engine {
 		return moves;
 	}
 
+	// Adds all possible jump moves to the specified vector.
 	void MoveFinder::AddJumpMovesToVector(std::vector<Move>* moves, Cell<int> source) {
 		if ((source.GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetLeft()->GetLeft(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetLeft()->GetLeft(),
+				JUMP
+			);
 		}
 		if ((source.GetRight()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetRight()->GetRight(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetRight()->GetRight(),
+				JUMP
+			);
 		}
 		if ((source.GetTop()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetTop()->GetTop(),
+				JUMP
+			);
 		}
 		if ((source.GetBottom()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetBottom()->GetBottom(),
+				JUMP
+			);
 		}
 
 		// Diagonal
 		if ((source.GetTop()->GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop()->GetLeft()->GetLeft(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetTop()->GetTop()->GetLeft()->GetLeft(),
+				JUMP
+			);
 		}
 		if ((source.GetTop()->GetRight()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetTop()->GetTop()->GetRight()->GetRight(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetTop()->GetTop()->GetRight()->GetRight(),
+				JUMP
+			);
 		}
 		if ((source.GetBottom()->GetLeft()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom()->GetLeft()->GetLeft(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetBottom()->GetBottom()->GetLeft()->GetLeft(),
+				JUMP
+			);
 		}
 		if ((source.GetBottom()->GetRight()->GetData() & (HasTile | IsEmpty)) == HasTile) {
-			AddMoveIfValidDestination(moves, source, *source.GetBottom()->GetBottom()->GetRight()->GetRight(), JUMP);
+			AddMoveIfValidDestination(moves,
+				source,
+				*source.GetBottom()->GetBottom()->GetRight()->GetRight(),
+				JUMP
+			);
 		}
 	}
 
-	// Adds all adjecent move options.
+	// Adds all adjecent move options to the specified move vector.
 	void MoveFinder::AddAdjacentMovesToVector(std::vector<Move>* moves, Cell<int> cell) {
 		AddMoveIfValidDestination(moves, cell, *cell.GetLeft(), STEP);
 		AddMoveIfValidDestination(moves, cell, *cell.GetRight(), STEP);
@@ -106,7 +142,13 @@ namespace engine {
 		}
 	}
 
-	void MoveFinder::AddTileMoveMoves(std::vector<Move>* moves, MoveType type, Cell<int> from, Cell<int> to) {
+	// Adds all moves that move an empty tile for the specified source/destination.
+	void MoveFinder::AddTileMoveMoves(
+		std::vector<Move>* moves,
+		MoveType type,
+		Cell<int> from,
+		Cell<int> to)
+	{
 		std::vector<Cell<int>>* emptyCells = _board->GetEmptyTiles();
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
 			if (it->NonDiagonalNeighbors() <= 2) {
