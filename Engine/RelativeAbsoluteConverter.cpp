@@ -1,8 +1,21 @@
 #include "RelativeAbsoluteConverter.h"
 namespace engine{
 
+	RelativeAbsoluteConverter::RelativeAbsoluteConverter(){
+		Init(NULL, Vector2D());
+	}
 	RelativeAbsoluteConverter::RelativeAbsoluteConverter(Grid<int>* parsable){
-		Vector2D _topLeft = Vector2D();
+		Init(parsable, Vector2D());
+	}
+
+	RelativeAbsoluteConverter::RelativeAbsoluteConverter(Grid<int>* parseable, Vector2D tl){
+		Init(parseable, tl);
+	}
+	void RelativeAbsoluteConverter::Init(Grid<int>* parsable, Vector2D tl){
+		if(parsable == NULL){
+			return;
+		}
+		_topLeft = tl;
 		_rowTileCount = vector<int>();
 		_colTileCount = vector<int>();
 		for(unsigned i = 0; i < parsable->GetSize()->GetWidth(); i++){
@@ -44,7 +57,41 @@ namespace engine{
 	}
 	// allows the converter to be kept up to date with board
 	void RelativeAbsoluteConverter::MoveTile(const Vector2D& from, const Vector2D& to){
-		_rowTileCount.at((int)from.X());
+		// update tilecounts
+		_colTileCount.at((int)from.X())--;
+		_rowTileCount.at((int)from.Y())--;
+		_colTileCount.at((int)to.X())++;
+		_rowTileCount.at((int)to.Y())++;
+
+		// handle the topleft changes
+		// the down right part
+		// if the topleft collumn has no tiles in it the topleft shifted right
+		if(_colTileCount.at((int)_topLeft.X()) == 0){
+			_topLeft.X(_topLeft.X() -1);
+		}
+		// if the top left row has no tiles in it the topleft shifted down
+		if(_rowTileCount.at((int)_topLeft.Y()) == 0){
+			_topLeft.Y(_topLeft.Y() -1);
+		}
+
+		// the up left part
+		Vector2D difference = to - _topLeft;
+		if(to.Y() == _topLeft.Y()){
+			if(to.X() < _topLeft.X()){
+				_topLeft.X(to.X());
+			}
+			// wrap arround case not absolute because these comparisons are only for up and left
+			if(difference.X() == 19){
+				_topLeft.X(to.X());
+			}
+		}
+		if(to.Y() < _topLeft.Y()){
+			_topLeft = to;
+		}
+		// wrap arround case
+		if(difference.Y() == 19){
+			_topLeft = to;
+		}
 	}
 
 
