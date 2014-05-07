@@ -12,6 +12,9 @@ namespace _2DFrontend
 	class KaroCommunicatedGameManager : KaroGameManager
 	{
 		private ICommunication _communication;
+		private int _turn = 0;
+		private Dictionary<string, Direction> _directions = new Dictionary<string, Direction>();
+
 		public KaroCommunicatedGameManager(ICommunication communication)
 			: base()
 		{
@@ -25,7 +28,16 @@ namespace _2DFrontend
 			_communication.WinAccepted += _communication_WinAccepted;
 			_communication.WinDetected += _communication_WinDetected;
 			_communication.WinRejected += _communication_WinRejected;
-			
+
+			_directions["00"] = Direction.None;
+			_directions["0-1"] = Direction.North;
+			_directions["10"] = Direction.East;
+			_directions["01"] = Direction.South;
+			_directions["-10"] = Direction.West;
+			_directions["-11"] = Direction.NorthEast;
+			_directions["-1-1"] = Direction.NorthWest;
+			_directions["11"] = Direction.SouthEast;
+			_directions["1-1"] = Direction.SouthWest;
 		}
 
 		void _communication_WinRejected()
@@ -70,8 +82,22 @@ namespace _2DFrontend
 			Debug.WriteLine("We won!");
 		}
 
+		bool IsMoveLegal(MoveWrapper mv)
+		{
+			/*			MoveWrapper mv = LegalMoves.Where(m =>
+				m.GetFromCell() == received.GetFromCell() && 
+				m.GetToCell() == received.GetToCell() &&
+				(!m.HasUsedCell() || m.GetUsedCell() == received.GetUsedCell())).FirstOrDefault();
+
+						if (mv == null)
+						{
+						}*/
+			return true;
+		}
+
 		void _communication_TurnReceived(Turn t)
 		{
+			_turn++;
 
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
@@ -85,18 +111,12 @@ namespace _2DFrontend
 			Debug.WriteLine("Converted turn to move: " + MoveWrapperToString(received));
 
 			// Get the move with the correct source tile from the last click.
-			MoveWrapper mv = LegalMoves.Where(m =>
-				m.GetFromCell() == received.GetFromCell() && 
-				m.GetToCell() == received.GetToCell() &&
-				(!m.HasUsedCell() || m.GetUsedCell() == received.GetUsedCell())).FirstOrDefault();
-
-			if (mv == null)
-			{
+			if(!IsMoveLegal(received)) {
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
 				return;
 			}
-			ExecuteMove(mv);
+			ExecuteMove(received);
 			//Handled their move, moving on to ours now
 
 
@@ -123,6 +143,7 @@ namespace _2DFrontend
 
 		void communication_RequestFirstMove()
 		{
+			_turn++;
 			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
 			MoveWrapper bm = Game.GetBestMove();
@@ -189,6 +210,14 @@ namespace _2DFrontend
 			}
 
 			return fromPosition;
+		}
+
+		private Direction CalculateDirection(Vector2DWrapper to, Vector2DWrapper from)
+		{
+			Vector2DWrapper difference = new Vector2DWrapper(to.X - from.X, to.Y - from.Y);
+			int xDiff = difference.X == 0 ? 0 : difference.X > 0 ? 1 : -1;
+			int yDiff = difference.Y == 0 ? 0 : difference.Y > 0 ? 1 : -1;
+			return _directions[xDiff.ToString() + yDiff.ToString()];
 		}
 
 		private MoveWrapper ConvertTurnToMove(Turn t)
@@ -319,7 +348,18 @@ namespace _2DFrontend
 			{
 				t.EmptyTile = null;
 			}
-			t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
+
+			if (_turn <= 12)
+			{
+				t.FromTile = ConvertBoardPositionToInt(mw.GetToCell());
+				t.Direction = Direction.None;
+			}
+			else
+			{
+				t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
+				t.Direction = CalculateDirection(mw.GetToCell(), mw.GetFromCell());
+			}
+			
 			return t;
 		}
 
