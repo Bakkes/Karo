@@ -60,11 +60,13 @@ namespace engine{
 		// the down right part
 		// if the topleft collumn has no tiles in it the topleft shifted right
 		if(_colTileCount.at((int)_topLeft.X()) == 0){
-			_topLeft.X(_topLeft.X() -1);
+			_topLeft.X(_topLeft.X() + 1);
+			_topLeft = WrapArround(_topLeft);
 		}
 		// if the top left row has no tiles in it the topleft shifted down
 		if(_rowTileCount.at((int)_topLeft.Y()) == 0){
-			_topLeft.Y(_topLeft.Y() -1);
+			_topLeft.Y(_topLeft.Y() +1);
+			_topLeft = WrapArround(_topLeft);
 		}
 
 		// the up left part
