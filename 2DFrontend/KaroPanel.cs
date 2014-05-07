@@ -84,6 +84,7 @@ namespace _2DFrontend
 			if (_manager != null)
 			{
 				PaintLegalMove(g);
+				PaintCurrentPlayer(g);
 
 				BoardWrapper board = _manager.Board;
 				const int maxPotentialSize = 20;
@@ -96,6 +97,16 @@ namespace _2DFrontend
 					}
 				}
 			}
+		}
+
+		private void PaintCurrentPlayer(Graphics g)
+		{
+			int x = this.Width - CellSize;
+			int y = CellSize - PieceSize;
+			int offset = (CellSize - PieceSize) / 2;
+			Brush playerBrush = _manager.CurrentPlayer == Players.Max ? _pieceMaxColor : _pieceMinColor;
+			g.FillRectangle(_tileBackColor, x - offset, y - offset, CellSize, CellSize);
+			g.FillEllipse(playerBrush, x, y, PieceSize, PieceSize);
 		}
 
 		private void PaintLegalMove(Graphics g)
