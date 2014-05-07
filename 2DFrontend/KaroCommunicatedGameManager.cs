@@ -72,6 +72,7 @@ namespace _2DFrontend
 
 		void _communication_TurnReceived(Turn t)
 		{
+
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
@@ -147,6 +148,49 @@ namespace _2DFrontend
 			
 		}
 
+		private int CalculateToCell(Turn t)
+		{
+			BoardWrapper b = Game.GetBoard();
+			Vector2DWrapper fromPosition = IntToBoardPosition(t.FromTile);
+			int moveSize = t.MoveType == MoveType.Jump ? 2 : 1;
+
+			switch (t.Direction)
+			{
+				case Direction.None:
+					break;
+				case Direction.North:
+					fromPosition.X -= moveSize;
+					break;
+				case Direction.East:
+					fromPosition.Y += moveSize;
+					break;
+				case Direction.South:
+					fromPosition.X += moveSize;
+					break;
+				case Direction.West:
+					fromPosition.Y -= moveSize;
+					break;
+				case Direction.NorthEast:
+					fromPosition.X -= moveSize;
+					fromPosition.Y += moveSize;
+					break;
+				case Direction.NorthWest:
+					fromPosition.X -= moveSize;
+					fromPosition.Y -= moveSize;
+					break;
+				case Direction.SouthEast:
+					fromPosition.X += moveSize;
+					fromPosition.Y += moveSize;
+					break;
+				case Direction.SouthWest:
+					fromPosition.X += moveSize;
+					fromPosition.Y -= moveSize;
+					break;
+			}
+
+			return fromPosition;
+		}
+
 		private MoveWrapper ConvertTurnToMove(Turn t)
 		{
 			engine.wrapper.MoveType mt = engine.wrapper.MoveType.INSERT;
@@ -162,15 +206,18 @@ namespace _2DFrontend
 					mt = engine.wrapper.MoveType.STEP;
 					break;
 			}
+
+			Vector2DWrapper toCell = CalculateToCell(t);
+
 			if (t.EmptyTile == null)
 			{
 				return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
-					ConvertIntToBoardPosition(t.ToTile));
+					toCell);
 			}
 			else
 			{
 				return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
-					ConvertIntToBoardPosition(t.ToTile), ConvertIntToBoardPosition(t.EmptyTile));
+					toCell, ConvertIntToBoardPosition(t.EmptyTile));
 
 			}
 		}
@@ -284,7 +331,7 @@ namespace _2DFrontend
 
 		public static String TurnToString(Turn t)
 		{
-			return String.Format("TURN: Type: {0}, FTU: {1},{2},{3}", t.MoveType, t.FromTile, t.ToTile, t.EmptyTile);
+			return String.Format("TURN: Type: {0}, FDU: {1},{2},{3}", t.MoveType, t.FromTile, t.Direction, t.EmptyTile);
 		}
 
 	}
