@@ -122,7 +122,7 @@ namespace engine{
 		on.SetData(on.GetData() | IsEmpty);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
-		_converter->MoveTile(from.GetPosition(), to.GetPosition());
+		_converter->MoveTile(tileUsed.GetPosition(), to.GetPosition());
 		tileUsed.SetData(tileUsed.GetData() & ~HasTile);
 		to.SetData(to.GetData() | HasTile);
 		MovePiece(from, to, owner);

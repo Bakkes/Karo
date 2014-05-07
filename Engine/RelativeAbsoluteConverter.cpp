@@ -24,8 +24,8 @@ namespace engine{
 		parsable->TraverseCells(
 			[this](Cell<int>* tile) -> void {
 				if(tile->GetData() & HasTile){
-					this->_rowTileCount.at((int)tile->GetPosition().X())+=1;
-					this->_rowTileCount.at((int)tile->GetPosition().Y())+=1;
+					_colTileCount.at((int)tile->GetPosition().X())++;
+					_rowTileCount.at((int)tile->GetPosition().Y())++;
 				}
 			}
 		);
