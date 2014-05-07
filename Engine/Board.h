@@ -33,7 +33,7 @@ namespace engine{
 		static const Size initSize;
 	private:
 		MoveFinder* _moveFinder;
-		RelativeAbsoluteConverter _converter;
+		RelativeAbsoluteConverter* _converter;
 		Grid<int>* _grid;
 		void Init(bool init);
 		void InsertPiece(const Cell<int>& on, Players owner);

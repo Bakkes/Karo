@@ -4,7 +4,7 @@
 #include "Size.h"
 using namespace std;
 namespace engine{
-	class ENGINE_API RelativeAbsoluteConverter{
+	class RelativeAbsoluteConverter{
 	public:
 		RelativeAbsoluteConverter();
 		RelativeAbsoluteConverter(Grid<int>* parseable);

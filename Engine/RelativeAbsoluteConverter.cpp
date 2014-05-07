@@ -1,9 +1,6 @@
 #include "RelativeAbsoluteConverter.h"
 namespace engine{
 
-	RelativeAbsoluteConverter::RelativeAbsoluteConverter(){
-		Init(NULL, Vector2D());
-	}
 	RelativeAbsoluteConverter::RelativeAbsoluteConverter(Grid<int>* parsable){
 		Init(parsable, Vector2D());
 	}
@@ -11,10 +8,10 @@ namespace engine{
 	RelativeAbsoluteConverter::RelativeAbsoluteConverter(Grid<int>* parseable, Vector2D tl){
 		Init(parseable, tl);
 	}
+	RelativeAbsoluteConverter::~RelativeAbsoluteConverter(){
+
+	}
 	void RelativeAbsoluteConverter::Init(Grid<int>* parsable, Vector2D tl){
-		if(parsable == NULL){
-			return;
-		}
 		_topLeft = tl;
 		_rowTileCount = vector<int>();
 		_colTileCount = vector<int>();
