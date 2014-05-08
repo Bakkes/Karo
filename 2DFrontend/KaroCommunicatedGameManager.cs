@@ -115,7 +115,7 @@ namespace _2DFrontend
 
 			System.Threading.Thread.Sleep(1000);
 
-			MoveWrapper bm = LegalMoves.Last();
+			MoveWrapper bm = Game.GetBestMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
 			_turn++;
