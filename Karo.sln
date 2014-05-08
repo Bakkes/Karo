@@ -20,6 +20,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationProtocol", "CommunicationProtocol\CommunicationProtocol.csproj", "{249EBC5B-8ADF-49C3-BDFE-72E9BABE7EB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNAFrontend", "XNAFrontend\XNAFrontend\XNAFrontend.csproj", "{1F1848BF-5A14-434A-97F5-68DD3A822A30}"
+	ProjectSection(ProjectDependencies) = postProject
+		{45887401-B8E2-414A-853C-65AAB97C01DA} = {45887401-B8E2-414A-853C-65AAB97C01DA}
+	EndProjectSection
 EndProject
 Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "XNAFrontendContent", "XNAFrontend\XNAFrontendContent\XNAFrontendContent.contentproj", "{753244B7-63C3-4C82-9F75-EF97123BFED5}"
 EndProject
