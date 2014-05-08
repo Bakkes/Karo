@@ -19,12 +19,12 @@ namespace engine{
 					if( tile->GetPosition().X() < Board::initSize.GetWidth() &&
 						tile->GetPosition().Y() < Board::initSize.GetHeight())
 					{
-						data |= HasCell | IsEmpty;
+						data |= HasTile | IsEmpty;
 					}
 					tile->SetData(data);
 				}
 			);
-			_absoluteTopLeft = Vector2D(0,0);
+			_converter = new RelativeAbsoluteConverter(_grid);
 		}
 	}
 
@@ -37,50 +37,72 @@ namespace engine{
 		_moveFinder = nullptr;
 		delete _grid;
 		_grid = nullptr;
+		delete _converter;
+		_converter = NULL;
 	}
 
 	int Board::GetPieceCountFor(Players player) {
-		// TODO: Actual counting.
-		return 0;
+
+		int playerCount = 0;
+		int isMax = player == Max ? IsMax : 0;
+
+		// Traverse the board and count all players.
+		_grid->TraverseCells(
+			[&](Cell<int>* tile) -> void {
+				int data = tile->GetData();
+				if ((data & HasTile) && (data & IsEmpty) == 0) {
+					if ((data & IsMax) == isMax) {
+						playerCount++;
+					}
+				}
+			}
+		);
+		return playerCount;
 	}
 
 	void Board::ExecuteMove(Move *move, Players player) {
+		Vector2D from = _converter->ToAbsolute(move->GetFromCell());
+		Vector2D to = _converter->ToAbsolute(move->GetToCell());
+		Vector2D used;
+		if(move->HasUsedCell()){
+			used = _converter->ToAbsolute(move->GetUsedCell());
+		}
 		switch(move->GetMoveType()){
 			case INSERT:
-				InsertPiece(*_grid->GetCellAt(move->GetToCell()), player);
+				InsertPiece(*_grid->GetCellAt(to), player);
 			return;
 			case DELETE:
-				DeletePiece(*_grid->GetCellAt(move->GetToCell()));
+				DeletePiece(*_grid->GetCellAt(to));
 			return;
-			case MOVE:
+			case STEP:
 				if(move->HasUsedCell()){
 					MovePiece(
-						*_grid->GetCellAt(move->GetFromCell()), 
-						*_grid->GetCellAt(move->GetToCell()), 
+						*_grid->GetCellAt(from), 
+						*_grid->GetCellAt(to), 
 						player, 
-						*_grid->GetCellAt(move->GetUsedCell()) 
+						*_grid->GetCellAt(used) 
 					);
 					return;
 				}
 				MovePiece(
-					*_grid->GetCellAt(move->GetFromCell()), 
-					*_grid->GetCellAt(move->GetToCell()), 
+					*_grid->GetCellAt(from), 
+					*_grid->GetCellAt(to), 
 					player
 				);
 			return; 
 			case JUMP:
 				if(move->HasUsedCell()){
 					JumpPiece(
-						*_grid->GetCellAt(move->GetFromCell()), 
-						*_grid->GetCellAt(move->GetToCell()), 
+						*_grid->GetCellAt(from), 
+						*_grid->GetCellAt(to), 
 						player, 
-						*_grid->GetCellAt(move->GetUsedCell()) 
+						*_grid->GetCellAt(used) 
 					);
 					return;
 				}
 				JumpPiece(
-					*_grid->GetCellAt(move->GetFromCell()), 
-					*_grid->GetCellAt(move->GetToCell()), 
+					*_grid->GetCellAt(from), 
+					*_grid->GetCellAt(to), 
 					player
 				);
 			return; 
@@ -100,8 +122,9 @@ namespace engine{
 		on.SetData(on.GetData() | IsEmpty);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
-		tileUsed.SetData(tileUsed.GetData() & ~HasCell);
-		tileUsed.SetData(to.GetData() | HasCell);
+		_converter->MoveTile(tileUsed.GetPosition(), to.GetPosition());
+		tileUsed.SetData(tileUsed.GetData() & ~HasTile);
+		to.SetData(to.GetData() | HasTile);
 		MovePiece(from, to, owner);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner){
@@ -110,10 +133,15 @@ namespace engine{
 		DeletePiece(from);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
+		Flip(from);
 		MovePiece(from, to, owner, tileUsed);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner){
+		Flip(from);
 		MovePiece(from, to, owner);
+	}
+	void Board::Flip(Cell<int>& which){
+		which.SetData(which.GetData() ^ IsFlipped);
 	}
 
 
@@ -125,7 +153,7 @@ namespace engine{
 		auto tiles = new vector<Cell<int>>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
-				if(!tile->GetData() & HasCell){
+				if(!tile->GetData() & HasTile){
 					return;
 				}
 				if(tile->GetData() & IsEmpty){
@@ -142,7 +170,7 @@ namespace engine{
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
 				// Stop if cell does not contain a tile.
-				if(!tile->GetData() & HasCell){
+				if(!tile->GetData() & HasTile){
 					return;
 				}
 				// Stop if tile is not empty.
@@ -154,7 +182,6 @@ namespace engine{
 		);
 		return emptyTiles;
 	}
-
 	string Board::ToString(){
 		stringstream result;
 		_grid->TraverseCells(
@@ -169,28 +196,24 @@ namespace engine{
 		return result.str();
 		
 	}
-	Cell<int>* Board::GetRelativeCellAt(const Vector2D relativePosition) const{
-		Vector2D position = relativePosition + absoluteTopLeft;
-		if(position.X() < 0){
-			position.X(position.X() + _grid->GetSize()->GetWidth());
-		}
-		if(position.Y() < 0){
-			position.Y(position.Y() + _grid->GetSize()->GetWidth());
-		}
-		return _grid->GetCellAt(position);
+	Cell<int>* Board::GetRelativeCellAt(const Vector2D& relativePosition) const{
+		return _grid->GetCellAt(_converter->ToAbsolute(relativePosition));
 	}
 
+	Board* Board::CreateBoard(string from) {
+		return Board::CreateBoard(from, Vector2D(0));
+	}
 	Board* Board::CreateBoard(string from, Vector2D absoluteTopLeft) {
 		Board* result = new Board(false);
 		int y = 0, x = 0;
 		for (string::iterator it = from.begin(); it < from.end(); it++) {
 			char subject = *it;
-			int myWonderfolNumber = 0;
+			int myWonderfulNumber = 0;
 			bool inWhile = false;
 
 			while(subject >= '0' && subject <= '9') {
-				myWonderfolNumber *= 10;
-				myWonderfolNumber += subject - '0';
+				myWonderfulNumber *= 10;
+				myWonderfulNumber += subject - '0';
 				it++;
 				subject = *it;
 				inWhile = true;
@@ -209,17 +232,12 @@ namespace engine{
 			} else {
 				it--;
 			}
-			result->_grid->GetCellAt(Vector2D(x,y))->SetData(myWonderfolNumber);
+			result->_grid->GetCellAt(Vector2D(x,y))->SetData(myWonderfulNumber);
 		}
 
-		result->_absoluteTopLeft = absoluteTopLeft;
+		result->_converter = new RelativeAbsoluteConverter(result->_grid,absoluteTopLeft);
 		return result;
 	}
-
-	Board* Board::CreateBoard(string from){
-		return CreateBoard(from, Vector2D(0, 0));
-	}
-
 	int Board::GetNumberOfEdges(Cell<int>* tile) {
 		int edges = 0;
 		
@@ -238,5 +256,4 @@ namespace engine{
 
 		return edges;
 	}
-
 }

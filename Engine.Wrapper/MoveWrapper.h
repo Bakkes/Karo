@@ -7,12 +7,12 @@ using namespace engine;
 namespace engine {
 namespace wrapper {
 
-	public enum class MoveType { INSERT = 0, MOVE = 1, JUMP = 2};
+	public enum class MoveType { INSERT = 0, STEP = 1, JUMP = 2};
 
 	public ref class MoveWrapper
 	{
 		public:
-			MoveWrapper(engine::wrapper::MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D usedCell);
+			MoveWrapper(engine::wrapper::MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D usedCell, bool hasUsedTile);
 			MoveWrapper(engine::wrapper::MoveType moveType, Vector2DWrapper^ fromTile, Vector2DWrapper^ toTile, Vector2DWrapper^ usedTile);
 			
 			~MoveWrapper();

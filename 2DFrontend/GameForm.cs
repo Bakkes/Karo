@@ -48,7 +48,7 @@ namespace _2DFrontend
 				communication.OnConnectionFailed += CommunicationFailed;
 				communication.StartCommunicating();
 				karoPanel.NewGame(_manager);
-			} catch(Exception ex) {
+			} catch(Exception) {
 				MessageBox.Show("IP incorrect");
 			}
 		}

@@ -107,7 +107,6 @@
 			// 
 			// karoPanel
 			// 
-			this.karoPanel.BackColor = System.Drawing.Color.CornflowerBlue;
 			this.karoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.karoPanel.Location = new System.Drawing.Point(12, 27);
 			this.karoPanel.Name = "karoPanel";
