@@ -6,11 +6,11 @@ namespace engine {
 		switch (move.GetMoveType()) {
 		case INSERT:
 			return Move(DELETE, move.GetToCell());
-		case MOVE: {
+		case STEP: {
 			if (move.HasUsedCell()) {
-				return Move(MOVE, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
+				return Move(STEP, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
 			} else {
-				return Move(MOVE, move.GetToCell(), move.GetFromCell());
+				return Move(STEP, move.GetToCell(), move.GetFromCell());
 			}
 		}
 		case JUMP: {

@@ -23,8 +23,8 @@ namespace Tests {
 	std::vector<Move>* StubBoard::GetLegalMoves(Players player) {
 		std::vector<Move>* legalMoves = new std::vector<Move>();
 
-		legalMoves->push_back(Move(MOVE, Vector2D(0), Vector2D(0, 1)));
-		legalMoves->push_back(Move(MOVE, Vector2D(0), Vector2D(1, 0)));
+		legalMoves->push_back(Move(STEP, Vector2D(0), Vector2D(0, 1)));
+		legalMoves->push_back(Move(STEP, Vector2D(0), Vector2D(1, 0)));
 		if (!_minimalMoves) {
 			legalMoves->push_back(Move(JUMP, Vector2D(0), Vector2D(0, 2)));
 		}
@@ -40,7 +40,7 @@ namespace Tests {
 		return 0;
 	}
 
-	Cell<int>* StubBoard::GetRelativeCellAt(const Vector2D relativePosition) const {
+	Cell<int>* StubBoard::GetRelativeCellAt(const Vector2D& relativePosition) const {
 		return nullptr;
 	}
 }
