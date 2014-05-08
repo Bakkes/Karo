@@ -70,6 +70,7 @@ namespace engine {
 				if (score.GetScore() <= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
 					// Cut off
 					OutputDebugStringW(L"Max Node Cut off\n");
+					SwapMinMaxInResult(result);
 					break;
 				} else if (score.GetScore() < result.GetBestForMax()) {
 					result.SetBestForMax(score.GetScore());
@@ -80,6 +81,7 @@ namespace engine {
 				if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
 					// Cut off
 					OutputDebugStringW(L"Min Node Cut off\n");
+					SwapMinMaxInResult(result);
 					break;
 				} else if (score.GetScore() < result.GetBestForMin()) {
 					result.SetBestForMin(score.GetScore());
@@ -117,10 +119,8 @@ namespace engine {
 
 
 			// Propogade the values up tree -> So swap them
-			int newMax = result.GetBestForMax();
-			result.SetBestForMax(result.GetBestForMin());
-			result.SetBestForMin(newMax);
-
+			SwapMinMaxInResult(result);
+			
 			OutputDebugStringW(L"Propogading Score\n");
 			return score;
 		} else {
@@ -135,6 +135,19 @@ namespace engine {
 			return score;
 		}
 
+	}
+
+	void ComputerPlayerAB::SwapMinMaxInResult(EvalResult& er) {
+			int oldMax = er.GetBestForMax();
+			int oldMin = er.GetBestForMin();
+			if (oldMax == INT_MIN) {
+				oldMax = INT_MAX;
+			}
+			if (oldMin == INT_MAX) {
+				oldMin = INT_MIN;
+			}
+			er.SetBestForMax(oldMin);
+			er.SetBestForMin(oldMax);
 	}
 
 	void ComputerPlayerAB::SetEvaluator(IStaticEvaluation* evaluator) {

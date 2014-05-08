@@ -27,6 +27,8 @@ namespace engine {
 		// Gets the score for the current phase, it either iterates deeper and takes that result
 		// or executes the static evaluation and uses that result.
 		EvalResult GetScore(Players player, Move move, int depth, EvalResult& result);
+		// Swaps the bestForMax and bestForMinx
+		void SwapMinMaxInResult(EvalResult& er);
 	};
 
 }
