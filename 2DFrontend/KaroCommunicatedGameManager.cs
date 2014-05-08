@@ -119,7 +119,9 @@ namespace _2DFrontend
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
 
-			MoveWrapper bm = Game.GetBestMove();
+			System.Threading.Thread.Sleep(1000);
+
+			MoveWrapper bm = LegalMoves.First();
 			ExecuteMove(bm);
 			if (Game.HasWon(Players.Max))
 			{
@@ -278,11 +280,13 @@ namespace _2DFrontend
                     }
 
                     // This cell has a tile, increment the number
-                    currentNumber++;
+                    
                     if (currentNumber == number)
                     {
+						currentNumber++;
                         return new Vector2DWrapper(x, y);
                     }
+					currentNumber++;
                 }
             }
 
@@ -352,17 +356,16 @@ namespace _2DFrontend
 				t.EmptyTile = null;
 			}
 
-			if (_turn <= 12)
+			if (_turn < 12)
 			{
 				t.FromTile = ConvertBoardPositionToInt(mw.GetToCell());
-				t.Direction = Direction.None;
 			}
 			else
 			{
 				t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
-				t.Direction = CalculateDirection(mw.GetToCell(), mw.GetFromCell());
+				
 			}
-			
+			t.Direction = CalculateDirection(mw.GetToCell(), mw.GetFromCell());
 			return t;
 		}
 
