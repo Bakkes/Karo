@@ -8,6 +8,7 @@ namespace Tests {
 	class StubBoard : public IBoard {
 	public:
 		StubBoard();
+		StubBoard(bool minimalMoves);
 		~StubBoard();
 
 		int GetPieceCountFor(Players player);
@@ -15,6 +16,9 @@ namespace Tests {
 		std::vector<Move>* GetLegalMoves(Players player);
 		std::vector<Cell<int>>* GetOccupiedTiles();
 		int GetNumberOfEdges(Cell<int>*);
-		Cell<int>* GetRelativeCellAt(const Vector2D relativePosition) const;
+		Cell<int>* GetRelativeCellAt(const Vector2D& relativePosition) const;
+
+	private:
+		bool _minimalMoves;
 	};
 }

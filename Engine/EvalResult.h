@@ -7,8 +7,11 @@ namespace engine {
 	class EvalResult {
 	public:
 		EvalResult();
+		EvalResult(const EvalResult& er);
 		EvalResult(int bestForMax, int bestForMin);
 		~EvalResult();
+
+		EvalResult& operator=(const EvalResult& other);
 
 		void SetScore(int score);
 		void SetMove(Move move);
