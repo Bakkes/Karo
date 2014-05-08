@@ -198,6 +198,13 @@ namespace engine{
 		return _grid->GetCellAt(position);
 	}
 
+
+	Cell<int>* Board::GetAbsoluteCellAt(const Vector2D absolutePosition) const{
+
+		return _grid->GetCellAt(absolutePosition);
+	}
+
+
 	Board* Board::CreateBoard(string from) {
 		return Board::CreateBoard(from, Vector2D(0));
 	}

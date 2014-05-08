@@ -82,6 +82,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IBoard.h" />
     <ClInclude Include="IComputerPlayer.h" />
+    <ClInclude Include="IHashAlgorithm.h" />
     <ClInclude Include="ISafeBoard.h" />
     <ClInclude Include="IStaticEvaluation.h" />
     <ClInclude Include="Move.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="ZobristHashing.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />

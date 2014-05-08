@@ -24,6 +24,7 @@ namespace engine{
 		vector<Cell<int>>* GetEmptyTiles();
 		int GetNumberOfEdges(Cell<int>*) override;
 		Cell<int>* GetRelativeCellAt(const Vector2D relativePosition) const override;
+		Cell<int>* GetAbsoluteCellAt(const Vector2D absolutePosition) const;
 		string ToString();
 		// create a board from a string with topleft at 0,0
 		static Board* CreateBoard(string from);
