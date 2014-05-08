@@ -6,15 +6,16 @@
 #include "Board.h"
 #include "IHashAlgorithm.h"
 
-#define m 16
-#define n 400
+
 
 namespace engine{
 	class ZobristHashing : IHashAlgorithm{
 
 	private:
 		hash_map<int,int> tableHash;
-		int table[m][n];
+		
+
+		int table[16][400];
 
 	public:
 		ZobristHashing(void);

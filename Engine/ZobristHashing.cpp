@@ -9,9 +9,9 @@ namespace engine{
 	{
 		srand((unsigned)time(NULL));
 	
-		for(int i=0;i<5;i++)
+		for(int i=0;i<16;i++)
 		{
-			for(int j=0; j<4; j++)
+			for(int j=0; j<400; j++)
 			{
 				table[i][j] = rand()%1000;
 			}
