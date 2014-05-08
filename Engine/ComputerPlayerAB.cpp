@@ -38,7 +38,13 @@ namespace engine {
 		}
 	}
 
-	EvalResult& ComputerPlayerAB::MinimaxStep(Players player, int depth, EvalResult& result) {
+	EvalResult ComputerPlayerAB::MinimaxStep(Players player, int depth, EvalResult result) {
+		if (player == Max) {
+			result.SetScore(INT_MIN);
+		} else {
+			result.SetScore(INT_MAX);
+		}
+
 		OutputDebugStringW(L"MinimaxStep(");
 		printPlayer(player);
 		OutputDebugStringW(L", ");
@@ -67,26 +73,31 @@ namespace engine {
 			OutputDebugStringW(L"\n");
 
 			if (player == Max) {
-				if (score.GetScore() <= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
-					// Cut off
-					OutputDebugStringW(L"Max Node Cut off\n");
-					SwapMinMaxInResult(result);
-					break;
-				} else if (score.GetScore() < result.GetBestForMax()) {
-					result.SetBestForMax(score.GetScore());
-					result.SetMove(score.GetMove());
+				if (score.GetScore() > result.GetScore()) {
 					result.SetScore(score.GetScore());
 				}
+
+				if (score.GetScore() >= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
+					// Cut off
+					OutputDebugStringW(L"Max Node Cut off\n");
+
+					break;
+				} else if (score.GetScore() > result.GetBestForMax()) {
+					result.SetBestForMax(score.GetScore());
+					result.SetMove(score.GetMove());
+				}
 			} else  if (player == Min)  {
+				if (score.GetScore() < result.GetScore()) {
+					result.SetScore(score.GetScore());
+				}
+
 				if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
 					// Cut off
 					OutputDebugStringW(L"Min Node Cut off\n");
-					SwapMinMaxInResult(result);
 					break;
 				} else if (score.GetScore() < result.GetBestForMin()) {
 					result.SetBestForMin(score.GetScore());
 					result.SetMove(score.GetMove());
-					result.SetScore(score.GetScore());
 				}
 			}
 
@@ -96,10 +107,8 @@ namespace engine {
 		return result;
 	}
 
-	EvalResult ComputerPlayerAB::GetScore(Players player, Move move, int depth, EvalResult& result) {
+	EvalResult ComputerPlayerAB::GetScore(Players player, Move move, int depth, EvalResult result) {
 		if (depth + 1 < _maxDepth) {
-			OutputDebugStringW(L"Going Down\n");
-
 			// We are allowed to go deeper, take the result of the next step
 			EvalResult score = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
 
@@ -117,11 +126,6 @@ namespace engine {
 			printInteger(result.GetBestForMin());
 			OutputDebugStringW(L")\n");
 
-
-			// Propogade the values up tree -> So swap them
-			SwapMinMaxInResult(result);
-			
-			OutputDebugStringW(L"Propogading Score\n");
 			return score;
 		} else {
 			// We can't go deeper, evaluate the board
