@@ -6,6 +6,7 @@
 #include <iostream>
 #include "Windows.h"
 
+
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
 using namespace std;
@@ -27,6 +28,7 @@ namespace Tests {
 
 		TEST_METHOD(InsertPieceMax) {
 			board->ExecuteMove(move, Max);
+			string result = board->ToString();
 			Assert::IsTrue(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,5,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -49,7 +51,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 					==
-				board->ToString()
+				result
 			);
 		};
 		TEST_METHOD(InsertPieceMin) {

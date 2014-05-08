@@ -43,7 +43,7 @@ namespace engine {
 				(player == Min && ((it->GetData()) & IsMax) != IsMax))
 			{
 				AddJumpMovesToVector(moves, *it);
-				AddAdjecentMovesToVector(moves, *it);
+				AddAdjacentMovesToVector(moves, *it);
 			}
 		}
 		return moves;
@@ -112,7 +112,7 @@ namespace engine {
 	}
 
 	// Adds all adjecent move options to the specified move vector.
-	void MoveFinder::AddAdjecentMovesToVector(std::vector<Move>* moves, Cell<int> cell) {
+	void MoveFinder::AddAdjacentMovesToVector(std::vector<Move>* moves, Cell<int> cell) {
 		AddMoveIfValidDestination(moves, cell, *cell.GetLeft(), STEP);
 		AddMoveIfValidDestination(moves, cell, *cell.GetRight(), STEP);
 		AddMoveIfValidDestination(moves, cell, *cell.GetTop(), STEP);
