@@ -53,7 +53,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Current state of the game.
 		/// </summary>
-		protected KaroGame Game { get; set; }
+		public KaroGame Game { get; set; }
 
 		public KaroGameManager()
 		{
@@ -81,6 +81,7 @@ namespace _2DFrontend
 			{
 				CurrentState.Update(this, tileLocation);
 			}
+			
 		}
 
 		public void ExecuteMove(MoveWrapper move)

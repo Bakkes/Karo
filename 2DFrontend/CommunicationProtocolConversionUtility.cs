@@ -2,6 +2,7 @@
 using engine.wrapper;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,15 +17,15 @@ namespace _2DFrontend
 		public CommunicationProtocolConversionUtility(KaroGame game)
 		{
 			_game = game;
-			_directions["00"] = Direction.None;
-			_directions["0-1"] = Direction.North;
-			_directions["10"] = Direction.East;
-			_directions["01"] = Direction.South;
-			_directions["-10"] = Direction.West;
-			_directions["-11"] = Direction.NorthEast;
-			_directions["-1-1"] = Direction.NorthWest;
-			_directions["11"] = Direction.SouthEast;
-			_directions["1-1"] = Direction.SouthWest;
+			_directions[""] = Direction.None;
+			_directions["N"] = Direction.North;
+			_directions["E"] = Direction.East;
+			_directions["S"] = Direction.South;
+			_directions["W"] = Direction.West;
+			_directions["NE"] = Direction.NorthEast;
+			_directions["NW"] = Direction.NorthWest;
+			_directions["SE"] = Direction.SouthEast;
+			_directions["SW"] = Direction.SouthWest;
 		}
 
 		public Vector2DWrapper CalculateToCell(Turn t)
@@ -72,10 +73,11 @@ namespace _2DFrontend
 
 		public Direction CalculateDirection(Vector2DWrapper to, Vector2DWrapper from)
 		{
-			Vector2DWrapper difference = new Vector2DWrapper(to.X - from.X, to.Y - from.Y);
-			int xDiff = difference.X == 0 ? 0 : difference.X > 0 ? 1 : -1;
-			int yDiff = difference.Y == 0 ? 0 : difference.Y > 0 ? 1 : -1;
-			return _directions[xDiff.ToString() + yDiff.ToString()];
+			Vector2DWrapper difference = new Vector2DWrapper(from.X - to.X, from.Y - to.Y);
+			string xDiff = difference.X == 0 ? "" : difference.X > 0 ? "W" : "E";
+			string yDiff = difference.Y == 0 ? "" : difference.Y > 0 ? "N" : "S";
+			Debug.WriteLine(yDiff + xDiff +" - " + _directions[yDiff + xDiff]);
+			return _directions[yDiff + xDiff];
 		}
 
 		public MoveWrapper ConvertTurnToMove(Turn t)
@@ -122,24 +124,21 @@ namespace _2DFrontend
 			}
 
 			int currentNumber = 0;
-			for (int x = 0; x < 20; x++)
+			for (int y = 0; y < 20; y++)
 			{
-				for (int y = 0; y < 20; y++)
+				for (int x = 0; x < 20; x++)
 				{
 					
 					CellWrapper cell = _game.GetBoard().GetRelativeCellAt(new Vector2DWrapper(x, y));
-					if ((cell.GetData() & (int)CellValue.IsEmpty) == 0)
+					if ((cell.GetData() & (int)CellValue.HasCell) == 1)
 					{
-						continue;
+						// This cell has a tile, increment the number
+						currentNumber++;
+						if (currentNumber == number)
+						{
+							return new Vector2DWrapper(x, y);
+						}
 					}
-
-					// This cell has a tile, increment the number
-					currentNumber++;
-					if (currentNumber == number)
-					{
-						return new Vector2DWrapper(x, y);
-					}
-
 				}
 			}
 
@@ -149,29 +148,23 @@ namespace _2DFrontend
 		public int ConvertBoardPositionToInt(Vector2DWrapper vector2D)
 		{
 			int number = 0;
-			for (int x = 0; x < 20; x++)
+			for (int y = 0; y < 20; y++)
 			{
-				for (int y = 0; y < 20; y++)
+				for (int x = 0; x < 20; x++)
 				{
 					CellWrapper cell = _game.GetBoard().GetRelativeCellAt(new Vector2DWrapper(x, y));
 					bool reachedEnd = x == vector2D.X && y == vector2D.Y;
 
-					if ((cell.GetData() & (int)CellValue.IsEmpty) == 0)
+					if ((cell.GetData() & (int)CellValue.HasCell) == 1)
 					{
+						number++;
 						if (reachedEnd)
 						{
 							return number;
 						}
-						continue;
+						
 					}
 
-					// There is a tile here, update the number
-					number++;
-
-					if (reachedEnd)
-					{
-						return number;
-					}
 				}
 			}
 
@@ -212,13 +205,14 @@ namespace _2DFrontend
 			if (mw.GetMoveType() == engine.wrapper.MoveType.INSERT)
 			{
 				t.FromTile = ConvertBoardPositionToInt(mw.GetToCell());
+				t.Direction = Direction.None;
 			}
 			else
 			{
 				t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
-
+				t.Direction = CalculateDirection(mw.GetToCell(), mw.GetFromCell());
 			}
-			t.Direction = CalculateDirection(mw.GetToCell(), mw.GetFromCell());
+
 			return t;
 		}
 

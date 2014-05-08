@@ -76,6 +76,7 @@ namespace _2DFrontend
 
 		bool IsMoveLegal(MoveWrapper mv)
 		{
+			return true;
 			Vector2DWrapper from = mv.GetFromCell();
 			Vector2DWrapper to = mv.GetToCell();
 			Vector2DWrapper used = mv.GetUsedCell();
@@ -87,7 +88,7 @@ namespace _2DFrontend
 
 		void _communication_TurnReceived(Turn t)
 		{
-			_turn++;
+			
 
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
@@ -101,12 +102,13 @@ namespace _2DFrontend
 			Debug.WriteLine("Converted turn to move: " + _conversion.MoveWrapperToString(received));
 
 			// Get the move with the correct source tile from the last click.
-			if(_turn > 12 && !IsMoveLegal(received)) {
+			if(!IsMoveLegal(received)) {
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
 				return;
 			}
 			ExecuteMove(received);
+			_turn++;
 			//Handled their move, moving on to ours now
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
@@ -114,19 +116,22 @@ namespace _2DFrontend
 			System.Threading.Thread.Sleep(1000);
 
 			MoveWrapper bm = LegalMoves.Last();
+			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
+			_turn++;
+
 			if (Game.HasWon(Players.Max))
 			{
 				Debug.WriteLine("We won, sending message to opponent.");
-				_communication.SendWinDetected(Player.Me, _conversion.ConvertMoveToTurn(bm));
+				_communication.SendWinDetected(Player.Me, turn);
 			}
 			else
 			{
 				Debug.WriteLine("Move made, sending move to opponent.");
-				_communication.SendTurn(_conversion.ConvertMoveToTurn(bm));
+				_communication.SendTurn(turn);
 			}
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
-			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(_conversion.ConvertMoveToTurn(bm)));
+			Debug.WriteLine("Converted move to turn: " + turn);
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
 		}

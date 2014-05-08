@@ -44,11 +44,20 @@ namespace _2DFrontend.State
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
 
+			//Console.WriteLine(tileLocation.X + "-" + tileLocation.Y);
+
+
 			// We have a valid move.
 			if (move != null)
 			{
+
+
 				manager.ExecuteMove(move);
 				Debug.WriteLine("Placed a new piece.");
+
+				Debug.WriteLine(move.GetToCell());
+				CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);
+				Debug.WriteLine(util.TurnToString(util.ConvertMoveToTurn(move)));
 			}
 			else
 			{
