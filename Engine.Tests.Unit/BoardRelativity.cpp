@@ -195,5 +195,13 @@ namespace Tests {
 				result
 			);
 		}
+		TEST_METHOD(GetRelativeCellChangedTopLeft) {
+			move = new Move(STEP, Vector2D(0,0), Vector2D(-1,0), Vector2D(4,3));
+			board->ExecuteMove(move, Max);
+			board->ExecuteMove(move, Max);
+			string result = board->ToString();
+			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0,0))->GetPosition() == Vector2D(18,0));
+
+		}
 	};
 }

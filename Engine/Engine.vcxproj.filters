@@ -72,6 +72,9 @@
     <ClInclude Include="RelativeAbsoluteConverter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RelativeCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Move.cpp">

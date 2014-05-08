@@ -89,6 +89,7 @@
     <ClInclude Include="MoveFinder.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="RandStaticEval.h" />
+    <ClInclude Include="RelativeCell.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
