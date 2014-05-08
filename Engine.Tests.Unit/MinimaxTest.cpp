@@ -41,9 +41,6 @@ namespace Tests {
 			IBoard* board = new StubBoard(true);
 			ComputerPlayerAB* ai = new ComputerPlayerAB(board, 4);
 			int results[7] = {
-			// Tree
-//				 3, 17,  2, 12, 15, 15, 25,  0,  2,  5,  3,  3,  2,
-//				14,  2, 14
 			// Corrected output based on cut off
 				 3, 17,  2, 15, 15,  2,  3,
 			};
@@ -59,6 +56,49 @@ namespace Tests {
 			delete board;
 			delete ai;
 		}
+
+		TEST_METHOD(MiniMax_MaxNodeCutOff_ReturnsTrue) {
+			IBoard* board = new StubBoard(true);
+			ComputerPlayerAB* ai = new ComputerPlayerAB(board, 4);
+			int results[14] = {
+			// Corrected output based on cut off
+				3, 17, 4, 12, 1, 1, 25,
+				0,  2, 5,  4, 3, 4, 14
+			};
+			StubStaticEval* staticEval = new StubStaticEval(results, 14);
+
+			ai->SetEvaluator(staticEval);
+			Move move = ai->GetBestMove(Max);
+			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
+			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
+			Assert::IsTrue(MovesAreEqual(move,Move(MOVE, Vector2D(0), Vector2D(1, 0))), L"Returned not the expected move");
+			Assert::AreEqual(14, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
+
+			delete board;
+			delete ai;
+		}
+
+		TEST_METHOD(MiniMax_MinNodeCutOff_ReturnsTrue) {
+			IBoard* board = new StubBoard(true);
+			ComputerPlayerAB* ai = new ComputerPlayerAB(board, 4);
+			int results[14] = {
+			// Corrected output based on cut off
+				3, 17, 2, 1,  1, 25,  0,
+				2,  5, 3, 3,  2, 14,  2
+			};
+			StubStaticEval* staticEval = new StubStaticEval(results, 14);
+
+			ai->SetEvaluator(staticEval);
+			Move move = ai->GetBestMove(Max);
+			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
+			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
+			Assert::IsTrue(MovesAreEqual(move,Move(MOVE, Vector2D(0), Vector2D(0, 1))), L"Returned not the expected move");
+			Assert::AreEqual(14, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
+
+			delete board;
+			delete ai;
+		}
+
 
 private:
 	bool IsLegalMove(IBoard* board, Move move, Players player) {
