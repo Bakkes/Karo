@@ -169,8 +169,10 @@ namespace engine{
 		vector<Cell<int>>* emptyTiles = new vector<Cell<int>>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
+				if (tile->GetData() == 2)
+					int i = 5;
 				// Stop if cell does not contain a tile.
-				if(!tile->GetData() & HasTile){
+				if(!(tile->GetData() & HasTile)){
 					return;
 				}
 				// Stop if tile is not empty.
