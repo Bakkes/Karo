@@ -31,7 +31,7 @@ namespace _2DFrontend
 		public Vector2DWrapper CalculateToCell(Turn t)
 		{
 			BoardWrapper b = _game.GetBoard();
-			Vector2DWrapper fromPosition = ConvertIntToBoardPosition(t.FromTile);
+			Vector2DWrapper goalPosition = ConvertIntToBoardPosition(t.FromTile);
 			int moveSize = t.MoveType == CommunicationProtocol.MoveType.Jump ? 2 : 1;
 
 			switch (t.Direction)
@@ -39,36 +39,36 @@ namespace _2DFrontend
 				case Direction.None:
 					break;
 				case Direction.North:
-					fromPosition.X -= moveSize;
+					goalPosition.X -= moveSize;
 					break;
 				case Direction.East:
-					fromPosition.Y += moveSize;
+					goalPosition.Y += moveSize;
 					break;
 				case Direction.South:
-					fromPosition.X += moveSize;
+					goalPosition.X += moveSize;
 					break;
 				case Direction.West:
-					fromPosition.Y -= moveSize;
+					goalPosition.Y -= moveSize;
 					break;
 				case Direction.NorthEast:
-					fromPosition.X -= moveSize;
-					fromPosition.Y += moveSize;
+					goalPosition.X -= moveSize;
+					goalPosition.Y += moveSize;
 					break;
 				case Direction.NorthWest:
-					fromPosition.X -= moveSize;
-					fromPosition.Y -= moveSize;
+					goalPosition.X -= moveSize;
+					goalPosition.Y -= moveSize;
 					break;
 				case Direction.SouthEast:
-					fromPosition.X += moveSize;
-					fromPosition.Y += moveSize;
+					goalPosition.X += moveSize;
+					goalPosition.Y += moveSize;
 					break;
 				case Direction.SouthWest:
-					fromPosition.X += moveSize;
-					fromPosition.Y -= moveSize;
+					goalPosition.X += moveSize;
+					goalPosition.Y -= moveSize;
 					break;
 			}
 
-			return fromPosition;
+			return goalPosition;
 		}
 
 		public Direction CalculateDirection(Vector2DWrapper to, Vector2DWrapper from)
