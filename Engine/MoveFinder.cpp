@@ -33,7 +33,7 @@ namespace engine {
 	// Returns all moves that are either a jump or move type of move.
 	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
 		std::vector<Move>* moves = new std::vector<Move>();
-		std::vector<Cell<int>>* occupiedCells = _board->GetOccupiedTiles();
+		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
 
 		// Loop through all occupied cells.
 		for (auto it = occupiedCells->begin(); it != occupiedCells->end(); ++it) {
@@ -137,7 +137,7 @@ namespace engine {
 			moves->push_back(Move(type, (from.GetPosition()), (to.GetPosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		else if (((to.GetData()) & HasTile) == 0 && to.NonDiagonalNeighbors() > 0) {
+		else if (((to.GetData()) & HasTile) == 0 && _board->CountNonDiagonalEdges(to) > 0) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}
@@ -151,7 +151,7 @@ namespace engine {
 	{
 		std::vector<Cell<int>>* emptyCells = _board->GetEmptyTiles();
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
-			if (it->NonDiagonalNeighbors() <= 2) {
+			if (_board->CountNonDiagonalEdges(*it) <= 2) {
 				moves->push_back(Move(
 					type,
 					from.GetPosition(),

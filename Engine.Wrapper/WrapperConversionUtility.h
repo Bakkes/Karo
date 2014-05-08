@@ -38,16 +38,12 @@ public:
 			move.GetFromCell(), move.GetToCell(), move.HasUsedCell() ? move.GetUsedCell() : 0, move.HasUsedCell());
 	}
 
-	static CellWrapper^ ConvertCell(Cell<int> tile) {
-		return gcnew CellWrapper(tile.GetPosition().X(), tile.GetPosition().Y(), (tile.GetData()));
+	static CellWrapper^ ConvertCell(Cell<int> cell) {
+		return gcnew CellWrapper(cell);
 	}
 
-	static CellWrapper^ ConvertCell(Cell<int>* tile) {
-		return gcnew CellWrapper(tile->GetPosition().X(), tile->GetPosition().Y(), tile->GetData());
-	}
-
-	static Cell<int>* ConvertCell(CellWrapper^ tile) {
-		return new Cell<int>(Vector2D(tile->GetPosition()->Y, tile->GetPosition()->X));
+	static CellWrapper^ ConvertCell(Cell<int>* cell) {
+		return ConvertCell(*cell);
 	}
 
 	static Vector2DWrapper^ ConvertVector2D(Vector2D vector2d) {

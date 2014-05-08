@@ -40,9 +40,9 @@ namespace engine {
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score += _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(&it) == 2) {
 				score += _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(&it) <= 2) {
 				score += _blockedTileValue;
 			}
 
@@ -111,9 +111,9 @@ namespace engine {
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score += _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(&it) == 2) {
 				score += _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(&it) <= 2) {
 				score += _blockedTileValue;
 			}
 
@@ -182,9 +182,9 @@ namespace engine {
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score -= _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(&it) == 2) {
 				score -= _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(&it) <= 2) {
 				score -= _blockedTileValue;
 			}
 
@@ -253,9 +253,9 @@ namespace engine {
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score -= _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(&it) == 2) {
 				score -= _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(&it) <= 2) {
 				score -= _blockedTileValue;
 			}
 
@@ -340,7 +340,7 @@ namespace engine {
 			score += _centerColumnValue;
 		} else if ((it.GetLeft()->GetData() & HasTile) == HasTile && (it.GetRight()->GetData() & HasTile) == HasTile) {
 			score += _bottomOrTopRowValue;;
-		} else if (board->GetNumberOfEdges(&it) == 2) {
+		} else if (board->CountNonDiagonalEdges(&it) == 2) {
 			score += _cornerValue;
 		}
 
@@ -357,7 +357,7 @@ namespace engine {
 			score -= _centerColumnValue;
 		} else if ((it.GetLeft()->GetData() & HasTile) == HasTile && (it.GetRight()->GetData() & HasTile) == HasTile) {
 			score -= _bottomOrTopRowValue;
-		} else if (board->GetNumberOfEdges(&it) == 2) {
+		} else if (board->CountNonDiagonalEdges(&it) == 2) {
 			score -= _cornerValue;
 		}
 
@@ -366,7 +366,7 @@ namespace engine {
 
 	int StaticEvaluation::Eval(IBoard* board, Players players)
 	{
-		vector<Cell<int>>* tiles = board->GetOccupiedTiles();
+		vector<RelativeCell>* tiles = board->GetOccupiedTiles();
 
 		int score = 0;
 
