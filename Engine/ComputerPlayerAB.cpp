@@ -141,19 +141,6 @@ namespace engine {
 
 	}
 
-	void ComputerPlayerAB::SwapMinMaxInResult(EvalResult& er) {
-			int oldMax = er.GetBestForMax();
-			int oldMin = er.GetBestForMin();
-			if (oldMax == INT_MIN) {
-				oldMax = INT_MAX;
-			}
-			if (oldMin == INT_MAX) {
-				oldMin = INT_MIN;
-			}
-			er.SetBestForMax(oldMin);
-			er.SetBestForMin(oldMax);
-	}
-
 	void ComputerPlayerAB::SetEvaluator(IStaticEvaluation* evaluator) {
 		delete _evaluator;
 		_evaluator = evaluator;
