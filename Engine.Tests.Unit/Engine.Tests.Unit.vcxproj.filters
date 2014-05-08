@@ -45,9 +45,18 @@
     <ClCompile Include="BoardMoveStep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BoardRelativity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StubStaticEval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StubBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

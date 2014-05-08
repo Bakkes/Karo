@@ -47,7 +47,6 @@ namespace _2DFrontend.State
 				var from = mw.GetFromCell();
 				var to = mw.GetToCell();
 				var type = mw.GetMoveType();
-				int i = 5;
 			}
 
 			// Valid source piece clicked, save the move.
