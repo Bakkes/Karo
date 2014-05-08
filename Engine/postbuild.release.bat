@@ -1,2 +1,1 @@
-xcopy "$(TargetPath)" "$(SolutionDir)2DFrontend\bin\Release" /y
-xcopy "$(TargetPath)" "$(SolutionDir)XNAFrontend\bin\Release" /y
+xcopy "..\Release\Engine.dll" "..\2DFrontend\bin\Release" /y /C
