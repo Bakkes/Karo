@@ -1,4 +1,5 @@
 #pragma once
+#pragma warning(disable:4251)
 
 #include <iostream>
 #include <time.h>
@@ -9,7 +10,7 @@
 
 
 namespace engine{
-	class ZobristHashing : IHashAlgorithm{
+	class ENGINE_API ZobristHashing : IHashAlgorithm{
 
 	private:
 		hash_map<int,int> tableHash;

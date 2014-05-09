@@ -5,7 +5,7 @@
 namespace engine{
 
 
-	class IHashAlgorithm{
+	class ENGINE_API IHashAlgorithm{
 
 	public :
 		virtual int hash(Board) =0;

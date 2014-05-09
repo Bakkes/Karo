@@ -5,6 +5,15 @@ using namespace stdext;
 
 namespace engine{
 
+	ZobristHashing::ZobristHashing(void)
+	{
+		init_zobrist();
+	}
+
+	ZobristHashing::~ZobristHashing(void)
+	{
+	}
+
 	void ZobristHashing::init_zobrist()
 	{
 		srand((unsigned)time(NULL));

@@ -29,6 +29,7 @@
     <ClCompile Include="PlayerInvertionTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
+    <ClCompile Include="ZobristTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveUtils.h" />

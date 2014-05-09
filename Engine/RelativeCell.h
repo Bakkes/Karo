@@ -9,5 +9,5 @@ namespace Engine{
 	private:
 		Cell<int> _cell;
 
-	}
+	};
 }
