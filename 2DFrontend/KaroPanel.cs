@@ -70,6 +70,12 @@ namespace _2DFrontend
 		public void NewGame(KaroGameManager manager)
 		{
 			_manager = manager;
+			_manager.OnBoardUpdated += BoardChanged;
+			Invalidate();
+		}
+
+		public void BoardChanged()
+		{
 			Invalidate();
 		}
 

@@ -1,6 +1,6 @@
 #pragma once
 #include "Grid.h"
-#include "IBoard.h"
+#include "CellValue.h"
 #include "Size.h"
 using namespace std;
 namespace engine{

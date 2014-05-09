@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="CellValue.h" />
     <ClInclude Include="ComputerPlayer.h" />
     <ClInclude Include="ComputerPlayerAB.h" />
     <ClInclude Include="ComputerPlayerUtils.h" />
@@ -85,6 +86,7 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IBoard.h" />
     <ClInclude Include="IComputerPlayer.h" />
+    <ClInclude Include="IHashAlgorithm.h" />
     <ClInclude Include="ISafeBoard.h" />
     <ClInclude Include="IStaticEvaluation.h" />
     <ClInclude Include="Move.h" />
@@ -95,6 +97,7 @@
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="ZobristHashing.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
@@ -106,9 +109,11 @@
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
+    <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />
     <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="ZobristHashing.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -149,8 +149,8 @@ namespace engine{
 		return _moveFinder->GetLegalMoves(player);
 	}
 
-	vector<Cell<int>>* Board::GetOccupiedTiles(){
-		auto tiles = new vector<Cell<int>>();
+	vector<RelativeCell>* Board::GetOccupiedTiles(){
+		auto tiles = new vector<RelativeCell>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
 				if(!tile->GetData() & HasTile){
@@ -159,14 +159,14 @@ namespace engine{
 				if(tile->GetData() & IsEmpty){
 					return;
 				}
-				tiles->push_back(*tile);
+				tiles->push_back(RelativeCell(tile, _converter));
 			}
 		);
 		return tiles;
 	}
 
-	vector<Cell<int>>* Board::GetEmptyTiles() {
-		vector<Cell<int>>* emptyTiles = new vector<Cell<int>>();
+	vector<RelativeCell>* Board::GetEmptyTiles() {
+		vector<RelativeCell>* emptyTiles = new vector<RelativeCell>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
 				if (tile->GetData() == 2)
@@ -179,7 +179,7 @@ namespace engine{
 				if((tile->GetData() & IsEmpty) == 0){
 					return;
 				}
-				emptyTiles->push_back(*tile);
+				emptyTiles->push_back(RelativeCell(tile, _converter));
 			}
 		);
 		return emptyTiles;
@@ -198,9 +198,19 @@ namespace engine{
 		return result.str();
 		
 	}
-	Cell<int>* Board::GetRelativeCellAt(const Vector2D& relativePosition) const{
-		return _grid->GetCellAt(_converter->ToAbsolute(relativePosition));
+	RelativeCell Board::GetRelativeCellAt(const Vector2D& relativePosition) const{
+		return RelativeCell(
+			_grid->GetCellAt(_converter->ToAbsolute(relativePosition)),
+			_converter
+		);
 	}
+
+
+	Cell<int>* Board::GetAbsoluteCellAt(const Vector2D absolutePosition) const{
+
+		return _grid->GetCellAt(absolutePosition);
+	}
+
 
 	Board* Board::CreateBoard(string from) {
 		return Board::CreateBoard(from, Vector2D(0));
@@ -240,19 +250,19 @@ namespace engine{
 		result->_converter = new RelativeAbsoluteConverter(result->_grid,absoluteTopLeft);
 		return result;
 	}
-	int Board::GetNumberOfEdges(Cell<int>* tile) {
+	int Board::CountNonDiagonalEdges(const RelativeCell& cell) {
 		int edges = 0;
 		
-		if (!((tile->GetLeft()->GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetLeft().HasTile()) {
 			edges++;
 		}
-		if (!((tile->GetRight()->GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetRight().HasTile()) {
 			edges++;
 		}
-		if (!((tile->GetTop()->GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetTop().HasTile()) {
 			edges++;
 		}
-		if (!((tile->GetBottom()->GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetBottom().HasTile()) {
 			edges++;
 		}
 

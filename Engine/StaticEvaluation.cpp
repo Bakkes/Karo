@@ -13,46 +13,46 @@ namespace engine {
 		_semiCenterValue = 4;
 		_centerColumnValue = 3;
 		_bottomOrTopRowValue = 2;
-		_cornerValue = 1;
+		_cornerValue2 = 1;
 	}
 
 	StaticEvaluation::~StaticEvaluation(void)
 	{
 	}
 
-	int StaticEvaluation::PlayingFase(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlayingFase(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if((it.GetData() & IsMax) == IsMax && players == Max) { //friendly: max
-			PlayingFaseFriendlyMax(score, board, it, players);
+			score = PlayingFaseFriendlyMax(score, board, it, players);
 		} else if((it.GetData() & IsMax) != IsMax && players == Min) { //friendly: min
-			PlayingFaseFriendlyMin(score, board, it, players);
+			score = PlayingFaseFriendlyMin(score, board, it, players);
 		} else if((it.GetData() & IsMax) != IsMax && players == Max) { //hostile: min
-			PlayingFaseHostileMin(score, board, it, players);
+			score = PlayingFaseHostileMin(score, board, it, players);
 		} else if((it.GetData() & IsMax) == IsMax && players == Min) { //hostile: max
-			PlayingFaseHostileMax(score, board, it, players);
+			score = PlayingFaseHostileMax(score, board, it, players);
 		}
 		
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseFriendlyMax(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlayingFaseFriendlyMax(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score += _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(it) == 2) {
 				score += _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(it) <= 2) {
 				score += _blockedTileValue;
 			}
 
 			//check left/right
 			bool tmpBool = false;
-			if ((it.GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -62,11 +62,11 @@ namespace engine {
 
 			//check up/down
 			tmpBool = false;
-			if ((it.GetTop()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetTop().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetBottom().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -76,11 +76,11 @@ namespace engine {
 
 			//check upleft/downright
 			tmpBool = false;
-			if ((it.GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetTop().GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetBottom().GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -90,11 +90,11 @@ namespace engine {
 
 			//check upright/downleft
 			tmpBool = false;
-			if ((it.GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetTop().GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetBottom().GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -106,24 +106,24 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseFriendlyMin(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlayingFaseFriendlyMin(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score += _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(it) == 2) {
 				score += _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(it) <= 2) {
 				score += _blockedTileValue;
 			}
 
 			//check left/right
 			bool tmpBool = false;
-			if ((it.GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetLeft().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetRight().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -133,11 +133,11 @@ namespace engine {
 
 			//check up/down
 			tmpBool = false;
-			if ((it.GetTop()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetTop().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetBottom().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -147,11 +147,11 @@ namespace engine {
 
 			//check upleft/downright
 			tmpBool = false;
-			if ((it.GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetTop().GetLeft().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetBottom().GetRight().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -161,11 +161,11 @@ namespace engine {
 
 			//check upright/downleft
 			tmpBool = false;
-			if ((it.GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetTop().GetRight().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score += _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetBottom().GetLeft().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score -= _neighborValue;
 					score += _lineValue;
@@ -177,24 +177,24 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseHostileMin(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlayingFaseHostileMin(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score -= _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(it) == 2) {
 				score -= _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(it) <= 2) {
 				score -= _blockedTileValue;
 			}
 
 			//check left/right
 			bool tmpBool = false;
-			if ((it.GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetLeft().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetRight().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -204,11 +204,11 @@ namespace engine {
 
 			//check up/down
 			tmpBool = false;
-			if ((it.GetTop()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetTop().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetBottom().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -218,11 +218,11 @@ namespace engine {
 
 			//check upleft/downright
 			tmpBool = false;
-			if ((it.GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetTop().GetLeft().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetBottom().GetRight().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -232,11 +232,11 @@ namespace engine {
 
 			//check upright/downleft
 			tmpBool = false;
-			if ((it.GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetTop().GetRight().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == IsFlipped) {
+			if ((it.GetBottom().GetLeft().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -248,24 +248,24 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseHostileMax(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlayingFaseHostileMax(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score -= _flippedValue;
 
-			if (board->GetNumberOfEdges(&it) == 2) {
+			if (board->CountNonDiagonalEdges(it) == 2) {
 				score -= _cornerValue;
-			} else if (board->GetNumberOfEdges(&it) <= 2) {
+			} else if (board->CountNonDiagonalEdges(it) <= 2) {
 				score -= _blockedTileValue;
 			}
 
 			//check left/right
 			bool tmpBool = false;
-			if ((it.GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -275,11 +275,11 @@ namespace engine {
 
 			//check up/down
 			tmpBool = false;
-			if ((it.GetTop()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetTop().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetBottom().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -289,11 +289,11 @@ namespace engine {
 
 			//check upleft/downright
 			tmpBool = false;
-			if ((it.GetTop()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetTop().GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetBottom().GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -303,11 +303,11 @@ namespace engine {
 
 			//check upright/downleft
 			tmpBool = false;
-			if ((it.GetTop()->GetRight()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetTop().GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				score -= _neighborValue;
 				tmpBool = true;
 			}
-			if ((it.GetBottom()->GetLeft()->GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+			if ((it.GetBottom().GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
 				if (tmpBool) {
 					score += _neighborValue;
 					score -= _lineValue;
@@ -319,46 +319,46 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlacingFase(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlacingFase(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if(((it.GetData() & IsMax) == IsMax && players == Max) || ((it.GetData() & IsMax) != IsMax && players == Min)) { //friendly
-			PlacingFaseFriendly(score, board, it, players);
+			score = PlacingFaseFriendly(score, board, it, players);
 		} else if(((it.GetData() & IsMax) == IsMax && players == Min) || ((it.GetData() & IsMax) != IsMax && players == Max)) { //hostile
-			PlacingFaseHostile(score, board, it, players);
+			score = PlacingFaseHostile(score, board, it, players);
 		}
 
 		return score;
 	}
 
-	int StaticEvaluation::PlacingFaseFriendly(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlacingFaseFriendly(int score, IBoard* board, RelativeCell it, Players players)
 	{
-		if ((it.GetPosition().X() == 2 && it.GetPosition().Y() == 1) || (it.GetPosition().X() == 2 && it.GetPosition().Y() == 2)) {
+		if ((it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 1) || (it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 2)) {
 			score += _centerValue;
 		} else if (it.GetSurroundingCells().size() == 0) {
 			score += _semiCenterValue;
-		} else if (it.GetPosition().X() == 2) {
+		} else if (it.GetAbsolutePosition().X() == 2) {
 			score += _centerColumnValue;
-		} else if ((it.GetLeft()->GetData() & HasTile) == HasTile && (it.GetRight()->GetData() & HasTile) == HasTile) {
+		} else if ((it.GetLeft().GetData() & HasTile) == HasTile && (it.GetRight().GetData() & HasTile) == HasTile) {
 			score += _bottomOrTopRowValue;;
-		} else if (board->GetNumberOfEdges(&it) == 2) {
-			score += _cornerValue;
+		} else if (board->CountNonDiagonalEdges(it) == 2) {
+			score += _cornerValue2;
 		}
 
 		return score;
 	}
 
-	int StaticEvaluation::PlacingFaseHostile(int score, IBoard* board, Cell<int> it, Players players)
+	int StaticEvaluation::PlacingFaseHostile(int score, IBoard* board, RelativeCell it, Players players)
 	{
-		if ((it.GetPosition().X() == 2 && it.GetPosition().Y() == 1) || (it.GetPosition().X() == 2 && it.GetPosition().Y() == 2)) {
+		if ((it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 1) || (it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 2)) {
 			score -= _centerValue;
 		} else if (it.GetSurroundingCells().size() == 0) {
 			score -= _semiCenterValue;
-		} else if (it.GetPosition().X() == 2) {
+		} else if (it.GetAbsolutePosition().X() == 2) {
 			score -= _centerColumnValue;
-		} else if ((it.GetLeft()->GetData() & HasTile) == HasTile && (it.GetRight()->GetData() & HasTile) == HasTile) {
+		} else if ((it.GetLeft().GetData() & HasTile) == HasTile && (it.GetRight().GetData() & HasTile) == HasTile) {
 			score -= _bottomOrTopRowValue;
-		} else if (board->GetNumberOfEdges(&it) == 2) {
-			score -= _cornerValue;
+		} else if (board->CountNonDiagonalEdges(it) == 2) {
+			score -= _cornerValue2;
 		}
 
 		return score;
@@ -366,7 +366,7 @@ namespace engine {
 
 	int StaticEvaluation::Eval(IBoard* board, Players players)
 	{
-		vector<Cell<int>>* tiles = board->GetOccupiedTiles();
+		vector<RelativeCell>* tiles = board->GetOccupiedTiles();
 
 		int score = 0;
 

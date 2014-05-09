@@ -63,6 +63,11 @@ namespace KaroManager.State
 					Debug.WriteLine("Moving tile at {0} to {1}",
 						move.GetFromCell(), move.GetToCell());
 					manager.ExecuteMove(move);
+
+					//Debug.WriteLine(move.GetToCell());
+					CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);
+					Debug.WriteLine(util.TurnToString(util.ConvertMoveToTurn(move)));
+
 					manager.ChangeState(PieceSourceState.Instance);
 				}
 			}

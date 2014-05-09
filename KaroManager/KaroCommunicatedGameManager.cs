@@ -9,10 +9,15 @@ namespace KaroManager
 	public class KaroCommunicatedGameManager : KaroGameManager
 	{
 		private ICommunication _communication;
+		private CommunicationProtocolConversionUtility _conversion;
+		private int _turn = 0;
+		
+
 		public KaroCommunicatedGameManager(ICommunication communication)
 			: base()
 		{
 			CurrentPlayer = Players.Min;
+			_conversion = new CommunicationProtocolConversionUtility(Game);
 			_communication = communication;
 			_communication.Connected += _communication_Connected;
 			_communication.Disconnected += _communication_Disconnected;
@@ -22,7 +27,6 @@ namespace KaroManager
 			_communication.WinAccepted += _communication_WinAccepted;
 			_communication.WinDetected += _communication_WinDetected;
 			_communication.WinRejected += _communication_WinRejected;
-			
 		}
 
 		void _communication_WinRejected()
@@ -67,37 +71,70 @@ namespace KaroManager
 			Debug.WriteLine("We won!");
 		}
 
+		bool IsMoveLegal(MoveWrapper mv)
+		{
+			if (mv.GetMoveType() == engine.wrapper.MoveType.INSERT)
+				return true;
+			Vector2DWrapper from = mv.GetFromCell();
+			Vector2DWrapper to = mv.GetToCell();
+			Vector2DWrapper used = mv.GetUsedCell();
+			Debug.WriteLine("Checking if legal: ");
+			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
+			IEnumerable<MoveWrapper> legal = LegalMoves;
+			return LegalMoves.Where(m =>
+				m.GetFromCell() == mv.GetFromCell() && 
+				m.GetToCell() == mv.GetToCell() &&
+				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
+		}
+
 		void _communication_TurnReceived(Turn t)
 		{
-			Debug.WriteLine("Opponent took a turn");
-			MoveWrapper received = ConvertTurnToMove(t);
+			
 
-			// Get the move with the correct source tile from the last click.
-			MoveWrapper mv = LegalMoves.Where(m =>
-				m.GetFromCell() == received.GetFromCell() && 
-				m.GetToCell() == received.GetToCell() &&
-				m.GetUsedCell() == received.GetUsedCell()).FirstOrDefault();
-			if (mv == null)
+			Debug.WriteLine("Opponent took a turn");
+			if (t == null)
 			{
+				Console.WriteLine("Turn is null, sending back");
 				_communication.SendMoveInvalid(t);
 				return;
 			}
-			ExecuteMove(mv);
-			//Handled their move, moving on to ours now
+			Debug.WriteLine("Received turn: " + _conversion.TurnToString(t));
+			MoveWrapper received = _conversion.ConvertTurnToMove(t);
+			Debug.WriteLine("Converted turn to move: " + _conversion.MoveWrapperToString(received));
 
+			// Get the move with the correct source tile from the last click.
+			if(!IsMoveLegal(received)) {
+				Console.WriteLine("Move is illegal, sending back");
+				_communication.SendMoveInvalid(t);
+				return;
+			}
+			ExecuteMove(received);
+			_turn++;
+			//Handled their move, moving on to ours now
+			if (OnBoardUpdated != null)
+				OnBoardUpdated();
+
+			System.Threading.Thread.Sleep(1000);
 
 			MoveWrapper bm = Game.GetBestMove();
+			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
+			_turn++;
+
 			if (Game.HasWon(Players.Max))
 			{
 				Debug.WriteLine("We won, sending message to opponent.");
-				_communication.SendWinDetected(Player.Me, ConvertMoveToTurn(bm));
+				_communication.SendWinDetected(Player.Me, turn);
 			}
 			else
 			{
 				Debug.WriteLine("Move made, sending move to opponent.");
-				_communication.SendTurn(ConvertMoveToTurn(bm));
+				_communication.SendTurn(turn);
 			}
+			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
+			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(turn));
+			if (OnBoardUpdated != null)
+				OnBoardUpdated();
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
@@ -107,11 +144,16 @@ namespace KaroManager
 
 		void communication_RequestFirstMove()
 		{
+			_turn++;
 			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
 			MoveWrapper bm = Game.GetBestMove();
 			ExecuteMove(bm);
-			_communication.SendTurn(ConvertMoveToTurn(bm));
+			_communication.SendTurn(_conversion.ConvertMoveToTurn(bm));
+			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
+			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(_conversion.ConvertMoveToTurn(bm)));
+			if (OnBoardUpdated != null)
+				OnBoardUpdated();
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)
@@ -129,116 +171,5 @@ namespace KaroManager
 		{
 			
 		}
-
-		private MoveWrapper ConvertTurnToMove(Turn t)
-		{
-			engine.wrapper.MoveType mt = engine.wrapper.MoveType.INSERT;
-			switch (t.MoveType)
-			{
-				case CommunicationProtocol.MoveType.Insert:
-					mt = engine.wrapper.MoveType.INSERT;
-					break;
-				case CommunicationProtocol.MoveType.Jump:
-					mt = engine.wrapper.MoveType.JUMP;
-					break;
-				case CommunicationProtocol.MoveType.Move:
-					mt = engine.wrapper.MoveType.STEP;
-					break;
-			}
-			return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
-				ConvertIntToBoardPosition(t.ToTile), t.EmptyTile == -1 ? null : ConvertIntToBoardPosition(t.EmptyTile));
-		}
-
-		private Vector2DWrapper ConvertIntToBoardPosition(int? number)
-		{
-			if (number == null)
-			{
-				return new Vector2DWrapper(0, 0);
-			}
-
-            if (number < 0 || number > 20) 
-            {
-                throw new ArgumentException(String.Format("Number {0} can not exist on the board"));
-            }
-
-            int currentNumber = 0;
-            for (int x = 0; x < 20; x++)
-            {
-                for (int y = 0; y < 20; y++)
-                {
-                    CellWrapper cell = Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-                    if ((cell.GetData() & (int)CellValue.IsEmpty) == 0)
-                    {
-                        continue;
-                    }
-
-                    // This cell has a tile, increment the number
-                    currentNumber++;
-                    if (currentNumber == number)
-                    {
-                        return new Vector2DWrapper(x, y);
-                    }
-                }
-            }
-
-            throw new Exception("Failed to translate int to board position");
-		}
-
-		private int ConvertBoardPositionToInt(Vector2DWrapper vector2D)
-		{
-            int number = 0;
-            for (int x = 0; x <= vector2D.X; x++)
-            {
-                for (int y = 0; y <= vector2D.Y; y++)
-                {
-                    CellWrapper cell = Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-                    if ((cell.GetData() & (int)CellValue.IsEmpty) == 0)
-                    {
-                        continue;
-                    }
-
-                    // There is a tile here, update the number
-                    number++;
-                }
-            }
-
-            if (number == 0)
-            {
-                throw new Exception("No tiles found before this position, invalid position to relate from");
-            }
-
-			return number;
-		}
-
-		private Turn ConvertMoveToTurn(MoveWrapper mw)
-		{
-			CommunicationProtocol.MoveType mt = CommunicationProtocol.MoveType.Insert;
-			switch (mw.GetMoveType())
-			{
-				case engine.wrapper.MoveType.INSERT:
-					mt = CommunicationProtocol.MoveType.Insert;
-					break;
-				case engine.wrapper.MoveType.JUMP:
-					mt = CommunicationProtocol.MoveType.Jump;
-					break;
-				case engine.wrapper.MoveType.STEP:
-					mt = CommunicationProtocol.MoveType.Move;
-					break;
-			}
-			Turn t = new Turn();
-			t.MoveType = mt;
-			if (mw.HasUsedCell())
-			{
-				t.EmptyTile = ConvertBoardPositionToInt(mw.GetUsedCell());
-			}
-			else
-			{
-				t.EmptyTile = null;
-			}
-			t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
-			t.ToTile = ConvertBoardPositionToInt(mw.GetToCell());
-			return t;
-		}
-
 	}
 }
