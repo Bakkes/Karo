@@ -23,7 +23,6 @@
     <ClCompile Include="BoardRelativity.cpp" />
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
-    <ClCompile Include="LegalMovesTest.cpp" />
     <ClCompile Include="MinimaxTest.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
     <ClCompile Include="MoveInvertionTest.cpp" />
