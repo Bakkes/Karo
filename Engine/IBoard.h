@@ -1,6 +1,5 @@
 #pragma once
 #include "Move.h"
-#include "Cell.h"
 #include <vector>
 #include "Players.h"
 #include "Vector2D.h"
@@ -13,7 +12,7 @@ namespace engine {
 		virtual void ExecuteMove(Move* move, Players player) = 0;
 		virtual std::vector<Move>* GetLegalMoves(Players player) = 0;
 		virtual std::vector<RelativeCell>* GetOccupiedTiles() = 0;
-		virtual vector<RelativeCell>* GetEmptyTiles() = 0;
+		virtual std::vector<RelativeCell>* GetEmptyTiles() = 0;
 		virtual int CountNonDiagonalEdges(const RelativeCell&) = 0;
 		virtual RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const = 0;
 	};

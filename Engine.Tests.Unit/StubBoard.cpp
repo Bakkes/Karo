@@ -32,15 +32,18 @@ namespace Tests {
 		return legalMoves;
 	}
 
-	std::vector<Cell<int>>* StubBoard::GetOccupiedTiles() {
+	std::vector<RelativeCell>* StubBoard::GetOccupiedTiles() {
 		return nullptr;
 	}
 
-	int StubBoard::GetNumberOfEdges(Cell<int>*) {
+	int StubBoard::CountNonDiagonalEdges(const RelativeCell&) {
 		return 0;
 	}
 
-	Cell<int>* StubBoard::GetRelativeCellAt(const Vector2D& relativePosition) const {
+	RelativeCell StubBoard::GetRelativeCellAt(const Vector2D& relativePosition) const {
+		return RelativeCell(nullptr, nullptr);
+	}
+	std::vector<RelativeCell>* StubBoard::GetEmptyTiles(){
 		return nullptr;
 	}
 }

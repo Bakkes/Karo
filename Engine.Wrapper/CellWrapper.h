@@ -12,10 +12,10 @@ public:
 	int GetData();
 	Vector2DWrapper^ GetRelativePosition();
 	Vector2DWrapper^ GetAbsolutePosition();
-	int HasTile();
-	int IsEmpty();
-	int IsMaxPiece();
-	int IsFlipped();
+	bool HasTile();
+	bool IsEmpty();
+	bool IsMaxPiece();
+	bool IsFlipped();
 	RelativeCell getCell();
 private:
 	RelativeCell* _cell;
