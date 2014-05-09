@@ -2,34 +2,37 @@
 
 namespace engine {
 namespace wrapper {
-	CellWrapper::CellWrapper(RelativeCell cell) : _cell(cell)
+	CellWrapper::CellWrapper(RelativeCell cell)
 	{
+		_cell = new RelativeCell(cell);
+	}
+	CellWrapper::~CellWrapper(void){
+		delete _cell;
 	}
 
-	int& CellWrapper::GetData() {
-
-		_cell.GetData();
-	}
 	Vector2DWrapper^ CellWrapper::GetRelativePosition() {
-		return gcnew Vector2DWrapper(this->_cell.GetRelativePosition().X(), this->_cell.GetRelativePosition().Y());
+		return gcnew Vector2DWrapper(_cell->GetRelativePosition().X(), _cell->GetRelativePosition().Y());
 	}
 	Vector2DWrapper^ CellWrapper::GetAbsolutePosition() {
-		return gcnew Vector2DWrapper(this->_cell.GetAbsolutePosition().X(), this->_cell.GetAbsolutePosition().Y());
+		return gcnew Vector2DWrapper(_cell->GetAbsolutePosition().X(), _cell->GetAbsolutePosition().Y());
 	}
-	int& CellWrapper::HasTile() {
-		return _cell.HasTile();
+	int CellWrapper::GetData() {
+		return _cell->GetData();
 	}
-	int& CellWrapper::IsEmpty() {
-		return _cell.IsEmpty();
+	int CellWrapper::HasTile() {
+		return _cell->HasTile();
 	}
-	int& CellWrapper::IsMaxPiece() {
-		return _cell.IsMaxPiece();
+	int CellWrapper::IsEmpty() {
+		return _cell->IsEmpty();
 	}
-	int& CellWrapper::IsFlipped() {
-		return _cell.IsFlipped();
+	int CellWrapper::IsMaxPiece() {
+		return _cell->IsMaxPiece();
+	}
+	int CellWrapper::IsFlipped() {
+		return _cell->IsFlipped();
 	}
 	RelativeCell CellWrapper::getCell() {
-		return _cell;
+		return *_cell;
 	}
 }
 }

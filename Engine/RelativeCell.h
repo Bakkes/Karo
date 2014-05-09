@@ -14,19 +14,19 @@ namespace engine{
 		RelativeCell GetTop() const;
 
 		const Vector2D& GetAbsolutePosition() const;
-		const Vector2D& GetRelativePosition() const;
-		const int& GetData() const;
+		Vector2D GetRelativePosition() const;
+		int GetData() const;
 
-		const int& HasTile() const;
-		const int& IsEmpty() const;
-		const int& IsMaxPiece() const;
-		const int& IsFlipped() const;
+		int HasTile() const;
+		int IsEmpty() const;
+		int IsMaxPiece() const;
+		int IsFlipped() const;
 
 		vector<RelativeCell> GetSurroundingCells() const;
 
 	private:
 		Cell<int>* _cell;
 		RelativeAbsoluteConverter* _converter;
-		Init(Cell<int>* cell, RelativeAbsoluteConverter* converter);
+		void Init(Cell<int>* cell, RelativeAbsoluteConverter* converter);
 	};
 }

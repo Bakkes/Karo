@@ -38,11 +38,11 @@ public:
 			move.GetFromCell(), move.GetToCell(), move.HasUsedCell() ? move.GetUsedCell() : 0, move.HasUsedCell());
 	}
 
-	static CellWrapper^ ConvertCell(Cell<int> cell) {
+	static CellWrapper^ ConvertCell(RelativeCell cell) {
 		return gcnew CellWrapper(cell);
 	}
 
-	static CellWrapper^ ConvertCell(Cell<int>* cell) {
+	static CellWrapper^ ConvertCell(RelativeCell* cell) {
 		return ConvertCell(*cell);
 	}
 

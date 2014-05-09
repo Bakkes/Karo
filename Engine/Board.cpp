@@ -165,8 +165,8 @@ namespace engine{
 		return tiles;
 	}
 
-	vector<Cell<int>>* Board::GetEmptyTiles() {
-		vector<Cell<int>>* emptyTiles = new vector<Cell<int>>();
+	vector<RelativeCell>* Board::GetEmptyTiles() {
+		vector<RelativeCell>* emptyTiles = new vector<RelativeCell>();
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
 				// Stop if cell does not contain a tile.
@@ -177,7 +177,7 @@ namespace engine{
 				if((tile->GetData() & IsEmpty) == 0){
 					return;
 				}
-				emptyTiles->push_back(*tile);
+				emptyTiles->push_back(RelativeCell(tile, _converter));
 			}
 		);
 		return emptyTiles;

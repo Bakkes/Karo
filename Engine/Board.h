@@ -15,8 +15,6 @@ namespace engine{
 
 	class ENGINE_API Board : public IBoard{
 	public:
-		static const int MaxPiecesPerPlayer = 6;
-
 		Board();
 		Board(bool init);
 		~Board();
@@ -24,10 +22,10 @@ namespace engine{
 		void ExecuteMove(Move *m, Players player) override;
 		vector<Move>* GetLegalMoves(Players player) override;
 		vector<RelativeCell>* GetOccupiedTiles() override;
+		vector<RelativeCell>* GetEmptyTiles() override;
 		RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const override;
 		int CountNonDiagonalEdges(const RelativeCell&) override;
 
-		vector<Cell<int>>* GetEmptyTiles();
 		string ToString();
 		// create a board from a string with topleft at 0,0
 		static Board* CreateBoard(string from);

@@ -8,7 +8,7 @@ namespace engine{
 		Init(cpy._cell, cpy._converter);
 	}
 
-	RelativeCell::Init(Cell<int>* cell, RelativeAbsoluteConverter* converter){
+	void RelativeCell::Init(Cell<int>* cell, RelativeAbsoluteConverter* converter){
 		_cell = cell;
 		_converter = converter;
 	}
@@ -28,26 +28,26 @@ namespace engine{
 		return RelativeCell(_cell->GetTop(), _converter);
 	}
 
-	const Vector2D& RelativeCell::GetRelativePosition() const {
+	Vector2D RelativeCell::GetRelativePosition() const {
 		return _converter->ToRelative(_cell->GetPosition());
 	}
 	const Vector2D& RelativeCell::GetAbsolutePosition() const {
 		return _cell->GetPosition();
 	}
 
-	const int& RelativeCell::GetData() const {
+	int RelativeCell::GetData() const {
 		return _cell->GetData();
 	}
-	const int& RelativeCell::HasTile() const{
+	int RelativeCell::HasTile() const{
 		return GetData() & CellValue::HasTile;
 	}
-	const int& RelativeCell::IsEmpty() const{
+	int RelativeCell::IsEmpty() const{
 		return GetData() & CellValue::IsEmpty;
 	}
-	const int& RelativeCell::IsMaxPiece() const{
+	int RelativeCell::IsMaxPiece() const{
 		return GetData() & CellValue::IsMax;
 	}
-	const int& RelativeCell::IsFlipped() const{
+	int RelativeCell::IsFlipped() const{
 		return GetData() & CellValue::IsFlipped;
 	}
 
