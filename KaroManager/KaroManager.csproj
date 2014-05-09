@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationProtocolConversionUtility.cs" />
     <Compile Include="KaroCommunicatedGameManager.cs" />
     <Compile Include="KaroGameManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
