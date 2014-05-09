@@ -4,14 +4,14 @@ using System.Drawing;
 using System.Linq;
 using engine.wrapper;
 
-namespace _2DFrontend.State
+namespace KaroManager.State
 {
 	/// <summary>
 	/// In this state, the current player must pick one of his pieces. When
 	/// a valid piece is chosen, the game will go to the PieceDestinationState
 	/// so the player can decide where he wants to move his piece.
 	/// </summary>
-	class PieceSourceState : IKaroState
+	public class PieceSourceState : IKaroState
 	{
 		private static PieceSourceState _instance;
 

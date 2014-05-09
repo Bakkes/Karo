@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using _2DFrontend.State;
 using engine.wrapper;
+using KaroManager.State;
 
-namespace _2DFrontend
+namespace KaroManager
 {
 	/// <summary>
 	/// Statemachine that keeps track of the game's states.
 	/// </summary>
-	class KaroGameManager
+	public class KaroGameManager
 	{
 		/// <summary>
 		/// Current state of the game.

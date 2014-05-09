@@ -1,15 +1,12 @@
-﻿using CommunicationProtocol;
-using engine.wrapper;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CommunicationProtocol;
+using engine.wrapper;
 
-namespace _2DFrontend
+namespace KaroManager
 {
-	class KaroCommunicatedGameManager : KaroGameManager
+	public class KaroCommunicatedGameManager : KaroGameManager
 	{
 		private ICommunication _communication;
 		public KaroCommunicatedGameManager(ICommunication communication)

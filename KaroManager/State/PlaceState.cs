@@ -4,12 +4,12 @@ using System.Drawing;
 using System.Linq;
 using engine.wrapper;
 
-namespace _2DFrontend.State
+namespace KaroManager.State
 {
 	/// <summary>
 	/// In this state, a human player can place a piece on an empty tile.
 	/// </summary>
-	class PlaceState : IKaroState
+	public class PlaceState : IKaroState
 	{
 		/// <summary>
 		/// The amount of pieces that have to be on the board in order for the

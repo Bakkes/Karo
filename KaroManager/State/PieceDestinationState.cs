@@ -4,14 +4,14 @@ using System.Drawing;
 using System.Linq;
 using engine.wrapper;
 
-namespace _2DFrontend.State
+namespace KaroManager.State
 {
 	/// <summary>
 	/// In this state, the player will decide on which tile he wants to move
 	/// his piece to. If clicked on a non valid tile, the game will go back to
 	/// the PieceSourceState.
 	/// </summary>
-	class PieceDestinationState : IKaroState
+	public class PieceDestinationState : IKaroState
 	{
 		private static PieceDestinationState _instance;
 

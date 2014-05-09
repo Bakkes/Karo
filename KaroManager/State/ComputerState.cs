@@ -1,12 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 
-namespace _2DFrontend.State
+namespace KaroManager.State
 {
 	/// <summary>
 	/// In this state, the computer will generate and place a move.
 	/// </summary>
-	class ComputerState : IKaroState
+	public class ComputerState : IKaroState
 	{
 		private static ComputerState _instance;
 

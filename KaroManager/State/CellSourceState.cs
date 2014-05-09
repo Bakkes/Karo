@@ -4,12 +4,12 @@ using System.Drawing;
 using System.Linq;
 using engine.wrapper;
 
-namespace _2DFrontend.State
+namespace KaroManager.State
 {
 	/// <summary>
 	/// In this state, the player will choose an empty tile that will be moved.
 	/// </summary>
-	class CellSourceState : IKaroState
+	public class CellSourceState : IKaroState
 	{
 		private static CellSourceState _instance;
 

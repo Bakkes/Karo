@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
 
-namespace _2DFrontend.State
+namespace KaroManager.State
 {
 	/// <summary>
 	/// Interface for karo game states. Takes a tile coordinate and
 	/// performs an action depending on the coordinate and state.
 	/// Implementations of this interface should be a singleton.
 	/// </summary>
-	interface IKaroState
+	public interface IKaroState
 	{
 		void Enter(KaroGameManager manager);
 		void Update(KaroGameManager manager, Point click);
