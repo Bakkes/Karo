@@ -29,7 +29,7 @@ namespace engine{
 		RelativeAbsoluteConverter* _converter;
 		void Init(Cell<int>* cell, RelativeAbsoluteConverter* converter);
 	};
-	inline bool ENGINE_API operator ==(const RelativeCell& l, const RelativeCell& r){
+	inline bool ENGINE_API operator==(const RelativeCell& l, const RelativeCell& r){
 		if(l.GetRelativePosition() != r.GetRelativePosition()){
 			return false;
 		}
@@ -38,6 +38,6 @@ namespace engine{
 		}
 		return true;
 	}
-	inline bool ENGINE_API operator !=(const RelativeCell& l, const RelativeCell& r){return !(l==r);}
+	inline bool ENGINE_API operator!=(const RelativeCell& l, const RelativeCell& r){return !(l==r);}
 
 }

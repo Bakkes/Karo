@@ -30,9 +30,6 @@
     <ClCompile Include="MinimaxTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BoardMoveChange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -54,14 +51,11 @@
     <ClCompile Include="StubStaticEval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LegalMovesTest.cpp">
+    <ClCompile Include="MoveFinderTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MoveUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StubStaticEval.h">
       <Filter>Header Files</Filter>
     </ClInclude>

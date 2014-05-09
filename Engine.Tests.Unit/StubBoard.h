@@ -1,6 +1,5 @@
 #pragma once
-#include "iboard.h"
-
+#include "IBoard.h"
 using namespace engine;
 
 namespace Tests {
@@ -11,12 +10,13 @@ namespace Tests {
 		StubBoard(bool minimalMoves);
 		~StubBoard();
 
-		int GetPieceCountFor(Players player);
-		void ExecuteMove(Move* move, Players player);
-		std::vector<Move>* GetLegalMoves(Players player);
-		std::vector<Cell<int>>* GetOccupiedTiles();
-		int GetNumberOfEdges(Cell<int>*);
-		Cell<int>* GetRelativeCellAt(const Vector2D& relativePosition) const;
+		int GetPieceCountFor(Players player) override;
+		void ExecuteMove(Move* move, Players player) override;
+		std::vector<Move>* GetLegalMoves(Players player) override;
+		std::vector<RelativeCell>* GetOccupiedTiles() override;
+		std::vector<RelativeCell>* GetEmptyTiles() override;
+		int CountNonDiagonalEdges(const RelativeCell&) override;
+		RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const override;
 
 	private:
 		bool _minimalMoves;
