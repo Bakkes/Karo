@@ -33,6 +33,26 @@ namespace engine {
 	}
 
 	bool ComputerPlayerUtils::IsWinningState(IBoard* board) {
+		if (board->GetPieceCountFor(Max) < IBoard::MaxPiecesPerPlayer && board->GetPieceCountFor(Min) < IBoard::MaxPiecesPerPlayer)
+			return false;
+
+		for (int x = 0; x < 20; ++x) {
+			for (int y = 0; y < 20; ++y) {
+				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
+				Players player = cell.IsMaxPiece() ? Max : Min;
+
+				for (int i = 0; i < 4; i++) {
+					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
+					if (!cell.HasTile() || !cell.IsFlipped()/* || TODO player check */ ) {
+						// Can not be part of 4 flipped pieces
+						break;
+					}
+				}
+
+
+			}
+		}
+
 		return false;
 	}
 }
