@@ -197,17 +197,16 @@ namespace _2DFrontend
 				{
 					CellWrapper cell = _game.GetBoard().GetRelativeCellAt(new Vector2DWrapper(x, y));
 					bool reachedEnd = x == vector2D.X && y == vector2D.Y;
+					
 
-					if ((cell.GetData() & (int)CellValue.HasCell) == 1)
+					if (cell.HasTile() != 0)
 					{
 						number++;
-						if (reachedEnd)
-						{
-							return number;
-						}
-						
 					}
-
+					if (reachedEnd)
+					{
+						return number;
+					}
 				}
 			}
 

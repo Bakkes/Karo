@@ -76,10 +76,14 @@ namespace _2DFrontend
 
 		bool IsMoveLegal(MoveWrapper mv)
 		{
-			return true;
+			if (mv.GetMoveType() == engine.wrapper.MoveType.INSERT)
+				return true;
 			Vector2DWrapper from = mv.GetFromCell();
 			Vector2DWrapper to = mv.GetToCell();
 			Vector2DWrapper used = mv.GetUsedCell();
+			Debug.WriteLine("Checking if legal: ");
+			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
+			IEnumerable<MoveWrapper> legal = LegalMoves;
 			return LegalMoves.Where(m =>
 				m.GetFromCell() == mv.GetFromCell() && 
 				m.GetToCell() == mv.GetToCell() &&
@@ -131,7 +135,7 @@ namespace _2DFrontend
 				_communication.SendTurn(turn);
 			}
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
-			Debug.WriteLine("Converted move to turn: " + turn);
+			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(turn));
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
 		}
