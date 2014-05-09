@@ -26,6 +26,7 @@
     <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="MoveUtils.cpp" />
     <ClCompile Include="PlayerInvertionTest.cpp" />
+    <ClCompile Include="StaticEvaluationTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveUtils.h" />
