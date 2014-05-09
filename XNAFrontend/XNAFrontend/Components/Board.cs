@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace XNAFrontend.Components
 {
@@ -8,14 +9,11 @@ namespace XNAFrontend.Components
 	/// </summary>
 	internal class Board : DrawableGameComponent
 	{
-		private Vector3 Position = Vector3.One;
-		private float Zoom = 2500;
-		private float RotationY = 0.0f;
-		private float RotationX = 0.0f;
-		private Matrix gameWorldRotation;
 		private Model _tileModel;
 
 		private KaroGame KaroGame { get { return (KaroGame)this.Game; } }
+
+		public Vector3 Position { get; set; }
 
 		public Board(KaroGame game)
 			: base(game)
@@ -23,42 +21,37 @@ namespace XNAFrontend.Components
 			LoadContent();
 		}
 
+		public override void Initialize()
+		{
+			base.Initialize();
+			this.Position = Vector3.Zero;
+		}
+
 		protected override void LoadContent()
 		{
 			base.LoadContent();
-			_tileModel = Game.Content.Load<Model>("tile");
+			_tileModel = Game.Content.Load<Model>("pawnred");
 		}
 
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
-			gameWorldRotation =
-				Matrix.CreateRotationX(MathHelper.ToRadians(RotationX)) *
-				Matrix.CreateRotationY(MathHelper.ToRadians(RotationY));
 		}
 
 		public override void Draw(GameTime gameTime)
 		{
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			float aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
-			Matrix projection =
-				Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
-				aspectRatio, 1.0f, 10000.0f);
-			Matrix view = Matrix.CreateLookAt(new Vector3(0.0f, 50.0f, Zoom),
-				Vector3.Zero, Vector3.Up);
 
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
-
-					effect.View = view;
-					effect.Projection = projection;
-					effect.World = gameWorldRotation *
-						transforms[mesh.ParentBone.Index] *
+					effect.World = transforms[mesh.ParentBone.Index] *
 						Matrix.CreateTranslation(Position);
+					effect.View = KaroGame.ViewMatrix;
+					effect.Projection = KaroGame.ProjectionMatrix;
 				}
 				mesh.Draw();
 			}

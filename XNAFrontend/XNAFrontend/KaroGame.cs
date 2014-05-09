@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using XNAFrontend.Components;
 
 namespace XNAFrontend
 {
@@ -12,6 +13,8 @@ namespace XNAFrontend
 		private GraphicsDeviceManager graphics;
 
 		public Vector3 CameraPosition { get; set; }
+		public Matrix ViewMatrix { get; set; }
+		public Matrix ProjectionMatrix { get; set; }
 
 		public KaroGame()
 		{
@@ -27,10 +30,14 @@ namespace XNAFrontend
 		/// </summary>
 		protected override void Initialize()
 		{
+			Board board = new Board(this);
 			base.Initialize();
 			IsMouseVisible = true;
-			Components.Add(new Components.Board(this));
-			CameraPosition = new Vector3(0, 0, -1);
+			CameraPosition = new Vector3(0.0f, 50.0f, 5000.0f);
+			ViewMatrix = Matrix.CreateLookAt(CameraPosition, board.Position, Vector3.Up);
+			float aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
+			ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(40f), aspectRatio, 100f, 100000f);
+			Components.Add(board);
 		}
 
 		/// <summary>
@@ -55,7 +62,7 @@ namespace XNAFrontend
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.Black);
+			GraphicsDevice.Clear(Color.CornflowerBlue);
 
 			base.Draw(gameTime);
 		}
