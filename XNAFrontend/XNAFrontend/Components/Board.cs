@@ -8,59 +8,58 @@ namespace XNAFrontend.Components
 	/// </summary>
 	internal class Board : DrawableGameComponent
 	{
-		private Vector3 _position;
-		private Vector3 _modelPosition;
+		private Vector3 Position = Vector3.One;
+		private float Zoom = 2500;
+		private float RotationY = 0.0f;
+		private float RotationX = 0.0f;
+		private Matrix gameWorldRotation;
 		private Model _tileModel;
-		private float _modelRotation;
-		private float _aspectRatio;
 
 		private KaroGame KaroGame { get { return (KaroGame)this.Game; } }
 
 		public Board(KaroGame game)
 			: base(game)
 		{
+			LoadContent();
 		}
 
 		protected override void LoadContent()
 		{
 			base.LoadContent();
 			_tileModel = Game.Content.Load<Model>("tile");
-			_aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
 		}
 
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
+			gameWorldRotation =
+				Matrix.CreateRotationX(MathHelper.ToRadians(RotationX)) *
+				Matrix.CreateRotationY(MathHelper.ToRadians(RotationY));
 		}
 
 		public override void Draw(GameTime gameTime)
 		{
-			if (_tileModel == null)
-			{
-				LoadContent();
-				return;
-			}
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
+			float aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			Matrix projection =
+				Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
+				aspectRatio, 1.0f, 10000.0f);
+			Matrix view = Matrix.CreateLookAt(new Vector3(0.0f, 50.0f, Zoom),
+				Vector3.Zero, Vector3.Up);
 
-			// Draw the model. A model can have multiple meshes, so loop.
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
-				// This is where the mesh orientation is set, as well 
-				// as our camera and projection.
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
-					effect.World = transforms[mesh.ParentBone.Index] *
-						Matrix.CreateRotationY(_modelRotation)
-						* Matrix.CreateTranslation(_modelPosition);
-					effect.View = Matrix.CreateLookAt(KaroGame.CameraPosition,
-						Vector3.Zero, Vector3.Up);
-					effect.Projection = Matrix.CreatePerspectiveFieldOfView(
-						MathHelper.ToRadians(45.0f), _aspectRatio,
-						1.0f, 10000.0f);
+
+					effect.View = view;
+					effect.Projection = projection;
+					effect.World = gameWorldRotation *
+						transforms[mesh.ParentBone.Index] *
+						Matrix.CreateTranslation(Position);
 				}
-				// Draw the mesh, using the effects set above.
 				mesh.Draw();
 			}
 			base.Draw(gameTime);

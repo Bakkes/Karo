@@ -30,7 +30,7 @@ namespace XNAFrontend
 			base.Initialize();
 			IsMouseVisible = true;
 			Components.Add(new Components.Board(this));
-			CameraPosition = new Vector3(0, 50, 5000);
+			CameraPosition = new Vector3(0, 0, -1);
 		}
 
 		/// <summary>
