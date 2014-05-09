@@ -1,3 +1,4 @@
+#include <vector>
 #include "CppUnitTest.h"
 #include "ComputerPlayerUtils.h"
 #include "MoveUtils.h"
@@ -6,8 +7,16 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
 
 namespace Tests {
-	TEST_CLASS(MoveInvertionTest) {
+	TEST_CLASS(ComputerPlayerUtilsTests) {
 	public:
+		TEST_METHOD(InvertPlayerMax) {
+			Assert::IsTrue(ComputerPlayerUtils::InvertPlayer(Max) == Min);
+		}
+
+		TEST_METHOD(InvertPlayerMin) {
+			Assert::IsTrue(ComputerPlayerUtils::InvertPlayer(Min) == Max);
+		}
+		
 		TEST_METHOD(InvertSimpleMove) {
 			Move move = Move(STEP, Vector2D(3, 4), Vector2D(3, 5));
 			Move invertedMove = Move(STEP, Vector2D(3, 5), Vector2D(3, 4));
@@ -38,5 +47,6 @@ namespace Tests {
 			Assert::IsTrue(MovesAreEqual(invertedMove, ComputerPlayerUtils::InvertMove(move)));
 		}
 	
+
 	};
 }
