@@ -33,7 +33,7 @@ namespace XNAFrontend
 			Board board = new Board(this);
 			base.Initialize();
 			IsMouseVisible = true;
-			CameraPosition = new Vector3(0.0f, 50.0f, 5000.0f);
+			CameraPosition = new Vector3(0.0f, 200.0f, 500.0f);
 			ViewMatrix = Matrix.CreateLookAt(CameraPosition, board.Position, Vector3.Up);
 			float aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
 			ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(40f), aspectRatio, 100f, 100000f);

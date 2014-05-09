@@ -30,7 +30,7 @@ namespace XNAFrontend.Components
 		protected override void LoadContent()
 		{
 			base.LoadContent();
-			_tileModel = Game.Content.Load<Model>("pawnred");
+			_tileModel = Game.Content.Load<Model>("tile");
 		}
 
 		public override void Update(GameTime gameTime)
