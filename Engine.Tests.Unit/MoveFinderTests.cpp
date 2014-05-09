@@ -145,5 +145,33 @@ namespace Tests {
 			delete legalMoves;
 			delete board;
 		}
+		TEST_METHOD(MaxBasicBoardTest) {
+			Move expected[] = {
+				Move(STEP, Vector2D(3,3), Vector2D(4,3)),
+				Move(STEP, Vector2D(3,3), Vector2D(3,4), Vector2D(4,3)),
+				Move(STEP, Vector2D(3,3), Vector2D(2,4), Vector2D(4,3)),
+
+				Move(JUMP, Vector2D(3,3), Vector2D(1,3)),
+				Move(JUMP, Vector2D(3,3), Vector2D(5,1), Vector2D(4,3))
+			};
+			std::vector<Move>* result = board->GetLegalMoves(Max);
+
+			int checkedNumber = 0; // make sure all expected are checked and true
+			for_each(result->begin(), result->end(), [&] (Move& move) -> void{
+				if(move.GetFromCell() == Vector2D(3,3)){
+					bool isChecked = false;
+					for(int i = 0; i < sizeof(expected)/sizeof(Move); i++){
+						if(expected[i] == move){
+							isChecked = true;
+							checkedNumber++;
+							break;
+						}
+					}
+					Assert::IsTrue(isChecked);
+				}
+			});
+
+			Assert::IsTrue(checkedNumber == 5);
+		}
 	};
 }
