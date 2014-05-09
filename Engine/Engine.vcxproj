@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="CellValue.h" />
     <ClInclude Include="ComputerPlayer.h" />
     <ClInclude Include="ComputerPlayerAB.h" />
     <ClInclude Include="ComputerPlayerUtils.h" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
+    <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />
     <ClCompile Include="Vector2D.cpp" />

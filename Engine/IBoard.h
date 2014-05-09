@@ -4,20 +4,17 @@
 #include <vector>
 #include "Players.h"
 #include "Vector2D.h"
+#include "RelativeCell.h"
 namespace engine {
-enum CellValue{
-	HasTile = 1,
-	IsEmpty = 2,
-	IsMax = 4,
-	IsFlipped = 8
-};
 	class IBoard {
 	public:
+		static const int MaxPiecesPerPlayer = 6;
 		virtual int GetPieceCountFor(Players player) = 0;
 		virtual void ExecuteMove(Move* move, Players player) = 0;
 		virtual std::vector<Move>* GetLegalMoves(Players player) = 0;
-		virtual std::vector<Cell<int>>* GetOccupiedTiles() = 0;
-		virtual int GetNumberOfEdges(Cell<int>*) = 0;
-		virtual Cell<int>* GetRelativeCellAt(const Vector2D& relativePosition) const = 0;
+		virtual std::vector<RelativeCell>* GetOccupiedTiles() = 0;
+		virtual vector<RelativeCell>* GetEmptyTiles() = 0;
+		virtual int CountNonDiagonalEdges(const RelativeCell&) = 0;
+		virtual RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const = 0;
 	};
 }

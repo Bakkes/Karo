@@ -1,18 +1,24 @@
 #pragma once
-#include "Cell.h"
+#include "RelativeCell.h"
 #include "Vector2DWrapper.h"
 namespace engine {
 namespace wrapper {
+using namespace engine;
 public ref class CellWrapper
 {
 public:
-	CellWrapper(double x, double y, int data);
+	CellWrapper(RelativeCell);
 	~CellWrapper(void);
 	int GetData();
-	Vector2DWrapper^ GetPosition();
+	Vector2DWrapper^ GetRelativePosition();
+	Vector2DWrapper^ GetAbsolutePosition();
+	int HasTile();
+	int IsEmpty();
+	int IsMaxPiece();
+	int IsFlipped();
+	RelativeCell getCell();
 private:
-	Cell<int> * _tile;
-	int _data;
+	RelativeCell* _cell;
 };
 
 }

@@ -48,6 +48,15 @@
     <ClCompile Include="BoardRelativity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StubBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StubStaticEval.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LegalMovesTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MoveUtils.h">
