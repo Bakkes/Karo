@@ -1,4 +1,5 @@
 #include "RelativeCell.h"
+#include "RelativeAbsoluteConverter.h"
 namespace engine{
 	RelativeCell::RelativeCell(Cell<int>* cell, RelativeAbsoluteConverter* converter) {
 		Init(cell, converter);
@@ -15,16 +16,16 @@ namespace engine{
 	RelativeCell::~RelativeCell(){
 		// dont delete anything, because this did not create anything!
 	}
-	RelativeCell RelativeCell::GetBottom() const{
+	const RelativeCell RelativeCell::GetBottom() const{
 		return RelativeCell(_cell->GetBottom(), _converter);
 	}
-	RelativeCell RelativeCell::GetRight() const{
+	const RelativeCell RelativeCell::GetRight() const{
 		return RelativeCell(_cell->GetRight(), _converter);
 	}
-	RelativeCell RelativeCell::GetLeft() const{
+	const RelativeCell RelativeCell::GetLeft() const{
 		return RelativeCell(_cell->GetLeft(), _converter);
 	}
-	RelativeCell RelativeCell::GetTop() const{
+	const RelativeCell RelativeCell::GetTop() const{
 		return RelativeCell(_cell->GetTop(), _converter);
 	}
 
