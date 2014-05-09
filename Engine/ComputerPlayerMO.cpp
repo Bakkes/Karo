@@ -3,7 +3,7 @@
 
 namespace engine {
 	/*
-	 * Computer AI with the Alpha Beta Pruning
+	 * Computer AI with the Alpha Beta Pruning and Move Ordering
 	 */
 
 	ComputerPlayerMO::ComputerPlayerMO(IBoard* board, int maxDepth) {
