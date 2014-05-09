@@ -51,19 +51,37 @@
     <ClInclude Include="ISafeBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComputerPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EvalResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RandStaticEval.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StaticEvaluation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveFinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerPlayerAB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComputerPlayerUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveFinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RelativeAbsoluteConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RelativeCell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CellValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -83,16 +101,31 @@
     <ClCompile Include="Vector2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComputerPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StaticEvaluation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EvalResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RandStaticEval.cpp">
+    <ClCompile Include="MoveFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerPlayerAB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerPlayerUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RelativeAbsoluteConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RelativeCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
