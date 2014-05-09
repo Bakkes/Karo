@@ -35,7 +35,7 @@ namespace CommunicationProtocol
         /// Dit kan een relatieve positie zijn als Direction geen Direction.None is.
         /// </summary>
         /// <seealso cref="Direction"/>
-        public int ToTile { get; set; }
+        //public int ToTile { get; set; }
         /// <summary>
         /// De direction wordt voor locaties op het bord op none gezet. Bij het aangeven van locaties die niet in het huidige bord liggen (het 'verbouwen' van het bord) wordt een relatieve positie meegegeven relatief aan de ToTile
         /// </summary>

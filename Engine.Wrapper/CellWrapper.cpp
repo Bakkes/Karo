@@ -19,17 +19,17 @@ namespace wrapper {
 	int CellWrapper::GetData() {
 		return _cell->GetData();
 	}
-	int CellWrapper::HasTile() {
-		return _cell->HasTile();
+	bool CellWrapper::HasTile() {
+		return _cell->HasTile() != 0;
 	}
-	int CellWrapper::IsEmpty() {
-		return _cell->IsEmpty();
+	bool CellWrapper::IsEmpty() {
+		return _cell->IsEmpty() != 0;
 	}
-	int CellWrapper::IsMaxPiece() {
-		return _cell->IsMaxPiece();
+	bool CellWrapper::IsMaxPiece() {
+		return _cell->IsMaxPiece() != 0;
 	}
-	int CellWrapper::IsFlipped() {
-		return _cell->IsFlipped();
+	bool CellWrapper::IsFlipped() {
+		return _cell->IsFlipped() != 0;
 	}
 	RelativeCell CellWrapper::getCell() {
 		return *_cell;

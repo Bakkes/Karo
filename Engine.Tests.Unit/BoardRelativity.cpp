@@ -203,5 +203,137 @@ namespace Tests {
 			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0,0)).GetAbsolutePosition() == Vector2D(18,0));
 
 		}
+
+		TEST_METHOD(InsertChangesTopLeft){
+			board = Board::CreateBoard(
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+			);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,0)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(2,0)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(3,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(4,0)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,1)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(2,1)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(3,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(4,1)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,2)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,2)), Min);
+			board->ExecuteMove(new Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Max);
+			Assert::IsTrue(
+				board->GetRelativeCellAt(Vector2D(0,0)).GetAbsolutePosition() == Vector2D(0,0)
+			);
+			Assert::IsTrue(
+				board->GetRelativeCellAt(Vector2D(0,0)).GetRelativePosition() == Vector2D(0,0)
+			);
+		}
+		TEST_METHOD(InsertChangesTopLeftMinFirst){
+			board = Board::CreateBoard(
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+			);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,0)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(2,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(3,0)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(4,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,1)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(2,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(3,1)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(4,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,2)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,2)), Max);
+			board->ExecuteMove(new Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Min);
+			Assert::IsTrue(
+				board->GetRelativeCellAt(Vector2D(0,0)).GetAbsolutePosition() == Vector2D(0,0)
+			);
+			Assert::IsTrue(
+				board->GetRelativeCellAt(Vector2D(0,0)).GetRelativePosition() == Vector2D(0,0)
+			);
+		}
+		TEST_METHOD(InsertChangesTopLeftData){
+			board = Board::CreateBoard(
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+			);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,0)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(2,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(3,0)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(4,0)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,1)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(2,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(3,1)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(4,1)), Max);
+			board->ExecuteMove(new Move(INSERT, Vector2D(0,2)), Min);
+			board->ExecuteMove(new Move(INSERT, Vector2D(1,2)), Max);
+			Assert::IsTrue(
+				(!board->GetRelativeCellAt(Vector2D(0,0)).IsMaxPiece()) &&
+				board->GetRelativeCellAt(Vector2D(0,0)).HasTile() 
+			);
+			board->ExecuteMove(new Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Min);
+			Assert::IsTrue(
+				board->GetRelativeCellAt(Vector2D(0,0)).HasTile() &&
+				board->GetRelativeCellAt(Vector2D(0,0)).IsEmpty()
+			);
+		}
 	};
 }
