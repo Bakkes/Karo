@@ -9,7 +9,9 @@ namespace XNAFrontend
 	/// </summary>
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
-		GraphicsDeviceManager graphics;
+		private GraphicsDeviceManager graphics;
+
+		public Vector3 CameraPosition { get; set; }
 
 		public KaroGame()
 		{
@@ -27,6 +29,8 @@ namespace XNAFrontend
 		{
 			base.Initialize();
 			IsMouseVisible = true;
+			Components.Add(new Components.Board(this));
+			CameraPosition = new Vector3(0, 50, 5000);
 		}
 
 		/// <summary>
