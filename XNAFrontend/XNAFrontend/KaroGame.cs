@@ -26,6 +26,7 @@ namespace XNAFrontend
 		protected override void Initialize()
 		{
 			base.Initialize();
+			IsMouseVisible = true;
 		}
 
 		/// <summary>
