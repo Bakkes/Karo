@@ -68,7 +68,7 @@ namespace engine {
 	}
 
 	EvalResult ComputerPlayerAB::GetScore(Players player, Move move, int depth, EvalResult result) {
-		if (depth + 1 < _maxDepth) {
+		if (depth + 1 < _maxDepth && !ComputerPlayerUtils::IsWinningState(_board)) {
 			// We are allowed to go deeper, take the result of the next step
 			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
 		}

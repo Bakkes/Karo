@@ -31,4 +31,8 @@ namespace engine {
 		}
 		return Players::Min;
 	}
+
+	bool ComputerPlayerUtils::IsWinningState(IBoard* board) {
+		return false;
+	}
 }
