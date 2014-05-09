@@ -13,6 +13,11 @@ namespace _2DFrontend
 		/// </summary>
 		private KaroGameManager _manager;
 
+		/// <summary>
+		/// The last used communication module
+		/// </summary>
+		private ICommunication _communication;
+
 		public Karo()
 		{
 			InitializeComponent();
@@ -32,8 +37,8 @@ namespace _2DFrontend
 
 		private void serverToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ICommunication communication = new Server(43594);
-			_manager = new KaroCommunicatedGameManager(communication);
+			_communication = new Server(43594);
+			_manager = new KaroCommunicatedGameManager(_communication);
 			karoPanel.NewGame(_manager);
 		}
 
@@ -47,6 +52,7 @@ namespace _2DFrontend
 				_manager = new KaroCommunicatedGameManager(communication);
 				communication.OnConnectionFailed += CommunicationFailed;
 				communication.StartCommunicating();
+				_communication = communication;
 				karoPanel.NewGame(_manager);
 			} catch(Exception) {
 				MessageBox.Show("IP incorrect");
@@ -56,6 +62,20 @@ namespace _2DFrontend
 		public void CommunicationFailed()
 		{
 			MessageBox.Show("Could not reach server");
+			CancelCommunication();
 		}
+
+		private void Karo_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			CancelCommunication();
+		}
+
+		private void CancelCommunication()
+		{
+			if (_communication != null)
+				_communication.CleanUp();
+		}
+
+
 	}
 }

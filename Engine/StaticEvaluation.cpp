@@ -13,7 +13,7 @@ namespace engine {
 		_semiCenterValue = 4;
 		_centerColumnValue = 3;
 		_bottomOrTopRowValue = 2;
-		_cornerValue = 1;
+		_cornerValue2 = 1;
 	}
 
 	StaticEvaluation::~StaticEvaluation(void)
@@ -23,13 +23,13 @@ namespace engine {
 	int StaticEvaluation::PlayingFase(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if((it.GetData() & IsMax) == IsMax && players == Max) { //friendly: max
-			PlayingFaseFriendlyMax(score, board, it, players);
+			score = PlayingFaseFriendlyMax(score, board, it, players);
 		} else if((it.GetData() & IsMax) != IsMax && players == Min) { //friendly: min
-			PlayingFaseFriendlyMin(score, board, it, players);
+			score = PlayingFaseFriendlyMin(score, board, it, players);
 		} else if((it.GetData() & IsMax) != IsMax && players == Max) { //hostile: min
-			PlayingFaseHostileMin(score, board, it, players);
+			score = PlayingFaseHostileMin(score, board, it, players);
 		} else if((it.GetData() & IsMax) == IsMax && players == Min) { //hostile: max
-			PlayingFaseHostileMax(score, board, it, players);
+			score = PlayingFaseHostileMax(score, board, it, players);
 		}
 		
 		return score;
@@ -322,9 +322,9 @@ namespace engine {
 	int StaticEvaluation::PlacingFase(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if(((it.GetData() & IsMax) == IsMax && players == Max) || ((it.GetData() & IsMax) != IsMax && players == Min)) { //friendly
-			PlacingFaseFriendly(score, board, it, players);
+			score = PlacingFaseFriendly(score, board, it, players);
 		} else if(((it.GetData() & IsMax) == IsMax && players == Min) || ((it.GetData() & IsMax) != IsMax && players == Max)) { //hostile
-			PlacingFaseHostile(score, board, it, players);
+			score = PlacingFaseHostile(score, board, it, players);
 		}
 
 		return score;
@@ -341,7 +341,7 @@ namespace engine {
 		} else if ((it.GetLeft().GetData() & HasTile) == HasTile && (it.GetRight().GetData() & HasTile) == HasTile) {
 			score += _bottomOrTopRowValue;;
 		} else if (board->CountNonDiagonalEdges(it) == 2) {
-			score += _cornerValue;
+			score += _cornerValue2;
 		}
 
 		return score;
@@ -358,7 +358,7 @@ namespace engine {
 		} else if ((it.GetLeft().GetData() & HasTile) == HasTile && (it.GetRight().GetData() & HasTile) == HasTile) {
 			score -= _bottomOrTopRowValue;
 		} else if (board->CountNonDiagonalEdges(it) == 2) {
-			score -= _cornerValue;
+			score -= _cornerValue2;
 		}
 
 		return score;

@@ -253,16 +253,16 @@ namespace engine{
 	int Board::CountNonDiagonalEdges(const RelativeCell& cell) {
 		int edges = 0;
 		
-		if (!((cell.GetLeft().GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetLeft().HasTile()) {
 			edges++;
 		}
-		if (!((cell.GetRight().GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetRight().HasTile()) {
 			edges++;
 		}
-		if (!((cell.GetTop().GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetTop().HasTile()) {
 			edges++;
 		}
-		if (!((cell.GetBottom().GetData() & IsEmpty) == IsEmpty)) {
+		if (cell.GetBottom().HasTile()) {
 			edges++;
 		}
 

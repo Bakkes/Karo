@@ -49,6 +49,8 @@ namespace CommunicationProtocol
                 Random r = new Random();
                 double x = r.NextDouble();
                 Console.Write("Diceroll: " + x);
+				SendRequestFirstMove();
+				/*
                 if (x >= 0.5)
                 {
                     Console.Write(" server starts\n");
@@ -58,7 +60,7 @@ namespace CommunicationProtocol
                 {
                     Console.Write(" client starts\n");
                     SendRequestFirstMove();
-                }
+                }*/
             }
             DoCommunication();
             _listener.Stop();

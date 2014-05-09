@@ -23,12 +23,12 @@
     <ClCompile Include="BoardRelativity.cpp" />
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
-    <ClCompile Include="LegalMovesTest.cpp" />
     <ClCompile Include="MinimaxTest.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
     <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="MoveUtils.cpp" />
     <ClCompile Include="PlayerInvertionTest.cpp" />
+    <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
     <ClCompile Include="ZobristTest.cpp" />

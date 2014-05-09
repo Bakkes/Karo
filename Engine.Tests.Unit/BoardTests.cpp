@@ -187,5 +187,14 @@ namespace Tests {
 			Assert::IsTrue(*result == vector<RelativeCell>());
 			delete result;
 		};
+
+		TEST_METHOD(CountEgesTest) {
+			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(0,0))) == 2);
+			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(0,3))) == 2);
+			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(4,0))) == 2);
+			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(4,3))) == 2);
+			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(3,3))) == 3);
+			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(3,2))) == 4);
+		}
 	};
 }
