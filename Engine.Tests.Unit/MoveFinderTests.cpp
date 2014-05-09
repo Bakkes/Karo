@@ -70,6 +70,42 @@ namespace Tests {
 			);
 			vector<Move>* resultMax = board->GetLegalMoves(Max);
 			vector<Move>* resultMin = board->GetLegalMoves(Min);
+			Assert::IsTrue(*resultMax == *resultMin);
+
+			Move moves[] = {
+				Move(INSERT, Vector2D(0,0)),
+				Move(INSERT, Vector2D(1,0)),
+				Move(INSERT, Vector2D(2,0)),
+				Move(INSERT, Vector2D(3,0)),
+				Move(INSERT, Vector2D(4,0)),
+
+				Move(INSERT, Vector2D(0,1)),
+				Move(INSERT, Vector2D(1,1)),
+				Move(INSERT, Vector2D(2,1)),
+				Move(INSERT, Vector2D(3,1)),
+				Move(INSERT, Vector2D(4,1)),
+
+				Move(INSERT, Vector2D(0,2)),
+				Move(INSERT, Vector2D(1,2)),
+				Move(INSERT, Vector2D(2,2)),
+				Move(INSERT, Vector2D(3,2)),
+				Move(INSERT, Vector2D(4,2)),
+
+				Move(INSERT, Vector2D(0,3)),
+				Move(INSERT, Vector2D(1,3)),
+				Move(INSERT, Vector2D(2,3)),
+				Move(INSERT, Vector2D(3,3)),
+				Move(INSERT, Vector2D(4,3)),
+			};
+			int moveCount = 0;
+			function<void (Move&)> getMove = [&] (Move& move) -> void{
+				Move excpected = moves[moveCount];
+				Assert::IsTrue(move == excpected);
+				moveCount++;
+			};
+			for_each(resultMax->begin(), resultMax->end(), getMove);
+			moveCount = 0;
+			for_each(resultMin->begin(), resultMin->end(), getMove);
 			
 		};
 		TEST_METHOD(RulesAmendment) {

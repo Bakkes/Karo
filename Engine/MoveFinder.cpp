@@ -24,7 +24,7 @@ namespace engine {
 		std::vector<RelativeCell>* emptyTiles = _board->GetEmptyTiles();
 		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
 			// Add insertion move to an empty tile.
-			moves->push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
+			moves->push_back(Move(INSERT, it->GetRelativePosition()));
 		}
 		return moves;
 	}
