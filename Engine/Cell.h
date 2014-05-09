@@ -10,7 +10,7 @@ namespace engine {
 	// this class is for easy navigating the grid, when you get a tile you now
 	// its neighbours
 	template<typename T>
-	class ENGINE_API Cell{
+	class  Cell{
 
 	public:
 		// Copy constructor

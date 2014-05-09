@@ -3,7 +3,7 @@
 #include "CellValue.h"
 #include "RelativeAbsoluteConverter.h"
 namespace engine{
-	class RelativeCell{
+	class ENGINE_API RelativeCell{
 	public:
 		RelativeCell(Cell<int>* cell,RelativeAbsoluteConverter* converter);
 		RelativeCell(const RelativeCell&);
