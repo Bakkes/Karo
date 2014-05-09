@@ -43,19 +43,22 @@ namespace XNAFrontend.Components
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
 
-			for (int i = 0; i < 3; i++)
+			for (int i = 0; i < 5; i++)
 			{
-				foreach (ModelMesh mesh in _tileModel.Meshes)
+				for (int j = 0; j < 4; j++)
 				{
-					foreach (BasicEffect effect in mesh.Effects)
+					foreach (ModelMesh mesh in _tileModel.Meshes)
 					{
-						effect.EnableDefaultLighting();
-						effect.World = transforms[mesh.ParentBone.Index] *
-							Matrix.CreateTranslation(Position + new Vector3(0, 0, 10 * i));
-						effect.View = KaroGame.ViewMatrix;
-						effect.Projection = KaroGame.ProjectionMatrix;
+						foreach (BasicEffect effect in mesh.Effects)
+						{
+							effect.EnableDefaultLighting();
+							effect.World = transforms[mesh.ParentBone.Index] *
+								Matrix.CreateTranslation(Position + new Vector3(-300 * j, 0, -300 * i));
+							effect.View = KaroGame.ViewMatrix;
+							effect.Projection = KaroGame.ProjectionMatrix;
+						}
+						mesh.Draw();
 					}
-					mesh.Draw();
 				}
 			}
 			base.Draw(gameTime);
