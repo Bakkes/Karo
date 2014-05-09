@@ -199,7 +199,7 @@ namespace _2DFrontend
 					bool reachedEnd = x == vector2D.X && y == vector2D.Y;
 					
 
-					if (cell.HasTile() != 0)
+					if (cell.HasTile())
 					{
 						number++;
 					}
