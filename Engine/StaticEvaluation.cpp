@@ -13,7 +13,7 @@ namespace engine {
 		_semiCenterValue = 4;
 		_centerColumnValue = 3;
 		_bottomOrTopRowValue = 2;
-		_cornerValue = 1;
+		_cornerValue2 = 1;
 	}
 
 	StaticEvaluation::~StaticEvaluation(void)
@@ -341,7 +341,7 @@ namespace engine {
 		} else if ((it.GetLeft().GetData() & HasTile) == HasTile && (it.GetRight().GetData() & HasTile) == HasTile) {
 			score += _bottomOrTopRowValue;;
 		} else if (board->CountNonDiagonalEdges(it) == 2) {
-			score += _cornerValue;
+			score += _cornerValue2;
 		}
 
 		return score;
@@ -358,7 +358,7 @@ namespace engine {
 		} else if ((it.GetLeft().GetData() & HasTile) == HasTile && (it.GetRight().GetData() & HasTile) == HasTile) {
 			score -= _bottomOrTopRowValue;
 		} else if (board->CountNonDiagonalEdges(it) == 2) {
-			score -= _cornerValue;
+			score -= _cornerValue2;
 		}
 
 		return score;

@@ -13,6 +13,7 @@ namespace engine {
 		int _flippedValue;
 		int _blockedTileValue;
 		int _cornerValue;
+		int _cornerValue2;
 		int _neighborValue;
 		int _lineValue;
 		int _centerValue;
