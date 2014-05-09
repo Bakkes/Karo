@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 #include "Windows.h"
-#include "MoveUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -69,9 +68,9 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = new Move(STEP, Vector2D(4,0), Vector2D(5,0), Vector2D(4,3));
-			board->ExecuteMove(move, Max);
-			string result = board->ToString();
+			vector<Move>* resultMax = board->GetLegalMoves(Max);
+			vector<Move>* resultMin = board->GetLegalMoves(Min);
+			
 		};
 		TEST_METHOD(RulesAmendment) {
 			Board* board = Board::CreateBoard(
@@ -104,7 +103,7 @@ namespace Tests {
 			for (auto it = legalMoves->begin(); it != legalMoves->end(); ++it) {
 				Move move = *it;
 
-				Assert::IsFalse(MovesAreEqual(illegalMove, move), L"Found illegal move as specified by rule amendment");
+				Assert::IsFalse(illegalMove == move, L"Found illegal move as specified by rule amendment");
 			}
 
 			delete legalMoves;
