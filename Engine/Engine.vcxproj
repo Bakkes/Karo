@@ -52,7 +52,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetPath)" "$(SolutionDir)2DFrontend\bin\Debug" /y</Command>
+      <Command>call "$(ProjectDir)postbuild.debug.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,13 +70,15 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TargetPath)" "$(SolutionDir)2DFrontend\bin\Release" /y</Command>
+      <Command>call "$(ProjectDir)postbuild.release.bat"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="CellValue.h" />
     <ClInclude Include="ComputerPlayer.h" />
+    <ClInclude Include="ComputerPlayerAB.h" />
+    <ClInclude Include="ComputerPlayerUtils.h" />
     <ClInclude Include="RelativeAbsoluteConverter.h" />
     <ClInclude Include="DllImportExport.h" />
     <ClInclude Include="EvalResult.h" />
@@ -89,7 +91,6 @@
     <ClInclude Include="Move.h" />
     <ClInclude Include="MoveFinder.h" />
     <ClInclude Include="Players.h" />
-    <ClInclude Include="RandStaticEval.h" />
     <ClInclude Include="RelativeCell.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
@@ -99,11 +100,12 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="ComputerPlayer.cpp" />
+    <ClCompile Include="ComputerPlayerAB.cpp" />
+    <ClCompile Include="ComputerPlayerUtils.cpp" />
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
-    <ClCompile Include="RandStaticEval.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
     <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
