@@ -12,20 +12,22 @@ namespace _2DFrontend
 	class CommunicationProtocolConversionUtility
 	{
 		private KaroGame _game;
-		private Dictionary<string, Direction> _directions = new Dictionary<string, Direction>();
+		private readonly Dictionary<string, Direction> _directions = new Dictionary<string, Direction>() 
+			{
+				{"" , Direction.None},
+				{"N" , Direction.North},
+				{"E" , Direction.East},
+				{"S" , Direction.South},
+				{"W" , Direction.West},
+				{"NE" , Direction.NorthEast},
+				{"NW" , Direction.NorthWest},
+				{"SE" , Direction.SouthEast},
+				{"SW" , Direction.SouthWest}
+			};
 
 		public CommunicationProtocolConversionUtility(KaroGame game)
 		{
 			_game = game;
-			_directions[""] = Direction.None;
-			_directions["N"] = Direction.North;
-			_directions["E"] = Direction.East;
-			_directions["S"] = Direction.South;
-			_directions["W"] = Direction.West;
-			_directions["NE"] = Direction.NorthEast;
-			_directions["NW"] = Direction.NorthWest;
-			_directions["SE"] = Direction.SouthEast;
-			_directions["SW"] = Direction.SouthWest;
 		}
 
 		public Vector2DWrapper CalculateToCell(Turn t)
@@ -80,6 +82,48 @@ namespace _2DFrontend
 			return _directions[yDiff + xDiff];
 		}
 
+		public Turn ConvertMoveToTurn(MoveWrapper mw)
+		{
+			CommunicationProtocol.MoveType mt = CommunicationProtocol.MoveType.Insert;
+			switch (mw.GetMoveType())
+			{
+				case engine.wrapper.MoveType.INSERT:
+					mt = CommunicationProtocol.MoveType.Insert;
+					break;
+				case engine.wrapper.MoveType.JUMP:
+					mt = CommunicationProtocol.MoveType.Jump;
+					break;
+				case engine.wrapper.MoveType.STEP:
+					mt = CommunicationProtocol.MoveType.Move;
+					break;
+			}
+
+			Turn t = new Turn();
+			t.MoveType = mt;
+			if (mw.HasUsedCell())
+			{
+				t.EmptyTile = ConvertBoardPositionToInt(mw.GetUsedCell());
+			}
+			else
+			{
+				t.EmptyTile = null;
+			}
+
+			if (mw.GetMoveType() == engine.wrapper.MoveType.INSERT)
+			{
+				t.FromTile = ConvertBoardPositionToInt(mw.GetToCell());
+				t.Direction = Direction.None;
+			}
+			else
+			{
+				t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
+				t.Direction = CalculateDirection(mw.GetToCell(), mw.GetFromCell());
+			}
+
+			return t;
+		}
+
+
 		public MoveWrapper ConvertTurnToMove(Turn t)
 		{
 			engine.wrapper.MoveType mt = engine.wrapper.MoveType.INSERT;
@@ -107,7 +151,6 @@ namespace _2DFrontend
 			{
 				return new MoveWrapper(mt, ConvertIntToBoardPosition(t.FromTile),
 					toCell, ConvertIntToBoardPosition(t.EmptyTile));
-
 			}
 		}
 
@@ -174,46 +217,6 @@ namespace _2DFrontend
 			}
 
 			return number;
-		}
-
-		public Turn ConvertMoveToTurn(MoveWrapper mw)
-		{
-			CommunicationProtocol.MoveType mt = CommunicationProtocol.MoveType.Insert;
-			switch (mw.GetMoveType())
-			{
-				case engine.wrapper.MoveType.INSERT:
-					mt = CommunicationProtocol.MoveType.Insert;
-					break;
-				case engine.wrapper.MoveType.JUMP:
-					mt = CommunicationProtocol.MoveType.Jump;
-					break;
-				case engine.wrapper.MoveType.STEP:
-					mt = CommunicationProtocol.MoveType.Move;
-					break;
-			}
-			Turn t = new Turn();
-			t.MoveType = mt;
-			if (mw.HasUsedCell())
-			{
-				t.EmptyTile = ConvertBoardPositionToInt(mw.GetUsedCell());
-			}
-			else
-			{
-				t.EmptyTile = null;
-			}
-
-			if (mw.GetMoveType() == engine.wrapper.MoveType.INSERT)
-			{
-				t.FromTile = ConvertBoardPositionToInt(mw.GetToCell());
-				t.Direction = Direction.None;
-			}
-			else
-			{
-				t.FromTile = ConvertBoardPositionToInt(mw.GetFromCell());
-				t.Direction = CalculateDirection(mw.GetToCell(), mw.GetFromCell());
-			}
-
-			return t;
 		}
 
 		public String MoveWrapperToString(MoveWrapper mw)

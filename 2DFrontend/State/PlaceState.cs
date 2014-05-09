@@ -51,13 +51,13 @@ namespace _2DFrontend.State
 			if (move != null)
 			{
 
+				Debug.WriteLine(move.GetToCell());
+				CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);
+				Debug.WriteLine(util.TurnToString(util.ConvertMoveToTurn(move)));
 
 				manager.ExecuteMove(move);
 				Debug.WriteLine("Placed a new piece.");
 
-				Debug.WriteLine(move.GetToCell());
-				CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);
-				Debug.WriteLine(util.TurnToString(util.ConvertMoveToTurn(move)));
 			}
 			else
 			{
