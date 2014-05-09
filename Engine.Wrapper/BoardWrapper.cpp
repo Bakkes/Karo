@@ -1,6 +1,5 @@
 #include "BoardWrapper.h"
 
-
 namespace engine {
 namespace wrapper {
 	BoardWrapper::BoardWrapper(void)
@@ -48,6 +47,10 @@ namespace wrapper {
 
 	Board* BoardWrapper::GetInternalBoard() {
 		return _board;
+	}
+
+	String^ BoardWrapper::ToString() {
+		return gcnew String(_board->ToString().c_str());
 	}
 }
 }

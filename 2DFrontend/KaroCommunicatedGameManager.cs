@@ -92,8 +92,6 @@ namespace _2DFrontend
 
 		void _communication_TurnReceived(Turn t)
 		{
-			
-
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
@@ -101,7 +99,7 @@ namespace _2DFrontend
 				_communication.SendMoveInvalid(t);
 				return;
 			}
-			Debug.WriteLine("Received turn: " + _conversion.TurnToString(t));
+			Debug.WriteLine("Received turn: " + _conversion.TurnToString(t) + " - " + (t.EmptyTile == null));
 			MoveWrapper received = _conversion.ConvertTurnToMove(t);
 			Debug.WriteLine("Converted turn to move: " + _conversion.MoveWrapperToString(received));
 
@@ -113,11 +111,12 @@ namespace _2DFrontend
 			}
 			ExecuteMove(received);
 			_turn++;
+
 			//Handled their move, moving on to ours now
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
 
-			System.Threading.Thread.Sleep(1000);
+			//System.Threading.Thread.Sleep(1000);
 
 			MoveWrapper bm = Game.GetBestMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);

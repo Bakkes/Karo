@@ -41,20 +41,20 @@ namespace _2DFrontend
 				case Direction.None:
 					break;
 				case Direction.North:
-					goalPosition.X -= moveSize;
-					break;
-				case Direction.East:
-					goalPosition.Y += moveSize;
-					break;
-				case Direction.South:
-					goalPosition.X += moveSize;
-					break;
-				case Direction.West:
 					goalPosition.Y -= moveSize;
 					break;
-				case Direction.NorthEast:
-					goalPosition.X -= moveSize;
+				case Direction.East:
+					goalPosition.X += moveSize;
+					break;
+				case Direction.South:
 					goalPosition.Y += moveSize;
+					break;
+				case Direction.West:
+					goalPosition.X -= moveSize;
+					break;
+				case Direction.NorthEast:
+					goalPosition.X += moveSize;
+					goalPosition.Y -= moveSize;
 					break;
 				case Direction.NorthWest:
 					goalPosition.X -= moveSize;
@@ -65,8 +65,8 @@ namespace _2DFrontend
 					goalPosition.Y += moveSize;
 					break;
 				case Direction.SouthWest:
-					goalPosition.X += moveSize;
-					goalPosition.Y -= moveSize;
+					goalPosition.X -= moveSize;
+					goalPosition.Y += moveSize;
 					break;
 			}
 
@@ -75,9 +75,9 @@ namespace _2DFrontend
 
 		public Direction CalculateDirection(Vector2DWrapper to, Vector2DWrapper from)
 		{
-			Vector2DWrapper difference = new Vector2DWrapper(from.X - to.X, from.Y - to.Y);
-			string xDiff = difference.X == 0 ? "" : difference.X > 0 ? "W" : "E";
-			string yDiff = difference.Y == 0 ? "" : difference.Y > 0 ? "N" : "S";
+			Vector2DWrapper difference = new Vector2DWrapper(to.X - from.X, to.Y - from.Y);
+			string xDiff = difference.X == 0 ? "" : difference.X < 0 ? "W" : "E";
+			string yDiff = difference.Y == 0 ? "" : difference.Y < 0 ? "N" : "S";
 			Debug.WriteLine(yDiff + xDiff +" - " + _directions[yDiff + xDiff]);
 			return _directions[yDiff + xDiff];
 		}
@@ -158,7 +158,7 @@ namespace _2DFrontend
 		{
 			if (number == null)
 			{
-				return new Vector2DWrapper(0, 0);
+				return new Vector2DWrapper(-1337, -1337);
 			}
 
 			if (number < 0 || number > 20)
@@ -173,7 +173,7 @@ namespace _2DFrontend
 				{
 					
 					CellWrapper cell = _game.GetBoard().GetRelativeCellAt(new Vector2DWrapper(x, y));
-					if ((cell.GetData() & (int)CellValue.HasCell) == 1)
+					if (cell.HasTile() != 0)
 					{
 						// This cell has a tile, increment the number
 						currentNumber++;
@@ -220,7 +220,10 @@ namespace _2DFrontend
 
 		public String MoveWrapperToString(MoveWrapper mw)
 		{
-			return String.Format("MOVE: Type {0}, FTU: {1},{2},{3}", mw.GetMoveType(), mw.GetFromCell(), mw.GetToCell(), mw.GetUsedCell());
+			if(mw.HasUsedCell())
+				return String.Format("MOVE: Type {0}, FTU: {1},{2},{3}", mw.GetMoveType(), mw.GetFromCell(), mw.GetToCell(), mw.GetUsedCell());
+			return String.Format("MOVE: Type {0}, FTU: {1},{2}, None", mw.GetMoveType(), mw.GetFromCell(), mw.GetToCell());
+		
 		}
 
 		public String TurnToString(Turn t)
