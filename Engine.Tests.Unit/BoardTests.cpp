@@ -1,7 +1,7 @@
 
 #include "CppUnitTest.h"
 #include "Board.h"
-#include "Cell.h"
+#include "RelativeCell.h"
 #include <string>
 #include <iostream>
 #include "Windows.h"
@@ -67,8 +67,8 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				input);
-			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0,0))->GetPosition() == input);
-			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0,0))->GetData() == 3);
+			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0,0)).GetAbsolutePosition() == input);
+			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0,0)).GetData() == 3);
 		}
 		TEST_METHOD(ConstructorIsGoodSize) {
 			/** the board should be constructed as a empty 5*4*/
@@ -89,25 +89,25 @@ namespace Tests {
 			board = Board::CreateBoard(
 				standartBoard,
 				input);
-			Vector2D result = board->GetRelativeCellAt(Vector2D(0,0))->GetPosition();
+			Vector2D result = board->GetRelativeCellAt(Vector2D(0,0)).GetAbsolutePosition();
 			Assert::IsTrue(result == input);
 		}
 
 		TEST_METHOD(WrapArroundTopLeft) {
 			Vector2D input = Vector2D(0);
-			Cell<int>* result = board->GetRelativeCellAt(input);
+			RelativeCell result = board->GetRelativeCellAt(input);
 			Assert::IsTrue(
-				result->GetPosition()
+				result.GetAbsolutePosition()
 					== 
 				input
 			);
 			Assert::IsTrue(
-				result->GetLeft()->GetPosition()
+				result.GetLeft().GetAbsolutePosition()
 					== 
 				Vector2D(19,0)
 			);
 			Assert::IsTrue(
-				result->GetTop()->GetPosition()
+				result.GetTop().GetAbsolutePosition()
 					== 
 				Vector2D(0,19)
 			);
@@ -137,19 +137,19 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,3,\n",
 				Vector2D(14, 15) // set the absolute topleft
 			);
-			Cell<int>* result = board->GetRelativeCellAt(input);
+			RelativeCell result = board->GetRelativeCellAt(input);
 			Assert::IsTrue(
-				result->GetPosition()
+				result.GetAbsolutePosition()
 					== 
 				Vector2D(19,19)
 			);
 			Assert::IsTrue(
-				result->GetRight()->GetPosition()
+				result.GetRight().GetAbsolutePosition()
 					== 
 				Vector2D(0,19)
 			);
 			Assert::IsTrue(
-				result->GetBottom()->GetPosition()
+				result.GetBottom().GetAbsolutePosition()
 					== 
 				Vector2D(19,0)
 			);
@@ -183,8 +183,8 @@ namespace Tests {
 			Assert::IsTrue(result == input);
 		}
 		TEST_METHOD(IsInitialBoardEmpty) {
-			vector<Cell<int>>* result = board->GetOccupiedTiles();
-			Assert::IsTrue(*result == vector<Cell<int>>());
+			vector<RelativeCell>* result = board->GetOccupiedTiles();
+			Assert::IsTrue(*result == vector<RelativeCell>());
 			delete result;
 		};
 	};

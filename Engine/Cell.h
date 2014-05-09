@@ -10,7 +10,7 @@ namespace engine {
 	// this class is for easy navigating the grid, when you get a tile you now
 	// its neighbours
 	template<typename T>
-	class ENGINE_API Cell{
+	class  Cell{
 
 	public:
 		// Copy constructor
@@ -35,25 +35,6 @@ namespace engine {
 			_bottom = NULL;
 			_position = NULL;
 		}
-
-		int NonDiagonalNeighbors() const
-		{
-			int count = 0;
-			if ((_top->GetData() & HasTile) == HasTile) {
-				count++;
-			}
-			if ((_right->GetData() & HasTile) == HasTile) {
-				count++;
-			}
-			if ((_left->GetData() & HasTile) == HasTile) {
-				count++;
-			}
-			if ((_bottom->GetData() & HasTile) == HasTile) {
-				count++;
-			}
-			return count;
-		}
-
 		void SetBottom(Cell<T>* bottom){
 			this->_bottom = bottom;
 		}
@@ -124,29 +105,4 @@ namespace engine {
 		Cell<T>* _bottom;
 	};
 
-	inline bool ENGINE_API operator==(const Cell<int>& l, const Cell<int>& r){
-		if(l.GetPosition() != r.GetPosition()){
-			return false;
-		}
-		// don't compare the actual states of the neighbours,
-		// because it will recusrivle call their == operators as well
-		// just checking their identity trough pointers is way faster
-		// and sort of reliable (not for pointer pointers, but this may be
-		// handled by the type system)
-		if(l.GetTop() != r.GetTop()){
-			return false;
-		}
-		if(l.GetLeft() != r.GetLeft()){
-			return false;
-		}
-		if(l.GetBottom() != r.GetBottom()){
-			return false;
-		}
-		if(l.GetRight() != r.GetRight()){
-			return false;
-		}
-		return true;
-	}
-
-	inline bool ENGINE_API operator!=(const Cell<int>& l, const Cell<int>& r){return !operator==(l,r);}
 }

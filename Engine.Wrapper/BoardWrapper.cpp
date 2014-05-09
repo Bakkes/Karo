@@ -19,7 +19,7 @@ namespace wrapper {
 	}
 
 	List<CellWrapper^>^ BoardWrapper::GetOccupiedCells() {
-		vector<Cell<int>>* native = _board->GetOccupiedTiles();
+		vector<RelativeCell>* native = _board->GetOccupiedTiles();
 		List<CellWrapper^> ^wrapped = gcnew List<CellWrapper^>();
 
 		for(unsigned i = 0; i < native->size(); i++) {
@@ -42,7 +42,7 @@ namespace wrapper {
 
 	CellWrapper^ BoardWrapper::GetRelativeCellAt(Vector2DWrapper^ relativePosition) {
 		Vector2D* position = WrapperConversionUtility().ConvertVector2D(relativePosition);
-		Cell<int>* relativeCellAt = _board->GetRelativeCellAt(*position);
+		RelativeCell relativeCellAt = _board->GetRelativeCellAt(*position);
 		return WrapperConversionUtility().ConvertCell(relativeCellAt);
 	}
 
