@@ -118,7 +118,7 @@ namespace _2DFrontend
 
 			//System.Threading.Thread.Sleep(1000);
 
-			MoveWrapper bm = Game.GetBestMove();
+			MoveWrapper bm =  LegalMoves.Where(x => x.HasUsedCell() == false).OrderBy(x => Guid.NewGuid()).First(); //Game.GetBestMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
 			_turn++;
