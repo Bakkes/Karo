@@ -81,13 +81,7 @@
     <ClInclude Include="RelativeCell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveFinder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ZobristHashing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IHashAlgorithm.h">
+    <ClInclude Include="CellValue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -131,10 +125,7 @@
     <ClCompile Include="RelativeAbsoluteConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveFinder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ZobristHashing.cpp">
+    <ClCompile Include="RelativeCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
