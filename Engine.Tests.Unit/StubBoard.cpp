@@ -43,7 +43,7 @@ namespace Tests {
 	RelativeCell StubBoard::GetRelativeCellAt(const Vector2D& relativePosition) const {
 		return RelativeCell(nullptr, nullptr);
 	}
-	std::vector<RelativeCell>* GetEmptyTiles(){
+	std::vector<RelativeCell>* StubBoard::GetEmptyTiles(){
 		return nullptr;
 	}
 }
