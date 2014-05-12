@@ -1,3 +1,4 @@
+using KaroManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -15,6 +16,7 @@ namespace XNAFrontend
 		public Vector3 CameraPosition { get; set; }
 		public Matrix ViewMatrix { get; set; }
 		public Matrix ProjectionMatrix { get; set; }
+		public KaroGameManager KaroGameManager { get; set; }
 
 		public KaroGame()
 		{

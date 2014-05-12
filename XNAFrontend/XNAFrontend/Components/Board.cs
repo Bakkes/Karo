@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using KaroManager;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -12,6 +13,13 @@ namespace XNAFrontend.Components
 		private Model _tileModel;
 
 		private KaroGame KaroGame { get { return (KaroGame)this.Game; } }
+		private KaroGameManager KaroGameManager
+		{
+			get
+			{
+				return KaroGame.KaroGameManager;;
+			}
+		}
 
 		public Vector3 Position { get; set; }
 
@@ -47,21 +55,31 @@ namespace XNAFrontend.Components
 			{
 				for (int j = 0; j < 4; j++)
 				{
-					foreach (ModelMesh mesh in _tileModel.Meshes)
-					{
-						foreach (BasicEffect effect in mesh.Effects)
-						{
-							effect.EnableDefaultLighting();
-							effect.World = transforms[mesh.ParentBone.Index] *
-								Matrix.CreateTranslation(Position + new Vector3(-300 * j, 0, -300 * i));
-							effect.View = KaroGame.ViewMatrix;
-							effect.Projection = KaroGame.ProjectionMatrix;
-						}
-						mesh.Draw();
-					}
+					DrawTileAt(i, j);
 				}
 			}
 			base.Draw(gameTime);
+		}
+
+		/// <summary>
+		/// Draws a tile with the specified relative position.
+		/// </summary>
+		private void DrawTileAt(int x, int y)
+		{
+			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
+			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			foreach (ModelMesh mesh in _tileModel.Meshes)
+			{
+				foreach (BasicEffect effect in mesh.Effects)
+				{
+					effect.EnableDefaultLighting();
+					effect.World = transforms[mesh.ParentBone.Index] *
+						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
+					effect.View = KaroGame.ViewMatrix;
+					effect.Projection = KaroGame.ProjectionMatrix;
+				}
+				mesh.Draw();
+			}
 		}
 	}
 }

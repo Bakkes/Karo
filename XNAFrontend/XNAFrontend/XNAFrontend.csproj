@@ -92,6 +92,10 @@
       <Project>{1120b367-b325-4b42-b7f1-754522577572}</Project>
       <Name>Engine.Wrapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\KaroManager\KaroManager.csproj">
+      <Project>{65404c12-ce62-416e-a01d-4939c00edd17}</Project>
+      <Name>KaroManager</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XNAFrontendContent\XNAFrontendContent.contentproj">
       <Name>XNAFrontendContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
