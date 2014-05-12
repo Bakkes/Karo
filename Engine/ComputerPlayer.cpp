@@ -15,7 +15,7 @@ namespace engine {
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
-		return MinimaxStep(player, 4).GetMove();
+		return MinimaxStep(player, 0).GetMove();
 	}
 
 	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth) {
