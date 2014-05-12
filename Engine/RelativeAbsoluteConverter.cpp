@@ -71,14 +71,12 @@ namespace engine{
 
 		// the up left part
 		Vector2D difference = to - _topLeft;
-		if(to.Y() == _topLeft.Y()){
-			if(to.X() < _topLeft.X()){
-				_topLeft.X(to.X());
-			}
-			// wrap arround case not absolute because these comparisons are only for up and left
-			if(difference.X() == 19){
-				_topLeft.X(to.X());
-			}
+		if(to.X() < _topLeft.X()){
+			_topLeft.X(to.X());
+		}
+		// wrap arround case not absolute because these comparisons are only for up and left
+		if(difference.X() == 19){
+			_topLeft.X(to.X());
 		}
 		if(to.Y() < _topLeft.Y()){
 			_topLeft = to;
