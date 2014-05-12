@@ -108,6 +108,7 @@ private:
 				return true;
 			}
 		}
+		delete legalMoves;
 		return false;
 	}
 	};
