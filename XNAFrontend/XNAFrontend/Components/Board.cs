@@ -61,7 +61,7 @@ namespace XNAFrontend.Components
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
 					if (cell.HasTile())
 					{
-						DrawTileAt(cell, i, j);
+						DrawCellAt(cell, i, j);
 					}
 				}
 			}
@@ -71,7 +71,7 @@ namespace XNAFrontend.Components
 		/// <summary>
 		/// Draws a tile with the specified relative position.
 		/// </summary>
-		private void DrawTileAt(CellWrapper cell, int x, int y)
+		private void DrawCellAt(CellWrapper cell, int x, int y)
 		{
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
