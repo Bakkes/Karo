@@ -63,7 +63,7 @@
     <ClCompile Include="ZobristTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveDifference.cpp">
+    <ClCompile Include="AbsoluteRelativeConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

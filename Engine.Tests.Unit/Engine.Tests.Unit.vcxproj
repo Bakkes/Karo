@@ -16,6 +16,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbsoluteRelativeConverter.cpp" />
     <ClCompile Include="BoardMoveChange.cpp" />
     <ClCompile Include="BoardMoveInsert.cpp" />
     <ClCompile Include="BoardMoveJump.cpp" />
