@@ -102,12 +102,13 @@ namespace Tests {
 
 private:
 	bool IsLegalMove(IBoard* board, Move move, Players player) {
-		std::vector<Move>* legalMoves = board->GetLegalMoves(player);
-		for (auto it = legalMoves->begin(); it != legalMoves->end(); ++it) {
+		std::vector<Move> legalMoves = board->GetLegalMoves(player);
+		for (auto it = legalMoves.begin(); it != legalMoves.end(); ++it) {
 			if (MovesAreEqual(move, *it)) {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	};
