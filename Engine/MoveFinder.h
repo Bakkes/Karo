@@ -4,6 +4,7 @@
 #include "IBoard.h"
 #include "Players.h"
 #include "Move.h"
+#include <vector>
 
 namespace engine{
 	class ENGINE_API MoveFinder
@@ -14,6 +15,9 @@ namespace engine{
 		std::vector<Move>* GetLegalMoves(Players player);
 	private:
 		IBoard* _board;
+
+		// Used for IsConnected method.
+		std::vector<const RelativeCell>* _checkedCells;
 
 		// Get all legal moves for the place state.
 		std::vector<Move>* GetLegalPlaceMoves(Players player);
@@ -34,5 +38,7 @@ namespace engine{
 			const RelativeCell &to,
 			const MoveType& type
 		);
+		bool IsConnected(const RelativeCell &from, const RelativeCell &to);
+		bool IsConnectedRecursive(const RelativeCell &from, const RelativeCell &to);
 	};
 }

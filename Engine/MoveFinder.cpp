@@ -3,9 +3,12 @@
 namespace engine {
 	MoveFinder::MoveFinder(IBoard* board) {
 		_board = board;
+		_checkedCells = new std::vector<const RelativeCell>();
 	}
 
 	MoveFinder::~MoveFinder(void) {
+		delete _checkedCells;
+		_checkedCells = nullptr;
 	}
 
 	// Returns all legal moves for the current state of this._board.
@@ -157,6 +160,14 @@ namespace engine {
 					_board->CountNonDiagonalEdges(from) <= 1) {
 				continue;
 			}
+			Move move(INSERT, it->GetRelativePosition());
+			// Undo move
+			if (!IsConnected(from, to)) {
+				// An island was created, stop!
+				// Do move
+				continue;
+			}
+			// Do move
 			moves.push_back(Move(
 				type,
 				from.GetRelativePosition(),
@@ -164,5 +175,43 @@ namespace engine {
 				it->GetRelativePosition()
 			));
 		}
+	}
+
+	bool MoveFinder::IsConnected(
+			const RelativeCell &from,
+			const RelativeCell &to) {
+		_checkedCells->clear();
+		return IsConnectedRecursive(from, to);
+	}
+
+	// Recursive function for MoveFinder.IsConnected.
+	bool MoveFinder::IsConnectedRecursive(
+			const RelativeCell &from,
+			const RelativeCell &to) {
+		// Check if the cell we're checking has been checked.
+		for (auto it = _checkedCells->begin(); it != _checkedCells->end(); ++it) {
+			if (*it == from) {
+				return false;
+			}
+		}
+		_checkedCells->push_back(from);
+		if (from == to) {
+			// From and to are connected!
+			return true;
+		}
+		// Check if neighbors are connected to the "to" cell.
+		if (from.GetLeft().HasTile()) {
+			if (IsConnectedRecursive(from.GetLeft(), to)) return true;
+		}
+		if (from.GetRight().HasTile()) {
+			if (IsConnectedRecursive(from.GetRight(), to)) return true;
+		}
+		if (from.GetTop().HasTile()) {
+			if (IsConnectedRecursive(from.GetTop(), to)) return true;
+		}
+		if (from.GetBottom().HasTile()) {
+			if (IsConnectedRecursive(from.GetBottom(), to)) return true;
+		}
+		return false;
 	}
 }
