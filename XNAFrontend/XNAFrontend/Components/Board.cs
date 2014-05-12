@@ -1,4 +1,5 @@
-﻿using KaroManager;
+﻿using engine.wrapper;
+using KaroManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -51,11 +52,17 @@ namespace XNAFrontend.Components
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
 
-			for (int i = 0; i < 5; i++)
+			BoardWrapper board = KaroGameManager.Board;
+
+			for (int i = 0; i < 20; i++)
 			{
-				for (int j = 0; j < 4; j++)
+				for (int j = 0; j < 20; j++)
 				{
-					DrawTileAt(i, j);
+					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
+					if (cell.HasTile())
+					{
+						DrawTileAt(cell, i, j);
+					}
 				}
 			}
 			base.Draw(gameTime);
@@ -64,7 +71,7 @@ namespace XNAFrontend.Components
 		/// <summary>
 		/// Draws a tile with the specified relative position.
 		/// </summary>
-		private void DrawTileAt(int x, int y)
+		private void DrawTileAt(CellWrapper cell, int x, int y)
 		{
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);

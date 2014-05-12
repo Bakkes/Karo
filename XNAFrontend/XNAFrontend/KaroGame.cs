@@ -32,6 +32,7 @@ namespace XNAFrontend
 		/// </summary>
 		protected override void Initialize()
 		{
+			KaroGameManager = new KaroGameManager();
 			Board board = new Board(this);
 			base.Initialize();
 			IsMouseVisible = true;
