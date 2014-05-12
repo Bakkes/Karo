@@ -31,7 +31,7 @@ namespace engine{
 		);
 	}
 	Vector2D RelativeAbsoluteConverter::ToRelative(const Vector2D& input)const{
-		return input - _topLeft;
+		return WrapArround(input - _topLeft);
 	}
 	Vector2D RelativeAbsoluteConverter::ToAbsolute(const Vector2D& input)const{
 		return WrapArround(input + _topLeft);
