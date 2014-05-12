@@ -36,7 +36,9 @@ namespace wrapper {
 		{
 			managedMoves->Add(WrapperConversionUtility::ConvertMove(*it));
 		}
+		delete nativeMoves;
 		return managedMoves;
+
 	}
 
 	CellWrapper^ BoardWrapper::GetRelativeCellAt(Vector2DWrapper^ relativePosition) {
