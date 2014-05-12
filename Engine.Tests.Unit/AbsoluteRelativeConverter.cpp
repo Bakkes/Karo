@@ -46,9 +46,14 @@ namespace Tests {
 			delete move;
 		}
 
-		TEST_METHOD(TopLeftIsRelativeCellNotTile) {
+		TEST_METHOD(TopLeftIsRelativeCellNotTileX) {
 			board->ExecuteMove(move,Max);
 			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0)).GetAbsolutePosition() == Vector2D(19,0));
+		}
+		TEST_METHOD(TopLeftIsRelativeCellNotTileY) {
+			move = new Move(STEP,Vector2D(4,0), Vector2D(4,-1), Vector2D(4,3));
+			board->ExecuteMove(move,Max);
+			Assert::IsTrue(board->GetRelativeCellAt(Vector2D(0)).GetAbsolutePosition() == Vector2D(0,19));
 		}
 	};
 }
