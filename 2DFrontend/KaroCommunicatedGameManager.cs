@@ -92,12 +92,12 @@ namespace _2DFrontend
 
 		void _communication_TurnReceived(Turn t)
 		{
-			if (CurrentPlayer == Players.Max)
+			/*if (CurrentPlayer == Players.Max)
 			{
 				//Not their turn
 				_communication.SendDisconnect(DisconnectReason.InvalidMove);
 				return;
-			}
+			}*/
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
@@ -124,7 +124,7 @@ namespace _2DFrontend
 
 			//System.Threading.Thread.Sleep(1000);
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm =  LegalMoves.OrderBy(x => Guid.NewGuid()).First(); //Game.GetBestMove();
+			MoveWrapper bm = LegalMoves.Last();// LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
 			_turn++;
@@ -156,7 +156,7 @@ namespace _2DFrontend
 			_turn++;
 			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm = Game.GetBestMove();
+			MoveWrapper bm = LegalMoves.Last(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
 			ExecuteMove(bm);
 			_communication.SendTurn(_conversion.ConvertMoveToTurn(bm));
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
