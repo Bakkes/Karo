@@ -15,6 +15,16 @@ namespace engine {
 	}
 
 	void Move::Init(MoveType type, Vector2D fromCell, Vector2D toCell, Vector2D usedCell, bool hasUsedCell) {
+		Vector2D difference = fromCell-toCell;
+				if(abs(difference.X())>2)
+				{
+					toCell.X(-1);
+				}
+				if(abs(difference.Y())>2)
+				{
+					toCell.Y(-1);
+				}
+
 		_moveType = type;
 		_fromCell = fromCell;
 		_toCell = toCell;

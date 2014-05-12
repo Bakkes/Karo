@@ -25,6 +25,7 @@
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
     <ClCompile Include="MinimaxTest.cpp" />
+    <ClCompile Include="MoveDifference.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
     <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="MoveUtils.cpp" />
