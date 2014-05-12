@@ -117,7 +117,7 @@ namespace _2DFrontend
 				OnBoardUpdated();
 
 			//System.Threading.Thread.Sleep(1000);
-
+			CurrentPlayer = Players.Max;
 			MoveWrapper bm =  LegalMoves.OrderBy(x => Guid.NewGuid()).First(); //Game.GetBestMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
@@ -137,6 +137,7 @@ namespace _2DFrontend
 			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(turn));
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
+			CurrentPlayer = Players.Min;
 		}
 
 		void _communication_SentMoveInvalid(Turn t)
