@@ -34,8 +34,8 @@ namespace Tests {
 			);
 
 			Move move = Move(STEP, Vector2D(1, 1), Vector2D(2, 1));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -86,8 +86,8 @@ namespace Tests {
 			);
 
 			Move move = Move(STEP, Vector2D(1, 1), Vector2D(3, 1));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -138,8 +138,8 @@ namespace Tests {
 			);
 
 			Move move = Move(INSERT, Vector2D(2, 1));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -190,8 +190,8 @@ namespace Tests {
 			);
 
 			Move move = Move(STEP, Vector2D(1, 0), Vector2D(1, -1));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"3,1,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -242,8 +242,8 @@ namespace Tests {
 			);
 
 			Move move = Move(JUMP, Vector2D(1, 1), Vector2D(1, -1));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -294,8 +294,8 @@ namespace Tests {
 			);
 
 			Move move = Move(JUMP, Vector2D(1, 2), Vector2D(1, 0));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -346,8 +346,8 @@ namespace Tests {
 			);
 
 			Move move = Move(JUMP, Vector2D(1, 1), Vector2D(1, 0));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			string result = board->ToString();
 			Assert::IsTrue(
@@ -399,8 +399,8 @@ namespace Tests {
 			);
 
 			Move move = Move(STEP, Vector2D(19, 0), Vector2D(20, 0));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,1,\n"
@@ -451,8 +451,8 @@ namespace Tests {
 			);
 
 			Move move = Move(JUMP, Vector2D(18, 0), Vector2D(20, 0));
-			board->ExecuteMove(&move, Min);
-			board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), Min);
+			board->ExecuteMove(move, Min);
+			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,1,3,\n"

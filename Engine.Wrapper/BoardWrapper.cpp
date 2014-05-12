@@ -14,8 +14,7 @@ namespace wrapper {
 	}
 
 	void BoardWrapper::ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player) {
-		Move* mv = WrapperConversionUtility().ConvertMove(mw);
-		_board->ExecuteMove(mv, static_cast<engine::Players>(player));
+		_board->ExecuteMove(*WrapperConversionUtility().ConvertMove(mw), static_cast<engine::Players>(player));
 	}
 
 	List<CellWrapper^>^ BoardWrapper::GetOccupiedCells() {
@@ -37,7 +36,9 @@ namespace wrapper {
 		{
 			managedMoves->Add(WrapperConversionUtility::ConvertMove(*it));
 		}
+		delete nativeMoves;
 		return managedMoves;
+
 	}
 
 	CellWrapper^ BoardWrapper::GetRelativeCellAt(Vector2DWrapper^ relativePosition) {

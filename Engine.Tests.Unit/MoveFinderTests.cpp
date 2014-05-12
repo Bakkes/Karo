@@ -13,7 +13,6 @@ namespace Tests {
 	TEST_CLASS(MoveFinder) {
 	private:
 		Board* board;
-		Move* move;
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
 			board = Board::CreateBoard(
@@ -38,12 +37,10 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = NULL;
 		}
 
 		TEST_METHOD_CLEANUP(DeleteBoard) {
 			delete board;
-			delete move;
 		}
 
 		TEST_METHOD(MTinsertTest) {
@@ -69,7 +66,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = new Move(STEP, Vector2D(4,0), Vector2D(5,0), Vector2D(4,3));
+			Move move = Move(STEP, Vector2D(4,0), Vector2D(5,0), Vector2D(4,3));
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
 		};

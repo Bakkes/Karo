@@ -60,22 +60,19 @@ namespace engine{
 		return playerCount;
 	}
 
-	void Board::ExecuteMove(Move *move, Players player) {
-		Vector2D from = _converter->ToAbsolute(move->GetFromCell());
-		Vector2D to = _converter->ToAbsolute(move->GetToCell());
+	void Board::ExecuteMove(const Move& move, Players player) {
+		Vector2D from = _converter->ToAbsolute(move.GetFromCell());
+		Vector2D to = _converter->ToAbsolute(move.GetToCell());
 		Vector2D used;
-		if(move->HasUsedCell()){
-			used = _converter->ToAbsolute(move->GetUsedCell());
+		if(move.HasUsedCell()){
+			used = _converter->ToAbsolute(move.GetUsedCell());
 		}
-		switch(move->GetMoveType()){
+		switch(move.GetMoveType()){
 			case INSERT:
 				InsertPiece(*_grid->GetCellAt(to), player);
 			return;
-			case DELETE:
-				DeletePiece(*_grid->GetCellAt(to));
-			return;
 			case STEP:
-				if(move->HasUsedCell()){
+				if(move.HasUsedCell()){
 					MovePiece(
 						*_grid->GetCellAt(from), 
 						*_grid->GetCellAt(to), 
@@ -91,7 +88,7 @@ namespace engine{
 				);
 			return; 
 			case JUMP:
-				if(move->HasUsedCell()){
+				if(move.HasUsedCell()){
 					JumpPiece(
 						*_grid->GetCellAt(from), 
 						*_grid->GetCellAt(to), 
@@ -109,6 +106,68 @@ namespace engine{
 		}
 		
 	}
+	void Board::UndoMove(const Move& inputMove, Players player){
+		Move move = ShiftMoveBack(inputMove);
+		Vector2D from = _converter->ToAbsolute(move.GetFromCell());
+		Vector2D to = _converter->ToAbsolute(move.GetToCell());
+		Vector2D used;
+		if(move.HasUsedCell()){
+			used = _converter->ToAbsolute(move.GetUsedCell());
+		}
+		switch(move.GetMoveType()){
+			case INSERT:
+				DeletePiece(*_grid->GetCellAt(to));
+			return;
+			case STEP:
+				if(move.HasUsedCell()){
+					MovePiece(
+						*_grid->GetCellAt(to), 
+						*_grid->GetCellAt(from), 
+						player
+					);
+					MoveTile(*_grid->GetCellAt(to), *_grid->GetCellAt(used));
+					return;
+				}
+				MovePiece(
+					*_grid->GetCellAt(to), 
+					*_grid->GetCellAt(from), 
+					player
+				);
+			return; 
+			case JUMP:
+				if(move.HasUsedCell()){
+					JumpPiece(
+						*_grid->GetCellAt(to), 
+						*_grid->GetCellAt(from), 
+						player
+					);
+					MoveTile(*_grid->GetCellAt(to), *_grid->GetCellAt(used));
+					return;
+				}
+				JumpPiece(
+					*_grid->GetCellAt(to), 
+					*_grid->GetCellAt(from), 
+					player
+				);
+			return; 
+
+		}
+	}
+
+	Move Board::ShiftMoveBack(const Move& move){
+		// no used cell means there is no shifting necisary
+		if(!move.HasUsedCell()){
+			return move;
+		}
+		Vector2D from = move.GetFromCell();
+		Vector2D to = move.GetToCell();
+		Vector2D used = move.GetUsedCell();
+		Vector2D correction = _converter->CalcShiftCorrection(to, used);
+		from += correction;
+		to += correction;
+		used += correction;
+		return Move(move.GetMoveType(), from, to, used);
+	}
 
 	void Board::InsertPiece(Cell<int>& on, Players owner){
 		on.SetData(on.GetData() & ~IsEmpty);
@@ -122,10 +181,15 @@ namespace engine{
 		on.SetData(on.GetData() | IsEmpty);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
-		_converter->MoveTile(tileUsed.GetPosition(), to.GetPosition());
-		tileUsed.SetData(tileUsed.GetData() & ~HasTile);
-		to.SetData(to.GetData() | HasTile);
+		// convertions already happend save to update converter
+		MoveTile(tileUsed, to);
 		MovePiece(from, to, owner);
+	}
+
+	void Board::MoveTile(Cell<int>& from, Cell<int>& to){
+		_converter->MoveTile(from.GetPosition(), to.GetPosition());
+		from.SetData(from.GetData() & ~HasTile);
+		to.SetData(to.GetData() | HasTile);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner){
 
