@@ -92,6 +92,12 @@ namespace _2DFrontend
 
 		void _communication_TurnReceived(Turn t)
 		{
+			if (CurrentPlayer == Players.Max)
+			{
+				//Not their turn
+				_communication.SendDisconnect(DisconnectReason.InvalidMove);
+				return;
+			}
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
