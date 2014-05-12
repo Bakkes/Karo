@@ -28,8 +28,8 @@ namespace engine {
 			result.SetScore(INT_MAX);
 		}
 
-		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
-		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
+		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
+		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(&move, player);
 			EvalResult score = GetScore(player, move, depth, result);
@@ -62,7 +62,7 @@ namespace engine {
 			}
 
 		}
-		delete possibleMoves;
+		
 
 		return result;
 	}

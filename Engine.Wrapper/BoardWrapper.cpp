@@ -31,13 +31,13 @@ namespace wrapper {
 	IEnumerable<MoveWrapper^>^ BoardWrapper::GetLegalMoves(Players player)
 	{
 		List<MoveWrapper^>^ managedMoves = gcnew List<MoveWrapper^>();
-		vector<Move>* nativeMoves = _board->GetLegalMoves(static_cast<engine::Players>(player));
+		vector<Move> nativeMoves = _board->GetLegalMoves(static_cast<engine::Players>(player));
 
-		for (auto it = nativeMoves->begin(); it != nativeMoves->end(); ++it)
+		for (auto it = nativeMoves.begin(); it != nativeMoves.end(); ++it)
 		{
 			managedMoves->Add(WrapperConversionUtility::ConvertMove(*it));
 		}
-		delete nativeMoves;
+		
 		return managedMoves;
 
 	}
