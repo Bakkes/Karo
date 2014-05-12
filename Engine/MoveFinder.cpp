@@ -149,14 +149,20 @@ namespace engine {
 		const RelativeCell& to) {
 		std::vector<RelativeCell>* emptyCells = _board->GetEmptyTiles();
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
-			if (_board->CountNonDiagonalEdges(*it) <= 2) {
-				moves.push_back(Move(
-					type,
-					from.GetRelativePosition(),
-					to.GetRelativePosition(),
-					it->GetRelativePosition()
-				));
+			if (_board->CountNonDiagonalEdges(*it) > 2) {
+				continue;
 			}
+			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
+			if (abs((int)diff.X()) == 1 && abs((int)diff.Y()) == 1 &&
+					_board->CountNonDiagonalEdges(from) <= 1) {
+				continue;
+			}
+			moves.push_back(Move(
+				type,
+				from.GetRelativePosition(),
+				to.GetRelativePosition(),
+				it->GetRelativePosition()
+			));
 		}
 	}
 }
