@@ -19,6 +19,8 @@ namespace _2DFrontend
 		/// </summary>
 		private KaroGameManager _manager;
 
+		private CommunicationProtocolConversionUtility _conversion;
+
 		/// <summary>
 		/// The backcolor of Karo tiles.
 		/// </summary>
@@ -71,6 +73,7 @@ namespace _2DFrontend
 		{
 			_manager = manager;
 			_manager.OnBoardUpdated += BoardChanged;
+			_conversion = new CommunicationProtocolConversionUtility(_manager.Game);
 			Invalidate();
 		}
 
@@ -100,6 +103,15 @@ namespace _2DFrontend
 					{
 						CellWrapper tile = board.GetRelativeCellAt(new Vector2DWrapper(x, y));
 						PaintTile(tile, g, x, y);
+						if (tile.HasTile())
+						{
+							Point paintPos = CellToPixel(x, y);
+							g.DrawString(_conversion.ConvertBoardPositionToInt(tile.GetRelativePosition()).ToString(), 
+								SystemFonts.DefaultFont, Brushes.White, paintPos);
+
+							paintPos.Y += 37;
+							g.DrawString(x + ", " + y, SystemFonts.DefaultFont, Brushes.White, paintPos);
+						}
 					}
 				}
 			}
