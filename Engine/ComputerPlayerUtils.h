@@ -11,5 +11,11 @@ namespace engine {
 		static Move InvertMove(Move move); 
 		static Players InvertPlayer(Players player); 
 		static bool IsWinningState(IBoard* board);
+
+	private:
+		static bool IsWinningStateHorizontal(IBoard* board);
+		static bool IsWinningStateVertical(IBoard* board);
+		static bool IsWinningStateDiagonalUp(IBoard* board);
+		static bool IsWinningStateDiagonalDown(IBoard* board);
 	};
 }
