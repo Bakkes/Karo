@@ -76,6 +76,12 @@ namespace _2DFrontend
 		public Direction CalculateDirection(Vector2DWrapper to, Vector2DWrapper from)
 		{
 			Vector2DWrapper difference = new Vector2DWrapper(to.X - from.X, to.Y - from.Y);
+			if (Math.Abs(difference.X) > 2)
+				difference.X = -difference.X;
+
+			if (Math.Abs(difference.Y) > 2)
+				difference.Y = -difference.Y;
+
 			string xDiff = difference.X == 0 ? "" : difference.X < 0 ? "W" : "E";
 			string yDiff = difference.Y == 0 ? "" : difference.Y < 0 ? "N" : "S";
 			Debug.WriteLine(yDiff + xDiff +" - " + _directions[yDiff + xDiff]);
@@ -173,7 +179,7 @@ namespace _2DFrontend
 				{
 					
 					CellWrapper cell = _game.GetBoard().GetRelativeCellAt(new Vector2DWrapper(x, y));
-					if (cell.HasTile() != 0)
+					if (cell.HasTile())
 					{
 						// This cell has a tile, increment the number
 						currentNumber++;
