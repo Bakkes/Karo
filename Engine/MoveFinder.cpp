@@ -161,20 +161,20 @@ namespace engine {
 					_board->CountNonDiagonalEdges(from) <= 1) {
 				continue;
 			}
-			Move move(INSERT, it->GetRelativePosition());
-			// Undo move
-			if (!IsConnected(from, to)) {
-				// An island was created, stop!
-				// Do move
-				continue;
-			}
-			// Do move
-			moves.push_back(Move(
-				type,
+			// Create potential move.
+			Move move(type,
 				from.GetRelativePosition(),
 				to.GetRelativePosition(),
 				it->GetRelativePosition()
-			));
+			);
+			_board->ExecuteMove(move, from.GetPlayer());
+			if (!IsConnected(from, to)) {
+				// An island was created, stop!
+				_board->UndoMove(move, from.GetPlayer());
+				continue;
+			}
+			_board->UndoMove(move, from.GetPlayer());
+			moves.push_back(move);
 		}
 	}
 

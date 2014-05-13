@@ -1,5 +1,7 @@
+#include <assert.h>
 #include "RelativeCell.h"
 #include "RelativeAbsoluteConverter.h"
+
 namespace engine{
 	RelativeCell::RelativeCell(Cell<int>* cell, RelativeAbsoluteConverter* converter) {
 		Init(cell, converter);
@@ -50,6 +52,13 @@ namespace engine{
 	}
 	int RelativeCell::IsFlipped() const{
 		return GetData() & CellValue::IsFlipped;
+	}
+
+	// Returns what player is on this cell. Doesn't take into account that
+	// the tile may not exist.
+	Players RelativeCell::GetPlayer() const {
+		//assert(!IsEmpty());
+		return IsMaxPiece() ? Max : Min;
 	}
 
 	vector<RelativeCell> RelativeCell::GetSurroundingCells() const{
