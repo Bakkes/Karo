@@ -2,6 +2,7 @@
 #include "ComputerPlayerUtils.h"
 #include "MoveUtils.h"
 #include "Board.h"
+#include "Windows.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -241,10 +242,11 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
 
-			Move move = Move(JUMP, Vector2D(1, 1), Vector2D(1, -1));
+			Move move = Move(JUMP, Vector2D(1, 1), Vector2D(1, -1), Vector2D(4,3));
 			board->ExecuteMove(move, Min);
 			board->UndoMove(move, Min);
-
+			string result  = board->ToString();
+			OutputDebugString(result.c_str());
 			Assert::IsTrue(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,1,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -266,7 +268,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
-				 == board->ToString());
+				 == result);
 		}
 		
 		TEST_METHOD(InvertNonBoardShiftingJump) {
