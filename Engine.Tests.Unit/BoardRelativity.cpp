@@ -13,7 +13,6 @@ namespace Tests {
 	TEST_CLASS(BoardRelativity) {
 	private:
 		Board* board;
-		Move* move;
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
 			board = Board::CreateBoard(
@@ -38,16 +37,14 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = NULL;
 		}
 
 		TEST_METHOD_CLEANUP(DeleteBoard) {
 			delete board;
-			delete move;
 		}
 
 		TEST_METHOD(WrapBoardChainXTest) {
-			move = new Move(STEP, Vector2D(0,0), Vector2D(-1,0), Vector2D(4,3));
+			Move move = Move(STEP, Vector2D(0,0), Vector2D(-1,0), Vector2D(4,3));
 			board->ExecuteMove(move, Max);
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
@@ -77,7 +74,7 @@ namespace Tests {
 			);
 		};
 		TEST_METHOD(WrapBoardChainYTest) {
-			move = new Move(STEP, Vector2D(0,0), Vector2D(0,-1), Vector2D(4,3));
+			Move move = Move(STEP, Vector2D(0,0), Vector2D(0,-1), Vector2D(4,3));
 			board->ExecuteMove(move, Max);
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
@@ -107,12 +104,12 @@ namespace Tests {
 			);
 		};
 		TEST_METHOD(WalkAroundTest) {
-			move = new Move(STEP, Vector2D(0,0), Vector2D(0,-1), Vector2D(4,3));
+			Move move = Move(STEP, Vector2D(0,0), Vector2D(0,-1), Vector2D(4,3));
 			board->ExecuteMove(move, Max);
 			board->ExecuteMove(move, Max);
-			move = new Move(STEP, Vector2D(0,0), Vector2D(0,1));
+			move = Move(STEP, Vector2D(0,0), Vector2D(0,1));
 			board->ExecuteMove(move, Max);
-			move = new Move(STEP, Vector2D(0,1), Vector2D(1,1), Vector2D(3,5));
+			move = Move(STEP, Vector2D(0,1), Vector2D(1,1), Vector2D(3,5));
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
 			Assert::IsTrue(
@@ -164,9 +161,9 @@ namespace Tests {
 				"7,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0,18)
 			);
-			move = new Move(STEP, Vector2D(1,1), Vector2D(2,1), Vector2D(0,0));
+			Move move = Move(STEP, Vector2D(1,1), Vector2D(2,1), Vector2D(0,0));
 			board->ExecuteMove(move, Max);
-			move = new Move(STEP, Vector2D(2,0), Vector2D(3,0), Vector2D(0,0));
+			move = Move(STEP, Vector2D(2,0), Vector2D(3,0), Vector2D(0,0));
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
 			OutputDebugString(result.c_str());
@@ -196,7 +193,7 @@ namespace Tests {
 			);
 		}
 		TEST_METHOD(GetRelativeCellChangedTopLeft) {
-			move = new Move(STEP, Vector2D(0,0), Vector2D(-1,0), Vector2D(4,3));
+			Move move = Move(STEP, Vector2D(0,0), Vector2D(-1,0), Vector2D(4,3));
 			board->ExecuteMove(move, Max);
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
@@ -227,19 +224,19 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,0)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(2,0)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(3,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(4,0)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,1)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(2,1)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(3,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(4,1)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,2)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,2)), Min);
-			board->ExecuteMove(new Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(2,0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(3,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(4,0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(2,1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(3,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(4,1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,2)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,2)), Min);
+			board->ExecuteMove(Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Max);
 			Assert::IsTrue(
 				board->GetRelativeCellAt(Vector2D(0,0)).GetAbsolutePosition() == Vector2D(0,0)
 			);
@@ -270,19 +267,19 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,0)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(2,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(3,0)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(4,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,1)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(2,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(3,1)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(4,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,2)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,2)), Max);
-			board->ExecuteMove(new Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(2,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(3,0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(4,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(2,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(3,1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(4,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,2)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,2)), Max);
+			board->ExecuteMove(Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Min);
 			Assert::IsTrue(
 				board->GetRelativeCellAt(Vector2D(0,0)).GetAbsolutePosition() == Vector2D(0,0)
 			);
@@ -313,23 +310,23 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,0)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(2,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(3,0)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(4,0)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,1)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(2,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(3,1)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(4,1)), Max);
-			board->ExecuteMove(new Move(INSERT, Vector2D(0,2)), Min);
-			board->ExecuteMove(new Move(INSERT, Vector2D(1,2)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(2,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(3,0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(4,0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(2,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(3,1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(4,1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(0,2)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(1,2)), Max);
 			Assert::IsTrue(
 				(!board->GetRelativeCellAt(Vector2D(0,0)).IsMaxPiece()) &&
 				board->GetRelativeCellAt(Vector2D(0,0)).HasTile() 
 			);
-			board->ExecuteMove(new Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Min);
+			board->ExecuteMove(Move(JUMP, Vector2D(0,0), Vector2D(2,2)), Min);
 			Assert::IsTrue(
 				board->GetRelativeCellAt(Vector2D(0,0)).HasTile() &&
 				board->GetRelativeCellAt(Vector2D(0,0)).IsEmpty()

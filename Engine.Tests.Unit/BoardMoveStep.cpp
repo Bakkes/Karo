@@ -13,7 +13,6 @@ namespace Tests {
 	TEST_CLASS(BoardMoveStep) {
 	private:
 		Board* board;
-		Move* move;
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
 			board = Board::CreateBoard(
@@ -38,16 +37,14 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = NULL;
 		}
 
 		TEST_METHOD_CLEANUP(DeleteBoard) {
 			delete board;
-			delete move;
 		}
 
 		TEST_METHOD(StepMax) {
-			move = new Move(STEP, Vector2D(1,1), Vector2D(0,1));
+			Move move = Move(STEP, Vector2D(1,1), Vector2D(0,1));
 			board->ExecuteMove(move, Max);
 			Assert::IsTrue(
 				"5,3,3,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -74,8 +71,8 @@ namespace Tests {
 				board->ToString()
 			);
 
-			// test to C if the 7 value can be overwritten
-			move = new Move(STEP, Vector2D(1,2), Vector2D(1,1));
+			// test to C if the 7 value can be overwritten 
+			move = Move(STEP, Vector2D(1,2), Vector2D(1,1));
 			board->ExecuteMove(move, Min);
 			Assert::IsTrue(
 				"5,3,3,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -103,7 +100,7 @@ namespace Tests {
 			);
 		};
 		TEST_METHOD(StepMin) {
-			move = new Move(STEP, Vector2D(1,2), Vector2D(0,1));
+			Move move = Move(STEP, Vector2D(1,2), Vector2D(0,1));
 			board->ExecuteMove(move, Min);
 			Assert::IsTrue(
 				"5,3,3,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"

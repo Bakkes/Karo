@@ -20,10 +20,10 @@ namespace engine {
 
 	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth) {
 		EvalResult result;
-		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
-		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
+		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
+		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
-			_board->ExecuteMove(&move, player);
+			_board->ExecuteMove(move, player);
 
 			EvalResult score;
 			if (depth + 1 < _maxDepth) {
@@ -43,9 +43,9 @@ namespace engine {
 				result.SetScore(score.GetScore());
 			}
 			
-			_board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), player);
+			_board->UndoMove(move, player);
 		}
-		delete possibleMoves;
+		
 
 		return result;
 	}

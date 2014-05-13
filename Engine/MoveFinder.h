@@ -12,7 +12,8 @@ namespace engine{
 	public:
 		MoveFinder(IBoard* board);
 		~MoveFinder(void);
-		std::vector<Move>* GetLegalMoves(Players player);
+		std::vector<Move> GetLegalMoves(Players player);
+		
 	private:
 		IBoard* _board;
 
@@ -20,10 +21,10 @@ namespace engine{
 		std::vector<const RelativeCell>* _checkedCells;
 
 		// Get all legal moves for the place state.
-		std::vector<Move>* GetLegalPlaceMoves(Players player);
+		std::vector<Move> GetLegalPlaceMoves(Players player);
 
 		// Get all legal moves for the move state.
-		std::vector<Move>* GetLegalMoveMoves(Players player);
+		std::vector<Move> GetLegalMoveMoves(Players player);
 		void AddAdjacentMovesToVector(std::vector<Move>& moves, const RelativeCell& source);
 		void AddJumpMovesToVector(std::vector<Move>& moves, const RelativeCell& source);
 		void AddTileMoveMoves(

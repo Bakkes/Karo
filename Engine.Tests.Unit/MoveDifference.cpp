@@ -42,9 +42,9 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
 		
-		 vector<Move>* possibleMove= board->GetLegalMoves(Max);
+		 vector<Move> possibleMove= board->GetLegalMoves(Max);
 
-		for_each(possibleMove->begin(),possibleMove->end(),
+		for_each(possibleMove.begin(),possibleMove.end(),
 			[](Move& move)->void{
 			if(move.GetFromCell()==Vector2D(0,0)){
 				Vector2D difference = move.GetFromCell()-move.GetToCell();
@@ -60,7 +60,7 @@ namespace Tests {
 		}
 	);
 		
-		delete possibleMove;
+		
 		}
 	};
 }
