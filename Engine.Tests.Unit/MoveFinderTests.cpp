@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 #include "Windows.h"
-#include "MoveUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -101,7 +100,7 @@ namespace Tests {
 			for (auto it = legalMoves.begin(); it != legalMoves.end(); ++it) {
 				Move move = *it;
 
-				Assert::IsFalse(MovesAreEqual(illegalMove, move), L"Found illegal move as specified by rule amendment");
+				Assert::IsFalse(illegalMove == move, L"Found illegal move as specified by rule amendment");
 			}
 
 			
