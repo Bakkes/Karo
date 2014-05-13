@@ -190,10 +190,11 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
 
-			Move move = Move(STEP, Vector2D(1, 0), Vector2D(1, -1));
+			Move move = Move(STEP, Vector2D(1, 0), Vector2D(1, -1), Vector2D(4,3));
 			board->ExecuteMove(move, Min);
 			board->UndoMove(move, Min);
-
+			string result = board->ToString();
+			OutputDebugString(result.c_str());
 			Assert::IsTrue(
 				"3,1,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -214,8 +215,8 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
-				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
-				 == board->ToString());
+				"0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				 == result);
 		}
 
 		TEST_METHOD(InvertBoardShiftingJump) {
@@ -294,12 +295,12 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
 
-			Move move = Move(JUMP, Vector2D(1, 2), Vector2D(1, 0));
+			Move move = Move(JUMP, Vector2D(1, 2), Vector2D(1, 0), Vector2D(4,3));
 			board->ExecuteMove(move, Min);
 			board->UndoMove(move, Min);
 
 			Assert::IsTrue(
-				"3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,1,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -346,13 +347,13 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
 
-			Move move = Move(JUMP, Vector2D(1, 1), Vector2D(1, 0));
+			Move move = Move(JUMP, Vector2D(1, 1), Vector2D(1, 0), Vector2D(4,3));
 			board->ExecuteMove(move, Min);
 			board->UndoMove(move, Min);
 
 			string result = board->ToString();
 			Assert::IsTrue(
-				"3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,1,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
