@@ -63,12 +63,21 @@
     <ClCompile Include="AbsoluteRelativeConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MoveDifference.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StubStaticEval.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="StubBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

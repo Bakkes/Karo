@@ -28,6 +28,7 @@
     <ClCompile Include="MoveDifference.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
     <ClCompile Include="MoveInvertionTest.cpp" />
+    <ClCompile Include="MoveUtils.cpp" />
     <ClCompile Include="PlayerInvertionTest.cpp" />
     <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
@@ -35,6 +36,7 @@
     <ClCompile Include="ZobristTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MoveUtils.h" />
     <ClInclude Include="StubBoard.h" />
     <ClInclude Include="StubStaticEval.h" />
   </ItemGroup>
