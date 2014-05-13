@@ -402,8 +402,11 @@ namespace Tests {
 			Move evilMove(STEP, Vector2D(0, 0), Vector2D(-1, 0), Vector2D(4, 0));
 			board->ExecuteMove(evilMove, Max);
 			board->UndoMove(evilMove, Max);
+			string result = board->ToString();
+			OutputDebugString(result.c_str());
 			Assert::AreEqual(
-				string("1,5,1,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				string(
+				"1,5,1,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"5,1,5,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"1,5,1,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"5,1,5,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -423,7 +426,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"),
-				board->ToString()
+				result
 			);
 		}
 	};
