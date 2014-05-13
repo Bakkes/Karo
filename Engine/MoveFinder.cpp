@@ -1,7 +1,7 @@
 #include "MoveFinder.h"
 
 namespace engine {
-	MoveFinder::MoveFinder(IBoard* board) {
+	MoveFinder::MoveFinder(Board* board) {
 		_board = board;
 		_checkedCells = new std::vector<const RelativeCell>();
 	}
@@ -167,13 +167,18 @@ namespace engine {
 				to.GetRelativePosition(),
 				it->GetRelativePosition()
 			);
+			string a = _board->ToString();
 			_board->ExecuteMove(move, from.GetPlayer());
+			string b = _board->ToString();
+			string c;
 			if (!IsConnected(from, to)) {
 				// An island was created, stop!
 				_board->UndoMove(move, from.GetPlayer());
+				c = _board->ToString();
 				continue;
 			}
 			_board->UndoMove(move, from.GetPlayer());
+			c = _board->ToString();
 			moves.push_back(move);
 		}
 	}

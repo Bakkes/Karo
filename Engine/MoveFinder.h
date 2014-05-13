@@ -1,21 +1,22 @@
 #pragma once
 
 #include "DllImportExport.h"
-#include "IBoard.h"
 #include "Players.h"
 #include "Move.h"
+#include "Board.h"
 #include <vector>
 
 namespace engine{
+	class Board;
 	class ENGINE_API MoveFinder
 	{
 	public:
-		MoveFinder(IBoard* board);
+		MoveFinder(Board* board);
 		~MoveFinder(void);
 		std::vector<Move> GetLegalMoves(Players player);
 		
 	private:
-		IBoard* _board;
+		Board* _board;
 
 		// Used for IsConnected method.
 		std::vector<const RelativeCell>* _checkedCells;
