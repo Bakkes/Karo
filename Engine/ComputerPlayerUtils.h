@@ -7,7 +7,6 @@ namespace engine {
 	class ENGINE_API ComputerPlayerUtils
 	{
 	public:
-		static Move InvertMove(Move move); 
 		static Players InvertPlayer(Players player); 
 	};
 }

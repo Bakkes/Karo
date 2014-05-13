@@ -13,7 +13,6 @@ namespace Tests {
 	TEST_CLASS(BoardMoveJump) {
 	private:
 		Board* board;
-		Move* move;
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
 			board = Board::CreateBoard(
@@ -38,16 +37,14 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = NULL;
 		}
 
 		TEST_METHOD_CLEANUP(DeleteBoard) {
 			delete board;
-			delete move;
 		}
 
 		TEST_METHOD(JumpMax) {
-			move = new Move(JUMP, Vector2D(1,1), Vector2D(1,3));
+			Move move = Move(JUMP, Vector2D(1,1), Vector2D(1,3));
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
 			Assert::IsTrue(
@@ -76,7 +73,7 @@ namespace Tests {
 			);
 		};
 		TEST_METHOD(JumpMin) {
-			move = new Move(JUMP, Vector2D(1,2), Vector2D(1,0));
+			Move move = Move(JUMP, Vector2D(1,2), Vector2D(1,0));
 			board->ExecuteMove(move, Min);
 			string result = board->ToString();
 			Assert::IsTrue(
@@ -127,7 +124,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = new Move(JUMP, Vector2D(1,0), Vector2D(1,2));
+			Move move = Move(JUMP, Vector2D(1,0), Vector2D(1,2));
 			board->ExecuteMove(move, Min);
 			string result = board->ToString();
 			Assert::IsTrue(
