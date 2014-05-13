@@ -74,7 +74,7 @@ namespace _2DFrontend
 			Debug.WriteLine("We won!");
 		}
 
-		bool IsMoveLegal(MoveWrapper mv)
+		bool IsMoveLegal(MoveWrapper mv, Players player)
 		{
 			if (mv.GetMoveType() == engine.wrapper.MoveType.INSERT)
 				return true;
@@ -83,8 +83,15 @@ namespace _2DFrontend
 			Vector2DWrapper used = mv.GetUsedCell();
 			Debug.WriteLine("Checking if legal: ");
 			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
-			IEnumerable<MoveWrapper> legal = LegalMoves;
-			return LegalMoves.Where(m =>
+			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
+			foreach(MoveWrapper mw in legal) {
+				Vector2DWrapper from2 = mw.GetFromCell();
+				Vector2DWrapper to2 = mw.GetToCell();
+				Vector2DWrapper used2 = mw.GetUsedCell();
+				bool hasUsed = mw.HasUsedCell();
+				int a = 1;
+			}
+			return legal.Where(m =>
 				m.GetFromCell() == mv.GetFromCell() && 
 				m.GetToCell() == mv.GetToCell() &&
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
@@ -110,7 +117,8 @@ namespace _2DFrontend
 			Debug.WriteLine("Converted turn to move: " + _conversion.MoveWrapperToString(received));
 
 			// Get the move with the correct source tile from the last click.
-			if(!IsMoveLegal(received)) {
+			Console.WriteLine("Current player: " + CurrentPlayer);
+			if(!IsMoveLegal(received, Players.Min)) {
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
 				return;
@@ -163,6 +171,7 @@ namespace _2DFrontend
 			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(_conversion.ConvertMoveToTurn(bm)));
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
+			CurrentPlayer = Players.Min;
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)
