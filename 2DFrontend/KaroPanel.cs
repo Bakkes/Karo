@@ -110,7 +110,7 @@ namespace _2DFrontend
 								SystemFonts.DefaultFont, Brushes.White, paintPos);
 
 							paintPos.Y += 37;
-							g.DrawString(x + ", " + y, SystemFonts.DefaultFont, Brushes.White, paintPos);
+							g.DrawString(tile.GetRelativePosition().ToString(), SystemFonts.DefaultFont, Brushes.White, paintPos);
 						}
 					}
 				}
