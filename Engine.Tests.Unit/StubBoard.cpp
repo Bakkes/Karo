@@ -19,14 +19,13 @@ namespace Tests {
 
 	void StubBoard::ExecuteMove(const Move& move, Players player) { }
 
-	void StubBoard::UndoMove(const Move& move, Players player) { }
-	std::vector<Move>* StubBoard::GetLegalMoves(Players player) {
-		std::vector<Move>* legalMoves = new std::vector<Move>();
+	std::vector<Move> StubBoard::GetLegalMoves(Players player) {
+		std::vector<Move> legalMoves = std::vector<Move>();
 
-		legalMoves->push_back(Move(STEP, Vector2D(0), Vector2D(0, 1)));
-		legalMoves->push_back(Move(STEP, Vector2D(0), Vector2D(1, 0)));
+		legalMoves.push_back(Move(STEP, Vector2D(0), Vector2D(0, 1)));
+		legalMoves.push_back(Move(STEP, Vector2D(0), Vector2D(1, 0)));
 		if (!_minimalMoves) {
-			legalMoves->push_back(Move(JUMP, Vector2D(0), Vector2D(0, 2)));
+			legalMoves.push_back(Move(JUMP, Vector2D(0), Vector2D(0, 2)));
 		}
 
 		return legalMoves;

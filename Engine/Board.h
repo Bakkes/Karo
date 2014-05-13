@@ -19,9 +19,8 @@ namespace engine{
 		Board(bool init);
 		~Board();
 		int GetPieceCountFor(Players player) override;
-		void ExecuteMove(const Move& m, Players player) override;
-		void UndoMove(const Move& move, Players player) override;
-		vector<Move>* GetLegalMoves(Players player) override;
+		void ExecuteMove(Move *m, Players player) override;
+		vector<Move> GetLegalMoves(Players player) override;
 		vector<RelativeCell>* GetOccupiedTiles() override;
 		vector<RelativeCell>* GetEmptyTiles() override;
 		RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const override;

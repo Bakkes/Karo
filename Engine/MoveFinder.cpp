@@ -9,7 +9,7 @@ namespace engine {
 	}
 
 	// Returns all legal moves for the current state of this._board.
-	std::vector<Move>* MoveFinder::GetLegalMoves(Players player) {
+	std::vector<Move> MoveFinder::GetLegalMoves(Players player) {
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
 			return GetLegalPlaceMoves(player);
 		}
@@ -19,19 +19,20 @@ namespace engine {
 	}
 
 	// Returns all place moves for the specified player.
-	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
-		std::vector<Move>* moves = new std::vector<Move>();
+	std::vector<Move> MoveFinder::GetLegalPlaceMoves(Players player) {
+	
+		std::vector<Move> moves = std::vector<Move>();
 		std::vector<RelativeCell>* emptyTiles = _board->GetEmptyTiles();
 		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
 			// Add insertion move to an empty tile.
-			moves->push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
-		}
+			moves.push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
+		} 
 		return moves;
 	}
 
 	// Returns all moves that are either a jump or move type of move.
-	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
-		std::vector<Move>* moves = new std::vector<Move>();
+	std::vector<Move> MoveFinder::GetLegalMoveMoves(Players player) {
+		std::vector<Move> moves = std::vector<Move>();
 		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
 
 		// Loop through all occupied cells.
@@ -41,8 +42,8 @@ namespace engine {
 			if ((player == Max && ((it->GetData()) & IsMax) == IsMax) ||
 				(player == Min && ((it->GetData()) & IsMax) != IsMax))
 			{
-				AddJumpMovesToVector(*moves, *it);
-				AddAdjacentMovesToVector(*moves, *it);
+				AddJumpMovesToVector(moves, *it);
+				AddAdjacentMovesToVector(moves, *it);
 			}
 		}
 		return moves;
@@ -149,14 +150,20 @@ namespace engine {
 		const RelativeCell& to) {
 		std::vector<RelativeCell>* emptyCells = _board->GetEmptyTiles();
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
-			if (_board->CountNonDiagonalEdges(*it) <= 2) {
-				moves.push_back(Move(
-					type,
-					from.GetRelativePosition(),
-					to.GetRelativePosition(),
-					it->GetRelativePosition()
-				));
+			if (_board->CountNonDiagonalEdges(*it) > 2) {
+				continue;
 			}
+			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
+			if (abs((int)diff.X()) == 1 && abs((int)diff.Y()) == 1 &&
+					_board->CountNonDiagonalEdges(from) <= 1) {
+				continue;
+			}
+			moves.push_back(Move(
+				type,
+				from.GetRelativePosition(),
+				to.GetRelativePosition(),
+				it->GetRelativePosition()
+			));
 		}
 	}
 }

@@ -15,13 +15,13 @@ namespace engine {
 	}
 
 	Move ComputerPlayer::GetBestMove(Players player) {
-		return MinimaxStep(player, 4).GetMove();
+		return MinimaxStep(player, 0).GetMove();
 	}
 
 	EvalResult ComputerPlayer::MinimaxStep(Players player, int depth) {
 		EvalResult result;
-		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
-		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
+		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
+		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
 
@@ -45,7 +45,7 @@ namespace engine {
 			
 			_board->UndoMove(move, player);
 		}
-		delete possibleMoves;
+		
 
 		return result;
 	}
