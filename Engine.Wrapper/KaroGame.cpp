@@ -26,7 +26,7 @@ namespace wrapper {
 	}
 
 	MoveWrapper^ KaroGame::GetBestMove() {
-		ComputerPlayerAB _cPlayer = ComputerPlayerAB(_board->GetInternalBoard(), 2); // TODO GET COPY!
+		ComputerPlayerAB _cPlayer = ComputerPlayerAB(_board->GetInternalBoard(), 3); // TODO GET COPY!
 		_cPlayer.SetEvaluator(new StaticEvaluation());
 		Move bestMove = _cPlayer.GetBestMove(Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
