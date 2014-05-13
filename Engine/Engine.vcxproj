@@ -96,6 +96,7 @@
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="TranspositionTable.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="ZobristHashing.h" />
   </ItemGroup>
@@ -112,6 +113,7 @@
     <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />
+    <ClCompile Include="TranspositionTable.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="ZobristHashing.cpp" />
   </ItemGroup>
