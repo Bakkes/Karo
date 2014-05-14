@@ -81,6 +81,26 @@ namespace engine {
 	}
 
 	bool ComputerPlayerUtils::IsWinningStateDiagonalDown(IBoard* board) {
+		for (int y = 3; y < 20; ++y) {
+			for (int x = 0; x < 16; ++x) {
+				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
+				Players player = cell.IsMaxPiece() ? Max : Min;
+
+				for (int i = 0; i < 4; i++) {
+					cell = board->GetRelativeCellAt(Vector2D(x - i, y - i));
+					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
+					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+						// Can not be part of 4 flipped pieces
+						break;
+					}
+
+					if (i == 3) {
+						// 4 flipped pieces of the same time in a vertical row
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	}
 }
