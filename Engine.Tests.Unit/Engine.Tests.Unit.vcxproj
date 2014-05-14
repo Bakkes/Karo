@@ -33,6 +33,7 @@
     <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
+    <ClCompile Include="TranspositionTableTest.cpp" />
     <ClCompile Include="ZobristTest.cpp" />
   </ItemGroup>
   <ItemGroup>
