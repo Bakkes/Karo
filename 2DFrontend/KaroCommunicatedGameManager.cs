@@ -132,7 +132,7 @@ namespace _2DFrontend
 
 			//System.Threading.Thread.Sleep(1000);
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm = LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); // LegalMoves.First();// LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();
+			MoveWrapper bm = LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();Game.GetBestMove(); // LegalMoves.First();// LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
 			_turn++;
@@ -164,7 +164,7 @@ namespace _2DFrontend
 			_turn++;
 			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm = LegalMoves.OrderBy(x => Guid.NewGuid()).Last();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+			MoveWrapper bm = LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
 			ExecuteMove(bm);
 			_communication.SendTurn(_conversion.ConvertMoveToTurn(bm));
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
@@ -177,7 +177,6 @@ namespace _2DFrontend
 		void _communication_Disconnected(DisconnectReason reason)
 		{
 			Debug.WriteLine("Opponent disconnected, reason: " + reason.ToString());
-
 		}
 
 		void _communication_Connected()
