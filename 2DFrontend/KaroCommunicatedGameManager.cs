@@ -14,7 +14,7 @@ namespace _2DFrontend
 		private ICommunication _communication;
 		private CommunicationProtocolConversionUtility _conversion;
 		private int _turn = 0;
-		
+        private Random rand = new Random(1340);
 
 		public KaroCommunicatedGameManager(ICommunication communication)
 			: base()
@@ -132,7 +132,7 @@ namespace _2DFrontend
 
 			//System.Threading.Thread.Sleep(1000);
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm = Game.GetBestMove();Game.GetBestMove(); // LegalMoves.First();// LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();
+            MoveWrapper bm = LegalMoves.Skip(rand.Next(0, LegalMoves.Count() - 1)).First();//Game.GetBestMove(); // LegalMoves.First();// LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
 			_turn++;
@@ -164,7 +164,7 @@ namespace _2DFrontend
 			_turn++;
 			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm = Game.GetBestMove();//Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+            MoveWrapper bm = LegalMoves.Skip(rand.Next(0, LegalMoves.Count() - 1)).First();//Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
 			ExecuteMove(bm);
 			_communication.SendTurn(_conversion.ConvertMoveToTurn(bm));
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
