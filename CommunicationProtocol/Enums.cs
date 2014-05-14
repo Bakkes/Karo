@@ -48,7 +48,15 @@ namespace CommunicationProtocol
         /// <summary>
         /// Geeft de positie ten westen van de ToTile aan.
         /// </summary>
-        West
+        West,
+
+		NorthEast,
+
+		NorthWest,
+
+		SouthEast,
+
+		SouthWest
     }
     /// <summary>
     /// Berichttype voor communicatie tussen client en server

@@ -42,13 +42,22 @@
     <ClCompile Include="BoardRelativity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StaticEvaluationTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="StubBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StubStaticEval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LegalMovesTest.cpp">
+    <ClCompile Include="MoveFinderTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ZobristTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AbsoluteRelativeConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ComputerPlayerUtilsTests.cpp">

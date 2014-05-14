@@ -14,6 +14,7 @@ namespace engine{
 		Vector2D ToAbsolute(const Vector2D&)const; 
 		// allows the converter to be kept up to date with board
 		void MoveTile(const Vector2D& from, const Vector2D& to);
+		Vector2D CalcShiftCorrection(const Vector2D&,const Vector2D&) const;
 	private:
 		void Init(Grid<int>* parseable, Vector2D tl);
 		// the absolute topleft

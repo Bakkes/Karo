@@ -1,138 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="ComputerPlayer.cpp" />
+    <ClCompile Include="ComputerPlayerAB.cpp" />
+    <ClCompile Include="ComputerPlayerUtils.cpp" />
+    <ClCompile Include="EvalResult.cpp" />
+    <ClCompile Include="ExportedClass.cpp" />
+    <ClCompile Include="Move.cpp" />
+    <ClCompile Include="MoveFinder.cpp" />
+    <ClCompile Include="RelativeAbsoluteConverter.cpp" />
+    <ClCompile Include="RelativeCell.cpp" />
+    <ClCompile Include="Size.cpp" />
+    <ClCompile Include="StaticEvaluation.cpp" />
+    <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="ZobristHashing.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DllImportExport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IComputerPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Move.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ExportedClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Size.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IBoard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IStaticEvaluation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Players.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ISafeBoard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EvalResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StaticEvaluation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Cell.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveFinder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputerPlayerAB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputerPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputerPlayerUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveFinder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RelativeAbsoluteConverter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RelativeCell.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CellValue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputerPlayerMO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Move.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ExportedClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Size.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StaticEvaluation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EvalResult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveFinder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputerPlayerAB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputerPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputerPlayerUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveFinder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RelativeAbsoluteConverter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RelativeCell.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputerPlayerMO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="CellValue.h" />
+    <ClInclude Include="ComputerPlayer.h" />
+    <ClInclude Include="ComputerPlayerAB.h" />
+    <ClInclude Include="ComputerPlayerUtils.h" />
+    <ClInclude Include="RelativeAbsoluteConverter.h" />
+    <ClInclude Include="DllImportExport.h" />
+    <ClInclude Include="EvalResult.h" />
+    <ClInclude Include="ExportedClass.h" />
+    <ClInclude Include="Grid.h" />
+    <ClInclude Include="IBoard.h" />
+    <ClInclude Include="IComputerPlayer.h" />
+    <ClInclude Include="IHashAlgorithm.h" />
+    <ClInclude Include="ISafeBoard.h" />
+    <ClInclude Include="IStaticEvaluation.h" />
+    <ClInclude Include="Move.h" />
+    <ClInclude Include="MoveFinder.h" />
+    <ClInclude Include="Players.h" />
+    <ClInclude Include="RelativeCell.h" />
+    <ClInclude Include="Size.h" />
+    <ClInclude Include="StaticEvaluation.h" />
+    <ClInclude Include="Cell.h" />
+    <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="ZobristHashing.h" />
   </ItemGroup>
 </Project>

@@ -31,11 +31,11 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.playerVSComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.computerVSComputerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.karoPanel = new _2DFrontend.KaroPanel();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -65,15 +65,8 @@
             this.playerVSComputerToolStripMenuItem,
             this.computerVSComputerToolStripMenuItem});
 			this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-			this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.newToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
 			this.newToolStripMenuItem.Text = "New";
-			// 
-			// exitToolStripMenuItem
-			// 
-			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-			this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.exitToolStripMenuItem.Text = "Exit";
-			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
 			// 
 			// playerVSComputerToolStripMenuItem
 			// 
@@ -94,23 +87,32 @@
 			// serverToolStripMenuItem
 			// 
 			this.serverToolStripMenuItem.Name = "serverToolStripMenuItem";
-			this.serverToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.serverToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.serverToolStripMenuItem.Text = "Server";
 			this.serverToolStripMenuItem.Click += new System.EventHandler(this.serverToolStripMenuItem_Click);
 			// 
 			// clientToolStripMenuItem
 			// 
 			this.clientToolStripMenuItem.Name = "clientToolStripMenuItem";
-			this.clientToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.clientToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.clientToolStripMenuItem.Text = "Client";
 			this.clientToolStripMenuItem.Click += new System.EventHandler(this.clientToolStripMenuItem_Click);
 			// 
+			// exitToolStripMenuItem
+			// 
+			this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+			this.exitToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+			this.exitToolStripMenuItem.Text = "Exit";
+			this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+			// 
 			// karoPanel
 			// 
+			this.karoPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
 			this.karoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.karoPanel.Location = new System.Drawing.Point(12, 27);
+			this.karoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.karoPanel.Location = new System.Drawing.Point(0, 24);
 			this.karoPanel.Name = "karoPanel";
-			this.karoPanel.Size = new System.Drawing.Size(800, 530);
+			this.karoPanel.Size = new System.Drawing.Size(1058, 545);
 			this.karoPanel.TabIndex = 0;
 			// 
 			// Karo
@@ -124,6 +126,7 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Karo";
 			this.Text = "Karo";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Karo_FormClosing);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
