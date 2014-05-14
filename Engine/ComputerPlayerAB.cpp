@@ -10,6 +10,7 @@ namespace engine {
 		_board = board;
 		_maxDepth = maxDepth;
 		_evaluator = nullptr;
+		_killerMoves = new EvalResult[_maxDepth];
 	}
 
 	ComputerPlayerAB::~ComputerPlayerAB() {
@@ -29,15 +30,27 @@ namespace engine {
 		}
 
 		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
+		int findResult = find(possibleMoves->begin(),possibleMoves->end(),_killerMoves[depth].GetMove())-possibleMoves->end();
+		if(findResult){
+			(*possibleMoves)[findResult]=(*possibleMoves)[0];
+			(*possibleMoves)[0]=_killerMoves[depth].GetMove();
+
+
+		}
 		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(&move, player);
 			EvalResult score = GetScore(player, move, depth, result);
+		
+
 			_board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), player);
 
 			if (player == Max) {
 				if (score.GetScore() > result.GetScore()) {
 					result.SetScore(score.GetScore());
+				}
+				if(score.GetBestForMax()>_killerMoves[depth].GetBestForMax()){
+					_killerMoves[depth]=score;
 				}
 
 				if (score.GetScore() >= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
@@ -50,6 +63,9 @@ namespace engine {
 			} else  if (player == Min)  {
 				if (score.GetScore() < result.GetScore()) {
 					result.SetScore(score.GetScore());
+				}
+				if(score.GetBestForMin()>_killerMoves[depth].GetBestForMin()){
+					_killerMoves[depth]=score;
 				}
 
 				if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
