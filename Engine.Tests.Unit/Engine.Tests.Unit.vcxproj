@@ -29,7 +29,6 @@
     <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="MoveDifference.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
-    <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="MoveUtils.cpp" />
     <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
