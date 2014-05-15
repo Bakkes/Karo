@@ -42,5 +42,7 @@ namespace engine{
 		);
 		bool IsConnected(const RelativeCell &from, const RelativeCell &to);
 		bool IsConnectedRecursive(const RelativeCell &from, const RelativeCell &to);
+
+		bool CellHasTileWithPlayer(const RelativeCell &cell);
 	};
 }

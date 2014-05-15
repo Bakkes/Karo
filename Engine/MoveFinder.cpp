@@ -54,28 +54,28 @@ namespace engine {
 
 	// Adds all possible jump moves to the specified vector.
 	void MoveFinder::AddJumpMovesToVector(std::vector<Move>& moves, const RelativeCell& source) {
-		if ((source.GetLeft().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetLeft())) {
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetLeft().GetLeft(),
 				JUMP
 			);
 		}
-		if ((source.GetRight().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetRight())) {
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetRight().GetRight(),
 				JUMP
 			);
 		}
-		if ((source.GetTop().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetTop())) {
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetTop().GetTop(),
 				JUMP
 			);
 		}
-		if ((source.GetBottom().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetBottom())) {
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetBottom().GetBottom(),
@@ -84,28 +84,28 @@ namespace engine {
 		}
 
 		// Diagonal
-		if ((source.GetTop().GetLeft().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetTop().GetLeft())) { 
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetTop().GetTop().GetLeft().GetLeft(),
 				JUMP
 			);
 		}
-		if ((source.GetTop().GetRight().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetTop().GetRight())) {
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetTop().GetTop().GetRight().GetRight(),
 				JUMP
 			);
 		}
-		if ((source.GetBottom().GetLeft().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetBottom().GetLeft())) {
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetBottom().GetBottom().GetLeft().GetLeft(),
 				JUMP
 			);
 		}
-		if ((source.GetBottom().GetRight().GetData() & (HasTile | IsEmpty)) == HasTile) {
+		if (CellHasTileWithPlayer(source.GetBottom().GetRight())) {
 			AddMoveIfValidDestination(moves,
 				source,
 				source.GetBottom().GetBottom().GetRight().GetRight(),
@@ -136,7 +136,7 @@ namespace engine {
 		const MoveType& type)
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
-		if (((to.GetData()) & (IsEmpty | HasTile)) == (IsEmpty | HasTile)) {
+		if (to.IsEmpty() && to.HasTile()) {
 			moves.push_back(Move(type, (from.GetRelativePosition()), (to.GetRelativePosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
@@ -219,5 +219,9 @@ namespace engine {
 			if (IsConnectedRecursive(from.GetBottom(), to)) return true;
 		}
 		return false;
+	}
+
+	bool MoveFinder::CellHasTileWithPlayer(const RelativeCell &cell) {
+		return cell.HasTile() && !cell.IsEmpty();
 	}
 }
