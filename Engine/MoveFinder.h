@@ -40,8 +40,8 @@ namespace engine{
 			const RelativeCell &to,
 			const MoveType& type
 		);
-		bool IsConnected(const RelativeCell &from, const RelativeCell &to);
-		bool IsConnectedRecursive(const RelativeCell &from, const RelativeCell &to);
+		int ConnectedTiles(const RelativeCell &start);
+		int ConnectedTilesRecursive(const RelativeCell &start);
 
 		bool CellHasTileWithPlayer(const RelativeCell &cell);
 	};

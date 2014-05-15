@@ -172,7 +172,7 @@ namespace engine {
 				it->GetRelativePosition()
 			);
 			_board->ExecuteMove(move, from.GetPlayer());
-			if (!IsConnected(from, to)) {
+			if (ConnectedTiles(*it) != 20) {
 				// An island was created, stop!
 				_board->UndoMove(move, from.GetPlayer());
 				continue;
@@ -182,42 +182,32 @@ namespace engine {
 		}
 	}
 
-	bool MoveFinder::IsConnected(
-			const RelativeCell &from,
-			const RelativeCell &to) {
+	int MoveFinder::ConnectedTiles(const RelativeCell &start) {
 		_checkedCells->clear();
-		return IsConnectedRecursive(from, to);
+		return ConnectedTilesRecursive(start);
 	}
 
-	// Recursive function for MoveFinder.IsConnected.
-	bool MoveFinder::IsConnectedRecursive(
-			const RelativeCell &from,
-			const RelativeCell &to) {
-		// Check if the cell we're checking has been checked.
+	int MoveFinder::ConnectedTilesRecursive(const RelativeCell &start) {
 		for (auto it = _checkedCells->begin(); it != _checkedCells->end(); ++it) {
-			if (*it == from) {
-				return false;
+			if (start == *it) {
+				return 0;
 			}
 		}
-		_checkedCells->push_back(from);
-		if (from == to) {
-			// From and to are connected!
-			return true;
+		_checkedCells->push_back(start);
+		int result = 1;
+		if (start.GetLeft().HasTile()) {
+			result += ConnectedTilesRecursive(start.GetLeft());
 		}
-		// Check if neighbors are connected to the "to" cell.
-		if (from.GetLeft().HasTile()) {
-			if (IsConnectedRecursive(from.GetLeft(), to)) return true;
+		if (start.GetRight().HasTile()) {
+			result += ConnectedTilesRecursive(start.GetRight());
 		}
-		if (from.GetRight().HasTile()) {
-			if (IsConnectedRecursive(from.GetRight(), to)) return true;
+		if (start.GetTop().HasTile()) {
+			result += ConnectedTilesRecursive(start.GetTop());
 		}
-		if (from.GetTop().HasTile()) {
-			if (IsConnectedRecursive(from.GetTop(), to)) return true;
+		if (start.GetBottom().HasTile()) {
+			result += ConnectedTilesRecursive(start.GetBottom());
 		}
-		if (from.GetBottom().HasTile()) {
-			if (IsConnectedRecursive(from.GetBottom(), to)) return true;
-		}
-		return false;
+		return result;
 	}
 
 	bool MoveFinder::CellHasTileWithPlayer(const RelativeCell &cell) {
