@@ -60,7 +60,7 @@
     <ClCompile Include="AbsoluteRelativeConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComputerPlayerUtilsTests.cpp">
+    <ClCompile Include="MoveDifference.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

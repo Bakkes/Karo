@@ -31,9 +31,9 @@ namespace engine {
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
-			_board->ExecuteMove(&move, player);
+			_board->ExecuteMove(move, player);
 			EvalResult score = GetScore(player, move, depth, result);
-			_board->ExecuteMove(&ComputerPlayerUtils::InvertMove(move), player);
+			_board->UndoMove(move, player);
 
 			if (player == Max) {
 				if (score.GetScore() > result.GetScore()) {
@@ -62,8 +62,6 @@ namespace engine {
 			}
 
 		}
-		delete possibleMoves;
-
 		return result;
 	}
 

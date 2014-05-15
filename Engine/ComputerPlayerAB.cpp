@@ -29,15 +29,15 @@ namespace engine {
 			result.SetScore(INT_MAX);
 		}
 
-		std::vector<Move>* possibleMoves = _board->GetLegalMoves(player);
-		int findResult = find(possibleMoves->begin(),possibleMoves->end(),_killerMoves[depth].GetMove())-possibleMoves->end();
+		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
+		int findResult = find(possibleMoves.begin(),possibleMoves.end(),_killerMoves[depth].GetMove())-possibleMoves.end();
 		if(findResult){
-			(*possibleMoves)[findResult]=(*possibleMoves)[0];
-			(*possibleMoves)[0]=_killerMoves[depth].GetMove();
+			possibleMoves[findResult]=possibleMoves[0];
+			possibleMoves[0]=_killerMoves[depth].GetMove();
 
 
 		}
-		for (auto it = possibleMoves->begin(); it != possibleMoves->end(); ++it) {
+		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
 			EvalResult score = GetScore(player, move, depth, result);
