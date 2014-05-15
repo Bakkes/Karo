@@ -30,6 +30,34 @@ namespace engine{
 			}
 		);
 	}
+
+	Vector2D RelativeAbsoluteConverter::CalcShiftCorrection( const Vector2D& to, const Vector2D& used) const{
+		Vector2D result = Vector2D(0);
+
+		if(
+			(_colTileCount.at((int)_topLeft.X()) > 1)&&
+			(_rowTileCount.at((int)_topLeft.Y()) > 1)
+		){
+			return result;
+		}
+		if(_colTileCount.at((int)_topLeft.X() > 0)){
+			if(used.X() == 0){
+				result -= Vector2D(1,0);
+			}
+			if(to.X() == -1){
+				result += Vector2D(1,0);
+			}
+		}
+		if(_rowTileCount.at((int)_topLeft.Y() > 0)){
+			if(used.Y() == 0){
+				result -= Vector2D(0,1);
+			}
+			if(to.Y() == -1){
+				result += Vector2D(0,1);
+			}
+		}
+		return result;
+	}
 	Vector2D RelativeAbsoluteConverter::ToRelative(const Vector2D& input)const{
 		return WrapArround(input - _topLeft);
 	}
@@ -71,10 +99,10 @@ namespace engine{
 
 		// the up left part
 		Vector2D difference = to - _topLeft;
-		if(to.X() < _topLeft.X() || difference.X() == 19 /* wrap arround case not absolute because these comparisons are only for up and left*/){
+		if((difference.X() > -2) && (to.X() < _topLeft.X() || difference.X() == 19) /* wrap arround case not absolute because these comparisons are only for up and left*/){
 			_topLeft.X(to.X());
 		}
-		if(to.Y() < _topLeft.Y() || difference.Y() == 19){
+		if((difference.Y() > -2) && (to.Y() < _topLeft.Y() || difference.Y() == 19)){
 			_topLeft.Y(to.Y());
 		}
 	}

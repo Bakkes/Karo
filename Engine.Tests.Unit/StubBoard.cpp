@@ -17,8 +17,8 @@ namespace Tests {
 		return 0;
 	}
 
-	void StubBoard::ExecuteMove(Move* move, Players player) {
-	}
+	void StubBoard::ExecuteMove(const Move& move, Players player) { }
+	void StubBoard::UndoMove(const Move& move, Players player) { }
 
 	std::vector<Move> StubBoard::GetLegalMoves(Players player) {
 		std::vector<Move> legalMoves = std::vector<Move>();

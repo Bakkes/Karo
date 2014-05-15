@@ -1,6 +1,5 @@
 #include "BoardWrapper.h"
 
-
 namespace engine {
 namespace wrapper {
 	BoardWrapper::BoardWrapper(void)
@@ -14,8 +13,7 @@ namespace wrapper {
 	}
 
 	void BoardWrapper::ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player) {
-		Move* mv = WrapperConversionUtility().ConvertMove(mw);
-		_board->ExecuteMove(mv, static_cast<engine::Players>(player));
+		_board->ExecuteMove(*WrapperConversionUtility().ConvertMove(mw), static_cast<engine::Players>(player));
 	}
 
 	List<CellWrapper^>^ BoardWrapper::GetOccupiedCells() {
@@ -50,6 +48,10 @@ namespace wrapper {
 
 	Board* BoardWrapper::GetInternalBoard() {
 		return _board;
+	}
+
+	String^ BoardWrapper::ToString() {
+		return gcnew String(_board->ToString().c_str());
 	}
 }
 }

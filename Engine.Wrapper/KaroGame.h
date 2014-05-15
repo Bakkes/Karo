@@ -20,7 +20,6 @@ namespace wrapper {
 			BoardWrapper^ GetBoard();
 		private:
 			BoardWrapper^ _board;
-			ComputerPlayer * _cPlayer;
 	};
 }
 }

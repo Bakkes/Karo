@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 #include "Windows.h"
-#include "MoveUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -13,7 +12,6 @@ namespace Tests {
 	TEST_CLASS(MoveFinder) {
 	private:
 		Board* board;
-		Move* move;
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
 			board = Board::CreateBoard(
@@ -38,12 +36,37 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = NULL;
 		}
 
 		TEST_METHOD_CLEANUP(DeleteBoard) {
 			delete board;
-			delete move;
+		}
+		TEST_METHOD(MoveFinderIdemPotent){
+
+			Board* invertedBoard = Board::CreateBoard(
+				"1,3,3,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,1,5,5,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"3,5,5,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"1,3,5,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+			);
+			Assert::IsTrue(board->GetLegalMoves(Min) == invertedBoard->GetLegalMoves(Max));
+			Assert::IsFalse(board->GetLegalMoves(Max) == invertedBoard->GetLegalMoves(Max));
 		}
 
 		TEST_METHOD(MTinsertTest) {
@@ -69,7 +92,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 			);
-			move = new Move(STEP, Vector2D(4,0), Vector2D(5,0), Vector2D(4,3));
+			Move move = Move(STEP, Vector2D(4,0), Vector2D(5,0), Vector2D(4,3));
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
 		};
@@ -104,7 +127,7 @@ namespace Tests {
 			for (auto it = legalMoves.begin(); it != legalMoves.end(); ++it) {
 				Move move = *it;
 
-				Assert::IsFalse(MovesAreEqual(illegalMove, move), L"Found illegal move as specified by rule amendment");
+				Assert::IsFalse(illegalMove == move, L"Found illegal move as specified by rule amendment");
 			}
 
 			

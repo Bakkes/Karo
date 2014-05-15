@@ -31,6 +31,7 @@ public:
 	IEnumerable<MoveWrapper^>^ GetLegalMoves(Players player);
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();
+	String^ ToString() new;
 private:
 	Board * _board;
 };

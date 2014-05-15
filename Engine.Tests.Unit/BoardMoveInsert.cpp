@@ -14,19 +14,17 @@ namespace Tests {
 	TEST_CLASS(BoardMoveInsert) {
 	private:
 		Board* board;
-		Move* move;
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
 			board = new Board();
-			move  = new Move(INSERT, Vector2D(1,1));
 		}
 
 		TEST_METHOD_CLEANUP(DeleteBoard) {
 			delete board;
-			delete move;
 		}
 
 		TEST_METHOD(InsertPieceMax) {
+			Move move  = Move(INSERT, Vector2D(1,1));
 			board->ExecuteMove(move, Max);
 			string result = board->ToString();
 			Assert::IsTrue(
@@ -55,6 +53,7 @@ namespace Tests {
 			);
 		};
 		TEST_METHOD(InsertPieceMin) {
+			Move move  = Move(INSERT, Vector2D(1,1));
 			board->ExecuteMove(move, Min);
 			Assert::IsTrue(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"

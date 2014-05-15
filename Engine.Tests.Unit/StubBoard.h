@@ -11,7 +11,8 @@ namespace Tests {
 		~StubBoard();
 
 		int GetPieceCountFor(Players player) override;
-		void ExecuteMove(Move* move, Players player) override;
+		void ExecuteMove(const Move& move, Players player) override;
+		void UndoMove(const Move& m, Players player) override;
 		std::vector<Move> GetLegalMoves(Players player) override;
 		std::vector<RelativeCell>* GetOccupiedTiles() override;
 		std::vector<RelativeCell>* GetEmptyTiles() override;
@@ -20,5 +21,6 @@ namespace Tests {
 
 	private:
 		bool _minimalMoves;
+		int _moveIdentifier; 
 	};
 }

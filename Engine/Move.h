@@ -3,7 +3,7 @@
 
 namespace engine {
 
-	enum MoveType { INSERT, STEP, JUMP, DELETE };
+	enum MoveType { INSERT, STEP, JUMP };
 	
 	/** NOTE: Move positions use the absolute coordinates */
 	class ENGINE_API Move {
@@ -39,4 +39,26 @@ namespace engine {
 
 		void Init(MoveType moveType, Vector2D fromCell, Vector2D toCell, Vector2D tile, bool hasUsedCell);
 	};
+
+	inline bool operator==(const Move& lhs, const Move& rhs) {
+		if (lhs.GetMoveType() != rhs.GetMoveType())
+			return false;
+
+		if (lhs.GetFromCell() != rhs.GetFromCell())
+			return false;
+
+		if (lhs.GetToCell() != rhs.GetToCell())
+			return false;
+
+		if (lhs.HasUsedCell() != rhs.HasUsedCell())
+			return false;
+
+		if (lhs.HasUsedCell() && lhs.GetUsedCell() != rhs.GetUsedCell())
+			return false;
+
+		return true;
+	}
+
+	inline bool operator!=(const Move& lhs, const Move& rhs) { return !(lhs == rhs);}
+
 }

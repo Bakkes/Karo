@@ -2,33 +2,121 @@
 
 namespace engine {
 
-	Move ComputerPlayerUtils::InvertMove(Move move) {
-		switch (move.GetMoveType()) {
-		case INSERT:
-			return Move(DELETE, move.GetToCell());
-		case STEP: {
-			if (move.HasUsedCell()) {
-				return Move(STEP, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
-			} else {
-				return Move(STEP, move.GetToCell(), move.GetFromCell());
-			}
-		}
-		case JUMP: {
-			if (move.HasUsedCell()) {
-				return Move(JUMP, move.GetUsedCell(), move.GetFromCell(), move.GetToCell());
-			} else {
-				return Move(JUMP, move.GetToCell(), move.GetFromCell());
-			}
-		}
-		}
-
-		return Move(INSERT, Vector2D(-1,-1));
-	}
-
 	Players ComputerPlayerUtils::InvertPlayer(Players player) {
 		if (player == Players::Min) {
 			return Players::Max;
 		}
 		return Players::Min;
+	}
+
+	bool ComputerPlayerUtils::IsWinningState(IBoard* board, Players player) {
+		if (board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer)
+			return false;
+
+		if (IsWinningStateHorizontal(board, player))
+			return true;
+
+		if (IsWinningStateVertical(board, player))
+			return true;
+
+		if (IsWinningStateDiagonalUp(board, player))
+			return true;
+
+		if (IsWinningStateDiagonalDown(board, player))
+			return true;
+
+		return false;
+	}
+
+	bool ComputerPlayerUtils::IsWinningStateHorizontal(IBoard* board, Players player) {
+		for (int x = 0; x < 16; ++x) {
+			for (int y = 0; y < 20; ++y) {
+				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
+
+				for (int i = 0; i < 4; i++) {
+					cell = board->GetRelativeCellAt(Vector2D(x + i, y));
+					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
+					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+						// Can not be part of 4 flipped pieces
+						break;
+					}
+
+					if (i == 3) {
+						// 4 flipped pieces of the same time in a horizontal row
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	bool ComputerPlayerUtils::IsWinningStateVertical(IBoard* board, Players player) {
+		for (int y = 0; y < 16; ++y) {
+			for (int x = 0; x < 20; ++x) {
+				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
+
+				for (int i = 0; i < 4; i++) {
+					cell = board->GetRelativeCellAt(Vector2D(x, y + i));
+					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
+					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+						// Can not be part of 4 flipped pieces
+						break;
+					}
+
+					if (i == 3) {
+						// 4 flipped pieces of the same time in a vertical row
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	bool ComputerPlayerUtils::IsWinningStateDiagonalUp(IBoard* board, Players player) {
+		for (int y = 3; y < 20; ++y) {
+			for (int x = 0; x < 16; ++x) {
+				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
+
+				for (int i = 0; i < 4; i++) {
+					cell = board->GetRelativeCellAt(Vector2D(x + i, y - i));
+					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
+					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+						// Can not be part of 4 flipped pieces
+						break;
+					}
+
+					if (i == 3) {
+						// 4 flipped pieces of the same time in a vertical row
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	bool ComputerPlayerUtils::IsWinningStateDiagonalDown(IBoard* board, Players player) {
+		for (int y = 3; y < 20; ++y) {
+			for (int x = 3; x < 16; ++x) {
+				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
+
+				for (int i = 0; i < 4; i++) {
+					cell = board->GetRelativeCellAt(Vector2D(x - i, y - i));
+					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
+					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+						// Can not be part of 4 flipped pieces
+						break;
+					}
+
+					if (i == 3) {
+						// 4 flipped pieces of the same time in a vertical row
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }
