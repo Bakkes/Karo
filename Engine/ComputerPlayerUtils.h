@@ -9,12 +9,12 @@ namespace engine {
 	{
 	public:
 		static Players InvertPlayer(Players player); 
-		static bool IsWinningState(IBoard* board);
+		static bool IsWinningState(IBoard* board, Players player);
 
 	private:
-		static bool IsWinningStateHorizontal(IBoard* board);
-		static bool IsWinningStateVertical(IBoard* board);
-		static bool IsWinningStateDiagonalUp(IBoard* board);
-		static bool IsWinningStateDiagonalDown(IBoard* board);
+		static bool IsWinningStateHorizontal(IBoard* board, Players player);
+		static bool IsWinningStateVertical(IBoard* board, Players player);
+		static bool IsWinningStateDiagonalUp(IBoard* board, Players player);
+		static bool IsWinningStateDiagonalDown(IBoard* board, Players player);
 	};
 }
