@@ -173,7 +173,7 @@ namespace Tests {
 			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
 		}
 
-		TEST_METHOD(IsWinningState_MaxDiagonalDown2) {
+		TEST_METHOD(IsWinningState_MaxDiagonalUp2) {
 			Board* board = Board::CreateBoard(
 				"3,3,1,13,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,1,13,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
