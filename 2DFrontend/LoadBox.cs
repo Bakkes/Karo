@@ -20,6 +20,22 @@ namespace _2DFrontend
             }
         }
 
+        public int LeftTopX
+        {
+            get
+            {
+                return (int)numTLX.Value;
+            }
+        }
+
+        public int LeftTopY
+        {
+            get
+            {
+                return (int)numTLY.Value;
+            }
+        }
+
         public LoadBox()
         {
             InitializeComponent();

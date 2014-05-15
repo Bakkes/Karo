@@ -46,7 +46,7 @@ namespace wrapper {
 		return WrapperConversionUtility().ConvertCell(relativeCellAt);
 	}
 
-	void BoardWrapper::LoadFromString(String^ boardString) {
+	void BoardWrapper::LoadFromString(String^ boardString, int topLeftX, int topLeftY) {
 		delete _board;
 
 		std::string stdBoardString = "";
@@ -54,7 +54,7 @@ namespace wrapper {
 			stdBoardString += (char) boardString[i];
 		}
 
-		_board = Board::CreateBoard(stdBoardString);
+		_board = Board::CreateBoard(stdBoardString, Vector2D(topLeftX, topLeftY));
 	}
 
 	Board* BoardWrapper::GetInternalBoard() {
