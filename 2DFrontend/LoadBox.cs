@@ -32,10 +32,28 @@ namespace _2DFrontend
             Close();
         }
 
+        private string RemoveFromString(string s, string[] characters)
+        {
+            string newString = String.Copy(s);
+            foreach (string character in characters) {
+                newString = newString.Replace(character, "");
+            }
+
+            return newString;
+        }
+
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            string boardString = txtBoardString.Text.Replace("\r", "").Replace("\n", "").Replace(" ", "");
+            txtBoardString.Text = RemoveFromString(txtBoardString.Text, new string[] { "\"", "\\n", " ", "\t" });
+
+            string boardString = RemoveFromString(txtBoardString.Text, new string[] { "\r", "\n" });
             string[] boardPieces = boardString.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (txtBoardString.Text.Split('\n').Length != 20)
+            {
+                MessageBox.Show(String.Format("Invalid amount of lines detected. Expected: 20, Found: {0}", txtBoardString.Text.Split('\n').Length));
+                return;
+            }
 
             if (boardPieces.Length != 400)
             {
