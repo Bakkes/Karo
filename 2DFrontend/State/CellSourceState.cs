@@ -43,6 +43,7 @@ namespace _2DFrontend.State
 			if (move != null)
 			{
 				CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);
+				//Debug.WriteLine(util.MoveWrapperToString(move));
 				Debug.WriteLine(util.TurnToString(util.ConvertMoveToTurn(move)));
 				// We now have a valid move. Execute it!
 				Debug.WriteLine("Clicked on moveable tile.");

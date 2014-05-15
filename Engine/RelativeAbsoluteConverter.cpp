@@ -99,10 +99,10 @@ namespace engine{
 
 		// the up left part
 		Vector2D difference = to - _topLeft;
-		if(to.X() < _topLeft.X() || difference.X() == 19 /* wrap arround case not absolute because these comparisons are only for up and left*/){
+		if((difference.X() > -2) && (to.X() < _topLeft.X() || difference.X() == 19) /* wrap arround case not absolute because these comparisons are only for up and left*/){
 			_topLeft.X(to.X());
 		}
-		if(to.Y() < _topLeft.Y() || difference.Y() == 19){
+		if((difference.Y() > -2) && (to.Y() < _topLeft.Y() || difference.Y() == 19)){
 			_topLeft.Y(to.Y());
 		}
 	}

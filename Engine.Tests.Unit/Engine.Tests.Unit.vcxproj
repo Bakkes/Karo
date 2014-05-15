@@ -26,17 +26,14 @@
     <ClCompile Include="ClassNameTests.cpp" />
     <ClCompile Include="ComputerPlayerUtilsTests.cpp" />
     <ClCompile Include="MinimaxTest.cpp" />
-    <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="MoveDifference.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
-    <ClCompile Include="MoveUtils.cpp" />
     <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
     <ClCompile Include="ZobristTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MoveUtils.h" />
     <ClInclude Include="StubBoard.h" />
     <ClInclude Include="StubStaticEval.h" />
   </ItemGroup>
