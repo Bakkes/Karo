@@ -43,8 +43,8 @@ namespace engine {
 		for (auto it = occupiedCells->begin(); it != occupiedCells->end(); ++it) {
 
 			// If this cells contain a piece owned by player, continue.
-			if ((player == Max && ((it->GetData()) & IsMax) == IsMax) ||
-				(player == Min && ((it->GetData()) & IsMax) != IsMax))
+			if ((player == Max && it->IsMaxPiece()) ||
+				(player == Min && !it->IsMaxPiece()))
 			{
 				AddJumpMovesToVector(moves, *it);
 				AddAdjacentMovesToVector(moves, *it);
@@ -141,7 +141,7 @@ namespace engine {
 			moves.push_back(Move(type, from.GetRelativePosition(), to.GetRelativePosition()));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		else if (((to.GetData()) & HasTile) == 0 && _board->CountNonDiagonalEdges(to) > 0) {
+		else if (!to.HasTile() && _board->CountNonDiagonalEdges(to) > 0) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}
