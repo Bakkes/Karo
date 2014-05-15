@@ -4,7 +4,6 @@
 #include "ComputerPlayerAB.h"
 #include "StubBoard.h"
 #include "StubStaticEval.h"
-#include "MoveUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -30,7 +29,7 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
-			Assert::IsTrue(MovesAreEqual(move, Move(STEP, Vector2D(0), Vector2D(1, 0))), L"Returned not the expected move");
+			Assert::IsTrue(move == Move(STEP, Vector2D(0), Vector2D(1, 0)), L"Returned not the expected move");
 			Assert::AreEqual(81, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 
 			delete board;
@@ -50,7 +49,7 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
-			Assert::IsTrue(MovesAreEqual(move,Move(STEP, Vector2D(0), Vector2D(0, 1))), L"Returned not the expected move");
+			Assert::IsTrue(move == Move(STEP, Vector2D(0), Vector2D(0, 1)), L"Returned not the expected move");
 			Assert::AreEqual(7, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 
 			delete board;
@@ -71,7 +70,7 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
-			Assert::IsTrue(MovesAreEqual(move,Move(STEP, Vector2D(0), Vector2D(1, 0))), L"Returned not the expected move");
+			Assert::IsTrue(move == Move(STEP, Vector2D(0), Vector2D(1, 0)), L"Returned not the expected move");
 			Assert::AreEqual(14, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 
 			delete board;
@@ -92,7 +91,7 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(board, move, Max), L"Returned move is not legal on the board");
-			Assert::IsTrue(MovesAreEqual(move,Move(STEP, Vector2D(0), Vector2D(0, 1))), L"Returned not the expected move");
+			Assert::IsTrue(move == Move(STEP, Vector2D(0), Vector2D(0, 1)), L"Returned not the expected move");
 			Assert::AreEqual(14, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 
 			delete board;
@@ -104,7 +103,7 @@ private:
 	bool IsLegalMove(IBoard* board, Move move, Players player) {
 		std::vector<Move> legalMoves = board->GetLegalMoves(player);
 		for (auto it = legalMoves.begin(); it != legalMoves.end(); ++it) {
-			if (MovesAreEqual(move, *it)) {
+			if (move == *it) {
 				return true;
 			}
 		}

@@ -1,6 +1,5 @@
 #include "CppUnitTest.h"
 #include "ComputerPlayerUtils.h"
-#include "MoveUtils.h"
 #include "Board.h"
 #include "Windows.h"
 

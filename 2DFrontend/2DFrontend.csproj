@@ -60,6 +60,12 @@
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="KaroCommunicatedGameManager.cs" />
+    <Compile Include="LoadBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadBox.Designer.cs">
+      <DependentUpon>LoadBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="State\ComputerState.cs" />
     <Compile Include="State\IKaroState.cs" />
     <Compile Include="KaroGameManager.cs" />
@@ -77,6 +83,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadBox.resx">
+      <DependentUpon>LoadBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
