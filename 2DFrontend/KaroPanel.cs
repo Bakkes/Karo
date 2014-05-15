@@ -27,7 +27,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Color of the circle accent on pieces.
 		/// </summary>
-		private Pen _pieceAccentColor = new Pen(Color.FromArgb(34, 34, 34), 2);
+		private Pen _pieceAccentColor = new Pen(Color.FromArgb(34, 34, 34), 3);
 
 		/// <summary>
 		/// Color of max's pieces.
@@ -44,11 +44,11 @@ namespace _2DFrontend
 		/// <summary>
 		/// Width/height of the tiles in pixels.
 		/// </summary>
-		private const int CellSize = 25;
+		private const int CellSize = 50;
 
-		private const int AccentSize = 15;
+		private const int AccentSize = 30;
 
-		private const int PieceSize = 20;
+		private const int PieceSize = 40;
 
 		/// <summary>
 		/// Gap left and right of every tile.
