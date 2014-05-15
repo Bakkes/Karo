@@ -282,8 +282,5 @@ namespace Tests {
 			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 
-
-
-
 	};
 }
