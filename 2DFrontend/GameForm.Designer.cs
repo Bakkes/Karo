@@ -107,9 +107,11 @@
 			// 
 			// karoPanel
 			// 
+			this.karoPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.karoPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
 			this.karoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.karoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.karoPanel.Location = new System.Drawing.Point(0, 24);
 			this.karoPanel.Name = "karoPanel";
 			this.karoPanel.Size = new System.Drawing.Size(1058, 545);
@@ -122,7 +124,6 @@
 			this.ClientSize = new System.Drawing.Size(1058, 569);
 			this.Controls.Add(this.karoPanel);
 			this.Controls.Add(this.menuStrip1);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "Karo";
 			this.Text = "Karo";
