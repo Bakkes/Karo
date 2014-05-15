@@ -137,7 +137,7 @@ namespace engine {
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
 		if (to.IsEmpty() && to.HasTile()) {
-			moves.push_back(Move(type, (from.GetRelativePosition()), (to.GetRelativePosition())));
+			moves.push_back(Move(type, from.GetRelativePosition(), to.GetRelativePosition()));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
 		else if (((to.GetData()) & HasTile) == 0 && _board->CountNonDiagonalEdges(to) > 0) {
@@ -156,6 +156,10 @@ namespace engine {
 			if (_board->CountNonDiagonalEdges(*it) > 2) {
 				continue;
 			}
+			// Rule amendment solution
+			// - From tile has 0 or 1 edges
+			// - to and used tile are diagonal (relative to eachother)
+			// then this move is illegal
 			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
 			if (abs((int)diff.X()) == 1 && abs((int)diff.Y()) == 1 &&
 					_board->CountNonDiagonalEdges(from) <= 1) {
