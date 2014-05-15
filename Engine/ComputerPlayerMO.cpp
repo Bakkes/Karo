@@ -1,6 +1,5 @@
 #include "ComputerPlayerMO.h"
 #include "ComputerPlayerUtils.h"
-
 namespace engine {
 	/*
 	 * Computer AI with the Alpha Beta Pruning
@@ -33,8 +32,8 @@ namespace engine {
 		}
 
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
-		int findResult = find(possibleMoves.begin(),possibleMoves.end(),_killerMoves[depth].GetMove())-possibleMoves.end();
-		if(findResult){
+		int findResult = find(possibleMoves.begin(),possibleMoves.end(),_killerMoves[depth].GetMove())-possibleMoves.begin();
+		if(findResult > 0 && ((unsigned)findResult < possibleMoves.size())){
 			possibleMoves[findResult]=possibleMoves[0];
 			possibleMoves[0]=_killerMoves[depth].GetMove();
 

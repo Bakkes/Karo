@@ -6,6 +6,7 @@
 #include "StaticEvaluation.h"
 #include "ComputerPlayerUtils.h"
 #include "ComputerPlayerMO.h"
+#include "Players.h"
 namespace engine {
 namespace wrapper {
 
@@ -29,7 +30,7 @@ namespace wrapper {
 	MoveWrapper^ KaroGame::GetBestMove() {
 		ComputerPlayerMO _cPlayer = ComputerPlayerMO(_board->GetInternalBoard(), 3); // TODO GET COPY!
 		_cPlayer.SetEvaluator(new StaticEvaluation());
-		Move bestMove = _cPlayer.GetBestMove(Max);
+		Move bestMove = _cPlayer.GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 		return wrapped;
 	}
