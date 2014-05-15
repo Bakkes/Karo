@@ -46,6 +46,17 @@ namespace wrapper {
 		return WrapperConversionUtility().ConvertCell(relativeCellAt);
 	}
 
+	void BoardWrapper::LoadFromString(String^ boardString) {
+		delete _board;
+
+		std::string stdBoardString = "";
+		for (int i = 0; i < boardString->Length; ++i) {
+			stdBoardString += (char) boardString[i];
+		}
+
+		_board = Board::CreateBoard(stdBoardString);
+	}
+
 	Board* BoardWrapper::GetInternalBoard() {
 		return _board;
 	}
