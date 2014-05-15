@@ -60,6 +60,9 @@
     <ClCompile Include="MoveDifference.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComputerPlayerUtilsTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StubStaticEval.h">

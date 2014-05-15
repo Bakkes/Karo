@@ -3,13 +3,14 @@
 
 namespace engine {
 	/*
-	 * Computer AI with the Alpha Beta Pruning and Move Ordering
+	 * Computer AI with the Alpha Beta Pruning
 	 */
 
 	ComputerPlayerMO::ComputerPlayerMO(IBoard* board, int maxDepth) {
 		_board = board;
 		_maxDepth = maxDepth;
 		_evaluator = nullptr;
+		
 	}
 
 	ComputerPlayerMO::~ComputerPlayerMO() {
@@ -18,7 +19,10 @@ namespace engine {
 	}
 
 	Move ComputerPlayerMO::GetBestMove(Players player) {
-		return MinimaxStep(player, 0, EvalResult(INT_MIN, INT_MAX)).GetMove();
+		_killerMoves = new EvalResult[_maxDepth];
+		Move result = MinimaxStep(player, 0, EvalResult(INT_MIN, INT_MAX)).GetMove();
+		delete []_killerMoves;
+		return result;
 	}
 
 	EvalResult ComputerPlayerMO::MinimaxStep(Players player, int depth, EvalResult result) {
@@ -29,6 +33,13 @@ namespace engine {
 		}
 
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
+		int findResult = find(possibleMoves.begin(),possibleMoves.end(),_killerMoves[depth].GetMove())-possibleMoves.end();
+		if(findResult){
+			possibleMoves[findResult]=possibleMoves[0];
+			possibleMoves[0]=_killerMoves[depth].GetMove();
+
+
+		}
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
@@ -38,6 +49,9 @@ namespace engine {
 			if (player == Max) {
 				if (score.GetScore() > result.GetScore()) {
 					result.SetScore(score.GetScore());
+				}
+				if(score.GetBestForMax()>_killerMoves[depth].GetBestForMax()){
+					_killerMoves[depth]=score;
 				}
 
 				if (score.GetScore() >= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
@@ -51,6 +65,9 @@ namespace engine {
 				if (score.GetScore() < result.GetScore()) {
 					result.SetScore(score.GetScore());
 				}
+				if(score.GetBestForMin()<_killerMoves[depth].GetBestForMin()){
+					_killerMoves[depth]=score;
+				}
 
 				if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
 					// Cut off
@@ -62,11 +79,13 @@ namespace engine {
 			}
 
 		}
+		
+
 		return result;
 	}
 
 	EvalResult ComputerPlayerMO::GetScore(Players player, Move move, int depth, EvalResult result) {
-		if (depth + 1 < _maxDepth) {
+		if (depth + 1 < _maxDepth && !ComputerPlayerUtils::IsWinningState(_board)) {
 			// We are allowed to go deeper, take the result of the next step
 			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
 		}

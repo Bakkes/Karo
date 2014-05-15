@@ -24,6 +24,7 @@
     <ClCompile Include="BoardRelativity.cpp" />
     <ClCompile Include="BoardTests.cpp" />
     <ClCompile Include="ClassNameTests.cpp" />
+    <ClCompile Include="ComputerPlayerUtilsTests.cpp" />
     <ClCompile Include="MinimaxTest.cpp" />
     <ClCompile Include="MoveDifference.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />

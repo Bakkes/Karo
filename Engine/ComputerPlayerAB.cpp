@@ -3,14 +3,13 @@
 
 namespace engine {
 	/*
-	 * Computer AI with the Alpha Beta Pruning
+	 * Computer AI with the Alpha Beta Pruning and Move Ordering
 	 */
 
 	ComputerPlayerAB::ComputerPlayerAB(IBoard* board, int maxDepth) {
 		_board = board;
 		_maxDepth = maxDepth;
 		_evaluator = nullptr;
-		_killerMoves = new EvalResult[_maxDepth];
 	}
 
 	ComputerPlayerAB::~ComputerPlayerAB() {
@@ -30,13 +29,6 @@ namespace engine {
 		}
 
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
-		int findResult = find(possibleMoves.begin(),possibleMoves.end(),_killerMoves[depth].GetMove())-possibleMoves.end();
-		if(findResult){
-			possibleMoves[findResult]=possibleMoves[0];
-			possibleMoves[0]=_killerMoves[depth].GetMove();
-
-
-		}
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
@@ -46,9 +38,6 @@ namespace engine {
 			if (player == Max) {
 				if (score.GetScore() > result.GetScore()) {
 					result.SetScore(score.GetScore());
-				}
-				if(score.GetBestForMax()>_killerMoves[depth].GetBestForMax()){
-					_killerMoves[depth]=score;
 				}
 
 				if (score.GetScore() >= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
@@ -62,9 +51,6 @@ namespace engine {
 				if (score.GetScore() < result.GetScore()) {
 					result.SetScore(score.GetScore());
 				}
-				if(score.GetBestForMin()>_killerMoves[depth].GetBestForMin()){
-					_killerMoves[depth]=score;
-				}
 
 				if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
 					// Cut off
@@ -76,13 +62,11 @@ namespace engine {
 			}
 
 		}
-		
-
 		return result;
 	}
 
 	EvalResult ComputerPlayerAB::GetScore(Players player, Move move, int depth, EvalResult result) {
-		if (depth + 1 < _maxDepth && !ComputerPlayerUtils::IsWinningState(_board)) {
+		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
 			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
 		}

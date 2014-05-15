@@ -16,8 +16,6 @@ namespace engine {
 		void SetEvaluator(IStaticEvaluation* evaluator);
 
 	private:
-		EvalResult* _killerMoves;
-
 		// The Static Evaluation function which will evaluate the board
 		IStaticEvaluation* _evaluator;
 		// The maximum depth of the minimax search

@@ -77,8 +77,8 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="CellValue.h" />
     <ClInclude Include="ComputerPlayer.h" />
-    <ClInclude Include="ComputerPlayerAB.h" />
     <ClInclude Include="ComputerPlayerMO.h" />
+    <ClInclude Include="ComputerPlayerAB.h" />
     <ClInclude Include="ComputerPlayerUtils.h" />
     <ClInclude Include="RelativeAbsoluteConverter.h" />
     <ClInclude Include="DllImportExport.h" />
@@ -103,8 +103,8 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="ComputerPlayer.cpp" />
-    <ClCompile Include="ComputerPlayerAB.cpp" />
     <ClCompile Include="ComputerPlayerMO.cpp" />
+    <ClCompile Include="ComputerPlayerAB.cpp" />
     <ClCompile Include="ComputerPlayerUtils.cpp" />
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
