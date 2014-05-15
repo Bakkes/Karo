@@ -2,7 +2,6 @@
 #include "CppUnitTest.h"
 #include "ComputerPlayerUtils.h"
 #include "Board.h"
-#include "MoveUtils.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
