@@ -9,16 +9,17 @@ namespace XNAFrontend.Components
 	/// <summary>
 	/// 3D board representation of the karo board game.
 	/// </summary>
-	internal class Board : DrawableGameComponent
+    internal class Board : ACommonComponent
 	{
 		private Model _tileModel;
+        public CameraComponent CameraComponent{get; set;}
 
-		private KaroGame KaroGame { get { return (KaroGame)this.Game; } }
+	
 		private KaroGameManager KaroGameManager
 		{
 			get
 			{
-				return KaroGame.KaroGameManager;;
+				return karoGame.KaroGameManager;;
 			}
 		}
 
@@ -82,8 +83,8 @@ namespace XNAFrontend.Components
 					effect.EnableDefaultLighting();
 					effect.World = transforms[mesh.ParentBone.Index] *
 						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
-					effect.View = KaroGame.ViewMatrix;
-					effect.Projection = KaroGame.ProjectionMatrix;
+					effect.View = CameraComponent.ViewMatrix;
+					effect.Projection = CameraComponent.ProjectionMatrix;
 				}
 				mesh.Draw();
 			}

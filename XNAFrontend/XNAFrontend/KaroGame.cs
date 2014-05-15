@@ -11,11 +11,9 @@ namespace XNAFrontend
 	/// </summary>
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
-		private GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics { get; set; }
 
-		public Vector3 CameraPosition { get; set; }
-		public Matrix ViewMatrix { get; set; }
-		public Matrix ProjectionMatrix { get; set; }
+
 		public KaroGameManager KaroGameManager { get; set; }
 
 		public KaroGame()
@@ -34,13 +32,14 @@ namespace XNAFrontend
 		{
 			KaroGameManager = new KaroGameManager();
 			Board board = new Board(this);
-			base.Initialize();
+            board.CameraComponent = new CameraComponent(this);
+
 			IsMouseVisible = true;
-			CameraPosition = new Vector3(500.0f, 400.0f, 1000.0f);
-			ViewMatrix = Matrix.CreateLookAt(CameraPosition, board.Position, Vector3.Up);
-			float aspectRatio = graphics.GraphicsDevice.Viewport.AspectRatio;
-			ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(40f), aspectRatio, 100f, 100000f);
+
+            Components.Add(board.CameraComponent);
+			
 			Components.Add(board);
+            base.Initialize();
 		}
 
 		/// <summary>
