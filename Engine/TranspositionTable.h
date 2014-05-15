@@ -7,15 +7,15 @@
 using namespace std;
 
 namespace engine {
-	class TranspositionTable
+	class ENGINE_API TranspositionTable
 	{
 	private:
-		map<int,TranspositionTableData> hashMap;
-		priority_queue<int> pq;
+		map<int,TranspositionTableData*>* hashMap;
+		priority_queue<int>* pq;
 	public:
 		TranspositionTable(void);
 		~TranspositionTable(void);
 		void Insert(int value, int score, Move* maxBestMove, Move* minBestMove);
-		TranspositionTableData Get(int value);
+		TranspositionTableData* Get(int value);
 	};
 }

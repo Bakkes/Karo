@@ -3,13 +3,15 @@
 namespace engine {
 	TranspositionTable::TranspositionTable(void)
 	{
-		map<int,TranspositionTableData> hashMap;
-		priority_queue<int> pq;
+		hashMap = new map<int,TranspositionTableData*>();
+		pq = new priority_queue<int>();
 	}
 
 
 	TranspositionTable::~TranspositionTable(void)
 	{
+		delete hashMap;
+		delete pq;
 	}
 
 
@@ -17,17 +19,17 @@ namespace engine {
 	{
 		const int size = 1009;
 
-		pq.push(value);
-		hashMap[value] = TranspositionTableData(score, maxBestMove, minBestMove);
+		pq->push(value);
+		(*hashMap)[value] = new TranspositionTableData(score, maxBestMove, minBestMove); //this breaks EVERYTHING!!!
 
-		if (pq.size > size) {
-			hashMap.erase(pq.top());
-			pq.pop();
+		if (pq->size() > size) {
+			hashMap->erase(pq->top());
+			pq->pop();
 		}
 	}
 
-	TranspositionTableData TranspositionTable::Get(int value)
+	TranspositionTableData* TranspositionTable::Get(int value)
 	{
-		return hashMap.at(value);
+		return hashMap->at(value);
 	}
 }

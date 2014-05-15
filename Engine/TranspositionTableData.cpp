@@ -1,6 +1,8 @@
 #include "TranspositionTableData.h"
 
 namespace engine{
+	TranspositionTableData::TranspositionTableData(void){}
+
 	TranspositionTableData::TranspositionTableData(int score, Move* maxBestMove, Move* minBestMove)
 	{
 		_score = score;

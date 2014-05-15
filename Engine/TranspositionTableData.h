@@ -2,13 +2,14 @@
 #include "Move.h"
 
 namespace engine{
-	class TranspositionTableData
+	class ENGINE_API TranspositionTableData
 	{
 	private:
 		int _score;
 		Move* _maxBestMove;
 		Move* _minBestMove;
 	public:
+		TranspositionTableData(void);
 		TranspositionTableData(int score, Move* maxBestMove, Move* minBestMove);
 		~TranspositionTableData(void);
 		Move* GetMaxBestMove();
