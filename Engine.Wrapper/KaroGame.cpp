@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "WrapperConversionUtility.h"
 #include "StaticEvaluation.h"
+#include "ComputerPlayerUtils.h"
 namespace engine {
 namespace wrapper {
 
@@ -33,7 +34,7 @@ namespace wrapper {
 	}
 
 	bool KaroGame::HasWon(engine::wrapper::Players player) {
-		return false;
+		return ComputerPlayerUtils::IsWinningState(_board->GetInternalBoard(), static_cast<engine::Players>(player));
 	}
 }
 }
