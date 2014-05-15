@@ -1,4 +1,5 @@
 #include "MoveFinder.h"
+#include <Windows.h>
 
 namespace engine {
 	MoveFinder::MoveFinder(Board* board) {
@@ -153,6 +154,9 @@ namespace engine {
 		const RelativeCell& to) {
 		std::vector<RelativeCell>* emptyCells = _board->GetEmptyTiles();
 		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
+			string boardString = _board->ToString();
+			OutputDebugString(boardString.c_str());
+			OutputDebugString("\n");
 			if (_board->CountNonDiagonalEdges(*it) > 2) {
 				continue;
 			}
