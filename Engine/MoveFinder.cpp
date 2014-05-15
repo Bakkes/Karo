@@ -137,7 +137,7 @@ namespace engine {
 			moves.push_back(Move(type, (from.GetRelativePosition()), (to.GetRelativePosition())));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
-		else if (((to.GetData()) & HasTile) == 0 && _board->CountNonDiagonalEdges(to) > 0) {
+		else if ((!to.HasTile()) && (_board->CountNonDiagonalEdges(to) > 0)) {
 			AddTileMoveMoves(moves, type, from, to);
 		}
 	}

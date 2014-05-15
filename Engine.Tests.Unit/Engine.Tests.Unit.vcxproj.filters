@@ -18,21 +18,16 @@
     <ClCompile Include="ClassNameTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveInvertionTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="BoardTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerInvertionTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MinimaxTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveUtils.cpp">
+<ClCompile Include="TranspositionTableTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+
     <ClCompile Include="BoardMoveChange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -69,14 +64,11 @@
     <ClCompile Include="MoveDifference.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TranspositionTableTest.cpp">
+    <ClCompile Include="ComputerPlayerUtilsTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MoveUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StubStaticEval.h">
       <Filter>Header Files</Filter>
     </ClInclude>
