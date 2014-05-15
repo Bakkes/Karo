@@ -44,7 +44,7 @@ namespace _2DFrontend
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            txtBoardString.Text = RemoveFromString(txtBoardString.Text, new string[] { "\"", "\\n", " ", "\t" });
+            txtBoardString.Text = RemoveFromString(txtBoardString.Text, new string[] { "\"", "\\n", " ", "\t", ";" });
 
             string boardString = RemoveFromString(txtBoardString.Text, new string[] { "\r", "\n" });
             string[] boardPieces = boardString.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
