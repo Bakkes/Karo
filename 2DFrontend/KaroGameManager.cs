@@ -6,6 +6,9 @@ using engine.wrapper;
 
 namespace _2DFrontend
 {
+
+	public delegate void BoardUpdated();
+
 	/// <summary>
 	/// Statemachine that keeps track of the game's states.
 	/// </summary>
@@ -20,6 +23,8 @@ namespace _2DFrontend
 		/// The player whose turn it is.
 		/// </summary>
 		public Players CurrentPlayer { get; protected set; }
+
+		public BoardUpdated OnBoardUpdated;
 
 		/// <summary>
 		/// Access the board of the current game.
@@ -48,7 +53,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Current state of the game.
 		/// </summary>
-		protected KaroGame Game { get; set; }
+		public KaroGame Game { get; set; }
 
 		public KaroGameManager()
 		{
@@ -76,6 +81,7 @@ namespace _2DFrontend
 			{
 				CurrentState.Update(this, tileLocation);
 			}
+			
 		}
 
 		public void ExecuteMove(MoveWrapper move)

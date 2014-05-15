@@ -19,13 +19,14 @@ namespace engine{
 		Board(bool init);
 		~Board();
 		int GetPieceCountFor(Players player) override;
-		void ExecuteMove(Move *m, Players player) override;
-		vector<Move>* GetLegalMoves(Players player) override;
+		void ExecuteMove(const Move& m, Players player) override;
+		void UndoMove(const Move& m, Players player) override;
+		vector<Move> GetLegalMoves(Players player) override;
 		vector<RelativeCell>* GetOccupiedTiles() override;
 		vector<RelativeCell>* GetEmptyTiles() override;
 		RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const override;
 		int CountNonDiagonalEdges(const RelativeCell&) override;
-
+		Cell<int>* GetAbsoluteCellAt(const Vector2D absolutePosition) const;
 		string ToString();
 		// create a board from a string with topleft at 0,0
 		static Board* CreateBoard(string from);
@@ -39,6 +40,7 @@ namespace engine{
 		void Init(bool init);
 		void InsertPiece(const Cell<int>& on, Players owner);
 		void DeletePiece(const Cell<int>& on);
+		void MoveTile(Cell<int>& from, Cell<int>& to);
 		void InsertPiece(Cell<int>& on, Players owner);
 		void DeletePiece(Cell<int>& on);
 		void MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed);
@@ -46,5 +48,6 @@ namespace engine{
 		void JumpPiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed);
 		void JumpPiece(Cell<int>& from, Cell<int>& to, Players owner);
 		void Flip(Cell<int>& which);
+		Move ShiftMoveBack(const Move&);
 	};
 }

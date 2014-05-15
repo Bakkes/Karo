@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationProtocolConversionUtility.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
