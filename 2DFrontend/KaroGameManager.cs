@@ -58,6 +58,7 @@ namespace _2DFrontend
 		public KaroGameManager()
 		{
 			Game = new KaroGame();
+			Debug.WriteLine("Init Board State: {0}", Board.ToString());
 			CurrentState = PlaceState.Instance;
 		}
 
@@ -86,8 +87,11 @@ namespace _2DFrontend
 
 		public void ExecuteMove(MoveWrapper move)
 		{
+			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
+			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			Game.ExecuteMove(move, CurrentPlayer);
 			SwapCurrentPlayer();
+			Debug.WriteLine("After Board State: {0}", Board.ToString());
 		}
 
 		private void SwapCurrentPlayer()

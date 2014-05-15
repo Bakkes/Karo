@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -27,14 +27,14 @@
     <ClCompile Include="MinimaxTest.cpp" />
     <ClCompile Include="MoveDifference.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
-    <ClCompile Include="MoveUtils.cpp" />
+    <ClCompile Include="MoveInvertionTest.cpp" />
+    <ClCompile Include="PlayerInvertionTest.cpp" />
     <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
     <ClCompile Include="ZobristTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MoveUtils.h" />
     <ClInclude Include="StubBoard.h" />
     <ClInclude Include="StubStaticEval.h" />
   </ItemGroup>

@@ -4,18 +4,17 @@
 #include "Board.h"
 #include "WrapperConversionUtility.h"
 #include "StaticEvaluation.h"
+#include "ComputerPlayerAB.h"
 namespace engine {
 namespace wrapper {
 
 	KaroGame::KaroGame() {
 		_board = gcnew BoardWrapper();
-		_cPlayer = new ComputerPlayer(_board->GetInternalBoard(), 5);
-		_cPlayer->SetEvaluator(new StaticEvaluation());
+		
 	}
 
 	KaroGame::~KaroGame() {
 		delete _board;
-		delete _cPlayer;
 	}
 
 	BoardWrapper^ KaroGame::GetBoard() {
@@ -27,7 +26,9 @@ namespace wrapper {
 	}
 
 	MoveWrapper^ KaroGame::GetBestMove() {
-		Move bestMove = _cPlayer->GetBestMove(Max);
+		ComputerPlayerAB _cPlayer = ComputerPlayerAB(_board->GetInternalBoard(), 3); // TODO GET COPY!
+		_cPlayer.SetEvaluator(new StaticEvaluation());
+		Move bestMove = _cPlayer.GetBestMove(Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 		return wrapped;
 	}
