@@ -35,7 +35,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 	
 		TEST_METHOD(IsWinningState_MaxHorizontal) {
@@ -62,7 +62,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
 		TEST_METHOD(IsWinningState_MinVertical) {
@@ -89,13 +89,13 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 
 		TEST_METHOD(IsWinningState_MaxVertical) {
 			Board* board = Board::CreateBoard(
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
-				"13,3,3,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"13,13,13,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"13,1,5,1,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"13,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -116,7 +116,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
 		TEST_METHOD(IsWinningState_MinDiagonalDown) {
@@ -143,7 +143,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 
 		TEST_METHOD(IsWinningState_MaxDiagonalDown) {
@@ -170,7 +170,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
 		TEST_METHOD(IsWinningState_MaxDiagonalUp2) {
@@ -197,7 +197,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
 		TEST_METHOD(IsWinningState_MinDiagonalUp) {
@@ -224,7 +224,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 
 		TEST_METHOD(IsWinningState_MaxDiagonalUp) {
@@ -251,7 +251,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
 		TEST_METHOD(IsWinningState_NoWin) {
@@ -278,7 +278,8 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
-			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board));
+			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board, Max));
+			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 
 

@@ -9,30 +9,29 @@ namespace engine {
 		return Players::Min;
 	}
 
-	bool ComputerPlayerUtils::IsWinningState(IBoard* board) {
-		if (board->GetPieceCountFor(Max) < IBoard::MaxPiecesPerPlayer && board->GetPieceCountFor(Min) < IBoard::MaxPiecesPerPlayer)
+	bool ComputerPlayerUtils::IsWinningState(IBoard* board, Players player) {
+		if (board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer)
 			return false;
 
-		if (IsWinningStateHorizontal(board))
+		if (IsWinningStateHorizontal(board, player))
 			return true;
 
-		if (IsWinningStateVertical(board))
+		if (IsWinningStateVertical(board, player))
 			return true;
 
-		if (IsWinningStateDiagonalUp(board))
+		if (IsWinningStateDiagonalUp(board, player))
 			return true;
 
-		if (IsWinningStateDiagonalDown(board))
+		if (IsWinningStateDiagonalDown(board, player))
 			return true;
 
 		return false;
 	}
 
-	bool ComputerPlayerUtils::IsWinningStateHorizontal(IBoard* board) {
+	bool ComputerPlayerUtils::IsWinningStateHorizontal(IBoard* board, Players player) {
 		for (int x = 0; x < 16; ++x) {
 			for (int y = 0; y < 20; ++y) {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
-				Players player = cell.IsMaxPiece() ? Max : Min;
 
 				for (int i = 0; i < 4; i++) {
 					cell = board->GetRelativeCellAt(Vector2D(x + i, y));
@@ -52,11 +51,10 @@ namespace engine {
 		return false;
 	}
 
-	bool ComputerPlayerUtils::IsWinningStateVertical(IBoard* board) {
+	bool ComputerPlayerUtils::IsWinningStateVertical(IBoard* board, Players player) {
 		for (int y = 0; y < 16; ++y) {
 			for (int x = 0; x < 20; ++x) {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
-				Players player = cell.IsMaxPiece() ? Max : Min;
 
 				for (int i = 0; i < 4; i++) {
 					cell = board->GetRelativeCellAt(Vector2D(x, y + i));
@@ -76,11 +74,10 @@ namespace engine {
 		return false;
 	}
 
-	bool ComputerPlayerUtils::IsWinningStateDiagonalUp(IBoard* board) {
+	bool ComputerPlayerUtils::IsWinningStateDiagonalUp(IBoard* board, Players player) {
 		for (int y = 3; y < 20; ++y) {
 			for (int x = 0; x < 16; ++x) {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
-				Players player = cell.IsMaxPiece() ? Max : Min;
 
 				for (int i = 0; i < 4; i++) {
 					cell = board->GetRelativeCellAt(Vector2D(x + i, y - i));
@@ -100,11 +97,10 @@ namespace engine {
 		return false;
 	}
 
-	bool ComputerPlayerUtils::IsWinningStateDiagonalDown(IBoard* board) {
+	bool ComputerPlayerUtils::IsWinningStateDiagonalDown(IBoard* board, Players player) {
 		for (int y = 3; y < 20; ++y) {
 			for (int x = 3; x < 16; ++x) {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
-				Players player = cell.IsMaxPiece() ? Max : Min;
 
 				for (int i = 0; i < 4; i++) {
 					cell = board->GetRelativeCellAt(Vector2D(x - i, y - i));
