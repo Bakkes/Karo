@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using engine.wrapper;
+
 namespace _2DFrontend
 {
     public partial class LoadBox : Form 
@@ -18,7 +20,6 @@ namespace _2DFrontend
             {
                 return txtBoardString.Text;
             }
-
             set
             {
                 txtBoardString.Text = value;
@@ -31,7 +32,6 @@ namespace _2DFrontend
             {
                 return (int)numTLX.Value;
             }
-
             set
             {
                 numTLX.Value = value;
@@ -50,6 +50,18 @@ namespace _2DFrontend
             }
         }
 
+        public Players CurrentPlayer
+        {
+            get
+            {
+                return (Players)cbPlayer.SelectedIndex;
+            }
+            set
+            {
+                cbPlayer.SelectedIndex = (int)value;
+            }
+        }
+
         public LoadBox() : this(true)
         {
         }
@@ -57,6 +69,7 @@ namespace _2DFrontend
         public LoadBox(bool enableLoading)
         {
             InitializeComponent();
+            cbPlayer.SelectedIndex = 0;
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
 
             if (!enableLoading)

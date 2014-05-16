@@ -85,6 +85,7 @@ namespace _2DFrontend
                 CancelCommunication();
                 _manager = new KaroGameManager();
                 _manager.Board.LoadFromString(loadBox.BoardString, loadBox.LeftTopX, loadBox.LeftTopY);
+                _manager.CurrentPlayer = loadBox.CurrentPlayer;
                 karoPanel.NewGame(_manager);
             }
         }
@@ -106,6 +107,7 @@ namespace _2DFrontend
             loadBox.BoardString = boardString;
             loadBox.LeftTopX = (int)topLeft.X;
             loadBox.LeftTopY = (int)topLeft.Y;
+            loadBox.CurrentPlayer = _manager.CurrentPlayer;
 
             loadBox.ShowDialog();
         }
