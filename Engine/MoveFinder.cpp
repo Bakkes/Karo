@@ -175,15 +175,9 @@ namespace engine {
 			// then this move is illegal
 			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
 			if (abs((int)diff.X()) <= 1 && abs((int)diff.Y()) <= 1) {
-				Move hackyMove(type,
-					from.GetRelativePosition(),
-					Vector2D(15, 15),
-					it->GetRelativePosition()
-				);
-				Players player = from.GetPlayer();
-				_board->ExecuteMove(hackyMove, player);
+				_board->DeleteTileAt(it->GetRelativePosition());
 				int connectedTiles = ConnectedTiles(from);
-				_board->UndoMove(hackyMove, player);
+				_board->CreateTileAt(it->GetRelativePosition());
 				if (connectedTiles != 19) {
 					continue;
 				}
