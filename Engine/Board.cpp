@@ -61,6 +61,7 @@ namespace engine{
 	}
 
 	void Board::ExecuteMove(const Move& move, Players player) {
+		_moveFinder->Invalidate();
 		Vector2D from = _converter->ToAbsolute(move.GetFromCell());
 		Vector2D to = _converter->ToAbsolute(move.GetToCell());
 		Vector2D used;
@@ -107,6 +108,7 @@ namespace engine{
 		
 	}
 	void Board::UndoMove(const Move& inputMove, Players player){
+		_moveFinder->Invalidate();
 		Move move = ShiftMoveBack(inputMove);
 		Vector2D from = _converter->ToAbsolute(move.GetFromCell());
 		Vector2D to = _converter->ToAbsolute(move.GetToCell());
