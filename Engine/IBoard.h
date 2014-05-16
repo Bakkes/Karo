@@ -11,6 +11,8 @@ namespace engine {
 		virtual int GetPieceCountFor(Players player) = 0;
 		virtual void ExecuteMove(const Move& m, Players player) = 0;
 		virtual void UndoMove(const Move& m, Players player) = 0;
+		virtual void CreateTileAt(const Vector2D &relativePosition) = 0;
+		virtual void DeleteTileAt(const Vector2D &relativePosition) = 0;
 		virtual std::vector<Move> GetLegalMoves(Players player) = 0;
 		virtual std::vector<RelativeCell>* GetOccupiedTiles() = 0;
 		virtual std::vector<RelativeCell>* GetEmptyTiles() = 0;
