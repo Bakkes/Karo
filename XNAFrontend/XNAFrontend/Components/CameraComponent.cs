@@ -17,10 +17,15 @@ namespace XNAFrontend.Components
     /// </summary>
     public class CameraComponent : ACommonComponent
     {
+        private Matrix OriginalView { get; set; }
         private Vector3 CameraPosition = new Vector3(500.0f, 400.0f, 1000.0f);
+        private Vector3 CalculatePosition = new Vector3(500.0f, 400.0f, 1000.0f);
         public Matrix ViewMatrix { get; set; }
         public Matrix ProjectionMatrix { get; set; }
+
         private Vector2 PreviousMousePosition;
+        Vector2 Rotation = new Vector2(MathHelper.PiOver2, -MathHelper.Pi / 10.0f);
+        const float rotationSpeed = 0.3f;
         public void MoveCamera(Vector3 Change)
         {
 
@@ -43,8 +48,9 @@ namespace XNAFrontend.Components
         public override void Initialize()
         {
             // TODO: Add your initialization code here
-           
+
             ViewMatrix = Matrix.CreateLookAt(CameraPosition, Vector3.Zero, Vector3.Up);
+            OriginalView = Matrix.CreateLookAt(CameraPosition, Vector3.Zero, Vector3.Up);
             float aspectRatio = karoGame.graphics.GraphicsDevice.Viewport.AspectRatio;
             ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(40f), aspectRatio, 100f, 100000f);
             base.Initialize();
@@ -56,7 +62,7 @@ namespace XNAFrontend.Components
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            float speed = (float)(10 * gameTime.ElapsedGameTime.TotalMilliseconds);
+            float speed = (float)(1* gameTime.ElapsedGameTime.TotalMilliseconds);
          
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
@@ -81,15 +87,13 @@ namespace XNAFrontend.Components
             Vector2 MousePosition = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
             if (MousePosition != PreviousMousePosition)
             {
-                Vector2 Difference = MousePosition - PreviousMousePosition;
-                Matrix RotationX;
-               
-                Matrix.CreateRotationY((float)Math.Atan((Difference.X / CameraPosition.Z)), out RotationX);
-                ViewMatrix *= RotationX;
-                Matrix RotationY;
-                Matrix.CreateRotationX((float)Math.Atan((Difference.Y / CameraPosition.Z)), out RotationY);
-                ViewMatrix *= RotationY;
+                Rotation -= (MousePosition - PreviousMousePosition);
+            
                 PreviousMousePosition = MousePosition;
+
+                Matrix RotationX = Matrix.CreateRotationX((float)Math.Atan(Rotation.Y / -Math.Abs(CameraPosition.Z)));
+                ViewMatrix = RotationX * Matrix.CreateRotationY((float)Math.Atan(Rotation.X / -Math.Abs(CameraPosition.Z)));
+                ViewMatrix *= Matrix.CreateTranslation(CameraPosition - CalculatePosition) * OriginalView;
 
             }
             
