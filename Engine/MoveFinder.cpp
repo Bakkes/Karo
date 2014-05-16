@@ -174,7 +174,7 @@ namespace engine {
 			// - to and used tile are diagonal (relative to eachother)
 			// then this move is illegal
 			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
-			if (abs((int)diff.X()) == 1 && abs((int)diff.Y()) == 1) {
+			if (abs((int)diff.X()) <= 1 && abs((int)diff.Y()) <= 1) {
 				Move hackyMove(type,
 					from.GetRelativePosition(),
 					Vector2D(15, 15),
