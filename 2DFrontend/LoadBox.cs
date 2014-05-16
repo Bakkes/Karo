@@ -18,6 +18,11 @@ namespace _2DFrontend
             {
                 return txtBoardString.Text;
             }
+
+            set
+            {
+                txtBoardString.Text = value;
+            }
         }
 
         public int LeftTopX
@@ -25,6 +30,11 @@ namespace _2DFrontend
             get
             {
                 return (int)numTLX.Value;
+            }
+
+            set
+            {
+                numTLX.Value = value;
             }
         }
 
@@ -34,12 +44,26 @@ namespace _2DFrontend
             {
                 return (int)numTLY.Value;
             }
+            set
+            {
+                numTLY.Value = value;
+            }
         }
 
-        public LoadBox()
+        public LoadBox() : this(true)
+        {
+        }
+
+        public LoadBox(bool enableLoading)
         {
             InitializeComponent();
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
+
+            if (!enableLoading)
+            {
+                btnLoad.Enabled = false;
+                Text = "Board String";
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -92,6 +116,15 @@ namespace _2DFrontend
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
+        }
+
+        private void txtBoardString_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                txtBoardString.SelectAll();
+                e.Handled = true;
+            }
         }
     }
 }

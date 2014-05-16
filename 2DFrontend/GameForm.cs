@@ -89,6 +89,27 @@ namespace _2DFrontend
             }
         }
 
+        private void showBoardStringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_manager == null)
+                return;
+
+            string boardString = _manager.Board.ToString();
+
+            // Format string to be entered in C++ Unit test project
+            boardString = '"' + boardString.Replace("\n", "\\n\"\r\n\"");
+            boardString = boardString.Substring(0, boardString.Length - 1);
+
+            Vector2DWrapper topLeft = _manager.Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition();
+
+            LoadBox loadBox = new LoadBox(false);
+            loadBox.BoardString = boardString;
+            loadBox.LeftTopX = (int)topLeft.X;
+            loadBox.LeftTopY = (int)topLeft.Y;
+
+            loadBox.ShowDialog();
+        }
+
 
 	}
 }
