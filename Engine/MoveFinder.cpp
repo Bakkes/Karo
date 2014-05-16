@@ -188,7 +188,6 @@ namespace engine {
 	}
 
 	int MoveFinder::ConnectedTilesRecursive(const RelativeCell &start) {
-		string boardString = _board->ToString();
 		for (auto it = _checkedCells->begin(); it != _checkedCells->end(); ++it) {
 			if (start == *it) {
 				return 0;
