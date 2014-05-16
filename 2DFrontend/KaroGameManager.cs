@@ -22,7 +22,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// The player whose turn it is.
 		/// </summary>
-		public Players CurrentPlayer { get; protected set; }
+		public Players CurrentPlayer { get; set; }
 
 		public BoardUpdated OnBoardUpdated;
 

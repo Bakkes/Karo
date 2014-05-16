@@ -38,6 +38,7 @@
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.karoPanel = new _2DFrontend.KaroPanel();
+            this.showBoardStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,6 +57,7 @@
             this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newToolStripMenuItem,
             this.loadToolStripMenuItem,
+            this.showBoardStringToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
             this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
@@ -67,7 +69,7 @@
             this.playerVSComputerToolStripMenuItem,
             this.computerVSComputerToolStripMenuItem});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // playerVSComputerToolStripMenuItem
@@ -103,14 +105,14 @@
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -123,6 +125,13 @@
             this.karoPanel.Name = "karoPanel";
             this.karoPanel.Size = new System.Drawing.Size(1058, 545);
             this.karoPanel.TabIndex = 0;
+            // 
+            // showBoardStringToolStripMenuItem
+            // 
+            this.showBoardStringToolStripMenuItem.Name = "showBoardStringToolStripMenuItem";
+            this.showBoardStringToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.showBoardStringToolStripMenuItem.Text = "Show board string";
+            this.showBoardStringToolStripMenuItem.Click += new System.EventHandler(this.showBoardStringToolStripMenuItem_Click);
             // 
             // Karo
             // 
@@ -155,6 +164,7 @@
 		private System.Windows.Forms.ToolStripMenuItem serverToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showBoardStringToolStripMenuItem;
 
 	}
 }

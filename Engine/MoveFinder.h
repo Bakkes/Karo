@@ -14,9 +14,20 @@ namespace engine{
 		MoveFinder(Board* board);
 		~MoveFinder(void);
 		std::vector<Move> GetLegalMoves(Players player);
-		
+
+		// Invalidates the board, causing GetLegalMoves to generate new legal moves
+		// the next time it is called.
+		void Invalidate();
 	private:
 		Board* _board;
+
+		// All the moves that movefinder has calculated so far.
+		std::vector<Move>* _cachedMoves;
+
+		// If the movefinder is invalidated, GetLegalMoves will generate new
+		// legal moves. If not, it will return _cachedMoves.
+		bool _invalidatedMax;
+		bool _invalidatedMin;
 
 		// Used for IsConnected method.
 		std::vector<const RelativeCell>* _checkedCells;
@@ -26,16 +37,14 @@ namespace engine{
 
 		// Get all legal moves for the move state.
 		std::vector<Move> GetLegalMoveMoves(Players player);
-		void AddAdjacentMovesToVector(std::vector<Move>& moves, const RelativeCell& source);
-		void AddJumpMovesToVector(std::vector<Move>& moves, const RelativeCell& source);
+		void AddAdjacentMovesToVector(const RelativeCell& source);
+		void AddJumpMovesToVector(const RelativeCell& source);
 		void AddTileMoveMoves(
-			std::vector<Move>& moves, 
-			const MoveType& type, 
-			const RelativeCell& from, 
+			const MoveType& type,
+			const RelativeCell& from,
 			const RelativeCell& to
 		);
 		void AddMoveIfValidDestination(
-			std::vector<Move>& moves,
 			const RelativeCell &from,
 			const RelativeCell &to,
 			const MoveType& type

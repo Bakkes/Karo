@@ -3,16 +3,33 @@
 namespace engine {
 	MoveFinder::MoveFinder(Board* board) {
 		_board = board;
+		Invalidate();
+		_cachedMoves = new std::vector<Move>();
 		_checkedCells = new std::vector<const RelativeCell>();
 	}
 
 	MoveFinder::~MoveFinder(void) {
 		delete _checkedCells;
 		_checkedCells = nullptr;
+		delete _cachedMoves;
+		_cachedMoves = nullptr;
+	}
+
+	void MoveFinder::Invalidate() {
+		this->_invalidatedMax = true;
+		this->_invalidatedMin = true;
 	}
 
 	// Returns all legal moves for the current state of this._board.
 	std::vector<Move> MoveFinder::GetLegalMoves(Players player) {
+		if (player == Max && !_invalidatedMax ||
+			player == Min && !_invalidatedMin) {
+			// Return cached moves if not invalidated.
+			return (*_cachedMoves);
+		}
+		// Enable caching.
+		if (player == Max) { _invalidatedMax = false; }
+		if (player == Min) { _invalidatedMin = false; }
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
 			return GetLegalPlaceMoves(player);
 		}
@@ -23,19 +40,17 @@ namespace engine {
 
 	// Returns all place moves for the specified player.
 	std::vector<Move> MoveFinder::GetLegalPlaceMoves(Players player) {
-	
-		std::vector<Move> moves = std::vector<Move>();
 		std::vector<RelativeCell>* emptyTiles = _board->GetEmptyTiles();
 		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
 			// Add insertion move to an empty tile.
-			moves.push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
+			_cachedMoves->push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
 		} 
-		return moves;
+		return (*_cachedMoves);
 	}
 
 	// Returns all moves that are either a jump or move type of move.
 	std::vector<Move> MoveFinder::GetLegalMoveMoves(Players player) {
-		std::vector<Move> moves = std::vector<Move>();
+		_cachedMoves->clear();
 		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
 
 		// Loop through all occupied cells.
@@ -45,38 +60,38 @@ namespace engine {
 			if ((player == Max && it->IsMaxPiece()) ||
 				(player == Min && !it->IsMaxPiece()))
 			{
-				AddJumpMovesToVector(moves, *it);
-				AddAdjacentMovesToVector(moves, *it);
+				AddJumpMovesToVector(*it);
+				AddAdjacentMovesToVector(*it);
 			}
 		}
-		return moves;
+		return (*_cachedMoves);
 	}
 
 	// Adds all possible jump moves to the specified vector.
-	void MoveFinder::AddJumpMovesToVector(std::vector<Move>& moves, const RelativeCell& source) {
+	void MoveFinder::AddJumpMovesToVector(const RelativeCell& source) {
 		if (CellHasTileWithPlayer(source.GetLeft())) {
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetLeft().GetLeft(),
 				JUMP
 			);
 		}
 		if (CellHasTileWithPlayer(source.GetRight())) {
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetRight().GetRight(),
 				JUMP
 			);
 		}
 		if (CellHasTileWithPlayer(source.GetTop())) {
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetTop().GetTop(),
 				JUMP
 			);
 		}
 		if (CellHasTileWithPlayer(source.GetBottom())) {
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetBottom().GetBottom(),
 				JUMP
@@ -85,28 +100,28 @@ namespace engine {
 
 		// Diagonal
 		if (CellHasTileWithPlayer(source.GetTop().GetLeft())) { 
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetTop().GetTop().GetLeft().GetLeft(),
 				JUMP
 			);
 		}
 		if (CellHasTileWithPlayer(source.GetTop().GetRight())) {
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetTop().GetTop().GetRight().GetRight(),
 				JUMP
 			);
 		}
 		if (CellHasTileWithPlayer(source.GetBottom().GetLeft())) {
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetBottom().GetBottom().GetLeft().GetLeft(),
 				JUMP
 			);
 		}
 		if (CellHasTileWithPlayer(source.GetBottom().GetRight())) {
-			AddMoveIfValidDestination(moves,
+			AddMoveIfValidDestination(
 				source,
 				source.GetBottom().GetBottom().GetRight().GetRight(),
 				JUMP
@@ -115,39 +130,37 @@ namespace engine {
 	}
 
 	// Adds all adjecent move options to the specified move vector.
-	void MoveFinder::AddAdjacentMovesToVector(std::vector<Move>& moves, const RelativeCell& cell) {
-		AddMoveIfValidDestination(moves, cell, cell.GetLeft(), STEP);
-		AddMoveIfValidDestination(moves, cell, cell.GetRight(), STEP);
-		AddMoveIfValidDestination(moves, cell, cell.GetTop(), STEP);
-		AddMoveIfValidDestination(moves, cell, cell.GetBottom(), STEP);
+	void MoveFinder::AddAdjacentMovesToVector(const RelativeCell& cell) {
+		AddMoveIfValidDestination(cell, cell.GetLeft(), STEP);
+		AddMoveIfValidDestination(cell, cell.GetRight(), STEP);
+		AddMoveIfValidDestination(cell, cell.GetTop(), STEP);
+		AddMoveIfValidDestination(cell, cell.GetBottom(), STEP);
 
 		// Diagonal
-		AddMoveIfValidDestination(moves, cell, cell.GetTop().GetLeft(), STEP);
-		AddMoveIfValidDestination(moves, cell, cell.GetTop().GetRight(), STEP);
-		AddMoveIfValidDestination(moves, cell, cell.GetBottom().GetLeft(), STEP);
-		AddMoveIfValidDestination(moves, cell, cell.GetBottom().GetRight(), STEP);
+		AddMoveIfValidDestination(cell, cell.GetTop().GetLeft(), STEP);
+		AddMoveIfValidDestination(cell, cell.GetTop().GetRight(), STEP);
+		AddMoveIfValidDestination(cell, cell.GetBottom().GetLeft(), STEP);
+		AddMoveIfValidDestination(cell, cell.GetBottom().GetRight(), STEP);
 	}
 
 	// Assumes that the fromtile has a piece on it.
 	void MoveFinder::AddMoveIfValidDestination(
-		std::vector<Move>& moves,
 		const RelativeCell &from,
 		const RelativeCell &to,
 		const MoveType& type)
 	{
 		// If there is a tile and it is empty, we can move the piece to it.
 		if (to.IsEmpty() && to.HasTile()) {
-			moves.push_back(Move(type, from.GetRelativePosition(), to.GetRelativePosition()));
+			_cachedMoves->push_back(Move(type, from.GetRelativePosition(), to.GetRelativePosition()));
 		}
 		// If there is no tile, we have to pick a tile to move to it.
 		else if ((!to.HasTile()) && (_board->CountNonDiagonalEdges(to) > 0)) {
-			AddTileMoveMoves(moves, type, from, to);
+			AddTileMoveMoves(type, from, to);
 		}
 	}
 
 	// Adds all moves that move an empty tile for the specified source/destination.
 	void MoveFinder::AddTileMoveMoves(
-		std::vector<Move>& moves,
 		const MoveType& type,
 		const RelativeCell& from,
 		const RelativeCell& to) {
@@ -178,8 +191,12 @@ namespace engine {
 				continue;
 			}
 			_board->UndoMove(move, from.GetPlayer());
-			moves.push_back(move);
+			_cachedMoves->push_back(move);
 		}
+		// This is to prevent the UndoMove and ExecuteMove in this method
+		// from invalidating the cache.
+		if (from.GetPlayer() == Max) { _invalidatedMax = false; }
+		if (from.GetPlayer() == Min) { _invalidatedMin = false; }
 	}
 
 	int MoveFinder::ConnectedTiles(const RelativeCell &start) {

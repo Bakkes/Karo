@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using engine.wrapper;
+
 namespace _2DFrontend
 {
     public partial class LoadBox : Form 
@@ -18,6 +20,10 @@ namespace _2DFrontend
             {
                 return txtBoardString.Text;
             }
+            set
+            {
+                txtBoardString.Text = value;
+            }
         }
 
         public int LeftTopX
@@ -25,6 +31,10 @@ namespace _2DFrontend
             get
             {
                 return (int)numTLX.Value;
+            }
+            set
+            {
+                numTLX.Value = value;
             }
         }
 
@@ -34,12 +44,39 @@ namespace _2DFrontend
             {
                 return (int)numTLY.Value;
             }
+            set
+            {
+                numTLY.Value = value;
+            }
         }
 
-        public LoadBox()
+        public Players CurrentPlayer
+        {
+            get
+            {
+                return (Players)cbPlayer.SelectedIndex;
+            }
+            set
+            {
+                cbPlayer.SelectedIndex = (int)value;
+            }
+        }
+
+        public LoadBox() : this(true)
+        {
+        }
+
+        public LoadBox(bool enableLoading)
         {
             InitializeComponent();
+            cbPlayer.SelectedIndex = 0;
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
+
+            if (!enableLoading)
+            {
+                btnLoad.Enabled = false;
+                Text = "Board String";
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -92,6 +129,15 @@ namespace _2DFrontend
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
+        }
+
+        private void txtBoardString_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                txtBoardString.SelectAll();
+                e.Handled = true;
+            }
         }
     }
 }
