@@ -172,7 +172,7 @@ namespace engine {
 				it->GetRelativePosition()
 			);
 			_board->ExecuteMove(move, from.GetPlayer());
-			if (ConnectedTiles(*it) != 20) {
+			if (ConnectedTiles(from) != 20) {
 				// An island was created, stop!
 				_board->UndoMove(move, from.GetPlayer());
 				continue;
@@ -188,6 +188,7 @@ namespace engine {
 	}
 
 	int MoveFinder::ConnectedTilesRecursive(const RelativeCell &start) {
+		string boardString = _board->ToString();
 		for (auto it = _checkedCells->begin(); it != _checkedCells->end(); ++it) {
 			if (start == *it) {
 				return 0;
