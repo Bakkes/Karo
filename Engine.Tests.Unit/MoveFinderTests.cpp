@@ -211,8 +211,15 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,2,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				, Vector2D(0, 19)
 				);
 			std::vector<Move> moves = board->GetLegalMoves(Min);
+
+			Move illegalMove = Move(STEP, Vector2D(2, 0), Vector2D(3, -1), Vector2D(4, 3));
+
+			for (auto it = moves.begin(); it != moves.end(); ++it) {
+				Assert::IsFalse(illegalMove == *it, L"Invalid STEP with tile detected");
+			}
 		}
 	};
 }
