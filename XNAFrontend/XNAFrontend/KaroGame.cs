@@ -33,7 +33,9 @@ namespace XNAFrontend
 			KaroGameManager = new KaroGameManager();
 			Board board = new Board(this);
             board.CameraComponent = new CameraComponent(this);
-
+            SkyBoxComponent SkyBox = new SkyBoxComponent(this);
+            SkyBox.CameraComponent = board.CameraComponent;
+            Components.Add(SkyBox);
 			IsMouseVisible = true;
 
             Components.Add(board.CameraComponent);
@@ -64,7 +66,7 @@ namespace XNAFrontend
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.Black);
+		
 
 			base.Draw(gameTime);
 		}

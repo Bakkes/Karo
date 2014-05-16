@@ -22,14 +22,29 @@ namespace XNAFrontend.Components
         private Vector3 CalculatePosition = new Vector3(500.0f, 400.0f, 1000.0f);
         public Matrix ViewMatrix { get; set; }
         public Matrix ProjectionMatrix { get; set; }
+        public Vector3 Position
+        {
+            get
+            {
+                return CameraPosition;
+            }
+        }
 
         private Vector2 PreviousMousePosition;
+        private Matrix RotationMatrix
+        {
+            get
+            {
+                return  Matrix.CreateRotationX((float)Math.Atan(Rotation.Y/CameraPosition.Z))
+               * Matrix.CreateRotationY((float)Math.Atan(Rotation.X /CameraPosition.Z));
+                
+            }
+        }
         Vector2 Rotation = new Vector2(MathHelper.PiOver2, -MathHelper.Pi / 10.0f);
         const float rotationSpeed = 0.3f;
         public void MoveCamera(Vector3 Change)
         {
-
-            CameraPosition += Change;
+            CameraPosition += Vector3.Transform( Change,RotationMatrix);
             Matrix Movement = Matrix.CreateTranslation(Change);
             ViewMatrix *= Movement;
         }
@@ -91,9 +106,11 @@ namespace XNAFrontend.Components
             
                 PreviousMousePosition = MousePosition;
 
-                Matrix RotationX = Matrix.CreateRotationX((float)Math.Atan(Rotation.Y / -Math.Abs(CameraPosition.Z)));
-                ViewMatrix = RotationX * Matrix.CreateRotationY((float)Math.Atan(Rotation.X / -Math.Abs(CameraPosition.Z)));
-                ViewMatrix *= Matrix.CreateTranslation(CameraPosition - CalculatePosition) * OriginalView;
+               
+               
+                
+                ViewMatrix = RotationMatrix * OriginalView; 
+                ViewMatrix *= Matrix.CreateTranslation(CameraPosition - CalculatePosition);
 
             }
             
