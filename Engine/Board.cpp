@@ -172,6 +172,7 @@ namespace engine{
 	}
 
 	void Board::InsertPiece(Cell<int>& on, Players owner){
+		_moveFinder->Invalidate();
 		on.SetData(on.GetData() & ~IsEmpty);
 		if(owner == Max) {
 			on.SetData(on.GetData() | IsMax);
@@ -180,33 +181,39 @@ namespace engine{
 		on.SetData(on.GetData() & ~IsMax);
 	}
 	void Board::DeletePiece(Cell<int>& on){
+		_moveFinder->Invalidate();
 		on.SetData(on.GetData() | IsEmpty);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
 		// convertions already happend save to update converter
+		_moveFinder->Invalidate();
 		MoveTile(tileUsed, to);
 		MovePiece(from, to, owner);
 	}
 
 	void Board::MoveTile(Cell<int>& from, Cell<int>& to){
+		_moveFinder->Invalidate();
 		_converter->MoveTile(from.GetPosition(), to.GetPosition());
 		from.SetData(from.GetData() & ~HasTile);
 		to.SetData(to.GetData() | HasTile);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner){
-
+		_moveFinder->Invalidate();
 		to.SetData(from.GetData());
 		DeletePiece(from);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
+		_moveFinder->Invalidate();
 		Flip(from);
 		MovePiece(from, to, owner, tileUsed);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner){
+		_moveFinder->Invalidate();
 		Flip(from);
 		MovePiece(from, to, owner);
 	}
 	void Board::Flip(Cell<int>& which){
+		_moveFinder->Invalidate();
 		which.SetData(which.GetData() ^ IsFlipped);
 	}
 

@@ -30,6 +30,7 @@ namespace engine {
 		// Enable caching.
 		if (player == Max) { _invalidatedMax = false; }
 		if (player == Min) { _invalidatedMin = false; }
+		_cachedMoves->clear();
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
 			return GetLegalPlaceMoves(player);
 		}
@@ -50,7 +51,6 @@ namespace engine {
 
 	// Returns all moves that are either a jump or move type of move.
 	std::vector<Move> MoveFinder::GetLegalMoveMoves(Players player) {
-		_cachedMoves->clear();
 		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
 
 		// Loop through all occupied cells.
