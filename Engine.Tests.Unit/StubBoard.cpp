@@ -17,6 +17,9 @@ namespace Tests {
 		return 0;
 	}
 
+	void StubBoard::CreateTileAt(const Vector2D &relativePosition) { }
+	void StubBoard::DeleteTileAt(const Vector2D &relativePosition) { }
+
 	void StubBoard::ExecuteMove(const Move& move, Players player) { }
 	void StubBoard::UndoMove(const Move& move, Players player) { }
 

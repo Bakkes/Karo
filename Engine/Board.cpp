@@ -217,6 +217,15 @@ namespace engine{
 		which.SetData(which.GetData() ^ IsFlipped);
 	}
 
+	void Board::CreateTileAt(const Vector2D &relativePosition) {
+		Cell<int> *cell = _grid->GetCellAt(_converter->ToAbsolute(relativePosition));
+		cell->SetData(3);
+	}
+
+	void Board::DeleteTileAt(const Vector2D &relativePosition) {
+		Cell<int> *cell = _grid->GetCellAt(_converter->ToAbsolute(relativePosition));
+		cell->SetData(0);
+	}
 
 	vector<Move> Board::GetLegalMoves(Players player) {
 		return _moveFinder->GetLegalMoves(player);
