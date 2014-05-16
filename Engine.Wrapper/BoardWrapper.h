@@ -29,6 +29,7 @@ public:
 	List<CellWrapper^>^ GetOccupiedCells();
 	CellWrapper^ GetRelativeCellAt(Vector2DWrapper^ relativePosition);
 	IEnumerable<MoveWrapper^>^ GetLegalMoves(Players player);
+	void LoadFromString(String^ boardString, int topLeftX, int topLeftY);
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();
 	String^ ToString() new;

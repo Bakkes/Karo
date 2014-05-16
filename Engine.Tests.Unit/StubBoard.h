@@ -21,5 +21,6 @@ namespace Tests {
 
 	private:
 		bool _minimalMoves;
+		int _moveIdentifier; 
 	};
 }

@@ -1,20 +1,25 @@
 #pragma once
 
 #include "DllImportExport.h"
-#include "IBoard.h"
 #include "Players.h"
 #include "Move.h"
+#include "Board.h"
+#include <vector>
 
 namespace engine{
+	class Board;
 	class ENGINE_API MoveFinder
 	{
 	public:
-		MoveFinder(IBoard* board);
+		MoveFinder(Board* board);
 		~MoveFinder(void);
 		std::vector<Move> GetLegalMoves(Players player);
 		
 	private:
-		IBoard* _board;
+		Board* _board;
+
+		// Used for IsConnected method.
+		std::vector<const RelativeCell>* _checkedCells;
 
 		// Get all legal moves for the place state.
 		std::vector<Move> GetLegalPlaceMoves(Players player);
@@ -35,5 +40,9 @@ namespace engine{
 			const RelativeCell &to,
 			const MoveType& type
 		);
+		int ConnectedTiles(const RelativeCell &start);
+		int ConnectedTilesRecursive(const RelativeCell &start);
+
+		bool CellHasTileWithPlayer(const RelativeCell &cell);
 	};
 }

@@ -29,7 +29,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Color of the circle accent on pieces.
 		/// </summary>
-		private Pen _pieceAccentColor = new Pen(Color.FromArgb(34, 34, 34), 5);
+		private Pen _pieceAccentColor = new Pen(Color.FromArgb(34, 34, 34), 3);
 
 		/// <summary>
 		/// Color of max's pieces.
@@ -55,7 +55,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Gap left and right of every tile.
 		/// </summary>
-		private const int Gap = 3;
+		private const int Gap = 2;
 
 		public KaroPanel()
 			: base()

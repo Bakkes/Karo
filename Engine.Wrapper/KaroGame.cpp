@@ -4,7 +4,9 @@
 #include "Board.h"
 #include "WrapperConversionUtility.h"
 #include "StaticEvaluation.h"
-#include "ComputerPlayerAB.h"
+#include "ComputerPlayerUtils.h"
+#include "ComputerPlayerMO.h"
+#include "Players.h"
 namespace engine {
 namespace wrapper {
 
@@ -26,15 +28,15 @@ namespace wrapper {
 	}
 
 	MoveWrapper^ KaroGame::GetBestMove() {
-		ComputerPlayerAB _cPlayer = ComputerPlayerAB(_board->GetInternalBoard(), 3); // TODO GET COPY!
+		ComputerPlayerMO _cPlayer = ComputerPlayerMO(_board->GetInternalBoard(), 3); // TODO GET COPY!
 		_cPlayer.SetEvaluator(new StaticEvaluation());
-		Move bestMove = _cPlayer.GetBestMove(Max);
+		Move bestMove = _cPlayer.GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 		return wrapped;
 	}
 
 	bool KaroGame::HasWon(engine::wrapper::Players player) {
-		return false;
+		return ComputerPlayerUtils::IsWinningState(_board->GetInternalBoard(), static_cast<engine::Players>(player));
 	}
 }
 }

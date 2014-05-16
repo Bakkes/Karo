@@ -78,6 +78,7 @@
     <ClInclude Include="CellValue.h" />
     <ClInclude Include="ComputerPlayer.h" />
     <ClInclude Include="ComputerPlayerAB.h" />
+    <ClInclude Include="ComputerPlayerMO.h" />
     <ClInclude Include="ComputerPlayerUtils.h" />
     <ClInclude Include="RelativeAbsoluteConverter.h" />
     <ClInclude Include="DllImportExport.h" />
@@ -96,6 +97,8 @@
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="TranspositionTable.h" />
+    <ClInclude Include="TranspositionTableData.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="ZobristHashing.h" />
   </ItemGroup>
@@ -103,6 +106,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="ComputerPlayer.cpp" />
     <ClCompile Include="ComputerPlayerAB.cpp" />
+    <ClCompile Include="ComputerPlayerMO.cpp" />
     <ClCompile Include="ComputerPlayerUtils.cpp" />
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
@@ -112,6 +116,8 @@
     <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />
+    <ClCompile Include="TranspositionTable.cpp" />
+    <ClCompile Include="TranspositionTableData.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="ZobristHashing.cpp" />
   </ItemGroup>

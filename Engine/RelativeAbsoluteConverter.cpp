@@ -40,16 +40,16 @@ namespace engine{
 		){
 			return result;
 		}
-		if(_colTileCount.at((int)_topLeft.X() > 0)){
-			if(used.X() == 0){
+		if(_colTileCount.at((int)_topLeft.X()) > 0){
+			if(used.X() == -1){
 				result -= Vector2D(1,0);
 			}
 			if(to.X() == -1){
 				result += Vector2D(1,0);
 			}
 		}
-		if(_rowTileCount.at((int)_topLeft.Y() > 0)){
-			if(used.Y() == 0){
+		if(_rowTileCount.at((int)_topLeft.Y()) > 0){
+			if(used.Y() == -1){
 				result -= Vector2D(0,1);
 			}
 			if(to.Y() == -1){

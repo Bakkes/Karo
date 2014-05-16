@@ -76,6 +76,19 @@ namespace _2DFrontend
 				_communication.CleanUp();
 		}
 
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadBox loadBox = new LoadBox();
+            DialogResult result = loadBox.ShowDialog(this);
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                CancelCommunication();
+                _manager = new KaroGameManager();
+                _manager.Board.LoadFromString(loadBox.BoardString, loadBox.LeftTopX, loadBox.LeftTopY);
+                karoPanel.NewGame(_manager);
+            }
+        }
+
 
 	}
 }
