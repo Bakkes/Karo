@@ -84,7 +84,7 @@ namespace _2DFrontend
             {
                 CancelCommunication();
                 _manager = new KaroGameManager();
-                _manager.Board.LoadFromString(loadBox.BoardString);
+                _manager.Board.LoadFromString(loadBox.BoardString, loadBox.LeftTopX, loadBox.LeftTopY);
                 karoPanel.NewGame(_manager);
             }
         }
