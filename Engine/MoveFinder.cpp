@@ -30,6 +30,7 @@ namespace engine {
 		// Enable caching.
 		if (player == Max) { _invalidatedMax = false; }
 		if (player == Min) { _invalidatedMin = false; }
+		_cachedMoves->clear();
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
 			return GetLegalPlaceMoves(player);
 		}
@@ -50,7 +51,6 @@ namespace engine {
 
 	// Returns all moves that are either a jump or move type of move.
 	std::vector<Move> MoveFinder::GetLegalMoveMoves(Players player) {
-		_cachedMoves->clear();
 		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
 
 		// Loop through all occupied cells.
@@ -174,9 +174,19 @@ namespace engine {
 			// - to and used tile are diagonal (relative to eachother)
 			// then this move is illegal
 			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
-			if (abs((int)diff.X()) == 1 && abs((int)diff.Y()) == 1 &&
-					_board->CountNonDiagonalEdges(from) <= 1) {
-				continue;
+			if (abs((int)diff.X()) <= 1 && abs((int)diff.Y()) <= 1) {
+				Move hackyMove(type,
+					from.GetRelativePosition(),
+					Vector2D(15, 15),
+					it->GetRelativePosition()
+				);
+				Players player = from.GetPlayer();
+				_board->ExecuteMove(hackyMove, player);
+				int connectedTiles = ConnectedTiles(from);
+				_board->UndoMove(hackyMove, player);
+				if (connectedTiles != 19) {
+					continue;
+				}
 			}
 			// Create potential move.
 			Move move(type,
@@ -184,13 +194,14 @@ namespace engine {
 				to.GetRelativePosition(),
 				it->GetRelativePosition()
 			);
-			_board->ExecuteMove(move, from.GetPlayer());
+			Players player = from.GetPlayer();
+			_board->ExecuteMove(move, player);
 			if (ConnectedTiles(from) != 20) {
 				// An island was created, stop!
-				_board->UndoMove(move, from.GetPlayer());
+				_board->UndoMove(move, player);
 				continue;
 			}
-			_board->UndoMove(move, from.GetPlayer());
+			_board->UndoMove(move, player);
 			_cachedMoves->push_back(move);
 		}
 		// This is to prevent the UndoMove and ExecuteMove in this method
