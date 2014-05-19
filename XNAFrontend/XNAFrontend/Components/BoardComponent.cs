@@ -84,12 +84,15 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
+			const float SIZE = 1f;
+			const float GAP = 0.1f;
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
-					Matrix world = Matrix.CreateTranslation(new Vector3(x * 1.5f, 0, 0));
+					Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+					world *= Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 
 					effect.EnableDefaultLighting();
 					effect.World = world;
