@@ -24,6 +24,10 @@
     <ClCompile Include="MinimaxTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<ClCompile Include="TranspositionTableTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+
     <ClCompile Include="BoardMoveChange.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -1,5 +1,6 @@
 ﻿using engine.wrapper;
 using KaroManager;
+using XNAFrontend.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,14 +13,12 @@ namespace XNAFrontend.Components
     internal class Board : ACommonComponent
 	{
 		private Model _tileModel;
-        public CameraComponent CameraComponent{get; set;}
-
 	
 		private KaroGameManager KaroGameManager
 		{
 			get
 			{
-				return karoGame.KaroGameManager;;
+				return karoGame.KaroGameManager;
 			}
 		}
 
@@ -82,17 +81,20 @@ namespace XNAFrontend.Components
 		/// </summary>
 		private void DrawCellAt(CellWrapper cell, int x, int y)
 		{
-			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			const float SIZE = 1f;
+			const float GAP = 0.1f;
+			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
+					Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+					world *= Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+
 					effect.EnableDefaultLighting();
-					effect.World = transforms[mesh.ParentBone.Index] *
-						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
-					effect.View = CameraComponent.ViewMatrix;
-					effect.Projection = CameraComponent.ProjectionMatrix;
+					effect.World = world;
+					effect.View = camera.View;
+					effect.Projection = camera.Projection;
 				}
 				mesh.Draw();
 			}
