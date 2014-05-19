@@ -14,7 +14,7 @@ namespace _2DFrontend
 		private ICommunication _communication;
 		private CommunicationProtocolConversionUtility _conversion;
 		private int _turn = 0;
-        private Random rand = new Random(1340);
+		private Random rand = new Random(1340);
 
 		public KaroCommunicatedGameManager(ICommunication communication)
 			: base()
@@ -83,8 +83,10 @@ namespace _2DFrontend
 			Vector2DWrapper used = mv.GetUsedCell();
 			Debug.WriteLine("Checking if legal: ");
 			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
-			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
-			foreach(MoveWrapper mw in legal) {
+			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player);
+			;
+			foreach (MoveWrapper mw in legal)
+			{
 				Vector2DWrapper from2 = mw.GetFromCell();
 				Vector2DWrapper to2 = mw.GetToCell();
 				Vector2DWrapper used2 = mw.GetUsedCell();
@@ -92,7 +94,7 @@ namespace _2DFrontend
 				int a = 1;
 			}
 			return legal.Where(m =>
-				m.GetFromCell() == mv.GetFromCell() && 
+				m.GetFromCell() == mv.GetFromCell() &&
 				m.GetToCell() == mv.GetToCell() &&
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
 		}
@@ -118,7 +120,8 @@ namespace _2DFrontend
 
 			// Get the move with the correct source tile from the last click.
 			Console.WriteLine("Current player: " + CurrentPlayer);
-			if(!IsMoveLegal(received, Players.Min)) {
+			if (!IsMoveLegal(received, Players.Min))
+			{
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
 				return;
@@ -127,12 +130,8 @@ namespace _2DFrontend
 			_turn++;
 
 			//Handled their move, moving on to ours now
-			if (OnBoardUpdated != null)
-				OnBoardUpdated();
-
-			//System.Threading.Thread.Sleep(1000);
 			CurrentPlayer = Players.Max;
-            MoveWrapper bm = GetMove();
+			MoveWrapper bm = GetMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
 			_turn++;
@@ -149,8 +148,6 @@ namespace _2DFrontend
 			}
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
 			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(turn));
-			if (OnBoardUpdated != null)
-				OnBoardUpdated();
 			CurrentPlayer = Players.Min;
 		}
 
@@ -164,19 +161,17 @@ namespace _2DFrontend
 			_turn++;
 			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
-            MoveWrapper bm = GetMove();
+			MoveWrapper bm = GetMove();
 			ExecuteMove(bm);
 			_communication.SendTurn(_conversion.ConvertMoveToTurn(bm));
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
 			Debug.WriteLine("Converted move to turn: " + _conversion.TurnToString(_conversion.ConvertMoveToTurn(bm)));
-			if (OnBoardUpdated != null)
-				OnBoardUpdated();
 			CurrentPlayer = Players.Min;
 		}
-        MoveWrapper GetMove()
-        {
-            return LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
-        }
+		MoveWrapper GetMove()
+		{
+			return LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+		}
 
 		void _communication_Disconnected(DisconnectReason reason)
 		{
@@ -190,7 +185,7 @@ namespace _2DFrontend
 
 		public override void Update(System.Drawing.Point tileLocation)
 		{
-			
+
 		}
 	}
 }
