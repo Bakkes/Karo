@@ -12,8 +12,9 @@ namespace XNAFrontend.Components
 	internal class Board : ACommonComponent
 	{
 		private Model _tileModel;
+		private Model _minModel;
+		private Model _maxModel;
 		public CameraComponent CameraComponent { get; set; }
-
 
 		private KaroGameManager KaroGameManager
 		{
@@ -41,6 +42,8 @@ namespace XNAFrontend.Components
 		{
 			base.LoadContent();
 			_tileModel = Game.Content.Load<Model>("tile");
+			_minModel = Game.Content.Load<Model>("pawnwhite");
+			_maxModel = Game.Content.Load<Model>("pawnred");
 		}
 
 		public override void Update(GameTime gameTime)
