@@ -49,9 +49,6 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
-			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
-
 			BoardWrapper board = KaroGameManager.Board;
 
 			for (int i = 0; i < 21; i++)
@@ -84,18 +81,17 @@ namespace XNAFrontend.Components
 			const float SIZE = 1f;
 			const float GAP = 0.1f;
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
+			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
-					Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
-					world *= Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
-
 					effect.EnableDefaultLighting();
-					effect.World = world;
+					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
 				}
+
 				mesh.Draw();
 			}
 		}
