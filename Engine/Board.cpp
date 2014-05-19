@@ -165,6 +165,12 @@ namespace engine{
 		Vector2D to = move.GetToCell();
 		Vector2D used = move.GetUsedCell();
 		Vector2D correction = _converter->CalcShiftCorrection(to, used);
+		if(used.X() == 0 && (_grid->GetCellAt(_converter->ToAbsolute(used + correction))->GetData() & HasTile)){
+			correction -= Vector2D(1, 0);
+		}
+		if(used.Y() == 0 && (_grid->GetCellAt(_converter->ToAbsolute(used + correction))->GetData() & HasTile)){
+			correction -= Vector2D(0, 1);
+		}
 		from += correction;
 		to += correction;
 		used += correction;
