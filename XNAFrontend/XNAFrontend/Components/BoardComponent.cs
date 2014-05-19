@@ -42,8 +42,8 @@ namespace XNAFrontend.Components
 		{
 			base.LoadContent();
 			_tileModel = Game.Content.Load<Model>("tile");
-			_minModel = Game.Content.Load<Model>("pawnwhite");
-			_maxModel = Game.Content.Load<Model>("pawnred");
+			_minModel = Game.Content.Load<Model>("piecemin");
+			_maxModel = Game.Content.Load<Model>("piecemax");
 		}
 
 		public override void Update(GameTime gameTime)
