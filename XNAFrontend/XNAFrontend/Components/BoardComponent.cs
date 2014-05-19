@@ -1,4 +1,7 @@
-﻿using engine.wrapper;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using engine.wrapper;
 using KaroManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,11 +12,11 @@ namespace XNAFrontend.Components
 	/// <summary>
 	/// 3D board representation of the karo board game.
 	/// </summary>
-    internal class Board : ACommonComponent
+	internal class Board : ACommonComponent
 	{
-		private Model _tileModel;
-        public CameraComponent CameraComponent{get; set;}
+		public CameraComponent CameraComponent{get; set;}
 
+		private ICollection<Cell> cells;
 	
 		private KaroGameManager KaroGameManager
 		{
@@ -28,7 +31,7 @@ namespace XNAFrontend.Components
 		public Board(KaroGame game)
 			: base(game)
 		{
-			LoadContent();
+			cells = new LinkedList<Cell>();
 		}
 
 		public override void Initialize()
@@ -40,62 +43,55 @@ namespace XNAFrontend.Components
 		protected override void LoadContent()
 		{
 			base.LoadContent();
-			_tileModel = Game.Content.Load<Model>("tile");
-		}
-
-		public override void Update(GameTime gameTime)
-		{
-			base.Update(gameTime);
-		}
-
-		public override void Draw(GameTime gameTime)
-		{
-			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
-
+			Model tile = Game.Content.Load<Model>("tile");
 			BoardWrapper board = KaroGameManager.Board;
-
 			for (int i = 0; i < 21; i++)
 			{
 				for (int j = 0; j < 21; j++)
 				{
-                    if (i == 20)
-                    {
-                        continue;
-                    }
-                    if (j == 20)
-                    {
-                        break;
-                    }
-					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
-					if (cell.HasTile())
+					if (i == 20)
 					{
-						DrawCellAt(cell, i, j);
+						cells.Add(
+							new Cell(){
+								Position = new Vector2(i,j),
+								Model = tile,
+								CameraComponent = CameraComponent
+							}
+						);
+						continue;
 					}
+					if (j == 20)
+					{
+						cells.Add(
+							new Cell(){
+								Position = new Vector2(i,j),
+								Model = tile,
+								CameraComponent = CameraComponent
+							}
+						);
+						break;
+					}
+
+					cells.Add(
+						new Cell(){
+							CellWrapper = board.GetRelativeCellAt(new Vector2DWrapper(i, j)),
+							Model = tile,
+							CameraComponent = CameraComponent
+						}
+					);
 				}
 			}
-			base.Draw(gameTime);
 		}
 
-		/// <summary>
-		/// Draws a tile with the specified relative position.
-		/// </summary>
-		private void DrawCellAt(CellWrapper cell, int x, int y)
+		public override void Update(GameTime gameTime)
 		{
-			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
-			foreach (ModelMesh mesh in _tileModel.Meshes)
-			{
-				foreach (BasicEffect effect in mesh.Effects)
-				{
-					effect.EnableDefaultLighting();
-					effect.World = transforms[mesh.ParentBone.Index] *
-						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
-					effect.View = CameraComponent.ViewMatrix;
-					effect.Projection = CameraComponent.ProjectionMatrix;
-				}
-				mesh.Draw();
+		}
+
+		public override void Draw(GameTime gameTime){
+			foreach(Cell cell in cells){
+				cell.Render();
 			}
+			base.Draw(gameTime);
 		}
 	}
 }

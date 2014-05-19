@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cell.cs" />
     <Compile Include="Components\ACommonComponent.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\BoardComponent.cs" />
