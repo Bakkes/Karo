@@ -2,6 +2,7 @@
 using System.Net;
 using System.Windows.Forms;
 using CommunicationProtocol;
+using engine.wrapper;
 using KaroManager;
 
 namespace _2DFrontend
