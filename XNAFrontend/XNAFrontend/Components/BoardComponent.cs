@@ -40,7 +40,6 @@ namespace XNAFrontend.Components
 
 		protected override void LoadContent()
 		{
-			base.LoadContent();
 			Model tile = Game.Content.Load<Model>("tile");
 			BoardWrapper board = KaroGameManager.Board;
 			for (int i = 0; i < 21; i++)
@@ -79,6 +78,7 @@ namespace XNAFrontend.Components
 					);
 				}
 			}
+			base.LoadContent();
 		}
 
 		public override void Update(GameTime gameTime)

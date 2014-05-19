@@ -38,21 +38,18 @@ namespace XNAFrontend {
 			if(!(CellWrapper == null || CellWrapper.HasTile())){
 				return;
 			}
-			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
 			foreach (ModelMesh mesh in Model.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
-					effect.World = 
-						world*
-						Matrix.CreateTranslation(
+					effect.World = Matrix.CreateTranslation(
 							new Vector3(
-								(float)Position.X,
+								(float)(Position.X *1.01),
 								0, 
-								(float)Position.Y
+								(float)(Position.Y *1.01)
 								)
-							);
+							) * Matrix.CreateScale(100);
 					effect.View = Camera.View;
 					effect.Projection = Camera.Projection;
 				}
