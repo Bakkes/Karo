@@ -175,7 +175,7 @@ namespace _2DFrontend
 		}
         MoveWrapper GetMove()
         {
-            return LegalMoves.First();// Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+            return LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
         }
 
 		void _communication_Disconnected(DisconnectReason reason)

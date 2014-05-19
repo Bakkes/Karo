@@ -210,8 +210,9 @@ namespace engine {
 	}
 
 	int MoveFinder::ConnectedTilesRecursive(const RelativeCell &start) {
-		if(std::find(&_checkedCells->begin(), &_checkedCells->end(), start) != &_checkedCells->end()) {
-			return 0;
+		for(unsigned i = 0; i < _checkedCells->size(); i++) {
+			if(_checkedCells->at(i) == start)
+				return 0;
 		}
 		_checkedCells->push_back(start);
 		int result = 1;
