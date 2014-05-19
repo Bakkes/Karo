@@ -34,10 +34,8 @@ namespace engine{
 	Vector2D RelativeAbsoluteConverter::CalcShiftCorrection( const Vector2D& to, const Vector2D& used) const{
 		Vector2D result = Vector2D(0);
 
-		if(
-			(_colTileCount.at((int)_topLeft.X()) > 1)&&
-			(_rowTileCount.at((int)_topLeft.Y()) > 1)
-		){
+		if ((_colTileCount.at((int)_topLeft.X()) > 1) &&
+			(_rowTileCount.at((int)_topLeft.Y()) > 1)) {
 			return result;
 		}
 		if(_colTileCount.at((int)_topLeft.X()) > 0){
