@@ -225,6 +225,7 @@ namespace Tests {
 			board->ExecuteMove(evilMove, Max);
 			board->UndoMove(evilMove, Max);
 			RelativeCell shouldBeEmptyCell = board->GetRelativeCellAt(Vector2D(1, 0));
+			OutputDebugString(board->ToString().c_str());
 			Assert::IsFalse(shouldBeEmptyCell.HasTile());
 		}
 	};
