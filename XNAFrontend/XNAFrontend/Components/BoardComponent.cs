@@ -55,10 +55,18 @@ namespace XNAFrontend.Components
 
 			BoardWrapper board = KaroGameManager.Board;
 
-			for (int i = 0; i < 20; i++)
+			for (int i = 0; i < 21; i++)
 			{
-				for (int j = 0; j < 20; j++)
+				for (int j = 0; j < 21; j++)
 				{
+                    if (i == 20)
+                    {
+                        continue;
+                    }
+                    if (j == 20)
+                    {
+                        break;
+                    }
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
 					if (cell.HasTile())
 					{
