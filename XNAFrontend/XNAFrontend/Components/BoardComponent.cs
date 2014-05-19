@@ -99,6 +99,15 @@ namespace XNAFrontend.Components
 				}
 				mesh.Draw();
 			}
+
+			if (!cell.IsEmpty())
+			{
+				DrawPieceAt(cell, x, y);
+			}
+		}
+
+		private void DrawPieceAt(CellWrapper cell, int x, int y)
+		{
 		}
 	}
 }
