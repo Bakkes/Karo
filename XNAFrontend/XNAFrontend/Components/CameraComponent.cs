@@ -18,8 +18,17 @@ namespace XNAFrontend.Components
     /// </summary>
     public class CameraComponent : ACommonComponent, ICamera
     {
+		/// <summary>
+		/// The position of the camera in world space
+		/// </summary>
 		private Vector3 _position;
+		/// <summary>
+		/// The projection matrix which transforms our 3D world into 2D space
+		/// </summary>
 		private Matrix _projection;
+		/// <summary>
+		/// The matrix which defines how we look at the world
+		/// </summary>
 		private Matrix _view;
 
 		public Vector3 Position
