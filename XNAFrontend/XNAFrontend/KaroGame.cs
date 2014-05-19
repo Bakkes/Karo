@@ -1,3 +1,4 @@
+using engine.wrapper;
 using KaroManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,6 +32,13 @@ namespace XNAFrontend
 		protected override void Initialize()
 		{
 			KaroGameManager = new KaroGameManager();
+			KaroGameManager.ExecuteMove(
+				new MoveWrapper(
+					MoveType.INSERT,
+					new Vector2DWrapper(-1, -1),
+					new Vector2DWrapper(0, 0)
+				)
+			);
 			Board board = new Board(this);
 			board.CameraComponent = new CameraComponent(this);
 			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
