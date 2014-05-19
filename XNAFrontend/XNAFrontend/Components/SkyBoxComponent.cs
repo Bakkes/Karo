@@ -13,12 +13,12 @@ namespace XNAFrontend.Components
         public SkyBoxComponent(KaroGame game)
             : base(game) { }
 
-        string assetName = "skybox2";
+        //string assetName = "skybox2";
         TextureCube texture;
         Model skyBox;
         public CameraComponent CameraComponent { get; set; }
         private Effect skyBoxEffect;
-
+       
         GraphicsDevice device
         {
             get
@@ -33,10 +33,12 @@ namespace XNAFrontend.Components
         {
           
             skyBox = karoGame.Content.Load<Model>("cube");
-            texture =karoGame.Content.Load<TextureCube>("Islands");
+           
             skyBoxEffect = karoGame.Content.Load<Effect>("SkyBox");
+            skyBox = karoGame.Content.Load<Model>("Islands");
 
-            base.LoadContent();
+
+           base.LoadContent();
           
         }
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
@@ -58,7 +60,9 @@ namespace XNAFrontend.Components
                         part.Effect.Parameters["Projection"].SetValue(CameraComponent.ProjectionMatrix);
                         part.Effect.Parameters["SkyBoxTexture"].SetValue(texture);
                         part.Effect.Parameters["CameraPosition"].SetValue(CameraComponent.Position);
+                        
                     }
+
 
                     // Draw the mesh with the skybox effect
                     mesh.Draw();

@@ -12,15 +12,15 @@ namespace XNAFrontend
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
         public GraphicsDeviceManager graphics { get; set; }
-
-
-		public KaroGameManager KaroGameManager { get; set; }
+        public KaroGameManager KaroGameManager { get; set; }
+  
 
 		public KaroGame()
 		{
 			graphics = new GraphicsDeviceManager(this);
 			Content.RootDirectory = "Content";
 		}
+    
 
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
@@ -34,6 +34,7 @@ namespace XNAFrontend
 			Board board = new Board(this);
             board.CameraComponent = new CameraComponent(this);
             SkyBoxComponent SkyBox = new SkyBoxComponent(this);
+
             SkyBox.CameraComponent = board.CameraComponent;
             Components.Add(SkyBox);
 			IsMouseVisible = true;
@@ -44,6 +45,7 @@ namespace XNAFrontend
             base.Initialize();
 		}
 
+     
 		/// <summary>
 		/// Allows the game to run logic such as updating the world,
 		/// checking for collisions, gathering input, and playing audio.
