@@ -4,6 +4,8 @@ using XNAFrontend.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XNAFrontend.Components
 {
@@ -53,42 +55,49 @@ namespace XNAFrontend.Components
             MouseState mouseState = Mouse.GetState();
             if (mouseState.LeftButton == ButtonState.Pressed && _previousMouseState.LeftButton != ButtonState.Pressed)
             {
-                ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
-                Vector3 nearSource = new Vector3((float)mouseState.X, (float)mouseState.Y, 0f);
-                Vector3 farSource = new Vector3((float)mouseState.X, (float)mouseState.Y, 1f);
-                Matrix world = Matrix.CreateTranslation(0, 0, 0);
-                Vector3 nearPoint = GraphicsDevice.Viewport.Unproject(nearSource,
-                    camera.Projection, camera.View, world);
-                Vector3 farPoint = GraphicsDevice.Viewport.Unproject(farSource,
-                    camera.Projection, camera.View, world);
 
-                Vector3 direction = farPoint - nearPoint;
-                direction.Normalize();
-                Ray pickRay = new Ray(nearPoint, direction);
-
-                for (int x = 0; x <= 20; x++)
-                {
-                    for (int y = 0; y <= 20; y++)
-                    {
-                        CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-                        if (cell.HasTile()) //check for tile click
-                        {
-                            BoundingBox b = UpdateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
-                            if (pickRay.Intersects(b) > 0)
-                            {
-                                System.Console.WriteLine("Found tile click " + x + ", " + y + ": " + pickRay.Intersects(b));
-                            }
-                        }
-                        if (!cell.IsEmpty()) //check for piece click
-                        {
-                        } 
-                        
-                    }
-                }
             }
 			base.Update(gameTime);
             _previousMouseState = mouseState;
 		}
+
+        protected Vector2 GetTileAtPixelPosition(int mouseX, int mouseY)
+        {
+            ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
+            Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
+            Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
+            Matrix world = Matrix.CreateTranslation(0, 0, 0);
+            Vector3 nearPoint = GraphicsDevice.Viewport.Unproject(nearSource,
+                camera.Projection, camera.View, world);
+            Vector3 farPoint = GraphicsDevice.Viewport.Unproject(farSource,
+                camera.Projection, camera.View, world);
+
+            Vector3 direction = farPoint - nearPoint;
+            direction.Normalize();
+            Ray pickRay = new Ray(nearPoint, direction);
+
+            float nearestDist = float.MaxValue;
+            Vector2 nearest = new Vector2(-1337, -1337);
+
+            for (int x = 0; x <= 20; x++)
+            {
+                for (int y = 0; y <= 20; y++)
+                {
+                    CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+                    if (cell.HasTile()) //check for tile click
+                    {
+                        BoundingBox b = UpdateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
+                        float? dist = pickRay.Intersects(b);
+                        if (dist != null && dist > 0 && dist < nearestDist)
+                        {
+                            nearestDist = (float)dist;
+                            nearest = new Vector2(x, y);
+                        }
+                    }
+                }
+            }
+            return nearest;
+        }
 
         protected BoundingBox UpdateBoundingBox(Model model, Matrix worldTransform)
         {
