@@ -74,10 +74,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="State\PieceSourceState.cs" />
-    <Compile Include="State\PieceDestinationState.cs" />
-    <Compile Include="State\PlaceState.cs" />
-    <Compile Include="State\CellSourceState.cs" />
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +114,10 @@
     <ProjectReference Include="..\Engine.Wrapper\Engine.Wrapper.vcxproj">
       <Project>{1120b367-b325-4b42-b7f1-754522577572}</Project>
       <Name>Engine.Wrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KaroManager\KaroManager.csproj">
+      <Project>{65404c12-ce62-416e-a01d-4939c00edd17}</Project>
+      <Name>KaroManager</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

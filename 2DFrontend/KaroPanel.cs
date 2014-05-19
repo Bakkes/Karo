@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
-using _2DFrontend.State;
 using engine.wrapper;
+using KaroManager;
+using KaroManager.State;
 
 namespace _2DFrontend
 {
