@@ -108,6 +108,27 @@ namespace XNAFrontend.Components
 
 		private void DrawPieceAt(CellWrapper cell, int x, int y)
 		{
+			// Nothing to draw if this cell is empty.
+			if (cell.IsEmpty()) { return; }
+
+			// Define the model of the piece we have to use (max/min).
+			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
+
+			// Draw the piece on the cell.
+			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
+			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			foreach (ModelMesh mesh in pieceModel.Meshes)
+			{
+				foreach (BasicEffect effect in mesh.Effects)
+				{
+					effect.EnableDefaultLighting();
+					effect.World = transforms[mesh.ParentBone.Index] *
+						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
+					effect.View = CameraComponent.ViewMatrix;
+					effect.Projection = CameraComponent.ProjectionMatrix;
+				}
+				mesh.Draw();
+			}
 		}
 	}
 }
