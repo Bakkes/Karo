@@ -44,6 +44,7 @@
       <Name>tile</Name>
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
+      <ProcessorParameters_ResizeTexturesToPowerOfTwo>True</ProcessorParameters_ResizeTexturesToPowerOfTwo>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +52,7 @@
       <Name>STUCCO4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +60,7 @@
       <Name>1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +73,7 @@
       <Name>Islands</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </Compile>
   </ItemGroup>
   <ItemGroup>

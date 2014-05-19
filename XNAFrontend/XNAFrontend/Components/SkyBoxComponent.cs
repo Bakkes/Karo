@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using XNAFrontend.Services;
 
 namespace XNAFrontend.Components
 {
@@ -41,6 +42,7 @@ namespace XNAFrontend.Components
         }
         public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
         {
+			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 
             foreach (EffectPass pass in skyBoxEffect.CurrentTechnique.Passes)
             {
@@ -53,11 +55,11 @@ namespace XNAFrontend.Components
                     {
                         part.Effect = skyBoxEffect;
                         part.Effect.Parameters["World"].SetValue(
-                            Matrix.CreateScale(50) * Matrix.CreateTranslation(CameraComponent.Position));
-                        part.Effect.Parameters["View"].SetValue(CameraComponent.ViewMatrix);
-                        part.Effect.Parameters["Projection"].SetValue(CameraComponent.ProjectionMatrix);
+                            Matrix.CreateScale(50) * Matrix.CreateTranslation(camera.Position));
+                        part.Effect.Parameters["View"].SetValue(camera.View);
+                        part.Effect.Parameters["Projection"].SetValue(camera.Projection);
                         part.Effect.Parameters["SkyBoxTexture"].SetValue(texture);
-                        part.Effect.Parameters["CameraPosition"].SetValue(CameraComponent.Position);
+                        part.Effect.Parameters["CameraPosition"].SetValue(camera.Position);
                     }
 
                     // Draw the mesh with the skybox effect

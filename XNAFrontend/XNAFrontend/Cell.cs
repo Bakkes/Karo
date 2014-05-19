@@ -25,7 +25,13 @@ namespace XNAFrontend {
 		}
 		private Vector2 _position;
 		public Vector2 Position { get { return _position; } set { _position = value; } }
-		public CameraComponent CameraComponent;
+
+		private ICamera Camera{
+			get{
+				
+				return(ICamera)Game.Services.GetService(typeof(ICamera));
+			}
+		}
 		public void Render(){
 			if(!(CellWrapper == null || CellWrapper.HasTile())){
 				return;

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using engine.wrapper;
 using KaroManager;
+using XNAFrontend.Services;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,15 +15,13 @@ namespace XNAFrontend.Components
 	/// </summary>
 	internal class Board : ACommonComponent
 	{
-		public CameraComponent CameraComponent{get; set;}
-
-		private ICollection<Cell> cells;
+		private Model _tileModel;
 	
 		private KaroGameManager KaroGameManager
 		{
 			get
 			{
-				return karoGame.KaroGameManager;;
+				return karoGame.KaroGameManager;
 			}
 		}
 
@@ -85,11 +84,19 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
-		}
+			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
+			foreach (ModelMesh mesh in _tileModel.Meshes)
+			{
+				foreach (BasicEffect effect in mesh.Effects)
+				{
+					Matrix world = Matrix.CreateTranslation(new Vector3(x * 1.5f, 0, 0));
 
-		public override void Draw(GameTime gameTime){
-			foreach(Cell cell in cells){
-				cell.Render();
+					effect.EnableDefaultLighting();
+					effect.World = world;
+					effect.View = camera.View;
+					effect.Projection = camera.Projection;
+				}
+				mesh.Draw();
 			}
 			base.Draw(gameTime);
 		}
