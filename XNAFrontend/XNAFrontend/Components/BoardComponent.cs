@@ -16,7 +16,8 @@ namespace XNAFrontend.Components
         const float GAP = 0.1f;
 
 		private Model _tileModel;
-	
+        private MouseState _previousMouseState;
+
 		private KaroGameManager KaroGameManager
 		{
 			get
@@ -37,6 +38,7 @@ namespace XNAFrontend.Components
 		{
 			base.Initialize();
 			this.Position = Vector3.Zero;
+            this._previousMouseState = Mouse.GetState();
 		}
 
 		protected override void LoadContent()
@@ -49,22 +51,15 @@ namespace XNAFrontend.Components
 		{
             
             MouseState mouseState = Mouse.GetState();
-            if (mouseState.LeftButton == ButtonState.Pressed)
+            if (mouseState.LeftButton == ButtonState.Pressed && _previousMouseState.LeftButton != ButtonState.Pressed)
             {
-                
-
                 ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
-                int mouseX = mouseState.X;
-                int mouseY = mouseState.Y;
-                Vector3 nearsource = new Vector3((float)mouseX, (float)mouseY, 0f);
-                Vector3 farsource = new Vector3((float)mouseX, (float)mouseY, 1f);
-
+                Vector3 nearSource = new Vector3((float)mouseState.X, (float)mouseState.Y, 0f);
+                Vector3 farSource = new Vector3((float)mouseState.X, (float)mouseState.Y, 1f);
                 Matrix world = Matrix.CreateTranslation(0, 0, 0);
-
-                Vector3 nearPoint = GraphicsDevice.Viewport.Unproject(nearsource,
+                Vector3 nearPoint = GraphicsDevice.Viewport.Unproject(nearSource,
                     camera.Projection, camera.View, world);
-
-                Vector3 farPoint = GraphicsDevice.Viewport.Unproject(farsource,
+                Vector3 farPoint = GraphicsDevice.Viewport.Unproject(farSource,
                     camera.Projection, camera.View, world);
 
                 Vector3 direction = farPoint - nearPoint;
@@ -76,19 +71,23 @@ namespace XNAFrontend.Components
                     for (int y = 0; y <= 20; y++)
                     {
                         CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-                        if (cell.HasTile())
+                        if (cell.HasTile()) //check for tile click
                         {
                             BoundingBox b = UpdateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
                             if (pickRay.Intersects(b) > 0)
                             {
-                                System.Console.WriteLine("Found at " + x + ", " + y + ": " + pickRay.Intersects(b));
+                                System.Console.WriteLine("Found tile click " + x + ", " + y + ": " + pickRay.Intersects(b));
                             }
-
                         }
+                        if (!cell.IsEmpty()) //check for piece click
+                        {
+                        } 
+                        
                     }
                 }
             }
 			base.Update(gameTime);
+            _previousMouseState = mouseState;
 		}
 
         protected BoundingBox UpdateBoundingBox(Model model, Matrix worldTransform)
