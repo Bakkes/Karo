@@ -9,17 +9,17 @@ namespace XNAFrontend.Components
 	/// <summary>
 	/// 3D board representation of the karo board game.
 	/// </summary>
-    internal class Board : ACommonComponent
+	internal class Board : ACommonComponent
 	{
 		private Model _tileModel;
-        public CameraComponent CameraComponent{get; set;}
+		public CameraComponent CameraComponent { get; set; }
 
-	
+
 		private KaroGameManager KaroGameManager
 		{
 			get
 			{
-				return karoGame.KaroGameManager;;
+				return karoGame.KaroGameManager;
 			}
 		}
 
@@ -59,14 +59,14 @@ namespace XNAFrontend.Components
 			{
 				for (int j = 0; j < 21; j++)
 				{
-                    if (i == 20)
-                    {
-                        continue;
-                    }
-                    if (j == 20)
-                    {
-                        break;
-                    }
+					if (i == 20)
+					{
+						continue;
+					}
+					if (j == 20)
+					{
+						break;
+					}
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
 					if (cell.HasTile())
 					{
