@@ -1,9 +1,9 @@
-using engine.wrapper;
 using KaroManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using XNAFrontend.Components;
+using XNAFrontend.Services;
 
 namespace XNAFrontend
 {
@@ -12,8 +12,7 @@ namespace XNAFrontend
 	/// </summary>
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
-		public GraphicsDeviceManager graphics { get; set; }
-
+        public GraphicsDeviceManager graphics { get; set; }
 
 		public KaroGameManager KaroGameManager { get; set; }
 
@@ -31,25 +30,18 @@ namespace XNAFrontend
 		/// </summary>
 		protected override void Initialize()
 		{
-			KaroGameManager = new KaroGameManager();
-			KaroGameManager.ExecuteMove(
-				new MoveWrapper(
-					MoveType.INSERT,
-					new Vector2DWrapper(-1, -1),
-					new Vector2DWrapper(0, 0)
-				)
-			);
-			Board board = new Board(this);
-			board.CameraComponent = new CameraComponent(this);
-			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
-			SkyBox.CameraComponent = board.CameraComponent;
-			Components.Add(SkyBox);
 			IsMouseVisible = true;
 
-			Components.Add(board.CameraComponent);
+			CameraComponent camera = new CameraComponent(this);
 
-			Components.Add(board);
-			base.Initialize();
+			Services.AddService(typeof(ICamera), camera);
+
+			KaroGameManager = new KaroGameManager();
+            Components.Add(new SkyBoxComponent(this));
+            Components.Add(camera);
+			Components.Add(new Board(this));
+
+            base.Initialize();
 		}
 
 		/// <summary>
@@ -74,8 +66,7 @@ namespace XNAFrontend
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-
-
+			GraphicsDevice.Clear(Color.CornflowerBlue);
 			base.Draw(gameTime);
 		}
 	}
