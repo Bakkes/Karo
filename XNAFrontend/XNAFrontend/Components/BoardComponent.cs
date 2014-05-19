@@ -82,15 +82,14 @@ namespace XNAFrontend.Components
 		private void DrawCellAt(CellWrapper cell, int x, int y)
 		{
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
-			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
+					Matrix world = Matrix.CreateTranslation(new Vector3(x * 1.5f, 0, 0));
+
 					effect.EnableDefaultLighting();
-					effect.World = transforms[mesh.ParentBone.Index] *
-						Matrix.CreateTranslation(Position + new Vector3(-300 * x, 0, -300 * y));
+					effect.World = world;
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
 				}

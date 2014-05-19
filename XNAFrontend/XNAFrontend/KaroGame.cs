@@ -149,7 +149,7 @@ namespace XNAFrontend
 			{
 				cubeBuffer.SetData<VertexPositionColor>(_vertices);
 				GraphicsDevice.SetVertexBuffer(cubeBuffer);
-				GraphicsDevice.DrawPrimitives(PrimitiveType.TriangleList, 0, 12);
+			//	GraphicsDevice.DrawPrimitives(PrimitiveType.TriangleList, 0, 12);
 			}
 
 			base.Draw(gameTime);
