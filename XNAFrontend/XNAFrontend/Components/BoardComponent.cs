@@ -78,15 +78,17 @@ namespace XNAFrontend.Components
 					);
 				}
 			}
-			base.LoadContent();
 		}
 
-		public override void Update(GameTime gameTime)
+
+		public override void Draw(GameTime gameTime)
 		{
-			foreach(Cell cell in cells){
+			foreach(Cell cell in cells)
+			{
 				cell.Render();
 			}
 			base.Draw(gameTime);
 		}
+
 	}
 }

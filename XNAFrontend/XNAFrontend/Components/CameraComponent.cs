@@ -18,9 +18,17 @@ namespace XNAFrontend.Components
     /// </summary>
     public class CameraComponent : ACommonComponent, ICamera
     {
+		/// <summary>
+		/// The position of the camera in world space
+		/// </summary>
 		private Vector3 _position;
-		private Matrix _world;
+		/// <summary>
+		/// The projection matrix which transforms our 3D world into 2D space
+		/// </summary>
 		private Matrix _projection;
+		/// <summary>
+		/// The matrix which defines how we look at the world
+		/// </summary>
 		private Matrix _view;
 
 		public Vector3 Position
@@ -28,14 +36,6 @@ namespace XNAFrontend.Components
 			get
 			{
 				return _position;
-			}
-		}
-
-		public Matrix World
-		{
-			get
-			{
-				return _world;
 			}
 		}
 
@@ -59,10 +59,9 @@ namespace XNAFrontend.Components
         {
 			Viewport viewport = game.GraphicsDevice.Viewport;
 
-			_position = new Vector3(5, 5, 5);
-			_world = Matrix.Identity;
+			_position = new Vector3(2.75f, 5, 5);
 			_projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, viewport.AspectRatio, 0.1f, 10000);
-			_view = Matrix.CreateLookAt(_position, Vector3.Zero, Vector3.Up);
+			_view = Matrix.CreateLookAt(_position, new Vector3(2.75f, 0, 0), Vector3.Up);
         }
 
         /// <summary>

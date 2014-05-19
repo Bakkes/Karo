@@ -10,7 +10,6 @@ namespace XNAFrontend.Services
     interface ICamera
     {
 		Vector3 Position { get; }
-		Matrix World { get; }
 		Matrix Projection { get; }
 		Matrix View { get; }
     }
