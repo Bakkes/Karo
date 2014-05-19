@@ -35,7 +35,7 @@ namespace XNAFrontend.Components
             skyBox = karoGame.Content.Load<Model>("cube");
            
             skyBoxEffect = karoGame.Content.Load<Effect>("SkyBox");
-            skyBox = karoGame.Content.Load<Model>("Islands");
+           
 
 
            base.LoadContent();
