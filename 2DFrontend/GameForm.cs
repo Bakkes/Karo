@@ -112,6 +112,10 @@ namespace _2DFrontend
             loadBox.ShowDialog();
         }
 
+        private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new RenderOptionsForm(karoPanel).Show();
+        }
 
 	}
 }

@@ -36,16 +36,19 @@
             this.serverToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showBoardStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.karoPanel = new _2DFrontend.KaroPanel();
-            this.showBoardStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.renderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gameToolStripMenuItem});
+            this.gameToolStripMenuItem,
+            this.renderToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1058, 24);
@@ -109,6 +112,13 @@
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
+            // showBoardStringToolStripMenuItem
+            // 
+            this.showBoardStringToolStripMenuItem.Name = "showBoardStringToolStripMenuItem";
+            this.showBoardStringToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.showBoardStringToolStripMenuItem.Text = "Show board string";
+            this.showBoardStringToolStripMenuItem.Click += new System.EventHandler(this.showBoardStringToolStripMenuItem_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
@@ -123,15 +133,24 @@
             this.karoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.karoPanel.Location = new System.Drawing.Point(0, 24);
             this.karoPanel.Name = "karoPanel";
+            this.karoPanel.Scale = 0.5F;
             this.karoPanel.Size = new System.Drawing.Size(1058, 545);
             this.karoPanel.TabIndex = 0;
             // 
-            // showBoardStringToolStripMenuItem
+            // renderToolStripMenuItem
             // 
-            this.showBoardStringToolStripMenuItem.Name = "showBoardStringToolStripMenuItem";
-            this.showBoardStringToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.showBoardStringToolStripMenuItem.Text = "Show board string";
-            this.showBoardStringToolStripMenuItem.Click += new System.EventHandler(this.showBoardStringToolStripMenuItem_Click);
+            this.renderToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zoomToolStripMenuItem});
+            this.renderToolStripMenuItem.Name = "renderToolStripMenuItem";
+            this.renderToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.renderToolStripMenuItem.Text = "Render";
+            // 
+            // zoomToolStripMenuItem
+            // 
+            this.zoomToolStripMenuItem.Name = "zoomToolStripMenuItem";
+            this.zoomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zoomToolStripMenuItem.Text = "Zoom";
+            this.zoomToolStripMenuItem.Click += new System.EventHandler(this.zoomToolStripMenuItem_Click);
             // 
             // Karo
             // 
@@ -165,6 +184,8 @@
 		private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showBoardStringToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem renderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomToolStripMenuItem;
 
 	}
 }
