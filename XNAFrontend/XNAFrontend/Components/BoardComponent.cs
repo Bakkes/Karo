@@ -13,10 +13,9 @@ namespace XNAFrontend.Components
 	/// <summary>
 	/// 3D board representation of the karo board game.
 	/// </summary>
-	internal class Board : ACommonComponent
-	{
-		private Model _tileModel;
-	
+	internal class Board : ACommonComponent{
+
+		private ICollection<Cell> cells;	
 		private KaroGameManager KaroGameManager
 		{
 			get
@@ -54,7 +53,7 @@ namespace XNAFrontend.Components
 							new Cell(){
 								Position = new Vector2(i,j),
 								Model = tile,
-								CameraComponent = CameraComponent
+								Services = Game.Services
 							}
 						);
 						continue;
@@ -65,7 +64,7 @@ namespace XNAFrontend.Components
 							new Cell(){
 								Position = new Vector2(i,j),
 								Model = tile,
-								CameraComponent = CameraComponent
+								Services = Game.Services
 							}
 						);
 						break;
@@ -75,7 +74,7 @@ namespace XNAFrontend.Components
 						new Cell(){
 							CellWrapper = board.GetRelativeCellAt(new Vector2DWrapper(i, j)),
 							Model = tile,
-							CameraComponent = CameraComponent
+							Services = Game.Services
 						}
 					);
 				}
@@ -84,22 +83,8 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
-			const float SIZE = 1f;
-			const float GAP = 0.1f;
-			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
-			foreach (ModelMesh mesh in _tileModel.Meshes)
-			{
-				foreach (BasicEffect effect in mesh.Effects)
-				{
-					Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
-					world *= Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
-
-					effect.EnableDefaultLighting();
-					effect.World = world;
-					effect.View = camera.View;
-					effect.Projection = camera.Projection;
-				}
-				mesh.Draw();
+			foreach(Cell cell in cells){
+				cell.Render();
 			}
 			base.Draw(gameTime);
 		}
