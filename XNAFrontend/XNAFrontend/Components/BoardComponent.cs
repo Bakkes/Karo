@@ -119,7 +119,7 @@ namespace XNAFrontend.Components
 
 			for (int i = 0; i < 20; i++)
 			{
-				for (int j = 0; j < 20; j++)
+				for (int j = 0; i + j < 20; j++)
 				{
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
 					if (cell.HasTile())
