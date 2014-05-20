@@ -39,8 +39,13 @@ namespace _2DFrontend
 
 		void _communication_WinDetected(Turn t, Player p)
 		{
+			// openent says he won (the message contains player.me)
 			if (p == Player.Me)
 			{
+				// c if execute their move
+				if(!HandleTheirMove(t)){
+					return;
+				}
 				Debug.WriteLine("Opponent thinks he won, going to check.");
 				if (Game.HasWon(Players.Min))
 				{
@@ -97,8 +102,7 @@ namespace _2DFrontend
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
 		}
 
-		void _communication_TurnReceived(Turn t)
-		{
+		private bool HandleTheirMove(Turn t){
 			/*if (CurrentPlayer == Players.Max)
 			{
 				//Not their turn
@@ -110,7 +114,7 @@ namespace _2DFrontend
 			{
 				Console.WriteLine("Turn is null, sending back");
 				_communication.SendMoveInvalid(t);
-				return;
+				return false;
 			}
 			Debug.WriteLine("Received turn: " + _conversion.TurnToString(t) + " - " + (t.EmptyTile == null));
 			MoveWrapper received = _conversion.ConvertTurnToMove(t);
@@ -121,9 +125,16 @@ namespace _2DFrontend
 			if(!IsMoveLegal(received, Players.Min)) {
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
-				return;
+				return false;
 			}
 			ExecuteMove(received);
+			return true;
+		}
+		void _communication_TurnReceived(Turn t)
+		{
+			if(!HandleTheirMove(t)){
+				return;
+			}
 			_turn++;
 
 			//Handled their move, moving on to ours now

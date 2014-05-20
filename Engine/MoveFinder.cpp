@@ -34,39 +34,36 @@ namespace engine {
 		delete _cachedMoves;
 		_cachedMoves = new vector<Move>();
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
-			return GetLegalPlaceMoves(player);
+			return (*GetLegalPlaceMoves(player));
 		}
 		else {
-			return GetLegalMoveMoves(player);
+			return (*GetLegalMoveMoves(player));
 		}
 	}
 
 	// Returns all place moves for the specified player.
-	std::vector<Move> MoveFinder::GetLegalPlaceMoves(Players player) {
+	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
 		std::vector<RelativeCell>* emptyTiles = _board->GetEmptyTiles();
-		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
-			// Add insertion move to an empty tile.
-			_cachedMoves->push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
-		} 
-		return (*_cachedMoves);
+		for_each(emptyTiles->begin(), emptyTiles->end(), [this](RelativeCell& cell) -> void{
+			_cachedMoves->push_back(Move(INSERT, Vector2D(), cell.GetRelativePosition()));	
+		});
+		return _cachedMoves;
 	}
 
 	// Returns all moves that are either a jump or move type of move.
-	std::vector<Move> MoveFinder::GetLegalMoveMoves(Players player) {
-		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
+	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
+		std::vector<RelativeCell> occupiedCells = std::vector<RelativeCell>(*_board->GetOccupiedTiles());
 
-		// Loop through all occupied cells.
-		for (auto it = occupiedCells->begin(); it != occupiedCells->end(); ++it) {
-
+		for_each(occupiedCells.begin(), occupiedCells.end(), [&,this](RelativeCell& cell) -> void{
 			// If this cells contain a piece owned by player, continue.
-			if ((player == Max && it->IsMaxPiece()) ||
-				(player == Min && !it->IsMaxPiece()))
+			if ((player == Max && cell.IsMaxPiece()) ||
+				(player == Min && !cell.IsMaxPiece()))
 			{
-				AddJumpMovesToVector(*it);
-				AddAdjacentMovesToVector(*it);
+				AddJumpMovesToVector(cell);
+				AddAdjacentMovesToVector(cell);
 			}
-		}
-		return (*_cachedMoves);
+		});
+		return _cachedMoves;
 	}
 
 	// Adds all possible jump moves to the specified vector.
@@ -166,40 +163,40 @@ namespace engine {
 		const MoveType& type,
 		const RelativeCell& from,
 		const RelativeCell& to) {
-		std::vector<RelativeCell>* emptyCells = _board->GetEmptyTiles();
-		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
-			if (_board->CountNonDiagonalEdges(*it) > 2) {
-				continue;
+		std::vector<RelativeCell> emptyCells = std::vector<RelativeCell>(*_board->GetEmptyTiles());
+		for_each(emptyCells.begin(), emptyCells.end(), [&,this](RelativeCell& cell) -> void{
+			if (_board->CountNonDiagonalEdges(cell) > 2) {
+				return;// continue does not work return is the same
 			}
 			// Rule amendment solution
 			// - From tile has 0 or 1 edges
 			// - to and used tile are diagonal (relative to eachother)
 			// then this move is illegal
-			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
+			Vector2D diff = to.GetRelativePosition() - cell.GetRelativePosition();
 			if (abs((int)diff.X()) <= 1 && abs((int)diff.Y()) <= 1) {
-				_board->DeleteTileAt(it->GetRelativePosition());
+				_board->DeleteTileAt(cell.GetRelativePosition());
 				int connectedTiles = ConnectedTiles(from);
-				_board->CreateTileAt(it->GetRelativePosition());
+				_board->CreateTileAt(cell.GetRelativePosition());
 				if (connectedTiles != 19) {
-					continue;
+					return;
 				}
 			}
 			// Create potential move.
 			Move move(type,
 				from.GetRelativePosition(),
 				to.GetRelativePosition(),
-				it->GetRelativePosition()
+				cell.GetRelativePosition()
 			);
 			Players player = from.GetPlayer();
 			_board->ExecuteMove(move, player);
 			if (ConnectedTiles(from) != 20) {
 				// An island was created, stop!
 				_board->UndoMove(move, player);
-				continue;
+				return;
 			}
 			_board->UndoMove(move, player);
 			_cachedMoves->push_back(move);
-		}
+		});
 		// This is to prevent the UndoMove and ExecuteMove in this method
 		// from invalidating the cache.
 		if (from.GetPlayer() == Max) { _invalidatedMax = false; }
