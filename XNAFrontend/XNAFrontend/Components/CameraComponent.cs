@@ -57,9 +57,10 @@ namespace XNAFrontend.Components
 			Viewport viewport = game.GraphicsDevice.Viewport;
 			_targetPosition = targetPosition;
 
-			_yaw = 0f;
-			_pitch = 0f;
+			_yaw = -MathHelper.ToRadians(45);
+			_pitch = -MathHelper.ToRadians(45);
 			_zoom = 8f;
+
 
 			_nearPlane = 1f;
 			_farPlane = 400f;
