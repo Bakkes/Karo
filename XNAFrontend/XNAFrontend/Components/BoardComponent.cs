@@ -21,6 +21,8 @@ namespace XNAFrontend.Components
 		private Model _minModel;
 		private Model _maxModel;
 
+		private MouseState _previousMouseState;
+
 		private KaroGameManager KaroGameManager
 		{
 			get
@@ -188,7 +190,7 @@ namespace XNAFrontend.Components
 
 			// Define the model of the piece we have to use (max/min).
 			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
-
+			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			// Draw the piece on the cell.
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
@@ -199,8 +201,8 @@ namespace XNAFrontend.Components
 					effect.EnableDefaultLighting();
 					effect.World = transforms[mesh.ParentBone.Index] *
 						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
-					effect.View = CameraComponent.ViewMatrix;
-					effect.Projection = CameraComponent.ProjectionMatrix;
+					effect.View = camera.View;
+					effect.Projection = camera.Projection;
 				}
 				mesh.Draw();
 			}
