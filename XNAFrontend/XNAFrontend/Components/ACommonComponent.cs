@@ -12,25 +12,25 @@ using Microsoft.Xna.Framework.Media;
 
 namespace XNAFrontend.Components
 {
-    /// <summary>
-    /// This is a game component that implements IUpdateable.
-    /// </summary>
-    public abstract class ACommonComponent : Microsoft.Xna.Framework.DrawableGameComponent
-    {
-        protected KaroGame karoGame { get; set; }
+	/// <summary>
+	/// This is a game component that implements IUpdateable.
+	/// </summary>
+	public abstract class ACommonComponent : Microsoft.Xna.Framework.DrawableGameComponent
+	{
+		protected KaroGame karoGame { get; set; }
 
-        public ACommonComponent(KaroGame game)
-            : base(game)
-        {
-            karoGame = game;
-            // TODO:  Construct any child components here
-        }
+		public ACommonComponent(KaroGame game)
+			: base(game)
+		{
+			karoGame = game;
+			// TODO:  Construct any child components here
+		}
 
-        public override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
-        }
+		public override void Draw(GameTime gameTime)
+		{
+			base.Draw(gameTime);
+		}
 
-    }
+	}
 
 }

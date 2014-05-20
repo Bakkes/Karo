@@ -12,13 +12,16 @@ namespace XNAFrontend.Components
 	/// <summary>
 	/// 3D board representation of the karo board game.
 	/// </summary>
-    internal class Board : ACommonComponent
+	internal class Board : ACommonComponent
 	{
         const float SIZE = 1f;
         const float GAP = 0.1f;
 
 		private Model _tileModel;
-        private MouseState _previousMouseState;
+		private Model _minModel;
+		private Model _maxModel;
+
+		private MouseState _previousMouseState;
 
 		private KaroGameManager KaroGameManager
 		{
@@ -47,6 +50,8 @@ namespace XNAFrontend.Components
 		{
 			base.LoadContent();
 			_tileModel = Game.Content.Load<Model>("tile");
+			_minModel = Game.Content.Load<Model>("piecemin");
+			_maxModel = Game.Content.Load<Model>("piecemax");
 		}
 
 		public override void Update(GameTime gameTime)
@@ -137,14 +142,14 @@ namespace XNAFrontend.Components
 			{
 				for (int j = 0; j < 21; j++)
 				{
-                    if (i == 20)
-                    {
-                        continue;
-                    }
-                    if (j == 20)
-                    {
-                        break;
-                    }
+					if (i == 20)
+					{
+						continue;
+					}
+					if (j == 20)
+					{
+						break;
+					}
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
 					if (cell.HasTile())
 					{
@@ -172,6 +177,36 @@ namespace XNAFrontend.Components
 					effect.Projection = camera.Projection;
 				}
 
+				mesh.Draw();
+			}
+
+			if (!cell.IsEmpty())
+			{
+				DrawPieceAt(cell, x, y);
+			}
+		}
+
+		private void DrawPieceAt(CellWrapper cell, int x, int y)
+		{
+			// Nothing to draw if this cell is empty.
+			if (cell.IsEmpty()) { return; }
+
+			// Define the model of the piece we have to use (max/min).
+			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
+			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
+			// Draw the piece on the cell.
+			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
+			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			foreach (ModelMesh mesh in pieceModel.Meshes)
+			{
+				foreach (BasicEffect effect in mesh.Effects)
+				{
+					effect.EnableDefaultLighting();
+					effect.World = transforms[mesh.ParentBone.Index] *
+						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
+					effect.View = camera.View;
+					effect.Projection = camera.Projection;
+				}
 				mesh.Draw();
 			}
 		}
