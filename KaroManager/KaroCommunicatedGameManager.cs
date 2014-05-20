@@ -39,9 +39,12 @@ namespace KaroManager
 
 		void _communication_WinDetected(Turn t, Player p)
 		{
-			if (p == Player.You)
+			if (p == Player.Me)
 			{
 				Debug.WriteLine("Opponent thinks he won, going to check.");
+				if(!HanldeTheirMove(t)){
+					return;
+				}
 				if (Game.HasWon(Players.Min))
 				{
 					Debug.WriteLine("Opponent did win, we lose.");
@@ -53,7 +56,7 @@ namespace KaroManager
 					_communication.SendWinDisputed();
 				}
 			}
-			else if (p == Player.Me)
+			else if (p == Player.You)
 			{
 				Debug.WriteLine("Opponent thinks I won, going to check.");
 				if (Game.HasWon(Players.Max))
@@ -98,8 +101,7 @@ namespace KaroManager
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
 		}
 
-		void _communication_TurnReceived(Turn t)
-		{
+		bool HanldeTheirMove(Turn t){
 			/*if (CurrentPlayer == Players.Max)
 			{
 				//Not their turn
@@ -111,7 +113,7 @@ namespace KaroManager
 			{
 				Console.WriteLine("Turn is null, sending back");
 				_communication.SendMoveInvalid(t);
-				return;
+				return false;
 			}
 			Debug.WriteLine("Received turn: " + _conversion.TurnToString(t) + " - " + (t.EmptyTile == null));
 			MoveWrapper received = _conversion.ConvertTurnToMove(t);
@@ -123,9 +125,16 @@ namespace KaroManager
 			{
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
-				return;
+				return false;
 			}
 			ExecuteMove(received);
+			return true;
+		}
+		void _communication_TurnReceived(Turn t)
+		{
+			if(!HanldeTheirMove(t)){
+				return;
+			}
 			_turn++;
 
 			//Handled their move, moving on to ours now
