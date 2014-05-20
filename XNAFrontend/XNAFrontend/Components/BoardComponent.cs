@@ -36,7 +36,8 @@ namespace XNAFrontend.Components
 		public Board(KaroGame game)
 			: base(game)
 		{
-			this.Position = new Vector3((SIZE + GAP) * 2.5f + GAP, 0f, (SIZE + GAP) * 2f + GAP);
+			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
+			//this.Position = Vector3.Zero;
 			LoadContent();
 		}
 
