@@ -8,7 +8,7 @@ namespace XNAFrontend.Components
 	/// <summary>
 	/// This is a game component that implements IUpdateable.
 	/// </summary>
-	public class CameraComponent : ACommonComponent, ICamera
+	public class CameraComponent : ACommonComponent
 	{
 		private const float MaxPitch = -MathHelper.TwoPi / 40;
 		private const float MinPitch = -MathHelper.PiOver2 + 0.01f;
@@ -19,10 +19,16 @@ namespace XNAFrontend.Components
 		private const float MoveSpeed = 0.05f;
 		private const float ZoomSpeed = 0.15f;
 
-		private Matrix _projection;
 		private Matrix _view;
 
-		private Vector3 _relativePosition;
+		private ICamera Camera
+		{
+			get
+			{
+				return (ICamera)Game.Services.GetService(typeof(ICamera));
+			}
+		}
+
 		private Vector3 _targetPosition;
 		private float _zoom;
 
@@ -32,21 +38,6 @@ namespace XNAFrontend.Components
 		private float _nearPlane;
 		private float _farPlane;
 
-
-		public Vector3 Position
-		{
-			get { return _relativePosition * _zoom + _targetPosition; }
-		}
-
-		public Matrix Projection
-		{
-			get { return _projection; }
-		}
-
-		public Matrix View
-		{
-			get { return _view; }
-		}
 
 		public CameraComponent(KaroGame game, Vector3 targetPosition)
 			: base(game)
@@ -112,20 +103,20 @@ namespace XNAFrontend.Components
 			_zoom = MathHelper.Clamp(_zoom, MinZoom, MaxZoom);
 
 			RecreateViewMatrix();
-			RecreateProjectionMatrix();
 			base.Update(gameTime);
 		}
 
 		private void RecreateViewMatrix()
 		{
-			_relativePosition = Vector3.Transform(Vector3.Backward, Matrix.CreateFromYawPitchRoll(_yaw, _pitch, 0));
-			_view = Matrix.CreateLookAt(Position, _targetPosition, Vector3.Up);
+			Vector3 relativePosition = Vector3.Transform(Vector3.Backward, Matrix.CreateFromYawPitchRoll(_yaw, _pitch, 0));
+			Vector3 position = relativePosition * _zoom + _targetPosition;
+			Camera.View = Matrix.CreateLookAt(position, _targetPosition, Vector3.Up);
 		}
 
 		private void RecreateProjectionMatrix()
 		{
 			float aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
-			_projection = Matrix.CreatePerspectiveFieldOfView(
+			Camera.Projection = Matrix.CreatePerspectiveFieldOfView(
 				MathHelper.PiOver4, aspectRatio, _nearPlane, _farPlane
 			);
 		}

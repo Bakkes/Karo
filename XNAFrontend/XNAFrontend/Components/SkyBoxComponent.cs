@@ -54,12 +54,11 @@ namespace XNAFrontend.Components
 					foreach (ModelMeshPart part in mesh.MeshParts)
 					{
 						part.Effect = skyBoxEffect;
-						part.Effect.Parameters["World"].SetValue(
-							Matrix.CreateScale(50) * Matrix.CreateTranslation(camera.Position));
+						part.Effect.Parameters["World"].SetValue(Matrix.CreateScale(50));
 						part.Effect.Parameters["View"].SetValue(camera.View);
 						part.Effect.Parameters["Projection"].SetValue(camera.Projection);
 						part.Effect.Parameters["SkyBoxTexture"].SetValue(texture);
-						part.Effect.Parameters["CameraPosition"].SetValue(camera.Position);
+						part.Effect.Parameters["CameraPosition"].SetValue(Vector3.Zero);
 					}
 
 					// Draw the mesh with the skybox effect
