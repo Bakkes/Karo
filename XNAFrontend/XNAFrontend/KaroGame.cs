@@ -13,7 +13,7 @@ namespace XNAFrontend
 	/// </summary>
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
-        public GraphicsDeviceManager graphics { get; set; }
+		public GraphicsDeviceManager graphics { get; set; }
 
 		public KaroGameManager KaroGameManager { get; set; }
 
@@ -52,11 +52,11 @@ namespace XNAFrontend
 					new Vector2DWrapper(4, 3)
 				)
 			);
-            Components.Add(new SkyBoxComponent(this));
-            Components.Add(camera);
+			Components.Add(new SkyBoxComponent(this));
+			Components.Add(camera);
 			Components.Add(new Board(this));
 
-            base.Initialize();
+			base.Initialize();
 		}
 
 		/// <summary>
