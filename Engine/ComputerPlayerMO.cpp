@@ -36,8 +36,6 @@ namespace engine {
 		if(findResult > 0 && ((unsigned)findResult < possibleMoves.size())){
 			possibleMoves[findResult]=possibleMoves[0];
 			possibleMoves[0]=_killerMoves[depth].GetMove();
-
-
 		}
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);

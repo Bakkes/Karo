@@ -27,7 +27,6 @@ namespace engine {
 		} else {
 			result.SetScore(INT_MAX);
 		}
-
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
