@@ -71,9 +71,6 @@
     <Compile Include="RenderOptionsForm.Designer.cs">
       <DependentUpon>RenderOptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="State\ComputerState.cs" />
-    <Compile Include="State\IKaroState.cs" />
-    <Compile Include="KaroGameManager.cs" />
     <Compile Include="KaroPanel.cs">
       <SubType>Component</SubType>
     </Compile>
