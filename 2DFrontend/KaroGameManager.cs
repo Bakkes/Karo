@@ -92,6 +92,10 @@ namespace _2DFrontend
 			Game.ExecuteMove(move, CurrentPlayer);
 			SwapCurrentPlayer();
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
+			if (OnBoardUpdated != null)
+			{
+				OnBoardUpdated();
+			}
 		}
 
 		private void SwapCurrentPlayer()
