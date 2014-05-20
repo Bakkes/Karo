@@ -76,8 +76,9 @@ namespace XNAFrontend
 			KaroGameManager = new KaroGameManager();
 			Board board = new Board(this);
 			CameraComponent camera = new CameraComponent(this, board.Position);
-			Services.AddService(typeof(ICamera), camera);
 			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
+
+			Services.AddService(typeof(ICamera), new Camera());
 
 			Components.Add(camera);
 			Components.Add(SkyBox);
