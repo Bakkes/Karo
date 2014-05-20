@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KaroManager
 {
-	class KaroCommunicatedGameManager : KaroGameManager
+	public class KaroCommunicatedGameManager : KaroGameManager
 	{
 		private ICommunication _communication;
 		private CommunicationProtocolConversionUtility _conversion;
