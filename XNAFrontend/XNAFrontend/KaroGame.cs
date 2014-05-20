@@ -14,7 +14,7 @@ namespace XNAFrontend
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
 		public GraphicsDeviceManager graphics { get; set; }
-        public SpriteBatch spriteBatch { get; private set; }
+		public SpriteBatch spriteBatch { get; private set; }
 		public KeyboardState keyState { get; private set; }
 		public KeyboardState prevKeyState { get; private set; }
 
@@ -33,36 +33,12 @@ namespace XNAFrontend
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            IsMouseVisible = true;
-            Components.Add(new MenuComponent(this));
+		{
+			spriteBatch = new SpriteBatch(GraphicsDevice);
+			IsMouseVisible = true;
+			Components.Add(new MenuComponent(this));
 			prevKeyState = Keyboard.GetState();
 			IsMouseVisible = true;
-
-			Board board = new Board(this);
-			Components.Add(board);
-			CameraComponent camera = new CameraComponent(this, board.Position);
-
-			Services.AddService(typeof(ICamera), camera);
-
-			KaroGameManager = new KaroGameManager();
-			KaroGameManager.ExecuteMove(
-				new MoveWrapper(
-					MoveType.INSERT,
-					new Vector2DWrapper(-1, -1),
-					new Vector2DWrapper(2, 2)
-				)
-			);
-			KaroGameManager.ExecuteMove(
-				new MoveWrapper(
-					MoveType.INSERT,
-					new Vector2DWrapper(-1, -1),
-					new Vector2DWrapper(4, 3)
-				)
-			);
-			Components.Add(new SkyBoxComponent(this));
-			Components.Add(camera);
 
 			base.Initialize();
 		}
@@ -89,6 +65,19 @@ namespace XNAFrontend
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 			base.Draw(gameTime);
+		}
+
+		public void StartGame()
+		{
+			KaroGameManager = new KaroGameManager();
+			Board board = new Board(this);
+			CameraComponent camera = new CameraComponent(this, board.Position);
+			Services.AddService(typeof(ICamera), camera);
+			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
+
+			Components.Add(camera);
+			Components.Add(SkyBox);
+			Components.Add(board);
 		}
 	}
 }
