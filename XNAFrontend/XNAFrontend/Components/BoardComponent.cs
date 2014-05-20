@@ -90,24 +90,21 @@ namespace XNAFrontend.Components
 			float nearestDist = float.MaxValue;
 			Vector2 nearest = new Vector2(-1337, -1337);
 
-			for (int x = 0; x <= 20; x++)
+			for (int x = -1; x <= 20; x++)
 			{
-				for (int y = 0; y <= 20; y++)
+				for (int y = -1; y <= 20; y++)
 				{
 					CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-					if (cell.HasTile()) //check for tile click
+					BoundingBox b = Utilities.CreateBoundingBox(
+						_tileModel, world * Matrix.CreateTranslation(
+							new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))
+						)
+					);
+					float? dist = pickRay.Intersects(b);
+					if (dist != null && dist > 0 && dist < nearestDist)
 					{
-						BoundingBox b = Utilities.CreateBoundingBox(
-							_tileModel, world * Matrix.CreateTranslation(
-								new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))
-							)
-						);
-						float? dist = pickRay.Intersects(b);
-						if (dist != null && dist > 0 && dist < nearestDist)
-						{
-							nearestDist = (float)dist;
-							nearest = new Vector2(x, y);
-						}
+						nearestDist = (float)dist;
+						nearest = new Vector2(x, y);
 					}
 				}
 			}
