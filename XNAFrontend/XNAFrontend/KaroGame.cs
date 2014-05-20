@@ -14,6 +14,9 @@ namespace XNAFrontend
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
 		public GraphicsDeviceManager graphics { get; set; }
+        public SpriteBatch spriteBatch { get; private set; }
+		public KeyboardState keyState { get; private set; }
+		public KeyboardState prevKeyState { get; private set; }
 
 		public KaroGameManager KaroGameManager { get; set; }
 
@@ -30,7 +33,11 @@ namespace XNAFrontend
 		/// and initialize them as well.
 		/// </summary>
 		protected override void Initialize()
-		{
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            IsMouseVisible = true;
+            Components.Add(new MenuComponent(this));
+			prevKeyState = Keyboard.GetState();
 			IsMouseVisible = true;
 
 			Board board = new Board(this);
@@ -67,13 +74,11 @@ namespace XNAFrontend
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
-			// Allows the game to exit
-			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-			{
-				this.Exit();
-			}
+			keyState = Keyboard.GetState();
 
 			base.Update(gameTime);
+
+			prevKeyState = keyState;
 		}
 
 		/// <summary>
