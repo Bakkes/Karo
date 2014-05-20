@@ -13,6 +13,12 @@ namespace XNAFrontend.Components
 		private const float MaxPitch = -MathHelper.TwoPi / 40;
 		private const float MinPitch = -MathHelper.PiOver2 + 0.01f;
 
+		private const float MinZoom = 5f;
+		private const float MaxZoom = 20f;
+
+		private const float MoveSpeed = 0.05f;
+		private const float ZoomSpeed = 0.15f;
+
 		private Matrix _projection;
 		private Matrix _view;
 
@@ -26,7 +32,6 @@ namespace XNAFrontend.Components
 		private float _nearPlane;
 		private float _farPlane;
 
-		private float _speed;
 
 		public Vector3 Position
 		{
@@ -56,8 +61,6 @@ namespace XNAFrontend.Components
 
 			_nearPlane = 1f;
 			_farPlane = 400f;
-
-			_speed = 0.05f;
 		}
 
 		/// <summary>
@@ -81,22 +84,32 @@ namespace XNAFrontend.Components
 			KeyboardState state = Keyboard.GetState();
 			if (state.IsKeyDown(Keys.Left))
 			{
-				_yaw += _speed;
+				_yaw += MoveSpeed;
 			}
 			if (state.IsKeyDown(Keys.Right))
 			{
-				_yaw -= _speed;
+				_yaw -= MoveSpeed;
 			}
 			if (state.IsKeyDown(Keys.Up))
 			{
-				_pitch += _speed;
+				_pitch -= MoveSpeed;
 			}
 			if (state.IsKeyDown(Keys.Down))
 			{
-				_pitch -= _speed;
+				_pitch += MoveSpeed;
+			}
+
+			if (state.IsKeyDown(Keys.Add))
+			{
+				_zoom -= ZoomSpeed;
+			}
+			if (state.IsKeyDown(Keys.Subtract))
+			{
+				_zoom += ZoomSpeed;
 			}
 
 			_pitch = MathHelper.Clamp(_pitch, MinPitch, MaxPitch);
+			_zoom = MathHelper.Clamp(_zoom, MinZoom, MaxZoom);
 
 			RecreateViewMatrix();
 			RecreateProjectionMatrix();
