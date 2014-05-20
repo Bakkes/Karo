@@ -40,11 +40,11 @@ namespace KaroManager
 			// openent says he won (the message contains player.me)
 			if (p == Player.Me)
 			{
+				Debug.WriteLine("Opponent thinks he won, going to check.");
 				// c if execute their move
 				if(!HandleTheirMove(t)){
 					return;
 				}
-				Debug.WriteLine("Opponent thinks he won, going to check.");
 				if (Game.HasWon(Players.Min))
 				{
 					Debug.WriteLine("Opponent did win, we lose.");
