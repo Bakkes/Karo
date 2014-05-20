@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2DFrontend
+namespace KaroManager
 {
-	class CommunicationProtocolConversionUtility
+	public class CommunicationProtocolConversionUtility
 	{
 		private KaroGame _game;
 		private readonly Dictionary<string, Direction> _directions = new Dictionary<string, Direction>() 
