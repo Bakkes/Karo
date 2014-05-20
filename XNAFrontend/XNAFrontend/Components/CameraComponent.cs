@@ -18,51 +18,53 @@ namespace XNAFrontend.Components
 	/// </summary>
 	public class CameraComponent : ACommonComponent, ICamera
 	{
-		/// <summary>
-		/// The position of the camera in world space
-		/// </summary>
-		private Vector3 _position;
-		/// <summary>
-		/// The projection matrix which transforms our 3D world into 2D space
-		/// </summary>
+		private const float MaxPitch = -MathHelper.TwoPi / 40;
+		private const float MinPitch = -MathHelper.PiOver2 + 0.01f;
+
 		private Matrix _projection;
-		/// <summary>
-		/// The matrix which defines how we look at the world
-		/// </summary>
 		private Matrix _view;
+
+		private Vector3 _relativePosition;
+		private Vector3 _targetPosition;
+		private float _zoom;
+
+		private float _yaw;
+		private float _pitch;
+
+		private float _nearPlane;
+		private float _farPlane;
+
+		private float _speed;
 
 		public Vector3 Position
 		{
-			get
-			{
-				return _position;
-			}
+			get { return _relativePosition * _zoom + _targetPosition; }
 		}
 
 		public Matrix Projection
 		{
-			get
-			{
-				return _projection;
-			}
+			get { return _projection; }
 		}
 
 		public Matrix View
 		{
-			get
-			{
-				return _view;
-			}
+			get { return _view; }
 		}
 
-		public CameraComponent(KaroGame game)
+		public CameraComponent(KaroGame game, Vector3 targetPosition)
 			: base(game)
 		{
 			Viewport viewport = game.GraphicsDevice.Viewport;
+			_targetPosition = targetPosition;
 
-			_position = new Vector3(2.75f, 0.3f, 10);
-			_projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, viewport.AspectRatio, 0.1f, 10000);
-			_view = Matrix.CreateLookAt(_position, new Vector3(2.75f, 0, 0), Vector3.Up);
+			_yaw = 0f;
+			_pitch = 0f;
+			_zoom = 10f;
+
+			_nearPlane = 1f;
+			_farPlane = 400f;
+
+			_speed = 0.05f;
 		}
 
 		/// <summary>
@@ -71,6 +73,9 @@ namespace XNAFrontend.Components
 		/// </summary>
 		public override void Initialize()
 		{
+			RecreateViewMatrix();
+			RecreateProjectionMatrix();
+
 			base.Initialize();
 		}
 
@@ -80,8 +85,43 @@ namespace XNAFrontend.Components
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Update(GameTime gameTime)
 		{
+			KeyboardState state = Keyboard.GetState();
+			if (state.IsKeyDown(Keys.Left))
+			{
+				_yaw += _speed;
+			}
+			if (state.IsKeyDown(Keys.Right))
+			{
+				_yaw -= _speed;
+			}
+			if (state.IsKeyDown(Keys.Up))
+			{
+				_pitch += _speed;
+			}
+			if (state.IsKeyDown(Keys.Down))
+			{
+				_pitch -= _speed;
+			}
+
+			_pitch = MathHelper.Clamp(_pitch, MinPitch, MaxPitch);
+
+			RecreateViewMatrix();
+			RecreateProjectionMatrix();
 			base.Update(gameTime);
 		}
 
+		private void RecreateViewMatrix()
+		{
+			_relativePosition = Vector3.Transform(Vector3.Backward, Matrix.CreateFromYawPitchRoll(_yaw, _pitch, 0));
+			_view = Matrix.CreateLookAt(Position, _targetPosition, Vector3.Up);
+		}
+
+		private void RecreateProjectionMatrix()
+		{
+			float aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
+			_projection = Matrix.CreatePerspectiveFieldOfView(
+				MathHelper.PiOver4, aspectRatio, _nearPlane, _farPlane
+			);
+		}
 	}
 }

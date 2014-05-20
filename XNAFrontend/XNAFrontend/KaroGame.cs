@@ -33,7 +33,9 @@ namespace XNAFrontend
 		{
 			IsMouseVisible = true;
 
-			CameraComponent camera = new CameraComponent(this);
+			Board board = new Board(this);
+			Components.Add(board);
+			CameraComponent camera = new CameraComponent(this, board.Position);
 
 			Services.AddService(typeof(ICamera), camera);
 
@@ -54,7 +56,6 @@ namespace XNAFrontend
 			);
 			Components.Add(new SkyBoxComponent(this));
 			Components.Add(camera);
-			Components.Add(new Board(this));
 
 			base.Initialize();
 		}

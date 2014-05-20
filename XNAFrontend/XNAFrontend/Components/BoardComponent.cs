@@ -36,13 +36,13 @@ namespace XNAFrontend.Components
 		public Board(KaroGame game)
 			: base(game)
 		{
+			this.Position = new Vector3((SIZE + GAP) * 2.5f + GAP, 0f, (SIZE + GAP) * 2f + GAP);
 			LoadContent();
 		}
 
 		public override void Initialize()
 		{
 			base.Initialize();
-			this.Position = Vector3.Zero;
 			this._previousMouseState = Mouse.GetState();
 		}
 
