@@ -59,7 +59,7 @@ namespace XNAFrontend.Components
         {
 			Viewport viewport = game.GraphicsDevice.Viewport;
 
-			_position = new Vector3(2.75f, 5, 5);
+			_position = new Vector3(2.75f, 2, 10);
 			_projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, viewport.AspectRatio, 0.1f, 10000);
 			_view = Matrix.CreateLookAt(_position, new Vector3(2.75f, 0, 0), Vector3.Up);
         }

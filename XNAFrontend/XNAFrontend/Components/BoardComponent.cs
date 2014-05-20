@@ -193,14 +193,14 @@ namespace XNAFrontend.Components
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			// Draw the piece on the cell.
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
+			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
 			foreach (ModelMesh mesh in pieceModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
-					effect.World = transforms[mesh.ParentBone.Index] *
-						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
+					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
 				}
