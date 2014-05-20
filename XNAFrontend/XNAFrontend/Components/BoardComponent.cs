@@ -168,16 +168,20 @@ namespace XNAFrontend.Components
 			// Define the model of the piece we have to use (max/min).
 			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
-			// Draw the piece on the cell.
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-270));
+			BoundingBox pieceBox = Utilities.CreateBoundingBox(pieceModel, world);
+			BoundingBox tileBox = Utilities.CreateBoundingBox(pieceModel, world);
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			float extraHeight = pieceBox.Max.Y / 2 + tileBox.Max.Y;
+
+			// Draw the piece on the cell.
 			foreach (ModelMesh mesh in pieceModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
-					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), extraHeight, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
 				}
