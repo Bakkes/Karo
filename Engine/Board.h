@@ -21,6 +21,8 @@ namespace engine{
 		int GetPieceCountFor(Players player) override;
 		void ExecuteMove(const Move& m, Players player) override;
 		void UndoMove(const Move& m, Players player) override;
+		void CreateTileAt(const Vector2D &relativePosition) override;
+		void DeleteTileAt(const Vector2D &relativePosition) override;
 		vector<Move> GetLegalMoves(Players player) override;
 		vector<RelativeCell>* GetOccupiedTiles() override;
 		vector<RelativeCell>* GetEmptyTiles() override;

@@ -1,6 +1,8 @@
 #pragma once
 #include "Cell.h"
 #include "CellValue.h"
+#include "Players.h"
+
 namespace engine{
 	class RelativeAbsoluteConverter;
 	class ENGINE_API RelativeCell{
@@ -21,6 +23,7 @@ namespace engine{
 		int IsEmpty() const;
 		int IsMaxPiece() const;
 		int IsFlipped() const;
+		Players GetPlayer() const;
 
 		vector<RelativeCell> GetSurroundingCells() const;
 

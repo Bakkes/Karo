@@ -29,7 +29,7 @@ namespace _2DFrontend
 		/// <summary>
 		/// Color of the circle accent on pieces.
 		/// </summary>
-		private Pen _pieceAccentColor = new Pen(Color.FromArgb(34, 34, 34), 5);
+		private Pen _pieceAccentColor = new Pen(Color.FromArgb(34, 34, 34), 3);
 
 		/// <summary>
 		/// Color of max's pieces.
@@ -52,10 +52,32 @@ namespace _2DFrontend
 
 		private const int PieceSize = 40;
 
+        private int ScaledCellSize;
+        private int ScaledAccentSize;
+        private int ScaledPieceSize;
+
 		/// <summary>
 		/// Gap left and right of every tile.
 		/// </summary>
-		private const int Gap = 3;
+		private const int Gap = 2;
+
+        private float _scale;
+
+        public new float Scale
+        {
+            set
+            {
+                _scale = value;
+                ScaledAccentSize = (int)(value * AccentSize);
+                ScaledCellSize = (int)(value * CellSize);
+                ScaledPieceSize = (int)(value * PieceSize);
+            }
+
+            get
+            {
+                return _scale;
+            }
+        }
 
 		public KaroPanel()
 			: base()
@@ -63,6 +85,7 @@ namespace _2DFrontend
 			BackColor = Color.FromArgb(12, 12, 12);
 			DoubleBuffered = true;
 			MouseClick += KaroPanel_MouseClick;
+            Scale = 1f;
 		}
 
 		/// <summary>
@@ -105,12 +128,14 @@ namespace _2DFrontend
 						PaintTile(tile, g, x, y);
 						if (tile.HasTile())
 						{
+                            Font font = new Font(SystemFonts.DefaultFont.FontFamily, SystemFonts.DefaultFont.Size * Scale);
+
 							Point paintPos = CellToPixel(x, y);
 							g.DrawString(_conversion.ConvertBoardPositionToInt(tile.GetRelativePosition()).ToString(), 
-								SystemFonts.DefaultFont, Brushes.White, paintPos);
+								font, Brushes.White, paintPos);
 
-							paintPos.Y += 37;
-							g.DrawString(tile.GetRelativePosition().ToString(), SystemFonts.DefaultFont, Brushes.White, paintPos);
+							paintPos.Y += (int)(37 * _scale);
+							g.DrawString(tile.GetRelativePosition().ToString(), font, Brushes.White, paintPos);
 						}
 					}
 				}
@@ -122,16 +147,16 @@ namespace _2DFrontend
 		/// </summary>
 		private void PaintCurrentPlayer(Graphics g)
 		{
-			int x = this.Width - CellSize;
-			int y = CellSize - PieceSize;
-			int offset = (CellSize - PieceSize) / 2;
+			int x = this.Width - ScaledCellSize;
+			int y = ScaledCellSize - ScaledPieceSize;
+			int offset = (ScaledCellSize - ScaledPieceSize) / 2;
 			Brush playerBrush = _manager.CurrentPlayer == Players.Max ? _pieceMaxColor : _pieceMinColor;
-			g.FillRectangle(_tileBackColor, x - offset, y - offset, CellSize, CellSize);
-			g.FillEllipse(playerBrush, x, y, PieceSize, PieceSize);
+			g.FillRectangle(_tileBackColor, x - offset, y - offset, ScaledCellSize, ScaledCellSize);
+			g.FillEllipse(playerBrush, x, y, ScaledPieceSize, ScaledPieceSize);
 		}
 
 		/// <summary>
-		/// Paints a tile that's 2 pixels wider/taller than CellSize at every
+		/// Paints a tile that's 2 pixels wider/taller than ScaledCellSize at every
 		/// tile that's currently clickable.
 		/// </summary>
 		private void PaintLegalMove(Graphics g)
@@ -144,7 +169,7 @@ namespace _2DFrontend
 				{
 					Point paintPos = CellToPixel((int)move.GetToCell().X, (int)move.GetToCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
-						CellSize + 4, CellSize + 4);
+						ScaledCellSize + 4, ScaledCellSize + 4);
 				}
 			}
 			else if (_manager.CurrentState is PieceSourceState)
@@ -154,7 +179,7 @@ namespace _2DFrontend
 				{
 					Point paintPos = CellToPixel((int)move.GetFromCell().X, (int)move.GetFromCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
-						CellSize + 4, CellSize + 4);
+						ScaledCellSize + 4, ScaledCellSize + 4);
 				}
 			}
 			else if (_manager.CurrentState is PieceDestinationState)
@@ -164,7 +189,7 @@ namespace _2DFrontend
 				{
 					Point paintPos = CellToPixel((int)move.GetToCell().X, (int)move.GetToCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
-						CellSize + 4, CellSize + 4);
+						ScaledCellSize + 4, ScaledCellSize + 4);
 				}
 			}
 			else if (_manager.CurrentState is CellSourceState)
@@ -175,7 +200,7 @@ namespace _2DFrontend
 				{
 					Point paintPos = CellToPixel((int)move.GetUsedCell().X, (int)move.GetUsedCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
-						CellSize + 4, CellSize + 4);
+						ScaledCellSize + 4, ScaledCellSize + 4);
 				}
 			}
 		}
@@ -190,7 +215,7 @@ namespace _2DFrontend
 			}
 			Point paintPos = CellToPixel(x, y);
 			g.FillRectangle(_tileBackColor, paintPos.X, paintPos.Y,
-				CellSize, CellSize);
+				ScaledCellSize, ScaledCellSize);
 			if ((tileData & (int)CellValue.IsEmpty) == 0)
 			{
 				Brush brush;
@@ -204,17 +229,17 @@ namespace _2DFrontend
 				}
 				g.FillEllipse(
 					brush,
-					paintPos.X + (CellSize - PieceSize) / 2,
-					paintPos.Y + (CellSize - PieceSize) / 2,
-					PieceSize, PieceSize
+					paintPos.X + (ScaledCellSize - ScaledPieceSize) / 2,
+					paintPos.Y + (ScaledCellSize - ScaledPieceSize) / 2,
+					ScaledPieceSize, ScaledPieceSize
 				);
 				if ((tileData & (int)CellValue.IsFlipped) != 0)
 				{
 					g.DrawEllipse(
 						_pieceAccentColor,
-						paintPos.X + (CellSize - AccentSize) / 2,
-						paintPos.Y + (CellSize - AccentSize) / 2,
-						AccentSize, AccentSize
+						paintPos.X + (ScaledCellSize - ScaledAccentSize) / 2,
+						paintPos.Y + (ScaledCellSize - ScaledAccentSize) / 2,
+						ScaledAccentSize, ScaledAccentSize
 					);
 				}
 			}
@@ -236,8 +261,8 @@ namespace _2DFrontend
 		{
 			// The +1 is because all tiles are offest by one tile to the bottom/right.
 			// See comments in CellToPixel for further explanation.
-			return new Point(x / (CellSize + Gap * 2) - 1,
-				y / (CellSize + Gap * 2) - 1);
+			return new Point(x / (ScaledCellSize + Gap * 2) - 1,
+				y / (ScaledCellSize + Gap * 2) - 1);
 		}
 
 		/// <summary>
@@ -250,8 +275,8 @@ namespace _2DFrontend
 			x++;
 			y++;
 
-			return new Point(x * (CellSize + Gap * 2) + Gap,
-				y * (CellSize + Gap * 2) + Gap);
+			return new Point(x * (ScaledCellSize + Gap * 2) + Gap,
+				y * (ScaledCellSize + Gap * 2) + Gap);
 		}
 	}
 }

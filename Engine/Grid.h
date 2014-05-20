@@ -81,7 +81,7 @@ namespace engine {
 			for (unsigned y = 0; y < height; y++) {
 				for (unsigned x = 0; x < width; x++) {
 
-					if (y < height - 2) {
+					if (y < height - 1) {
 						_tiles->at(GetCellIndex(x, y))->SetBottom(
 							_tiles->at(
 								GetCellIndex(x, y + 1)
@@ -108,7 +108,7 @@ namespace engine {
 						);
 					}
 
-					if (x < width - 2) {
+					if (x < width - 1) {
 						_tiles->at(GetCellIndex(x, y))->SetRight(
 							_tiles->at(
 								GetCellIndex(x + 1, y)

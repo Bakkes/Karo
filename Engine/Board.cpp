@@ -61,6 +61,7 @@ namespace engine{
 	}
 
 	void Board::ExecuteMove(const Move& move, Players player) {
+		_moveFinder->Invalidate();
 		Vector2D from = _converter->ToAbsolute(move.GetFromCell());
 		Vector2D to = _converter->ToAbsolute(move.GetToCell());
 		Vector2D used;
@@ -107,6 +108,7 @@ namespace engine{
 		
 	}
 	void Board::UndoMove(const Move& inputMove, Players player){
+		_moveFinder->Invalidate();
 		Move move = ShiftMoveBack(inputMove);
 		Vector2D from = _converter->ToAbsolute(move.GetFromCell());
 		Vector2D to = _converter->ToAbsolute(move.GetToCell());
@@ -163,6 +165,12 @@ namespace engine{
 		Vector2D to = move.GetToCell();
 		Vector2D used = move.GetUsedCell();
 		Vector2D correction = _converter->CalcShiftCorrection(to, used);
+		if(used.X() == 0 && (_grid->GetCellAt(_converter->ToAbsolute(used + correction))->GetData() & HasTile)){
+			correction -= Vector2D(1, 0);
+		}
+		if(used.Y() == 0 && (_grid->GetCellAt(_converter->ToAbsolute(used + correction))->GetData() & HasTile)){
+			correction -= Vector2D(0, 1);
+		}
 		from += correction;
 		to += correction;
 		used += correction;
@@ -170,6 +178,7 @@ namespace engine{
 	}
 
 	void Board::InsertPiece(Cell<int>& on, Players owner){
+		_moveFinder->Invalidate();
 		on.SetData(on.GetData() & ~IsEmpty);
 		if(owner == Max) {
 			on.SetData(on.GetData() | IsMax);
@@ -178,36 +187,51 @@ namespace engine{
 		on.SetData(on.GetData() & ~IsMax);
 	}
 	void Board::DeletePiece(Cell<int>& on){
+		_moveFinder->Invalidate();
 		on.SetData(on.GetData() | IsEmpty);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
 		// convertions already happend save to update converter
+		_moveFinder->Invalidate();
 		MoveTile(tileUsed, to);
 		MovePiece(from, to, owner);
 	}
 
 	void Board::MoveTile(Cell<int>& from, Cell<int>& to){
+		_moveFinder->Invalidate();
 		_converter->MoveTile(from.GetPosition(), to.GetPosition());
 		from.SetData(from.GetData() & ~HasTile);
 		to.SetData(to.GetData() | HasTile);
 	}
 	void Board::MovePiece(Cell<int>& from, Cell<int>& to, Players owner){
-
+		_moveFinder->Invalidate();
 		to.SetData(from.GetData());
 		DeletePiece(from);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner, Cell<int>& tileUsed){
+		_moveFinder->Invalidate();
 		Flip(from);
 		MovePiece(from, to, owner, tileUsed);
 	}
 	void Board::JumpPiece(Cell<int>& from, Cell<int>& to, Players owner){
+		_moveFinder->Invalidate();
 		Flip(from);
 		MovePiece(from, to, owner);
 	}
 	void Board::Flip(Cell<int>& which){
+		_moveFinder->Invalidate();
 		which.SetData(which.GetData() ^ IsFlipped);
 	}
 
+	void Board::CreateTileAt(const Vector2D &relativePosition) {
+		Cell<int> *cell = _grid->GetCellAt(_converter->ToAbsolute(relativePosition));
+		cell->SetData(3);
+	}
+
+	void Board::DeleteTileAt(const Vector2D &relativePosition) {
+		Cell<int> *cell = _grid->GetCellAt(_converter->ToAbsolute(relativePosition));
+		cell->SetData(0);
+	}
 
 	vector<Move> Board::GetLegalMoves(Players player) {
 		return _moveFinder->GetLegalMoves(player);

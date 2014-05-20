@@ -196,5 +196,37 @@ namespace Tests {
 			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(3,3))) == 3);
 			Assert::IsTrue(board->CountNonDiagonalEdges(board->GetRelativeCellAt(Vector2D(3,2))) == 4);
 		}
+
+		TEST_METHOD(BoardDoMoveThenUndoMoveDoesNotScrewBoardUp) {
+			Board* board = Board::CreateBoard(
+				"2,3,5,1,5,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,\n"
+				"1,3,1,5,1,2,0,0,0,0,0,0,0,0,0,0,0,0,2,3,\n"
+				"3,3,7,1,5,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,\n"
+				"3,3,5,5,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,2,6,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,6,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
+				Vector2D(19, 0)
+			);
+			Move evilMove(STEP, Vector2D(3, 0), Vector2D(3, -1), Vector2D(0, 1));
+			board->ExecuteMove(evilMove, Max);
+			board->UndoMove(evilMove, Max);
+			RelativeCell shouldBeEmptyCell = board->GetRelativeCellAt(Vector2D(1, 0));
+			OutputDebugString(board->ToString().c_str());
+			Assert::IsFalse(shouldBeEmptyCell.HasTile());
+		}
 	};
 }
