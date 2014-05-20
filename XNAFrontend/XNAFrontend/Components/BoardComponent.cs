@@ -89,19 +89,21 @@ namespace XNAFrontend.Components
                 for (int y = 0; y <= 20; y++)
                 {
                     CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+					float? dist = 0;
+					BoundingBox b;
 					if (includePawns && cell.IsEmpty())
 					{
-
+						Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
+						b = CreateBoundingBox(pieceModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
 					} else if (cell.HasTile()) //check for tile click
                     {
-                        BoundingBox b = CreateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
-                        float? dist = pickRay.Intersects(b);
-                        if (dist != null && dist > 0 && dist < nearestDist)
-                        {
-                            nearestDist = (float)dist;
-                            nearest = new Vector2(x, y);
-                        }
+                        b = CreateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
                     }
+					if (dist != null && dist > 0 && dist < nearestDist)
+					{
+						nearestDist = (float)dist;
+						nearest = new Vector2(x, y);
+					}
                 }
             }
             return nearest;
@@ -190,7 +192,7 @@ namespace XNAFrontend.Components
 		{
 			// Nothing to draw if this cell is empty.
 			if (cell.IsEmpty()) { return; }
-
+			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
 			// Define the model of the piece we have to use (max/min).
 			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
@@ -202,7 +204,7 @@ namespace XNAFrontend.Components
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
-					effect.World = transforms[mesh.ParentBone.Index] *
+					effect.World = world *
 						Matrix.CreateTranslation(Position + new Vector3(-300 * y, 0, -300 * x));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
