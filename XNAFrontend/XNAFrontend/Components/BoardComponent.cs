@@ -61,6 +61,7 @@ namespace XNAFrontend.Components
             if (mouseState.LeftButton == ButtonState.Pressed && _previousMouseState.LeftButton != ButtonState.Pressed)
             {
 				Vector2 clickedTile = GetTileAtPixelPosition(mouseState.X, mouseState.Y, true);
+				System.Console.WriteLine(clickedTile.X + ", " + clickedTile.Y);
             }
 			base.Update(gameTime);
             _previousMouseState = mouseState;
@@ -71,7 +72,7 @@ namespace XNAFrontend.Components
             ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
             Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
             Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
-            Matrix world = Matrix.CreateTranslation(0, 0, 0);
+			Matrix world = Matrix.Identity;
             Vector3 nearPoint = GraphicsDevice.Viewport.Unproject(nearSource,
                 camera.Projection, camera.View, world);
             Vector3 farPoint = GraphicsDevice.Viewport.Unproject(farSource,
@@ -88,19 +89,28 @@ namespace XNAFrontend.Components
             {
                 for (int y = 0; y <= 20; y++)
                 {
+
                     CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+					if (!cell.HasTile())
+					{
+						continue;
+					}
+
+					Matrix tempWorld = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+					Model model = _tileModel;
 					float? dist = 0;
 					BoundingBox b;
 					if (includePawns && cell.IsEmpty())
 					{
-						Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
-						b = CreateBoundingBox(pieceModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
-					} else if (cell.HasTile()) //check for tile click
-                    {
-                        b = CreateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
-                    }
+						model = cell.IsMaxPiece() ? _maxModel : _minModel;
+					}
+
+					b = CreateBoundingBox(model, tempWorld);
+					dist = pickRay.Intersects(b);
+
 					if (dist != null && dist > 0 && dist < nearestDist)
 					{
+						System.Console.WriteLine(dist);
 						nearestDist = (float)dist;
 						nearest = new Vector2(x, y);
 					}
@@ -198,7 +208,7 @@ namespace XNAFrontend.Components
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			// Draw the piece on the cell.
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
-			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+			
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
 			foreach (ModelMesh mesh in pieceModel.Meshes)
 			{
