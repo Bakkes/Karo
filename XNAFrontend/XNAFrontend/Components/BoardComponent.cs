@@ -57,7 +57,6 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
-
 			MouseState mouseState = Mouse.GetState();
 			if (mouseState.LeftButton == ButtonState.Pressed && _previousMouseState.LeftButton != ButtonState.Pressed)
 			{
