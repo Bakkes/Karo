@@ -122,7 +122,7 @@ namespace KaroManager
 
 			// Get the move with the correct source tile from the last click.
 			Console.WriteLine("Current player: " + CurrentPlayer);
-			if (!IsMoveLegal(received, Players.Min))
+			if (!IsMoveLegal(received, CurrentPlayer))
 			{
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
