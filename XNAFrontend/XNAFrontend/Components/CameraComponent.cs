@@ -90,11 +90,11 @@ namespace XNAFrontend.Components
 				_pitch += MoveSpeed;
 			}
 
-			if (state.IsKeyDown(Keys.Add))
+			if (state.IsKeyDown(Keys.PageDown))
 			{
 				_zoom -= ZoomSpeed;
 			}
-			if (state.IsKeyDown(Keys.Subtract))
+			if (state.IsKeyDown(Keys.PageUp))
 			{
 				_zoom += ZoomSpeed;
 			}
