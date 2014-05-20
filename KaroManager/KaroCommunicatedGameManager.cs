@@ -87,15 +87,7 @@ namespace KaroManager
 			Debug.WriteLine("Checking if legal: ");
 			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
 			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player);
-			;
-			foreach (MoveWrapper mw in legal)
-			{
-				Vector2DWrapper from2 = mw.GetFromCell();
-				Vector2DWrapper to2 = mw.GetToCell();
-				Vector2DWrapper used2 = mw.GetUsedCell();
-				bool hasUsed = mw.HasUsedCell();
-				int a = 1;
-			}
+			
 			return legal.Where(m =>
 				m.GetFromCell() == mv.GetFromCell() &&
 				m.GetToCell() == mv.GetToCell() &&
@@ -179,7 +171,7 @@ namespace KaroManager
 		}
 		MoveWrapper GetMove()
 		{
-			return LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+			return Game.GetBestMove(); //LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)

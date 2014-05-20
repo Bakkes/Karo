@@ -1,12 +1,15 @@
-﻿using System;
+﻿using CommunicationProtocol;
+using engine.wrapper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using CommunicationProtocol;
-using engine.wrapper;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace KaroManager
+namespace _2DFrontend
 {
-	public class CommunicationProtocolConversionUtility
+	class CommunicationProtocolConversionUtility
 	{
 		private KaroGame _game;
 		private readonly Dictionary<string, Direction> _directions = new Dictionary<string, Direction>() 
@@ -38,20 +41,20 @@ namespace KaroManager
 				case Direction.None:
 					break;
 				case Direction.North:
-					goalPosition.X -= moveSize;
-					break;
-				case Direction.East:
-					goalPosition.Y += moveSize;
-					break;
-				case Direction.South:
-					goalPosition.X += moveSize;
-					break;
-				case Direction.West:
 					goalPosition.Y -= moveSize;
 					break;
-				case Direction.NorthEast:
-					goalPosition.X -= moveSize;
+				case Direction.East:
+					goalPosition.X += moveSize;
+					break;
+				case Direction.South:
 					goalPosition.Y += moveSize;
+					break;
+				case Direction.West:
+					goalPosition.X -= moveSize;
+					break;
+				case Direction.NorthEast:
+					goalPosition.X += moveSize;
+					goalPosition.Y -= moveSize;
 					break;
 				case Direction.NorthWest:
 					goalPosition.X -= moveSize;
@@ -62,8 +65,8 @@ namespace KaroManager
 					goalPosition.Y += moveSize;
 					break;
 				case Direction.SouthWest:
-					goalPosition.X += moveSize;
-					goalPosition.Y -= moveSize;
+					goalPosition.X -= moveSize;
+					goalPosition.Y += moveSize;
 					break;
 			}
 
@@ -72,10 +75,16 @@ namespace KaroManager
 
 		public Direction CalculateDirection(Vector2DWrapper to, Vector2DWrapper from)
 		{
-			Vector2DWrapper difference = new Vector2DWrapper(from.X - to.X, from.Y - to.Y);
-			string xDiff = difference.X == 0 ? "" : difference.X > 0 ? "W" : "E";
-			string yDiff = difference.Y == 0 ? "" : difference.Y > 0 ? "N" : "S";
-			Debug.WriteLine(yDiff + xDiff +" - " + _directions[yDiff + xDiff]);
+			Vector2DWrapper difference = new Vector2DWrapper(to.X - from.X, to.Y - from.Y);
+			if (Math.Abs(difference.X) > 2)
+				difference.X = -difference.X;
+
+			if (Math.Abs(difference.Y) > 2)
+				difference.Y = -difference.Y;
+
+			string xDiff = difference.X == 0 ? "" : difference.X < 0 ? "W" : "E";
+			string yDiff = difference.Y == 0 ? "" : difference.Y < 0 ? "N" : "S";
+			Debug.WriteLine(yDiff + xDiff + " - " + _directions[yDiff + xDiff]);
 			return _directions[yDiff + xDiff];
 		}
 
@@ -155,7 +164,7 @@ namespace KaroManager
 		{
 			if (number == null)
 			{
-				return new Vector2DWrapper(0, 0);
+				return new Vector2DWrapper(-1337, -1337);
 			}
 
 			if (number < 0 || number > 20)
@@ -168,9 +177,9 @@ namespace KaroManager
 			{
 				for (int x = 0; x < 20; x++)
 				{
-					
+
 					CellWrapper cell = _game.GetBoard().GetRelativeCellAt(new Vector2DWrapper(x, y));
-					if ((cell.GetData() & (int)CellValue.HasCell) == 1)
+					if (cell.HasTile())
 					{
 						// This cell has a tile, increment the number
 						currentNumber++;
@@ -194,7 +203,7 @@ namespace KaroManager
 				{
 					CellWrapper cell = _game.GetBoard().GetRelativeCellAt(new Vector2DWrapper(x, y));
 					bool reachedEnd = x == vector2D.X && y == vector2D.Y;
-					
+
 
 					if (cell.HasTile())
 					{
@@ -217,7 +226,10 @@ namespace KaroManager
 
 		public String MoveWrapperToString(MoveWrapper mw)
 		{
-			return String.Format("MOVE: Type {0}, FTU: {1},{2},{3}", mw.GetMoveType(), mw.GetFromCell(), mw.GetToCell(), mw.GetUsedCell());
+			if (mw.HasUsedCell())
+				return String.Format("MOVE: Type {0}, FTU: {1},{2},{3}", mw.GetMoveType(), mw.GetFromCell(), mw.GetToCell(), mw.GetUsedCell());
+			return String.Format("MOVE: Type {0}, FTU: {1},{2}, None", mw.GetMoveType(), mw.GetFromCell(), mw.GetToCell());
+
 		}
 
 		public String TurnToString(Turn t)
