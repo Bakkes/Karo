@@ -32,13 +32,11 @@ namespace XNAFrontend
 		{
 			IsMouseVisible = true;
 
-			CameraComponent camera = new CameraComponent(this);
-
-			Services.AddService(typeof(ICamera), camera);
+			Services.AddService(typeof(ICamera), new Camera(GraphicsDevice.Viewport));
 
 			KaroGameManager = new KaroGameManager();
             Components.Add(new SkyBoxComponent(this));
-            Components.Add(camera);
+            Components.Add(new CameraComponent(this));
 			Components.Add(new Board(this));
 
             base.Initialize();

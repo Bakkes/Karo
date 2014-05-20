@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using XNAFrontend.Services;
+using engine.wrapper;
 
 
 namespace XNAFrontend.Components
@@ -16,52 +17,13 @@ namespace XNAFrontend.Components
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class CameraComponent : ACommonComponent, ICamera
+    public class CameraComponent : ACommonComponent
     {
-		/// <summary>
-		/// The position of the camera in world space
-		/// </summary>
-		private Vector3 _position;
-		/// <summary>
-		/// The projection matrix which transforms our 3D world into 2D space
-		/// </summary>
-		private Matrix _projection;
-		/// <summary>
-		/// The matrix which defines how we look at the world
-		/// </summary>
-		private Matrix _view;
 
-		public Vector3 Position
-		{
-			get
-			{
-				return _position;
-			}
-		}
-
-		public Matrix Projection
-		{
-			get
-			{
-				return _projection;
-			}
-		}
-
-		public Matrix View
-		{
-			get
-			{
-				return _view;
-			}
-		}
+		private new KaroGame Game { get { return (KaroGame)base.Game; } }
 
         public CameraComponent(KaroGame game) : base(game)
         {
-			Viewport viewport = game.GraphicsDevice.Viewport;
-
-			_position = new Vector3(2.75f, 5, 5);
-			_projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, viewport.AspectRatio, 0.1f, 10000);
-			_view = Matrix.CreateLookAt(_position, new Vector3(2.75f, 0, 0), Vector3.Up);
         }
 
         /// <summary>
@@ -81,6 +43,58 @@ namespace XNAFrontend.Components
         {
             base.Update(gameTime);
         }
+
+		/// <summary>
+		/// Gets the maximum width of the board
+		/// Note: This does not have to be the tile count
+		/// </summary>
+		/// <returns>the maximum amount of used cells in the width</returns>
+		private int GetMaxBoardWidth()
+		{
+			BoardWrapper board = Game.KaroGameManager.Board;
+			int maxWidth = 0;
+			for (int y = 0; y < 20; y++)
+			{
+				for (int x = 19; x >= 0; x--)
+				{
+					if (!board.GetRelativeCellAt(new Vector2DWrapper(x, y)).HasTile())
+					{
+						continue;
+					}
+
+					if (x > maxWidth) {
+						maxWidth = x;
+					}
+				}
+			}
+			return maxWidth;
+		}
+
+		/// <summary>
+		/// Gets the maximum of the board
+		/// Note: This does not have to be the tile count
+		/// </summary>
+		/// <returns>the maximum amount of used cells in the height</returns>
+		private int GetMaxBoardHeight()
+		{
+			BoardWrapper board = Game.KaroGameManager.Board;
+			int maxHeight = 0;
+			for (int x = 0; x < 20; x++)
+			{
+				for (int y = 19; y >= 0; y--)
+				{
+					if (!board.GetRelativeCellAt(new Vector2DWrapper(x, y)).HasTile())
+					{
+						continue;
+					}
+
+					if (y > maxHeight) {
+						maxHeight = y;
+					}
+				}
+			}
+			return maxHeight;
+		}
 
 	}
 }
