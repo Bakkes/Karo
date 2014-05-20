@@ -168,6 +168,7 @@ namespace XNAFrontend.Components
 
 			// Define the model of the piece we have to use (max/min).
 			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
+			Vector3 color = cell.IsMaxPiece() ? Color.Red.ToVector3() : Color.Green.ToVector3();
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
@@ -192,6 +193,7 @@ namespace XNAFrontend.Components
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), extraHeight, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
+					effect.DiffuseColor = color;
 				}
 				mesh.Draw();
 			}
