@@ -30,7 +30,7 @@ namespace engine {
 		// Enable caching.
 		if (player == Max) { _invalidatedMax = false; }
 		if (player == Min) { _invalidatedMin = false; }
-		_cachedMoves->clear();
+		
 		delete _cachedMoves;
 		_cachedMoves = new vector<Move>();
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
@@ -204,7 +204,6 @@ namespace engine {
 	}
 
 	int MoveFinder::ConnectedTiles(const RelativeCell &start) {
-		_checkedCells->clear();
 		delete _checkedCells;
 		_checkedCells = new vector<const RelativeCell>();
 		return ConnectedTilesRecursive(start);
