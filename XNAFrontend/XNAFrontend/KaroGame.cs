@@ -56,11 +56,6 @@ namespace XNAFrontend
 		{
 			keyState = Keyboard.GetState();
 
-			if (keyState.IsKeyDown(Keys.Escape))
-			{
-				Exit();
-			}
-
 			base.Update(gameTime);
 			prevKeyState = keyState;
 		}
