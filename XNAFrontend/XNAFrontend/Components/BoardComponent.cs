@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
 namespace XNAFrontend.Components
 {
@@ -64,6 +65,7 @@ namespace XNAFrontend.Components
 				System.Console.WriteLine(clickedTile.X + ", " + clickedTile.Y);
             }
 			base.Update(gameTime);
+			
             _previousMouseState = mouseState;
 		}
 
@@ -72,7 +74,7 @@ namespace XNAFrontend.Components
             ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
             Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
             Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
-			Matrix world = Matrix.Identity;
+			Matrix world = Matrix.CreateTranslation(0, 0, 0);
             Vector3 nearPoint = GraphicsDevice.Viewport.Unproject(nearSource,
                 camera.Projection, camera.View, world);
             Vector3 farPoint = GraphicsDevice.Viewport.Unproject(farSource,
@@ -89,7 +91,6 @@ namespace XNAFrontend.Components
             {
                 for (int y = 0; y <= 20; y++)
                 {
-
                     CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
 					if (!cell.HasTile())
 					{
@@ -100,8 +101,9 @@ namespace XNAFrontend.Components
 					Model model = _tileModel;
 					float? dist = 0;
 					BoundingBox b;
-					if (includePawns && cell.IsEmpty())
+					if (includePawns && !cell.IsEmpty())
 					{
+						Debug.WriteLine("Using piece model for " + x + ", " + y);
 						model = cell.IsMaxPiece() ? _maxModel : _minModel;
 					}
 
