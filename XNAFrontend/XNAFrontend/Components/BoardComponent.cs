@@ -61,7 +61,13 @@ namespace XNAFrontend.Components
 			MouseState mouseState = Mouse.GetState();
 			if (mouseState.LeftButton == ButtonState.Pressed && _previousMouseState.LeftButton != ButtonState.Pressed)
 			{
-
+				Vector2 tilePosition = GetTileAtPixelPosition(mouseState.X, mouseState.Y);
+				if (tilePosition.X != -1337)
+				{
+					karoGame.KaroGameManager.Update(
+						new System.Drawing.Point((int)tilePosition.X, (int)tilePosition.Y)
+					);
+				}
 			}
 			base.Update(gameTime);
 			_previousMouseState = mouseState;
