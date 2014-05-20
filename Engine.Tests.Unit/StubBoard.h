@@ -13,6 +13,8 @@ namespace Tests {
 		int GetPieceCountFor(Players player) override;
 		void ExecuteMove(const Move& move, Players player) override;
 		void UndoMove(const Move& m, Players player) override;
+		void CreateTileAt(const Vector2D &relativePosition) override;
+		void DeleteTileAt(const Vector2D &relativePosition) override;
 		std::vector<Move> GetLegalMoves(Players player) override;
 		std::vector<RelativeCell>* GetOccupiedTiles() override;
 		std::vector<RelativeCell>* GetEmptyTiles() override;
