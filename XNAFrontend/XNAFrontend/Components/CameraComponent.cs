@@ -59,7 +59,7 @@ namespace XNAFrontend.Components
 
 			_yaw = 0f;
 			_pitch = 0f;
-			_zoom = 10f;
+			_zoom = 8f;
 
 			_nearPlane = 1f;
 			_farPlane = 400f;

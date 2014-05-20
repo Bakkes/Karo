@@ -40,6 +40,10 @@ namespace XNAFrontend
 			prevKeyState = Keyboard.GetState();
 			IsMouseVisible = true;
 
+			graphics.PreferredBackBufferWidth = 1280;
+			graphics.PreferredBackBufferHeight = 720;
+			graphics.ApplyChanges();
+
 			base.Initialize();
 		}
 
