@@ -80,6 +80,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="KaroGame.cs" />
     <Compile Include="Services\ICamera.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

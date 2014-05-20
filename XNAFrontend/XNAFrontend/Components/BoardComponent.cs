@@ -91,7 +91,11 @@ namespace XNAFrontend.Components
 					CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
 					if (cell.HasTile()) //check for tile click
 					{
-						BoundingBox b = CreateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
+						BoundingBox b = Utilities.CreateBoundingBox(
+							_tileModel, world * Matrix.CreateTranslation(
+								new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))
+							)
+						);
 						float? dist = pickRay.Intersects(b);
 						if (dist != null && dist > 0 && dist < nearestDist)
 						{
@@ -102,33 +106,6 @@ namespace XNAFrontend.Components
 				}
 			}
 			return nearest;
-		}
-
-		protected BoundingBox CreateBoundingBox(Model model, Matrix worldTransform)
-		{
-			Vector3 min = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
-			Vector3 max = new Vector3(float.MinValue, float.MinValue, float.MinValue);
-
-			foreach (ModelMesh mesh in model.Meshes)
-			{
-				foreach (ModelMeshPart meshPart in mesh.MeshParts)
-				{
-					int vertexStride = meshPart.VertexBuffer.VertexDeclaration.VertexStride;
-					int vertexBufferSize = meshPart.NumVertices * vertexStride;
-
-					float[] vertexData = new float[vertexBufferSize / sizeof(float)];
-					meshPart.VertexBuffer.GetData<float>(vertexData);
-
-					for (int i = 0; i < vertexBufferSize / sizeof(float); i += vertexStride / sizeof(float))
-					{
-						Vector3 transformedPosition = Vector3.Transform(new Vector3(vertexData[i], vertexData[i + 1], vertexData[i + 2]), worldTransform);
-
-						min = Vector3.Min(min, transformedPosition);
-						max = Vector3.Max(max, transformedPosition);
-					}
-				}
-			}
-			return new BoundingBox(min, max);
 		}
 
 		public override void Draw(GameTime gameTime)
