@@ -39,7 +39,7 @@ namespace _2DFrontend
 
 		void _communication_WinDetected(Turn t, Player p)
 		{
-			if (p == Player.You)
+			if (p == Player.Me)
 			{
 				Debug.WriteLine("Opponent thinks he won, going to check.");
 				if (Game.HasWon(Players.Min))
@@ -53,7 +53,7 @@ namespace _2DFrontend
 					_communication.SendWinDisputed();
 				}
 			}
-			else if (p == Player.Me)
+			else if (p == Player.You)
 			{
 				Debug.WriteLine("Opponent thinks I won, going to check.");
 				if (Game.HasWon(Players.Max))
