@@ -176,10 +176,17 @@ namespace XNAFrontend.Components
 			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
+			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+
+			// Flip the piece if neccesary
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-270));
+			if (cell.IsFlipped())
+			{
+				world *= Matrix.CreateRotationX(MathHelper.ToRadians(180));
+			}
+
 			BoundingBox pieceBox = Utilities.CreateBoundingBox(pieceModel, world);
 			BoundingBox tileBox = Utilities.CreateBoundingBox(pieceModel, world);
-			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
 			float extraHeight = pieceBox.Max.Y / 2 + tileBox.Max.Y;
 
 			// Draw the piece on the cell.
