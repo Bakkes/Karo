@@ -12,6 +12,10 @@ namespace XNAFrontend.Components
 	/// </summary>
     internal class Board : ACommonComponent
 	{
+		public const float PIECE_SIZE = 1f;
+		public const float GAP_SIZE = 0.1f;
+		public const float TOTAL_SPACING = PIECE_SIZE + GAP_SIZE;
+
 		private Model _tileModel;
 	
 		private KaroGameManager KaroGameManager
@@ -78,8 +82,6 @@ namespace XNAFrontend.Components
 		/// </summary>
 		private void DrawCellAt(CellWrapper cell, int x, int y)
 		{
-			const float SIZE = 1f;
-			const float GAP = 0.1f;
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
 			foreach (ModelMesh mesh in _tileModel.Meshes)
@@ -87,7 +89,7 @@ namespace XNAFrontend.Components
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
-					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+					effect.World = world * Matrix.CreateTranslation(new Vector3(x * TOTAL_SPACING, 0, y * TOTAL_SPACING));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
 				}

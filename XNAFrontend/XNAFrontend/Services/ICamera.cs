@@ -9,8 +9,8 @@ namespace XNAFrontend.Services
 {
     interface ICamera
     {
-		Vector3 Position { get; }
-		Matrix Projection { get; }
-		Matrix View { get; }
+		Vector3 Position { get; set; }
+		Matrix Projection { get; set; }
+		Matrix View { get; set; }
     }
 }

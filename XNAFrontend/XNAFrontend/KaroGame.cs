@@ -2,6 +2,7 @@ using KaroManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 using XNAFrontend.Components;
 using XNAFrontend.Services;
 
@@ -56,6 +57,7 @@ namespace XNAFrontend
 			}
 
 			base.Update(gameTime);
+			Debug.WriteLine(string.Format("FPS: {0}", 1000 / gameTime.ElapsedGameTime.TotalMilliseconds));
 		}
 
 		/// <summary>
