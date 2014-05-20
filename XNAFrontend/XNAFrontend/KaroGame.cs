@@ -1,3 +1,4 @@
+using engine.wrapper;
 using KaroManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -37,6 +38,20 @@ namespace XNAFrontend
 			Services.AddService(typeof(ICamera), camera);
 
 			KaroGameManager = new KaroGameManager();
+			KaroGameManager.ExecuteMove(
+				new MoveWrapper(
+					MoveType.INSERT,
+					new Vector2DWrapper(-1, -1),
+					new Vector2DWrapper(2, 2)
+				)
+			);
+			KaroGameManager.ExecuteMove(
+				new MoveWrapper(
+					MoveType.INSERT,
+					new Vector2DWrapper(-1, -1),
+					new Vector2DWrapper(4, 3)
+				)
+			);
             Components.Add(new SkyBoxComponent(this));
             Components.Add(camera);
 			Components.Add(new Board(this));
