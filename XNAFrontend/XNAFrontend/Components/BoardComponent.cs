@@ -55,13 +55,13 @@ namespace XNAFrontend.Components
             MouseState mouseState = Mouse.GetState();
             if (mouseState.LeftButton == ButtonState.Pressed && _previousMouseState.LeftButton != ButtonState.Pressed)
             {
-
+				Vector2 clickedTile = GetTileAtPixelPosition(mouseState.X, mouseState.Y, true);
             }
 			base.Update(gameTime);
             _previousMouseState = mouseState;
 		}
 
-        protected Vector2 GetTileAtPixelPosition(int mouseX, int mouseY)
+        protected Vector2 GetTileAtPixelPosition(int mouseX, int mouseY, bool includePawns)
         {
             ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
             Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
@@ -84,7 +84,10 @@ namespace XNAFrontend.Components
                 for (int y = 0; y <= 20; y++)
                 {
                     CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-                    if (cell.HasTile()) //check for tile click
+					if (includePawns && cell.IsEmpty())
+					{
+
+					} else if (cell.HasTile()) //check for tile click
                     {
                         BoundingBox b = CreateBoundingBox(_tileModel, world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))));
                         float? dist = pickRay.Intersects(b);
