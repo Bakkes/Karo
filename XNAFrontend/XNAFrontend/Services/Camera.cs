@@ -38,8 +38,8 @@ namespace XNAFrontend.Services
 
         public Camera(Viewport viewport)
         {
-			Position = new Vector3(2.75f, 5, 5);
-			Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, viewport.AspectRatio, 0.1f, 10000);
+			Position = new Vector3(0, 5, 5);
+			Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.PiOver4, viewport.AspectRatio, 0.001f, 10000);
         }
 	}
 }

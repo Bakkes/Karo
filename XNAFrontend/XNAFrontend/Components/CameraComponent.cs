@@ -55,8 +55,7 @@ namespace XNAFrontend.Components
 			int maxWidth = GetMaxBoardWidth();
 			int maxHeight = GetMaxBoardWidth();
 
-//			Vector3 desiredPosition = new Vector3(maxWidth * Board.TOTAL_SPACING / 2, Camera.Position.Y, maxHeight * Board.TOTAL_SPACING / 2);
-			Vector3 desiredPosition = new Vector3(maxWidth * Board.TOTAL_SPACING / 2, Camera.Position.Y, Camera.Position.Z);
+			Vector3 desiredPosition = new Vector3(maxWidth * Board.TOTAL_SPACING / 2, Camera.Position.Y, maxHeight * Board.TOTAL_SPACING / 2);
 			Vector3 positionDifference = desiredPosition - Camera.Position;
 			if (positionDifference.LengthSquared() != 0)
 			{
