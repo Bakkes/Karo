@@ -94,7 +94,6 @@ namespace XNAFrontend.Components
 			{
 				for (int y = -1; y <= 20; y++)
 				{
-					CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
 					BoundingBox b = Utilities.CreateBoundingBox(
 						_tileModel, world * Matrix.CreateTranslation(
 							new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP))
