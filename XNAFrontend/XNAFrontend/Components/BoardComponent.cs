@@ -119,9 +119,9 @@ namespace XNAFrontend.Components
 
 			BoardWrapper board = KaroGameManager.Board;
 
-			for (int i = 0; i < 20; i++)
+			for (int i = -1; i < 20; i++)
 			{
-				for (int j = 0; i + j < 20; j++)
+				for (int j = -1; i + j < 20; j++)
 				{
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
 					
@@ -129,7 +129,7 @@ namespace XNAFrontend.Components
 					{
 						DrawCellAt(cell, i, j);
 					}
-					if (IsMarkedCell(cell.GetRelativePosition()))
+					if (IsMarkedCell(new Vector2DWrapper((float)i, (float)j)))
 					{
 						DrawCellAt(cell, i, j, true);
 					}
@@ -147,7 +147,7 @@ namespace XNAFrontend.Components
 		{
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
-			bool clickableTile = IsMarkedCell(cell.GetRelativePosition());
+			bool clickableTile = IsMarkedCell(new Vector2DWrapper((float)x, (float)y));
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
