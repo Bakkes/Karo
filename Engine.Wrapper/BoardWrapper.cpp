@@ -5,6 +5,8 @@ namespace wrapper {
 	BoardWrapper::BoardWrapper(void)
 	{
 		_board = new Board();
+		_legalMaxMoves = nullptr;
+		_legalMinMoves = nullptr;
 	}
 
 	BoardWrapper::~BoardWrapper(void)
@@ -13,6 +15,8 @@ namespace wrapper {
 	}
 
 	void BoardWrapper::ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player) {
+		_legalMaxMoves = nullptr;
+		_legalMinMoves = nullptr;
 		_board->ExecuteMove(*WrapperConversionUtility().ConvertMove(mw), static_cast<engine::Players>(player));
 	}
 
@@ -28,6 +32,13 @@ namespace wrapper {
 
 	IEnumerable<MoveWrapper^>^ BoardWrapper::GetLegalMoves(Players player)
 	{
+		// Return cached moves.
+		if (player == Players::Max && _legalMaxMoves != nullptr) {
+			return _legalMaxMoves;
+		}
+		if (player == Players::Min && _legalMinMoves != nullptr) {
+			return _legalMinMoves;
+		}
 		List<MoveWrapper^>^ managedMoves = gcnew List<MoveWrapper^>();
 		vector<Move> nativeMoves = _board->GetLegalMoves(static_cast<engine::Players>(player));
 
@@ -35,9 +46,14 @@ namespace wrapper {
 		{
 			managedMoves->Add(WrapperConversionUtility::ConvertMove(*it));
 		}
+		if (player == Players::Max) {
+			_legalMaxMoves = managedMoves;
+		}
+		if (player == Players::Min) {
+			_legalMinMoves = managedMoves;
+		}
 		
 		return managedMoves;
-
 	}
 
 	CellWrapper^ BoardWrapper::GetRelativeCellAt(Vector2DWrapper^ relativePosition) {
