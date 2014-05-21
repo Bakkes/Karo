@@ -36,6 +36,8 @@ public:
 	String^ ToString() new;
 private:
 	Board * _board;
+	IEnumerable<MoveWrapper^>^ _legalMaxMoves;
+	IEnumerable<MoveWrapper^>^ _legalMinMoves;
 };
 
 }

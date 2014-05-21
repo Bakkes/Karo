@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System.Linq;
+using KaroManager.State;
 using System.Diagnostics;
 
 namespace XNAFrontend.Components
@@ -129,6 +130,10 @@ namespace XNAFrontend.Components
 							DrawCellAt(cell, i, j);
 						}
 					}
+					if (IsMarkedCell(cell.GetRelativePosition()))
+					{
+						DrawCellAt(cell, i, j, true);
+					}
 				}
 			}
 			base.Draw(gameTime);
@@ -137,10 +142,11 @@ namespace XNAFrontend.Components
 		/// <summary>
 		/// Draws a tile with the specified relative position.
 		/// </summary>
-		private void DrawCellAt(CellWrapper cell, int x, int y)
+		private void DrawCellAt(CellWrapper cell, int x, int y, bool marked = false)
 		{
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+			bool clickableTile = IsMarkedCell(cell.GetRelativePosition());
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
@@ -149,6 +155,22 @@ namespace XNAFrontend.Components
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
+					if (marked)
+					{
+						effect.Alpha = 0.2f;
+					}
+					else
+					{
+						effect.Alpha = 1f;
+					}
+					if (clickableTile || marked)
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 1f);
+					}
+					else
+					{
+						effect.DiffuseColor = new Vector3(0.5f, 0.5f, 0.5f);
+					}
 				}
 
 				mesh.Draw();
@@ -171,6 +193,12 @@ namespace XNAFrontend.Components
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			bool marked = false;
+			if (KaroGameManager.CurrentMove != null)
+			{
+				marked = KaroGameManager.CurrentMove.GetFromCell() ==
+					cell.GetAbsolutePosition();
+			}
 
 			// Flip the piece if neccesary
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-270));
@@ -192,10 +220,70 @@ namespace XNAFrontend.Components
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), extraHeight, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
-					effect.DiffuseColor = color;
+					if (marked)
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else
+					{
+						effect.DiffuseColor = color;
+					}
 				}
 				mesh.Draw();
 			}
+		}
+
+		private bool IsMarkedCell(Vector2DWrapper position)
+		{
+			BoardWrapper board = KaroGameManager.Board;
+			MoveWrapper currentMove = KaroGameManager.CurrentMove;
+			IKaroState currentState = KaroGameManager.CurrentState;
+
+			if (currentState is PlaceState)
+			{
+				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
+				{
+					if (position == legalMove.GetToCell())
+					{
+						return true;
+					}
+				}
+			}
+			else if (currentState is PieceSourceState)
+			{
+				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
+				{
+					if (position == legalMove.GetFromCell())
+					{
+						return true;
+					}
+				}
+			}
+			else if (currentState is PieceDestinationState)
+			{
+				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves
+					.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
+				{
+					if (position == legalMove.GetToCell())
+					{
+						return true;
+					}
+				}
+			}
+			else if (currentState is CellSourceState)
+			{
+				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves
+					.Where(m => m.GetFromCell() == currentMove.GetFromCell())
+					.Where(m => m.GetToCell() == currentMove.GetToCell()))
+				{
+					if (position == legalMove.GetUsedCell())
+					{
+						return true;
+					}
+				}
+			}
+
+			return false;
 		}
 	}
 }
