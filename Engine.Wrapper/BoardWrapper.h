@@ -25,6 +25,7 @@ public ref class BoardWrapper
 public:
 	BoardWrapper(void);
 	~BoardWrapper(void);
+	!BoardWrapper(void);
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
 	List<CellWrapper^>^ GetOccupiedCells();
 	CellWrapper^ GetRelativeCellAt(Vector2DWrapper^ relativePosition);
@@ -36,6 +37,8 @@ public:
 	Vector2DWrapper^ GetDynamicSize();
 private:
 	Board * _board;
+	IEnumerable<MoveWrapper^>^ _legalMaxMoves;
+	IEnumerable<MoveWrapper^>^ _legalMinMoves;
 };
 
 }
