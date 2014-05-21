@@ -293,6 +293,7 @@ namespace Tests {
 			board->ExecuteMove(Move(STEP, Vector2D(1, 3), Vector2D(2, 2)), Min);
 			board->ExecuteMove(Move(STEP, Vector2D(0, 0), Vector2D(0, 1)), Max);
 			int len = board->GetOccupiedTiles()->size() + board->GetEmptyTiles()->size();
+			OutputDebugString(board->ToString().c_str());
 			Assert::AreEqual(20, len);
 		}
 	};

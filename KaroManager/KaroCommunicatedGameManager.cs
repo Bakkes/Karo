@@ -177,7 +177,7 @@ namespace KaroManager
 		}
 		MoveWrapper GetMove()
 		{
-			return LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+			return Game.GetBestMove(); //LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)

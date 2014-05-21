@@ -129,6 +129,7 @@ namespace _2DFrontend
 				text += "board->ExecuteMove(Move(" + move.GetMoveType() + 
 				", Vector2D(" + move.GetFromCell().X + ", " + move.GetFromCell().Y + "), " + 
 				"Vector2D(" + move.GetToCell().X+", " + move.GetToCell().Y + ")), " + 
+				(move.HasUsedCell() ? "Vector2D(" + move.GetUsedCell().X + ", " + move.GetUsedCell().Y + "), " : "") +
 				moveKV.Value.ToString() + ");\n";
 			}
 			Clipboard.SetText(text);
