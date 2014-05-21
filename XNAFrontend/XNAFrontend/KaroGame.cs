@@ -13,7 +13,10 @@ namespace XNAFrontend
 	/// </summary>
 	public class KaroGame : Microsoft.Xna.Framework.Game
 	{
-        public GraphicsDeviceManager graphics { get; set; }
+		public GraphicsDeviceManager graphics { get; set; }
+		public SpriteBatch spriteBatch { get; private set; }
+		public KeyboardState keyState { get; private set; }
+		public KeyboardState prevKeyState { get; private set; }
 
 		public KaroGameManager KaroGameManager { get; set; }
 
@@ -31,32 +34,17 @@ namespace XNAFrontend
 		/// </summary>
 		protected override void Initialize()
 		{
+			spriteBatch = new SpriteBatch(GraphicsDevice);
+			IsMouseVisible = true;
+			Components.Add(new MenuComponent(this));
+			prevKeyState = Keyboard.GetState();
 			IsMouseVisible = true;
 
-			CameraComponent camera = new CameraComponent(this);
+			graphics.PreferredBackBufferWidth = 1280;
+			graphics.PreferredBackBufferHeight = 720;
+			graphics.ApplyChanges();
 
-			Services.AddService(typeof(ICamera), camera);
-
-			KaroGameManager = new KaroGameManager();
-			KaroGameManager.ExecuteMove(
-				new MoveWrapper(
-					MoveType.INSERT,
-					new Vector2DWrapper(-1, -1),
-					new Vector2DWrapper(2, 2)
-				)
-			);
-			KaroGameManager.ExecuteMove(
-				new MoveWrapper(
-					MoveType.INSERT,
-					new Vector2DWrapper(-1, -1),
-					new Vector2DWrapper(4, 3)
-				)
-			);
-            Components.Add(new SkyBoxComponent(this));
-            Components.Add(camera);
-			Components.Add(new Board(this));
-
-            base.Initialize();
+			base.Initialize();
 		}
 
 		/// <summary>
@@ -66,13 +54,10 @@ namespace XNAFrontend
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
-			// Allows the game to exit
-			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-			{
-				this.Exit();
-			}
+			keyState = Keyboard.GetState();
 
 			base.Update(gameTime);
+			prevKeyState = keyState;
 		}
 
 		/// <summary>
@@ -81,8 +66,22 @@ namespace XNAFrontend
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.Black);
 			base.Draw(gameTime);
+		}
+
+		public void StartGame()
+		{
+			KaroGameManager = new KaroGameManager();
+			Board board = new Board(this);
+			CameraComponent camera = new CameraComponent(this, board.Position);
+			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
+
+			Services.AddService(typeof(ICamera), new Camera());
+
+			Components.Add(camera);
+			Components.Add(SkyBox);
+			Components.Add(board);
 		}
 	}
 }
