@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <vector>
 namespace engine {
-	class AI : IComputerPlayer
+	class ENGINE_API AI : public IComputerPlayer
 	{
 	public:
 		AI(IBoard* board, int maxDepth);
@@ -16,7 +16,7 @@ namespace engine {
 		void AddExtension(AIExtension);
 		void SetEvaluator(IStaticEvaluation* evaluator);
 	private:
-		std::vector<AIExtension> _extensions;
+		std::vector<AIExtension>* _extensions;
 		// The Static Evaluation function which will evaluate the board
 		IStaticEvaluation* _evaluator;
 		// The maximum depth of the minimax search

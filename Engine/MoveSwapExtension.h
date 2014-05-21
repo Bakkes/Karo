@@ -3,7 +3,7 @@
 namespace engine{
 	// an instance of this class alows an AI to prefer moves that are marked as
 	// killer moves in other branches of the minmax tree of the same depth
-	class MoveSwapExtension : AIExtension
+	class MoveSwapExtension : public AIExtension
 	{
 	public:
 		MoveSwapExtension(void);

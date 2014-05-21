@@ -2,7 +2,6 @@
 
 #include "MoveWrapper.h"
 #include "Board.h"
-#include "ComputerPlayer.h"
 #include "PlayersWrapper.h"
 #include "BoardWrapper.h"
 using namespace engine;

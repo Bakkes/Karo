@@ -1,7 +1,7 @@
 #pragma once
 #include "AIExtension.h"
 namespace engine{
-	class AlfaBetaExtension : AIExtension
+	class AlfaBetaExtension : public AIExtension
 	{
 	public:
 		AlfaBetaExtension(void);
