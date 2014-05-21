@@ -32,6 +32,7 @@ namespace wrapper {
 
 	MoveWrapper::!MoveWrapper() {
 		delete _move;
+		_move = nullptr;
 	}
 
 	engine::wrapper::MoveType MoveWrapper::GetMoveType() {

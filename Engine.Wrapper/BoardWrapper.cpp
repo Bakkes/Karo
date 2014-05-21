@@ -15,6 +15,7 @@ namespace wrapper {
 	BoardWrapper::!BoardWrapper(void)
 	{
 		delete _board;
+		_board = nullptr;
 	}
 
 	void BoardWrapper::ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player) {

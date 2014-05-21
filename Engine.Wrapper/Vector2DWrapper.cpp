@@ -16,6 +16,7 @@ Vector2DWrapper::~Vector2DWrapper()
 Vector2DWrapper::!Vector2DWrapper()
 {
 	delete _vector2D;
+	_vector2D = nullptr;
 }
 
 double Vector2DWrapper::X::get()

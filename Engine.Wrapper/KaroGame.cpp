@@ -21,6 +21,7 @@ namespace wrapper {
 
 	KaroGame::!KaroGame() {
 		delete _board;
+		_board = nullptr;
 	}
 
 	BoardWrapper^ KaroGame::GetBoard() {
