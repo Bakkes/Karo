@@ -22,7 +22,7 @@ namespace XNAFrontend
 
 					for (int i = 0; i < vertexBufferSize / sizeof(float); i += vertexStride / sizeof(float))
 					{
-						Vector3 transformedPosition = Vector3.Transform(new Vector3(vertexData[i], vertexData[i + 1], vertexData[i + 2]), worldTransform);
+						Vector3 transformedPosition = Vector3.Transform(new Vector3(vertexData[i + 1], vertexData[i + 2], vertexData[i]), worldTransform);
 
 						min = Vector3.Min(min, transformedPosition);
 						max = Vector3.Max(max, transformedPosition);
