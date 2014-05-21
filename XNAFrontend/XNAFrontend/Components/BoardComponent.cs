@@ -1,13 +1,12 @@
-﻿using engine.wrapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using engine.wrapper;
 using KaroManager;
-using XNAFrontend.Services;
+using KaroManager.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.Linq;
-using KaroManager.State;
-using System.Diagnostics;
+using XNAFrontend.Services;
 
 namespace XNAFrontend.Components
 {
@@ -22,6 +21,7 @@ namespace XNAFrontend.Components
 		private Model _tileModel;
 		private Model _minModel;
 		private Model _maxModel;
+		private Dictionary<Vector2, bool> _markedCache;
 
 		private MouseState _previousMouseState;
 
@@ -38,6 +38,7 @@ namespace XNAFrontend.Components
 		public Board(KaroGame game)
 			: base(game)
 		{
+			_markedCache = new Dictionary<Vector2, bool>();
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
 			//this.Position = Vector3.Zero;
 			LoadContent();
@@ -77,6 +78,7 @@ namespace XNAFrontend.Components
 
 		protected Vector2 GetTileAtPixelPosition(int mouseX, int mouseY)
 		{
+			_markedCache = new Dictionary<Vector2, bool>();
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
 			Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
@@ -129,7 +131,7 @@ namespace XNAFrontend.Components
 					{
 						DrawCellAt(cell, i, j);
 					}
-					if (IsMarkedCell(new Vector2DWrapper((float)i, (float)j)))
+					if (IsMarkedCell(new Vector2((float)i, (float)j)))
 					{
 						DrawCellAt(cell, i, j, true);
 					}
@@ -145,7 +147,7 @@ namespace XNAFrontend.Components
 		{
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
-			bool clickableTile = IsMarkedCell(new Vector2DWrapper((float)x, (float)y));
+			bool clickableTile = IsMarkedCell(new Vector2((float)x, (float)y));
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
@@ -231,8 +233,14 @@ namespace XNAFrontend.Components
 			}
 		}
 
-		private bool IsMarkedCell(Vector2DWrapper position)
+		private bool IsMarkedCell(Vector2 position)
 		{
+			if (_markedCache.ContainsKey(position))
+			{
+				return _markedCache[position];
+			}
+			_markedCache[position] = false;
+
 			BoardWrapper board = KaroGameManager.Board;
 			MoveWrapper currentMove = KaroGameManager.CurrentMove;
 			IKaroState currentState = KaroGameManager.CurrentState;
@@ -241,9 +249,10 @@ namespace XNAFrontend.Components
 			{
 				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
 				{
-					if (position == legalMove.GetToCell())
+					Vector2DWrapper wrapperPos = legalMove.GetToCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
@@ -251,9 +260,10 @@ namespace XNAFrontend.Components
 			{
 				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
 				{
-					if (position == legalMove.GetFromCell())
+					Vector2DWrapper wrapperPos = legalMove.GetFromCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
@@ -262,9 +272,10 @@ namespace XNAFrontend.Components
 				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves
 					.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
 				{
-					if (position == legalMove.GetToCell())
+					Vector2DWrapper wrapperPos = legalMove.GetToCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
@@ -274,14 +285,15 @@ namespace XNAFrontend.Components
 					.Where(m => m.GetFromCell() == currentMove.GetFromCell())
 					.Where(m => m.GetToCell() == currentMove.GetToCell()))
 				{
-					if (position == legalMove.GetUsedCell())
+					Vector2DWrapper wrapperPos = legalMove.GetUsedCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
 
-			return false;
+			return _markedCache[position];
 		}
 	}
 }
