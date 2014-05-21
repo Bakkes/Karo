@@ -1,6 +1,5 @@
 #pragma once
 #include "IComputerPlayer.h"
-#include "Pruner.h"
 #include "AIExtension.h"
 #include "EvalResult.h"
 #include "IStaticEvaluation.h"
@@ -26,6 +25,6 @@ namespace engine {
 		IBoard* _board;
 		// Executes a single step from the Minimax algorithm
 		EvalResult MinimaxStep(Players player, int depth, EvalResult);
-		void NextStep(Players player, Move move, int depth, EvalResult&);
+		EvalResult NextStep(Players player, Move move, int depth, EvalResult);
 	};
 }

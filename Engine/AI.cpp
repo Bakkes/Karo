@@ -15,13 +15,14 @@ namespace engine{
 	}
 
 	Move AI::GetBestMove(Players player){
-		for_each(_extensions.begin(), _extensions.end(), [](AIExtension extension) -> void{
-			extension.Start();
+		for_each(_extensions.begin(), _extensions.end(),[this](AIExtension extension) -> void{
+			extension.Start(_maxDepth);
 		});
-		MinimaxStep(player, _maxDepth, EvalResult(INT_MIN, INT_MAX));
+		EvalResult result = MinimaxStep(player, _maxDepth, EvalResult(INT_MIN, INT_MAX));
 		for_each(_extensions.begin(), _extensions.end(), [](AIExtension extension) -> void{
 			extension.End();
 		});
+		return result.GetMove();
 	}
 	void AI::AddExtension(AIExtension extension){
 		_extensions.push_back(extension);
@@ -31,46 +32,44 @@ namespace engine{
 	}
 	EvalResult AI::MinimaxStep(Players player, int depth, EvalResult result){
 		// allow extensions to set te result
-		for_each(_extensions.begin(), _extensions.end(), [&result](AIExtension extension) -> void{
-			extension.Step(result);
+		for_each(_extensions.begin(), _extensions.end(), [&](AIExtension extension) -> void{
+			extension.Step(player, depth, result);
 		});
 
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
 
 		// allow extensoins to do some move ordering
-		for_each(_extensions.begin(), _extensions.end(), [&possibleMoves](AIExtension extension) -> void{
-			extension.UpdateMoves(possibleMoves);
+		for_each(_extensions.begin(), _extensions.end(), [&depth, &possibleMoves](AIExtension extension) -> void{
+			extension.UpdateMoves(depth, possibleMoves);
 		});
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
-			NextStep(player, move, depth, result);
+			EvalResult currentResult = NextStep(player, move, depth, result);
 			_board->UndoMove(move, player);
 
-			bool shouldContinue = true;
 
-			// allow extensions to figure out pruning
-			for_each(_extensions.begin(), _extensions.end(), [&](AIExtension extension) -> void{
-				shouldContinue = shouldContinue && extension.ShouldContinue(result, player);
-			});
-			if(!shouldContinue){
-				break;
+			// allows for pruning
+			for(auto extension = _extensions.begin(); extension != _extensions.end(); ++extension){
+				if(!extension->ShouldContinue(currentResult, result, player)){
+					return result;
+				}
 			}
 		}
 		return result;
 	}
-	void AI::NextStep(Players player, Move move, int depth, EvalResult& result) {
+	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
 		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
-			MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
-			return;
+			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
 		}
 
 		// We can't go deeper, evaluate the board
 		EvalResult score(result.GetBestForMax(), result.GetBestForMin());
 		score.SetMove(move);
 		score.SetScore(_evaluator->Eval(_board, player));
+		return score;
 	}
 }
