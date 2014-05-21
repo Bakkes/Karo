@@ -7,6 +7,9 @@ namespace wrapper {
 		_cell = new RelativeCell(cell);
 	}
 	CellWrapper::~CellWrapper(void){
+		this->!CellWrapper();
+	}
+	CellWrapper::!CellWrapper(void){
 		delete _cell;
 	}
 

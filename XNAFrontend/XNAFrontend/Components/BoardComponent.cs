@@ -91,30 +91,38 @@ namespace XNAFrontend.Components
             {
                 for (int y = 0; y <= 20; y++)
                 {
-                    CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
-					if (!cell.HasTile())
+					using (CellWrapper cell = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y)))
 					{
-						continue;
-					}
+						for (int a = 0; a < 10000; a++)
+						{
+							CellWrapper cell2 = KaroGameManager.Board.GetRelativeCellAt(new Vector2DWrapper(x, y));
+							{
+							}
+						}
+						if (!cell.HasTile())
+						{
+							continue;
+						}
 
-					Matrix tempWorld = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
-					Model model = _tileModel;
-					float? dist = 0;
-					BoundingBox b;
-					if (includePawns && !cell.IsEmpty())
-					{
-						Debug.WriteLine("Using piece model for " + x + ", " + y);
-						model = cell.IsMaxPiece() ? _maxModel : _minModel;
-					}
+						Matrix tempWorld = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+						Model model = _tileModel;
+						float? dist = 0;
+						BoundingBox b;
+						if (includePawns && !cell.IsEmpty())
+						{
+							Debug.WriteLine("Using piece model for " + x + ", " + y);
+							model = cell.IsMaxPiece() ? _maxModel : _minModel;
+						}
 
-					b = CreateBoundingBox(model, tempWorld);
-					dist = pickRay.Intersects(b);
+						b = CreateBoundingBox(model, tempWorld);
+						dist = pickRay.Intersects(b);
 
-					if (dist != null && dist > 0 && dist < nearestDist)
-					{
-						System.Console.WriteLine(dist);
-						nearestDist = (float)dist;
-						nearest = new Vector2(x, y);
+						if (dist != null && dist > 0 && dist < nearestDist)
+						{
+							System.Console.WriteLine(dist);
+							nearestDist = (float)dist;
+							nearest = new Vector2(x, y);
+						}
 					}
                 }
             }
@@ -164,10 +172,12 @@ namespace XNAFrontend.Components
 					{
 						break;
 					}
-					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
-					if (cell.HasTile())
+					using (CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j)))
 					{
-						DrawCellAt(cell, i, j);
+						if (cell.HasTile())
+						{
+							DrawCellAt(cell, i, j);
+						}
 					}
 				}
 			}

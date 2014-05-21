@@ -9,6 +9,11 @@ namespace wrapper {
 
 	BoardWrapper::~BoardWrapper(void)
 	{
+		this->!BoardWrapper();
+	}
+
+	BoardWrapper::!BoardWrapper(void)
+	{
 		delete _board;
 	}
 

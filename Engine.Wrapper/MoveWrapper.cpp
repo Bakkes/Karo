@@ -27,6 +27,10 @@ namespace wrapper {
 	}
 
 	MoveWrapper::~MoveWrapper() {
+		this->!MoveWrapper();
+	}
+
+	MoveWrapper::!MoveWrapper() {
 		delete _move;
 	}
 

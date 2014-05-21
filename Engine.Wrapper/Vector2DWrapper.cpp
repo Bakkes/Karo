@@ -10,6 +10,11 @@ Vector2DWrapper::Vector2DWrapper(double x, double y)
 
 Vector2DWrapper::~Vector2DWrapper()
 {
+	this->!Vector2DWrapper();
+}
+
+Vector2DWrapper::!Vector2DWrapper()
+{
 	delete _vector2D;
 }
 

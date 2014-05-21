@@ -16,6 +16,10 @@ namespace wrapper {
 	}
 
 	KaroGame::~KaroGame() {
+		this->!KaroGame();
+	}
+
+	KaroGame::!KaroGame() {
 		delete _board;
 	}
 
