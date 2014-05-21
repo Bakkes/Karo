@@ -189,6 +189,12 @@ namespace XNAFrontend.Components
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix[] transforms = new Matrix[_tileModel.Bones.Count];
 			_tileModel.CopyAbsoluteBoneTransformsTo(transforms);
+			bool marked = false;
+			if (KaroGameManager.CurrentMove != null)
+			{
+				marked = KaroGameManager.CurrentMove.GetFromCell() ==
+					cell.GetAbsolutePosition();
+			}
 
 			// Flip the piece if neccesary
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-270));
@@ -210,7 +216,14 @@ namespace XNAFrontend.Components
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), extraHeight, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
-					effect.DiffuseColor = color;
+					if (marked)
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else
+					{
+						effect.DiffuseColor = color;
+					}
 				}
 				mesh.Draw();
 			}
