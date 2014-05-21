@@ -123,17 +123,18 @@ namespace XNAFrontend.Components
 			{
 				for (int j = 0; i + j < 20; j++)
 				{
-					using (CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j)))
+					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
+					
+					if (cell.HasTile())
 					{
-						if (cell.HasTile())
-						{
-							DrawCellAt(cell, i, j);
-						}
+						DrawCellAt(cell, i, j);
 					}
 					if (IsMarkedCell(cell.GetRelativePosition()))
 					{
 						DrawCellAt(cell, i, j, true);
 					}
+					
+					
 				}
 			}
 			base.Draw(gameTime);
