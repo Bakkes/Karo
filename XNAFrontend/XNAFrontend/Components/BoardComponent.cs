@@ -102,30 +102,8 @@ namespace XNAFrontend.Components
 						)
 					);
 					float? dist = pickRay.Intersects(b);
-							{
-							}
-						}
-						if (!cell.HasTile())
-						{
-							continue;
-						}
-
-						Matrix tempWorld = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
-						Model model = _tileModel;
-						float? dist = 0;
-						BoundingBox b;
-						if (includePawns && !cell.IsEmpty())
-						{
-							Debug.WriteLine("Using piece model for " + x + ", " + y);
-							model = cell.IsMaxPiece() ? _maxModel : _minModel;
-						}
-
-						b = CreateBoundingBox(model, tempWorld);
-						dist = pickRay.Intersects(b);
-
 					if (dist != null && dist > 0 && dist < nearestDist)
 					{
-							System.Console.WriteLine(dist);
 						nearestDist = (float)dist;
 						nearest = new Vector2(x, y);
 					}
@@ -186,7 +164,7 @@ namespace XNAFrontend.Components
 		{
 			// Nothing to draw if this cell is empty.
 			if (cell.IsEmpty()) { return; }
-			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+
 			// Define the model of the piece we have to use (max/min).
 			Model pieceModel = cell.IsMaxPiece() ? _maxModel : _minModel;
 			Vector3 color = cell.IsMaxPiece() ? Color.Red.ToVector3() : Color.Green.ToVector3();
