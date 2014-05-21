@@ -71,7 +71,7 @@ namespace XNAFrontend.Components
 				}
 			}
 			base.Update(gameTime);
-			
+
 			_previousMouseState = mouseState;
 		}
 
@@ -124,7 +124,7 @@ namespace XNAFrontend.Components
 				for (int j = -1; i + j < 20; j++)
 				{
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
-					
+
 					if (cell.HasTile())
 					{
 						DrawCellAt(cell, i, j);
@@ -133,8 +133,6 @@ namespace XNAFrontend.Components
 					{
 						DrawCellAt(cell, i, j, true);
 					}
-					
-					
 				}
 			}
 			base.Draw(gameTime);
@@ -173,7 +171,6 @@ namespace XNAFrontend.Components
 						effect.DiffuseColor = new Vector3(0.5f, 0.5f, 0.5f);
 					}
 				}
-
 				mesh.Draw();
 			}
 
