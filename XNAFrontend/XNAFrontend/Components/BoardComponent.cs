@@ -119,8 +119,17 @@ namespace XNAFrontend.Components
 
 			BoardWrapper board = KaroGameManager.Board;
 			double width = board.GetDynamicSize().X;
-			
-			System.Console.WriteLine("test: " + width);
+			double height = board.GetDynamicSize().Y;
+			CellWrapper tmp = board.GetRelativeCellAt(new Vector2DWrapper(0, 0));
+
+			for (int i = 0; i <= height; i++)
+			{
+				DrawCordsAt(tmp, -2, i);
+			}
+			for (int i = 0; i <= width; i++)
+			{
+				DrawCordsAt(tmp, i, (int)height + 2);
+			}
 
 			for (int i = 0; i < 20; i++)
 			{
@@ -136,11 +145,30 @@ namespace XNAFrontend.Components
 					{
 						DrawCellAt(cell, i, j, true);
 					}
-					
-					
 				}
 			}
 			base.Draw(gameTime);
+		}
+
+
+		private void DrawCordsAt(CellWrapper cell, int x, int y)
+		{
+			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
+			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+			foreach (ModelMesh mesh in _tileModel.Meshes)
+			{
+				foreach (BasicEffect effect in mesh.Effects)
+				{
+					effect.EnableDefaultLighting();
+					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+					effect.View = camera.View;
+					effect.Projection = camera.Projection;
+					effect.Alpha = 1f;
+					effect.DiffuseColor = new Vector3(0.2f, 0.2f, 0.2f);
+				}
+
+				mesh.Draw();
+			}
 		}
 
 		/// <summary>
