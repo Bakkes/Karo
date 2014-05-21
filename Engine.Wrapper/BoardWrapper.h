@@ -33,6 +33,7 @@ public:
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();
 	String^ ToString() new;
+	Vector2DWrapper^ GetDynamicSize();
 private:
 	Board * _board;
 };

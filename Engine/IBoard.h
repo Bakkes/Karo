@@ -18,5 +18,6 @@ namespace engine {
 		virtual std::vector<RelativeCell>* GetEmptyTiles() = 0;
 		virtual int CountNonDiagonalEdges(const RelativeCell&) = 0;
 		virtual RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const = 0;
+		virtual Vector2D GetDynamicSize() = 0;
 	};
 }

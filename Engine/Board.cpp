@@ -40,6 +40,24 @@ namespace engine{
 		delete _converter;
 		_converter = NULL;
 	}
+	
+	Vector2D Board::GetDynamicSize() {
+		double width = 1;
+		double height = 1;
+		
+		auto tiles = new vector<RelativeCell>();
+		_grid->TraverseCells(
+			[&](Cell<int>* tile) -> void{
+				if(tile->GetData() & HasTile){
+					if (tile->GetPosition().X() > width) { width = tile->GetPosition().X(); }
+					if (tile->GetPosition().Y() > height) { height = tile->GetPosition().Y(); }
+				}
+				tiles->push_back(RelativeCell(tile, _converter));
+			}
+		);
+		
+		return Vector2D(width, height);
+	}
 
 	int Board::GetPieceCountFor(Players player) {
 

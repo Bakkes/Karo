@@ -20,7 +20,7 @@ namespace Tests {
 		std::vector<RelativeCell>* GetEmptyTiles() override;
 		int CountNonDiagonalEdges(const RelativeCell&) override;
 		RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const override;
-
+		Vector2D GetDynamicSize() override;
 	private:
 		bool _minimalMoves;
 		int _moveIdentifier; 

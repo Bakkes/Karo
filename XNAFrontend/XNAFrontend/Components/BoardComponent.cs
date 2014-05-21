@@ -115,6 +115,9 @@ namespace XNAFrontend.Components
 			karoGame.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
 			BoardWrapper board = KaroGameManager.Board;
+			double width = board.GetDynamicSize().X;
+			
+			System.Console.WriteLine("test: " + width);
 
 			for (int i = 0; i < 20; i++)
 			{

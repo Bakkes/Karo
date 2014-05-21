@@ -12,6 +12,10 @@ namespace wrapper {
 		delete _board;
 	}
 
+	Vector2DWrapper^ BoardWrapper::GetDynamicSize() {
+		return WrapperConversionUtility().ConvertVector2D(_board->GetDynamicSize());
+	}
+
 	void BoardWrapper::ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player) {
 		_board->ExecuteMove(*WrapperConversionUtility().ConvertMove(mw), static_cast<engine::Players>(player));
 	}
