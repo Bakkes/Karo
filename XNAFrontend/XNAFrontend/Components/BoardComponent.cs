@@ -153,6 +153,10 @@ namespace XNAFrontend.Components
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
+					effect.LightingEnabled = true;
+					effect.DirectionalLight0.DiffuseColor = new Vector3(0.5f, 0.2f, 0f);
+					effect.DirectionalLight0.Direction = new Vector3(1f, 10f, 1f);
+					effect.DirectionalLight0.SpecularColor = new Vector3(0f, 1f, 0f);
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
@@ -217,6 +221,10 @@ namespace XNAFrontend.Components
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.EnableDefaultLighting();
+					effect.LightingEnabled = true;
+					effect.DirectionalLight0.DiffuseColor = new Vector3(0.5f, 0.2f, 0f);
+					effect.DirectionalLight0.Direction = new Vector3(1f, 10f, 1f);
+					effect.DirectionalLight0.SpecularColor = new Vector3(0f, 1f, 0f);
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), extraHeight, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
