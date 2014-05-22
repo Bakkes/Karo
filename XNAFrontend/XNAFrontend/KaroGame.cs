@@ -86,7 +86,13 @@ namespace XNAFrontend
 		public void ConnectionFailed()
 		{
 			Components.Clear();
-			Components.Add(new MessageComponent(this, "Failed to connect to server."));
+			Components.Add(new MessageComponent(this, "Failed to connect to server.", "Hit enter to return to the menu", new MenuComponent(this)));
+		}
+
+		public void ConnectionSucceed()
+		{
+			Components.Clear();
+			AddGameComponents();
 		}
 
 		public void StartOnlineGame(bool isClient)
@@ -99,7 +105,9 @@ namespace XNAFrontend
 
 			DisposeComminucation();
 			_communication = new Server(43594);
+			_communication.Connected += ConnectionSucceed;
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
 		}
 
 		private void DisposeComminucation()
