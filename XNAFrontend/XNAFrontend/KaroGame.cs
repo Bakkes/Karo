@@ -72,19 +72,24 @@ namespace XNAFrontend
 			base.Draw(gameTime);
 		}
 
-		public void StartOnlineGame(bool isClient)
+		public void ConnectTo(System.Net.IPAddress ip, int port)
 		{
 			DisposeComminucation();
+			_communication = new Client(ip, port);
+			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+		}
+
+		public void StartOnlineGame(bool isClient)
+		{
 			if (isClient)
 			{
 				Components.Add(new ConnectComponent(this));
+				return;
 			}
-			else
-			{
-				_communication = new Server(43594);
-				KaroGameManager = new KaroCommunicatedGameManager(_communication);
-			}
-			
+
+			DisposeComminucation();
+			_communication = new Server(43594);
+			KaroGameManager = new KaroCommunicatedGameManager(_communication);
 		}
 
 		private void DisposeComminucation()

@@ -5,6 +5,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace XNAFrontend.Components
 {
@@ -27,15 +28,16 @@ namespace XNAFrontend.Components
 			base.LoadContent();
 		}
 
-		public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
+		public override void Update(GameTime gameTime)
 		{
-			base.Draw(gameTime);
-		}
+			if (Keyboard.GetState().IsKeyDown(Keys.Enter) && _inputField.IsValid)
+			{
+				Game.Components.Remove(this);
+				Game.Components.Remove(_inputField);
+				karoGame.ConnectTo(_inputField.IpAddress, _inputField.Port);
+			}
 
-		public void Dispose()
-		{
-			Game.Components.Remove(this);
-			Game.Components.Remove(_inputField);
+			base.Update(gameTime);
 		}
 	}
 }

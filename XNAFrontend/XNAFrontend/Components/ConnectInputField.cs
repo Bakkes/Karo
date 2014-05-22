@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.Net;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,6 +13,35 @@ namespace XNAFrontend.Components
 {
 	class ConnectInputField : ACommonComponent
 	{
+		public IPAddress IpAddress { get; private set; }
+		public int Port { get; private set; }
+
+		public bool IsValid
+		{
+			get
+			{
+				if (!_connectionString.Contains(':'))
+					return false;
+
+				string[] parts = _connectionString.Split(':');
+
+				if (parts.Length != 2)
+					return false;
+
+				try
+				{
+					IpAddress = IPAddress.Parse(parts[0]);
+					Port = ushort.Parse(parts[1]);
+				}
+				catch (FormatException)
+				{
+					return false;
+				}
+
+				return true;
+			}
+		}
+
 		private Vector2 _position;
 		private string _prefix;
 		private string _connectionString;
@@ -22,6 +53,8 @@ namespace XNAFrontend.Components
 			_position = position;
 			_prefix = prefix;
 			_connectionString = "";
+
+			Port = -1;
 		}
 
 		protected override void LoadContent()
