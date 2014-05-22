@@ -78,22 +78,62 @@ namespace XNAFrontend
 			Client client = new Client(ip, port);
 			_communication = client;
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			// Attach handlers
 			client.OnConnectionFailed += ConnectionFailed;
+			AddGlobalHandlers();
+
 			_communication.StartCommunicating();
 			AddGameComponents();
 		}
 
-		public void ConnectionFailed()
+		#region Event Handler for Connected Mode
+		private void AddGlobalHandlers()
+		{
+			_communication.Disconnected += Disconnected;
+		}
+
+		void Disconnected(DisconnectReason reason)
+		{
+			Components.Clear();
+
+			string s = "";
+			switch (reason) {
+				case DisconnectReason.ConnectionLost:
+					s = "Lost connection";
+					break;
+
+				case DisconnectReason.GameEnded:
+					s = "Game ended";
+					break;
+
+				case DisconnectReason.InvalidMove:
+					s = "Invalid move";
+					break;
+
+				case DisconnectReason.WinnerDisputed:
+					s = "Winner disputed";
+					break;
+			}
+
+			Components.Add(new MessageComponent(this, string.Format("Disconnected: {0}", s), "Hit enter to return to the menu", new MenuComponent(this)));
+		}
+
+		private void ConnectionFailed()
 		{
 			Components.Clear();
 			Components.Add(new MessageComponent(this, "Failed to connect to server.", "Hit enter to return to the menu", new MenuComponent(this)));
 		}
 
-		public void ConnectionSucceed()
+		private void ConnectionSucceed()
 		{
 			Components.Clear();
 			AddGameComponents();
 		}
+
+		public void Disconnected()
+		{
+		}
+		#endregion
 
 		public void StartOnlineGame(bool isClient)
 		{
@@ -106,6 +146,7 @@ namespace XNAFrontend
 			DisposeComminucation();
 			_communication = new Server(43594);
 			_communication.Connected += ConnectionSucceed;
+			AddGlobalHandlers();
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
 			Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
 		}
