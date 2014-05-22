@@ -118,7 +118,7 @@ namespace Tests {
 			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
-		TEST_METHOD(IsWinningState_MinDiagonalDown) {
+		TEST_METHOD(IsWinningState_MinDiagonalUp) {
 			Board* board = Board::CreateBoard(
 				"3,9,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,5,9,3,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -145,7 +145,7 @@ namespace Tests {
 			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 
-		TEST_METHOD(IsWinningState_MaxDiagonalDown) {
+		TEST_METHOD(IsWinningState_MaxDiagonalUp) {
 			Board* board = Board::CreateBoard(
 				"3,13,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,1,13,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -172,7 +172,7 @@ namespace Tests {
 			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
-		TEST_METHOD(IsWinningState_MaxDiagonalUp2) {
+		TEST_METHOD(IsWinningState_MaxDiagonalDown2) {
 			Board* board = Board::CreateBoard(
 				"3,3,1,13,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,1,13,3,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -199,7 +199,7 @@ namespace Tests {
 			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Max));
 		}
 
-		TEST_METHOD(IsWinningState_MinDiagonalUp) {
+		TEST_METHOD(IsWinningState_MinDiagonalDown) {
 			Board* board = Board::CreateBoard(
 				"3,3,3,3,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -226,7 +226,7 @@ namespace Tests {
 			Assert::IsTrue(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
 
-		TEST_METHOD(IsWinningState_MaxDiagonalUp) {
+		TEST_METHOD(IsWinningState_MaxDiagonalDown) {
 			Board* board = Board::CreateBoard(
 				"3,3,3,3,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,13,13,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -277,6 +277,37 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n",
 				Vector2D(0, 0));
 			
+			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board, Max));
+			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board, Min));
+		}
+		
+		TEST_METHOD(NobodyWonHere_okey) {
+		/*
+		this is a boardstate that does not contain any winners and the actual computer
+		players tought they won
+		*/
+			Board* board = Board::CreateBoard(
+				"9,2,10,5,9,9,10,10,0,0,0,0,0,0,0,0,2,2,2,3,\n"
+				"1,13,2,10,3,10,10,0,0,0,0,0,0,0,0,0,0,2,2,1,\n"
+				"3,3,15,15,9,10,6,0,0,0,0,0,0,0,0,0,0,2,2,2,\n"
+				"14,13,13,15,10,6,6,0,0,0,0,0,0,0,0,0,0,2,2,2,\n"
+				"6,14,6,7,13,14,6,0,0,0,0,0,0,0,0,0,0,0,6,6,\n"
+				"2,2,6,5,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,6,\n"
+				"0,0,0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,0,0,0,0,0,14,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"0,2,0,0,0,14,14,14,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+				"2,10,2,10,10,10,10,10,10,0,0,0,0,0,0,0,0,2,10,10,\n" ,
+				Vector2D(19, 0));
 			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board, Max));
 			Assert::IsFalse(ComputerPlayerUtils::IsWinningState(board, Min));
 		}
