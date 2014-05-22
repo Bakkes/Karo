@@ -85,7 +85,7 @@ namespace KaroManager
 			
 		}
 
-		public void ExecuteMove(MoveWrapper move)
+		public virtual void ExecuteMove(MoveWrapper move)
 		{
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
@@ -93,8 +93,9 @@ namespace KaroManager
 			SwapCurrentPlayer();
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
 		}
+     
 
-		private void SwapCurrentPlayer()
+		protected void SwapCurrentPlayer()
 		{
 			// Swap the player to the other player with the ternary operator.
 			CurrentPlayer = CurrentPlayer == Players.Max ? Players.Min : Players.Max;
