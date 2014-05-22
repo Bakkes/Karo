@@ -65,6 +65,12 @@
     <Compile Include="LoadBox.Designer.cs">
       <DependentUpon>LoadBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="RenderOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RenderOptionsForm.Designer.cs">
+      <DependentUpon>RenderOptionsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="KaroPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -89,6 +95,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RenderOptionsForm.resx">
+      <DependentUpon>RenderOptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

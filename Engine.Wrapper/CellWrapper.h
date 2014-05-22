@@ -9,6 +9,7 @@ public ref class CellWrapper
 public:
 	CellWrapper(RelativeCell);
 	~CellWrapper(void);
+	!CellWrapper(void);
 	int GetData();
 	Vector2DWrapper^ GetRelativePosition();
 	Vector2DWrapper^ GetAbsolutePosition();

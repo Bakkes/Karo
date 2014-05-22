@@ -25,16 +25,19 @@ public ref class BoardWrapper
 public:
 	BoardWrapper(void);
 	~BoardWrapper(void);
+	!BoardWrapper(void);
 	void ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player);
 	List<CellWrapper^>^ GetOccupiedCells();
 	CellWrapper^ GetRelativeCellAt(Vector2DWrapper^ relativePosition);
 	IEnumerable<MoveWrapper^>^ GetLegalMoves(Players player);
-	void LoadFromString(String^ boardString);
+	void LoadFromString(String^ boardString, int topLeftX, int topLeftY);
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();
 	String^ ToString() new;
 private:
 	Board * _board;
+	IEnumerable<MoveWrapper^>^ _legalMaxMoves;
+	IEnumerable<MoveWrapper^>^ _legalMinMoves;
 };
 
 }

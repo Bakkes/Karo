@@ -2,6 +2,7 @@
 using System.Net;
 using System.Windows.Forms;
 using CommunicationProtocol;
+using engine.wrapper;
 using KaroManager;
 
 namespace _2DFrontend
@@ -84,11 +85,38 @@ namespace _2DFrontend
             {
                 CancelCommunication();
                 _manager = new KaroGameManager();
-                _manager.Board.LoadFromString(loadBox.BoardString);
+                _manager.Board.LoadFromString(loadBox.BoardString, loadBox.LeftTopX, loadBox.LeftTopY);
+                _manager.CurrentPlayer = loadBox.CurrentPlayer;
                 karoPanel.NewGame(_manager);
             }
         }
 
+        private void showBoardStringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_manager == null)
+                return;
+
+            string boardString = _manager.Board.ToString();
+
+            // Format string to be entered in C++ Unit test project
+            boardString = '"' + boardString.Replace("\n", "\\n\"\r\n\"");
+            boardString = boardString.Substring(0, boardString.Length - 1);
+
+            Vector2DWrapper topLeft = _manager.Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition();
+
+            LoadBox loadBox = new LoadBox(false);
+            loadBox.BoardString = boardString;
+            loadBox.LeftTopX = (int)topLeft.X;
+            loadBox.LeftTopY = (int)topLeft.Y;
+            loadBox.CurrentPlayer = _manager.CurrentPlayer;
+
+            loadBox.ShowDialog();
+        }
+
+        private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new RenderOptionsForm(karoPanel).Show();
+        }
 
 	}
 }

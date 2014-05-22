@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using engine.wrapper;
+
 namespace _2DFrontend
 {
     public partial class LoadBox : Form 
@@ -18,12 +20,63 @@ namespace _2DFrontend
             {
                 return txtBoardString.Text;
             }
+            set
+            {
+                txtBoardString.Text = value;
+            }
         }
 
-        public LoadBox()
+        public int LeftTopX
+        {
+            get
+            {
+                return (int)numTLX.Value;
+            }
+            set
+            {
+                numTLX.Value = value;
+            }
+        }
+
+        public int LeftTopY
+        {
+            get
+            {
+                return (int)numTLY.Value;
+            }
+            set
+            {
+                numTLY.Value = value;
+            }
+        }
+
+        public Players CurrentPlayer
+        {
+            get
+            {
+                return (Players)cbPlayer.SelectedIndex;
+            }
+            set
+            {
+                cbPlayer.SelectedIndex = (int)value;
+            }
+        }
+
+        public LoadBox() : this(true)
+        {
+        }
+
+        public LoadBox(bool enableLoading)
         {
             InitializeComponent();
+            cbPlayer.SelectedIndex = 0;
             DialogResult = System.Windows.Forms.DialogResult.Cancel;
+
+            if (!enableLoading)
+            {
+                btnLoad.Enabled = false;
+                Text = "Board String";
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -32,10 +85,28 @@ namespace _2DFrontend
             Close();
         }
 
+        private string RemoveFromString(string s, string[] characters)
+        {
+            string newString = String.Copy(s);
+            foreach (string character in characters) {
+                newString = newString.Replace(character, "");
+            }
+
+            return newString;
+        }
+
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            string boardString = txtBoardString.Text.Replace("\r", "").Replace("\n", "").Replace(" ", "");
+            txtBoardString.Text = RemoveFromString(txtBoardString.Text, new string[] { "\"", "\\n", " ", "\t", ";" });
+
+            string boardString = RemoveFromString(txtBoardString.Text, new string[] { "\r", "\n" });
             string[] boardPieces = boardString.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (txtBoardString.Text.Split('\n').Length != 20)
+            {
+                MessageBox.Show(String.Format("Invalid amount of lines detected. Expected: 20, Found: {0}", txtBoardString.Text.Split('\n').Length));
+                return;
+            }
 
             if (boardPieces.Length != 400)
             {
@@ -58,6 +129,15 @@ namespace _2DFrontend
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();
+        }
+
+        private void txtBoardString_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                txtBoardString.SelectAll();
+                e.Handled = true;
+            }
         }
     }
 }
