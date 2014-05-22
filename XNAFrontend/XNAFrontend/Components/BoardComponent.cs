@@ -205,7 +205,7 @@ namespace XNAFrontend.Components
 			if (KaroGameManager.CurrentMove != null)
 			{
 				marked = KaroGameManager.CurrentMove.GetFromCell() ==
-					cell.GetAbsolutePosition();
+					cell.GetRelativePosition();
 			}
 
 			// Flip the piece if neccesary
