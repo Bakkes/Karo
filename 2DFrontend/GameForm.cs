@@ -26,7 +26,7 @@ namespace _2DFrontend
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_manager = new KaroGameManager();
+			_manager = new KaroComputerManager();
 			karoPanel.NewGame(_manager);
 		}
 
