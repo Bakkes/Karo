@@ -123,7 +123,7 @@ namespace XNAFrontend
 
 		public void StartOfflineGame()
 		{
-			KaroGameManager = new KaroGameManager();
+			KaroGameManager = new KaroComputerManager();
 			AddGameComponents();
 		}
 
