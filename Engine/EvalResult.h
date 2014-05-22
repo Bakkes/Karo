@@ -20,9 +20,9 @@ namespace engine {
 
 		const int& GetScore() const;
 		const Move& GetMove() const;
-		int GetBestForMax();
-		int GetBestForMin();
-		bool IsSet();
+		int GetBestForMax() const;
+		int GetBestForMin() const;
+		bool IsSet() const;
 
 	private:
 		int _score;
