@@ -21,6 +21,7 @@ namespace Tests {
 		int CountNonDiagonalEdges(const RelativeCell&) override;
 		RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const override;
 
+		void SetMinimalMoves(const bool& to);
 	private:
 		bool _minimalMoves;
 		int _moveIdentifier; 

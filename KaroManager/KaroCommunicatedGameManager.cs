@@ -1,4 +1,4 @@
-﻿using CommunicationProtocol;
+using CommunicationProtocol;
 using engine.wrapper;
 using System;
 using System.Collections.Generic;
@@ -184,9 +184,8 @@ namespace KaroManager
 				OnBoardUpdated();
 			CurrentPlayer = Players.Min;
 		}
-		MoveWrapper GetMove()
-		{
-			return Game.GetBestMove(); //LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+		MoveWrapper GetMove(){
+			return Game.GetBestMove();
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)
