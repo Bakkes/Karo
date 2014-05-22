@@ -24,6 +24,7 @@ namespace XNAFrontend.Components
 		/// </summary>
 		public ACommonComponent EnterComponent { get; set; }
 
+		private KeyboardState _oldState;
 		private SpriteFont _font;
 
 		public MessageComponent(KaroGame game)
@@ -48,11 +49,13 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
-			if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+			if (_oldState != null && Keyboard.GetState().IsKeyDown(Keys.Enter) && _oldState.IsKeyDown(Keys.Enter))
 			{
 				karoGame.Components.Remove(this);
 				karoGame.Components.Add(new MenuComponent(karoGame));
 			}
+
+			_oldState = Keyboard.GetState();
 			base.Update(gameTime);
 		}
 
