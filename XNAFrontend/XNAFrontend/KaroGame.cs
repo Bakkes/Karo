@@ -75,8 +75,18 @@ namespace XNAFrontend
 		public void ConnectTo(System.Net.IPAddress ip, int port)
 		{
 			DisposeComminucation();
-			_communication = new Client(ip, port);
+			Client client = new Client(ip, port);
+			_communication = client;
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			client.OnConnectionFailed += ConnectionFailed;
+			_communication.StartCommunicating();
+			AddGameComponents();
+		}
+
+		public void ConnectionFailed()
+		{
+			Components.Clear();
+			Services.RemoveService(typeof(ICamera));
 		}
 
 		public void StartOnlineGame(bool isClient)
@@ -106,6 +116,11 @@ namespace XNAFrontend
 		public void StartOfflineGame()
 		{
 			KaroGameManager = new KaroGameManager();
+			AddGameComponents();
+		}
+
+		private void AddGameComponents()
+		{
 			Board board = new Board(this);
 			CameraComponent camera = new CameraComponent(this, board.Position);
 			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
