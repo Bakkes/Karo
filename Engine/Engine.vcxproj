@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -74,11 +74,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="AIExtension.h" />
+    <ClInclude Include="AIFactory.h" />
+    <ClInclude Include="AlfaBetaExtension.h" />
+    <ClInclude Include="MoveSwapExtension.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="CellValue.h" />
-    <ClInclude Include="ComputerPlayer.h" />
-    <ClInclude Include="ComputerPlayerAB.h" />
-    <ClInclude Include="ComputerPlayerMO.h" />
     <ClInclude Include="ComputerPlayerUtils.h" />
     <ClInclude Include="RelativeAbsoluteConverter.h" />
     <ClInclude Include="DllImportExport.h" />
@@ -103,15 +105,17 @@
     <ClInclude Include="ZobristHashing.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
+    <ClCompile Include="AIExtension.cpp" />
+    <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="AlfaBetaExtension.cpp" />
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="ComputerPlayer.cpp" />
-    <ClCompile Include="ComputerPlayerAB.cpp" />
-    <ClCompile Include="ComputerPlayerMO.cpp" />
     <ClCompile Include="ComputerPlayerUtils.cpp" />
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
+    <ClCompile Include="MoveSwapExtension.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
     <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
