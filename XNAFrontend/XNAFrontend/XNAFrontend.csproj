@@ -76,6 +76,8 @@
     <Compile Include="Components\ACommonComponent.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\BoardComponent.cs" />
+    <Compile Include="Components\ConnectComponent.cs" />
+    <Compile Include="Components\ConnectInputField.cs" />
     <Compile Include="Components\SkyBoxComponent.cs" />
     <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

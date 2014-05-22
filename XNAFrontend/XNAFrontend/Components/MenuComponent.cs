@@ -67,12 +67,27 @@ namespace XNAFrontend.Components
 
 		private void ExecuteMenuItem(int depth, int item)
 		{
-			if (item == 0 && depth == 0) { game.StartGame(); game.Components.Remove(this); }
-			if (item == 1 && depth == 0) { menuDepth = 1; }
-			if (item == 2 && depth == 0) { game.Exit(); }
+			if (item == 0 && depth == 0)
+			{
+				game.StartOfflineGame(); game.Components.Remove(this);
+			}
+			if (item == 1 && depth == 0)
+			{
+				menuDepth = 1;
+			}
+			if (item == 2 && depth == 0)
+			{
+				game.Exit();
+			}
 
-			if (item == 0 && depth == 1) { game.StartGame(); game.Components.Remove(this); }
-			if (item == 1 && depth == 1) { game.StartGame(); game.Components.Remove(this); }
+			if (item == 0 && depth == 1) // Client
+			{
+				game.StartOnlineGame(true); game.Components.Remove(this);
+			}
+			if (item == 1 && depth == 1) // Server
+			{
+				game.StartOnlineGame(false); game.Components.Remove(this);
+			}
 
 			selectedItem = 0;
 		}

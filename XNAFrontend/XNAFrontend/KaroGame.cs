@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using XNAFrontend.Components;
 using XNAFrontend.Services;
+using CommunicationProtocol;
 
 namespace XNAFrontend
 {
@@ -18,6 +19,7 @@ namespace XNAFrontend
 		public KeyboardState keyState { get; private set; }
 		public KeyboardState prevKeyState { get; private set; }
 
+		private ICommunication _communication;
 		public KaroGameManager KaroGameManager { get; set; }
 
 		public KaroGame()
@@ -70,7 +72,33 @@ namespace XNAFrontend
 			base.Draw(gameTime);
 		}
 
-		public void StartGame()
+		public void StartOnlineGame(bool isClient)
+		{
+			DisposeComminucation();
+			if (isClient)
+			{
+				Components.Add(new ConnectComponent(this));
+			}
+			else
+			{
+				_communication = new Server(43594);
+				KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			}
+			
+		}
+
+		private void DisposeComminucation()
+		{
+			if (_communication == null)
+			{
+				return;
+			}
+
+			_communication.CleanUp();
+			_communication = null;
+		}
+
+		public void StartOfflineGame()
 		{
 			KaroGameManager = new KaroGameManager();
 			Board board = new Board(this);
