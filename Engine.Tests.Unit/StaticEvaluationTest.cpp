@@ -2,7 +2,6 @@
 #include "StaticEvaluation.h"
 #include "Players.h"
 #include "Board.h"
-#include "ComputerPlayer.h"
 #include "Windows.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

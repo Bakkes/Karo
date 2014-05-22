@@ -3,11 +3,11 @@
 namespace engine {
 	StaticEvaluation::StaticEvaluation(void)
 	{
-		_flippedValue = 10;
+		_flippedValue = 50;
 		_blockedTileValue = 8;
 		_cornerValue = 9;
 		_neighborValue = 11;
-		_lineValue = 21;
+		_lineValue = 25;
 
 		_centerValue = 5;
 		_semiCenterValue = 4;

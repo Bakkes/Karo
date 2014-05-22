@@ -60,15 +60,15 @@ namespace engine {
 		return _move;
 	}
 
-	int EvalResult::GetBestForMax() {
+	int EvalResult::GetBestForMax() const {
 		return _bestForMax;
 	}
 
-	int EvalResult::GetBestForMin() {
+	int EvalResult::GetBestForMin() const {
 		return _bestForMin;
 	}
 
-	bool EvalResult::IsSet() {
+	bool EvalResult::IsSet() const {
 		return _isSet;
 	}
 }

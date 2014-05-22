@@ -2,6 +2,9 @@
 
 namespace engine {
 
+	Move::Move(const Move& cpy){
+		Init(cpy._moveType, cpy._fromCell, cpy._toCell,cpy._usedCell,cpy._hasUsedCell);
+	}
 	Move::Move(MoveType type, Vector2D toCell) {
 		Init(type, Vector2D(-1), toCell, Vector2D(-1), false);
 	}

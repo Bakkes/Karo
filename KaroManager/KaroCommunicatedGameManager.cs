@@ -1,9 +1,11 @@
-﻿using System;
+using CommunicationProtocol;
+using engine.wrapper;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using CommunicationProtocol;
-using engine.wrapper;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KaroManager
 {
@@ -12,7 +14,7 @@ namespace KaroManager
 		private ICommunication _communication;
 		private CommunicationProtocolConversionUtility _conversion;
 		private int _turn = 0;
-		
+		private Random rand = new Random(1340);
 
 		public KaroCommunicatedGameManager(ICommunication communication)
 			: base()
@@ -37,9 +39,12 @@ namespace KaroManager
 
 		void _communication_WinDetected(Turn t, Player p)
 		{
-			if (p == Player.You)
+			if (p == Player.Me)
 			{
 				Debug.WriteLine("Opponent thinks he won, going to check.");
+				if(!HanldeTheirMove(t)){
+					return;
+				}
 				if (Game.HasWon(Players.Min))
 				{
 					Debug.WriteLine("Opponent did win, we lose.");
@@ -51,7 +56,7 @@ namespace KaroManager
 					_communication.SendWinDisputed();
 				}
 			}
-			else if (p == Player.Me)
+			else if (p == Player.You)
 			{
 				Debug.WriteLine("Opponent thinks I won, going to check.");
 				if (Game.HasWon(Players.Max))
@@ -82,7 +87,8 @@ namespace KaroManager
 			Debug.WriteLine("Checking if legal: ");
 			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
 			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
-			foreach(MoveWrapper mw in legal) {
+			foreach (MoveWrapper mw in legal)
+			{
 				Vector2DWrapper from2 = mw.GetFromCell();
 				Vector2DWrapper to2 = mw.GetToCell();
 				Vector2DWrapper used2 = mw.GetUsedCell();
@@ -90,13 +96,12 @@ namespace KaroManager
 				int a = 1;
 			}
 			return legal.Where(m =>
-				m.GetFromCell() == mv.GetFromCell() && 
+				m.GetFromCell() == mv.GetFromCell() &&
 				m.GetToCell() == mv.GetToCell() &&
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
 		}
 
-		void _communication_TurnReceived(Turn t)
-		{
+		bool HanldeTheirMove(Turn t){
 			/*if (CurrentPlayer == Players.Max)
 			{
 				//Not their turn
@@ -108,7 +113,7 @@ namespace KaroManager
 			{
 				Console.WriteLine("Turn is null, sending back");
 				_communication.SendMoveInvalid(t);
-				return;
+				return false;
 			}
 			Debug.WriteLine("Received turn: " + _conversion.TurnToString(t) + " - " + (t.EmptyTile == null));
 			MoveWrapper received = _conversion.ConvertTurnToMove(t);
@@ -116,12 +121,20 @@ namespace KaroManager
 
 			// Get the move with the correct source tile from the last click.
 			Console.WriteLine("Current player: " + CurrentPlayer);
-			if(!IsMoveLegal(received, Players.Min)) {
+			if (!IsMoveLegal(received, Players.Min))
+			{
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
-				return;
+				return false;
 			}
 			ExecuteMove(received);
+			return true;
+		}
+		void _communication_TurnReceived(Turn t)
+		{
+			if(!HanldeTheirMove(t)){
+				return;
+			}
 			_turn++;
 
 			//Handled their move, moving on to ours now
@@ -130,7 +143,7 @@ namespace KaroManager
 
 			//System.Threading.Thread.Sleep(1000);
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm = Game.GetBestMove(); //Game.GetBestMove();Game.GetBestMove(); // LegalMoves.First();// LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();
+			MoveWrapper bm = GetMove();
 			Turn turn = _conversion.ConvertMoveToTurn(bm);
 			ExecuteMove(bm);
 			_turn++;
@@ -162,7 +175,7 @@ namespace KaroManager
 			_turn++;
 			Debug.WriteLine("We're first.");
 			CurrentPlayer = Players.Max;
-			MoveWrapper bm = Game.GetBestMove(); //Game.GetBestMove();Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+			MoveWrapper bm = GetMove();
 			ExecuteMove(bm);
 			_communication.SendTurn(_conversion.ConvertMoveToTurn(bm));
 			Debug.WriteLine("Move sent to opponent: " + _conversion.MoveWrapperToString(bm));
@@ -170,6 +183,9 @@ namespace KaroManager
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
 			CurrentPlayer = Players.Min;
+		}
+		MoveWrapper GetMove(){
+			return Game.GetBestMove();
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)
@@ -184,7 +200,7 @@ namespace KaroManager
 
 		public override void Update(System.Drawing.Point tileLocation)
 		{
-			
+
 		}
 	}
 }

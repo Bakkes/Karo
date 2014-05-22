@@ -37,6 +37,8 @@ namespace KaroManager
 			}
 		}
 
+		public List<KeyValuePair<MoveWrapper, Players>> MoveLog { get; set; }
+
 		public IEnumerable<MoveWrapper> LegalMoves
 		{
 			get
@@ -58,6 +60,7 @@ namespace KaroManager
 		public KaroGameManager()
 		{
 			Game = new KaroGame();
+			MoveLog = new List<KeyValuePair<MoveWrapper, Players>>();
 			Debug.WriteLine("Init Board State: {0}", Board.ToString());
 			CurrentState = PlaceState.Instance;
 		}
@@ -87,11 +90,16 @@ namespace KaroManager
 
 		public virtual void ExecuteMove(MoveWrapper move)
 		{
+			MoveLog.Add(new KeyValuePair<MoveWrapper,Players>(move, CurrentPlayer));
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			Game.ExecuteMove(move, CurrentPlayer);
 			SwapCurrentPlayer();
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
+			if (OnBoardUpdated != null)
+			{
+				OnBoardUpdated();
+			}
 		}
      
 
