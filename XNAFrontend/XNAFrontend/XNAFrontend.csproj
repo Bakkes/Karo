@@ -78,6 +78,7 @@
     <Compile Include="Components\BoardComponent.cs" />
     <Compile Include="Components\ConnectComponent.cs" />
     <Compile Include="Components\ConnectInputField.cs" />
+    <Compile Include="Components\MessageComponent.cs" />
     <Compile Include="Components\SkyBoxComponent.cs" />
     <Compile Include="Components\MenuComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
