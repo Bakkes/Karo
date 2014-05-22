@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using engine.wrapper;
 using KaroManager;
 using KaroManager.State;
@@ -17,6 +18,8 @@ namespace XNAFrontend.Components
 	{
 		const float SIZE = 1f;
 		const float GAP = 0.1f;
+
+		private Thread _highlightThread;
 
 		private Model _tileModel;
 		private Model _minModel;
@@ -43,6 +46,7 @@ namespace XNAFrontend.Components
 			_lastMoveHighlight = new Vector2DWrapper[2];
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
 			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
+			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
 			LoadContent();
 		}
 
@@ -181,7 +185,15 @@ namespace XNAFrontend.Components
 					{
 						effect.Alpha = 1f;
 					}
-					if (clickableTile || marked)
+					if (_lastMoveHighlight[0] != null && _lastMoveHighlight[0] == cell.GetRelativePosition())
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else if (_lastMoveHighlight[1] != null && _lastMoveHighlight[1] == cell.GetRelativePosition())
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else if (clickableTile || marked)
 					{
 						effect.DiffuseColor = new Vector3(1f, 1f, 1f);
 					}
@@ -323,6 +335,25 @@ namespace XNAFrontend.Components
 
 		private void OnMoveExecuted(MoveWrapper move)
 		{
+			if (move.GetMoveType() == MoveType.INSERT)
+			{
+				_lastMoveHighlight[0] = move.GetToCell();
+			}
+			else
+			{
+				_lastMoveHighlight[0] = move.GetFromCell();
+				_lastMoveHighlight[1] = move.GetToCell();
+			}
+			_highlightThread.Abort();
+			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
+			_highlightThread.Start();
+		}
+
+		private void RemoveHighlightAfterOneSecond()
+		{
+			Thread.Sleep(1000);
+			_lastMoveHighlight[0] = null;
+			_lastMoveHighlight[1] = null;
 		}
 	}
 }
