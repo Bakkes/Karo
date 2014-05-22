@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using XNAFrontend.Components;
 using XNAFrontend.Services;
+using CommunicationProtocol;
 
 namespace XNAFrontend
 {
@@ -18,6 +19,7 @@ namespace XNAFrontend
 		public KeyboardState keyState { get; private set; }
 		public KeyboardState prevKeyState { get; private set; }
 
+		private ICommunication _communication;
 		public KaroGameManager KaroGameManager { get; set; }
 
 		public KaroGame()
@@ -70,13 +72,71 @@ namespace XNAFrontend
 			base.Draw(gameTime);
 		}
 
-		public void StartGame()
+		public void ConnectTo(System.Net.IPAddress ip, int port)
+		{
+			DisposeComminucation();
+			Client client = new Client(ip, port);
+			_communication = client;
+			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			client.OnConnectionFailed += ConnectionFailed;
+			_communication.StartCommunicating();
+			AddGameComponents();
+		}
+
+		public void ConnectionFailed()
+		{
+			Components.Clear();
+			Components.Add(new MessageComponent(this, "Failed to connect to server.", "Hit enter to return to the menu", new MenuComponent(this)));
+		}
+
+		public void ConnectionSucceed()
+		{
+			Components.Clear();
+			AddGameComponents();
+		}
+
+		public void StartOnlineGame(bool isClient)
+		{
+			if (isClient)
+			{
+				Components.Add(new ConnectComponent(this));
+				return;
+			}
+
+			DisposeComminucation();
+			_communication = new Server(43594);
+			_communication.Connected += ConnectionSucceed;
+			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
+		}
+
+		private void DisposeComminucation()
+		{
+			if (_communication == null)
+			{
+				return;
+			}
+
+			_communication.CleanUp();
+			_communication = null;
+		}
+
+		public void StartOfflineGame()
 		{
 			KaroGameManager = new KaroGameManager();
+			AddGameComponents();
+		}
+
+		private void AddGameComponents()
+		{
 			Board board = new Board(this);
 			CameraComponent camera = new CameraComponent(this, board.Position);
 			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
 
+			if (Services.GetService(typeof(ICamera)) != null)
+			{
+				Services.RemoveService(typeof(ICamera));
+			}
 			Services.AddService(typeof(ICamera), new Camera());
 
 			Components.Add(camera);
