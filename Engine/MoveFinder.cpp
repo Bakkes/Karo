@@ -34,7 +34,7 @@ namespace engine {
 
 		delete _cachedMoves;
 		_cachedMoves = new vector<Move>();
-		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
+		if (_board->GetPieceCountFor(player) <= IBoard::MaxPiecesPerPlayer) {
 			return (*GetLegalPlaceMoves(player));
 		}
 		else {
