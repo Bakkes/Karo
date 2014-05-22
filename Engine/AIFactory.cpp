@@ -17,12 +17,12 @@ namespace engine{
 	}
 	AI* AIFactory::CreateAlfaAI(){
 		AI* result = CreateAI();
-		result->AddExtension(AlfaBetaExtension());
+		result->AddExtension(new AlfaBetaExtension());
 		return result;
 	}
 	AI* AIFactory::CreateMoveOrderingAlfaAI(){
 		AI* result = CreateAlfaAI();
-		result->AddExtension(MoveSwapExtension());
+		result->AddExtension(new MoveSwapExtension());
 		return result;
 	}
 

@@ -184,9 +184,8 @@ namespace KaroManager
 				OnBoardUpdated();
 			CurrentPlayer = Players.Min;
 		}
-		MoveWrapper GetMove()
-		{
-			return LegalMoves.OrderBy(x => Guid.NewGuid()).Last(); //Game.GetBestMove();// LegalMoves.First(); // LegalMoves.OrderBy(x => Guid.NewGuid()).Last();
+		MoveWrapper GetMove(){
+			return Game.GetBestMove();
 		}
 
 		void _communication_Disconnected(DisconnectReason reason)

@@ -13,10 +13,12 @@ namespace engine {
 		AI(IBoard* board, int maxDepth);
 		~AI(void);
 		Move GetBestMove(Players player) override;
-		void AddExtension(AIExtension);
+		// add the extensions to this ai, when the ai is gone the extension
+		// will also be cleaned
+		void AddExtension(AIExtension*);
 		void SetEvaluator(IStaticEvaluation* evaluator);
 	private:
-		std::vector<AIExtension>* _extensions;
+		std::vector<AIExtension*>* _extensions;
 		// The Static Evaluation function which will evaluate the board
 		IStaticEvaluation* _evaluator;
 		// The maximum depth of the minimax search

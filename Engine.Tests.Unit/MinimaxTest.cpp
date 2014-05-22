@@ -28,8 +28,8 @@ namespace Tests {
 				93, 31, 98
 			};
 			StubStaticEval* staticEval = new StubStaticEval(results, 81);
-
 			ai->SetEvaluator(staticEval);
+
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(_factory->GetBoard(), move, Max), L"Returned move is not legal on the board");
