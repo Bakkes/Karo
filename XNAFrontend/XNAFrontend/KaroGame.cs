@@ -86,7 +86,7 @@ namespace XNAFrontend
 		public void ConnectionFailed()
 		{
 			Components.Clear();
-			Services.RemoveService(typeof(ICamera));
+			Components.Add(new MessageComponent(this, "Failed to connect to server."));
 		}
 
 		public void StartOnlineGame(bool isClient)
@@ -125,6 +125,10 @@ namespace XNAFrontend
 			CameraComponent camera = new CameraComponent(this, board.Position);
 			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
 
+			if (Services.GetService(typeof(ICamera)) != null)
+			{
+				Services.RemoveService(typeof(ICamera));
+			}
 			Services.AddService(typeof(ICamera), new Camera());
 
 			Components.Add(camera);

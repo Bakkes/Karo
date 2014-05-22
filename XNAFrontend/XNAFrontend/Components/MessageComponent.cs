@@ -5,6 +5,7 @@ using System.Text;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace XNAFrontend.Components
 {
@@ -32,6 +33,16 @@ namespace XNAFrontend.Components
 			base.LoadContent();
 		}
 
+		public override void Update(GameTime gameTime)
+		{
+			if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+			{
+				karoGame.Components.Remove(this);
+				karoGame.Components.Add(new MenuComponent(karoGame));
+			}
+			base.Update(gameTime);
+		}
+
 		public override void Draw(Microsoft.Xna.Framework.GameTime gameTime)
 		{
 			karoGame.spriteBatch.Begin();
@@ -41,10 +52,11 @@ namespace XNAFrontend.Components
 			Vector2 returnSize = _font.MeasureString(returnMessage);
 
 			Vector2 viewportSize = new Vector2(karoGame.GraphicsDevice.Viewport.Width, karoGame.GraphicsDevice.Viewport.Height);
-			Vector2 centeredLocation = (viewportSize + messageSize + returnSize) / 2;
 
-			karoGame.spriteBatch.DrawString(_font, Message, centeredLocation, Color.White);
-			karoGame.spriteBatch.DrawString(_font, returnMessage, centeredLocation + messageSize, Color.Green);
+			Vector2 centeredLocation = viewportSize / 2;
+
+			karoGame.spriteBatch.DrawString(_font, Message, centeredLocation - (messageSize / 2), Color.White);
+			karoGame.spriteBatch.DrawString(_font, returnMessage, centeredLocation - new Vector2(returnSize.X / 2, -5), Color.Green);
 			karoGame.spriteBatch.End();
 
 			base.Draw(gameTime);
