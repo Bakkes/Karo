@@ -8,6 +8,7 @@ namespace engine {
 	/** NOTE: Move positions use the absolute coordinates */
 	class ENGINE_API Move {
 	public:
+		Move(const Move&);
 		// Creates either a INSERT or DELETE move
 		Move(MoveType type, Vector2D toCell);
 		// Creates either a MOVE or JUMP move which does NOT change the board structure

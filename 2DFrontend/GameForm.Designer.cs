@@ -39,6 +39,7 @@
 			this.showBoardStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.karoPanel = new _2DFrontend.KaroPanel();
+			this.copyMoveLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -58,6 +59,7 @@
             this.newToolStripMenuItem,
             this.loadToolStripMenuItem,
             this.showBoardStringToolStripMenuItem,
+            this.copyMoveLogToolStripMenuItem,
             this.exitToolStripMenuItem});
 			this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
 			this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
@@ -130,8 +132,16 @@
 			this.karoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.karoPanel.Location = new System.Drawing.Point(0, 24);
 			this.karoPanel.Name = "karoPanel";
+			this.karoPanel.Scale = 1F;
 			this.karoPanel.Size = new System.Drawing.Size(1272, 665);
 			this.karoPanel.TabIndex = 0;
+			// 
+			// copyMoveLogToolStripMenuItem
+			// 
+			this.copyMoveLogToolStripMenuItem.Name = "copyMoveLogToolStripMenuItem";
+			this.copyMoveLogToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+			this.copyMoveLogToolStripMenuItem.Text = "Copy move log";
+			this.copyMoveLogToolStripMenuItem.Click += new System.EventHandler(this.copyMoveLogToolStripMenuItem_Click);
 			// 
 			// Karo
 			// 
@@ -164,6 +174,7 @@
 		private System.Windows.Forms.ToolStripMenuItem clientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showBoardStringToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem copyMoveLogToolStripMenuItem;
 
 	}
 }
