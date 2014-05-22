@@ -22,6 +22,7 @@ namespace XNAFrontend.Components
 		private Model _minModel;
 		private Model _maxModel;
 		private Dictionary<Vector2, bool> _markedCache;
+		private Vector2DWrapper[] _lastMoveHighlight;
 
 		private MouseState _previousMouseState;
 
@@ -39,8 +40,9 @@ namespace XNAFrontend.Components
 			: base(game)
 		{
 			_markedCache = new Dictionary<Vector2, bool>();
+			_lastMoveHighlight = new Vector2DWrapper[2];
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
-			//this.Position = Vector3.Zero;
+			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
 			LoadContent();
 		}
 
@@ -317,6 +319,10 @@ namespace XNAFrontend.Components
 			}
 
 			return _markedCache[position];
+		}
+
+		private void OnMoveExecuted(MoveWrapper move)
+		{
 		}
 	}
 }
