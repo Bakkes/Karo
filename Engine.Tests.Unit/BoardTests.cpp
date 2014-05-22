@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include "Windows.h"
-
+#include "ComputerPlayerMO.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
 using namespace std;
@@ -295,6 +295,24 @@ namespace Tests {
 			int len = board->GetOccupiedTiles()->size() + board->GetEmptyTiles()->size();
 			OutputDebugString(board->ToString().c_str());
 			Assert::AreEqual(20, len);
+		}
+
+		TEST_METHOD(DontInsertTooEarly) {			
+			Board* board = new Board();
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(2, 1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(4, 3), Vector2D(4, 3)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(2, 3)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1, 0), Vector2D(1, 0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(3, 0)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1, 1), Vector2D(1, 1)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(3, 1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1, 2), Vector2D(1, 2)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(3, 2)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(4, 0), Vector2D(4, 0)), Min);
+			ComputerPlayerMO* cp = new ComputerPlayerMO(board, 3);
+			Move bm = cp->GetBestMove(Max);
+			Assert::IsTrue(bm.GetMoveType() == INSERT);
+
 		}
 	};
 		

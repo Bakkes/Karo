@@ -12,6 +12,7 @@ namespace engine {
 		init(both, both);
 	}
 	Vector2D::Vector2D(const Vector2D& cpy){
+		assert(cpy != null);
 		init(cpy._x, cpy._y);
 	}
 	Vector2D::~Vector2D(void)
