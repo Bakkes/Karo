@@ -79,8 +79,12 @@ namespace KaroManager
 
 		bool IsMoveLegal(MoveWrapper mv, Players player)
 		{
-			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
-			return legal.Any(m =>
+			if (mv.GetMoveType() == engine.wrapper.MoveType.INSERT)
+			{
+				return LegalMoves.
+					Any(m => m.GetToCell() == mv.GetToCell());
+			}
+			return LegalMoves.Any(m =>
 				m.GetFromCell() == mv.GetFromCell() &&
 				m.GetToCell() == mv.GetToCell() &&
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell()));
