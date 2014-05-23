@@ -19,9 +19,13 @@ namespace XNAFrontend.Components
 		const float SIZE = 1f;
 		const float GAP = 0.1f;
 
-		private Model _tileModel;
+		private Model _tileModel, _cordModel;
 		private Model _minModel;
 		private Model _maxModel;
+		private SpriteFont _font;
+		private KaroGame _game;
+		private Texture2D _cordTexture;
+		private RenderTarget2D renderTarget;
 
 		private MouseState _previousMouseState;
 
@@ -40,6 +44,7 @@ namespace XNAFrontend.Components
 		{
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
 			//this.Position = Vector3.Zero;
+			_game = game;
 			LoadContent();
 		}
 
@@ -53,8 +58,14 @@ namespace XNAFrontend.Components
 		{
 			base.LoadContent();
 			_tileModel = Game.Content.Load<Model>("tile");
+			_cordModel = Game.Content.Load<Model>("cords");
 			_minModel = Game.Content.Load<Model>("piecemin");
 			_maxModel = Game.Content.Load<Model>("piecemax");
+			_font = Game.Content.Load<SpriteFont>("SpriteFont1");
+			_cordTexture = Game.Content.Load<Texture2D>("a1");
+
+			PresentationParameters pp = Game.GraphicsDevice.PresentationParameters;
+			renderTarget = new RenderTarget2D(Game.GraphicsDevice, 512, 512, true, Game.GraphicsDevice.DisplayMode.Format, DepthFormat.Depth24);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -115,21 +126,11 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
+			
+			
 			karoGame.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
 			BoardWrapper board = KaroGameManager.Board;
-			double width = board.GetDynamicSize().X;
-			double height = board.GetDynamicSize().Y;
-			CellWrapper tmp = board.GetRelativeCellAt(new Vector2DWrapper(0, 0));
-
-			for (int i = 0; i <= height; i++)
-			{
-				DrawCordsAt(tmp, -2, i);
-			}
-			for (int i = 0; i <= width; i++)
-			{
-				DrawCordsAt(tmp, i, (int)height + 2);
-			}
 
 			for (int i = 0; i < 20; i++)
 			{
@@ -147,6 +148,24 @@ namespace XNAFrontend.Components
 					}
 				}
 			}
+
+			double width = board.GetDynamicSize().X;
+			double height = board.GetDynamicSize().Y;
+			CellWrapper tmp = board.GetRelativeCellAt(new Vector2DWrapper(0, 0));
+
+			for (int i = 0; i <= height; i++)
+			{
+				DrawCordsAt(tmp, -2, i);
+			}
+			for (int i = 0; i <= width; i++)
+			{
+				DrawCordsAt(tmp, i, (int)height + 2);
+			}
+
+			_game.spriteBatch.Begin();
+			_game.spriteBatch.DrawString(_font, "test", new Vector2(10, 10), Color.Red);
+			_game.spriteBatch.End();
+
 			base.Draw(gameTime);
 		}
 
@@ -155,18 +174,19 @@ namespace XNAFrontend.Components
 		{
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
-			foreach (ModelMesh mesh in _tileModel.Meshes)
+			foreach (ModelMesh mesh in _cordModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
+					effect.TextureEnabled = true;
+					effect.Texture = _cordTexture;
 					effect.EnableDefaultLighting();
-					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+					effect.World = world * Matrix.CreateRotationX(MathHelper.ToRadians(90)) * Matrix.CreateScale(0.5f) * Matrix.CreateRotationY(MathHelper.ToRadians(180)) * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
 					effect.Alpha = 1f;
-					effect.DiffuseColor = new Vector3(0.2f, 0.2f, 0.2f);
+					effect.DiffuseColor = new Vector3(0.8f, 0.8f, 0.8f);
 				}
-
 				mesh.Draw();
 			}
 		}
