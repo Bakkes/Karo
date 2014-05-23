@@ -25,7 +25,7 @@ namespace XNAFrontend.Components
 			_gravity = new Vector3(0f, 0.05f, 0f);
 			_position = Vector3.Zero;
 			_maxVelocity = new Vector3(0f, 1f, 0f);
-			_velocity = new Vector3(0f, 1f, 0f);
+			_velocity = _maxVelocity;
 
 			float aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
 			_cameraPosition = new Vector3(20f, 0f, 0f);
@@ -52,12 +52,18 @@ namespace XNAFrontend.Components
 			{
 				_velocity = _maxVelocity;
 			}
+			_rotation += 0.15f;
 			base.Update(gameTime);
 		}
 
 		public override void Draw(GameTime gameTime)
 		{
 			base.Draw(gameTime);
+
+			RasterizerState rs = new RasterizerState();
+			rs.DepthBias = -10f;
+			RasterizerState rsold = Game.GraphicsDevice.RasterizerState;
+			Game.GraphicsDevice.RasterizerState = rs;
 			foreach (ModelMesh mesh in _beachBall.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
@@ -65,11 +71,14 @@ namespace XNAFrontend.Components
 					effect.EnableDefaultLighting();
 					effect.View = _view;
 					effect.Projection = _projection;
-					effect.World = Matrix.CreateTranslation(_position) *
+					effect.World = Matrix.CreateRotationZ(1.5f) *
+						Matrix.CreateRotationX(_rotation) *
+						Matrix.CreateTranslation(_position) *
 						Matrix.CreateTranslation(_offset);
 				}
 				mesh.Draw();
 			}
+			Game.GraphicsDevice.RasterizerState = rsold;
 		}
 	}
 }
