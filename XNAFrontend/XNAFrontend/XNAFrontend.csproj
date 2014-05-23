@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Components\ACommonComponent.cs" />
+    <Compile Include="Components\BeachBallComponent.cs" />
     <Compile Include="Components\CameraComponent.cs" />
     <Compile Include="Components\BoardComponent.cs" />
     <Compile Include="Components\ConnectComponent.cs" />
