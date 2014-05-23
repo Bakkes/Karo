@@ -30,7 +30,7 @@ namespace engine{
 		RelativeCell GetRelativeCellAt(const Vector2D& relativePosition) const override;
 		int CountNonDiagonalEdges(const RelativeCell&) override;
 		Cell<int>* GetAbsoluteCellAt(const Vector2D absolutePosition) const;
-		string ToString();
+		string ToString() const;
 		// create a board from a string with topleft at 0,0
 		static Board* CreateBoard(string from);
 		// allows you to specify the top left position, the string from is still absolute
