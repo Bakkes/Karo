@@ -16,6 +16,7 @@ namespace engine{
 	class ENGINE_API Board : public IBoard{
 	public:
 		Board();
+		Board(const Board& cpy);
 		Board(bool init);
 		~Board();
 		int GetPieceCountFor(Players player) override;
