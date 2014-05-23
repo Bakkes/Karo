@@ -48,7 +48,7 @@ namespace KaroManager.State
 				// We now have a valid move. Execute it!
 				Debug.WriteLine("Clicked on moveable tile.");
 				manager.ExecuteMove(move);
-				
+				manager.ChangeState(PieceSourceState.Instance);
 			}
 			else
 			{
