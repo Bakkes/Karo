@@ -3,7 +3,8 @@
 #include "StubBoard.h"
 #include "StubStaticEval.h"
 #include "AIFactory.h"
-
+#include "Board.h"
+#include "StaticEvaluation.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
 
@@ -98,7 +99,44 @@ namespace Tests {
 			delete _factory->GetBoard();
 			delete ai;
 		}
-
+		TEST_METHOD(ThisIsInsertPhaseIntegrationTest) {
+			Board* board = Board::CreateBoard(
+				"3,5,7,1,1,6,0,0,0,0,0,0,0,0,0,0,0,0,0,6,"
+				"7,5,15,1,7,6,0,0,0,0,0,0,0,0,0,0,0,0,0,6,"
+				"7,5,5,1,7,6,0,0,0,0,0,0,0,0,0,0,0,0,0,6,"
+				"15,5,1,7,7,6,0,0,0,0,0,0,0,0,0,0,0,0,0,6,"
+				"6,6,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+				"6,6,6,6,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+			);
+			vector<Move> legalMoves = board->GetLegalMoves(Max);
+			for(auto it = legalMoves.begin(); it < legalMoves.end(); ++it){
+				Assert::IsTrue(it->GetMoveType() == INSERT);
+			}
+			legalMoves = board->GetLegalMoves(Min);
+			for(auto it = legalMoves.begin(); it < legalMoves.end(); ++it){
+				Assert::IsTrue(it->GetMoveType() == INSERT);
+			}
+			AI* ai = AIFactory(board,3).CreateMoveOrderingAlfaAI();
+			ai->SetEvaluator(new StaticEvaluation());
+			Move m = ai->GetBestMove(Max);
+			Assert::IsTrue(m.GetMoveType() == INSERT);
+			m = ai->GetBestMove(Min);
+			Assert::IsTrue(m.GetMoveType() == INSERT);
+		}
 
 private:
 	bool IsLegalMove(IBoard* board, Move move, Players player) {

@@ -39,12 +39,8 @@ namespace KaroManager
 
 		public List<KeyValuePair<MoveWrapper, Players>> MoveLog { get; set; }
 
-		public IEnumerable<MoveWrapper> LegalMoves
-		{
-			get
-			{
-				return Board.GetLegalMoves(CurrentPlayer);
-			}
+		public IEnumerable<MoveWrapper> FindLegalMoves(Players forPlayer){
+			return Board.GetLegalMoves(forPlayer);
 		}
 
 		/// <summary>

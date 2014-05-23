@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Windows.Forms;
 using engine.wrapper;
 using KaroManager;
@@ -165,7 +166,7 @@ namespace _2DFrontend
 			if (_manager.CurrentState is PlaceState)
 			{
 				// Highlight every empty tile.
-				foreach (MoveWrapper move in _manager.LegalMoves)
+				foreach (MoveWrapper move in _manager.FindLegalMoves(_manager.CurrentPlayer))
 				{
 					Point paintPos = CellToPixel((int)move.GetToCell().X, (int)move.GetToCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
@@ -175,7 +176,7 @@ namespace _2DFrontend
 			else if (_manager.CurrentState is PieceSourceState)
 			{
 				// Highlight every movable piece of the current player.
-				foreach (MoveWrapper move in _manager.LegalMoves)
+				foreach (MoveWrapper move in _manager.FindLegalMoves(_manager.CurrentPlayer))
 				{
 					Point paintPos = CellToPixel((int)move.GetFromCell().X, (int)move.GetFromCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
@@ -185,7 +186,7 @@ namespace _2DFrontend
 			else if (_manager.CurrentState is PieceDestinationState)
 			{
 				// Highlight every destination of the currently selected piece.
-				foreach (MoveWrapper move in _manager.LegalMoves.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
+				foreach (MoveWrapper move in _manager.FindLegalMoves(_manager.CurrentPlayer).Where(m => m.GetFromCell() == currentMove.GetFromCell()))
 				{
 					Point paintPos = CellToPixel((int)move.GetToCell().X, (int)move.GetToCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,
@@ -196,7 +197,7 @@ namespace _2DFrontend
 			{
 				// Highlight every empty tile that can be moved to the currently
 				// empty spot on the board.
-				foreach (MoveWrapper move in _manager.LegalMoves.Where(m => m.GetToCell() == currentMove.GetToCell()))
+				foreach (MoveWrapper move in _manager.FindLegalMoves(_manager.CurrentPlayer).Where(m => m.GetToCell() == currentMove.GetToCell()))
 				{
 					Point paintPos = CellToPixel((int)move.GetUsedCell().X, (int)move.GetUsedCell().Y);
 					g.FillRectangle(_suggestionColor, paintPos.X - 2, paintPos.Y - 2,

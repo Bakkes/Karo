@@ -47,6 +47,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);ENGINE_EXPORTS</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -54,6 +55,9 @@
     <PostBuildEvent>
       <Command>call "$(ProjectDir)postbuild.debug.bat"</Command>
     </PostBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

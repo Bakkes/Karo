@@ -31,7 +31,6 @@ namespace engine {
 		if (player == Max) { _invalidatedMax = false; }
 		if (player == Min) { _invalidatedMin = false; }
 		_cachedMoves->clear();
-
 		delete _cachedMoves;
 		_cachedMoves = new vector<Move>();
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
@@ -45,25 +44,28 @@ namespace engine {
 	// Returns all place moves for the specified player.
 	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
 		std::vector<RelativeCell>* emptyTiles = _board->GetEmptyTiles();
-		for_each(emptyTiles->begin(), emptyTiles->end(), [this](RelativeCell& cell) -> void{
-			_cachedMoves->push_back(Move(INSERT, Vector2D(), cell.GetRelativePosition()));	
-		});
+		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
+			// Add insertion move to an empty tile.
+			_cachedMoves->push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
+		} 
 		return _cachedMoves;
 	}
 
 	// Returns all moves that are either a jump or move type of move.
 	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
-		std::vector<RelativeCell> occupiedCells = std::vector<RelativeCell>(*_board->GetOccupiedTiles());
+		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
 
-		for_each(occupiedCells.begin(), occupiedCells.end(), [&,this](RelativeCell& cell) -> void{
+		// Loop through all occupied cells.
+		for (auto it = occupiedCells->begin(); it != occupiedCells->end(); ++it) {
+
 			// If this cells contain a piece owned by player, continue.
-			if ((player == Max && cell.IsMaxPiece()) ||
-				(player == Min && !cell.IsMaxPiece()))
+			if ((player == Max && it->IsMaxPiece()) ||
+				(player == Min && !it->IsMaxPiece()))
 			{
-				AddJumpMovesToVector(cell);
-				AddAdjacentMovesToVector(cell);
+				AddJumpMovesToVector(*it);
+				AddAdjacentMovesToVector(*it);
 			}
-		});
+		}
 		return _cachedMoves;
 	}
 
@@ -164,40 +166,40 @@ namespace engine {
 		const MoveType& type,
 		const RelativeCell& from,
 		const RelativeCell& to) {
-		std::vector<RelativeCell> emptyCells = std::vector<RelativeCell>(*_board->GetEmptyTiles());
-		for_each(emptyCells.begin(), emptyCells.end(), [&,this](RelativeCell& cell) -> void{
-			if (_board->CountNonDiagonalEdges(cell) > 2) {
-				return;// continue does not work return is the same
+		std::vector<RelativeCell>* emptyCells = _board->GetEmptyTiles();
+		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
+			if (_board->CountNonDiagonalEdges(*it) > 2) {
+				continue;
 			}
 			// Rule amendment solution
 			// - From tile has 0 or 1 edges
 			// - to and used tile are diagonal (relative to eachother)
 			// then this move is illegal
-			Vector2D diff = to.GetRelativePosition() - cell.GetRelativePosition();
+			Vector2D diff = to.GetRelativePosition() - it->GetRelativePosition();
 			if (abs((int)diff.X()) <= 1 && abs((int)diff.Y()) <= 1) {
-				_board->DeleteTileAt(cell.GetRelativePosition());
+				_board->DeleteTileAt(it->GetRelativePosition());
 				int connectedTiles = ConnectedTiles(from);
-				_board->CreateTileAt(cell.GetRelativePosition());
+				_board->CreateTileAt(it->GetRelativePosition());
 				if (connectedTiles != 19) {
-					return;
+					continue;
 				}
 			}
 			// Create potential move.
 			Move move(type,
 				from.GetRelativePosition(),
 				to.GetRelativePosition(),
-				cell.GetRelativePosition()
+				it->GetRelativePosition()
 			);
 			Players player = from.GetPlayer();
 			_board->ExecuteMove(move, player);
 			if (ConnectedTiles(from) != 20) {
 				// An island was created, stop!
 				_board->UndoMove(move, player);
-				return;
+				continue;
 			}
 			_board->UndoMove(move, player);
 			_cachedMoves->push_back(move);
-		});
+		}
 		// This is to prevent the UndoMove and ExecuteMove in this method
 		// from invalidating the cache.
 		if (from.GetPlayer() == Max) { _invalidatedMax = false; }

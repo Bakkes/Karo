@@ -270,7 +270,7 @@ namespace XNAFrontend.Components
 
 			if (currentState is PlaceState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
 				{
 					Vector2DWrapper wrapperPos = legalMove.GetToCell();
 					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
@@ -281,7 +281,7 @@ namespace XNAFrontend.Components
 			}
 			else if (currentState is PieceSourceState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
 				{
 					Vector2DWrapper wrapperPos = legalMove.GetFromCell();
 					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
@@ -292,7 +292,7 @@ namespace XNAFrontend.Components
 			}
 			else if (currentState is PieceDestinationState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
 					.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
 				{
 					Vector2DWrapper wrapperPos = legalMove.GetToCell();
@@ -304,7 +304,7 @@ namespace XNAFrontend.Components
 			}
 			else if (currentState is CellSourceState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
 					.Where(m => m.GetFromCell() == currentMove.GetFromCell())
 					.Where(m => m.GetToCell() == currentMove.GetToCell()))
 				{
