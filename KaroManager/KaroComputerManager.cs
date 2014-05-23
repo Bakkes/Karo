@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using engine.wrapper;
+using KaroManager.State;
 
 namespace KaroManager
 {
@@ -17,8 +18,7 @@ namespace KaroManager
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			base.ExecuteMove(move);
-			Game.ExecuteMove(Game.GetBestMove(), CurrentPlayer);
-			SwapCurrentPlayer();
+			ChangeState(ComputerState.Instance);
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
 		}
 	}

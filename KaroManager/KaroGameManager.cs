@@ -67,6 +67,12 @@ namespace KaroManager
 			CurrentState = PlaceState.Instance;
 		}
 
+		/// <summary>
+		/// Changes the CurrentState to the specified state. The specified state's
+		/// Enter method will be called after the CurrentState is updated. The
+		/// CurrentState's Exit method will be called before the CurrentState is
+		/// updated.
+		/// </summary>
 		public void ChangeState(IKaroState state)
 		{
 			if (CurrentState != null)
