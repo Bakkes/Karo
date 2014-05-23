@@ -22,22 +22,22 @@ namespace KaroManager
 			CurrentPlayer = Players.Min;
 			_conversion = new CommunicationProtocolConversionUtility(Game);
 			_communication = communication;
-			_communication.Connected += _communication_Connected;
-			_communication.Disconnected += _communication_Disconnected;
-			_communication.RequestFirstMove += communication_RequestFirstMove;
-			_communication.SentMoveInvalid += _communication_SentMoveInvalid;
-			_communication.TurnReceived += _communication_TurnReceived;
-			_communication.WinAccepted += _communication_WinAccepted;
-			_communication.WinDetected += _communication_WinDetected;
-			_communication.WinRejected += _communication_WinRejected;
+			_communication.Connected += Communication_Connected;
+			_communication.Disconnected += Communication_Disconnected;
+			_communication.RequestFirstMove += Communication_RequestFirstMove;
+			_communication.SentMoveInvalid += Communication_SentMoveInvalid;
+			_communication.TurnReceived += Communication_TurnReceived;
+			_communication.WinAccepted += Communication_WinAccepted;
+			_communication.WinDetected += Communication_WinDetected;
+			_communication.WinRejected += Communication_WinRejected;
 		}
 
-		void _communication_WinRejected()
+		void Communication_WinRejected()
 		{
 			Debug.WriteLine("Opponent did not accept win.");
 		}
 
-		void _communication_WinDetected(Turn t, Player p)
+		void Communication_WinDetected(Turn t, Player p)
 		{
 			if (p == Player.Me)
 			{
@@ -72,7 +72,7 @@ namespace KaroManager
 			}
 		}
 
-		void _communication_WinAccepted()
+		void Communication_WinAccepted()
 		{
 			Debug.WriteLine("We won!");
 		}
@@ -109,7 +109,7 @@ namespace KaroManager
 			ExecuteMove(received);
 			return true;
 		}
-		void _communication_TurnReceived(Turn t)
+		void Communication_TurnReceived(Turn t)
 		{
 			if (CurrentPlayer == Players.Max)
 			{
@@ -150,12 +150,12 @@ namespace KaroManager
 			CurrentPlayer = Players.Min;
 		}
 
-		void _communication_SentMoveInvalid(Turn t)
+		void Communication_SentMoveInvalid(Turn t)
 		{
 			Debug.WriteLine("Opponent says our move is wrong.");
 		}
 
-		void communication_RequestFirstMove()
+		void Communication_RequestFirstMove()
 		{
 			_turn++;
 			Debug.WriteLine("We're first.");
@@ -173,12 +173,12 @@ namespace KaroManager
 			return Game.GetBestMove();
 		}
 
-		void _communication_Disconnected(DisconnectReason reason)
+		void Communication_Disconnected(DisconnectReason reason)
 		{
 			Debug.WriteLine("Opponent disconnected, reason: " + reason.ToString());
 		}
 
-		void _communication_Connected()
+		void Communication_Connected()
 		{
 			Debug.WriteLine("Connected to opponent, GLHF");
 		}
