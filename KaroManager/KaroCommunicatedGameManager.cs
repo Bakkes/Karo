@@ -79,8 +79,6 @@ namespace KaroManager
 
 		bool IsMoveLegal(MoveWrapper mv, Players player)
 		{
-			if (mv.GetMoveType() == engine.wrapper.MoveType.INSERT)
-				return true;
 			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
 			return legal.Any(m =>
 				m.GetFromCell() == mv.GetFromCell() &&
@@ -89,12 +87,6 @@ namespace KaroManager
 		}
 
 		bool HanldeTheirMove(Turn t){
-			if (CurrentPlayer == Players.Max)
-			{
-				//Not their turn
-				_communication.SendDisconnect(DisconnectReason.InvalidMove);
-				return false;
-			}
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
@@ -108,7 +100,7 @@ namespace KaroManager
 
 			// Get the move with the correct source tile from the last click.
 			Console.WriteLine("Current player: " + CurrentPlayer);
-			if (!IsMoveLegal(received, Players.Min))
+			if (!IsMoveLegal(received, CurrentPlayer))
 			{
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
@@ -119,6 +111,12 @@ namespace KaroManager
 		}
 		void _communication_TurnReceived(Turn t)
 		{
+			if (CurrentPlayer == Players.Max)
+			{
+				//Not their turn
+				_communication.SendDisconnect(DisconnectReason.InvalidMove);
+				return;
+			}
 			if(!HanldeTheirMove(t)){
 				return;
 			}
