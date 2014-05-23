@@ -82,7 +82,9 @@ namespace engine{
 	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
 		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
-			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
+			EvalResult res = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
+			res.SetMove(move);
+			return res;
 		}
 
 		// We can't go deeper, evaluate the board

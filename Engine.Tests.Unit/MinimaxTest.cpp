@@ -130,7 +130,7 @@ namespace Tests {
 			for(auto it = legalMoves.begin(); it < legalMoves.end(); ++it){
 				Assert::IsTrue(it->GetMoveType() == INSERT);
 			}
-			AI* ai = AIFactory(board,3).CreateMoveOrderingAlfaAI();
+			AI* ai = AIFactory(board,3).CreateAI();
 			ai->SetEvaluator(new StaticEvaluation());
 			Move m = ai->GetBestMove(Max);
 			Assert::IsTrue(m.GetMoveType() == INSERT);
