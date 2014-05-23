@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using XNAFrontend.Components;
 using XNAFrontend.Services;
 using CommunicationProtocol;
+using System.Diagnostics;
 
 namespace XNAFrontend
 {
@@ -78,6 +79,7 @@ namespace XNAFrontend
 			Client client = new Client(ip, port);
 			_communication = client;
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			KaroGameManager.OnPlayerWin += PlayerWon;
 			client.OnConnectionFailed += ConnectionFailed;
 			_communication.StartCommunicating();
 			AddGameComponents();
@@ -107,7 +109,13 @@ namespace XNAFrontend
 			_communication = new Server(43594);
 			_communication.Connected += ConnectionSucceed;
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
+			KaroGameManager.OnPlayerWin += PlayerWon;
 			Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
+		}
+
+		private void PlayerWon(Players player)
+		{
+			Debug.WriteLine(player + " has won");
 		}
 
 		private void DisposeCommunication()
@@ -124,6 +132,7 @@ namespace XNAFrontend
 		public void StartOfflineGame()
 		{
 			KaroGameManager = new KaroGameManager();
+			KaroGameManager.OnPlayerWin += PlayerWon;
 			AddGameComponents();
 		}
 
