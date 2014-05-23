@@ -355,6 +355,20 @@ namespace XNAFrontend.Components
 					_lastMoveHighlight[0].Y++;
 					_lastMoveHighlight[1].Y++;
 				}
+				if (karoGame.KaroGameManager.Board.GetRelativeCellAt(
+					move.GetUsedCell()).HasTile())
+				{
+					if (move.GetUsedCell().X == 0)
+					{
+						_lastMoveHighlight[0].X--;
+						_lastMoveHighlight[1].X--;
+					}
+					if (move.GetUsedCell().Y == 0)
+					{
+						_lastMoveHighlight[0].Y--;
+						_lastMoveHighlight[1].Y--;
+					}
+				}
 			}
 			_highlightThread.Abort();
 			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
