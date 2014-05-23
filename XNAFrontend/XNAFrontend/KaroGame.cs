@@ -74,7 +74,7 @@ namespace XNAFrontend
 
 		public void ConnectTo(System.Net.IPAddress ip, int port)
 		{
-			DisposeComminucation();
+			DisposeCommunication();
 			Client client = new Client(ip, port);
 			_communication = client;
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
@@ -103,14 +103,14 @@ namespace XNAFrontend
 				return;
 			}
 
-			DisposeComminucation();
+			DisposeCommunication();
 			_communication = new Server(43594);
 			_communication.Connected += ConnectionSucceed;
 			KaroGameManager = new KaroCommunicatedGameManager(_communication);
 			Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
 		}
 
-		private void DisposeComminucation()
+		private void DisposeCommunication()
 		{
 			if (_communication == null)
 			{
