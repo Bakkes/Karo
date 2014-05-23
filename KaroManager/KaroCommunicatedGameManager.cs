@@ -42,7 +42,7 @@ namespace KaroManager
 			if (p == Player.Me)
 			{
 				Debug.WriteLine("Opponent thinks he won, going to check.");
-				if(!HanldeTheirMove(t)){
+				if(!HandleTheirMove(t)){
 					return;
 				}
 				if (Game.HasWon(Players.Min))
@@ -90,7 +90,7 @@ namespace KaroManager
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell()));
 		}
 
-		bool HanldeTheirMove(Turn t){
+		bool HandleTheirMove(Turn t){
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
@@ -121,12 +121,12 @@ namespace KaroManager
 				_communication.SendDisconnect(DisconnectReason.InvalidMove);
 				return;
 			}
-			if(!HanldeTheirMove(t)){
+			if(!HandleTheirMove(t)){
 				return;
 			}
 			_turn++;
 
-			//Handled their move, moving on to ours now
+			//Handled their move, moving to ours now
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
 
@@ -173,7 +173,8 @@ namespace KaroManager
 				OnBoardUpdated();
 			CurrentPlayer = Players.Min;
 		}
-		MoveWrapper GetMove(){
+
+		MoveWrapper GetMove() {
 			return Game.GetBestMove();
 		}
 
