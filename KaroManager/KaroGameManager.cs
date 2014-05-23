@@ -8,6 +8,8 @@ namespace KaroManager
 {
 
 	public delegate void BoardUpdated();
+	public delegate void MoveExecuted(MoveWrapper move);
+	public delegate void PlayerHasWon(Players player);
 
 	/// <summary>
 	/// Statemachine that keeps track of the game's states.
@@ -25,7 +27,8 @@ namespace KaroManager
 		public Players CurrentPlayer { get; set; }
 
 		public BoardUpdated OnBoardUpdated;
-
+		public MoveExecuted OnMoveExecuted;
+		public PlayerHasWon OnPlayerWin;
 		/// <summary>
 		/// Access the board of the current game.
 		/// </summary>
@@ -90,14 +93,23 @@ namespace KaroManager
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			Game.ExecuteMove(move, CurrentPlayer);
-			SwapCurrentPlayer();
+			
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
+			if (OnMoveExecuted != null)
+			{
+				OnMoveExecuted(move);
+			}
+			if (Game.HasWon(CurrentPlayer) && OnPlayerWin != null)
+			{
+				OnPlayerWin(CurrentPlayer);
+			}
 			if (OnBoardUpdated != null)
 			{
 				OnBoardUpdated();
 			}
+			SwapCurrentPlayer();
 		}
-     
+
 
 		protected void SwapCurrentPlayer()
 		{
