@@ -109,7 +109,7 @@ namespace KaroManager
 		}
 
 
-		protected void SwapCurrentPlayer()
+		public void SwapCurrentPlayer()
 		{
 			// Swap the player to the other player with the ternary operator.
 			CurrentPlayer = CurrentPlayer == Players.Max ? Players.Min : Players.Max;
