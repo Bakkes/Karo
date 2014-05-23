@@ -156,9 +156,13 @@ Global
 		{65404C12-CE62-416E-A01D-4939C00EDD17}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{65404C12-CE62-416E-A01D-4939C00EDD17}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{65404C12-CE62-416E-A01D-4939C00EDD17}.Release|Win32.ActiveCfg = Release|Any CPU
+		{65404C12-CE62-416E-A01D-4939C00EDD17}.Release|Win32.Build.0 = Release|Any CPU
 		{65404C12-CE62-416E-A01D-4939C00EDD17}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
