@@ -46,6 +46,8 @@ namespace XNAFrontend
 			graphics.PreferredBackBufferHeight = 720;
 			graphics.ApplyChanges();
 
+			Components.Add(new BeachBallComponent(this));
+
 			base.Initialize();
 		}
 
