@@ -85,25 +85,15 @@ namespace KaroManager
 					Where(m => m.GetToCell() == mv.GetToCell()).Count() > 0;
 			}
 			
-			Vector2DWrapper from = mv.GetFromCell();
-			Vector2DWrapper to = mv.GetToCell();
-			Vector2DWrapper used = mv.GetUsedCell();
-			Debug.WriteLine("Checking if legal: ");
-			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
-			return LegalMoves.Where(m =>
+			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
+			return legal.Any(m =>
 				m.GetFromCell() == mv.GetFromCell() &&
 				m.GetToCell() == mv.GetToCell() &&
-				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
+				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell()));
 			
 		}
 
 		bool HanldeTheirMove(Turn t){
-			/*if (CurrentPlayer == Players.Max)
-			{
-				//Not their turn
-				_communication.SendDisconnect(DisconnectReason.InvalidMove);
-				return;
-			}*/
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
@@ -117,7 +107,7 @@ namespace KaroManager
 
 			// Get the move with the correct source tile from the last click.
 			Console.WriteLine("Current player: " + CurrentPlayer);
-			if (!IsMoveLegal(received, Players.Min))
+			if (!IsMoveLegal(received, CurrentPlayer))
 			{
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
@@ -128,6 +118,12 @@ namespace KaroManager
 		}
 		void _communication_TurnReceived(Turn t)
 		{
+			if (CurrentPlayer == Players.Max)
+			{
+				//Not their turn
+				_communication.SendDisconnect(DisconnectReason.InvalidMove);
+				return;
+			}
 			if(!HanldeTheirMove(t)){
 				return;
 			}
