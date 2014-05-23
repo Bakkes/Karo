@@ -48,12 +48,10 @@ namespace engine{
 
 		// allow extensoins to do some move ordering
 		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves](AIExtension* extension) -> void{
-			int i = 4;
 			extension->UpdateMoves(depth, possibleMoves);
 		});
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
-
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
 			EvalResult currentResult = NextStep(player, move, depth, result);
@@ -62,12 +60,12 @@ namespace engine{
 			if (player == Max) {
 				if (!result.IsSet() || result.GetScore() < currentResult.GetScore()) {
 					result.SetScore(currentResult.GetScore());
-					result.SetMove(currentResult.GetMove());
+					result.SetMove(move);
 				}
 			} else{
 				if (!result.IsSet() || result.GetScore() > currentResult.GetScore()) {
 					result.SetScore(currentResult.GetScore());
-					result.SetMove(currentResult.GetMove());
+					result.SetMove(move);
 				}
 			}
 			// allows for pruning
@@ -82,9 +80,7 @@ namespace engine{
 	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
 		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
-			EvalResult res = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
-			res.SetMove(move);
-			return res;
+			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
 		}
 
 		// We can't go deeper, evaluate the board
