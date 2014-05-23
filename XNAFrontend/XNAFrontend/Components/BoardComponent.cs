@@ -343,6 +343,18 @@ namespace XNAFrontend.Components
 			{
 				_lastMoveHighlight[0] = move.GetFromCell();
 				_lastMoveHighlight[1] = move.GetToCell();
+
+				// Adjust coordinates if board moved around.
+				if (_lastMoveHighlight[1].X < 0)
+				{
+					_lastMoveHighlight[0].X++;
+					_lastMoveHighlight[1].X++;
+				}
+				if (_lastMoveHighlight[1].Y < 0)
+				{
+					_lastMoveHighlight[0].Y++;
+					_lastMoveHighlight[1].Y++;
+				}
 			}
 			_highlightThread.Abort();
 			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
