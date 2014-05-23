@@ -38,6 +38,7 @@ namespace engine{
 	void AI::SetEvaluator(IStaticEvaluation* evaluator) {
 		_evaluator = evaluator;
 	}
+
 	EvalResult AI::MinimaxStep(Players player, int depth, EvalResult result){
 		// allow extensions to set te result
 		for_each(_extensions->begin(), _extensions->end(), [&](AIExtension* extension) -> void{
@@ -57,17 +58,6 @@ namespace engine{
 			EvalResult currentResult = NextStep(player, move, depth, result);
 			_board->UndoMove(move, player);
 
-			if (player == Max) {
-				if (!result.IsSet() || result.GetScore() < currentResult.GetScore()) {
-					result.SetScore(currentResult.GetScore());
-					result.SetMove(move);
-				}
-			} else{
-				if (!result.IsSet() || result.GetScore() > currentResult.GetScore()) {
-					result.SetScore(currentResult.GetScore());
-					result.SetMove(move);
-				}
-			}
 			// allows for pruning
 			for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension){
 				if(!(*extension)->ShouldContinue(currentResult, result, player)){
@@ -75,17 +65,19 @@ namespace engine{
 				}
 			}
 		}
+
 		return result;
 	}
 	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
 		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
-			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
+			EvalResult result = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
+			result.SetMove(move);
+			return result;
 		}
 
 		// We can't go deeper, evaluate the board
 		EvalResult score(result.GetBestForMax(), result.GetBestForMin());
-		score.SetMove(move);
 		score.SetScore(_evaluator->Eval(_board, player));
 		return score;
 	}
