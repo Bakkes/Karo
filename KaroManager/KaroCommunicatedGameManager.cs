@@ -82,15 +82,12 @@ namespace KaroManager
 			if (mv.GetMoveType() == engine.wrapper.MoveType.INSERT)
 			{
 				return LegalMoves.
-					Where(m => m.GetToCell() == mv.GetToCell()).Count() > 0;
+					Any(m => m.GetToCell() == mv.GetToCell());
 			}
-			
-			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
-			return legal.Any(m =>
+			return LegalMoves.Any(m =>
 				m.GetFromCell() == mv.GetFromCell() &&
 				m.GetToCell() == mv.GetToCell() &&
 				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell()));
-			
 		}
 
 		bool HanldeTheirMove(Turn t){
