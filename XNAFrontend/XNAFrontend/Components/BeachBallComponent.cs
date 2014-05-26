@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace XNAFrontend.Components
 {
-	public class BeachBallComponent : ACommonComponent
+	public class BeachBallComponent : ACommonComponent, ILoadingComponent
 	{
 		private Vector3 _gravity;
-		private readonly Vector3 _maxVelocity;
+		private Vector3 _maxVelocity;
 
 		private Model _beachBall;
 		private Vector3 _position;
@@ -19,14 +19,36 @@ namespace XNAFrontend.Components
 		private Matrix _view;
 		private Matrix _projection;
 
-		public BeachBallComponent(KaroGame game)
-			: base(game)
+		private bool _loading;
+
+		public bool Loading
+		{
+			get { return _loading; }
+		}
+
+		public void Start()
+		{
+			Initialize();
+			_loading = true;
+		}
+
+		public void Stop()
+		{
+			_loading = false;
+		}
+
+		public override void Initialize()
 		{
 			_gravity = new Vector3(0f, 0.08f, 0f);
 			_position = Vector3.Zero;
 			_maxVelocity = new Vector3(0f, 1.3f, 0f);
 			_velocity = _maxVelocity;
+			base.Initialize();
+		}
 
+		public BeachBallComponent(KaroGame game)
+			: base(game)
+		{
 			float aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
 			_cameraPosition = new Vector3(20f, 0f, 0f);
 			_view = Matrix.CreateLookAt(_cameraPosition, _position, Vector3.Up);
@@ -46,6 +68,11 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
+			if (!Loading)
+			{
+				// Not loading, stop execution.
+				return;
+			}
 			_velocity -= _gravity;
 			_position += _velocity;
 			if (_position.Y < 0f)
@@ -59,6 +86,11 @@ namespace XNAFrontend.Components
 		public override void Draw(GameTime gameTime)
 		{
 			base.Draw(gameTime);
+			if (!Loading)
+			{
+				// Not loading, stop execution.
+				return;
+			}
 
 			RasterizerState rs = new RasterizerState();
 			rs.DepthBias = -10f;
