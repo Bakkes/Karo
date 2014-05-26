@@ -1,6 +1,7 @@
 #pragma once
 
 #include "IStaticEvaluation.h"
+#include "RelativeCell.h"
 #include "DllImportExport.h"
 
 namespace engine {
@@ -15,5 +16,15 @@ namespace engine {
 		int CalcDownScore(RelativeCell &cell, Players player);
 		int CalcDownRightScore(RelativeCell &cell, Players player);
 		int CalcTopRightScore(RelativeCell &cell, Players player);
+
+		const RelativeCell &GetLeft(RelativeCell &current);
+		const RelativeCell &GetRight(RelativeCell &current);
+		const RelativeCell &GetTop(RelativeCell &current);
+		const RelativeCell &GetBottom(RelativeCell &current);
+
+		const RelativeCell &GetTopLeft(RelativeCell &current);
+		const RelativeCell &GetTopRight(RelativeCell &current);
+		const RelativeCell &GetBottomLeft(RelativeCell &current);
+		const RelativeCell &GetBottomright(RelativeCell &current);
 	};
 }

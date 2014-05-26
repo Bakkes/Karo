@@ -138,4 +138,23 @@ namespace engine {
 		}
 		return score;
 	}
+
+	const RelativeCell &AltEval::GetLeft(RelativeCell &current) {
+		return current.GetLeft();
+	}
+	const RelativeCell &AltEval::GetRight(RelativeCell &current) {
+	}
+	const RelativeCell &AltEval::GetTop(RelativeCell &current) {
+	}
+	const RelativeCell &AltEval::GetBottom(RelativeCell &current) {
+	}
+
+	const RelativeCell &AltEval::GetTopLeft(RelativeCell &current) {
+	}
+	const RelativeCell &AltEval::GetTopRight(RelativeCell &current) {
+	}
+	const RelativeCell &AltEval::GetBottomLeft(RelativeCell &current) {
+	}
+	const RelativeCell &AltEval::GetBottomright(RelativeCell &current) {
+	}
 }
