@@ -3,14 +3,17 @@
 
 namespace engine{
 
-	ZobristHashing::ZobristHashing() {
+	ZobristHashing::ZobristHashing(IBoard* board) {
+		_board = board;
+
 		srand((unsigned)time(NULL));
 	
-		for(int i = 0; i < 16; i++) {
-			for(int j = 0; j < 400; j++) {
-				_hashValues[i][j] = rand() % 1000;
+		for(int cellValue = 0; cellValue < 16; cellValue++) {
+			for(int position = 0; position < 400; position++) {
+				_hashValues[cellValue][position] = rand() % 1000;
 			}
 		}
+		// TODO Initialize the hash with the default board layout!
 	}
 
 	ZobristHashing::~ZobristHashing() {
@@ -22,8 +25,35 @@ namespace engine{
 	void ZobristHashing::UndoMove(const Move&) {
 	}
 
+	int ZobristHashing::GetCellData(const Vector2D& position) {
+		RelativeCell cell = _board->GetRelativeCellAt(position);
+
+		if (!cell.HasTile())
+			return 0;
+
+		if (cell.IsEmpty()) {
+			return HasTile | IsEmpty;
+		}
+
+		int data = HasTile;
+
+		if (cell.IsFlipped()) {
+			data |= IsFlipped;
+		}
+
+		if (cell.IsMaxPiece()) {
+			data |= IsMax;
+		}
+		
+		return data;
+	}
+
+	int ZobristHashing::GetCellPosition(const Vector2D& position) {
+		return position.Y() * 20 + position.X();
+	}
+
 	int ZobristHashing::GetHash() const {
-		return 0;
+		return _currentHash;
 	}
 
 }

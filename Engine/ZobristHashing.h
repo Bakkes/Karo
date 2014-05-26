@@ -13,7 +13,7 @@ namespace engine {
 	class ENGINE_API ZobristHashing : public IHashAlgorithm {
 
 	public:
-		ZobristHashing();
+		ZobristHashing(IBoard* board);
 		virtual ~ZobristHashing();
 
 		void ExecuteMove(const Move&) override;
@@ -24,5 +24,9 @@ namespace engine {
 	private:
 		int _hashValues[16][400];
 		int _currentHash;
+		IBoard* _board;
+
+		int GetCellPosition(const Vector2D& position);
+		int GetCellData(const Vector2D& position);
 	};
 }
