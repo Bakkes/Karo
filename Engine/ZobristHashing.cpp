@@ -10,10 +10,16 @@ namespace engine{
 	
 		for(int cellValue = 0; cellValue < 16; cellValue++) {
 			for(int position = 0; position < 400; position++) {
-				_hashValues[cellValue][position] = rand() % 1000;
+				_hashValues[cellValue][position] = rand() % 50000;
 			}
 		}
-		// TODO Initialize the hash with the default board layout!
+
+		// Initialize the hash to the default board representation
+		for (int x = 0; x < 5; x++) {
+			for (int y = 0; y < 4; y++) {
+				_currentHash ^= _hashValues[HasTile][GetCellPosition(Vector2D(x, y))];
+			}
+		}
 	}
 
 	ZobristHashing::~ZobristHashing() {
