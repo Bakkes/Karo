@@ -31,7 +31,7 @@ namespace engine{
 				Cell<int>* j = a.GetAbsoluteCellAt(Vector2D(i, k));
 				int value = (int)j->GetPosition().X() + (int)j->GetPosition().Y() * 20;
 
-				if(j->GetData() != 2) {
+				if((j->GetData() & IsEmpty) == 0) {
 					h = h^table[j->GetData()][value];
 				}
 			}
