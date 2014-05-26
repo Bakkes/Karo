@@ -23,7 +23,7 @@ namespace engine{
 			if (score.GetScore() > result.GetScore()) {
 				result.SetScore(score.GetScore());
 			}
-			if (score.GetScore() >= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
+			if (score.GetScore() >= result.GetBestForMin()) {
 				//cutoff
 				return false;
 			} else if (score.GetScore() > result.GetBestForMax()) {
@@ -34,7 +34,7 @@ namespace engine{
 			if (score.GetScore() < result.GetScore()) {
 				result.SetScore(score.GetScore());
 			}
-			if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
+			if (score.GetScore() <= result.GetBestForMax()) {
 				// Cut off
 				return false;
 			} else if (score.GetScore() < result.GetBestForMin()) {
