@@ -159,8 +159,8 @@ namespace XNAFrontend.Components
 				}
 			}
 
-			int width = (int)board.GetWidth();
-			int height = (int)board.GetHeight();
+			int width = (int)board.GetDynamicSize().X;
+			int height = (int)board.GetDynamicSize().Y;
 			CellWrapper tmp = board.GetRelativeCellAt(new Vector2DWrapper(0, 0));
 
 			for (int i = 0; i <= height; i++)

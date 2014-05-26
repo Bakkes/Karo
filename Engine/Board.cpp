@@ -63,12 +63,12 @@ namespace engine{
 		RelativeCell relCell = GetRelativeCellAt(Vector2D(0,0));
 		Vector2D topLeft = relCell.GetAbsolutePosition();
 		
-		int x1 = (int)topLeft.X();
-		int x2 = x1;
-		int y1 = (int)topLeft.Y();
-		int y2 = y1;
+		int x1 = 0;
+		int x2 = 0;
+		int y1 = 0;
+		int y2 = 0;
 		
-		for (int i = 0; i < 20; i++) {
+		/*for (int i = 0; i < 20; i++) {
 				for (int j = 0; j < 20; j++) {
 					if (GetRelativeCellAt(Vector2D(i,j)).HasTile()) {
 						x2 = i;
@@ -77,23 +77,21 @@ namespace engine{
 						}
 					}
 				}
-		}
+		}*/
 
-		/*
-		for (int i = 0; i < 20; i++) {
-			for (int j = 0; j < 20; j++) {
-				if (GetAbsoluteCellAt(Vector2D((i + topLeft.X()) % 20, (j + topLeft.Y()) % 20))) {
-					if ((GetAbsoluteCellAt(Vector2D((i + topLeft.X()) % 20, (j + topLeft.Y()) % 20))->GetData() & HasTile) == HasTile) {
-						if (x2 < (i + x1) % 20) {
-							x2 = (i + x1) % 20;
-						}
-						if (y2 < (i + y1) % 20) {
-							y2 = (i + y1) % 20;
-						}
+		
+		for (double i = 0; i < 20; i++) {
+			for (double j = 0; j < 20; j++) {
+				if ((GetAbsoluteCellAt(Vector2D((int)(i + topLeft.X()) % 20, (int)(j + topLeft.Y()) % 20))->GetData() & HasTile) == HasTile) {
+					if (x2 < i) {
+						x2 = i;
+					}
+					if (y2 < j) {
+						y2 = j;
 					}
 				}
 			}
-		}*/
+		}
 		
 		return Vector2D(x2 - x1, y2 - y1);
 	}
