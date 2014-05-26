@@ -41,22 +41,54 @@ namespace engine{
 		_converter = NULL;
 	}
 	
+	int Board::GetWidth() {
+		return _converter->GetWidth();
+	}
+	
+	int Board::GetHeight() {
+		return _converter->GetHeight();
+	}
+
 	Vector2D Board::GetDynamicSize() {
 		double width = 1;
 		double height = 1;
+
+		RelativeCell relCell = GetRelativeCellAt(Vector2D(0,0));
+		Vector2D topLeft = relCell.GetAbsolutePosition();
 		
-		auto tiles = new vector<RelativeCell>();
-		_grid->TraverseCells(
-			[&](Cell<int>* tile) -> void{
-				if(tile->GetData() & HasTile){
-					if (tile->GetPosition().X() > width) { width = tile->GetPosition().X(); }
-					if (tile->GetPosition().Y() > height) { height = tile->GetPosition().Y(); }
+		int x1 = (int)topLeft.X();
+		int x2 = x1;
+		int y1 = (int)topLeft.Y();
+		int y2 = y1;
+		
+		for (int i = 0; i < 20; i++) {
+				for (int j = 0; j < 20; j++) {
+					if (GetRelativeCellAt(Vector2D(i,j)).HasTile()) {
+						x2 = i;
+						if (y2 < j){
+							y2 = j;
+						}
+					}
 				}
-				tiles->push_back(RelativeCell(tile, _converter));
+		}
+
+		/*
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 20; j++) {
+				if (GetAbsoluteCellAt(Vector2D((i + topLeft.X()) % 20, (j + topLeft.Y()) % 20))) {
+					if ((GetAbsoluteCellAt(Vector2D((i + topLeft.X()) % 20, (j + topLeft.Y()) % 20))->GetData() & HasTile) == HasTile) {
+						if (x2 < (i + x1) % 20) {
+							x2 = (i + x1) % 20;
+						}
+						if (y2 < (i + y1) % 20) {
+							y2 = (i + y1) % 20;
+						}
+					}
+				}
 			}
-		);
+		}*/
 		
-		return Vector2D(width, height);
+		return Vector2D(x2 - x1, y2 - y1);
 	}
 
 	int Board::GetPieceCountFor(Players player) {

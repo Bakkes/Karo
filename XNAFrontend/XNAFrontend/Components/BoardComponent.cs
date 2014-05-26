@@ -22,7 +22,6 @@ namespace XNAFrontend.Components
 		private Model _tileModel, _cordModel;
 		private Model _minModel;
 		private Model _maxModel;
-		private SpriteFont _font;
 		private KaroGame _game;
 		private Texture2D _cordTexture;
 		private RenderTarget2D renderTarget;
@@ -61,7 +60,6 @@ namespace XNAFrontend.Components
 			_cordModel = Game.Content.Load<Model>("cords");
 			_minModel = Game.Content.Load<Model>("piecemin");
 			_maxModel = Game.Content.Load<Model>("piecemax");
-			_font = Game.Content.Load<SpriteFont>("SpriteFont1");
 			_cordTexture = Game.Content.Load<Texture2D>("a1");
 
 			PresentationParameters pp = Game.GraphicsDevice.PresentationParameters;
@@ -126,8 +124,6 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
-			
-			
 			karoGame.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
 			BoardWrapper board = KaroGameManager.Board;
@@ -149,8 +145,8 @@ namespace XNAFrontend.Components
 				}
 			}
 
-			double width = board.GetDynamicSize().X;
-			double height = board.GetDynamicSize().Y;
+			int width = (int)board.GetWidth();
+			int height = (int)board.GetHeight();
 			CellWrapper tmp = board.GetRelativeCellAt(new Vector2DWrapper(0, 0));
 
 			for (int i = 0; i <= height; i++)
@@ -161,10 +157,6 @@ namespace XNAFrontend.Components
 			{
 				DrawCordsAt(tmp, i, (int)height + 2);
 			}
-
-			_game.spriteBatch.Begin();
-			_game.spriteBatch.DrawString(_font, "test", new Vector2(10, 10), Color.Red);
-			_game.spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
@@ -179,7 +171,7 @@ namespace XNAFrontend.Components
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.TextureEnabled = true;
-					effect.Texture = _cordTexture;
+					effect.Texture = Game.Content.Load<Texture2D>("a1");
 					effect.EnableDefaultLighting();
 					effect.World = world * Matrix.CreateRotationX(MathHelper.ToRadians(90)) * Matrix.CreateScale(0.5f) * Matrix.CreateRotationY(MathHelper.ToRadians(180)) * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
