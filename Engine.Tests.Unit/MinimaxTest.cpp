@@ -56,7 +56,8 @@ namespace Tests {
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(_factory->GetBoard(), move, Max), L"Returned move is not legal on the board");
 			Assert::IsTrue(move == Move(STEP, Vector2D(0), Vector2D(0, 1)), L"Returned not the expected move");
-			Assert::AreEqual(7, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
+			int callCount= staticEval->GetCallCount();
+			Assert::AreEqual(7, callCount, L"Invalid amount of states have been checked");
 
 			delete _factory->GetBoard();
 			delete ai;
