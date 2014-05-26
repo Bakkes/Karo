@@ -32,14 +32,14 @@ namespace KaroManager.State
 		{
 		}
 
-		public void Update(KaroGameManager manager, Point click)
+		public void Update(KaroGameManager manager, MouseClick click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetFromCell() == manager.CurrentMove.GetFromCell() &&
 				m.GetToCell() == manager.CurrentMove.GetToCell() &&
 				m.HasUsedCell() &&
-				m.GetUsedCell() == new Vector2DWrapper(click.X, click.Y));
+				m.GetUsedCell() == new Vector2DWrapper(click.Position.X, click.Position.Y));
 			if (move != null)
 			{
 				CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);

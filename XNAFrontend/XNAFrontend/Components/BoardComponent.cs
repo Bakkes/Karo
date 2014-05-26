@@ -72,8 +72,8 @@ namespace XNAFrontend.Components
 				Vector2 tilePosition = GetTileAtPixelPosition(mouseState.X, mouseState.Y);
 				if (tilePosition.X != -1337)
 				{
-					karoGame.KaroGameManager.Update(
-						new System.Drawing.Point((int)tilePosition.X, (int)tilePosition.Y)
+					karoGame.KaroGameManager.Update(new MouseClick(
+						new System.Drawing.Point((int)tilePosition.X, (int)tilePosition.Y), MouseButton.LEFT)
 					);
 				}
 			}
@@ -81,7 +81,8 @@ namespace XNAFrontend.Components
 			if (mouseState.RightButton == ButtonState.Pressed)
 			{
 				_markedCache = new Dictionary<Vector2, bool>();
-				KaroGameManager.Update(new System.Drawing.Point(-1337, -1337));
+				KaroGameManager.Update(new MouseClick(
+						new System.Drawing.Point(-1337 -1337), MouseButton.RIGHT));
 			}
 
 			base.Update(gameTime);

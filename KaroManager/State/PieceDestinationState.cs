@@ -34,7 +34,7 @@ namespace KaroManager.State
 		{
 		}
 
-		public void Update(KaroGameManager manager, Point click)
+		public void Update(KaroGameManager manager, MouseClick click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
 
@@ -44,7 +44,7 @@ namespace KaroManager.State
 
 			// Get the move (if it exists) with the correct destination tile.
 			MoveWrapper move = sourceLegalMoves.FirstOrDefault(m =>
-				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
+				m.GetToCell() == new Vector2DWrapper(click.Position.X, click.Position.Y));
 
 			if (move != null)
 			{

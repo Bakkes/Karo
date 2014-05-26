@@ -33,10 +33,14 @@ namespace KaroManager.State
 			_timer.Start();
 		}
 
-		public void Update(KaroGameManager manager, System.Drawing.Point click)
+		public void Update(KaroGameManager manager, MouseClick click)
 		{
+			if (click.Button != MouseButton.RIGHT)
+			{
+				return;
+			}
 			manager.UndoLastMove();
-			if (manager.Board.GetOccupiedCells().Count == 6)
+			if (manager.Board.GetOccupiedCells().Count == 12)
 			{
 				manager.ChangeState(PieceSourceState.Instance);
 			}

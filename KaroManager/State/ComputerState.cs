@@ -33,7 +33,7 @@ namespace KaroManager.State
 		/// ComputerState doesn't listen to clickevents. The entry method will
 		/// do everything AI related.
 		/// </summary>
-		public void Update(KaroGameManager manager, Point click)
+		public void Update(KaroGameManager manager, MouseClick click)
 		{
 		}
 

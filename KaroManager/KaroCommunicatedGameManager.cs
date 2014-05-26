@@ -198,7 +198,7 @@ namespace KaroManager
 			Debug.WriteLine("Connected to opponent, GLHF");
 		}
 
-		public override void Update(System.Drawing.Point tileLocation)
+		public override void Update(MouseClick tileLocation)
 		{
 
 		}
