@@ -5,6 +5,7 @@
 #include "PlayersWrapper.h"
 #include "CellWrapper.h"
 #include "WrapperConversionUtility.h"
+#include "RelativeAbsoluteConverter.h"
 #include <vector>
 
 using namespace System;
@@ -35,6 +36,9 @@ public:
 	Board* GetInternalBoard();
 	Board* GetInternalBoardCopy();
 	String^ ToString() new;
+	Vector2DWrapper^ GetDynamicSize();
+	int GetWidth();
+	int GetHeight();
 private:
 	Board * _board;
 	IEnumerable<MoveWrapper^>^ _legalMaxMoves;
