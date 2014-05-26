@@ -12,7 +12,9 @@ namespace engine{
 	bool AIExtension::ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player){
 		return true;
 	}
-	void AIExtension::Step(const Players& player,const int& currentDepth, EvalResult&){}
+	void AIExtension::Step(const Players& player,const int& currentDepth, EvalResult&){
+		_currentDepth = currentDepth;
+	}
 
 	void AIExtension::Start(const int& maxDepth){
 		_maxDepth = maxDepth;

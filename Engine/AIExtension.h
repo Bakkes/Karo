@@ -23,8 +23,10 @@ namespace engine {
 
 	protected:
 		int GetMaxDepth() const;
+		int GetCurrentDepth() const;
 	private:
 		int _maxDepth;
+		int _currentDepth;
 
 	};
 

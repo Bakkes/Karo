@@ -83,6 +83,7 @@
     <ClInclude Include="AIFactory.h" />
     <ClInclude Include="AlfaBetaExtension.h" />
     <ClInclude Include="MiniMaxExtension.h" />
+    <ClInclude Include="MoveOrderExtension.h" />
     <ClInclude Include="MoveSwapExtension.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="CellValue.h" />
@@ -122,6 +123,7 @@
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
+    <ClCompile Include="MoveOrderExtension.cpp" />
     <ClCompile Include="MoveSwapExtension.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
     <ClCompile Include="RelativeCell.cpp" />

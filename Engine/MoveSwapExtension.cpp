@@ -19,9 +19,6 @@ namespace engine{
 	void MoveSwapExtension::End(){
 		delete []_killerMoves;
 	}
-	void MoveSwapExtension::Step(const Players& player, const int& currentDepth, EvalResult&){
-		_depth = currentDepth;
-	}
 
 	bool MoveSwapExtension::ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player) {
 		if(!ShouldSwap()){
