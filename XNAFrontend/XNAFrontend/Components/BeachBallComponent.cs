@@ -22,9 +22,9 @@ namespace XNAFrontend.Components
 		public BeachBallComponent(KaroGame game)
 			: base(game)
 		{
-			_gravity = new Vector3(0f, 0.05f, 0f);
+			_gravity = new Vector3(0f, 0.08f, 0f);
 			_position = Vector3.Zero;
-			_maxVelocity = new Vector3(0f, 1f, 0f);
+			_maxVelocity = new Vector3(0f, 1.3f, 0f);
 			_velocity = _maxVelocity;
 
 			float aspectRatio = Game.GraphicsDevice.Viewport.AspectRatio;
