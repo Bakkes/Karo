@@ -12,8 +12,8 @@ namespace engine{
 	{
 	}
 
-	void MoveSwapExtension::Start(const int& maxDepth){
-		AIExtension::Start(maxDepth);
+	void MoveSwapExtension::Start(const int& maxDepth, IBoard* board){
+		AIExtension::Start(maxDepth, board);
 		_killerMoves = new EvalResult[maxDepth];
 	}
 	void MoveSwapExtension::End(){
@@ -46,6 +46,9 @@ namespace engine{
 		}
 	}
 	bool MoveSwapExtension::ShouldSwap(){
+		if(_depth == 0){
+			return false;
+		}
 		if(_depth == (GetMaxDepth() - 1)){
 			return false;
 		}

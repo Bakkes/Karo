@@ -24,7 +24,7 @@ namespace engine{
 
 	Move AI::GetBestMove(Players player){
 		for_each(_extensions->begin(), _extensions->end(),[this](AIExtension* extension) -> void{
-			extension->Start(_maxDepth);
+			extension->Start(_maxDepth, _board);
 		});
 		EvalResult result = MinimaxStep(player, 0, EvalResult(INT_MIN, INT_MAX));
 		for_each(_extensions->begin(), _extensions->end(), [](AIExtension* extension) -> void{

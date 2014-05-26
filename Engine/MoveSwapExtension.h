@@ -8,7 +8,7 @@ namespace engine{
 	public:
 		MoveSwapExtension(void);
 		~MoveSwapExtension(void);
-		void Start(const int& maxDepth) override;
+		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
 		// notify the exntension taht minmax ends
 		void End() override;
 
