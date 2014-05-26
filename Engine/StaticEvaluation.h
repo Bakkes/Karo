@@ -8,7 +8,7 @@ namespace engine {
 	public:
 		StaticEvaluation(void);
 		~StaticEvaluation(void);
-		int Eval(IBoard*, Players);
+		int Eval(IBoard*, Players) override;
 	private:
 		int _flippedValue;
 		int _blockedTileValue;
