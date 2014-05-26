@@ -22,6 +22,7 @@ namespace XNAFrontend.Components
 
 		private Thread _highlightThread;
 
+		private Texture2D _background;
 		private SoundEffect _invalidMoveSound;
 		private Model _tileModel;
 		private Model _minModel;
@@ -66,6 +67,7 @@ namespace XNAFrontend.Components
 			_minModel = Game.Content.Load<Model>("piecemin");
 			_maxModel = Game.Content.Load<Model>("piecemax");
 			_invalidMoveSound = Game.Content.Load<SoundEffect>("invalidmove");
+			_background = Game.Content.Load<Texture2D>("background");
 		}
 
 		public override void Update(GameTime gameTime)
@@ -134,6 +136,13 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
+			Rectangle screenRectangle = new Rectangle(0, 0, 
+				GraphicsDevice.PresentationParameters.BackBufferWidth, 
+				GraphicsDevice.PresentationParameters.BackBufferHeight);
+			karoGame.spriteBatch.Begin();
+			karoGame.spriteBatch.Draw(_background, screenRectangle, Color.White);
+			karoGame.spriteBatch.End();
+
 			karoGame.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
 			BoardWrapper board = KaroGameManager.Board;
