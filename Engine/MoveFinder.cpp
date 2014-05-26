@@ -210,12 +210,13 @@ namespace engine {
 		_checkedCells->clear();
 		delete _checkedCells;
 		_checkedCells = new vector<const RelativeCell>();
+		_checkedCells->reserve(25);
 		return ConnectedTilesRecursive(start);
 	}
 
 	int MoveFinder::ConnectedTilesRecursive(const RelativeCell &start) {
 		for(unsigned i = 0; i < _checkedCells->size(); i++) {
-			if(_checkedCells->at(i) == start)
+			if(_checkedCells->at(i).GetAbsolutePosition() == start.GetAbsolutePosition())
 				return 0;
 		}
 		_checkedCells->push_back(start);
