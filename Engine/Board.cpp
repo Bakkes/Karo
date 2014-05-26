@@ -8,6 +8,13 @@ namespace engine{
 		Init(init);
 	}
 
+	Board::Board(const Board& cpy) {
+		Board* tmp = Board::CreateBoard(cpy.ToString(), cpy.GetRelativeCellAt(Vector2D(0)).GetAbsolutePosition());
+		_moveFinder = tmp->_moveFinder;
+		_grid = tmp->_grid;
+		_converter = tmp->_converter;
+	}
+
 	void Board::Init(bool init) {
 		_moveFinder = new MoveFinder(this);
 		_grid = new Grid<int>();
@@ -50,7 +57,7 @@ namespace engine{
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void {
 				int data = tile->GetData();
-				if ((data & HasTile) && (data & IsEmpty) == 0) {
+				if ((data & HasTile) && ((data & IsEmpty) == 0)) {
 					if ((data & IsMax) == isMax) {
 						playerCount++;
 					}
@@ -272,7 +279,7 @@ namespace engine{
 		);
 		return emptyTiles;
 	}
-	string Board::ToString(){
+	string Board::ToString() const {
 		stringstream result;
 		_grid->TraverseCells(
 			[&, this](Cell<int>* tile) -> void{

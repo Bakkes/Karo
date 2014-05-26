@@ -1,7 +1,6 @@
 #include "EvalResult.h"
 
 namespace engine {
-
 	EvalResult::EvalResult(const EvalResult& er) : _move(er._move) {
 		_bestForMax = er._bestForMax;
 		_bestForMin = er._bestForMin;
@@ -10,9 +9,9 @@ namespace engine {
 	}
 
 	EvalResult::EvalResult() : _move(INSERT, Vector2D(-1)) {
-		_bestForMax = -1337;
-		_bestForMin = 1337;
-		_score = -1337;
+		_bestForMax = -KinitScore;
+		_bestForMin = KinitScore;
+		_score = -KinitScore;
 		_isSet = false;
 	}
 
@@ -20,7 +19,7 @@ namespace engine {
 		_isSet = false;
 		_bestForMax = bestForMax;
 		_bestForMin = bestForMin;
-		_score = -1337;
+		_score = -KinitScore;
 	}
 
 	EvalResult::~EvalResult() {

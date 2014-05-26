@@ -7,19 +7,23 @@ namespace engine{
 		_maxDepth = maxDepth;
 	}
 
-
 	AIFactory::~AIFactory(void)
 	{
 	// delete nothing, because not responsiblibty of factory to delete stuff
 	}
+
 	AI* AIFactory::CreateAI(){
-		return new AI(_board, _maxDepth);
+		AI* result = new AI(_board, _maxDepth);
+		result->AddExtension(new MiniMaxExtension());
+		return result;
 	}
+
 	AI* AIFactory::CreateAlfaAI(){
-		AI* result = CreateAI();
+		AI* result = new AI(_board, _maxDepth); 
 		result->AddExtension(new AlfaBetaExtension());
 		return result;
 	}
+
 	AI* AIFactory::CreateMoveOrderingAlfaAI(){
 		AI* result = CreateAlfaAI();
 		result->AddExtension(new MoveSwapExtension());

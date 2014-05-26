@@ -34,6 +34,7 @@ public:
 	void LoadFromString(String^ boardString, int topLeftX, int topLeftY);
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();
+	Board* GetInternalBoardCopy();
 	String^ ToString() new;
 private:
 	Board * _board;

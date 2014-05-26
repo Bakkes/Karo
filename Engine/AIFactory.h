@@ -2,6 +2,7 @@
 #include "AI.h"
 #include "AlfaBetaExtension.h"
 #include "MoveSwapExtension.h"
+#include "MiniMaxExtension.h"
 namespace engine{
 	class ENGINE_API AIFactory
 	{

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using engine.wrapper;
 
 namespace KaroManager.State
@@ -36,8 +38,7 @@ namespace KaroManager.State
 
 		public void Update(KaroGameManager manager, MouseClick click)
 		{
-			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
-
+			IEnumerable<MoveWrapper> legalMoves = manager.FindLegalMoves(manager.CurrentPlayer);
 			// Get the move with the correct source tile from the last click.
 			IEnumerable<MoveWrapper> sourceLegalMoves = legalMoves.Where(m =>
 				m.GetFromCell() == manager.CurrentMove.GetFromCell());

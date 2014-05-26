@@ -22,27 +22,27 @@ namespace KaroManager
 			CurrentPlayer = Players.Min;
 			_conversion = new CommunicationProtocolConversionUtility(Game);
 			_communication = communication;
-			_communication.Connected += _communication_Connected;
-			_communication.Disconnected += _communication_Disconnected;
-			_communication.RequestFirstMove += communication_RequestFirstMove;
-			_communication.SentMoveInvalid += _communication_SentMoveInvalid;
-			_communication.TurnReceived += _communication_TurnReceived;
-			_communication.WinAccepted += _communication_WinAccepted;
-			_communication.WinDetected += _communication_WinDetected;
-			_communication.WinRejected += _communication_WinRejected;
+			_communication.Connected += Communication_Connected;
+			_communication.Disconnected += Communication_Disconnected;
+			_communication.RequestFirstMove += Communication_RequestFirstMove;
+			_communication.SentMoveInvalid += Communication_SentMoveInvalid;
+			_communication.TurnReceived += Communication_TurnReceived;
+			_communication.WinAccepted += Communication_WinAccepted;
+			_communication.WinDetected += Communication_WinDetected;
+			_communication.WinRejected += Communication_WinRejected;
 		}
 
-		void _communication_WinRejected()
+		void Communication_WinRejected()
 		{
 			Debug.WriteLine("Opponent did not accept win.");
 		}
 
-		void _communication_WinDetected(Turn t, Player p)
+		void Communication_WinDetected(Turn t, Player p)
 		{
 			if (p == Player.Me)
 			{
 				Debug.WriteLine("Opponent thinks he won, going to check.");
-				if(!HanldeTheirMove(t)){
+				if(!HandleTheirMove(t)){
 					return;
 				}
 				if (Game.HasWon(Players.Min))
@@ -72,7 +72,7 @@ namespace KaroManager
 			}
 		}
 
-		void _communication_WinAccepted()
+		void Communication_WinAccepted()
 		{
 			Debug.WriteLine("We won!");
 		}
@@ -80,34 +80,17 @@ namespace KaroManager
 		bool IsMoveLegal(MoveWrapper mv, Players player)
 		{
 			if (mv.GetMoveType() == engine.wrapper.MoveType.INSERT)
-				return true;
-			Vector2DWrapper from = mv.GetFromCell();
-			Vector2DWrapper to = mv.GetToCell();
-			Vector2DWrapper used = mv.GetUsedCell();
-			Debug.WriteLine("Checking if legal: ");
-			Debug.WriteLine(_conversion.MoveWrapperToString(mv));
-			IEnumerable<MoveWrapper> legal = Board.GetLegalMoves(player); ;
-			foreach (MoveWrapper mw in legal)
 			{
-				Vector2DWrapper from2 = mw.GetFromCell();
-				Vector2DWrapper to2 = mw.GetToCell();
-				Vector2DWrapper used2 = mw.GetUsedCell();
-				bool hasUsed = mw.HasUsedCell();
-				int a = 1;
+				return FindLegalMoves(player).
+					Any(m => m.GetToCell() == mv.GetToCell());
 			}
-			return legal.Where(m =>
+			return FindLegalMoves(player).Any(m =>
 				m.GetFromCell() == mv.GetFromCell() &&
 				m.GetToCell() == mv.GetToCell() &&
-				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell())).Count() > 0;
+				(!m.HasUsedCell() || m.GetUsedCell() == mv.GetUsedCell()));
 		}
 
-		bool HanldeTheirMove(Turn t){
-			/*if (CurrentPlayer == Players.Max)
-			{
-				//Not their turn
-				_communication.SendDisconnect(DisconnectReason.InvalidMove);
-				return;
-			}*/
+		bool HandleTheirMove(Turn t){
 			Debug.WriteLine("Opponent took a turn");
 			if (t == null)
 			{
@@ -121,7 +104,7 @@ namespace KaroManager
 
 			// Get the move with the correct source tile from the last click.
 			Console.WriteLine("Current player: " + CurrentPlayer);
-			if (!IsMoveLegal(received, Players.Min))
+			if (!IsMoveLegal(received, CurrentPlayer))
 			{
 				Console.WriteLine("Move is illegal, sending back");
 				_communication.SendMoveInvalid(t);
@@ -130,14 +113,20 @@ namespace KaroManager
 			ExecuteMove(received);
 			return true;
 		}
-		void _communication_TurnReceived(Turn t)
+		void Communication_TurnReceived(Turn t)
 		{
-			if(!HanldeTheirMove(t)){
+			if (CurrentPlayer == Players.Max)
+			{
+				//Not their turn
+				_communication.SendDisconnect(DisconnectReason.InvalidMove);
+				return;
+			}
+			if(!HandleTheirMove(t)){
 				return;
 			}
 			_turn++;
 
-			//Handled their move, moving on to ours now
+			//Handled their move, moving to ours now
 			if (OnBoardUpdated != null)
 				OnBoardUpdated();
 
@@ -165,12 +154,12 @@ namespace KaroManager
 			CurrentPlayer = Players.Min;
 		}
 
-		void _communication_SentMoveInvalid(Turn t)
+		void Communication_SentMoveInvalid(Turn t)
 		{
 			Debug.WriteLine("Opponent says our move is wrong.");
 		}
 
-		void communication_RequestFirstMove()
+		void Communication_RequestFirstMove()
 		{
 			_turn++;
 			Debug.WriteLine("We're first.");
@@ -184,16 +173,17 @@ namespace KaroManager
 				OnBoardUpdated();
 			CurrentPlayer = Players.Min;
 		}
-		MoveWrapper GetMove(){
+
+		MoveWrapper GetMove() {
 			return Game.GetBestMove();
 		}
 
-		void _communication_Disconnected(DisconnectReason reason)
+		void Communication_Disconnected(DisconnectReason reason)
 		{
 			Debug.WriteLine("Opponent disconnected, reason: " + reason.ToString());
 		}
 
-		void _communication_Connected()
+		void Communication_Connected()
 		{
 			Debug.WriteLine("Connected to opponent, GLHF");
 		}

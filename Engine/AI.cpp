@@ -32,12 +32,15 @@ namespace engine{
 		});
 		return result.GetMove();
 	}
+
 	void AI::AddExtension(AIExtension* extension){
 		_extensions->push_back(extension);
 	}
+
 	void AI::SetEvaluator(IStaticEvaluation* evaluator) {
 		_evaluator = evaluator;
 	}
+
 	EvalResult AI::MinimaxStep(Players player, int depth, EvalResult result){
 		// allow extensions to set te result
 		for_each(_extensions->begin(), _extensions->end(), [&](AIExtension* extension) -> void{
@@ -48,28 +51,15 @@ namespace engine{
 
 		// allow extensoins to do some move ordering
 		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves](AIExtension* extension) -> void{
-			int i = 4;
 			extension->UpdateMoves(depth, possibleMoves);
 		});
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
-
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
 			EvalResult currentResult = NextStep(player, move, depth, result);
 			_board->UndoMove(move, player);
 
-			if (player == Max) {
-				if (!result.IsSet() || result.GetScore() < currentResult.GetScore()) {
-					result.SetScore(currentResult.GetScore());
-					result.SetMove(currentResult.GetMove());
-				}
-			} else{
-				if (!result.IsSet() || result.GetScore() > currentResult.GetScore()) {
-					result.SetScore(currentResult.GetScore());
-					result.SetMove(currentResult.GetMove());
-				}
-			}
 			// allows for pruning
 			for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension){
 				if(!(*extension)->ShouldContinue(currentResult, result, player)){
@@ -77,18 +67,21 @@ namespace engine{
 				}
 			}
 		}
+
 		return result;
 	}
 	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
 		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
-			return MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
+			EvalResult _result = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
+			_result.SetMove(move);
+			return _result;
 		}
 
 		// We can't go deeper, evaluate the board
 		EvalResult score(result.GetBestForMax(), result.GetBestForMin());
-		score.SetMove(move);
 		score.SetScore(_evaluator->Eval(_board, player));
+		score.SetMove(move);
 		return score;
 	}
 }

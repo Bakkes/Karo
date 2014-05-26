@@ -9,6 +9,7 @@ namespace KaroManager
 
 	public delegate void BoardUpdated();
 	public delegate void MoveExecuted(MoveWrapper move);
+	public delegate void PlayerHasWon(Players player);
 
 	/// <summary>
 	/// Statemachine that keeps track of the game's states.
@@ -27,7 +28,7 @@ namespace KaroManager
 
 		public BoardUpdated OnBoardUpdated;
 		public MoveExecuted OnMoveExecuted;
-
+		public PlayerHasWon OnPlayerWin;
 		/// <summary>
 		/// Access the board of the current game.
 		/// </summary>
@@ -41,12 +42,8 @@ namespace KaroManager
 
 		public List<KeyValuePair<MoveWrapper, Players>> MoveLog { get; set; }
 
-		public IEnumerable<MoveWrapper> LegalMoves
-		{
-			get
-			{
-				return Board.GetLegalMoves(CurrentPlayer);
-			}
+		public IEnumerable<MoveWrapper> FindLegalMoves(Players forPlayer){
+			return Board.GetLegalMoves(forPlayer);
 		}
 
 		/// <summary>
@@ -104,16 +101,20 @@ namespace KaroManager
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			Game.ExecuteMove(move, CurrentPlayer);
 			_lastMove = move;
-			SwapCurrentPlayer();
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
 			if (OnMoveExecuted != null)
 			{
 				OnMoveExecuted(move);
 			}
+			if (Game.HasWon(CurrentPlayer) && OnPlayerWin != null)
+			{
+				OnPlayerWin(CurrentPlayer);
+			}
 			if (OnBoardUpdated != null)
 			{
 				OnBoardUpdated();
 			}
+			SwapCurrentPlayer();
 		}
 
 		public void UndoLastMove()

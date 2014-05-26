@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -47,6 +47,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);ENGINE_EXPORTS</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -54,6 +55,9 @@
     <PostBuildEvent>
       <Command>call "$(ProjectDir)postbuild.debug.bat"</Command>
     </PostBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -78,6 +82,7 @@
     <ClInclude Include="AIExtension.h" />
     <ClInclude Include="AIFactory.h" />
     <ClInclude Include="AlfaBetaExtension.h" />
+    <ClInclude Include="MiniMaxExtension.h" />
     <ClInclude Include="MoveSwapExtension.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="CellValue.h" />
@@ -96,6 +101,7 @@
     <ClInclude Include="MoveFinder.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="RelativeCell.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
@@ -108,6 +114,7 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="AIExtension.cpp" />
     <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="MiniMaxExtension.cpp" />
     <ClCompile Include="AlfaBetaExtension.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="ComputerPlayerUtils.cpp" />

@@ -34,7 +34,7 @@ namespace KaroManager.State
 
 		public void Update(KaroGameManager manager, MouseClick click)
 		{
-			IEnumerable<MoveWrapper> legalMoves = manager.LegalMoves;
+			IEnumerable<MoveWrapper> legalMoves = manager.FindLegalMoves(manager.CurrentPlayer);
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetFromCell() == manager.CurrentMove.GetFromCell() &&
 				m.GetToCell() == manager.CurrentMove.GetToCell() &&
