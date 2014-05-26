@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using engine.wrapper;
 using KaroManager;
 using KaroManager.State;
@@ -18,10 +19,13 @@ namespace XNAFrontend.Components
 		const float SIZE = 1f;
 		const float GAP = 0.1f;
 
+		private Thread _highlightThread;
+
 		private Model _tileModel;
 		private Model _minModel;
 		private Model _maxModel;
 		private Dictionary<Vector2, bool> _markedCache;
+		private Vector2DWrapper[] _lastMoveHighlight;
 
 		private MouseState _previousMouseState;
 
@@ -39,8 +43,10 @@ namespace XNAFrontend.Components
 			: base(game)
 		{
 			_markedCache = new Dictionary<Vector2, bool>();
+			_lastMoveHighlight = new Vector2DWrapper[2];
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
-			//this.Position = Vector3.Zero;
+			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
+			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
 			LoadContent();
 		}
 
@@ -179,7 +185,15 @@ namespace XNAFrontend.Components
 					{
 						effect.Alpha = 1f;
 					}
-					if (clickableTile || marked)
+					if (_lastMoveHighlight[0] != null && _lastMoveHighlight[0] == cell.GetRelativePosition())
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else if (_lastMoveHighlight[1] != null && _lastMoveHighlight[1] == cell.GetRelativePosition())
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else if (clickableTile || marked)
 					{
 						effect.DiffuseColor = new Vector3(1f, 1f, 1f);
 					}
@@ -317,6 +331,60 @@ namespace XNAFrontend.Components
 			}
 
 			return _markedCache[position];
+		}
+
+		private void OnMoveExecuted(MoveWrapper move)
+		{
+			if (move.GetMoveType() == MoveType.INSERT)
+			{
+				_lastMoveHighlight[0] = move.GetToCell();
+			}
+			else
+			{
+				_lastMoveHighlight[0] = move.GetFromCell();
+				_lastMoveHighlight[1] = move.GetToCell();
+
+				// Adjust coordinates if board moved around.
+				if (_lastMoveHighlight[1].X < 0)
+				{
+					_lastMoveHighlight[0].X++;
+					_lastMoveHighlight[1].X++;
+				}
+				if (_lastMoveHighlight[1].Y < 0)
+				{
+					_lastMoveHighlight[0].Y++;
+					_lastMoveHighlight[1].Y++;
+				}
+				if (move.HasUsedCell() && 
+					karoGame.KaroGameManager.Board.GetRelativeCellAt(
+						move.GetUsedCell()).HasTile())
+				{
+					if (move.GetUsedCell().X == 0 &&
+						move.GetToCell().X >= 0 &&
+						move.GetToCell().Y >= 0)
+					{
+						_lastMoveHighlight[0].X--;
+						_lastMoveHighlight[1].X--;
+					}
+					if (move.GetUsedCell().Y == 0 &&
+						move.GetToCell().X >= 0 &&
+						move.GetToCell().Y >= 0)
+					{
+						_lastMoveHighlight[0].Y--;
+						_lastMoveHighlight[1].Y--;
+					}
+				}
+			}
+			_highlightThread.Abort();
+			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
+			_highlightThread.Start();
+		}
+
+		private void RemoveHighlightAfterOneSecond()
+		{
+			Thread.Sleep(1000);
+			_lastMoveHighlight[0] = null;
+			_lastMoveHighlight[1] = null;
 		}
 	}
 }

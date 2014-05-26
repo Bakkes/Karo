@@ -8,6 +8,7 @@ namespace KaroManager
 {
 
 	public delegate void BoardUpdated();
+	public delegate void MoveExecuted(MoveWrapper move);
 
 	/// <summary>
 	/// Statemachine that keeps track of the game's states.
@@ -25,6 +26,7 @@ namespace KaroManager
 		public Players CurrentPlayer { get; set; }
 
 		public BoardUpdated OnBoardUpdated;
+		public MoveExecuted OnMoveExecuted;
 
 		/// <summary>
 		/// Access the board of the current game.
@@ -65,6 +67,12 @@ namespace KaroManager
 			CurrentState = PlaceState.Instance;
 		}
 
+		/// <summary>
+		/// Changes the CurrentState to the specified state. The specified state's
+		/// Enter method will be called after the CurrentState is updated. The
+		/// CurrentState's Exit method will be called before the CurrentState is
+		/// updated.
+		/// </summary>
 		public void ChangeState(IKaroState state)
 		{
 			if (CurrentState != null)
@@ -96,14 +104,18 @@ namespace KaroManager
 			Game.ExecuteMove(move, CurrentPlayer);
 			SwapCurrentPlayer();
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
+			if (OnMoveExecuted != null)
+			{
+				OnMoveExecuted(move);
+			}
 			if (OnBoardUpdated != null)
 			{
 				OnBoardUpdated();
 			}
 		}
-     
 
-		protected void SwapCurrentPlayer()
+
+		public void SwapCurrentPlayer()
 		{
 			// Swap the player to the other player with the ternary operator.
 			CurrentPlayer = CurrentPlayer == Players.Max ? Players.Min : Players.Max;
