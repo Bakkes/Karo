@@ -59,6 +59,8 @@ namespace KaroManager
 		/// </summary>
 		public KaroGame Game { get; set; }
 
+		private MoveWrapper _lastMove { get; set; }
+
 		public KaroGameManager()
 		{
 			Game = new KaroGame();
@@ -102,6 +104,7 @@ namespace KaroManager
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			Game.ExecuteMove(move, CurrentPlayer);
+			_lastMove = move;
 			SwapCurrentPlayer();
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
 			if (OnMoveExecuted != null)
@@ -114,6 +117,14 @@ namespace KaroManager
 			}
 		}
 
+		public void UndoLastMove()
+		{
+			if (_lastMove != null)
+			{
+				SwapCurrentPlayer();
+				Game.UndoMove(_lastMove, CurrentPlayer);
+			}
+		}
 
 		public void SwapCurrentPlayer()
 		{

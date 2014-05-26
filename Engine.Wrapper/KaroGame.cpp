@@ -31,6 +31,10 @@ namespace wrapper {
 		_board->ExecuteMove(moveWrapper, player);
 	}
 
+	void KaroGame::UndoMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
+		_board->UndoMove(moveWrapper, player);
+	}
+
 	MoveWrapper^ KaroGame::GetBestMove() {
 		AI* _cPlayer = AIFactory(_board->GetInternalBoard(), 3).CreateMoveOrderingAlfaAI();
 		_cPlayer->SetEvaluator(new StaticEvaluation());

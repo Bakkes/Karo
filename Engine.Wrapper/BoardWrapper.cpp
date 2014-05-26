@@ -28,6 +28,12 @@ namespace wrapper {
 		delete m;
 	}
 
+	void BoardWrapper::UndoMove(MoveWrapper^ mw, engine::wrapper::Players player) {
+		Move* m = WrapperConversionUtility().ConvertMove(mw);
+		_board->UndoMove(*m, static_cast<engine::Players>(player));
+		delete m;
+	}
+
 	List<CellWrapper^>^ BoardWrapper::GetOccupiedCells() {
 		vector<RelativeCell>* native = _board->GetOccupiedTiles();
 		List<CellWrapper^> ^wrapped = gcnew List<CellWrapper^>();

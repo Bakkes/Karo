@@ -54,6 +54,7 @@
     <Compile Include="State\PieceDestinationState.cs" />
     <Compile Include="State\PieceSourceState.cs" />
     <Compile Include="State\PlaceState.cs" />
+    <Compile Include="State\WaitForUndoState.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommunicationProtocol\CommunicationProtocol.csproj">
