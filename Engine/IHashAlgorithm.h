@@ -5,10 +5,16 @@
 namespace engine{
 
 
-	class ENGINE_API IHashAlgorithm{
+	class ENGINE_API IHashAlgorithm {
 
 	public :
-		virtual int hash(Board) =0;
+		virtual ~IHashAlgorithm() {
+		}
+
+		virtual void ExecuteMove(const Move&) = 0;
+		virtual void UndoMove(const Move&) = 0;
+
+		virtual int GetHash() const = 0;
 
 	};
 }

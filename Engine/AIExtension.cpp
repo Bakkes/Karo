@@ -9,6 +9,11 @@ namespace engine{
 	}
 
 	void AIExtension::UpdateMoves(const int& depth,std::vector<Move>& moves){}
+
+	void AIExtension::OnExecutedMove(const Move& move) {}
+
+	void AIExtension::OnUndoMove(const Move& move) {}
+
 	bool AIExtension::ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player){
 		return true;
 	}
