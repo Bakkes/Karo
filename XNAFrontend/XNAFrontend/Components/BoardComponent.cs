@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using XNAFrontend.Services;
+using Microsoft.Xna.Framework.Audio;
 
 namespace XNAFrontend.Components
 {
@@ -21,6 +22,7 @@ namespace XNAFrontend.Components
 
 		private Thread _highlightThread;
 
+		private SoundEffect _invalidMoveSound;
 		private Model _tileModel;
 		private Model _minModel;
 		private Model _maxModel;
@@ -46,6 +48,7 @@ namespace XNAFrontend.Components
 			_lastMoveHighlight = new Vector2DWrapper[2];
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
 			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
+			game.KaroGameManager.OnInvalidMoveMade += OnInvalidMove;
 			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
 			LoadContent();
 		}
@@ -62,6 +65,7 @@ namespace XNAFrontend.Components
 			_tileModel = Game.Content.Load<Model>("tile");
 			_minModel = Game.Content.Load<Model>("piecemin");
 			_maxModel = Game.Content.Load<Model>("piecemax");
+			_invalidMoveSound = Game.Content.Load<SoundEffect>("invalidmove");
 		}
 
 		public override void Update(GameTime gameTime)
@@ -331,6 +335,11 @@ namespace XNAFrontend.Components
 			}
 
 			return _markedCache[position];
+		}
+
+		private void OnInvalidMove()
+		{
+			_invalidMoveSound.Play();
 		}
 
 		private void OnMoveExecuted(MoveWrapper move)
