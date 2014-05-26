@@ -31,10 +31,11 @@ namespace XNAFrontend.Components
 			: base(game)
 		{
 			Message = "";
+			_oldState = Keyboard.GetState();
 		}
 
 		public MessageComponent(KaroGame game, string message, string enterMessage, ACommonComponent enterComponent)
-			: base(game)
+			: this(game)
 		{
 			Message = message;
 			EnterMessage = enterMessage;
@@ -49,7 +50,7 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
-			if (_oldState != null && Keyboard.GetState().IsKeyDown(Keys.Enter) && _oldState.IsKeyDown(Keys.Enter))
+			if (Keyboard.GetState().IsKeyDown(Keys.Enter) && _oldState.IsKeyDown(Keys.Enter))
 			{
 				karoGame.Components.Remove(this);
 				karoGame.Components.Add(new MenuComponent(karoGame));

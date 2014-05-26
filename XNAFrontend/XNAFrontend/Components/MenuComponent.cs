@@ -69,7 +69,8 @@ namespace XNAFrontend.Components
 		{
 			if (item == 0 && depth == 0)
 			{
-				game.StartOfflineGame(); game.Components.Remove(this);
+				game.StartOfflineGame(); 
+				game.Components.Remove(this);
 			}
 			if (item == 1 && depth == 0)
 			{
@@ -82,11 +83,13 @@ namespace XNAFrontend.Components
 
 			if (item == 0 && depth == 1) // Client
 			{
-				game.StartOnlineGame(true); game.Components.Remove(this);
+				game.StartOnlineGame(true); 
+				game.Components.Remove(this);
 			}
 			if (item == 1 && depth == 1) // Server
 			{
-				game.StartOnlineGame(false); game.Components.Remove(this);
+				game.StartOnlineGame(false);
+				game.Components.Remove(this);
 			}
 
 			selectedItem = 0;
@@ -100,24 +103,26 @@ namespace XNAFrontend.Components
 
 			if (menuDepth == 0)
 			{
-				if (selectedItem == 0) { game.spriteBatch.DrawString(font, "Player vs Computer", new Vector2(100, 150), Color.Green); }
-				else { game.spriteBatch.DrawString(font, "Player vs Computer", new Vector2(100, 150), Color.White); }
-				if (selectedItem == 1) { game.spriteBatch.DrawString(font, "Computer vs Computer", new Vector2(100, 200), Color.Green); }
-				else { game.spriteBatch.DrawString(font, "Computer vs Computer", new Vector2(100, 200), Color.White); }
-				if (selectedItem == 2) { game.spriteBatch.DrawString(font, "Exit", new Vector2(100, 250), Color.Green); }
-				else { game.spriteBatch.DrawString(font, "Exit", new Vector2(100, 250), Color.White); }
+				game.spriteBatch.DrawString(font, "Player vs Computer", new Vector2(100, 150), GetColorForItem(0));
+				game.spriteBatch.DrawString(font, "Computer vs Computer", new Vector2(100, 200), GetColorForItem(1));
+				game.spriteBatch.DrawString(font, "Exit", new Vector2(100, 250), GetColorForItem(2));
 			}
 			else
 			{
-				if (selectedItem == 0) { game.spriteBatch.DrawString(font, "Client", new Vector2(100, 175), Color.Green); }
-				else { game.spriteBatch.DrawString(font, "Client", new Vector2(100, 175), Color.White); }
-				if (selectedItem == 1) { game.spriteBatch.DrawString(font, "Server", new Vector2(100, 225), Color.Green); }
-				else { game.spriteBatch.DrawString(font, "Server", new Vector2(100, 225), Color.White); }
+				game.spriteBatch.DrawString(font, "Client", new Vector2(100, 175), GetColorForItem(0));
+				game.spriteBatch.DrawString(font, "Server", new Vector2(100, 225), GetColorForItem(1));
 			}
 
 			game.spriteBatch.End();
 
 			base.Draw(gameTime);
+		}
+
+		private Color GetColorForItem(int item)
+		{
+			if (selectedItem == item)
+				return Color.Green;
+			return Color.White;
 		}
 	}
 }

@@ -25,6 +25,7 @@ namespace engine {
 		bool IsSet() const;
 
 	private:
+		static const int KinitScore = 91929;
 		int _score;
 		Move _move;
 		int _bestForMax;
