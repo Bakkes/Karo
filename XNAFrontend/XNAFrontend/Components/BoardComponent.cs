@@ -21,12 +21,14 @@ namespace XNAFrontend.Components
 
 		private Thread _highlightThread;
 
+		private KaroGame _game;
 		private Model _cordModel;
 		private Model _tileModel;
 		private Model _minModel;
 		private Model _maxModel;
 		private Dictionary<Vector2, bool> _markedCache;
 		private Vector2DWrapper[] _lastMoveHighlight;
+		private Texture2D _cordTexture;
 
 		private MouseState _previousMouseState;
 
@@ -65,11 +67,7 @@ namespace XNAFrontend.Components
 			_cordModel = Game.Content.Load<Model>("cords");
 			_minModel = Game.Content.Load<Model>("piecemin");
 			_maxModel = Game.Content.Load<Model>("piecemax");
-			_font = Game.Content.Load<SpriteFont>("SpriteFont1");
 			_cordTexture = Game.Content.Load<Texture2D>("a1");
-
-			PresentationParameters pp = Game.GraphicsDevice.PresentationParameters;
-			renderTarget = new RenderTarget2D(Game.GraphicsDevice, 512, 512, true, Game.GraphicsDevice.DisplayMode.Format, DepthFormat.Depth24);
 		}
 
 		public override void Update(GameTime gameTime)
@@ -173,10 +171,6 @@ namespace XNAFrontend.Components
 			{
 				DrawCordsAt(tmp, i, (int)height + 2);
 			}
-
-			_game.spriteBatch.Begin();
-			_game.spriteBatch.DrawString(_font, "test", new Vector2(10, 10), Color.Red);
-			_game.spriteBatch.End();
 
 			base.Draw(gameTime);
 		}
