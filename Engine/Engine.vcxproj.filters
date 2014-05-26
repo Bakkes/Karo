@@ -18,12 +18,6 @@
     <ClCompile Include="Board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComputerPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComputerPlayerAB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ComputerPlayerUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -57,13 +51,28 @@
     <ClCompile Include="ZobristHashing.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ComputerPlayerMO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TranspositionTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TranspositionTableData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIExtension.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AlfaBetaExtension.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveSwapExtension.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AIFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMaxExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -72,12 +81,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CellValue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputerPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComputerPlayerAB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ComputerPlayerUtils.h">
@@ -140,13 +143,31 @@
     <ClInclude Include="ZobristHashing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ComputerPlayerMO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TranspositionTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TranspositionTableData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AlfaBetaExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveSwapExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AIFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMaxExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

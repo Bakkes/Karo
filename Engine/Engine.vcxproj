@@ -47,6 +47,7 @@
       <TreatWarningAsError>true</TreatWarningAsError>
       <MultiProcessorCompilation>false</MultiProcessorCompilation>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);ENGINE_EXPORTS</PreprocessorDefinitions>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -54,6 +55,9 @@
     <PostBuildEvent>
       <Command>call "$(ProjectDir)postbuild.debug.bat"</Command>
     </PostBuildEvent>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -74,11 +78,14 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="AIExtension.h" />
+    <ClInclude Include="AIFactory.h" />
+    <ClInclude Include="AlfaBetaExtension.h" />
+    <ClInclude Include="MiniMaxExtension.h" />
+    <ClInclude Include="MoveSwapExtension.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="CellValue.h" />
-    <ClInclude Include="ComputerPlayer.h" />
-    <ClInclude Include="ComputerPlayerAB.h" />
-    <ClInclude Include="ComputerPlayerMO.h" />
     <ClInclude Include="ComputerPlayerUtils.h" />
     <ClInclude Include="RelativeAbsoluteConverter.h" />
     <ClInclude Include="DllImportExport.h" />
@@ -94,6 +101,7 @@
     <ClInclude Include="MoveFinder.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="RelativeCell.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
@@ -103,15 +111,18 @@
     <ClInclude Include="ZobristHashing.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
+    <ClCompile Include="AIExtension.cpp" />
+    <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="MiniMaxExtension.cpp" />
+    <ClCompile Include="AlfaBetaExtension.cpp" />
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="ComputerPlayer.cpp" />
-    <ClCompile Include="ComputerPlayerAB.cpp" />
-    <ClCompile Include="ComputerPlayerMO.cpp" />
     <ClCompile Include="ComputerPlayerUtils.cpp" />
     <ClCompile Include="EvalResult.cpp" />
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
+    <ClCompile Include="MoveSwapExtension.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
     <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />

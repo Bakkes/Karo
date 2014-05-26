@@ -1,13 +1,13 @@
-﻿using engine.wrapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using engine.wrapper;
 using KaroManager;
-using XNAFrontend.Services;
+using KaroManager.State;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Collections.Generic;
-using System.Linq;
-using KaroManager.State;
-using System.Diagnostics;
+using XNAFrontend.Services;
 
 namespace XNAFrontend.Components
 {
@@ -19,13 +19,14 @@ namespace XNAFrontend.Components
 		const float SIZE = 1f;
 		const float GAP = 0.1f;
 
-		private Model _tileModel, _cordModel;
+		private Thread _highlightThread;
+
+		private Model _cordModel;
+		private Model _tileModel;
 		private Model _minModel;
 		private Model _maxModel;
-		private SpriteFont _font;
-		private KaroGame _game;
-		private Texture2D _cordTexture;
-		private RenderTarget2D renderTarget;
+		private Dictionary<Vector2, bool> _markedCache;
+		private Vector2DWrapper[] _lastMoveHighlight;
 
 		private MouseState _previousMouseState;
 
@@ -42,8 +43,11 @@ namespace XNAFrontend.Components
 		public Board(KaroGame game)
 			: base(game)
 		{
+			_markedCache = new Dictionary<Vector2, bool>();
+			_lastMoveHighlight = new Vector2DWrapper[2];
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
-			//this.Position = Vector3.Zero;
+			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
+			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
 			_game = game;
 			LoadContent();
 		}
@@ -81,13 +85,21 @@ namespace XNAFrontend.Components
 					);
 				}
 			}
+
+			if (mouseState.RightButton == ButtonState.Pressed)
+			{
+				_markedCache = new Dictionary<Vector2, bool>();
+				KaroGameManager.Update(new System.Drawing.Point(-1337, -1337));
+			}
+
 			base.Update(gameTime);
-			
+
 			_previousMouseState = mouseState;
 		}
 
 		protected Vector2 GetTileAtPixelPosition(int mouseX, int mouseY)
 		{
+			_markedCache = new Dictionary<Vector2, bool>();
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
 			Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
@@ -132,17 +144,17 @@ namespace XNAFrontend.Components
 
 			BoardWrapper board = KaroGameManager.Board;
 
-			for (int i = 0; i < 20; i++)
+			for (int i = -1; i < 20; i++)
 			{
-				for (int j = 0; i + j < 20; j++)
+				for (int j = -1; i + j < 20; j++)
 				{
 					CellWrapper cell = board.GetRelativeCellAt(new Vector2DWrapper(i, j));
-					
+
 					if (cell.HasTile())
 					{
 						DrawCellAt(cell, i, j);
 					}
-					if (IsMarkedCell(cell.GetRelativePosition()))
+					if (IsMarkedCell(new Vector2((float)i, (float)j)))
 					{
 						DrawCellAt(cell, i, j, true);
 					}
@@ -198,12 +210,20 @@ namespace XNAFrontend.Components
 		{
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
-			bool clickableTile = IsMarkedCell(cell.GetRelativePosition());
+			bool clickableTile = IsMarkedCell(new Vector2((float)x, (float)y));
 			foreach (ModelMesh mesh in _tileModel.Meshes)
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
-					effect.EnableDefaultLighting();
+					effect.LightingEnabled = true;
+					effect.DirectionalLight0.Enabled = true;
+					effect.DirectionalLight0.DiffuseColor = new Vector3(0.5f, 0.2f, 0f);
+					effect.DirectionalLight0.Direction = new Vector3(1f, -1f, 1f);
+					effect.DirectionalLight0.SpecularColor = new Vector3(0f, 1f, 0f);
+					effect.DirectionalLight1.Enabled = true;
+					effect.DirectionalLight1.DiffuseColor = new Vector3(0.7f, 0.7f, 0.7f);
+					effect.DirectionalLight1.Direction = new Vector3(1f, -1f, 1f);
+					effect.DirectionalLight1.SpecularColor = new Vector3(0f, 1f, 0f);
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
@@ -215,7 +235,15 @@ namespace XNAFrontend.Components
 					{
 						effect.Alpha = 1f;
 					}
-					if (clickableTile || marked)
+					if (_lastMoveHighlight[0] != null && _lastMoveHighlight[0] == cell.GetRelativePosition())
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else if (_lastMoveHighlight[1] != null && _lastMoveHighlight[1] == cell.GetRelativePosition())
+					{
+						effect.DiffuseColor = new Vector3(1f, 1f, 0f);
+					}
+					else if (clickableTile || marked)
 					{
 						effect.DiffuseColor = new Vector3(1f, 1f, 1f);
 					}
@@ -224,7 +252,6 @@ namespace XNAFrontend.Components
 						effect.DiffuseColor = new Vector3(0.5f, 0.5f, 0.5f);
 					}
 				}
-
 				mesh.Draw();
 			}
 
@@ -249,7 +276,7 @@ namespace XNAFrontend.Components
 			if (KaroGameManager.CurrentMove != null)
 			{
 				marked = KaroGameManager.CurrentMove.GetFromCell() ==
-					cell.GetAbsolutePosition();
+					cell.GetRelativePosition();
 			}
 
 			// Flip the piece if neccesary
@@ -268,7 +295,15 @@ namespace XNAFrontend.Components
 			{
 				foreach (BasicEffect effect in mesh.Effects)
 				{
-					effect.EnableDefaultLighting();
+					effect.LightingEnabled = true;
+					effect.DirectionalLight0.Enabled = true;
+					effect.DirectionalLight0.DiffuseColor = new Vector3(0.5f, 0.2f, 0f);
+					effect.DirectionalLight0.Direction = new Vector3(1f, -1f, 1f);
+					effect.DirectionalLight0.SpecularColor = new Vector3(0f, 1f, 0f);
+					effect.DirectionalLight1.Enabled = true;
+					effect.DirectionalLight1.DiffuseColor = new Vector3(0.7f, 0.7f, 0.7f);
+					effect.DirectionalLight1.Direction = new Vector3(1f, -1f, 1f);
+					effect.DirectionalLight1.SpecularColor = new Vector3(0f, 1f, 0f);
 					effect.World = world * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), extraHeight, y * (SIZE + GAP)));
 					effect.View = camera.View;
 					effect.Projection = camera.Projection;
@@ -285,57 +320,121 @@ namespace XNAFrontend.Components
 			}
 		}
 
-		private bool IsMarkedCell(Vector2DWrapper position)
+		private bool IsMarkedCell(Vector2 position)
 		{
+			if (_markedCache.ContainsKey(position))
+			{
+				return _markedCache[position];
+			}
+			_markedCache[position] = false;
+
 			BoardWrapper board = KaroGameManager.Board;
 			MoveWrapper currentMove = KaroGameManager.CurrentMove;
 			IKaroState currentState = KaroGameManager.CurrentState;
 
 			if (currentState is PlaceState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
 				{
-					if (position == legalMove.GetToCell())
+					Vector2DWrapper wrapperPos = legalMove.GetToCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
 			else if (currentState is PieceSourceState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves)
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
 				{
-					if (position == legalMove.GetFromCell())
+					Vector2DWrapper wrapperPos = legalMove.GetFromCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
 			else if (currentState is PieceDestinationState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
 					.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
 				{
-					if (position == legalMove.GetToCell())
+					Vector2DWrapper wrapperPos = legalMove.GetToCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
 			else if (currentState is CellSourceState)
 			{
-				foreach (MoveWrapper legalMove in KaroGameManager.LegalMoves
+				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
 					.Where(m => m.GetFromCell() == currentMove.GetFromCell())
 					.Where(m => m.GetToCell() == currentMove.GetToCell()))
 				{
-					if (position == legalMove.GetUsedCell())
+					Vector2DWrapper wrapperPos = legalMove.GetUsedCell();
+					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 					{
-						return true;
+						_markedCache[position] = true;
 					}
 				}
 			}
 
-			return false;
+			return _markedCache[position];
+		}
+
+		private void OnMoveExecuted(MoveWrapper move)
+		{
+			if (move.GetMoveType() == MoveType.INSERT)
+			{
+				_lastMoveHighlight[0] = move.GetToCell();
+			}
+			else
+			{
+				_lastMoveHighlight[0] = move.GetFromCell();
+				_lastMoveHighlight[1] = move.GetToCell();
+
+				// Adjust coordinates if board moved around.
+				if (_lastMoveHighlight[1].X < 0)
+				{
+					_lastMoveHighlight[0].X++;
+					_lastMoveHighlight[1].X++;
+				}
+				if (_lastMoveHighlight[1].Y < 0)
+				{
+					_lastMoveHighlight[0].Y++;
+					_lastMoveHighlight[1].Y++;
+				}
+				if (move.HasUsedCell() && 
+					karoGame.KaroGameManager.Board.GetRelativeCellAt(
+						move.GetUsedCell()).HasTile())
+				{
+					if (move.GetUsedCell().X == 0 &&
+						move.GetToCell().X >= 0 &&
+						move.GetToCell().Y >= 0)
+					{
+						_lastMoveHighlight[0].X--;
+						_lastMoveHighlight[1].X--;
+					}
+					if (move.GetUsedCell().Y == 0 &&
+						move.GetToCell().X >= 0 &&
+						move.GetToCell().Y >= 0)
+					{
+						_lastMoveHighlight[0].Y--;
+						_lastMoveHighlight[1].Y--;
+					}
+				}
+			}
+			_highlightThread.Abort();
+			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
+			_highlightThread.Start();
+		}
+
+		private void RemoveHighlightAfterOneSecond()
+		{
+			Thread.Sleep(1000);
+			_lastMoveHighlight[0] = null;
+			_lastMoveHighlight[1] = null;
 		}
 	}
 }

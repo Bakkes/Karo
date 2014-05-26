@@ -86,6 +86,10 @@ namespace wrapper {
 		_board = Board::CreateBoard(stdBoardString, Vector2D(topLeftX, topLeftY));
 	}
 
+	Board* BoardWrapper::GetInternalBoardCopy() {
+		return new Board(*_board);
+	}
+
 	Board* BoardWrapper::GetInternalBoard() {
 		return _board;
 	}

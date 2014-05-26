@@ -93,8 +93,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="beachball.fbx">
+      <Name>beachball</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>ModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="a1.jpg">
       <Name>a1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="beachballtex.png">
+      <Name>beachballtex</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

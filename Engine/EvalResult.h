@@ -20,11 +20,12 @@ namespace engine {
 
 		const int& GetScore() const;
 		const Move& GetMove() const;
-		int GetBestForMax();
-		int GetBestForMin();
-		bool IsSet();
+		int GetBestForMax() const;
+		int GetBestForMin() const;
+		bool IsSet() const;
 
 	private:
+		static const int KinitScore = 91929;
 		int _score;
 		Move _move;
 		int _bestForMax;

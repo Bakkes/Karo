@@ -8,6 +8,8 @@ namespace KaroManager
 {
 
 	public delegate void BoardUpdated();
+	public delegate void MoveExecuted(MoveWrapper move);
+	public delegate void PlayerHasWon(Players player);
 
 	/// <summary>
 	/// Statemachine that keeps track of the game's states.
@@ -25,7 +27,8 @@ namespace KaroManager
 		public Players CurrentPlayer { get; set; }
 
 		public BoardUpdated OnBoardUpdated;
-
+		public MoveExecuted OnMoveExecuted;
+		public PlayerHasWon OnPlayerWin;
 		/// <summary>
 		/// Access the board of the current game.
 		/// </summary>
@@ -37,12 +40,10 @@ namespace KaroManager
 			}
 		}
 
-		public IEnumerable<MoveWrapper> LegalMoves
-		{
-			get
-			{
-				return Board.GetLegalMoves(CurrentPlayer);
-			}
+		public List<KeyValuePair<MoveWrapper, Players>> MoveLog { get; set; }
+
+		public IEnumerable<MoveWrapper> FindLegalMoves(Players forPlayer){
+			return Board.GetLegalMoves(forPlayer);
 		}
 
 		/// <summary>
@@ -58,10 +59,17 @@ namespace KaroManager
 		public KaroGameManager()
 		{
 			Game = new KaroGame();
+			MoveLog = new List<KeyValuePair<MoveWrapper, Players>>();
 			Debug.WriteLine("Init Board State: {0}", Board.ToString());
 			CurrentState = PlaceState.Instance;
 		}
 
+		/// <summary>
+		/// Changes the CurrentState to the specified state. The specified state's
+		/// Enter method will be called after the CurrentState is updated. The
+		/// CurrentState's Exit method will be called before the CurrentState is
+		/// updated.
+		/// </summary>
 		public void ChangeState(IKaroState state)
 		{
 			if (CurrentState != null)
@@ -85,16 +93,31 @@ namespace KaroManager
 			
 		}
 
-		public void ExecuteMove(MoveWrapper move)
+		public virtual void ExecuteMove(MoveWrapper move)
 		{
+			MoveLog.Add(new KeyValuePair<MoveWrapper,Players>(move, CurrentPlayer));
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			Game.ExecuteMove(move, CurrentPlayer);
-			SwapCurrentPlayer();
+			
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
+			if (OnMoveExecuted != null)
+			{
+				OnMoveExecuted(move);
+			}
+			if (Game.HasWon(CurrentPlayer) && OnPlayerWin != null)
+			{
+				OnPlayerWin(CurrentPlayer);
+			}
+			if (OnBoardUpdated != null)
+			{
+				OnBoardUpdated();
+			}
+			SwapCurrentPlayer();
 		}
 
-		private void SwapCurrentPlayer()
+
+		public void SwapCurrentPlayer()
 		{
 			// Swap the player to the other player with the ternary operator.
 			CurrentPlayer = CurrentPlayer == Players.Max ? Players.Min : Players.Max;

@@ -45,6 +45,9 @@ namespace Tests {
 		return 0;
 	}
 
+	void StubBoard::SetMinimalMoves(const bool& to){
+		_minimalMoves = to;
+	}
 	RelativeCell StubBoard::GetRelativeCellAt(const Vector2D& relativePosition) const {
 		return RelativeCell(nullptr, nullptr);
 	}

@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CommunicationProtocol;
 using engine.wrapper;
 using KaroManager;
+using System.Collections.Generic;
 
 namespace _2DFrontend
 {
@@ -26,7 +27,7 @@ namespace _2DFrontend
 
 		private void newToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			_manager = new KaroGameManager();
+			_manager = new KaroComputerManager();
 			karoPanel.NewGame(_manager);
 		}
 
@@ -117,6 +118,22 @@ namespace _2DFrontend
         {
             new RenderOptionsForm(karoPanel).Show();
         }
+
+		private void copyMoveLogToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			//(STEP, Vector2D(1,1), Vector2D(0,1))
+			string text = "";
+			List<KeyValuePair<MoveWrapper, Players>> moves = _manager.MoveLog;
+			foreach(KeyValuePair<MoveWrapper, Players> moveKV in moves) {
+				MoveWrapper move = moveKV.Key;
+				text += "board->ExecuteMove(Move(" + move.GetMoveType() + 
+				", Vector2D(" + move.GetFromCell().X + ", " + move.GetFromCell().Y + "), " + 
+				"Vector2D(" + move.GetToCell().X+", " + move.GetToCell().Y + ")), " + 
+				(move.HasUsedCell() ? "Vector2D(" + move.GetUsedCell().X + ", " + move.GetUsedCell().Y + "), " : "") +
+				moveKV.Value.ToString() + ");\n";
+			}
+			Clipboard.SetText(text);
+		}
 
 	}
 }

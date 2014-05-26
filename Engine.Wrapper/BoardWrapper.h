@@ -33,6 +33,7 @@ public:
 	void LoadFromString(String^ boardString, int topLeftX, int topLeftY);
 	// Gets the C++ Board (unwrapped)
 	Board* GetInternalBoard();
+	Board* GetInternalBoardCopy();
 	String^ ToString() new;
 	Vector2DWrapper^ GetDynamicSize();
 private:

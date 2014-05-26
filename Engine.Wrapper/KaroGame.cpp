@@ -5,8 +5,8 @@
 #include "WrapperConversionUtility.h"
 #include "StaticEvaluation.h"
 #include "ComputerPlayerUtils.h"
-#include "ComputerPlayerMO.h"
 #include "Players.h"
+#include "AIFactory.h"
 namespace engine {
 namespace wrapper {
 
@@ -27,16 +27,19 @@ namespace wrapper {
 	BoardWrapper^ KaroGame::GetBoard() {
 		return _board;
 	}
-
 	void KaroGame::ExecuteMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
 		_board->ExecuteMove(moveWrapper, player);
 	}
 
 	MoveWrapper^ KaroGame::GetBestMove() {
-		ComputerPlayerMO _cPlayer = ComputerPlayerMO(_board->GetInternalBoard(), 3); // TODO GET COPY!
-		_cPlayer.SetEvaluator(new StaticEvaluation());
-		Move bestMove = _cPlayer.GetBestMove(engine::wrapper::Max);
+		IBoard* cpBoard = _board->GetInternalBoardCopy();
+		AI* cPlayer = AIFactory(cpBoard, 3).CreateMoveOrderingAlfaAI();
+		cPlayer->SetEvaluator(new StaticEvaluation());
+		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
+
+		delete cPlayer;
+		delete cpBoard;
 		return wrapped;
 	}
 

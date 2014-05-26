@@ -17,7 +17,8 @@ namespace Tests {
 	public:
 		TEST_METHOD_INITIALIZE(CreateBoard) {
 			board = new Board();
-			standartBoard = "3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
+			standartBoard = 
+				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
@@ -228,5 +229,26 @@ namespace Tests {
 			OutputDebugString(board->ToString().c_str());
 			Assert::IsFalse(shouldBeEmptyCell.HasTile());
 		}
+		TEST_METHOD(CountThesePieces) {
+			Board* board = Board::CreateBoard(standartBoard, Vector2D(0, 0));
+			board->ExecuteMove(Move(INSERT, Vector2D(3, 0), Vector2D(3, 0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(2, 3)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(2, 0), Vector2D(2, 0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(3, 1)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(1, 0), Vector2D(1, 0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(3, 3)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(2, 2), Vector2D(2, 2)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(0, 2)), Max);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(0, 0)), Min);
+			Assert::IsTrue(board->GetPieceCountFor(Max) == 4);
+			Assert::IsTrue(board->GetPieceCountFor(Min) == 5);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(4, 1)), Max);
+			Assert::IsTrue(board->GetPieceCountFor(Max) == 5);
+			board->ExecuteMove(Move(INSERT, Vector2D(4, 0), Vector2D(4, 0)), Min);
+			board->ExecuteMove(Move(INSERT, Vector2D(0, 0), Vector2D(0, 1)), Max);
+			Assert::IsTrue(board->GetPieceCountFor(Max) == 6);
+			Assert::IsTrue(board->GetPieceCountFor(Min) == 6);
+		}
 	};
+		
 }

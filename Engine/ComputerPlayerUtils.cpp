@@ -2,6 +2,10 @@
 
 namespace engine {
 
+	int IsWinningTileFor(const RelativeCell& cell, const Players& player){
+		Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
+		return cell.HasTile() && (!cell.IsEmpty()) && cell.IsFlipped() && playerAtCell == player;
+	}
 	Players ComputerPlayerUtils::InvertPlayer(Players player) {
 		if (player == Players::Min) {
 			return Players::Max;
@@ -34,9 +38,7 @@ namespace engine {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
 
 				for (int i = 0; i < 4; i++) {
-					cell = board->GetRelativeCellAt(Vector2D(x + i, y));
-					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
-					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+					if (!IsWinningTileFor(board->GetRelativeCellAt(Vector2D(x + i, y)), player)) {
 						// Can not be part of 4 flipped pieces
 						break;
 					}
@@ -57,9 +59,7 @@ namespace engine {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
 
 				for (int i = 0; i < 4; i++) {
-					cell = board->GetRelativeCellAt(Vector2D(x, y + i));
-					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
-					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+					if (!IsWinningTileFor(board->GetRelativeCellAt(Vector2D(x, y+i)), player)) {
 						// Can not be part of 4 flipped pieces
 						break;
 					}
@@ -80,9 +80,7 @@ namespace engine {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
 
 				for (int i = 0; i < 4; i++) {
-					cell = board->GetRelativeCellAt(Vector2D(x + i, y - i));
-					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
-					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+					if (!IsWinningTileFor(board->GetRelativeCellAt(Vector2D(x + i, y - i)), player)) {
 						// Can not be part of 4 flipped pieces
 						break;
 					}
@@ -103,9 +101,7 @@ namespace engine {
 				RelativeCell cell = board->GetRelativeCellAt(Vector2D(x, y));
 
 				for (int i = 0; i < 4; i++) {
-					cell = board->GetRelativeCellAt(Vector2D(x - i, y - i));
-					Players playerAtCell = cell.IsMaxPiece() ? Max : Min;
-					if (!cell.HasTile() || !cell.IsFlipped() || playerAtCell != player) {
+					if (!IsWinningTileFor(board->GetRelativeCellAt(Vector2D(x - i, y - i)), player)) {
 						// Can not be part of 4 flipped pieces
 						break;
 					}

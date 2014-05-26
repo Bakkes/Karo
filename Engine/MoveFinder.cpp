@@ -31,26 +31,28 @@ namespace engine {
 		if (player == Max) { _invalidatedMax = false; }
 		if (player == Min) { _invalidatedMin = false; }
 		_cachedMoves->clear();
+		delete _cachedMoves;
+		_cachedMoves = new vector<Move>();
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
-			return GetLegalPlaceMoves(player);
+			return (*GetLegalPlaceMoves(player));
 		}
 		else {
-			return GetLegalMoveMoves(player);
+			return (*GetLegalMoveMoves(player));
 		}
 	}
 
 	// Returns all place moves for the specified player.
-	std::vector<Move> MoveFinder::GetLegalPlaceMoves(Players player) {
+	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
 		std::vector<RelativeCell>* emptyTiles = _board->GetEmptyTiles();
 		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
 			// Add insertion move to an empty tile.
 			_cachedMoves->push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
 		} 
-		return (*_cachedMoves);
+		return _cachedMoves;
 	}
 
 	// Returns all moves that are either a jump or move type of move.
-	std::vector<Move> MoveFinder::GetLegalMoveMoves(Players player) {
+	std::vector<Move>* MoveFinder::GetLegalMoveMoves(Players player) {
 		std::vector<RelativeCell>* occupiedCells = _board->GetOccupiedTiles();
 
 		// Loop through all occupied cells.
@@ -64,7 +66,7 @@ namespace engine {
 				AddAdjacentMovesToVector(*it);
 			}
 		}
-		return (*_cachedMoves);
+		return _cachedMoves;
 	}
 
 	// Adds all possible jump moves to the specified vector.
@@ -206,14 +208,15 @@ namespace engine {
 
 	int MoveFinder::ConnectedTiles(const RelativeCell &start) {
 		_checkedCells->clear();
+		delete _checkedCells;
+		_checkedCells = new vector<const RelativeCell>();
 		return ConnectedTilesRecursive(start);
 	}
 
 	int MoveFinder::ConnectedTilesRecursive(const RelativeCell &start) {
-		for (auto it = _checkedCells->begin(); it != _checkedCells->end(); ++it) {
-			if (start == *it) {
+		for(unsigned i = 0; i < _checkedCells->size(); i++) {
+			if(_checkedCells->at(i) == start)
 				return 0;
-			}
 		}
 		_checkedCells->push_back(start);
 		int result = 1;
