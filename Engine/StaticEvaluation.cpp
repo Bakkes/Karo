@@ -7,7 +7,7 @@ namespace engine {
 		_blockedTileValue = -50;
 		_cornerValue = -100;
 		_neighborValue = 150;
-		_lineValue = 500;
+		_lineValue = 1500;
 
 		_centerValue = 5;
 		_semiCenterValue = 4;
