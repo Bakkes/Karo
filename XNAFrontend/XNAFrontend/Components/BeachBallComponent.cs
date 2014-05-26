@@ -57,6 +57,7 @@ namespace XNAFrontend.Components
 			);
 
 			_offset = new Vector3(0f, -5f, 0f);
+			_loading = false;
 		}
 
 		protected override void LoadContent()
