@@ -159,8 +159,8 @@ namespace XNAFrontend.Components
 				}
 			}
 
-			double width = board.GetDynamicSize().X;
-			double height = board.GetDynamicSize().Y;
+			int width = (int)board.GetWidth();
+			int height = (int)board.GetHeight();
 			CellWrapper tmp = board.GetRelativeCellAt(new Vector2DWrapper(0, 0));
 
 			for (int i = 0; i <= height; i++)
@@ -185,7 +185,7 @@ namespace XNAFrontend.Components
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.TextureEnabled = true;
-					effect.Texture = _cordTexture;
+					effect.Texture = Game.Content.Load<Texture2D>("a1");
 					effect.EnableDefaultLighting();
 					effect.World = world * Matrix.CreateRotationX(MathHelper.ToRadians(90)) * Matrix.CreateScale(0.5f) * Matrix.CreateRotationY(MathHelper.ToRadians(180)) * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
