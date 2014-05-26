@@ -12,8 +12,8 @@ namespace engine{
 	{
 	}
 
-	void MoveSwapExtension::Start(const int& maxDepth, IBoard* board){
-		AIExtension::Start(maxDepth, board);
+	void MoveSwapExtension::Start(const int& maxDepth, IBoard* board, IStaticEvaluation* eval){
+		AIExtension::Start(maxDepth, board, eval);
 		_killerMoves = new EvalResult[maxDepth];
 	}
 	void MoveSwapExtension::End(){
@@ -25,12 +25,12 @@ namespace engine{
 			return true;
 		}
 		if (player == Max) {
-			if(currentResult.GetBestForMax()>_killerMoves[_depth].GetBestForMax()){
-				_killerMoves[_depth]=currentResult;
+			if(currentResult.GetBestForMax()>_killerMoves[GetCurrentDepth()].GetBestForMax()){
+				_killerMoves[GetCurrentDepth()]=currentResult;
 			}
 		}else{
-			if(currentResult.GetBestForMin()<_killerMoves[_depth].GetBestForMin()){
-				_killerMoves[_depth]=currentResult;
+			if(currentResult.GetBestForMin()<_killerMoves[GetCurrentDepth()].GetBestForMin()){
+				_killerMoves[GetCurrentDepth()]=currentResult;
 			}
 		}
 		return true;
@@ -46,10 +46,10 @@ namespace engine{
 		}
 	}
 	bool MoveSwapExtension::ShouldSwap(){
-		if(_depth == 0){
+		if(GetCurrentDepth() == 0){
 			return false;
 		}
-		if(_depth == (GetMaxDepth() - 1)){
+		if(GetCurrentDepth() == (GetMaxDepth() - 1)){
 			return false;
 		}
 		return true;

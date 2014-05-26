@@ -3,6 +3,7 @@
 #include "AlfaBetaExtension.h"
 #include "MoveSwapExtension.h"
 #include "MiniMaxExtension.h"
+#include "MoveOrderExtension.h"
 namespace engine{
 	class ENGINE_API AIFactory
 	{

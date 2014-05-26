@@ -25,13 +25,16 @@ namespace engine{
 	}
 		// notify the exntension taht minmax ends
 	void AIExtension::End(){}
-	IStaticEvaluation& AIExtension::GetEvaluator() const{
-		return *_evaluator;
+	IStaticEvaluation* AIExtension::GetEvaluator() const{
+		return _evaluator;
 	}
 	int AIExtension::GetMaxDepth() const{
 		return _maxDepth;
 	}
-	IBoard& AIExtension::GetBoard() const{
-		return *_board;
+	IBoard* AIExtension::GetBoard() const{
+		return _board;
+	}
+	int AIExtension::GetCurrentDepth() const{
+		return _currentDepth;
 	}
 }

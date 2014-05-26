@@ -1,7 +1,7 @@
 #include "AIExtension.h"
 #pragma once
 namespace engine{
-	class MoveOrderExtension : AIExtension
+	class MoveOrderExtension : public AIExtension
 	{
 	public:
 		MoveOrderExtension();

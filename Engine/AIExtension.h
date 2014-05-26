@@ -26,8 +26,8 @@ namespace engine {
 	protected:
 		int GetMaxDepth() const;
 		int GetCurrentDepth() const;
-		IBoard& GetBoard() const;
-		IStaticEvaluation& GetEvaluator() const;
+		IBoard* GetBoard() const;
+		IStaticEvaluation* GetEvaluator() const;
 	private:
 		int _maxDepth;
 		int _currentDepth;
