@@ -86,6 +86,8 @@ namespace Tests {
 		TEST_METHOD(MiniMax_MinNodeCutOff_ReturnsTrue) {
 			AI* ai = _factory->CreateAlfaAI();
 			int results[14] = {
+			// Original Tree
+			// 3 17 2 12 1 1 25 0 2 5 3 3 2 14 2 14
 			// Corrected output based on cut off
 				3, 17, 2, 1,  1, 25,  0,
 				2,  5, 3, 3,  2, 14,  2
@@ -96,7 +98,7 @@ namespace Tests {
 			Move move = ai->GetBestMove(Max);
 			Assert::IsFalse(move.GetToCell() == Vector2D(-1), L"Returned move is invalid");
 			Assert::IsTrue(IsLegalMove(_factory->GetBoard(), move, Max), L"Returned move is not legal on the board");
-			Assert::IsTrue(move == Move(STEP, Vector2D(0), Vector2D(0, 1)), L"Returned not the expected move");
+			Assert::IsTrue(move == Move(STEP, Vector2D(0), Vector2D(1, 0)), L"Returned not the expected move");
 			Assert::AreEqual(14, staticEval->GetCallCount(), L"Invalid amount of states have been checked");
 
 			delete _factory->GetBoard();
