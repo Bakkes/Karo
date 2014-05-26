@@ -10,7 +10,7 @@ namespace engine{
 
 	void AIExtension::UpdateMoves(const int& depth,std::vector<Move>& moves){}
 
-	void AIExtension::OnExecutedMove(const Move& move) {}
+	void AIExtension::OnExecuteMove(const Move& move) {}
 
 	void AIExtension::OnUndoMove(const Move& move) {}
 

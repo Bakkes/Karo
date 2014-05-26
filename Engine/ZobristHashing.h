@@ -1,13 +1,7 @@
 #pragma once
-#pragma warning(disable:4251)
 
-#include <iostream>
-#include <time.h>
-#include <hash_map>
 #include "Board.h"
 #include "IHashAlgorithm.h"
-
-
 
 namespace engine {
 	class ENGINE_API ZobristHashing : public IHashAlgorithm {
@@ -16,8 +10,8 @@ namespace engine {
 		ZobristHashing(IBoard* board);
 		virtual ~ZobristHashing();
 
-		void ExecuteMove(const Move&) override;
-		void UndoMove(const Move&) override;
+		void ExecuteMove(const Move&, Players player) override;
+		void UndoMove(const Move&, Players player) override;
 
 		int GetHash() const override;
 
@@ -28,5 +22,14 @@ namespace engine {
 
 		int GetCellPosition(const Vector2D& position);
 		int GetCellData(const Vector2D& position);
+		
+		void UpdateHash(Vector2D position, int cellValue);
+		void UpdateHash(Vector2D position, int cellOldValue, int cellValue);
+
+		void InsertPiece(Vector2D position, Players player);
+		void RemovePiece(Vector2D position);
+		void MovePiece(Vector2D from, Vector2D to);
+		void JumpPiece(Vector2D from, Vector2D to);
+		void MoveTile(Vector2D from, Vector2D to);
 	};
 }

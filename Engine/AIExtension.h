@@ -16,9 +16,11 @@ namespace engine {
 		// go one ply deeper, allows extension to do plystep initilization
 		virtual void Step(const Players& player, const int& currentDepth, EvalResult&);
 
-		// Notifies the Extension of which move has been executed
-		virtual void OnExecutedMove(const Move&);
-		// Notifies the extension of which move has been undone
+		// Notifies the Extension of which move will be executed
+		// Called BEFORE the board state changes
+		virtual void OnExecuteMove(const Move&);
+		// Notifies the extension of which move will be undo
+		// Called BEFORE the board state changes
 		virtual void OnUndoMove(const Move&);
 		// allows extension to do move ordering
 		virtual void UpdateMoves(const int& depth,std::vector<Move>& moves);
