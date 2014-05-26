@@ -44,6 +44,8 @@ namespace Tests {
 		TEST_METHOD(MiniMax_BothCutOff_ReturnsTrue) {
 			AI* ai = _factory->CreateAlfaAI();
 			int results[7] = {
+			// Original Tree
+			// 3 17 2 12 15 15 25 0 2 5 3 3 2 14 2 14
 			// Corrected output based on cut off
 				 3, 17,  2, 15, 15,  2,  3,
 			};

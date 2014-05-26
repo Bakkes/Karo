@@ -20,6 +20,9 @@ namespace engine{
 
 	bool AlfaBetaExtension::ShouldContinue(const EvalResult& score, EvalResult& result, const Players& player){
 		if (player == Max) {
+			if (score.GetScore() > result.GetScore()) {
+				result.SetScore(score.GetScore());
+			}
 			if (score.GetScore() >= result.GetBestForMin() && result.GetBestForMin() != INT_MAX) {
 				//cutoff
 				return false;
@@ -27,7 +30,10 @@ namespace engine{
 				result.SetBestForMax(score.GetScore());
 				result.SetMove(score.GetMove());
 			}
-		} else  if (player == Min)  {
+		} else if (player == Min)  {
+			if (score.GetScore() < result.GetScore()) {
+				result.SetScore(score.GetScore());
+			}
 			if (score.GetScore() <= result.GetBestForMax() && result.GetBestForMax() != INT_MIN) {
 				// Cut off
 				return false;

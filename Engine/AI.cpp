@@ -32,9 +32,11 @@ namespace engine{
 		});
 		return result.GetMove();
 	}
+
 	void AI::AddExtension(AIExtension* extension){
 		_extensions->push_back(extension);
 	}
+
 	void AI::SetEvaluator(IStaticEvaluation* evaluator) {
 		_evaluator = evaluator;
 	}
@@ -71,14 +73,15 @@ namespace engine{
 	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
 		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
-			EvalResult result = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
-			result.SetMove(move);
-			return result;
+			EvalResult _result = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
+			_result.SetMove(move);
+			return _result;
 		}
 
 		// We can't go deeper, evaluate the board
 		EvalResult score(result.GetBestForMax(), result.GetBestForMin());
 		score.SetScore(_evaluator->Eval(_board, player));
+		score.SetMove(move);
 		return score;
 	}
 }
