@@ -26,9 +26,11 @@ namespace engine{
 
 	AI* AIFactory::CreateMoveOrderingAlfaAI(){
 		AI* result = CreateAlfaAI();
+		result->AddExtension(new MoveOrderExtension());
 		result->AddExtension(new MoveSwapExtension());
 		return result;
 	}
+
 
 	IBoard* AIFactory::GetBoard() const{
 		return _board;

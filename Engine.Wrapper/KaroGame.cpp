@@ -7,6 +7,8 @@
 #include "ComputerPlayerUtils.h"
 #include "Players.h"
 #include "AIFactory.h"
+#include "AltEval.h"
+
 namespace engine {
 namespace wrapper {
 
@@ -38,7 +40,7 @@ namespace wrapper {
 	MoveWrapper^ KaroGame::GetBestMove() {
 		IBoard* cpBoard = _board->GetInternalBoardCopy();
 		AI* cPlayer = AIFactory(cpBoard, 3).CreateMoveOrderingAlfaAI();
-		cPlayer->SetEvaluator(new StaticEvaluation());
+		cPlayer->SetEvaluator(new AltEval());
 		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 

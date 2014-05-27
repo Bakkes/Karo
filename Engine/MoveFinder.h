@@ -21,6 +21,8 @@ namespace engine{
 	private:
 		Board* _board;
 
+		std::vector<RelativeCell>* _emptyTiles;
+
 		// All the moves that movefinder has calculated so far.
 		std::vector<Move>* _cachedMoves;
 

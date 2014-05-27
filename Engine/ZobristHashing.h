@@ -9,34 +9,20 @@
 
 
 
-namespace engine{
-	class ENGINE_API ZobristHashing : IHashAlgorithm{
-
-	private:
-		hash_map<int,int> tableHash;
-		
-
-		int table[16][400];
+namespace engine {
+	class ENGINE_API ZobristHashing : public IHashAlgorithm {
 
 	public:
-		ZobristHashing(void);
-		~ZobristHashing(void);
+		ZobristHashing();
+		virtual ~ZobristHashing();
 
-		void init_zobrist();
-		void board_hash();
-		int hash(Board a) override;
+		void ExecuteMove(const Move&) override;
+		void UndoMove(const Move&) override;
 
+		int GetHash() const override;
 
-
-
-
-
-
-
-
-
-
-
-
+	private:
+		int _hashValues[16][400];
+		int _currentHash;
 	};
 }

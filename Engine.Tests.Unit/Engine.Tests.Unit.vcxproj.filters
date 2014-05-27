@@ -54,9 +54,6 @@
     <ClCompile Include="MoveFinderTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ZobristTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AbsoluteRelativeConverter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

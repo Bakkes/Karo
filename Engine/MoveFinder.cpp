@@ -6,6 +6,7 @@ namespace engine {
 		Invalidate();
 		_cachedMoves = new std::vector<Move>();
 		_checkedCells = new std::vector<const RelativeCell>();
+		_emptyTiles = nullptr;
 	}
 
 	MoveFinder::~MoveFinder(void) {
@@ -13,6 +14,8 @@ namespace engine {
 		_checkedCells = nullptr;
 		delete _cachedMoves;
 		_cachedMoves = nullptr;
+		delete _emptyTiles;
+		_emptyTiles = nullptr;
 	}
 
 	void MoveFinder::Invalidate() {
@@ -33,6 +36,9 @@ namespace engine {
 		_cachedMoves->clear();
 		delete _cachedMoves;
 		_cachedMoves = new vector<Move>();
+		delete _emptyTiles;
+		_emptyTiles = nullptr;
+		_emptyTiles = _board->GetEmptyTiles();
 		if (_board->GetPieceCountFor(player) < IBoard::MaxPiecesPerPlayer) {
 			return (*GetLegalPlaceMoves(player));
 		}
@@ -43,8 +49,7 @@ namespace engine {
 
 	// Returns all place moves for the specified player.
 	std::vector<Move>* MoveFinder::GetLegalPlaceMoves(Players player) {
-		std::vector<RelativeCell>* emptyTiles = _board->GetEmptyTiles();
-		for (auto it = emptyTiles->begin(); it != emptyTiles->end(); ++it) {
+		for (auto it = _emptyTiles->begin(); it != _emptyTiles->end(); ++it) {
 			// Add insertion move to an empty tile.
 			_cachedMoves->push_back(Move(INSERT, Vector2D(), it->GetRelativePosition()));
 		} 
@@ -166,8 +171,7 @@ namespace engine {
 		const MoveType& type,
 		const RelativeCell& from,
 		const RelativeCell& to) {
-		std::vector<RelativeCell>* emptyCells = _board->GetEmptyTiles();
-		for (auto it = emptyCells->begin(); it != emptyCells->end(); ++it) {
+		for (auto it = _emptyTiles->begin(); it != _emptyTiles->end(); ++it) {
 			if (_board->CountNonDiagonalEdges(*it) > 2) {
 				continue;
 			}
@@ -210,12 +214,13 @@ namespace engine {
 		_checkedCells->clear();
 		delete _checkedCells;
 		_checkedCells = new vector<const RelativeCell>();
+		_checkedCells->reserve(25);
 		return ConnectedTilesRecursive(start);
 	}
 
 	int MoveFinder::ConnectedTilesRecursive(const RelativeCell &start) {
 		for(unsigned i = 0; i < _checkedCells->size(); i++) {
-			if(_checkedCells->at(i) == start)
+			if(_checkedCells->at(i).GetAbsolutePosition() == start.GetAbsolutePosition())
 				return 0;
 		}
 		_checkedCells->push_back(start);

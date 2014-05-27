@@ -82,7 +82,9 @@
     <ClInclude Include="AIExtension.h" />
     <ClInclude Include="AIFactory.h" />
     <ClInclude Include="AlfaBetaExtension.h" />
+    <ClInclude Include="AltEval.h" />
     <ClInclude Include="MiniMaxExtension.h" />
+    <ClInclude Include="MoveOrderExtension.h" />
     <ClInclude Include="MoveSwapExtension.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="CellValue.h" />
@@ -105,6 +107,7 @@
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="TranspositionExtension.h" />
     <ClInclude Include="TranspositionTable.h" />
     <ClInclude Include="TranspositionTableData.h" />
     <ClInclude Include="Vector2D.h" />
@@ -114,6 +117,7 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="AIExtension.cpp" />
     <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="AltEval.cpp" />
     <ClCompile Include="MiniMaxExtension.cpp" />
     <ClCompile Include="AlfaBetaExtension.cpp" />
     <ClCompile Include="Board.cpp" />
@@ -122,11 +126,13 @@
     <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
+    <ClCompile Include="MoveOrderExtension.cpp" />
     <ClCompile Include="MoveSwapExtension.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
     <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />
+    <ClCompile Include="TranspositionExtension.cpp" />
     <ClCompile Include="TranspositionTable.cpp" />
     <ClCompile Include="TranspositionTableData.cpp" />
     <ClCompile Include="Vector2D.cpp" />
