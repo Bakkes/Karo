@@ -17,6 +17,8 @@ namespace Tests {
 		return 0;
 	}
 
+	Vector2D StubBoard::GetDynamicSize() { return Vector2D(0,0); }
+
 	void StubBoard::CreateTileAt(const Vector2D &relativePosition) { }
 	void StubBoard::DeleteTileAt(const Vector2D &relativePosition) { }
 

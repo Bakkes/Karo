@@ -47,6 +47,42 @@ namespace engine{
 		delete _converter;
 		_converter = NULL;
 	}
+	
+	int Board::GetWidth() {
+		return _converter->GetWidth();
+	}
+	
+	int Board::GetHeight() {
+		return _converter->GetHeight();
+	}
+
+	Vector2D Board::GetDynamicSize() {
+		double width = 1;
+		double height = 1;
+
+		RelativeCell relCell = GetRelativeCellAt(Vector2D(0,0));
+		Vector2D topLeft = relCell.GetAbsolutePosition();
+		
+		int x1 = 0;
+		int x2 = 0;
+		int y1 = 0;
+		int y2 = 0;
+		
+		for (double i = 0; i < 20; i++) {
+			for (double j = 0; j < 20; j++) {
+				if ((GetAbsoluteCellAt(Vector2D((int)(i + topLeft.X()) % 20, (int)(j + topLeft.Y()) % 20))->GetData() & HasTile) == HasTile) {
+					if (x2 < i) {
+						x2 = i;
+					}
+					if (y2 < j) {
+						y2 = j;
+					}
+				}
+			}
+		}
+		
+		return Vector2D(x2 - x1, y2 - y1);
+	}
 
 	int Board::GetPieceCountFor(Players player) {
 
