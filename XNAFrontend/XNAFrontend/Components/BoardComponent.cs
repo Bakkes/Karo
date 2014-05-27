@@ -157,8 +157,8 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
-			
-			
+
+
 			karoGame.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
 			BoardWrapper board = KaroGameManager.Board;
@@ -420,7 +420,7 @@ namespace XNAFrontend.Components
 					_lastMoveHighlight[0].Y++;
 					_lastMoveHighlight[1].Y++;
 				}
-				if (move.HasUsedCell() && 
+				if (move.HasUsedCell() &&
 					karoGame.KaroGameManager.Board.GetRelativeCellAt(
 						move.GetUsedCell()).HasTile())
 				{
@@ -450,6 +450,11 @@ namespace XNAFrontend.Components
 			Thread.Sleep(1000);
 			_lastMoveHighlight[0] = null;
 			_lastMoveHighlight[1] = null;
+		}
+
+		public void ClearMarkCache()
+		{
+			_markedCache = new Dictionary<Vector2, bool>();
 		}
 	}
 }

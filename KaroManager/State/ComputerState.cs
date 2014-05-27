@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
+using engine.wrapper;
 
 namespace KaroManager.State
 {
@@ -54,11 +55,19 @@ namespace KaroManager.State
 
 		public void ExecuteMoveThread()
 		{
+			MoveWrapper move = _manager.Game.GetBestMove();
+			Vector2DWrapper from = move.GetFromCell();
+			Vector2DWrapper to = move.GetToCell();
+			Vector2DWrapper used = move.HasUsedCell() ? move.GetUsedCell() : null;
 			_manager.Game.ExecuteMove(
-					_manager.Game.GetBestMove(),
+					move,
 					_manager.CurrentPlayer
 				);
 			_manager.SwapCurrentPlayer();
+			if (_manager.OnBoardUpdated != null)
+			{
+				_manager.OnBoardUpdated();
+			}
 			// Computer move executed
 
 			if (_manager.Board.GetOccupiedCells().Count < 12)
