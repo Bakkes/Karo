@@ -21,11 +21,14 @@ namespace XNAFrontend.Components
 
 		private Thread _highlightThread;
 
+		private KaroGame _game;
+		private Model _cordModel;
 		private Model _tileModel;
 		private Model _minModel;
 		private Model _maxModel;
 		private Dictionary<Vector2, bool> _markedCache;
 		private Vector2DWrapper[] _lastMoveHighlight;
+		private List<string> _cordList;
 
 		private MouseState _previousMouseState;
 
@@ -47,6 +50,7 @@ namespace XNAFrontend.Components
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
 			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
 			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
+			_game = game;
 			LoadContent();
 		}
 
@@ -54,12 +58,35 @@ namespace XNAFrontend.Components
 		{
 			base.Initialize();
 			this._previousMouseState = Mouse.GetState();
+
+			_cordList = new List<string>();
+			_cordList.Add("a");
+			_cordList.Add("b");
+			_cordList.Add("c");
+			_cordList.Add("d");
+			_cordList.Add("e");
+			_cordList.Add("f");
+			_cordList.Add("g");
+			_cordList.Add("h");
+			_cordList.Add("i");
+			_cordList.Add("j");
+			_cordList.Add("k");
+			_cordList.Add("l");
+			_cordList.Add("m");
+			_cordList.Add("n");
+			_cordList.Add("o");
+			_cordList.Add("p");
+			_cordList.Add("q");
+			_cordList.Add("r");
+			_cordList.Add("s");
+			_cordList.Add("t");
 		}
 
 		protected override void LoadContent()
 		{
 			base.LoadContent();
 			_tileModel = Game.Content.Load<Model>("tile");
+			_cordModel = Game.Content.Load<Model>("cords");
 			_minModel = Game.Content.Load<Model>("piecemin");
 			_maxModel = Game.Content.Load<Model>("piecemax");
 		}
@@ -130,6 +157,8 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
+
+
 			karoGame.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
 			BoardWrapper board = KaroGameManager.Board;
@@ -150,7 +179,43 @@ namespace XNAFrontend.Components
 					}
 				}
 			}
+
+			int width = (int)board.GetDynamicSize().X;
+			int height = (int)board.GetDynamicSize().Y;
+			CellWrapper tmp = board.GetRelativeCellAt(new Vector2DWrapper(0, 0));
+
+			for (int i = 0; i <= height; i++)
+			{
+				DrawCordsAt(tmp, -2, i, (i + 1).ToString());
+			}
+			for (int i = 0; i <= width; i++)
+			{
+				DrawCordsAt(tmp, i, (int)height + 2, _cordList[i]);
+			}
+
 			base.Draw(gameTime);
+		}
+
+
+		private void DrawCordsAt(CellWrapper cell, int x, int y, string cord)
+		{
+			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
+			Matrix world = Matrix.CreateRotationX(MathHelper.ToRadians(-90));
+			foreach (ModelMesh mesh in _cordModel.Meshes)
+			{
+				foreach (BasicEffect effect in mesh.Effects)
+				{
+					effect.TextureEnabled = true;
+					effect.Texture = Game.Content.Load<Texture2D>("cords/"+cord);
+					effect.EnableDefaultLighting();
+					effect.World = world * Matrix.CreateRotationX(MathHelper.ToRadians(90)) * Matrix.CreateScale(0.5f) * Matrix.CreateRotationY(MathHelper.ToRadians(180)) * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
+					effect.View = camera.View;
+					effect.Projection = camera.Projection;
+					effect.Alpha = 1f;
+					effect.DiffuseColor = new Vector3(0.8f, 0.8f, 0.8f);
+				}
+				mesh.Draw();
+			}
 		}
 
 		/// <summary>
@@ -355,7 +420,7 @@ namespace XNAFrontend.Components
 					_lastMoveHighlight[0].Y++;
 					_lastMoveHighlight[1].Y++;
 				}
-				if (move.HasUsedCell() && 
+				if (move.HasUsedCell() &&
 					karoGame.KaroGameManager.Board.GetRelativeCellAt(
 						move.GetUsedCell()).HasTile())
 				{
@@ -385,6 +450,11 @@ namespace XNAFrontend.Components
 			Thread.Sleep(1000);
 			_lastMoveHighlight[0] = null;
 			_lastMoveHighlight[1] = null;
+		}
+
+		public void ClearMarkCache()
+		{
+			_markedCache = new Dictionary<Vector2, bool>();
 		}
 	}
 }
