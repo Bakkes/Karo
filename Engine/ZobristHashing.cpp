@@ -1,16 +1,14 @@
-#include <time.h>
 #include "ZobristHashing.h"
 
 namespace engine{
 
-	ZobristHashing::ZobristHashing(IBoard* board) {
+	ZobristHashing::ZobristHashing(IBoard* board, IRng* rand) {
 		_board = board;
-
-		srand((unsigned)time(NULL));
+		_rand = rand;
 	
 		for(int cellValue = 0; cellValue < 16; cellValue++) {
 			for(int position = 0; position < 400; position++) {
-				_hashValues[cellValue][position] = rand() % 50000;
+				_hashValues[cellValue][position] = _rand->NextInteger() % 50000;
 			}
 		}
 
@@ -23,6 +21,8 @@ namespace engine{
 	}
 
 	ZobristHashing::~ZobristHashing() {
+		delete _rand;
+		_rand = nullptr;
 	}
 
 	void ZobristHashing::ExecuteMove(const Move& move, Players player) {

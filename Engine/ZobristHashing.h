@@ -2,12 +2,13 @@
 
 #include "Board.h"
 #include "IHashAlgorithm.h"
+#include "IRng.h"
 
 namespace engine {
 	class ENGINE_API ZobristHashing : public IHashAlgorithm {
 
 	public:
-		ZobristHashing(IBoard* board);
+		ZobristHashing(IBoard* board, IRng* rand);
 		virtual ~ZobristHashing();
 
 		void ExecuteMove(const Move&, Players player) override;
@@ -19,6 +20,7 @@ namespace engine {
 		int _hashValues[16][400];
 		int _currentHash;
 		IBoard* _board;
+		IRng* _rand;
 
 		int GetCellPosition(const Vector2D& position);
 		int GetCellData(const Vector2D& position);
