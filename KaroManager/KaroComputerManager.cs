@@ -17,8 +17,8 @@ namespace KaroManager
 			Debug.WriteLine("ComputerExecute Move");
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
-			base.ExecuteMove(move);
 			CurrentMove = null;
+			base.ExecuteMove(move);
 			ChangeState(ComputerState.Instance);
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
 		}

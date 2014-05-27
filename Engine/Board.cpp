@@ -72,10 +72,10 @@ namespace engine{
 			for (double j = 0; j < 20; j++) {
 				if ((GetAbsoluteCellAt(Vector2D((int)(i + topLeft.X()) % 20, (int)(j + topLeft.Y()) % 20))->GetData() & HasTile) == HasTile) {
 					if (x2 < i) {
-						x2 = i;
+						x2 = (int)i;
 					}
 					if (y2 < j) {
-						y2 = j;
+						y2 = (int)j;
 					}
 				}
 			}
