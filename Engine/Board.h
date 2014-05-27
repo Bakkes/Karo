@@ -36,6 +36,9 @@ namespace engine{
 		// allows you to specify the top left position, the string from is still absolute
 		static Board*  CreateBoard(string from, Vector2D absoluteTopLeft);
 		static const Size initSize;
+		Vector2D GetDynamicSize() override;
+		int GetWidth();
+		int GetHeight();
 	private:
 		MoveFinder* _moveFinder;
 		RelativeAbsoluteConverter* _converter;

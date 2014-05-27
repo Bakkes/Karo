@@ -93,7 +93,6 @@ namespace KaroManager
 			{
 				CurrentState.Update(this, tileLocation);
 			}
-			
 		}
 
 		public virtual void ExecuteMove(MoveWrapper move)

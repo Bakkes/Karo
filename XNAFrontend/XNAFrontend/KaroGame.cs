@@ -63,7 +63,14 @@ namespace XNAFrontend
 		{
 			keyState = Keyboard.GetState();
 
+			if (keyState.IsKeyDown(Keys.Escape) && prevKeyState.IsKeyUp(Keys.Escape))
+			{
+				Components.Clear();
+				Components.Add(new MenuComponent(this));
+			}
+
 			base.Update(gameTime);
+
 			prevKeyState = keyState;
 		}
 
@@ -185,6 +192,7 @@ namespace XNAFrontend
 		private void AddGameComponents()
 		{
 			Board board = new Board(this);
+			KaroGameManager.OnBoardUpdated += board.ClearMarkCache;
 			CameraComponent camera = new CameraComponent(this, board.Position);
 			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
 

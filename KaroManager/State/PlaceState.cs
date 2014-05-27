@@ -68,8 +68,11 @@ namespace KaroManager.State
 			// Change state to Piece source state if all 6 pieces are on the board.
 			if (manager.Board.GetOccupiedCells().Count == MaxPieceCount)
 			{
-				Debug.WriteLine("All {0} pieces are placed at the board.", MaxPieceCount);
-				manager.ChangeState(PieceSourceState.Instance);
+				if (!(manager.CurrentState is ComputerState))
+				{
+					Debug.WriteLine("All {0} pieces are placed at the board.", MaxPieceCount);
+					manager.ChangeState(PieceSourceState.Instance);
+				}
 			}
 		}
 
