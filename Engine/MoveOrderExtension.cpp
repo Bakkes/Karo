@@ -13,7 +13,7 @@ namespace engine{
 		_shouldOrder = currentDepth == 0;
 		_player = player;
 	}
-	void MoveOrderExtension::UpdateMoves(const int& depth,std::vector<Move>& moves){
+	void MoveOrderExtension::UpdateMoves(std::vector<Move>& moves){
 		if(!_shouldOrder){
 			return;
 		}

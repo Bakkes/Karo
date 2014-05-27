@@ -19,7 +19,7 @@ namespace engine {
 		virtual void Step(const Players& player, const int& currentDepth, EvalResult&);
 
 		// allows extension to do move ordering
-		virtual void UpdateMoves(const int& depth,std::vector<Move>& moves);
+		virtual void UpdateMoves(std::vector<Move>& moves);
 		// allows extension to do pruning
 		virtual bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player);
 

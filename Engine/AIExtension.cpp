@@ -10,7 +10,7 @@ namespace engine{
 	{
 	}
 
-	void AIExtension::UpdateMoves(const int& depth,std::vector<Move>& moves){}
+	void AIExtension::UpdateMoves(std::vector<Move>& moves){}
 	bool AIExtension::ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player){
 		return true;
 	}

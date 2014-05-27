@@ -12,7 +12,7 @@ namespace engine{
 		// notify the exntension taht minmax ends
 		void End() override;
 		// allows extension to do move ordering
-		void UpdateMoves(const int& depth, std::vector<Move>& moves) override;
+		void UpdateMoves(std::vector<Move>& moves) override;
 		bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player) override;
 	private:
 

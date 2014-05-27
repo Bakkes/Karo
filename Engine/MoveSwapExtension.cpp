@@ -35,14 +35,14 @@ namespace engine{
 		}
 		return true;
 	}
-	void MoveSwapExtension::UpdateMoves(const int& depth, std::vector<Move>& moves){
+	void MoveSwapExtension::UpdateMoves(std::vector<Move>& moves){
 		if(!ShouldSwap()){
 			return;
 		}
-		int findResult = find(moves.begin(),moves.end(),_killerMoves[depth].GetMove())-moves.begin();
+		int findResult = find(moves.begin(),moves.end(),_killerMoves[GetCurrentDepth()].GetMove())-moves.begin();
 		if(findResult > 0 && ((unsigned)findResult < moves.size())){
 			moves[findResult]=moves[0];
-			moves[0]=_killerMoves[depth].GetMove();
+			moves[0]=_killerMoves[GetCurrentDepth()].GetMove();
 		}
 	}
 	bool MoveSwapExtension::ShouldSwap(){

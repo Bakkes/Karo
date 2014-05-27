@@ -51,7 +51,7 @@ namespace engine{
 
 		// allow extensoins to do some move ordering
 		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves](AIExtension* extension) -> void{
-			extension->UpdateMoves(depth, possibleMoves);
+			extension->UpdateMoves(possibleMoves);
 		});
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
