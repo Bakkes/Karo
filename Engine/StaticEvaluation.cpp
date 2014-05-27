@@ -20,22 +20,22 @@ namespace engine {
 	{
 	}
 
-	int StaticEvaluation::PlayingFase(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlayingPhase(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if((it.GetData() & IsMax) == IsMax && players == Max) { //friendly: max
-			score = PlayingFaseFriendlyMax(score, board, it, players);
+			score = PlayingPhaseFriendlyMax(score, board, it, players);
 		} else if((it.GetData() & IsMax) != IsMax && players == Min) { //friendly: min
-			score = PlayingFaseFriendlyMin(score, board, it, players);
+			score = PlayingPhaseFriendlyMin(score, board, it, players);
 		} else if((it.GetData() & IsMax) != IsMax && players == Max) { //hostile: min
-			score = PlayingFaseHostileMin(score, board, it, players);
+			score = PlayingPhaseHostileMin(score, board, it, players);
 		} else if((it.GetData() & IsMax) == IsMax && players == Min) { //hostile: max
-			score = PlayingFaseHostileMax(score, board, it, players);
+			score = PlayingPhaseHostileMax(score, board, it, players);
 		}
 		
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseFriendlyMax(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlayingPhaseFriendlyMax(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score += _flippedValue;
@@ -106,7 +106,7 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseFriendlyMin(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlayingPhaseFriendlyMin(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score += _flippedValue;
@@ -177,7 +177,7 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseHostileMin(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlayingPhaseHostileMin(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score -= _flippedValue;
@@ -248,7 +248,7 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlayingFaseHostileMax(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlayingPhaseHostileMax(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetData() & IsFlipped) == IsFlipped) {
 			score -= _flippedValue;
@@ -319,18 +319,18 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlacingFase(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlacingPhase(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if(((it.GetData() & IsMax) == IsMax && players == Max) || ((it.GetData() & IsMax) != IsMax && players == Min)) { //friendly
-			score = PlacingFaseFriendly(score, board, it, players);
+			score = PlacingPhaseFriendly(score, board, it, players);
 		} else if(((it.GetData() & IsMax) == IsMax && players == Min) || ((it.GetData() & IsMax) != IsMax && players == Max)) { //hostile
-			score = PlacingFaseHostile(score, board, it, players);
+			score = PlacingPhaseHostile(score, board, it, players);
 		}
 
 		return score;
 	}
 
-	int StaticEvaluation::PlacingFaseFriendly(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlacingPhaseFriendly(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 1) || (it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 2)) {
 			score += _centerValue;
@@ -347,7 +347,7 @@ namespace engine {
 		return score;
 	}
 
-	int StaticEvaluation::PlacingFaseHostile(int score, IBoard* board, RelativeCell it, Players players)
+	int StaticEvaluation::PlacingPhaseHostile(int score, IBoard* board, RelativeCell it, Players players)
 	{
 		if ((it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 1) || (it.GetAbsolutePosition().X() == 2 && it.GetAbsolutePosition().Y() == 2)) {
 			score -= _centerValue;
@@ -373,10 +373,10 @@ namespace engine {
 		for(auto it = tiles->begin(); it != tiles->end(); ++it) {
 			if (tiles->size() == 12) {
 				// static evaluation for the playing face
-				score = PlayingFase(score, board, *it, players);
+				score = PlayingPhase(score, board, *it, players);
 			} else {
 				// static evaluation for the piece placing face
-				score = PlacingFase(score, board, *it, players);
+				score = PlacingPhase(score, board, *it, players);
 			}
 		}
 

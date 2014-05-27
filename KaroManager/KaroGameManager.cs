@@ -125,7 +125,6 @@ namespace KaroManager
 				Game.UndoMove(_lastMove, CurrentPlayer);
 			}
 		}
-
 		public void SwapCurrentPlayer()
 		{
 			// Swap the player to the other player with the ternary operator.

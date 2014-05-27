@@ -20,13 +20,13 @@ namespace engine {
 		int _semiCenterValue;
 		int _centerColumnValue;
 		int _bottomOrTopRowValue;
-		int PlayingFase(int score, IBoard* board, RelativeCell it, Players players);
-		int PlayingFaseFriendlyMax(int score, IBoard* board, RelativeCell it, Players players);
-		int PlayingFaseFriendlyMin(int score, IBoard* board, RelativeCell it, Players players);
-		int PlayingFaseHostileMax(int score, IBoard* board, RelativeCell it, Players players);
-		int PlayingFaseHostileMin(int score, IBoard* board, RelativeCell it, Players players);
-		int PlacingFase(int score, IBoard* board, RelativeCell it, Players players);
-		int PlacingFaseFriendly(int score, IBoard* board, RelativeCell it, Players players);
-		int PlacingFaseHostile(int score, IBoard* board, RelativeCell it, Players players);
+		int PlayingPhase(int score, IBoard* board, RelativeCell it, Players players);
+		int PlayingPhaseFriendlyMax(int score, IBoard* board, RelativeCell it, Players players);
+		int PlayingPhaseFriendlyMin(int score, IBoard* board, RelativeCell it, Players players);
+		int PlayingPhaseHostileMax(int score, IBoard* board, RelativeCell it, Players players);
+		int PlayingPhaseHostileMin(int score, IBoard* board, RelativeCell it, Players players);
+		int PlacingPhase(int score, IBoard* board, RelativeCell it, Players players);
+		int PlacingPhaseFriendly(int score, IBoard* board, RelativeCell it, Players players);
+		int PlacingPhaseHostile(int score, IBoard* board, RelativeCell it, Players players);
 	};
 }

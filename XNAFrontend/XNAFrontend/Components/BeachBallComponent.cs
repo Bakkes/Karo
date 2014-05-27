@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using KaroManager.State;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace XNAFrontend.Components
@@ -68,11 +69,18 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
-			if (!Loading)
+			if (karoGame.KaroGameManager == null ||
+				!(karoGame.KaroGameManager.CurrentState is ComputerState))
 			{
+				if (!_loading)
+				{
+					_loading = true;
+					Initialize();
+				}
 				// Not loading, stop execution.
 				return;
 			}
+			_loading = false;
 			_velocity -= _gravity;
 			_position += _velocity;
 			if (_position.Y < 0f)
@@ -86,7 +94,8 @@ namespace XNAFrontend.Components
 		public override void Draw(GameTime gameTime)
 		{
 			base.Draw(gameTime);
-			if (!Loading)
+			if (karoGame.KaroGameManager == null ||
+				!(karoGame.KaroGameManager.CurrentState is ComputerState))
 			{
 				// Not loading, stop execution.
 				return;
