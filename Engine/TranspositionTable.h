@@ -16,6 +16,7 @@ namespace engine {
 		TranspositionTable(void);
 		~TranspositionTable(void);
 		void Insert(int value, int score, Move* maxBestMove, Move* minBestMove);
+		bool Contains(int key);
 		TranspositionTableData* Get(int value);
 	};
 }

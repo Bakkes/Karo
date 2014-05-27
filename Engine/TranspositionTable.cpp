@@ -28,6 +28,10 @@ namespace engine {
 		}
 	}
 
+	bool TranspositionTable::Contains(int key) {
+		return hashMap->find(key) != hashMap->end();
+	}
+
 	TranspositionTableData* TranspositionTable::Get(int value)
 	{
 		return hashMap->at(value);

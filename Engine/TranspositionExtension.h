@@ -10,7 +10,8 @@ namespace engine {
 		TranspositionExtension();
 		virtual ~TranspositionExtension();
 
-		bool ShouldContinue(const IBoard* board, const EvalResult& currentResult, EvalResult& prevResult, const Players& player);
+		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
+		bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player) override;
 
 	private:
 		IHashAlgorithm* _hasher;

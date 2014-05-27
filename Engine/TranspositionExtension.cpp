@@ -4,17 +4,23 @@
 namespace engine {
 
 	TranspositionExtension::TranspositionExtension() {
-		IRng* rand = new RngTimeBased();
-
-		delete rand;
+		_transpositionTable = new TranspositionTable();
 	}
-
 
 	TranspositionExtension::~TranspositionExtension()
 	{
+		delete _transpositionTable;
+		delete _hasher;
 	}
 
-	bool TranspositionExtension::ShouldContinue(const IBoard* board, const EvalResult& currentResult, EvalResult& prevResult, const Players& player) {
+	void TranspositionExtension::Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) {
+		AIExtension::Start(maxDepth, board, evaluation);
+		IRng* rand = new RngTimeBased();
+		_hasher = new ZobristHashing(board, rand);
+		delete rand;
+	}
+
+	bool TranspositionExtension::ShouldContinue( const EvalResult& currentResult, EvalResult& prevResult, const Players& player) {
 		return true;
 	}
 }
