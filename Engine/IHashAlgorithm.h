@@ -11,10 +11,7 @@ namespace engine{
 		virtual ~IHashAlgorithm() {
 		}
 
-		virtual void ExecuteMove(const Move&, Players player) = 0;
-		virtual void UndoMove(const Move&, Players player) = 0;
-
-		virtual int GetHash() const = 0;
+		virtual int GetHash() = 0;
 
 	};
 }
