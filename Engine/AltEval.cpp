@@ -33,7 +33,7 @@ namespace engine {
 	}
 
 	int AltEval::CalcScoreWithNext(RelativeCell &cell, Players player,
-		const RelativeCell&(AltEval::*GetNext)(RelativeCell&)) {
+		const RelativeCell(AltEval::*GetNext)(RelativeCell&)) {
 		int score = 0;
 		// Right
 		RelativeCell current = cell;
@@ -49,35 +49,35 @@ namespace engine {
 		return score;
 	}
 
-	const RelativeCell &AltEval::GetLeft(RelativeCell &current) {
+	const RelativeCell AltEval::GetLeft(RelativeCell &current) {
 		return current.GetLeft();
 	}
 
-	const RelativeCell &AltEval::GetRight(RelativeCell &current) {
+	const RelativeCell AltEval::GetRight(RelativeCell &current) {
 		return current.GetRight();
 	}
 
-	const RelativeCell &AltEval::GetTop(RelativeCell &current) {
+	const RelativeCell AltEval::GetTop(RelativeCell &current) {
 		return current.GetTop();
 	}
 
-	const RelativeCell &AltEval::GetBottom(RelativeCell &current) {
+	const RelativeCell AltEval::GetBottom(RelativeCell &current) {
 		return current.GetBottom();
 	}
 
-	const RelativeCell &AltEval::GetTopLeft(RelativeCell &current) {
+	const RelativeCell AltEval::GetTopLeft(RelativeCell &current) {
 		return current.GetTop().GetLeft();
 	}
 
-	const RelativeCell &AltEval::GetTopRight(RelativeCell &current) {
+	const RelativeCell AltEval::GetTopRight(RelativeCell &current) {
 		return current.GetTop().GetRight();
 	}
 
-	const RelativeCell &AltEval::GetBottomLeft(RelativeCell &current) {
+	const RelativeCell AltEval::GetBottomLeft(RelativeCell &current) {
 		return current.GetBottom().GetLeft();
 	}
 
-	const RelativeCell &AltEval::GetBottomRight(RelativeCell &current) {
+	const RelativeCell AltEval::GetBottomRight(RelativeCell &current) {
 		return current.GetBottom().GetRight();
 	}
 }

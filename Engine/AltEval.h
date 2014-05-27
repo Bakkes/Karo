@@ -13,19 +13,19 @@ namespace engine {
 	private:
 		int CalcScoreFor(RelativeCell &cell, Players player);
 		int CalcScoreWithNext(RelativeCell &cell, Players player,
-			const RelativeCell&(AltEval::*GetNext)(RelativeCell&));
+			const RelativeCell(AltEval::*GetNext)(RelativeCell&));
 		int CalcDownScore(RelativeCell &cell, Players player);
 		int CalcDownRightScore(RelativeCell &cell, Players player);
 		int CalcTopRightScore(RelativeCell &cell, Players player);
 
-		const RelativeCell &GetLeft(RelativeCell &current);
-		const RelativeCell &GetRight(RelativeCell &current);
-		const RelativeCell &GetTop(RelativeCell &current);
-		const RelativeCell &GetBottom(RelativeCell &current);
+		const RelativeCell GetLeft(RelativeCell &current);
+		const RelativeCell GetRight(RelativeCell &current);
+		const RelativeCell GetTop(RelativeCell &current);
+		const RelativeCell GetBottom(RelativeCell &current);
 
-		const RelativeCell &GetTopLeft(RelativeCell &current);
-		const RelativeCell &GetTopRight(RelativeCell &current);
-		const RelativeCell &GetBottomLeft(RelativeCell &current);
-		const RelativeCell &GetBottomRight(RelativeCell &current);
+		const RelativeCell GetTopLeft(RelativeCell &current);
+		const RelativeCell GetTopRight(RelativeCell &current);
+		const RelativeCell GetBottomLeft(RelativeCell &current);
+		const RelativeCell GetBottomRight(RelativeCell &current);
 	};
 }
