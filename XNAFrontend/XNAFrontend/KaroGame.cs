@@ -185,6 +185,7 @@ namespace XNAFrontend
 		private void AddGameComponents()
 		{
 			Board board = new Board(this);
+			KaroGameManager.OnBoardUpdated += board.ClearMarkCache;
 			CameraComponent camera = new CameraComponent(this, board.Position);
 			SkyBoxComponent SkyBox = new SkyBoxComponent(this);
 

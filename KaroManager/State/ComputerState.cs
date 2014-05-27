@@ -59,6 +59,10 @@ namespace KaroManager.State
 					_manager.CurrentPlayer
 				);
 			_manager.SwapCurrentPlayer();
+			if (_manager.OnBoardUpdated != null)
+			{
+				_manager.OnBoardUpdated();
+			}
 			// Computer move executed
 
 			if (_manager.Board.GetOccupiedCells().Count < 12)
