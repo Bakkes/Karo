@@ -24,7 +24,7 @@ namespace engine{
 
 	Move AI::GetBestMove(Players player){
 		for_each(_extensions->begin(), _extensions->end(),[this](AIExtension* extension) -> void{
-			extension->Start(_maxDepth);
+			extension->Start(_maxDepth, _board, _evaluator);
 		});
 		EvalResult result = MinimaxStep(player, 0, EvalResult(INT_MIN, INT_MAX));
 		for_each(_extensions->begin(), _extensions->end(), [](AIExtension* extension) -> void{
@@ -51,7 +51,7 @@ namespace engine{
 
 		// allow extensoins to do some move ordering
 		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves](AIExtension* extension) -> void{
-			extension->UpdateMoves(depth, possibleMoves);
+			extension->UpdateMoves(possibleMoves);
 		});
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {

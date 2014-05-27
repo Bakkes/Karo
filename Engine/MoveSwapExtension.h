@@ -8,19 +8,16 @@ namespace engine{
 	public:
 		MoveSwapExtension(void);
 		~MoveSwapExtension(void);
-		void Start(const int& maxDepth) override;
+		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
 		// notify the exntension taht minmax ends
 		void End() override;
-
-		void Step(const Players& player, const int& currentDepth, EvalResult&) override;
 		// allows extension to do move ordering
-		void UpdateMoves(const int& depth, std::vector<Move>& moves) override;
+		void UpdateMoves(std::vector<Move>& moves) override;
 		bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player) override;
 	private:
 
 		bool ShouldSwap();
 		EvalResult* _killerMoves;
-		int _depth;
 	};
 
 }
