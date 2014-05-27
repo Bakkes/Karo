@@ -38,11 +38,18 @@ namespace engine {
 		// Right
 		RelativeCell current = cell;
 		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += 10;
-				if (current.IsFlipped()) {
-					score += score * 3;
-				}
+			if(!current.HasTile()){
+				continue;
+			}
+			if(current.IsEmpty()){
+				continue;
+			}
+			if(current.GetPlayer() != player){
+				continue;
+			}
+			score += 10;
+			if (current.IsFlipped()) {
+				score *= 3;
 			}
 			current = (*this.*GetNext)(current);
 		}
