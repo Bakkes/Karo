@@ -12,7 +12,8 @@ namespace engine {
 		int Eval(IBoard* board, Players player) override;
 	private:
 		int CalcScoreFor(RelativeCell &cell, Players player);
-		int CalcRightScore(RelativeCell &cell, Players player);
+		int CalcScoreWithNext(RelativeCell &cell, Players player,
+			const RelativeCell&(AltEval::*GetNext)(RelativeCell&));
 		int CalcDownScore(RelativeCell &cell, Players player);
 		int CalcDownRightScore(RelativeCell &cell, Players player);
 		int CalcTopRightScore(RelativeCell &cell, Players player);

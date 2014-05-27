@@ -20,14 +20,20 @@ namespace engine {
 
 	int AltEval::CalcScoreFor(RelativeCell &cell, Players player) {
 		int score = 0;
-		score += CalcRightScore(cell, player);
-		score += CalcDownScore(cell, player);
-		score += CalcDownRightScore(cell, player);
-		score += CalcTopRightScore(cell, player);
+		score += CalcScoreWithNext(cell, player, &AltEval::GetLeft);
+		score += CalcScoreWithNext(cell, player, &AltEval::GetRight);
+		score += CalcScoreWithNext(cell, player, &AltEval::GetTop);
+		score += CalcScoreWithNext(cell, player, &AltEval::GetBottom);
+
+		score += CalcScoreWithNext(cell, player, &AltEval::GetTopLeft);
+		score += CalcScoreWithNext(cell, player, &AltEval::GetTopRight);
+		score += CalcScoreWithNext(cell, player, &AltEval::GetBottomLeft);
+		score += CalcScoreWithNext(cell, player, &AltEval::GetBottomRight);
 		return score;
 	}
 
-	int AltEval::CalcRightScore(RelativeCell &cell, Players player) {
+	int AltEval::CalcScoreWithNext(RelativeCell &cell, Players player,
+		const RelativeCell&(AltEval::*GetNext)(RelativeCell&)) {
 		int score = 0;
 		// Right
 		RelativeCell current = cell;
@@ -38,103 +44,7 @@ namespace engine {
 					score += 50;
 				}
 			}
-			current = current.GetRight();
-		}
-
-		// Left
-		current = cell;
-		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += score + 10;
-				if (current.IsFlipped()) {
-					score += 50;
-				}
-			}
-			current = current.GetLeft();
-		}
-		return score;
-	}
-
-	int AltEval::CalcDownScore(RelativeCell &cell, Players player) {
-		int score = 0;
-		// Right
-		RelativeCell current = cell;
-		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player) {
-				score += score + 10;
-				if (current.IsFlipped()) {
-					score += 50;
-				}
-			}
-			current = current.GetBottom();
-		}
-
-		// Left
-		current = cell;
-		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += score + 10;
-				if (current.IsFlipped()) {
-					score += 50;
-				}
-			}
-			current = current.GetBottom();
-		}
-		return score;
-	}
-
-	int AltEval::CalcDownRightScore(RelativeCell &cell, Players player) {
-		int score = 0;
-		// Right
-		RelativeCell current = cell;
-		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += score + 10;
-				if (current.IsFlipped()) {
-					score += 50;
-				}
-			}
-			current = current.GetBottom().GetRight();
-		}
-
-		// Left
-		current = cell;
-		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += score + 10;
-				if (current.IsFlipped()) {
-					score += 50;
-				}
-			}
-			current = current.GetBottom().GetRight();
-		}
-		return score;
-	}
-
-	int AltEval::CalcTopRightScore(RelativeCell &cell, Players player) {
-		int score = 0;
-		// Right
-		RelativeCell current = cell;
-		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += score + 10;
-				if (current.IsFlipped()) {
-					score += 50;
-				}
-			}
-			current = current.GetTop().GetRight();
-		}
-
-		// Left
-		current = cell;
-		for (int i = 0; i < 3; i++) {
-			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += score + 10;
-				if (current.IsFlipped()) {
-					score += 50;
-				}
-			}
-			current = current.GetTop().GetRight();
+			current = (*this.*GetNext)(current);
 		}
 		return score;
 	}
