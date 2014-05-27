@@ -39,7 +39,7 @@ namespace Tests {
 			
 			int result = staticEvaluation->Eval(board, Max);
 
-			Assert::IsTrue(result == 8);
+			Assert::IsTrue(result == -14);
 		}
 	};
 }

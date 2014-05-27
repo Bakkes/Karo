@@ -31,6 +31,26 @@ namespace engine{
 		);
 	}
 
+	int RelativeAbsoluteConverter::GetWidth() {
+		int width = 0;
+		for (int i = 0; i < 20; i++) {
+			if (_colTileCount[i] > width) {
+				width = _colTileCount[i];
+			}
+		}
+		return width;
+	}
+
+	int RelativeAbsoluteConverter::GetHeight() {
+		int height = 0;
+		for (int i = 0; i < 20; i++) {
+			if (_rowTileCount[i] > height) {
+				height = _rowTileCount[i];
+			}
+		}
+		return height;
+	}
+
 	Vector2D RelativeAbsoluteConverter::CalcShiftCorrection( const Vector2D& to, const Vector2D& used) const{
 		Vector2D result = Vector2D(0);
 

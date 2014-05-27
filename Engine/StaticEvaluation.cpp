@@ -52,7 +52,7 @@ namespace engine {
 			score += _neighborValue;
 			tmpBool = true;
 		}
-		if (IsLinable(it.GetRight(), player)) {
+			if ((it.GetLeft().GetData() & (IsMax | IsFlipped)) == IsFlipped) {
 			if (tmpBool) {
 				score -= _neighborValue;
 				score += _lineValue;

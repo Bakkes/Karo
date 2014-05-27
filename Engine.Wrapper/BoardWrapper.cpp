@@ -20,6 +20,18 @@ namespace wrapper {
 		_board = nullptr;
 	}
 
+	int BoardWrapper::GetWidth() {
+		return _board->GetWidth();
+	}
+
+	int BoardWrapper::GetHeight() {
+		return _board->GetHeight();
+	}
+
+	Vector2DWrapper^ BoardWrapper::GetDynamicSize() {
+		return WrapperConversionUtility().ConvertVector2D(_board->GetDynamicSize());
+	}
+
 	void BoardWrapper::ExecuteMove(MoveWrapper^ mw, engine::wrapper::Players player) {
 		_legalMaxMoves = nullptr;
 		_legalMinMoves = nullptr;
