@@ -55,6 +55,7 @@ namespace KaroManager.State
 			{
 				// Clicked on invalid tile. Back to PieceSourceState.
 				Debug.WriteLine("Clicked on a non moveable tile.");
+				manager.SendMoveIsNotValid();
 				manager.CurrentMove = null;
 				manager.ChangeState(PieceSourceState.Instance);
 			}

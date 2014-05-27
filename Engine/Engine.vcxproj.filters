@@ -75,7 +75,7 @@
     <ClCompile Include="MiniMaxExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AltEval.cpp">
+    <ClCompile Include="TranspositionExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -173,7 +173,7 @@
     <ClInclude Include="MiniMaxExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AltEval.h">
+    <ClInclude Include="TranspositionExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

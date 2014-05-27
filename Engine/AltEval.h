@@ -25,6 +25,6 @@ namespace engine {
 		const RelativeCell &GetTopLeft(RelativeCell &current);
 		const RelativeCell &GetTopRight(RelativeCell &current);
 		const RelativeCell &GetBottomLeft(RelativeCell &current);
-		const RelativeCell &GetBottomright(RelativeCell &current);
+		const RelativeCell &GetBottomRight(RelativeCell &current);
 	};
 }

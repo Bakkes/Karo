@@ -142,19 +142,32 @@ namespace engine {
 	const RelativeCell &AltEval::GetLeft(RelativeCell &current) {
 		return current.GetLeft();
 	}
+
 	const RelativeCell &AltEval::GetRight(RelativeCell &current) {
+		return current.GetRight();
 	}
+
 	const RelativeCell &AltEval::GetTop(RelativeCell &current) {
+		return current.GetTop();
 	}
+
 	const RelativeCell &AltEval::GetBottom(RelativeCell &current) {
+		return current.GetBottom();
 	}
 
 	const RelativeCell &AltEval::GetTopLeft(RelativeCell &current) {
+		return current.GetTop().GetLeft();
 	}
+
 	const RelativeCell &AltEval::GetTopRight(RelativeCell &current) {
+		return current.GetTop().GetRight();
 	}
+
 	const RelativeCell &AltEval::GetBottomLeft(RelativeCell &current) {
+		return current.GetBottom().GetLeft();
 	}
-	const RelativeCell &AltEval::GetBottomright(RelativeCell &current) {
+
+	const RelativeCell &AltEval::GetBottomRight(RelativeCell &current) {
+		return current.GetBottom().GetRight();
 	}
 }

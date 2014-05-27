@@ -106,6 +106,7 @@
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
+    <ClInclude Include="TranspositionExtension.h" />
     <ClInclude Include="TranspositionTable.h" />
     <ClInclude Include="TranspositionTableData.h" />
     <ClInclude Include="Vector2D.h" />
@@ -129,6 +130,7 @@
     <ClCompile Include="RelativeCell.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />
+    <ClCompile Include="TranspositionExtension.cpp" />
     <ClCompile Include="TranspositionTable.cpp" />
     <ClCompile Include="TranspositionTableData.cpp" />
     <ClCompile Include="Vector2D.cpp" />

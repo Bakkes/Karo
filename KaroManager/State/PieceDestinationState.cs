@@ -74,9 +74,11 @@ namespace KaroManager.State
 			}
 			else
 			{
+
 				// Clicked on invalid destination tile. Get rid of the current
 				// move and go back to PieceSourceState.
 				Debug.WriteLine("Can't move selected piece to tile.", click);
+				manager.SendMoveIsNotValid();
 				manager.CurrentMove = null;
 				manager.ChangeState(PieceSourceState.Instance);
 			}
