@@ -35,7 +35,8 @@ namespace engine {
 	int StaticEvaluation::CalculateMovePhase(const RelativeCell& it)
 	{
 		int score = 0;
-		if ((it.GetData() & IsFlipped) == IsFlipped) {
+		int player = it.IsMaxPiece() ? IsMax : 0;
+		if (it.IsFlipped()) {
 			score += _flippedValue;
 
 		}
@@ -47,11 +48,11 @@ namespace engine {
 
 		//check left/right
 		bool tmpBool = false;
-		if ((it.GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetLeft(), player)) {
 			score += _neighborValue;
 			tmpBool = true;
 		}
-		if ((it.GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetRight(), player)) {
 			if (tmpBool) {
 				score -= _neighborValue;
 				score += _lineValue;
@@ -61,11 +62,11 @@ namespace engine {
 
 		//check up/down
 		tmpBool = false;
-		if ((it.GetTop().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetTop(), player)) {
 			score += _neighborValue;
 			tmpBool = true;
 		}
-		if ((it.GetBottom().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetBottom(), player)) {
 			if (tmpBool) {
 				score -= _neighborValue;
 				score += _lineValue;
@@ -75,11 +76,11 @@ namespace engine {
 
 		//check upleft/downright
 		tmpBool = false;
-		if ((it.GetTop().GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetTop().GetLeft(), player)) {
 			score += _neighborValue;
 			tmpBool = true;
 		}
-		if ((it.GetBottom().GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetBottom().GetRight(), player)) {
 			if (tmpBool) {
 				score -= _neighborValue;
 				score += _lineValue;
@@ -89,11 +90,11 @@ namespace engine {
 
 		//check upright/downleft
 		tmpBool = false;
-		if ((it.GetTop().GetRight().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetTop().GetRight(), player)) {
 			score += _neighborValue;
 			tmpBool = true;
 		}
-		if ((it.GetBottom().GetLeft().GetData() & (IsMax | IsFlipped)) == (IsMax | IsFlipped)) {
+		if (IsLinable(it.GetBottom().GetLeft(), player)) {
 			if (tmpBool) {
 				score -= _neighborValue;
 				score += _lineValue;
@@ -102,6 +103,19 @@ namespace engine {
 		}
 
 		return score;
+	}
+
+	bool StaticEvaluation::IsLinable(const RelativeCell& what, const int& player){
+		if(!what.HasTile()){
+			return false;
+		}
+		if(what.IsEmpty()){
+			return false;
+		}
+		if(!what.IsFlipped()){
+			return false;
+		}
+		return player == (what.GetData() & player);
 	}
 	int StaticEvaluation::PlacingFase(const RelativeCell& it)
 	{

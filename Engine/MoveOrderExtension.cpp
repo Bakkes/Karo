@@ -18,6 +18,7 @@ namespace engine{
 			return;
 		}
 
+		int y = 0;
 		sort(moves.begin(), moves.end(), [this](const Move& one, const Move& two) -> bool{
 			if(one == two){
 				return false;
@@ -28,7 +29,8 @@ namespace engine{
 			GetBoard()->ExecuteMove(two, _player);
 			int rhs = GetEvaluator()->Eval(GetBoard(), _player);
 			GetBoard()->UndoMove(two, _player);
-			return lhs < rhs; 
+			// invert the result for descending value
+			return rhs < lhs; 
 		});
 	}
 }

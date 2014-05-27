@@ -24,6 +24,7 @@ namespace engine {
 		int CalculateMovePhase(const RelativeCell& it);
 		int PlacingFase(const RelativeCell& it);
 		int CalculatePlacing(const RelativeCell& it);
+		bool IsLinable(const RelativeCell& what, const int& player);
 		IBoard* _board;
 	};
 }
