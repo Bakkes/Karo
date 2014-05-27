@@ -1,10 +1,15 @@
 #pragma once
 
+#include "DllImportExport.h"
+
 namespace engine {
 
-	class IRng {
+	class ENGINE_API IRng {
 
 	public:
+		virtual IRng::~IRng() {
+		}
+
 		virtual int NextInteger() = 0;
 
 	};

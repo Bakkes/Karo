@@ -31,11 +31,14 @@
     <ClCompile Include="MoveInvertionTest.cpp" />
     <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
+    <ClCompile Include="StubRng.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
     <ClCompile Include="TranspositionTableTest.cpp" />
+    <ClCompile Include="ZobristHashingTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StubBoard.h" />
+    <ClInclude Include="StubRng.h" />
     <ClInclude Include="StubStaticEval.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
