@@ -39,9 +39,9 @@ namespace engine {
 		RelativeCell current = cell;
 		for (int i = 0; i < 3; i++) {
 			if (current.HasTile() && current.GetPlayer() == player && current.IsFlipped()) {
-				score += score + 10;
+				score += 10;
 				if (current.IsFlipped()) {
-					score += 50;
+					score += score * 3;
 				}
 			}
 			current = (*this.*GetNext)(current);
