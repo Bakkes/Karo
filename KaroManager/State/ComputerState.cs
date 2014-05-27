@@ -10,7 +10,7 @@ namespace KaroManager.State
 	public class ComputerState : IKaroState
 	{
 		private static ComputerState _instance;
-        private KaroGameManager _manager;
+		private KaroGameManager _manager;
 		public static IKaroState Instance
 		{
 			get
@@ -42,10 +42,9 @@ namespace KaroManager.State
 		{
 			Debug.WriteLine("Entering ComputerState...");
 
-            Thread ExecuteThread = new Thread(ExecuteMoveThread);
-            _manager = manager;
-            ExecuteThread.Start();
-			
+			Thread ExecuteThread = new Thread(ExecuteMoveThread);
+			_manager = manager;
+			ExecuteThread.Start();
 		}
 
 		public void Exit(KaroGameManager manager)
@@ -53,27 +52,27 @@ namespace KaroManager.State
 			Debug.WriteLine("Exiting ComputerState...");
 		}
 
-        public void ExecuteMoveThread()
-        {
-            _manager.Game.ExecuteMove(
-				    _manager.Game.GetBestMove(),
-				    _manager.CurrentPlayer
-			    );
-			    _manager.SwapCurrentPlayer();
-			    // Computer move executed
+		public void ExecuteMoveThread()
+		{
+			_manager.Game.ExecuteMove(
+					_manager.Game.GetBestMove(),
+					_manager.CurrentPlayer
+				);
+			_manager.SwapCurrentPlayer();
+			// Computer move executed
 
-			    if (_manager.Board.GetOccupiedCells().Count < 12)
-			    {
-				    // Go back to the player's place state.
-				    _manager.ChangeState(PlaceState.Instance);
-			    }
-			    else
-			    {
-				    // Go back to the player's piece source state.
-				    _manager.ChangeState(PieceSourceState.Instance);
-			    }
-                
-         }
+			if (_manager.Board.GetOccupiedCells().Count < 12)
+			{
+				// Go back to the player's place state.
+				_manager.ChangeState(PlaceState.Instance);
+			}
+			else
+			{
+				// Go back to the player's piece source state.
+				_manager.ChangeState(PieceSourceState.Instance);
+			}
+
+		}
 
 	}
 
