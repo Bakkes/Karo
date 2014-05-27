@@ -63,7 +63,14 @@ namespace XNAFrontend
 		{
 			keyState = Keyboard.GetState();
 
+			if (keyState.IsKeyDown(Keys.Escape) && prevKeyState.IsKeyUp(Keys.Escape))
+			{
+				Components.Clear();
+				Components.Add(new MenuComponent(this));
+			}
+
 			base.Update(gameTime);
+
 			prevKeyState = keyState;
 		}
 

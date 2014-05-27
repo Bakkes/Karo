@@ -57,10 +57,6 @@ namespace XNAFrontend.Components
 			{
 				ExecuteMenuItem(menuDepth, selectedItem);
 			}
-			if (game.keyState.IsKeyDown(Keys.Escape) && game.prevKeyState.IsKeyUp(Keys.Escape))
-			{
-				if (menuDepth > 0) { selectedItem = 0; menuDepth = 0; }
-			}
 
 			base.Update(gameTime);
 		}
