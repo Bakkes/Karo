@@ -68,18 +68,6 @@ namespace engine{
 		int y1 = 0;
 		int y2 = 0;
 		
-		/*for (int i = 0; i < 20; i++) {
-				for (int j = 0; j < 20; j++) {
-					if (GetRelativeCellAt(Vector2D(i,j)).HasTile()) {
-						x2 = i;
-						if (y2 < j){
-							y2 = j;
-						}
-					}
-				}
-		}*/
-
-		
 		for (double i = 0; i < 20; i++) {
 			for (double j = 0; j < 20; j++) {
 				if ((GetAbsoluteCellAt(Vector2D((int)(i + topLeft.X()) % 20, (int)(j + topLeft.Y()) % 20))->GetData() & HasTile) == HasTile) {
