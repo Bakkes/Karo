@@ -68,11 +68,17 @@ namespace engine{
 			}
 		}
 
+		// Register board
+		for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension) {
+			(*extension)->RegisterBoard(player, result);
+		}
+
 		return result;
 	}
 	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
 		for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension) {
 			if((*extension)->IsKnownBoard(player, result)) {
+				// An extension told us we already know this position and it's results
 				return result;
 			}
 		}

@@ -7,8 +7,7 @@ namespace engine {
 		_transpositionTable = new TranspositionTable(1000);
 	}
 
-	TranspositionExtension::~TranspositionExtension()
-	{
+	TranspositionExtension::~TranspositionExtension() {
 		delete _transpositionTable;
 		delete _hasher;
 	}
@@ -18,6 +17,13 @@ namespace engine {
 		IRng* rand = new RngTimeBased();
 		_hasher = new ZobristHashing(board, rand);
 		delete rand;
+	}
+
+	void TranspositionExtension::RegisterBoard(const Players& player, EvalResult& result) {
+		int hash = _hasher->GetHash();
+		Move* move = new Move(result.GetMove());
+
+		_transpositionTable->Insert(hash, result.GetScore(), move, player);
 	}
 
 	bool TranspositionExtension::IsKnownBoard(const Players& player, EvalResult& result) {

@@ -4,6 +4,7 @@
 #include <iostream>
 #include "TranspositionTableData.h"
 #include "Move.h"
+#include "Players.h"
 using namespace std;
 
 namespace engine {
@@ -16,7 +17,7 @@ namespace engine {
 	public:
 		TranspositionTable(int maxSize);
 		~TranspositionTable(void);
-		void Insert(int value, int score, Move* maxBestMove, Move* minBestMove);
+		void Insert(int value, int score, Move* bestMove, Players player);
 		bool Contains(int key);
 		TranspositionTableData* Get(int value);
 	};

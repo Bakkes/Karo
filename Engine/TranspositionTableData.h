@@ -9,11 +9,14 @@ namespace engine{
 		Move* _maxBestMove;
 		Move* _minBestMove;
 	public:
-		TranspositionTableData(void);
-		TranspositionTableData(int score, Move* maxBestMove, Move* minBestMove);
+		TranspositionTableData(int score);
 		~TranspositionTableData(void);
 		Move* GetMaxBestMove();
 		Move* GetMinBestMove();
+
+		void SetMaxBestMove(Move* move);
+		void SetMinBestMove(Move* move);
+
 		int GetScore();
 	};
 }

@@ -11,6 +11,7 @@ namespace engine {
 		virtual ~TranspositionExtension();
 
 		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
+		void RegisterBoard(const Players& player, EvalResult& result) override;
 		bool IsKnownBoard(const Players& player, EvalResult& result) override;
 
 	private:
