@@ -11,7 +11,7 @@ namespace engine {
 		virtual ~TranspositionExtension();
 
 		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
-		bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player) override;
+		bool IsKnownBoard(const Players& player, EvalResult& result) override;
 
 	private:
 		IHashAlgorithm* _hasher;

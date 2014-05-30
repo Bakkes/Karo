@@ -4,7 +4,7 @@
 namespace engine {
 
 	TranspositionExtension::TranspositionExtension() {
-		_transpositionTable = new TranspositionTable();
+		_transpositionTable = new TranspositionTable(1000);
 	}
 
 	TranspositionExtension::~TranspositionExtension()
@@ -20,7 +20,23 @@ namespace engine {
 		delete rand;
 	}
 
-	bool TranspositionExtension::ShouldContinue( const EvalResult& currentResult, EvalResult& prevResult, const Players& player) {
+	bool TranspositionExtension::IsKnownBoard(const Players& player, EvalResult& result) {
+		int hash = _hasher->GetHash();
+
+		if (!_transpositionTable->Contains(hash)) {
+			return false;
+		}
+
+		TranspositionTableData* data = _transpositionTable->Get(hash);
+
+		result.SetScore(data->GetScore());
+		// Create copies of the stored move to prevent possible deletion later on
+		if (player == Max) {
+			result.SetMove(Move(*data->GetMaxBestMove()));
+		} else {
+			result.SetMove(Move(*data->GetMinBestMove()));
+		}
+
 		return true;
 	}
 }
