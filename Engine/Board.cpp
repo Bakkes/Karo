@@ -282,6 +282,7 @@ namespace engine{
 
 	vector<RelativeCell>* Board::GetOccupiedTiles(){
 		auto tiles = new vector<RelativeCell>();
+		tiles->reserve(13);
 		_grid->TraverseCells(
 			[&](Cell<int>* tile) -> void{
 				if(!tile->GetData() & HasTile){
