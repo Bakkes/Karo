@@ -348,65 +348,68 @@ namespace XNAFrontend.Components
 
 		private bool IsMarkedCell(Vector2 position)
 		{
-			if (_markedCache.ContainsKey(position))
+			lock (_markedCache)
 			{
+				if (_markedCache.ContainsKey(position))
+				{
+					return _markedCache[position];
+				}
+				_markedCache[position] = false;
+
+				BoardWrapper board = KaroGameManager.Board;
+				MoveWrapper currentMove = KaroGameManager.CurrentMove;
+				IKaroState currentState = KaroGameManager.CurrentState;
+
+				if (currentState is PlaceState)
+				{
+					foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
+					{
+						Vector2DWrapper wrapperPos = legalMove.GetToCell();
+						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
+						{
+							_markedCache[position] = true;
+						}
+					}
+				}
+				else if (currentState is PieceSourceState)
+				{
+					foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
+					{
+						Vector2DWrapper wrapperPos = legalMove.GetFromCell();
+						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
+						{
+							_markedCache[position] = true;
+						}
+					}
+				}
+				else if (currentState is PieceDestinationState)
+				{
+					foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
+						.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
+					{
+						Vector2DWrapper wrapperPos = legalMove.GetToCell();
+						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
+						{
+							_markedCache[position] = true;
+						}
+					}
+				}
+				else if (currentState is CellSourceState)
+				{
+					foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
+						.Where(m => m.GetFromCell() == currentMove.GetFromCell())
+						.Where(m => m.GetToCell() == currentMove.GetToCell()))
+					{
+						Vector2DWrapper wrapperPos = legalMove.GetUsedCell();
+						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
+						{
+							_markedCache[position] = true;
+						}
+					}
+				}
+
 				return _markedCache[position];
 			}
-			_markedCache[position] = false;
-
-			BoardWrapper board = KaroGameManager.Board;
-			MoveWrapper currentMove = KaroGameManager.CurrentMove;
-			IKaroState currentState = KaroGameManager.CurrentState;
-
-			if (currentState is PlaceState)
-			{
-				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
-				{
-					Vector2DWrapper wrapperPos = legalMove.GetToCell();
-					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
-					{
-						_markedCache[position] = true;
-					}
-				}
-			}
-			else if (currentState is PieceSourceState)
-			{
-				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer))
-				{
-					Vector2DWrapper wrapperPos = legalMove.GetFromCell();
-					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
-					{
-						_markedCache[position] = true;
-					}
-				}
-			}
-			else if (currentState is PieceDestinationState)
-			{
-				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
-					.Where(m => m.GetFromCell() == currentMove.GetFromCell()))
-				{
-					Vector2DWrapper wrapperPos = legalMove.GetToCell();
-					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
-					{
-						_markedCache[position] = true;
-					}
-				}
-			}
-			else if (currentState is CellSourceState)
-			{
-				foreach (MoveWrapper legalMove in KaroGameManager.FindLegalMoves(KaroGameManager.CurrentPlayer)
-					.Where(m => m.GetFromCell() == currentMove.GetFromCell())
-					.Where(m => m.GetToCell() == currentMove.GetToCell()))
-				{
-					Vector2DWrapper wrapperPos = legalMove.GetUsedCell();
-					if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
-					{
-						_markedCache[position] = true;
-					}
-				}
-			}
-
-			return _markedCache[position];
 		}
 
 		private void OnInvalidMove()
@@ -470,7 +473,10 @@ namespace XNAFrontend.Components
 
 		public void ClearMarkCache()
 		{
-			_markedCache = new Dictionary<Vector2, bool>();
+			lock (_markedCache)
+			{
+				_markedCache = new Dictionary<Vector2, bool>();
+			}
 		}
 	}
 }
