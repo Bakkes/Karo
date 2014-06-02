@@ -15,34 +15,16 @@ namespace engine {
 	}
 
 
-	void TranspositionTable::Insert(int key, int score, Move* bestMove, Players player)
+	void TranspositionTable::Insert(int key, int score, Move* bestMove)
 	{
-		TranspositionTableData* data = nullptr;
-
-		if (Contains(key)) {
-			// Fetch existing item
-			data = _hashMap->at(key);
-		} else {
-			// Insert new item
-
-			if (_ageQueue->size() >= (unsigned) _maxSize) {
-				// Remove an item if we reached the limit
-				_hashMap->erase(_ageQueue->front());
-				_ageQueue->pop();
-			}
-
-			data = new TranspositionTableData(score);
-
-			_ageQueue->push(key);
-			(*_hashMap)[key] = data;
+		if (_ageQueue->size() >= (unsigned) _maxSize) {
+			// Remove an item if we reached the limit
+			_hashMap->erase(_ageQueue->front());
+			_ageQueue->pop();
 		}
 
-		// Set the best move
-		if (player == Max) {
-			data->SetMaxBestMove(bestMove);
-		} else {
-			data->SetMinBestMove(bestMove);
-		}
+		_ageQueue->push(key);
+		(*_hashMap)[key] = new TranspositionTableData(score, bestMove);
 	}
 
 	bool TranspositionTable::Contains(int key) {

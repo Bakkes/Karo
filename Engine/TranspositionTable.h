@@ -17,7 +17,7 @@ namespace engine {
 	public:
 		TranspositionTable(int maxSize);
 		~TranspositionTable(void);
-		void Insert(int value, int score, Move* bestMove, Players player);
+		void Insert(int value, int score, Move* bestMove);
 		bool Contains(int key);
 		TranspositionTableData* Get(int value);
 	};
