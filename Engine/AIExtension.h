@@ -28,10 +28,8 @@ namespace engine {
 		virtual void UpdateMoves(std::vector<Move>& moves);
 		// allows extension to do pruning
 		virtual bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player);
-		// allows extension to use chached board states
-		virtual bool IsKnownBoard(const Players& player, EvalResult& result);
 		// allows extension to cache board states
-		virtual void RegisterBoard(const Players& player, EvalResult& result);
+		virtual void RegisterBoard(EvalResult& result);
 
 	protected:
 		int GetMaxDepth() const;

@@ -1,3 +1,4 @@
+#include <assert.h>
 #include "TranspositionExtension.h"
 #include "RngTimeBased.h"
 
@@ -27,26 +28,31 @@ namespace engine {
 		delete rand;
 	}
 
-	void TranspositionExtension::RegisterBoard(const Players& player, EvalResult& result) {
+	void TranspositionExtension::RegisterBoard(EvalResult& result) {
 		int hash = _hasher->GetHash();
 		Move* move = new Move(result.GetMove());
 
 		_transpositionTable->Insert(hash, result.GetScore(), move);
 	}
 
-	bool TranspositionExtension::IsKnownBoard(const Players& player, EvalResult& result) {
+	void TranspositionExtension::UpdateMoves(std::vector<Move>& moves) {
 		int hash = _hasher->GetHash();
 
 		if (!_transpositionTable->Contains(hash)) {
-			return false;
+			return;
 		}
 
 		TranspositionTableData* data = _transpositionTable->Get(hash);
 
-		result.SetScore(data->GetScore());
-		// Create copies of the stored move to prevent possible deletion later on
-		result.SetMove(Move(*data->GetBestMove()));
+		int findResult = find(moves.begin(), moves.end(), *data->GetBestMove()) - moves.begin();
+		
+		assert(findResult >= 0);
 
-		return true;
+		if (findResult > 0 && ((unsigned)findResult < moves.size())) {
+			Move tmp = moves[findResult];
+			moves[findResult] = moves[0];
+			moves[0] = tmp;
+		}
 	}
+
 }

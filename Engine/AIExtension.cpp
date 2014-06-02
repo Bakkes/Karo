@@ -31,11 +31,7 @@ namespace engine{
 		// notify the exntension taht minmax ends
 	void AIExtension::End(){}
 
-	void AIExtension::RegisterBoard(const Players& player, EvalResult& result) {
-	}
-
-	bool AIExtension::IsKnownBoard(const Players& player, EvalResult& result) {
-		return false;
+	void AIExtension::RegisterBoard(EvalResult& result) {
 	}
 
 	IStaticEvaluation* AIExtension::GetEvaluator() const{
