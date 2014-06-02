@@ -5,6 +5,7 @@ namespace engine {
 	{
 		_hashMap = new map<int,TranspositionTableData*>();
 		_ageQueue = new queue<int>();
+		_maxSize = maxSize;
 	}
 
 

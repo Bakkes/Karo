@@ -14,7 +14,7 @@ namespace wrapper {
 
 	KaroGame::KaroGame() {
 		_board = gcnew BoardWrapper();
-		_transpositionTable = new TranspositionTable(1000);
+		_transpositionTable = new TranspositionTable(100000);
 	}
 
 	KaroGame::~KaroGame() {
