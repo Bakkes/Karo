@@ -4,6 +4,8 @@
 #include "Board.h"
 #include "PlayersWrapper.h"
 #include "BoardWrapper.h"
+#include "TranspositionTable.h"
+
 using namespace engine;
 
 namespace engine {
@@ -20,6 +22,7 @@ namespace wrapper {
 			BoardWrapper^ GetBoard();
 		private:
 			BoardWrapper^ _board;
+			TranspositionTable* _transpositionTable;
 	};
 }
 }

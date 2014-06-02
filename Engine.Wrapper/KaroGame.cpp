@@ -14,7 +14,7 @@ namespace wrapper {
 
 	KaroGame::KaroGame() {
 		_board = gcnew BoardWrapper();
-		
+		_transpositionTable = new TranspositionTable(1000);
 	}
 
 	KaroGame::~KaroGame() {
@@ -23,6 +23,7 @@ namespace wrapper {
 
 	KaroGame::!KaroGame() {
 		delete _board;
+		delete _transpositionTable;
 		_board = nullptr;
 	}
 
@@ -35,7 +36,7 @@ namespace wrapper {
 
 	MoveWrapper^ KaroGame::GetBestMove() {
 		IBoard* cpBoard = _board->GetInternalBoardCopy();
-		AI* cPlayer = AIFactory(cpBoard, 4).CreateMoveOrderingAlfaZorbristAI();
+		AI* cPlayer = AIFactory(cpBoard, 4).CreateMoveOrderingAlfaZorbristAI(_transpositionTable);
 		cPlayer->SetEvaluator(new AltEval());
 		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);

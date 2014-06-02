@@ -5,10 +5,18 @@ namespace engine {
 
 	TranspositionExtension::TranspositionExtension() {
 		_transpositionTable = new TranspositionTable(1000);
+		_ownerOfTable = true;
+	}
+
+	TranspositionExtension::TranspositionExtension(TranspositionTable* transpostionTable) {
+		_transpositionTable = transpostionTable;
+		_ownerOfTable = false;
 	}
 
 	TranspositionExtension::~TranspositionExtension() {
-		delete _transpositionTable;
+		if (_ownerOfTable) {
+			delete _transpositionTable;
+		}
 		delete _hasher;
 	}
 

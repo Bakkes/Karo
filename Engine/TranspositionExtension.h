@@ -8,6 +8,7 @@ namespace engine {
 	{
 	public:
 		TranspositionExtension();
+		TranspositionExtension(TranspositionTable* table);
 		virtual ~TranspositionExtension();
 
 		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
@@ -17,5 +18,7 @@ namespace engine {
 	private:
 		IHashAlgorithm* _hasher;
 		TranspositionTable* _transpositionTable;
+		// Knows if we should delete the hash table upon destruction
+		bool _ownerOfTable;
 	};
 }

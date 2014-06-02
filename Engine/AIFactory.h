@@ -21,6 +21,7 @@ namespace engine{
 		AI* CreateMoveOrderingAlfaAI();
 
 		AI* CreateMoveOrderingAlfaZorbristAI();
+		AI* CreateMoveOrderingAlfaZorbristAI(TranspositionTable* table);
 
 		IBoard* GetBoard() const;
 	private:
