@@ -43,6 +43,7 @@ namespace XNAFrontend.Components
 			_position = Vector3.Zero;
 			_maxVelocity = new Vector3(0f, 1.3f, 0f);
 			_velocity = _maxVelocity;
+			DrawOrder = 100;
 			base.Initialize();
 		}
 

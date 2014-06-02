@@ -61,6 +61,7 @@ namespace KaroManager.State
 			}
 			else
 			{
+				manager.SendMoveIsNotValid();
 				Debug.WriteLine("Can't place a new piece");
 			}
 

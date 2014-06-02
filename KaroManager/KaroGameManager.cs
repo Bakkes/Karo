@@ -8,6 +8,7 @@ namespace KaroManager
 {
 
 	public delegate void BoardUpdated();
+	public delegate void InvalidMoveMade();
 	public delegate void MoveExecuted(MoveWrapper move);
 	public delegate void PlayerHasWon(Players player);
 
@@ -29,6 +30,8 @@ namespace KaroManager
 		public BoardUpdated OnBoardUpdated;
 		public MoveExecuted OnMoveExecuted;
 		public PlayerHasWon OnPlayerWin;
+		public InvalidMoveMade OnInvalidMoveMade;
+
 		/// <summary>
 		/// Access the board of the current game.
 		/// </summary>
@@ -113,6 +116,14 @@ namespace KaroManager
 				OnBoardUpdated();
 			}
 			SwapCurrentPlayer();
+		}
+
+		public void SendMoveIsNotValid()
+		{
+			if (OnInvalidMoveMade != null)
+			{
+				OnInvalidMoveMade();
+			}
 		}
 
 		public void SwapCurrentPlayer()

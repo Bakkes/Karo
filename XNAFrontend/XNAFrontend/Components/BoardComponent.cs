@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using XNAFrontend.Services;
+using Microsoft.Xna.Framework.Audio;
 
 namespace XNAFrontend.Components
 {
@@ -21,6 +22,8 @@ namespace XNAFrontend.Components
 
 		private Thread _highlightThread;
 
+		private Texture2D _background;
+		private SoundEffect _invalidMoveSound;
 		private KaroGame _game;
 		private Model _cordModel;
 		private Model _tileModel;
@@ -49,6 +52,7 @@ namespace XNAFrontend.Components
 			_lastMoveHighlight = new Vector2DWrapper[2];
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
 			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
+			game.KaroGameManager.OnInvalidMoveMade += OnInvalidMove;
 			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
 			_game = game;
 			LoadContent();
@@ -89,6 +93,8 @@ namespace XNAFrontend.Components
 			_cordModel = Game.Content.Load<Model>("cords");
 			_minModel = Game.Content.Load<Model>("piecemin");
 			_maxModel = Game.Content.Load<Model>("piecemax");
+			_invalidMoveSound = Game.Content.Load<SoundEffect>("invalidmove");
+			_background = Game.Content.Load<Texture2D>("background");
 		}
 
 		public override void Update(GameTime gameTime)
@@ -157,7 +163,12 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
-
+			Rectangle screenRectangle = new Rectangle(0, 0, 
+				GraphicsDevice.PresentationParameters.BackBufferWidth, 
+				GraphicsDevice.PresentationParameters.BackBufferHeight);
+			karoGame.spriteBatch.Begin();
+			karoGame.spriteBatch.Draw(_background, screenRectangle, Color.White);
+			karoGame.spriteBatch.End();
 
 			karoGame.GraphicsDevice.DepthStencilState = DepthStencilState.Default;
 
@@ -396,6 +407,11 @@ namespace XNAFrontend.Components
 			}
 
 			return _markedCache[position];
+		}
+
+		private void OnInvalidMove()
+		{
+			_invalidMoveSound.Play();
 		}
 
 		private void OnMoveExecuted(MoveWrapper move)

@@ -47,10 +47,6 @@ namespace XNAFrontend
 			graphics.PreferredBackBufferHeight = 720;
 			graphics.ApplyChanges();
 
-			var loading = new BeachBallComponent(this);
-			Components.Add(loading);
-			Services.AddService(typeof(ILoadingComponent), loading);
-
 			base.Initialize();
 		}
 
@@ -205,6 +201,7 @@ namespace XNAFrontend
 			Components.Add(camera);
 			Components.Add(SkyBox);
 			Components.Add(board);
+			Components.Add(new BeachBallComponent(this));
 		}
 	}
 }

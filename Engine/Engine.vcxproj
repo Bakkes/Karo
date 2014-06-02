@@ -83,6 +83,7 @@
     <ClInclude Include="AIFactory.h" />
     <ClInclude Include="AlfaBetaExtension.h" />
     <ClInclude Include="IRng.h" />
+    <ClInclude Include="AltEval.h" />
     <ClInclude Include="MiniMaxExtension.h" />
     <ClInclude Include="MoveOrderExtension.h" />
     <ClInclude Include="MoveSwapExtension.h" />
@@ -118,6 +119,7 @@
     <ClCompile Include="AI.cpp" />
     <ClCompile Include="AIExtension.cpp" />
     <ClCompile Include="AIFactory.cpp" />
+    <ClCompile Include="AltEval.cpp" />
     <ClCompile Include="MiniMaxExtension.cpp" />
     <ClCompile Include="AlfaBetaExtension.cpp" />
     <ClCompile Include="Board.cpp" />
