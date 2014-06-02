@@ -41,6 +41,9 @@ namespace wrapper {
 		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);
 
+		_staticEvalCallCount = cPlayer->GetStaticEvalCallCount();
+		_nodesSeen = cPlayer->GetNodesSeenCount();
+
 		delete cPlayer;
 		delete cpBoard;
 		return wrapped;
@@ -48,6 +51,14 @@ namespace wrapper {
 
 	bool KaroGame::HasWon(engine::wrapper::Players player) {
 		return ComputerPlayerUtils::IsWinningState(_board->GetInternalBoard(), static_cast<engine::Players>(player));
+	}
+
+	int KaroGame::GetStaticEvalCallCount() {
+		return _staticEvalCallCount;
+	}
+
+	int KaroGame::GetNodesSeenCount() {
+		return _nodesSeen;
 	}
 }
 }

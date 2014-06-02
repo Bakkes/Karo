@@ -8,6 +8,8 @@ namespace engine{
 		_maxDepth = maxDepth;
 		_evaluator = nullptr;
 		_extensions = new vector<AIExtension*>();
+		_staticEvalCallCount = 0;
+		_nodesSeen = 0;
 	}
 
 
@@ -57,6 +59,7 @@ namespace engine{
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
+			++_nodesSeen;
 			EvalResult currentResult = NextStep(player, move, depth, result);
 			_board->UndoMove(move, player);
 
@@ -87,6 +90,17 @@ namespace engine{
 		EvalResult score(result.GetBestForMax(), result.GetBestForMin());
 		score.SetScore(_evaluator->Eval(_board, player));
 		score.SetMove(move);
+
+		++_staticEvalCallCount;
+
 		return score;
+	}
+
+	int AI::GetStaticEvalCallCount() {
+		return _staticEvalCallCount;
+	}
+
+	int AI::GetNodesSeenCount() {
+		return _nodesSeen;
 	}
 }
