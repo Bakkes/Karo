@@ -33,7 +33,7 @@ namespace wrapper {
 
 	MoveWrapper^ KaroGame::GetBestMove() {
 		IBoard* cpBoard = _board->GetInternalBoardCopy();
-		AI* cPlayer = AIFactory(cpBoard, 3).CreateMoveOrderingAlfaAI();
+		AI* cPlayer = AIFactory(cpBoard, 3).CreateMoveOrderingAlfaZorbristAI();
 		cPlayer->SetEvaluator(new StaticEvaluation());
 		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);

@@ -4,6 +4,8 @@
 #include "MoveSwapExtension.h"
 #include "MiniMaxExtension.h"
 #include "MoveOrderExtension.h"
+#include "TranspositionExtension.h"
+
 namespace engine{
 	class ENGINE_API AIFactory
 	{
@@ -17,6 +19,8 @@ namespace engine{
 		AI* CreateAlfaAI();
 		// an AI that does alfa beta prunging with move oredring
 		AI* CreateMoveOrderingAlfaAI();
+
+		AI* CreateMoveOrderingAlfaZorbristAI();
 
 		IBoard* GetBoard() const;
 	private:
