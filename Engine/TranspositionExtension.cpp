@@ -38,8 +38,16 @@ namespace engine {
 		result.SetScore(data->GetScore());
 		// Create copies of the stored move to prevent possible deletion later on
 		if (player == Max) {
+			if (data->GetMaxBestMove() == nullptr) {
+				// We know this board, but we don't know the best move for the max player
+				return false;
+			}
 			result.SetMove(Move(*data->GetMaxBestMove()));
 		} else {
+			if (data->GetMinBestMove() == nullptr) {
+				// We know this board, but we don't know the best move for the min player
+				return false;
+			}
 			result.SetMove(Move(*data->GetMinBestMove()));
 		}
 
