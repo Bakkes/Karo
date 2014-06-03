@@ -34,6 +34,7 @@
     <ClCompile Include="StubRng.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
     <ClCompile Include="TranspositionTableTest.cpp" />
+    <ClCompile Include="ZobristBugTests.cpp" />
     <ClCompile Include="ZobristHashingTest.cpp" />
   </ItemGroup>
   <ItemGroup>
