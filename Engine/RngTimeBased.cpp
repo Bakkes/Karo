@@ -28,6 +28,6 @@ namespace engine {
 	}
 
 	long long RngTimeBased::NextLongLong() {
-		return static_cast<long long>(rand() << (sizeof(int) * 8)) | rand();
+		return static_cast<long long>((rand() << 32) | rand());
 	}
 }
