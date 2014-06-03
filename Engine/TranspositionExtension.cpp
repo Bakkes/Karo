@@ -7,25 +7,29 @@ namespace engine {
 	TranspositionExtension::TranspositionExtension() {
 		_transpositionTable = new TranspositionTable(1000);
 		_ownerOfTable = true;
+		_hasher = nullptr;
 	}
 
-	TranspositionExtension::TranspositionExtension(TranspositionTable* transpostionTable) {
+	TranspositionExtension::TranspositionExtension(ZobristHashing* hasher, TranspositionTable* transpostionTable) {
 		_transpositionTable = transpostionTable;
+		_hasher = hasher;
 		_ownerOfTable = false;
 	}
 
 	TranspositionExtension::~TranspositionExtension() {
 		if (_ownerOfTable) {
 			delete _transpositionTable;
+			delete _hasher;
 		}
-		delete _hasher;
 	}
 
 	void TranspositionExtension::Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) {
 		AIExtension::Start(maxDepth, board, evaluation);
-		IRng* rand = new RngTimeBased();
-		_hasher = new ZobristHashing(board, rand);
-		delete rand;
+		if (_hasher == nullptr) {
+			IRng* rand = new RngTimeBased();
+			_hasher = new ZobristHashing(board, rand);
+			delete rand;
+		}
 	}
 
 	void TranspositionExtension::RegisterBoard(EvalResult& result, int depth) {

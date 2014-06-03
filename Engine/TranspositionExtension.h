@@ -8,7 +8,7 @@ namespace engine {
 	{
 	public:
 		TranspositionExtension();
-		TranspositionExtension(TranspositionTable* table);
+		TranspositionExtension(ZobristHashing* hasher, TranspositionTable* table);
 		virtual ~TranspositionExtension();
 
 		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;

@@ -1,5 +1,5 @@
 #pragma once
-
+#include <list>
 #include "IRng.h"
 
 namespace engine { 
@@ -11,6 +11,9 @@ namespace engine {
 		virtual ~RngTimeBased();
 
 		int NextInteger() override;
+
+	private:
+		std::list<int>* _returnedNumbers;
 
 	};
 

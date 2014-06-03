@@ -5,6 +5,7 @@
 #include "PlayersWrapper.h"
 #include "BoardWrapper.h"
 #include "TranspositionTable.h"
+#include "ZobristHashing.h"
 
 using namespace engine;
 
@@ -25,6 +26,7 @@ namespace wrapper {
 		private:
 			BoardWrapper^ _board;
 			TranspositionTable* _transpositionTable;
+			ZobristHashing* _hasher;
 
 			int _staticEvalCallCount;
 			int _nodesSeen;

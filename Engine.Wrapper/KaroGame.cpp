@@ -8,6 +8,7 @@
 #include "Players.h"
 #include "AIFactory.h"
 #include "AltEval.h"
+#include "RngTimeBased.h"
 
 namespace engine {
 namespace wrapper {
@@ -15,6 +16,10 @@ namespace wrapper {
 	KaroGame::KaroGame() {
 		_board = gcnew BoardWrapper();
 		_transpositionTable = new TranspositionTable(100000);
+		
+		IRng* rand = new RngTimeBased();
+		_hasher = new ZobristHashing(nullptr, rand);
+		delete rand;
 	}
 
 	KaroGame::~KaroGame() {
@@ -36,7 +41,7 @@ namespace wrapper {
 
 	MoveWrapper^ KaroGame::GetBestMove() {
 		IBoard* cpBoard = _board->GetInternalBoardCopy();
-		AI* cPlayer = AIFactory(cpBoard, 4).CreateMoveOrderingAlfaZorbristAI(_transpositionTable);
+		AI* cPlayer = AIFactory(cpBoard, 4).CreateMoveOrderingAlfaZorbristAI(_hasher, _transpositionTable);
 		cPlayer->SetEvaluator(new AltEval());
 		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);
 		MoveWrapper^ wrapped = WrapperConversionUtility().ConvertMove(bestMove);

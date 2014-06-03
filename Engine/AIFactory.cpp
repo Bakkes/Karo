@@ -31,9 +31,9 @@ namespace engine{
 		return result;
 	}
 
-	AI* AIFactory::CreateMoveOrderingAlfaZorbristAI(TranspositionTable* table) {
+	AI* AIFactory::CreateMoveOrderingAlfaZorbristAI(ZobristHashing* hasher, TranspositionTable* table) {
 		AI* result = CreateMoveOrderingAlfaAI();
-		result->AddExtension(new TranspositionExtension(table));
+		result->AddExtension(new TranspositionExtension(hasher, table));
 		return result;
 	}
 
