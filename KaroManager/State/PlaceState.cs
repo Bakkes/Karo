@@ -40,12 +40,8 @@ namespace KaroManager.State
 		public void Update(KaroGameManager manager, Point click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.FindLegalMoves(manager.CurrentPlayer);
-			MoveWrapper first = legalMoves.ElementAt(3);
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
 				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
-
-			//Console.WriteLine(tileLocation.X + "-" + tileLocation.Y);
-
 
 			// We have a valid move.
 			if (move != null)
