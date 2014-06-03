@@ -8,12 +8,17 @@ namespace engine {
 	{
 	public:
 		TranspositionExtension();
+		TranspositionExtension(TranspositionTable* table);
 		virtual ~TranspositionExtension();
 
-		bool ShouldContinue(const IBoard* board, const EvalResult& currentResult, EvalResult& prevResult, const Players& player);
+		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
+		void RegisterBoard(EvalResult& result, int depth) override;
+		void UpdateMoves(std::vector<Move>& moves, int depth) override;
 
 	private:
 		IHashAlgorithm* _hasher;
 		TranspositionTable* _transpositionTable;
+		// Knows if we should delete the hash table upon destruction
+		bool _ownerOfTable;
 	};
 }

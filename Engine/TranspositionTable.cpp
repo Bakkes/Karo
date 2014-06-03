@@ -1,35 +1,39 @@
 #include "TranspositionTable.h"
 
 namespace engine {
-	TranspositionTable::TranspositionTable(void)
+	TranspositionTable::TranspositionTable(int maxSize)
 	{
-		hashMap = new map<int,TranspositionTableData*>();
-		pq = new priority_queue<int>();
+		_hashMap = new map<int,TranspositionTableData*>();
+		_ageQueue = new queue<int>();
+		_maxSize = maxSize;
 	}
 
 
 	TranspositionTable::~TranspositionTable(void)
 	{
-		delete hashMap;
-		delete pq;
+		delete _hashMap;
+		delete _ageQueue;
 	}
 
 
-	void TranspositionTable::Insert(int value, int score, Move* maxBestMove, Move* minBestMove)
+	void TranspositionTable::Insert(int key, int score, Move* bestMove, int depth)
 	{
-		const int size = 1009;
-
-		pq->push(value);
-		(*hashMap)[value] = new TranspositionTableData(score, maxBestMove, minBestMove); //this breaks EVERYTHING!!!
-
-		if (pq->size() > size) {
-			hashMap->erase(pq->top());
-			pq->pop();
+		if (_ageQueue->size() >= (unsigned) _maxSize) {
+			// Remove an item if we reached the limit
+			_hashMap->erase(_ageQueue->front());
+			_ageQueue->pop();
 		}
+
+		_ageQueue->push(key);
+		(*_hashMap)[key] = new TranspositionTableData(score, bestMove, depth);
+	}
+
+	bool TranspositionTable::Contains(int key) {
+		return _hashMap->find(key) != _hashMap->end();
 	}
 
 	TranspositionTableData* TranspositionTable::Get(int value)
 	{
-		return hashMap->at(value);
+		return _hashMap->at(value);
 	}
 }

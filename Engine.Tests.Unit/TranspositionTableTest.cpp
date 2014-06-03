@@ -9,16 +9,17 @@ namespace Tests {
 	TEST_CLASS(TranspositionTableTest) {
 	public:
 		TEST_METHOD(TranspositionTableTester) {
-			TranspositionTable* tTable = new TranspositionTable();
+			TranspositionTable* tTable = new TranspositionTable(1000);
 			
-			tTable->Insert(123, 1337, new Move(INSERT, Vector2D(2)), new Move(INSERT, Vector2D(1))); 
+			Move* move = new Move(INSERT, Vector2D(2));
 
-			bool check = false;
-			if (tTable->Get(123)->GetScore() == 1337) { check = true; }
+			tTable->Insert(123, 1337, move, 0); 
+
+			Assert::AreEqual(1337, tTable->Get(123)->GetScore(), L"Score mismatch");
+			Assert::IsTrue(move == tTable->Get(123)->GetBestMove(), L"Mismatch in best move for max");
 
 			delete tTable;
-
-			Assert::IsTrue(check);
+			delete move;
 		}
 	};
 }

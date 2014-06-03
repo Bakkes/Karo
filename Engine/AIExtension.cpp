@@ -11,8 +11,13 @@ namespace engine{
 	}
 
 	void AIExtension::UpdateMoves(std::vector<Move>& moves){}
+	
+	void AIExtension::UpdateMoves(std::vector<Move>& moves, int depth){
+		// Overload call for the old API
+		this->UpdateMoves(moves);
+	}
 
-	void AIExtension::OnExecutedMove(const Move& move) {}
+	void AIExtension::OnExecuteMove(const Move& move) {}
 
 	void AIExtension::OnUndoMove(const Move& move) {}
 
@@ -30,6 +35,10 @@ namespace engine{
 	}
 		// notify the exntension taht minmax ends
 	void AIExtension::End(){}
+
+	void AIExtension::RegisterBoard(EvalResult& result, int depth) {
+	}
+
 	IStaticEvaluation* AIExtension::GetEvaluator() const{
 		return _evaluator;
 	}

@@ -1,34 +1,27 @@
 #include "TranspositionTableData.h"
 
-namespace engine{
-	TranspositionTableData::TranspositionTableData(void){}
+namespace engine {
 
-	TranspositionTableData::TranspositionTableData(int score, Move* maxBestMove, Move* minBestMove)
-	{
+	TranspositionTableData::TranspositionTableData(int score, Move* bestMove, int depth) {
 		_score = score;
-		_maxBestMove = maxBestMove;
-		_minBestMove = minBestMove;
+		_bestMove = bestMove;
+		_depth = depth;
 	}
 
 
-	TranspositionTableData::~TranspositionTableData(void)
-	{
-		delete _maxBestMove;
-		delete _minBestMove;
+	TranspositionTableData::~TranspositionTableData(void) {
+		delete _bestMove;
 	}
-
 	
-	Move* TranspositionTableData::GetMaxBestMove()
-	{
-		return _maxBestMove;
-	}
-	Move* TranspositionTableData::GetMinBestMove()
-	{
-		return _minBestMove;
+	Move* TranspositionTableData::GetBestMove() {
+		return _bestMove;
 	}
 
-	int TranspositionTableData::GetScore()
-	{
+	int TranspositionTableData::GetScore() {
 		return _score;
+	}
+
+	int TranspositionTableData::GetDepth() {
+		return _depth;
 	}
 }

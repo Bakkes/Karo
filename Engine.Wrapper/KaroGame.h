@@ -4,6 +4,8 @@
 #include "Board.h"
 #include "PlayersWrapper.h"
 #include "BoardWrapper.h"
+#include "TranspositionTable.h"
+
 using namespace engine;
 
 namespace engine {
@@ -18,8 +20,14 @@ namespace wrapper {
 			void ExecuteMove(MoveWrapper^ w, engine::wrapper::Players player);
 			bool HasWon(engine::wrapper::Players player);
 			BoardWrapper^ GetBoard();
+			int GetStaticEvalCallCount();
+			int GetNodesSeenCount();
 		private:
 			BoardWrapper^ _board;
+			TranspositionTable* _transpositionTable;
+
+			int _staticEvalCallCount;
+			int _nodesSeen;
 	};
 }
 }
