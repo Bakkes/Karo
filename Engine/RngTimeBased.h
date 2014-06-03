@@ -4,7 +4,7 @@
 
 namespace engine { 
 
-	class RngTimeBased : public IRng {
+	class ENGINE_API RngTimeBased : public IRng {
 
 	public:
 		RngTimeBased();
