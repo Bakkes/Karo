@@ -124,7 +124,10 @@ namespace XNAFrontend.Components
 
 		protected Vector2 GetTileAtPixelPosition(int mouseX, int mouseY)
 		{
-			_markedCache = new Dictionary<Vector2, bool>();
+			lock (_markedCache)
+			{
+				_markedCache = new Dictionary<Vector2, bool>();
+			}
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
 			Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
