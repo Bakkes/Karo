@@ -30,6 +30,7 @@ namespace engine {
 			_hasher = new ZobristHashing(board, rand);
 			delete rand;
 		}
+		_hasher->UpdateBoard(board);
 	}
 
 	void TranspositionExtension::RegisterBoard(EvalResult& result, int depth) {

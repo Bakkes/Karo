@@ -42,6 +42,10 @@ namespace engine{
 		return (int)position.Y() * 20 + (int)position.X();
 	}
 
+	void ZobristHashing::UpdateBoard(IBoard* board) {
+		this->_board = board;
+	}
+
 	int ZobristHashing::GetHash() {
 		int hash = 0;
 		for (int x = 0; x < 20; ++x) {

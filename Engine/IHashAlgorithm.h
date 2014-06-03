@@ -1,6 +1,7 @@
 #include <string>
 #include "Move.h"
 #include "Cell.h"
+#include "IBoard.h"
 
 namespace engine{
 
@@ -11,6 +12,7 @@ namespace engine{
 		virtual ~IHashAlgorithm() {
 		}
 
+		virtual void UpdateBoard(IBoard* board) = 0;
 		virtual int GetHash() = 0;
 
 	};

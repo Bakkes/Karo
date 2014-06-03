@@ -12,6 +12,7 @@ namespace engine {
 		~ZobristHashing() override;
 
 		int GetHash() override;
+		void UpdateBoard(IBoard* board) override;
 
 	private:
 		int _hashValues[16][400];
