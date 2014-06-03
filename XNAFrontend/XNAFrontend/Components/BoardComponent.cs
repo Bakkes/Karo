@@ -459,10 +459,10 @@ namespace XNAFrontend.Components
 					}
 				}
 			}
-		    if (_highlightThread.IsAlive)
-		    {
-		        _highlightThread.Abort();
-		    }
+			if (_highlightThread.IsAlive)
+			{
+				_highlightThread.Abort();
+			}
 		    _highlightThread = new Thread(RemoveHighlightAfterOneSecond);
 			_highlightThread.Start();
 		}
