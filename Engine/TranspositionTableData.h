@@ -6,12 +6,14 @@ namespace engine{
 	{
 	private:
 		int _score;
+		int _depth;
 		Move* _bestMove;
 	public:
-		TranspositionTableData(int score, Move* bestMove);
+		TranspositionTableData(int score, Move* bestMove, int depth);
 		~TranspositionTableData(void);
 		Move* GetBestMove();
 
 		int GetScore();
+		int GetDepth();
 	};
 }

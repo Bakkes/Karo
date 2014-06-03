@@ -2,9 +2,10 @@
 
 namespace engine {
 
-	TranspositionTableData::TranspositionTableData(int score, Move* bestMove) {
+	TranspositionTableData::TranspositionTableData(int score, Move* bestMove, int depth) {
 		_score = score;
 		_bestMove = bestMove;
+		_depth = depth;
 	}
 
 
@@ -18,5 +19,9 @@ namespace engine {
 
 	int TranspositionTableData::GetScore() {
 		return _score;
+	}
+
+	int TranspositionTableData::GetDepth() {
+		return _depth;
 	}
 }

@@ -12,8 +12,8 @@ namespace engine {
 		virtual ~TranspositionExtension();
 
 		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
-		void RegisterBoard(EvalResult& result) override;
-		void UpdateMoves(std::vector<Move>& moves) override;
+		void RegisterBoard(EvalResult& result, int depth) override;
+		void UpdateMoves(std::vector<Move>& moves, int depth) override;
 
 	private:
 		IHashAlgorithm* _hasher;

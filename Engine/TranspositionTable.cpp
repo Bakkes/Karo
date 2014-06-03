@@ -16,7 +16,7 @@ namespace engine {
 	}
 
 
-	void TranspositionTable::Insert(int key, int score, Move* bestMove)
+	void TranspositionTable::Insert(int key, int score, Move* bestMove, int depth)
 	{
 		if (_ageQueue->size() >= (unsigned) _maxSize) {
 			// Remove an item if we reached the limit
@@ -25,7 +25,7 @@ namespace engine {
 		}
 
 		_ageQueue->push(key);
-		(*_hashMap)[key] = new TranspositionTableData(score, bestMove);
+		(*_hashMap)[key] = new TranspositionTableData(score, bestMove, depth);
 	}
 
 	bool TranspositionTable::Contains(int key) {
