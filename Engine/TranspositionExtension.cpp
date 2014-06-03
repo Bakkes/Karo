@@ -34,7 +34,7 @@ namespace engine {
 	}
 
 	void TranspositionExtension::RegisterBoard(EvalResult& result, int depth) {
-		int hash = _hasher->GetHash();
+		long long hash = _hasher->GetHash();
 		Move* move = new Move(result.GetMove());
 
 		_transpositionTable->Insert(hash, result.GetScore(), move, depth);
@@ -44,7 +44,7 @@ namespace engine {
 		if (player == Min)
 			return;
 
-		int hash = _hasher->GetHash();
+		long long hash = _hasher->GetHash();
 
 		if (!_transpositionTable->Contains(hash)) {
 			return;

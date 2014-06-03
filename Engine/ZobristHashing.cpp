@@ -7,7 +7,7 @@ namespace engine{
 	
 		for(int cellValue = 0; cellValue < 16; cellValue++) {
 			for(int position = 0; position < 400; position++) {
-				_hashValues[cellValue][position] = rand->NextInteger();
+				_hashValues[cellValue][position] = rand->NextLongLong();
 			}
 		}
 	}
@@ -46,7 +46,7 @@ namespace engine{
 		this->_board = board;
 	}
 
-	int ZobristHashing::GetHash() {
+	long long ZobristHashing::GetHash() {
 		int hash = 0;
 		for (int x = 0; x < 20; ++x) {
 			for (int y = 0; y < 20; ++y) {

@@ -18,7 +18,7 @@ namespace Tests {
 
 			// Key: Sane board string.
 			// Value: Zobrist hash value.
-			std::map<int, std::string> hashes;
+			std::map<long long, std::string> hashes;
 			engine::Board board;
 			engine::IRng *rng = new engine::RngTimeBased();
 			engine::ZobristHashing zobrist(&board, rng);
@@ -29,11 +29,11 @@ namespace Tests {
 				board.ExecuteMove(legalMoves[rng->NextInteger() % legalMoves.size()], currentPlayer);
 
 				std::string saneString = board.ToSaneString();
-				int hash = zobrist.GetHash();
+				long long hash = zobrist.GetHash();
 
 				auto it = hashes.find(hash);
 				if (it == hashes.end()) {
-					hashes.insert(std::pair<int, std::string>(hash, saneString));
+					hashes.insert(std::pair<long long, std::string>(hash, saneString));
 				} else {
 					Assert::AreEqual(saneString, it->second,
 						L"Zobrist hash collision found!");

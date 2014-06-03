@@ -61,12 +61,12 @@ namespace Tests {
 			Move move(JUMP, from, to, used);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			long long baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			long long expectedHash = baseHash;
 
 			// Delete Piece
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -119,12 +119,12 @@ namespace Tests {
 			Move move(STEP, from, to, used);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			long long baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = 0;
+			long long expectedHash = 0;
 
 			// Generate board has but shifted
 			for (int x = 0; x < 5; ++x) {
@@ -185,12 +185,12 @@ namespace Tests {
 			Move move(STEP, from, to, used);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			long long baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			long long expectedHash = baseHash;
 
 			// Delete Piece
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -239,12 +239,12 @@ namespace Tests {
 			Move move(JUMP, from, to);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			long long baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			long long expectedHash = baseHash;
 			
 			// Delete Piece at (3, 3)
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -291,12 +291,12 @@ namespace Tests {
 			Move move(STEP, from, to);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;	
+			long long baseHash = STARTING_HASH;	
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			long long expectedHash = baseHash;
 
 			// Delete Piece at (3, 3)
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -319,7 +319,7 @@ namespace Tests {
 			Move move(INSERT, Vector2D(3, 3));
 			board->ExecuteMove(move, Min);
 
-			int expectedHash = STARTING_HASH;
+			long long expectedHash = STARTING_HASH;
 			expectedHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(Vector2D(3, 3))];
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(Vector2D(3, 3))];
 
@@ -365,8 +365,8 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n");
 		}
 
-		int _hashValues[16][400];
+		long long _hashValues[16][400];
 
-		static const int STARTING_HASH = 80;
+		static const long long STARTING_HASH = 80l;
 	};
 }
