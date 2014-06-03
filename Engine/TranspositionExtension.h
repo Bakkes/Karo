@@ -13,7 +13,7 @@ namespace engine {
 
 		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
 		void RegisterBoard(EvalResult& result, int depth) override;
-		void UpdateMoves(std::vector<Move>& moves, int depth) override;
+		void UpdateMoves(std::vector<Move>& moves, Players player, int depth) override;
 
 	private:
 		IHashAlgorithm* _hasher;
