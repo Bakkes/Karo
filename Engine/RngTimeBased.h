@@ -11,10 +11,10 @@ namespace engine {
 		virtual ~RngTimeBased();
 
 		int NextInteger() override;
+		long long NextLongLong() override;
 
 	private:
 		std::list<int>* _returnedNumbers;
-
 	};
 
 }

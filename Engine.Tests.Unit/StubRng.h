@@ -9,6 +9,7 @@ namespace engine {
 		virtual StubRng::~StubRng() override;
 
 		int NextInteger() override;
+		long long NextLongLong() override { return 0l;}
 
 	private:
 		int _pointer;

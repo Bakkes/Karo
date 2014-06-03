@@ -11,6 +11,7 @@ namespace engine {
 		}
 
 		virtual int NextInteger() = 0;
+		virtual long long NextLongLong() = 0;
 
 	};
 
