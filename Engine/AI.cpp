@@ -72,8 +72,10 @@ namespace engine{
 		}
 
 		// Register board
-		for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension) {
-			(*extension)->RegisterBoard(result, depth);
+		if (player == Max) {
+			for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension) {
+				(*extension)->RegisterBoard(result, depth);
+			}
 		}
 
 		return result;
