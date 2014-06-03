@@ -400,4 +400,38 @@ namespace engine{
 
 		return edges;
 	}
+
+	int Board::ToSaneData(int insaneData) const {
+		int result = 0;
+		if ((insaneData & HasTile) == HasTile) {
+			result ^= HasTile;
+		} else {
+			return result;
+		}
+		if ((insaneData & IsEmpty) == IsEmpty) {
+			result ^= IsEmpty;
+			return result;
+		}
+		if ((insaneData & IsMax) == IsMax) {
+			result ^= IsMax;
+		}
+		if ((insaneData & IsFlipped) == IsFlipped) {
+			result ^= IsFlipped;
+		}
+		return result;
+	}
+
+	string Board::ToSaneString() const {
+		stringstream result;
+		_grid->TraverseCells(
+			[&, this](Cell<int>* tile) -> void{
+				int data = ToSaneData(tile->GetData());
+				result << data << ",";
+				if(tile->GetPosition().X() +1 == this->_grid->GetSize()->GetWidth()){
+					result << endl;
+				}
+			}
+		);
+		return result.str();
+	}
 }

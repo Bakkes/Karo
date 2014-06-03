@@ -31,6 +31,7 @@ namespace engine{
 		int CountNonDiagonalEdges(const RelativeCell&) override;
 		Cell<int>* GetAbsoluteCellAt(const Vector2D absolutePosition) const;
 		string ToString() const;
+		string ToSaneString() const;
 		// create a board from a string with topleft at 0,0
 		static Board* CreateBoard(string from);
 		// allows you to specify the top left position, the string from is still absolute
@@ -55,5 +56,6 @@ namespace engine{
 		void JumpPiece(Cell<int>& from, Cell<int>& to, Players owner);
 		void Flip(Cell<int>& which);
 		Move ShiftMoveBack(const Move&);
+		int ToSaneData(int insaneData) const;
 	};
 }

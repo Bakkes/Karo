@@ -72,6 +72,9 @@
     <ClCompile Include="StubRng.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ZobristBugTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StubStaticEval.h">
