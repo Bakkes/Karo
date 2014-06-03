@@ -58,7 +58,7 @@ namespace engine {
 		} else if (data->GetDepth() > depth) {
 			// We've seen this board before but at a deeper level, this search will improve that
 			// We can use our result from previous search to order the moves a bit
-			int findResult = find(moves.begin(), moves.end(), *data->GetBestMove()) - moves.begin();
+			/*int findResult = find(moves.begin(), moves.end(), *data->GetBestMove()) - moves.begin();
 		
 			assert(findResult >= 0);
 
@@ -66,7 +66,7 @@ namespace engine {
 				Move tmp = moves[findResult];
 				moves[findResult] = moves[0];
 				moves[0] = tmp;
-			}
+			}*/
 		}
 	}
 
