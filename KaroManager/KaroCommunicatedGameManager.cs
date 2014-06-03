@@ -177,7 +177,7 @@ namespace KaroManager
 		MoveWrapper GetMove() {
             MoveWrapper move = Game.GetBestMove();
 
-            Debug.WriteLine("Computer Player - Eval Count = {0}, Nodes Seen = {1}", Game.GetStaticEvalCallCount(), Game.GetNodesSeenCount());
+            Console.WriteLine("Computer Player - Eval Count = {0}, Nodes Seen = {1}", Game.GetStaticEvalCallCount(), Game.GetNodesSeenCount());
 
 			return move;
 		}

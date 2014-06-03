@@ -26,7 +26,7 @@ namespace engine {
 		virtual void OnUndoMove(const Move&);
 		// allows extension to do move ordering
 		virtual void UpdateMoves(std::vector<Move>& moves);
-		virtual void UpdateMoves(std::vector<Move>& moves, int depth);
+		virtual void UpdateMoves(std::vector<Move>& moves, Players player, int depth);
 		// allows extension to do pruning
 		virtual bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player);
 		// allows extension to cache board states

@@ -12,7 +12,7 @@ namespace engine{
 
 	void AIExtension::UpdateMoves(std::vector<Move>& moves){}
 	
-	void AIExtension::UpdateMoves(std::vector<Move>& moves, int depth){
+	void AIExtension::UpdateMoves(std::vector<Move>& moves, Players player, int depth){
 		// Overload call for the old API
 		this->UpdateMoves(moves);
 	}

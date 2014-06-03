@@ -52,8 +52,8 @@ namespace engine{
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
 
 		// allow extensoins to do some move ordering
-		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves](AIExtension* extension) -> void{
-			extension->UpdateMoves(possibleMoves, depth);
+		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves, &player](AIExtension* extension) -> void{
+			extension->UpdateMoves(possibleMoves, player, depth);
 		});
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
@@ -72,8 +72,10 @@ namespace engine{
 		}
 
 		// Register board
-		for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension) {
-			(*extension)->RegisterBoard(result, depth);
+		if (player == Max) {
+			for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension) {
+				(*extension)->RegisterBoard(result, depth);
+			}
 		}
 
 		return result;
