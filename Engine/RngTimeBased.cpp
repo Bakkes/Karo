@@ -5,8 +5,8 @@
 namespace engine {
 
 	RngTimeBased::RngTimeBased() {
-		srand(0);
-		_returnedNumbers = new std::list<int>();
+		srand(2);
+		_returnedNumbers = new std::list<long long>();
 	}
 
 
@@ -15,7 +15,7 @@ namespace engine {
 	}
 
 	long long RngTimeBased::NextInteger() {
-		int rndNumber = rand();
+		long long rndNumber = CreateLong();
 		for (auto it = _returnedNumbers->begin(); it != _returnedNumbers->end(); ++it) {
 			if (*it == rndNumber) {
 				// This is a duplicate! This is not allowed!

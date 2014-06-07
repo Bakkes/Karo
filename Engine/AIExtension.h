@@ -4,6 +4,10 @@
 #include "Board.h"
 #include <vector>
 #include "IStaticEvaluation.h"
+
+static int staticCounter = 0;
+static int staticCounter2 = 0;
+
 namespace engine {
 	class AIExtension
 	{
