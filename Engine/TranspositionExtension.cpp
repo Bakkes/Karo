@@ -60,10 +60,17 @@ namespace engine {
 			// If it's earlier than that search went deeper and has a better result
 			// We can already say what the result is
 
-			std::cout << "zobrist, Nodes saved: " << (moves.size() - 1) << std::endl;
+			bool containsMove = find(moves.begin(), moves.end(), *data->GetBestMove(player)) != moves.end();
 
-			moves.clear();
-			moves.push_back(Move(*data->GetBestMove(player)));
+			if (containsMove) {
+
+				std::cout << "zobrist, Nodes saved: " << (moves.size() - 1) << std::endl;
+
+				moves.clear();
+				moves.push_back(Move(*data->GetBestMove(player)));
+			} else {
+				std::cout << "zobrist COLLISION DETECTED!" << std::endl;
+			}
 		} else if (data->GetDepth() > depth) {
 			// We've seen this board before but at a deeper level, this search will improve that
 			// We can use our result from previous search to order the moves a bit
