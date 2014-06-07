@@ -67,8 +67,11 @@ namespace engine {
 
 				moves.clear();
 				moves.push_back(Move(*data->GetBestMove(player)));
+				staticCounter2++;
 			} else {
-				std::cout << "zobrist COLLISION DETECTED!" << std::endl;
+				staticCounter++;
+				int percentage = (int)((staticCounter / ((double) staticCounter2) * 100));
+				std::cout << "zobrist COLLISION DETECTED! Sum: " << staticCounter << " / " << staticCounter2 << "(" << percentage << "%)" << std::endl;
 			}
 		} else if (data->GetDepth() > depth) {
 			// We've seen this board before but at a deeper level, this search will improve that
