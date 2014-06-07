@@ -20,6 +20,9 @@ along with the GNU MP Library; see the file COPYING.LIB.  If not, write to
 the Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
 MA 02111-1307, USA. */
 
+/* Disable warning 4146 that the visual C++ compiler generates. */
+#pragma warning( disable : 4146 )
+
 #ifndef __GMP_H__
 
 #if defined (__cplusplus)

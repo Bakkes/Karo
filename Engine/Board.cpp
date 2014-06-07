@@ -1,5 +1,4 @@
 #include "Board.h"
-#include <gmp.h>
 
 namespace engine{
 
