@@ -70,7 +70,7 @@ namespace engine {
 				staticCounter2++;
 			} else {
 				staticCounter++;
-				int percentage = (int)((staticCounter / ((double) staticCounter2) * 100));
+				int percentage = (int)((staticCounter / ((double) (staticCounter + staticCounter2)) * 100));
 				std::cout << "zobrist COLLISION DETECTED! Sum: " << staticCounter << " / " << staticCounter2 << "(" << percentage << "%)" << std::endl;
 			}
 		} else if (data->GetDepth() > depth) {

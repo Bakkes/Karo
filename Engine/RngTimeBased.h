@@ -15,7 +15,7 @@ namespace engine {
 	private:
 		long long CreateLong();
 
-		std::list<int>* _returnedNumbers;
+		std::list<long long>* _returnedNumbers;
 
 	};
 
