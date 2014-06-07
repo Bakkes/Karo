@@ -3,8 +3,8 @@
 namespace engine {
 	TranspositionTable::TranspositionTable(int maxSize)
 	{
-		_hashMap = new map<long long,TranspositionTableData*>();
-		_ageQueue = new queue<long long>();
+		_hashMap = new map<BigInteger,TranspositionTableData*>();
+		_ageQueue = new queue<BigInteger>();
 		_maxSize = maxSize;
 	}
 
@@ -16,7 +16,7 @@ namespace engine {
 	}
 
 
-	void TranspositionTable::Insert(long long key, int depth, int score, Players player, Move* bestMove)
+	void TranspositionTable::Insert(BigInteger key, int depth, int score, Players player, Move* bestMove)
 	{
 		TranspositionTableData* data = nullptr;
 
@@ -39,11 +39,11 @@ namespace engine {
 		(*_hashMap)[key] = data;
 	}
 
-	bool TranspositionTable::Contains(long long key) {
+	bool TranspositionTable::Contains(BigInteger key) {
 		return _hashMap->find(key) != _hashMap->end();
 	}
 
-	TranspositionTableData* TranspositionTable::Get(long long value)
+	TranspositionTableData* TranspositionTable::Get(BigInteger value)
 	{
 		return _hashMap->at(value);
 	}

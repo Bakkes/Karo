@@ -26,22 +26,21 @@ namespace engine {
 	void TranspositionExtension::Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) {
 		AIExtension::Start(maxDepth, board, evaluation);
 		if (_hasher == nullptr) {
-			IRng* rand = new RngTimeBased();
-			_hasher = new ZobristHashing(board, rand);
-			delete rand;
+			_hasher = new ZobristHashing(board);
 		}
 		_hasher->UpdateBoard(board);
 	}
 
 	void TranspositionExtension::RegisterBoard(EvalResult& result, int depth, Players player) {
-		long long hash = _hasher->GetHash();
+
+		BigInteger hash = _hasher->GetHash();
 		Move* move = new Move(result.GetMove());
 
 		_transpositionTable->Insert(hash, depth, result.GetScore(), player, move);
 	}
 
 	void TranspositionExtension::UpdateMoves(std::vector<Move>& moves, Players player, int depth) {
-		long long hash = _hasher->GetHash();
+		BigInteger hash = _hasher->GetHash();
 
 		if (!_transpositionTable->Contains(hash)) {
 			// We don't know this board

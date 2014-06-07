@@ -2,20 +2,20 @@
 
 #include "Board.h"
 #include "IHashAlgorithm.h"
-#include "IRng.h"
+#include "BigInteger.h"
 
 namespace engine {
 	class ENGINE_API ZobristHashing : public IHashAlgorithm {
 
 	public:
-		ZobristHashing(IBoard* board, IRng* rand);
+		ZobristHashing(IBoard* board);
 		~ZobristHashing() override;
 
-		long long GetHash() override;
+		BigInteger GetHash() override;
 		void UpdateBoard(IBoard* board) override;
 
 	private:
-		long long _hashValues[16][400];
+		BigInteger _hashValues[16][400];
 		IBoard* _board;
 
 		int GetCellPosition(const Vector2D& position);

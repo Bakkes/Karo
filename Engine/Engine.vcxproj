@@ -69,7 +69,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);ENGINE_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)GMP;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GMP\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -86,6 +86,7 @@
     <ClInclude Include="AIExtension.h" />
     <ClInclude Include="AIFactory.h" />
     <ClInclude Include="AlfaBetaExtension.h" />
+    <ClInclude Include="BigInteger.h" />
     <ClInclude Include="IRng.h" />
     <ClInclude Include="AltEval.h" />
     <ClInclude Include="MiniMaxExtension.h" />
@@ -124,6 +125,7 @@
     <ClCompile Include="AIExtension.cpp" />
     <ClCompile Include="AIFactory.cpp" />
     <ClCompile Include="AltEval.cpp" />
+    <ClCompile Include="BigInteger.cpp" />
     <ClCompile Include="MiniMaxExtension.cpp" />
     <ClCompile Include="AlfaBetaExtension.cpp" />
     <ClCompile Include="Board.cpp" />

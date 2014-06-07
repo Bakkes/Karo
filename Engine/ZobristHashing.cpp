@@ -2,12 +2,17 @@
 
 namespace engine{
 
-	ZobristHashing::ZobristHashing(IBoard* board, IRng* rand) {
+	ZobristHashing::ZobristHashing(IBoard* board) {
 		_board = board;
 	
 		for(int cellValue = 0; cellValue < 16; cellValue++) {
-			for(int position = 0; position < 400; position++) {
-				_hashValues[cellValue][position] = rand->NextInteger();
+			for(int y = 0; y < 20; y++) {
+				for (int x = 0; x < 20; x++) {
+					int position = GetCellPosition(Vector2D(x, y));
+
+					_hashValues[cellValue][position].set(cellValue);
+					_hashValues[cellValue][position].multiply2exp((y * 80) + (x * 4));
+				}
 			}
 		}
 	}
@@ -46,8 +51,9 @@ namespace engine{
 		this->_board = board;
 	}
 
-	long long ZobristHashing::GetHash() {
-		long long hash = 0;
+	BigInteger ZobristHashing::GetHash() {
+		BigInteger hash(0);
+
 		for (int x = 0; x < 20; ++x) {
 			for (int y = 0; y < 20; ++y) {
 				const Vector2D position = Vector2D(x, y);
@@ -57,7 +63,7 @@ namespace engine{
 					continue;
 				}
 
-				hash ^= _hashValues[cellData][GetCellPosition(Vector2D(x, y))];
+				hash = hash ^ _hashValues[cellData][GetCellPosition(Vector2D(x, y))];
 			}
 		}
 
