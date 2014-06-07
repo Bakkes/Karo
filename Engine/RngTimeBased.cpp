@@ -10,7 +10,7 @@ namespace engine {
 		srand(2);
 		_returnedNumbers = new std::list<long long>();
 		_randDevice = new std::random_device();
-		_mersenne = new std::mt19937_64(*_randDevice);
+		_mersenne = new std::mt19937_64((*_randDevice)());
 		_dist = new std::uniform_int_distribution<long long int>(-(long long)(9223372036854775808), 9223372036854775807);
 	}
 
