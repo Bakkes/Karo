@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <random>
 #include "IRng.h"
 
 namespace engine { 
@@ -16,6 +17,9 @@ namespace engine {
 		long long CreateLong();
 
 		std::list<long long>* _returnedNumbers;
+		std::mt19937_64* _mersenne;
+		std::random_device* _randDevice;
+		std::uniform_int_distribution<long long int>* _dist;
 
 	};
 
