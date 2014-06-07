@@ -5,7 +5,7 @@
 namespace engine {
 
 	RngTimeBased::RngTimeBased() {
-		srand((unsigned)time(NULL));
+		srand(0);
 		_returnedNumbers = new std::list<int>();
 	}
 
@@ -28,7 +28,10 @@ namespace engine {
 	}
 
 	long long RngTimeBased::CreateLong() {
-		return (rand() << 32) | rand();
+		long long a = rand();
+		long long b = rand();
+
+		return (a << 32) | b;
 	}
 
 }
