@@ -227,7 +227,7 @@ namespace Tests {
 			board->UndoMove(evilMove, Max);
 			RelativeCell shouldBeEmptyCell = board->GetRelativeCellAt(Vector2D(1, 0));
 			OutputDebugString(board->ToString().c_str());
-			Assert::IsFalse(shouldBeEmptyCell.HasTile());
+			Assert::IsFalse(shouldBeEmptyCell.HasTile() == 1);
 		}
 		TEST_METHOD(CountThesePieces) {
 			Board* board = Board::CreateBoard(standartBoard, Vector2D(0, 0));

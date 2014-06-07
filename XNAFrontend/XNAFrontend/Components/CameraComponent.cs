@@ -12,18 +12,16 @@ namespace XNAFrontend.Components
 	{
 		private const float MaxPitch = -MathHelper.TwoPi / 40;
 		private const float MinPitch = -MathHelper.PiOver2 + 0.01f;
-        KeyboardState oldStateR;
-        KeyboardState oldStateT;
-        MouseState oldMouseStateR;
+		KeyboardState oldStateR;
+		KeyboardState oldStateT;
+		MouseState oldMouseStateR;
 
-        private bool checkYaw;
+		private bool checkYaw;
 		private const float MinZoom = 5f;
 		private const float MaxZoom = 20f;
 
 		private const float MoveSpeed = 0.05f;
 		private const float ZoomSpeed = 0.15f;
-
-		private Matrix _view;
 
 		private ICamera Camera
 		{
@@ -68,7 +66,7 @@ namespace XNAFrontend.Components
 			RecreateProjectionMatrix();
 
 			base.Initialize();
-          
+
 		}
 
 		/// <summary>
@@ -77,7 +75,7 @@ namespace XNAFrontend.Components
 		/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		public override void Update(GameTime gameTime)
 		{
-            MouseState mouseState = Mouse.GetState();
+			MouseState mouseState = Mouse.GetState();
 			KeyboardState state = Keyboard.GetState();
 			if (state.IsKeyDown(Keys.Left))
 			{
@@ -105,40 +103,40 @@ namespace XNAFrontend.Components
 				_zoom += ZoomSpeed;
 			}
 
-            if ((state.IsKeyDown(Keys.R))||(mouseState.MiddleButton==ButtonState.Pressed))
-            {
-                if (!(oldStateR.IsKeyDown(Keys.R)||(oldMouseStateR.MiddleButton==ButtonState.Pressed)))
-                {
-                    _yaw += MathHelper.Pi;
-                }
-            }
-            else if (oldStateR.IsKeyDown(Keys.R)||(oldMouseStateR.MiddleButton==ButtonState.Pressed))
-            {
-            }
-            oldStateR = state;
-            oldMouseStateR = mouseState;
+			if ((state.IsKeyDown(Keys.R)) || (mouseState.MiddleButton == ButtonState.Pressed))
+			{
+				if (!(oldStateR.IsKeyDown(Keys.R) || (oldMouseStateR.MiddleButton == ButtonState.Pressed)))
+				{
+					_yaw += MathHelper.Pi;
+				}
+			}
+			else if (oldStateR.IsKeyDown(Keys.R) || (oldMouseStateR.MiddleButton == ButtonState.Pressed))
+			{
+			}
+			oldStateR = state;
+			oldMouseStateR = mouseState;
 
-            if (state.IsKeyDown(Keys.T))
-            {
-                if (!oldStateT.IsKeyDown(Keys.T))
-                {
-                    checkYaw = !checkYaw;
-                }
-            }
-            else if(!oldStateT.IsKeyDown(Keys.T))
-            {
-            }
-            oldStateT= state;
-         
-            
-          
-         
+			if (state.IsKeyDown(Keys.T))
+			{
+				if (!oldStateT.IsKeyDown(Keys.T))
+				{
+					checkYaw = !checkYaw;
+				}
+			}
+			else if (!oldStateT.IsKeyDown(Keys.T))
+			{
+			}
+			oldStateT = state;
 
-            
+
+
+
+
+
 			_pitch = MathHelper.Clamp(_pitch, MinPitch, MaxPitch);
 			_zoom = MathHelper.Clamp(_zoom, MinZoom, MaxZoom);
 
-            
+
 
 
 			RecreateViewMatrix();
@@ -147,15 +145,15 @@ namespace XNAFrontend.Components
 
 		private void RecreateViewMatrix()
 		{
-            Vector3 relativePosition;
-            if (!checkYaw)
-            {
-                relativePosition = Vector3.Transform(Vector3.Backward, Matrix.CreateFromYawPitchRoll(_yaw, _pitch, 0));
-            }
-            else
-            {
-                relativePosition = Vector3.Transform(Vector3.Backward, Matrix.CreateFromYawPitchRoll(0, -MathHelper.PiOver2, 0));
-            }
+			Vector3 relativePosition;
+			if (!checkYaw)
+			{
+				relativePosition = Vector3.Transform(Vector3.Backward, Matrix.CreateFromYawPitchRoll(_yaw, _pitch, 0));
+			}
+			else
+			{
+				relativePosition = Vector3.Transform(Vector3.Backward, Matrix.CreateFromYawPitchRoll(0, -MathHelper.PiOver2, 0));
+			}
 			Vector3 position = relativePosition * _zoom + _targetPosition;
 			Camera.View = Matrix.CreateLookAt(position, _targetPosition, Vector3.Up);
 		}

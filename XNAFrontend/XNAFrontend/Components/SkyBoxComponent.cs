@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework;
 using XNAFrontend.Services;
 
 namespace XNAFrontend.Components
@@ -14,7 +9,6 @@ namespace XNAFrontend.Components
 		public SkyBoxComponent(KaroGame game)
 			: base(game) { }
 
-		string assetName = "skybox2";
 		TextureCube texture;
 		Model skyBox;
 		public CameraComponent CameraComponent { get; set; }
