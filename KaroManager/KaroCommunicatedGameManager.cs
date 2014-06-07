@@ -175,7 +175,11 @@ namespace KaroManager
 		}
 
 		MoveWrapper GetMove() {
-			return Game.GetBestMove();
+            MoveWrapper move = Game.GetBestMove();
+
+            Console.WriteLine("Computer Player - Eval Count = {0}, Nodes Seen = {1}", Game.GetStaticEvalCallCount(), Game.GetNodesSeenCount());
+
+			return move;
 		}
 
 		void Communication_Disconnected(DisconnectReason reason)

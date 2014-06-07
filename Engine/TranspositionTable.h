@@ -4,18 +4,21 @@
 #include <iostream>
 #include "TranspositionTableData.h"
 #include "Move.h"
+#include "Players.h"
 using namespace std;
 
 namespace engine {
 	class ENGINE_API TranspositionTable
 	{
 	private:
-		map<int,TranspositionTableData*>* hashMap;
-		priority_queue<int>* pq;
+		map<long long, TranspositionTableData*>* _hashMap;
+		queue<long long>* _ageQueue;
+		int _maxSize;
 	public:
-		TranspositionTable(void);
+		TranspositionTable(int maxSize);
 		~TranspositionTable(void);
-		void Insert(int value, int score, Move* maxBestMove, Move* minBestMove);
-		TranspositionTableData* Get(int value);
+		void Insert(long long key, int depth, int score, Players player, Move* bestMove);
+		bool Contains(long long key);
+		TranspositionTableData* Get(long long key);
 	};
 }

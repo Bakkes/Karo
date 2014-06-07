@@ -1,19 +1,23 @@
 #pragma once
 #include "Move.h"
+#include "Players.h"
 
 namespace engine{
 	class ENGINE_API TranspositionTableData
 	{
 	private:
 		int _score;
-		Move* _maxBestMove;
-		Move* _minBestMove;
+		int _depth;
+		Move* _bestMoveMin;
+		Move* _bestMoveMax;
 	public:
-		TranspositionTableData(void);
-		TranspositionTableData(int score, Move* maxBestMove, Move* minBestMove);
+		TranspositionTableData(int score, int depth);
 		~TranspositionTableData(void);
-		Move* GetMaxBestMove();
-		Move* GetMinBestMove();
+
+		void SetBestMove(Players player, Move* move);
+
+		Move* GetBestMove(Players player);
 		int GetScore();
+		int GetDepth();
 	};
 }

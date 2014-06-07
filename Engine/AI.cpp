@@ -8,6 +8,8 @@ namespace engine{
 		_maxDepth = maxDepth;
 		_evaluator = nullptr;
 		_extensions = new vector<AIExtension*>();
+		_staticEvalCallCount = 0;
+		_nodesSeen = 0;
 	}
 
 
@@ -50,13 +52,14 @@ namespace engine{
 		std::vector<Move> possibleMoves = _board->GetLegalMoves(player);
 
 		// allow extensoins to do some move ordering
-		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves](AIExtension* extension) -> void{
-			extension->UpdateMoves(possibleMoves);
+		for_each(_extensions->begin(), _extensions->end(), [&depth, &possibleMoves, &player](AIExtension* extension) -> void{
+			extension->UpdateMoves(possibleMoves, player, depth);
 		});
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
 			_board->ExecuteMove(move, player);
+			++_nodesSeen;
 			EvalResult currentResult = NextStep(player, move, depth, result);
 			_board->UndoMove(move, player);
 
@@ -66,6 +69,11 @@ namespace engine{
 					return result;
 				}
 			}
+		}
+
+		// Register board
+		for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension) {
+			(*extension)->RegisterBoard(result, depth, player);
 		}
 
 		return result;
@@ -82,6 +90,17 @@ namespace engine{
 		EvalResult score(result.GetBestForMax(), result.GetBestForMin());
 		score.SetScore(_evaluator->Eval(_board, player));
 		score.SetMove(move);
+
+		++_staticEvalCallCount;
+
 		return score;
+	}
+
+	int AI::GetStaticEvalCallCount() {
+		return _staticEvalCallCount;
+	}
+
+	int AI::GetNodesSeenCount() {
+		return _nodesSeen;
 	}
 }

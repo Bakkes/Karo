@@ -17,6 +17,10 @@ namespace engine {
 		// will also be cleaned
 		void AddExtension(AIExtension*);
 		void SetEvaluator(IStaticEvaluation* evaluator);
+
+		int GetStaticEvalCallCount();
+		int GetNodesSeenCount();
+
 	private:
 		std::vector<AIExtension*>* _extensions;
 		// The Static Evaluation function which will evaluate the board
@@ -28,5 +32,8 @@ namespace engine {
 		// Executes a single step from the Minimax algorithm
 		EvalResult MinimaxStep(Players player, int depth, EvalResult);
 		EvalResult NextStep(Players player, Move move, int depth, EvalResult);
+
+		int _staticEvalCallCount;
+		int _nodesSeen;
 	};
 }

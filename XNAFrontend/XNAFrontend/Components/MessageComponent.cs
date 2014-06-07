@@ -27,11 +27,17 @@ namespace XNAFrontend.Components
 		private KeyboardState _oldState;
 		private SpriteFont _font;
 
+        /// <summary>
+        /// The remaining seconds until the enter key functionallity unlocks
+        /// </summary>
+        private float lockTime;
+
 		public MessageComponent(KaroGame game)
 			: base(game)
 		{
 			Message = "";
 			_oldState = Keyboard.GetState();
+            lockTime = 1;
 		}
 
 		public MessageComponent(KaroGame game, string message, string enterMessage, ACommonComponent enterComponent)
@@ -50,6 +56,13 @@ namespace XNAFrontend.Components
 
 		public override void Update(GameTime gameTime)
 		{
+            if (lockTime > 0)
+            {
+                lockTime -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                _oldState = Keyboard.GetState();
+                return;
+            }
+
 			if (Keyboard.GetState().IsKeyDown(Keys.Enter) && _oldState.IsKeyDown(Keys.Enter))
 			{
 				karoGame.Components.Remove(this);

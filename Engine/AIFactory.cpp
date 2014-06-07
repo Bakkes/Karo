@@ -31,6 +31,18 @@ namespace engine{
 		return result;
 	}
 
+	AI* AIFactory::CreateMoveOrderingAlfaZorbristAI(ZobristHashing* hasher, TranspositionTable* table) {
+		AI* result = CreateMoveOrderingAlfaAI();
+		result->AddExtension(new TranspositionExtension(hasher, table));
+		return result;
+	}
+
+	AI* AIFactory::CreateMoveOrderingAlfaZorbristAI() {
+		AI* result = CreateMoveOrderingAlfaAI();
+		result->AddExtension(new TranspositionExtension());
+		return result;
+	}
+
 
 	IBoard* AIFactory::GetBoard() const{
 		return _board;

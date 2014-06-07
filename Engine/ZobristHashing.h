@@ -1,28 +1,25 @@
 #pragma once
-#pragma warning(disable:4251)
 
-#include <iostream>
-#include <time.h>
-#include <hash_map>
 #include "Board.h"
 #include "IHashAlgorithm.h"
-
-
+#include "IRng.h"
 
 namespace engine {
 	class ENGINE_API ZobristHashing : public IHashAlgorithm {
 
 	public:
-		ZobristHashing();
-		virtual ~ZobristHashing();
+		ZobristHashing(IBoard* board, IRng* rand);
+		~ZobristHashing() override;
 
-		void ExecuteMove(const Move&) override;
-		void UndoMove(const Move&) override;
-
-		int GetHash() const override;
+		long long GetHash() override;
+		void UpdateBoard(IBoard* board) override;
 
 	private:
-		int _hashValues[16][400];
-		int _currentHash;
+		long long _hashValues[16][400];
+		IBoard* _board;
+
+		int GetCellPosition(const Vector2D& position);
+		int GetCellData(const Vector2D& position);
+
 	};
 }

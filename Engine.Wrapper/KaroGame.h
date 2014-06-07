@@ -4,6 +4,9 @@
 #include "Board.h"
 #include "PlayersWrapper.h"
 #include "BoardWrapper.h"
+#include "TranspositionTable.h"
+#include "ZobristHashing.h"
+
 using namespace engine;
 
 namespace engine {
@@ -19,8 +22,15 @@ namespace wrapper {
 			void UndoMove(MoveWrapper^ w, engine::wrapper::Players player);
 			bool HasWon(engine::wrapper::Players player);
 			BoardWrapper^ GetBoard();
+			int GetStaticEvalCallCount();
+			int GetNodesSeenCount();
 		private:
 			BoardWrapper^ _board;
+			TranspositionTable* _transpositionTable;
+			ZobristHashing* _hasher;
+
+			int _staticEvalCallCount;
+			int _nodesSeen;
 	};
 }
 }
