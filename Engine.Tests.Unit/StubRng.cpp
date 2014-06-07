@@ -2,7 +2,7 @@
 
 namespace engine {
 
-	StubRng::StubRng(int values[]) {
+	StubRng::StubRng(long long values[]) {
 		_pointer = 0;
 		_values = values;
 	}
@@ -11,7 +11,7 @@ namespace engine {
 		delete _values;
 	}
 
-	int StubRng::NextInteger() {
+	long long StubRng::NextInteger() {
 		return _values[_pointer++];
 	}
 }

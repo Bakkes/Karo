@@ -2,19 +2,34 @@
 
 namespace engine {
 
-	TranspositionTableData::TranspositionTableData(int score, Move* bestMove, int depth) {
+	TranspositionTableData::TranspositionTableData(int score, int depth) {
 		_score = score;
-		_bestMove = bestMove;
 		_depth = depth;
 	}
 
 
 	TranspositionTableData::~TranspositionTableData(void) {
-		delete _bestMove;
+		delete _bestMoveMax;
+		delete _bestMoveMin;
+	}
+
+	void TranspositionTableData::SetBestMove(Players player, Move* move) {
+		if (player == Max) {
+			delete _bestMoveMax;
+			_bestMoveMax = move;
+		} else if (player == Min) {
+			delete _bestMoveMin;
+			_bestMoveMin = move;
+		}
 	}
 	
-	Move* TranspositionTableData::GetBestMove() {
-		return _bestMove;
+	Move* TranspositionTableData::GetBestMove(Players player) {
+		if (player == Max)
+			return _bestMoveMax;
+		if (player == Min)
+			return _bestMoveMin;
+
+		return nullptr;
 	}
 
 	int TranspositionTableData::GetScore() {

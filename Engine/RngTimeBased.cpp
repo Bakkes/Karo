@@ -14,7 +14,7 @@ namespace engine {
 		delete this->_returnedNumbers;
 	}
 
-	int RngTimeBased::NextInteger() {
+	long long RngTimeBased::NextInteger() {
 		int rndNumber = rand();
 		for (auto it = _returnedNumbers->begin(); it != _returnedNumbers->end(); ++it) {
 			if (*it == rndNumber) {
@@ -25,6 +25,10 @@ namespace engine {
 		// Not a duplicate, add it and return it
 		_returnedNumbers->push_front(rndNumber);
 		return rndNumber;
+	}
+
+	long long RngTimeBased::CreateLong() {
+		return (rand() << 32) | rand();
 	}
 
 }

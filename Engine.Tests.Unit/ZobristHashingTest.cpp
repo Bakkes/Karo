@@ -24,7 +24,7 @@ namespace Tests {
 			Board* board = CreateStartingBoard();
 			ZobristHashing hasher(board, CreateStubRNG());
 
-			Assert::AreEqual(STARTING_HASH, hasher.GetHash(), L"Invalid Hash");
+			Assert::IsTrue(STARTING_HASH == hasher.GetHash(), L"Invalid Hash");
 
 			delete board;
 		}
@@ -78,10 +78,10 @@ namespace Tests {
 			// Insert Piece at new tile
 			expectedHash ^= _hashValues[HasTile | IsFlipped][GetCellPosition(to)];
 
-			Assert::AreEqual(expectedHash, hasher.GetHash(), L"Invalid hash after Move");
+			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
-			Assert::AreEqual(baseHash, hasher.GetHash(), L"Invalid hash after undo");
+			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
 		TEST_METHOD(HashStepWithTileMoveShiftTL) {
@@ -147,10 +147,10 @@ namespace Tests {
 			// Insert the player at new tile
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(shiftTo)];
 
-			Assert::AreEqual(expectedHash, hasher.GetHash(), L"Invalid hash after Move");
+			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
-			Assert::AreEqual(baseHash, hasher.GetHash(), L"Invalid hash after undo");
+			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
 		TEST_METHOD(HashStepWithTileMove) {
@@ -202,10 +202,10 @@ namespace Tests {
 			// Insert Piece at new tile
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(to)];
 
-			Assert::AreEqual(expectedHash, hasher.GetHash(), L"Invalid hash after Move");
+			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
-			Assert::AreEqual(baseHash, hasher.GetHash(), L"Invalid hash after undo");
+			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
 		TEST_METHOD(HashJumpMove) {
@@ -254,10 +254,10 @@ namespace Tests {
 			expectedHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(to)];
 			expectedHash ^= _hashValues[HasTile | IsFlipped][GetCellPosition(to)];
 
-			Assert::AreEqual(expectedHash, hasher.GetHash(), L"Invalid hash after Move");
+			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
-			Assert::AreEqual(baseHash, hasher.GetHash(), L"Invalid hash after undo");
+			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
 		TEST_METHOD(HashStepMove) {
@@ -306,10 +306,10 @@ namespace Tests {
 			expectedHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(to)];
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(to)];
 
-			Assert::AreEqual(expectedHash, hasher.GetHash(), L"Invalid hash after Move");
+			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
-			Assert::AreEqual(baseHash, hasher.GetHash(), L"Invalid hash after undo");
+			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
 		TEST_METHOD(HashInsertMove) {
@@ -323,10 +323,10 @@ namespace Tests {
 			expectedHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(Vector2D(3, 3))];
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(Vector2D(3, 3))];
 
-			Assert::AreEqual(expectedHash, hasher.GetHash(), L"Invalid hash after Move");
+			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
-			Assert::AreEqual(STARTING_HASH, hasher.GetHash(), L"Invalid hash after undo");
+			Assert::IsTrue(STARTING_HASH == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
 		int GetCellPosition(const Vector2D& position) {
@@ -334,7 +334,7 @@ namespace Tests {
 		}
 
 		IRng* CreateStubRNG() {
-			int* values = new int[6400];
+			long long* values = new long long[6400];
 			for (int i = 0; i < 6400; i++) {
 				values[i] = i;
 			}
@@ -365,8 +365,8 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n");
 		}
 
-		int _hashValues[16][400];
+		long long _hashValues[16][400];
 
-		static const int STARTING_HASH = 80;
+		static const long long STARTING_HASH = 80;
 	};
 }

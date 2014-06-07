@@ -13,7 +13,7 @@ namespace engine{
 		}
 
 		virtual void UpdateBoard(IBoard* board) = 0;
-		virtual int GetHash() = 0;
+		virtual long long GetHash() = 0;
 
 	};
 }

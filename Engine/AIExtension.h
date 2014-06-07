@@ -30,7 +30,7 @@ namespace engine {
 		// allows extension to do pruning
 		virtual bool ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player);
 		// allows extension to cache board states
-		virtual void RegisterBoard(EvalResult& result, int depth);
+		virtual void RegisterBoard(EvalResult& result, int depth, Players player);
 
 	protected:
 		int GetMaxDepth() const;

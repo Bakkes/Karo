@@ -13,10 +13,10 @@ namespace Tests {
 			
 			Move* move = new Move(INSERT, Vector2D(2));
 
-			tTable->Insert(123, 1337, move, 0); 
+			tTable->Insert(123, 0, 1337, Max, move); 
 
 			Assert::AreEqual(1337, tTable->Get(123)->GetScore(), L"Score mismatch");
-			Assert::IsTrue(move == tTable->Get(123)->GetBestMove(), L"Mismatch in best move for max");
+			Assert::IsTrue(move == tTable->Get(123)->GetBestMove(Max), L"Mismatch in best move for max");
 
 			delete tTable;
 			delete move;

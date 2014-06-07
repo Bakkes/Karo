@@ -12,7 +12,7 @@ namespace engine {
 		virtual ~TranspositionExtension();
 
 		void Start(const int& maxDepth, IBoard* board, IStaticEvaluation* evaluation) override;
-		void RegisterBoard(EvalResult& result, int depth) override;
+		void RegisterBoard(EvalResult& result, int depth, Players player) override;
 		void UpdateMoves(std::vector<Move>& moves, Players player, int depth) override;
 
 	private:

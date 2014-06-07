@@ -1,5 +1,6 @@
 #pragma once
 #include "Move.h"
+#include "Players.h"
 
 namespace engine{
 	class ENGINE_API TranspositionTableData
@@ -7,12 +8,15 @@ namespace engine{
 	private:
 		int _score;
 		int _depth;
-		Move* _bestMove;
+		Move* _bestMoveMin;
+		Move* _bestMoveMax;
 	public:
-		TranspositionTableData(int score, Move* bestMove, int depth);
+		TranspositionTableData(int score, int depth);
 		~TranspositionTableData(void);
-		Move* GetBestMove();
 
+		void SetBestMove(Players player, Move* move);
+
+		Move* GetBestMove(Players player);
 		int GetScore();
 		int GetDepth();
 	};

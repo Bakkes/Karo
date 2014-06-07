@@ -11,14 +11,14 @@ namespace engine {
 	class ENGINE_API TranspositionTable
 	{
 	private:
-		map<int,TranspositionTableData*>* _hashMap;
-		queue<int>* _ageQueue;
+		map<long long, TranspositionTableData*>* _hashMap;
+		queue<long long>* _ageQueue;
 		int _maxSize;
 	public:
 		TranspositionTable(int maxSize);
 		~TranspositionTable(void);
-		void Insert(int value, int score, Move* bestMove, int depth);
-		bool Contains(int key);
-		TranspositionTableData* Get(int value);
+		void Insert(long long key, int depth, int score, Players player, Move* bestMove);
+		bool Contains(long long key);
+		TranspositionTableData* Get(long long key);
 	};
 }

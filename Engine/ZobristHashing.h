@@ -11,11 +11,11 @@ namespace engine {
 		ZobristHashing(IBoard* board, IRng* rand);
 		~ZobristHashing() override;
 
-		int GetHash() override;
+		long long GetHash() override;
 		void UpdateBoard(IBoard* board) override;
 
 	private:
-		int _hashValues[16][400];
+		long long _hashValues[16][400];
 		IBoard* _board;
 
 		int GetCellPosition(const Vector2D& position);

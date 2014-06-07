@@ -46,8 +46,8 @@ namespace engine{
 		this->_board = board;
 	}
 
-	int ZobristHashing::GetHash() {
-		int hash = 0;
+	long long ZobristHashing::GetHash() {
+		long long hash = 0;
 		for (int x = 0; x < 20; ++x) {
 			for (int y = 0; y < 20; ++y) {
 				const Vector2D position = Vector2D(x, y);

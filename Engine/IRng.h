@@ -10,7 +10,7 @@ namespace engine {
 		virtual IRng::~IRng() {
 		}
 
-		virtual int NextInteger() = 0;
+		virtual long long NextInteger() = 0;
 
 	};
 
