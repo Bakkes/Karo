@@ -17,9 +17,7 @@ namespace wrapper {
 		_board = gcnew BoardWrapper();
 		_transpositionTable = new TranspositionTable(100000);
 		
-		IRng* rand = new RngTimeBased();
-		_hasher = new ZobristHashing(nullptr, rand);
-		delete rand;
+		_hasher = new ZobristHashing(nullptr);
 	}
 
 	KaroGame::~KaroGame() {

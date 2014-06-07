@@ -5,6 +5,8 @@ namespace engine {
 	TranspositionTableData::TranspositionTableData(int score, int depth) {
 		_score = score;
 		_depth = depth;
+		_bestMoveMax = nullptr;
+		_bestMoveMin = nullptr;
 	}
 
 

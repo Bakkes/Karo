@@ -43,8 +43,7 @@ namespace engine {
 		return _hashMap->find(key) != _hashMap->end();
 	}
 
-	TranspositionTableData* TranspositionTable::Get(BigInteger value)
-	{
+	TranspositionTableData* TranspositionTable::Get(BigInteger value) {
 		return _hashMap->at(value);
 	}
 }

@@ -4,14 +4,16 @@ namespace engine{
 
 	ZobristHashing::ZobristHashing(IBoard* board) {
 		_board = board;
+
+		const int bits = 5;
 	
-		for(int cellValue = 0; cellValue < 16; cellValue++) {
+		for(int cellValue = 1; cellValue <= 16; cellValue++) {
 			for(int y = 0; y < 20; y++) {
 				for (int x = 0; x < 20; x++) {
 					int position = GetCellPosition(Vector2D(x, y));
 
-					_hashValues[cellValue][position].set(cellValue);
-					_hashValues[cellValue][position].multiply2exp((y * 80) + (x * 4));
+					_hashValues[cellValue - 1][position].set(cellValue);
+					_hashValues[cellValue - 1][position].multiply2exp((y * (20 * 20 * bits)) + (x * bits));
 				}
 			}
 		}
