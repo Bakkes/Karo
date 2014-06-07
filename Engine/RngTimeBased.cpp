@@ -28,10 +28,14 @@ namespace engine {
 	}
 
 	long long RngTimeBased::CreateLong() {
-		long long a = rand();
-		long long b = rand();
+		long long rnd = 0;
+		for (int i = 0; i < 8; i++) {
+			long long val = rand() & 0xFF;
 
-		return (a << 32) | b;
+			rnd |= (val << (i * 8));
+		}
+
+		return rnd;
 	}
 
 }
