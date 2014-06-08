@@ -2,7 +2,6 @@
 #include <map>
 #include "Board.h"
 #include "ZobristHashing.h"
-#include "RngTimeBased.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -18,22 +17,21 @@ namespace Tests {
 
 			// Key: Sane board string.
 			// Value: Zobrist hash value.
-			std::map<long long, std::string> hashes;
+			std::map<engine::BigInteger, std::string> hashes;
 			engine::Board board;
-			engine::IRng *rng = new engine::RngTimeBased();
-			engine::ZobristHashing zobrist(&board, rng);
+			engine::ZobristHashing zobrist(&board);
 			engine::Players currentPlayer = engine::Max;
 
 			for (int i = 0; i < Iterations; i++) {
 				auto legalMoves = board.GetLegalMoves(currentPlayer);
-				board.ExecuteMove(legalMoves[rng->NextInteger() % legalMoves.size()], currentPlayer);
+				board.ExecuteMove(legalMoves[rand() % legalMoves.size()], currentPlayer);
 
 				std::string saneString = board.ToSaneString();
-				long long hash = zobrist.GetHash();
+				engine::BigInteger hash = zobrist.GetHash();
 
 				auto it = hashes.find(hash);
 				if (it == hashes.end()) {
-					hashes.insert(std::pair<long long, std::string>(hash, saneString));
+					hashes.insert(std::pair<engine::BigInteger, std::string>(hash, saneString));
 				} else {
 					Assert::AreEqual(saneString, it->second,
 						L"Zobrist hash collision found!");
@@ -46,7 +44,6 @@ namespace Tests {
 					currentPlayer = engine::Max;
 				}
 			}
-			delete rng;
 		}
 	};
 }

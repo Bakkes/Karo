@@ -10,9 +10,6 @@ namespace engine {
 	public:
 		RngTimeBased();
 		virtual ~RngTimeBased();
-
-		long long NextInteger() override;
-
 	private:
 		long long CreateLong();
 

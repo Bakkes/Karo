@@ -81,9 +81,6 @@
     <ClCompile Include="AltEval.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RngTimeBased.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TranspositionExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -188,13 +185,7 @@
     <ClInclude Include="MoveOrderExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IRng.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AltEval.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RngTimeBased.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TranspositionExtension.h">

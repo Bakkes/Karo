@@ -2,7 +2,6 @@
 #include "CppUnitTest.h"
 #include "Board.h"
 #include "ZobristHashing.h"
-#include "StubRng.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace engine;
@@ -11,18 +10,16 @@ namespace Tests {
 	TEST_CLASS(ZobristHashingTest) {	
 	public:
 		TEST_METHOD_INITIALIZE(InitZobristTest) {
-			IRng* _rand = CreateStubRNG();
 			for(int cellValue = 0; cellValue < 16; cellValue++) {
 				for(int position = 0; position < 400; position++) {
 					_hashValues[cellValue][position] = _rand->NextInteger();
 				}
 			}
-			delete _rand;
 		}
 
 		TEST_METHOD(InitialHash) {
 			Board* board = CreateStartingBoard();
-			ZobristHashing hasher(board, CreateStubRNG());
+			ZobristHashing hasher(board);
 
 			Assert::IsTrue(STARTING_HASH == hasher.GetHash(), L"Invalid Hash");
 
@@ -52,7 +49,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				);
-			ZobristHashing hasher(board, CreateStubRNG());
+			ZobristHashing hasher(board);
 
 			Vector2D from(3, 3);
 			Vector2D to(5, 3);
@@ -107,7 +104,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				);
-			ZobristHashing hasher(board, CreateStubRNG());
+			ZobristHashing hasher(board);
 
 			Vector2D from(0, 0);
 			Vector2D shiftFrom(1, 0);
@@ -176,7 +173,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				);
-			ZobristHashing hasher(board, CreateStubRNG());
+			ZobristHashing hasher(board);
 
 			Vector2D from(3, 3);
 			Vector2D to(3, 4);
@@ -231,7 +228,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				);
-			ZobristHashing hasher(board, CreateStubRNG());
+			ZobristHashing hasher(board);
 
 			Vector2D from(3, 3);
 			Vector2D to(1, 3);
@@ -283,7 +280,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n"
 				);
-			ZobristHashing hasher(board, CreateStubRNG());
+			ZobristHashing hasher(board);
 
 			Vector2D from(3, 3);
 			Vector2D to(2, 3);
@@ -314,7 +311,7 @@ namespace Tests {
 
 		TEST_METHOD(HashInsertMove) {
 			Board* board = CreateStartingBoard();
-			ZobristHashing hasher(board, CreateStubRNG());
+			ZobristHashing hasher(board);
 
 			Move move(INSERT, Vector2D(3, 3));
 			board->ExecuteMove(move, Min);
@@ -331,14 +328,6 @@ namespace Tests {
 
 		int GetCellPosition(const Vector2D& position) {
 			return (int)position.Y() * 20 + (int)position.X();
-		}
-
-		IRng* CreateStubRNG() {
-			long long* values = new long long[6400];
-			for (int i = 0; i < 6400; i++) {
-				values[i] = i;
-			}
-			return new StubRng(values);
 		}
 
 		Board* CreateStartingBoard() {

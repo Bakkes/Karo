@@ -87,7 +87,6 @@
     <ClInclude Include="AIFactory.h" />
     <ClInclude Include="AlfaBetaExtension.h" />
     <ClInclude Include="BigInteger.h" />
-    <ClInclude Include="IRng.h" />
     <ClInclude Include="AltEval.h" />
     <ClInclude Include="MiniMaxExtension.h" />
     <ClInclude Include="MoveOrderExtension.h" />
@@ -110,7 +109,6 @@
     <ClInclude Include="Players.h" />
     <ClInclude Include="RelativeCell.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="RngTimeBased.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
     <ClInclude Include="Cell.h" />
@@ -138,7 +136,6 @@
     <ClCompile Include="MoveSwapExtension.cpp" />
     <ClCompile Include="RelativeAbsoluteConverter.cpp" />
     <ClCompile Include="RelativeCell.cpp" />
-    <ClCompile Include="RngTimeBased.cpp" />
     <ClCompile Include="Size.cpp" />
     <ClCompile Include="StaticEvaluation.cpp" />
     <ClCompile Include="TranspositionExtension.cpp" />
