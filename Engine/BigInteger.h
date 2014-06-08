@@ -16,6 +16,13 @@ namespace engine {
 		void multiply2exp(int integer);
 
 		void set(int integer);
+		void set(char* str, int base);
+
+		const char* ToString() const {
+			char* string = new char[mpz_sizeinbase(_value, 10) + 2];
+			string = mpz_get_str(string, 10, _value);
+			return string;
+		}
 
 		BigInteger& operator = (const BigInteger& instance);
 
@@ -31,9 +38,7 @@ namespace engine {
 		}
 
 		friend bool operator == (const BigInteger& lhs, const BigInteger& rhs) {
-			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, rhs._value);
-			return mpz_sgn(c._value) == 0;
+			return mpz_cmp(lhs._value, rhs._value) == 0;
 		}
 
 		friend bool operator != (const BigInteger& lhs, const BigInteger& rhs) {
@@ -41,27 +46,19 @@ namespace engine {
 		}
 
 		friend bool operator < (const BigInteger& lhs, const BigInteger& rhs) {
-			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, rhs._value);
-			return mpz_sgn(c._value) < 0;
+			return mpz_cmp(lhs._value, rhs._value) < 0;
 		}
 
 		friend bool operator > (const BigInteger& lhs, const BigInteger& rhs) {
-			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, rhs._value);
-			return mpz_sgn(c._value) > 0;
+			return mpz_cmp(lhs._value, rhs._value) > 0;
 		}
 
 		friend bool operator <= (const BigInteger& lhs, const BigInteger& rhs) {
-			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, rhs._value);
-			return mpz_sgn(c._value) <= 0;
+			return mpz_cmp(lhs._value, rhs._value) <= 0;
 		}
 
 		friend bool operator >= (const BigInteger& lhs, const BigInteger& rhs) {
-			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, rhs._value);
-			return mpz_sgn(c._value) >= 0;
+			return mpz_cmp(lhs._value, rhs._value) >= 0;
 		}
 
 	private:

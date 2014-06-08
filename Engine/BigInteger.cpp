@@ -12,8 +12,10 @@ namespace engine {
 	}
 
 	BigInteger::BigInteger(const BigInteger& instance) {
+		const char* s = instance.ToString();
 		mpz_init(_value);
 		mpz_add(_value, _value, instance._value);
+		const char* s2 = ToString();
 	}
 
 	BigInteger::~BigInteger() {
@@ -22,6 +24,10 @@ namespace engine {
 
 	void BigInteger::set(int integer) {
 		mpz_set_ui(_value, integer);
+	}
+
+	void BigInteger::set(char* string, int base) {
+		mpz_set_str(_value, string, base);
 	}
 
 	void BigInteger::multiply(BigInteger integer) {
