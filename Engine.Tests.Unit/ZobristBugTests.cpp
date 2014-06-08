@@ -13,7 +13,7 @@ namespace Tests {
 		TEST_METHOD(TestForCollisions) {
 			// How many moves will the engine perform to check for collisions.
 			// Higher values will give better results, but make the test slower.
-			const int Iterations = 1000;
+			const int Iterations = 100;
 
 			// Key: Sane board string.
 			// Value: Zobrist hash value.
