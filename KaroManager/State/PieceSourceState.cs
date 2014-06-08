@@ -34,13 +34,13 @@ namespace KaroManager.State
 		{
 		}
 
-		public void Update(KaroGameManager manager, Point click)
+		public void Update(KaroGameManager manager, MouseClick click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.FindLegalMoves(manager.CurrentPlayer);
 
 			// See if there is any move with the same source as the clicked tile.
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
-				m.GetFromCell() == new Vector2DWrapper(click.X, click.Y));
+				m.GetFromCell() == new Vector2DWrapper(click.Position.X, click.Position.Y));
 
 			// Valid source piece clicked, save the move.
 			if (move != null)

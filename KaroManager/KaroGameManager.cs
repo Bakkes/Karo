@@ -59,6 +59,8 @@ namespace KaroManager
 		/// </summary>
 		public KaroGame Game { get; set; }
 
+		private MoveWrapper _lastMove { get; set; }
+
 		public KaroGameManager()
 		{
 			Game = new KaroGame();
@@ -86,7 +88,7 @@ namespace KaroManager
 		/// <summary>
 		/// Perform actions depending on the current state and the click location.
 		/// </summary>
-		public virtual void Update(Point tileLocation)
+		public virtual void Update(MouseClick tileLocation)
 		{
 			Debug.WriteLine("Click received at tile {0}.", tileLocation);
 			if (CurrentState != null)
@@ -101,7 +103,7 @@ namespace KaroManager
 			Debug.WriteLine("TopLeft: {0}", Board.GetRelativeCellAt(new Vector2DWrapper(0, 0)).GetAbsolutePosition());
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			Game.ExecuteMove(move, CurrentPlayer);
-			
+			_lastMove = move;
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
 			if (OnMoveExecuted != null)
 			{
@@ -126,6 +128,14 @@ namespace KaroManager
 			}
 		}
 
+		public void UndoLastMove()
+		{
+			if (_lastMove != null)
+			{
+				SwapCurrentPlayer();
+				Game.UndoMove(_lastMove, CurrentPlayer);
+			}
+		}
 		public void SwapCurrentPlayer()
 		{
 			// Swap the player to the other player with the ternary operator.

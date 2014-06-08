@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using engine.wrapper;
@@ -22,6 +24,7 @@ namespace XNAFrontend.Components
 
 		private Thread _highlightThread;
 
+		private bool _showHighlight = false;
 		private Texture2D _background;
 		private SoundEffect _invalidMoveSound;
 		private KaroGame _game;
@@ -105,16 +108,20 @@ namespace XNAFrontend.Components
 				Vector2 tilePosition = GetTileAtPixelPosition(mouseState.X, mouseState.Y);
 				if (tilePosition.X != -1337)
 				{
-					karoGame.KaroGameManager.Update(
-						new System.Drawing.Point((int)tilePosition.X, (int)tilePosition.Y)
+					karoGame.KaroGameManager.Update(new MouseClick(
+						new System.Drawing.Point((int)tilePosition.X, (int)tilePosition.Y), MouseButton.LEFT)
 					);
 				}
 			}
 
-			if (mouseState.RightButton == ButtonState.Pressed)
+			if (mouseState.RightButton == ButtonState.Pressed && _previousMouseState.RightButton != ButtonState.Pressed)
 			{
-				_markedCache = new Dictionary<Vector2, bool>();
-				KaroGameManager.Update(new System.Drawing.Point(-1337, -1337));
+				lock (_markedCache)
+				{
+					_markedCache = new Dictionary<Vector2, bool>();
+				}
+				KaroGameManager.Update(new MouseClick(
+						new System.Drawing.Point(-1337 -1337), MouseButton.RIGHT));
 			}
 
 			base.Update(gameTime);
@@ -462,14 +469,26 @@ namespace XNAFrontend.Components
 					}
 				}
 			}
-			_highlightThread.Abort();
+			if (_highlightThread.IsAlive)
+			{
+				_showHighlight = false;
+				_highlightThread.Join();
+			}
 			_highlightThread = new Thread(RemoveHighlightAfterOneSecond);
 			_highlightThread.Start();
 		}
 
 		private void RemoveHighlightAfterOneSecond()
 		{
-			Thread.Sleep(1000);
+			_showHighlight = true;
+
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+			while (sw.ElapsedMilliseconds <= 1000 && _showHighlight)
+			{
+				Thread.Sleep(5);
+			}
+			
 			_lastMoveHighlight[0] = null;
 			_lastMoveHighlight[1] = null;
 		}

@@ -10,7 +10,7 @@ namespace KaroManager.State
 	public interface IKaroState
 	{
 		void Enter(KaroGameManager manager);
-		void Update(KaroGameManager manager, Point click);
+		void Update(KaroGameManager manager, MouseClick click);
 		void Exit(KaroGameManager manager);
 	}
 }
