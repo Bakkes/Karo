@@ -12,10 +12,8 @@ namespace engine {
 	}
 
 	BigInteger::BigInteger(const BigInteger& instance) {
-		const char* s = instance.ToString();
 		mpz_init(_value);
 		mpz_add(_value, _value, instance._value);
-		const char* s2 = ToString();
 	}
 
 	BigInteger::~BigInteger() {

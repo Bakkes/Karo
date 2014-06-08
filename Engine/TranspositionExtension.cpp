@@ -70,6 +70,17 @@ namespace engine {
 				staticCounter++;
 				int percentage = (int)((staticCounter / ((double) (staticCounter + staticCounter2)) * 100));
 				std::cout << "zobrist COLLISION DETECTED! Sum: " << staticCounter << " / " << staticCounter2 << "(" << percentage << "%)" << std::endl;
+				std::cout << ((Board*)GetBoard())->ToString() << std::endl;
+				std::cout << "TopLeft: (" << GetBoard()->GetRelativeCellAt(Vector2D(0)).GetAbsolutePosition().X() << ", " << GetBoard()->GetRelativeCellAt(Vector2D(0)).GetAbsolutePosition().Y() << ")" << std::endl;
+
+				Move move = *data->GetBestMove(player);
+
+				std::cout << "Type: " << move.GetMoveType() << ", From: (" << move.GetFromCell().X() << ", " << move.GetFromCell().Y() << "), To: (" << move.GetToCell().X() << ", " << move.GetToCell().Y() << ")";
+				if (move.HasUsedCell()) {
+					cout << " Used: (" << move.GetUsedCell().X() << ", " << move.GetUsedCell().Y() << ")";
+				}
+
+				cout << std::endl;
 			}
 		} else if (data->GetDepth() > depth) {
 			// We've seen this board before but at a deeper level, this search will improve that
