@@ -23,7 +23,7 @@ namespace engine {
 
 		friend bool operator == (const BigInteger& lhs, const BigInteger& rhs) {
 			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, lhs._value);
+			mpz_sub(c._value, c._value, rhs._value);
 			return mpz_sgn(c._value) == 0;
 		}
 
@@ -33,25 +33,25 @@ namespace engine {
 
 		friend bool operator < (const BigInteger& lhs, const BigInteger& rhs) {
 			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, lhs._value);
+			mpz_sub(c._value, c._value, rhs._value);
 			return mpz_sgn(c._value) < 0;
 		}
 
 		friend bool operator > (const BigInteger& lhs, const BigInteger& rhs) {
 			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, lhs._value);
+			mpz_sub(c._value, c._value, rhs._value);
 			return mpz_sgn(c._value) > 0;
 		}
 
 		friend bool operator <= (const BigInteger& lhs, const BigInteger& rhs) {
 			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, lhs._value);
+			mpz_sub(c._value, c._value, rhs._value);
 			return mpz_sgn(c._value) <= 0;
 		}
 
 		friend bool operator >= (const BigInteger& lhs, const BigInteger& rhs) {
 			BigInteger c(lhs);
-			mpz_sub(c._value, c._value, lhs._value);
+			mpz_sub(c._value, c._value, rhs._value);
 			return mpz_sgn(c._value) >= 0;
 		}
 
