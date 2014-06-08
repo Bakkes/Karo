@@ -79,6 +79,19 @@ namespace engine{
 		return result;
 	}
 	EvalResult AI::NextStep(Players player, Move move, int depth, EvalResult result) {
+		// If one of the players has won, return an EvalResult with huge +/- numbers.
+		if (ComputerPlayerUtils::IsWinningState(_board, Max)) {
+			EvalResult _result;
+			_result.SetScore(INT_MAX - depth);
+			_result.SetMove(move);
+			return _result;
+		} else if (ComputerPlayerUtils::IsWinningState(_board, Min)) {
+			EvalResult _result;
+			_result.SetScore(INT_MIN + depth);
+			_result.SetMove(move);
+			return _result;
+		}
+
 		if (depth + 1 < _maxDepth) {
 			// We are allowed to go deeper, take the result of the next step
 			EvalResult _result = MinimaxStep(ComputerPlayerUtils::InvertPlayer(player), depth + 1, result);
