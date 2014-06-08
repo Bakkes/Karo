@@ -23,11 +23,11 @@ namespace engine {
 		virtual void Step(const Players& player, const int& currentDepth, EvalResult&);
 
 		// Notifies the Extension of which move will be executed
-		// Called BEFORE the board state changes
+		// The board state has already been updated according to the given move!toCellData
 		virtual void OnExecuteMove(const Move&);
-		// Notifies the extension of which move will be undo
-		// Called BEFORE the board state changes
-		virtual void OnUndoMove(const Move&);
+		// Notifies the extension of which move will be undone
+		// The board state has already been updated according to the given move!toCellData
+		virtual void OnUndoMove(const Move&, Players& player);
 		// allows extension to do move ordering
 		virtual void UpdateMoves(std::vector<Move>& moves);
 		virtual void UpdateMoves(std::vector<Move>& moves, Players player, int depth);

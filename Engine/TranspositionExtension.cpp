@@ -33,6 +33,14 @@ namespace engine {
 		_hasher->UpdateBoard(board);
 	}
 
+	void TranspositionExtension::OnExecuteMove(const Move& move) {
+		_hasher->ExecuteMove(move);
+	}
+
+	void TranspositionExtension::OnUndoMove(const Move& move, Players& player) {
+		_hasher->UndoMove(move, player);
+	}
+
 	void TranspositionExtension::RegisterBoard(EvalResult& result, int depth, Players player) {
 		long long hash = _hasher->GetHash();
 		Move* move = new Move(result.GetMove());

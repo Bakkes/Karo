@@ -19,7 +19,7 @@ namespace engine{
 
 	void AIExtension::OnExecuteMove(const Move& move) {}
 
-	void AIExtension::OnUndoMove(const Move& move) {}
+	void AIExtension::OnUndoMove(const Move& move, Players& player) {}
 
 	bool AIExtension::ShouldContinue(const EvalResult& currentResult, EvalResult& prevResult, const Players& player){
 		return true;

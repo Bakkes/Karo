@@ -13,6 +13,8 @@ namespace engine{
 		}
 
 		virtual void UpdateBoard(IBoard* board) = 0;
+		virtual void ExecuteMove(const Move& move) = 0;
+		virtual void UndoMove(const Move& move, Players& player) = 0;
 		virtual long long GetHash() = 0;
 
 	};

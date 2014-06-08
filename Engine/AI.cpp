@@ -58,10 +58,23 @@ namespace engine{
 
 		for (auto it = possibleMoves.begin(); it != possibleMoves.end(); ++it) {
 			Move move = (*it);
+
 			_board->ExecuteMove(move, player);
 			++_nodesSeen;
+
+			for_each(_extensions->begin(), _extensions->end(), [&move](AIExtension* extension) -> void{
+				// Executed move
+				extension->OnExecuteMove(move);
+			});
+
+
 			EvalResult currentResult = NextStep(player, move, depth, result);
+
 			_board->UndoMove(move, player);
+			for_each(_extensions->begin(), _extensions->end(), [&move, &player](AIExtension* extension) -> void{
+				// Undone move
+				extension->OnUndoMove(move, player);
+			});
 
 			// allows for pruning
 			for(auto extension = _extensions->begin(); extension != _extensions->end(); ++extension){
