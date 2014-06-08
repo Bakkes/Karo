@@ -37,11 +37,11 @@ namespace KaroManager.State
 		{
 		}
 
-		public void Update(KaroGameManager manager, Point click)
+		public void Update(KaroGameManager manager, MouseClick click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.FindLegalMoves(manager.CurrentPlayer);
 			MoveWrapper move = legalMoves.FirstOrDefault(m =>
-				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
+				m.GetToCell() == new Vector2DWrapper(click.Position.X, click.Position.Y));
 
 			// We have a valid move.
 			if (move != null)
@@ -64,7 +64,7 @@ namespace KaroManager.State
 			// Change state to Piece source state if all 6 pieces are on the board.
 			if (manager.Board.GetOccupiedCells().Count == MaxPieceCount)
 			{
-				if (!(manager.CurrentState is ComputerState))
+				if (!(manager.CurrentState is ComputerState) && !(manager.CurrentState is WaitForUndoState))
 				{
 					Debug.WriteLine("All {0} pieces are placed at the board.", MaxPieceCount);
 					manager.ChangeState(PieceSourceState.Instance);

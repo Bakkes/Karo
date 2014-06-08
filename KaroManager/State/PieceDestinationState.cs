@@ -36,7 +36,7 @@ namespace KaroManager.State
 		{
 		}
 
-		public void Update(KaroGameManager manager, Point click)
+		public void Update(KaroGameManager manager, MouseClick click)
 		{
 			IEnumerable<MoveWrapper> legalMoves = manager.FindLegalMoves(manager.CurrentPlayer);
 			// Get the move with the correct source tile from the last click.
@@ -45,7 +45,7 @@ namespace KaroManager.State
 
 			// Get the move (if it exists) with the correct destination tile.
 			MoveWrapper move = sourceLegalMoves.FirstOrDefault(m =>
-				m.GetToCell() == new Vector2DWrapper(click.X, click.Y));
+				m.GetToCell() == new Vector2DWrapper(click.Position.X, click.Position.Y));
 
 			if (move != null)
 			{
@@ -68,7 +68,7 @@ namespace KaroManager.State
 					CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);
 					Debug.WriteLine(util.TurnToString(util.ConvertMoveToTurn(move)));
 
-					if (!(manager.CurrentState is ComputerState))
+					if (!(manager.CurrentState is ComputerState) && !(manager.CurrentState is WaitForUndoState))
 					{
 						manager.ChangeState(PieceSourceState.Instance);
 					}

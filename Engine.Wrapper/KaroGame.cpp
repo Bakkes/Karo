@@ -40,9 +40,13 @@ namespace wrapper {
 		_board->ExecuteMove(moveWrapper, player);
 	}
 
+	void KaroGame::UndoMove(MoveWrapper^ moveWrapper, engine::wrapper::Players player) {
+		_board->UndoMove(moveWrapper, player);
+	}
+
 	MoveWrapper^ KaroGame::GetBestMove() {
 		IBoard* cpBoard = _board->GetInternalBoardCopy();
-		AI* cPlayer = AIFactory(cpBoard, 4).CreateMoveOrderingAlfaZorbristAI(_hasher, _transpositionTable);
+		AI* cPlayer = AIFactory(cpBoard, 3).CreateMoveOrderingAlfaZorbristAI(_hasher, _transpositionTable);
 		_hasher->UpdateBoard(cpBoard);
 		cPlayer->SetEvaluator(new AltEval());
 		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);

@@ -7,6 +7,7 @@ using XNAFrontend.Components;
 using XNAFrontend.Services;
 using CommunicationProtocol;
 using System.Diagnostics;
+using System.Linq;
 
 namespace XNAFrontend
 {
@@ -165,6 +166,19 @@ namespace XNAFrontend
 		private void PlayerWon(Players player)
 		{
 			Debug.WriteLine(player + " has won");
+
+			// Get rid of game related components and the game manager.
+			KaroGameManager = null;
+			Components.Remove(Components.First(c => c is Board));
+
+			string color = player == Players.Max ? "red" : "green";
+
+			// Show the winning screen.
+			Components.Add(new MessageComponent(this,
+				string.Format("The {0} player has won the game.", color),
+				"Hit enter to return to the menu",
+				new MenuComponent(this)
+			));
 		}
 
 		private void DisposeCommunication()

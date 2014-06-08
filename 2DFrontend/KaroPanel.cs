@@ -250,7 +250,7 @@ namespace _2DFrontend
 		{
 			if (_manager != null)
 			{
-				_manager.Update(PixelToCell(e.Location.X, e.Location.Y));
+				_manager.Update(new MouseClick(PixelToCell(e.Location.X, e.Location.Y), MouseButton.LEFT));
 				Invalidate();
 			}
 		}

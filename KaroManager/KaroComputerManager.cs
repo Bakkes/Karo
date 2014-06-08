@@ -19,7 +19,7 @@ namespace KaroManager
 			Debug.WriteLine("Before Execute Board State: {0}", Board.ToString());
 			CurrentMove = null;
 			base.ExecuteMove(move);
-			ChangeState(ComputerState.Instance);
+			ChangeState(WaitForUndoState.Instance);
 			Debug.WriteLine("After Board State: {0}", Board.ToString());
 		}
 	}
