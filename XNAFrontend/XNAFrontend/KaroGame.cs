@@ -167,8 +167,7 @@ namespace XNAFrontend
 		{
 			Debug.WriteLine(player + " has won");
 
-			// Get rid of game related components and the game manager.
-			KaroGameManager = null;
+			// Get rid of game related components
 			Components.Remove(Components.First(c => c is Board));
 
 			string color = player == Players.Max ? "red" : "green";
