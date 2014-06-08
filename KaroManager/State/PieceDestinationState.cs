@@ -68,7 +68,7 @@ namespace KaroManager.State
 					CommunicationProtocolConversionUtility util = new CommunicationProtocolConversionUtility(manager.Game);
 					Debug.WriteLine(util.TurnToString(util.ConvertMoveToTurn(move)));
 
-					if (!(manager.CurrentState is ComputerState))
+					if (!(manager.CurrentState is ComputerState) && !(manager.CurrentState is WaitForUndoState))
 					{
 						manager.ChangeState(PieceSourceState.Instance);
 					}

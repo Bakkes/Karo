@@ -49,7 +49,7 @@ namespace KaroManager.State
 				Debug.WriteLine("Clicked on moveable tile.");
 				manager.ExecuteMove(move);
 				manager.CurrentMove = null;
-				if (!(manager.CurrentState is ComputerState))
+				if (!(manager.CurrentState is ComputerState) && !(manager.CurrentState is WaitForUndoState))
 				{
 					manager.ChangeState(PieceSourceState.Instance);
 				}
