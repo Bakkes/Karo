@@ -22,24 +22,24 @@ namespace engine{
 		if (player == Max) {
 			if (score.GetScore() > result.GetScore()) {
 				result.SetScore(score.GetScore());
+				result.SetMove(score.GetMove());
 			}
 			if (score.GetScore() >= result.GetBestForMin()) {
 				//cutoff
 				return false;
 			} else if (score.GetScore() > result.GetBestForMax()) {
 				result.SetBestForMax(score.GetScore());
-				result.SetMove(score.GetMove());
 			}
 		} else if (player == Min)  {
 			if (score.GetScore() < result.GetScore()) {
 				result.SetScore(score.GetScore());
+				result.SetMove(score.GetMove());
 			}
 			if (score.GetScore() <= result.GetBestForMax()) {
 				// Cut off
 				return false;
 			} else if (score.GetScore() < result.GetBestForMin()) {
 				result.SetBestForMin(score.GetScore());
-				result.SetMove(score.GetMove());
 			}
 		}
 		return true;
