@@ -30,7 +30,6 @@ namespace engine {
 
 	void BigInteger::multiply2exp(int exponent) {
 		mpz_mul_2exp(_value, _value, exponent);
-		gmp_printf("%Zd\n", _value);
 	}
 
 	BigInteger& BigInteger::operator = (BigInteger instance) {
