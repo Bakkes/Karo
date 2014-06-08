@@ -114,7 +114,7 @@ namespace XNAFrontend.Components
 				}
 			}
 
-			if (mouseState.RightButton == ButtonState.Pressed)
+			if (mouseState.RightButton == ButtonState.Pressed && _previousMouseState.RightButton != ButtonState.Pressed)
 			{
 				_markedCache = new Dictionary<Vector2, bool>();
 				KaroGameManager.Update(new MouseClick(
