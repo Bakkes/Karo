@@ -10,9 +10,18 @@ namespace Tests {
 	TEST_CLASS(ZobristHashingTest) {	
 	public:
 		TEST_METHOD_INITIALIZE(InitZobristTest) {
-			for(int cellValue = 0; cellValue < 16; cellValue++) {
-				for(int position = 0; position < 400; position++) {
-					_hashValues[cellValue][position] = _rand->NextInteger();
+			STARTING_HASH.set(4329604);
+
+			const int bits = 5;
+	
+			for(int cellValue = 1; cellValue <= 16; cellValue++) {
+				for(int y = 0; y < 20; y++) {
+					for (int x = 0; x < 20; x++) {
+						int position = GetCellPosition(Vector2D(x, y));
+
+						_hashValues[cellValue - 1][position].set(cellValue);
+						_hashValues[cellValue - 1][position].multiply2exp((y * (20 * 20 * bits)) + (x * bits));
+					}
 				}
 			}
 		}
@@ -21,7 +30,9 @@ namespace Tests {
 			Board* board = CreateStartingBoard();
 			ZobristHashing hasher(board);
 
-			Assert::IsTrue(STARTING_HASH == hasher.GetHash(), L"Invalid Hash");
+			BigInteger hash = hasher.GetHash();
+
+			Assert::IsTrue(STARTING_HASH == hash, L"Invalid Hash");
 
 			delete board;
 		}
@@ -58,12 +69,12 @@ namespace Tests {
 			Move move(JUMP, from, to, used);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			BigInteger baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			BigInteger expectedHash = baseHash;
 
 			// Delete Piece
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -116,12 +127,12 @@ namespace Tests {
 			Move move(STEP, from, to, used);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			BigInteger baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = 0;
+			BigInteger expectedHash = 0;
 
 			// Generate board has but shifted
 			for (int x = 0; x < 5; ++x) {
@@ -182,12 +193,12 @@ namespace Tests {
 			Move move(STEP, from, to, used);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			BigInteger baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			BigInteger expectedHash = baseHash;
 
 			// Delete Piece
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -236,12 +247,12 @@ namespace Tests {
 			Move move(JUMP, from, to);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;
+			BigInteger baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			BigInteger expectedHash = baseHash;
 			
 			// Delete Piece at (3, 3)
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -288,12 +299,12 @@ namespace Tests {
 			Move move(STEP, from, to);
 			board->ExecuteMove(move, Min);
 
-			int baseHash = STARTING_HASH;	
+			BigInteger baseHash = STARTING_HASH;	
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			BigInteger expectedHash = baseHash;
 
 			// Delete Piece at (3, 3)
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -316,7 +327,7 @@ namespace Tests {
 			Move move(INSERT, Vector2D(3, 3));
 			board->ExecuteMove(move, Min);
 
-			int expectedHash = STARTING_HASH;
+			BigInteger expectedHash = STARTING_HASH;
 			expectedHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(Vector2D(3, 3))];
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(Vector2D(3, 3))];
 
@@ -354,8 +365,7 @@ namespace Tests {
 				"0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n");
 		}
 
-		long long _hashValues[16][400];
-
-		static const long long STARTING_HASH = 80;
+		BigInteger _hashValues[16][400];
+		BigInteger STARTING_HASH;
 	};
 }

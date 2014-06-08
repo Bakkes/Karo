@@ -41,4 +41,9 @@ namespace engine {
 		mpz_xor(_value, _value, instance._value);
 		return *this;
 	}
+
+	BigInteger& BigInteger::operator ^= (BigInteger instance) {
+		mpz_xor(_value, _value, instance._value);
+		return *this;
+	}
 }

@@ -19,9 +19,13 @@ namespace engine {
 
 		BigInteger& operator = (BigInteger instance);
 		BigInteger& operator ^ (BigInteger instance);
+		BigInteger& operator ^= (BigInteger instance);
 
 		friend bool operator == (const BigInteger& lhs, const BigInteger& rhs) {
-			return mpz_cmp(lhs._value, rhs._value) == 0;
+			BigInteger c(lhs);
+			mpz_sub(c._value, c._value, lhs._value);
+			int result = mpz_sgn(c._value);
+			return result == 0;
 		}
 
 		friend bool operator != (const BigInteger& lhs, const BigInteger& rhs) {
