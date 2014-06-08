@@ -27,7 +27,7 @@ namespace KaroManager.State
 		public void Enter(KaroGameManager manager)
 		{
 			_timer = new Timer();
-			_timer.Elapsed += delegate { Finished(manager); }; ;
+			_timer.Elapsed += delegate { Finished(manager); };
 			_timer.AutoReset = true;
 			_timer.Interval = 1000;
 			_timer.Start();
