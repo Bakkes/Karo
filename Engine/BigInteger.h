@@ -17,9 +17,18 @@ namespace engine {
 
 		void set(int integer);
 
-		BigInteger& operator = (BigInteger instance);
-		BigInteger& operator ^ (BigInteger instance);
-		BigInteger& operator ^= (BigInteger instance);
+		BigInteger& operator = (const BigInteger& instance);
+
+		friend BigInteger operator ^ (const BigInteger& lhs, const BigInteger& rhs) {
+			BigInteger c(lhs);
+			mpz_xor(c._value, c._value, rhs._value);
+			return c;
+		}
+
+		friend BigInteger& operator ^= (BigInteger& lhs, const BigInteger& instance) {
+			mpz_xor(lhs._value, lhs._value, instance._value);
+			return lhs;
+		}
 
 		friend bool operator == (const BigInteger& lhs, const BigInteger& rhs) {
 			BigInteger c(lhs);

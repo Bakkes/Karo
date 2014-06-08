@@ -13,7 +13,7 @@ namespace engine {
 
 	BigInteger::BigInteger(const BigInteger& instance) {
 		mpz_init(_value);
-		mpz_set(_value, instance._value);
+		mpz_add(_value, _value, instance._value);
 	}
 
 	BigInteger::~BigInteger() {
@@ -32,18 +32,8 @@ namespace engine {
 		mpz_mul_2exp(_value, _value, exponent);
 	}
 
-	BigInteger& BigInteger::operator = (BigInteger instance) {
+	BigInteger& BigInteger::operator = (const BigInteger& instance) {
 		mpz_set(_value, instance._value);
-		return *this;
-	}
-
-	BigInteger& BigInteger::operator ^ (BigInteger instance) {
-		mpz_xor(_value, _value, instance._value);
-		return *this;
-	}
-
-	BigInteger& BigInteger::operator ^= (BigInteger instance) {
-		mpz_xor(_value, _value, instance._value);
 		return *this;
 	}
 }
