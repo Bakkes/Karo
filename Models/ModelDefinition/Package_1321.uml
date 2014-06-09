@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="fe54a4d4-8ab6-435f-a8a7-0d7eeb70ea30"
+  name="C#" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="80e01008-6919-4f0a-a835-1865bf04afb9"
+        LastKnownName="CommunicationProtocol"
+        LastKnownLocation="Package_1254.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="fbf5a1e0-43cf-4a38-a172-a015ecddf7d8"
+        LastKnownName="KaroManager"
+        LastKnownLocation="Package1_1254.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="f5036490-0e7b-4324-8d16-0551e0efb96d"
+        LastKnownName="XNAFrontend"
+        LastKnownLocation="Package3_1254.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="5b5051f3-a804-44d9-9e1f-3171ee329f5f"
+        LastKnownName="2DFrontend"
+        LastKnownLocation="Package2_1254.uml" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

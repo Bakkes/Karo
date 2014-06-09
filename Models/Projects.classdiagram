@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="b79c9571-ed40-455c-a0a8-1f40392f0e37" name="Projects" linkedPackageId="9926e56b-0765-489a-a1f6-4adda8729da5" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="4bae2234-f4d9-44c1-a778-b80cd29cbe02">
+      <profileInstance Id="a7b99e80-4c95-4e7d-9879-c54cf70ccf14" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="02d28ecb-1e35-4519-ba5d-0cb43f3e290f">
+      <profileInstance Id="a201ad1d-6afd-481d-a84a-53f69fd49194" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="6b88702c-9e4e-4768-9764-ce502a8a32f0" name="C++">
+        <elementDefinition Id="b28615ed-851e-4d2b-a2dc-99b93ac6b4b2" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="31f00bd2-da17-4862-8a8f-89e05d6be2b1" name="Engine">
+              <elementDefinition Id="f5f6c131-cfc8-448f-83ab-beacaa192879" />
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="ca671871-ca97-4c8e-b551-73ea67b8852d" name="C++/CLR">
+        <elementDefinition Id="2d334e76-ac50-4d9b-8f15-ea151da3b95c" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="85f5bf41-52c0-46a8-94b4-29257868646d" name="Engine.Wrapper">
+              <elementDefinition Id="f88d2856-c084-41f9-b8a1-461e909f34c1" />
+              <suppliersInternal>
+                <dependency Id="88e6fad8-4906-42b1-ab44-0ef1fa1a5547">
+                  <packageMoniker Id="31f00bd2-da17-4862-8a8f-89e05d6be2b1" LastKnownName="Engine" />
+                  <elementDefinition Id="35b96829-e359-4725-ad84-14380f858857" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+    <logicalClassDesignerModelHasPackages>
+      <package Id="64c70b72-b14f-46b6-936a-77abae474db6" name="C#">
+        <elementDefinition Id="fe54a4d4-8ab6-435f-a8a7-0d7eeb70ea30" />
+        <packagedElements>
+          <packageHasNamedElement>
+            <package Id="d476b02f-1d7c-4e76-a308-aef9b513bed1" name="CommunicationProtocol">
+              <elementDefinition Id="80e01008-6919-4f0a-a835-1865bf04afb9" />
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="da27da4c-0680-4818-8172-ebc97cba53b8" name="KaroManager">
+              <elementDefinition Id="fbf5a1e0-43cf-4a38-a172-a015ecddf7d8" />
+              <suppliersInternal>
+                <dependency Id="c5c2d071-59a0-48e6-88e4-d540bc9cdd56">
+                  <packageMoniker Id="85f5bf41-52c0-46a8-94b4-29257868646d" LastKnownName="Engine.Wrapper" />
+                  <elementDefinition Id="e1e73bb1-e526-4c8c-aa2a-d300d19ef092" />
+                </dependency>
+                <dependency Id="6204ffa9-a6b5-4bb9-99bd-9f36c49b1dc9">
+                  <packageMoniker Id="d476b02f-1d7c-4e76-a308-aef9b513bed1" LastKnownName="CommunicationProtocol" />
+                  <elementDefinition Id="638f8c3e-2838-4928-8cb7-37fe9aa90f80" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="3c1c7845-2bf1-4113-9cd9-4c7dc442bb9f" name="XNAFrontend">
+              <elementDefinition Id="f5036490-0e7b-4324-8d16-0551e0efb96d" />
+              <suppliersInternal>
+                <dependency Id="bd0db40c-236d-4c64-a5b9-883c2927a4bf">
+                  <packageMoniker Id="da27da4c-0680-4818-8172-ebc97cba53b8" LastKnownName="KaroManager" />
+                  <elementDefinition Id="9e40d3ea-401e-4d1c-923f-387e44207993" />
+                </dependency>
+                <dependency Id="f8bd549c-cf1c-4093-a4ca-0d916f7b5276">
+                  <packageMoniker Id="85f5bf41-52c0-46a8-94b4-29257868646d" LastKnownName="Engine.Wrapper" />
+                  <elementDefinition Id="692f8852-c82c-4636-b292-765f34d68b16" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+          <packageHasNamedElement>
+            <package Id="b2727d15-308a-46cb-976d-e3d6cf01fbfc" name="2DFrontend">
+              <elementDefinition Id="5b5051f3-a804-44d9-9e1f-3171ee329f5f" />
+              <suppliersInternal>
+                <dependency Id="2cac24c3-1692-4a7b-b8c1-7aeb29619413">
+                  <packageMoniker Id="da27da4c-0680-4818-8172-ebc97cba53b8" LastKnownName="KaroManager" />
+                  <elementDefinition Id="eaeff9ef-da62-4e5d-96ca-fd1d36b8e613" />
+                </dependency>
+                <dependency Id="10e0b1a7-cdf5-457d-96d6-341aebd6bafa">
+                  <packageMoniker Id="85f5bf41-52c0-46a8-94b4-29257868646d" LastKnownName="Engine.Wrapper" />
+                  <elementDefinition Id="1f396a72-5bbd-497c-b2e1-b3f44f596e01" />
+                </dependency>
+              </suppliersInternal>
+            </package>
+          </packageHasNamedElement>
+        </packagedElements>
+      </package>
+    </logicalClassDesignerModelHasPackages>
+  </packagedElements>
+  <package Id="9926e56b-0765-489a-a1f6-4adda8729da5" name="Models">
+    <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
+  </package>
+</logicalClassDesignerModel>

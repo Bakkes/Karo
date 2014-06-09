@@ -1496,6 +1496,32 @@
         Id="d44f383f-1bb6-471e-a410-d546eec2a954"
         name="Vector2D" />
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6b0d5998-754f-4ae6-9601-457905fab1ee"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="b28615ed-851e-4d2b-a2dc-99b93ac6b4b2"
+        LastKnownName="C++"
+        LastKnownLocation="Package_1314.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="2d334e76-ac50-4d9b-8f15-ea151da3b95c"
+        LastKnownName="C++/CLR"
+        LastKnownLocation="Package1_1314.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="fe54a4d4-8ab6-435f-a8a7-0d7eeb70ea30"
+        LastKnownName="C#"
+        LastKnownLocation="Package_1321.uml" />
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"
