@@ -3413,6 +3413,44 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="fc95b943-c3e3-4210-99b1-90fd8a0b49d9"
+            name="GetCellAt"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="cad43de0-2381-40e7-9674-cc260b2e123f"
+                  name="pos"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d44f383f-1bb6-471e-a410-d546eec2a954"
+                      LastKnownName="Vector2D"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8523198f-1912-4ce9-b216-c4c6ca29646a"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <classMoniker
+                      Id="bd7fafbc-1117-4297-a10e-10c44185dd46"
+                      LastKnownName="Cell&lt;T&gt;"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>

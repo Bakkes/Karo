@@ -528,6 +528,27 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="570e1e90-9b5e-4507-aa55-6bfea49c27dd" name="GetCellAt" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="fc95b943-c3e3-4210-99b1-90fd8a0b49d9" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="02b8b006-bdd9-4ec0-ba8c-8a6452b19080" name="pos" direction="In" isUnique="false">
+                  <elementDefinition Id="cad43de0-2381-40e7-9674-cc260b2e123f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="6deef291-ee6e-4f06-83c7-90ec2ca92e5c" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7c181779-ecb7-4c99-9c2f-34acf295c448" direction="Return" isUnique="false">
+                  <elementDefinition Id="8523198f-1912-4ce9-b216-c4c6ca29646a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="deb50e1c-a62e-4e62-8324-a082d49314d6" LastKnownName="Cell&lt;T&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -746,6 +767,11 @@
     <packageHasNamedElement>
       <referencedType Id="f2a2b0b5-9633-45da-a26d-cdf31a55846f" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
         <elementDefinition Id="1026481c-1bbb-4edb-872a-6055cf2137fb" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="deb50e1c-a62e-4e62-8324-a082d49314d6" name="Cell&lt;T&gt;" isAbstract="false" isLeaf="false" cachedFullName="Models::Cell&lt;T&gt;">
+        <elementDefinition Id="bd7fafbc-1117-4297-a10e-10c44185dd46" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>
