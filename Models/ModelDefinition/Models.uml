@@ -1524,36 +1524,1129 @@
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
-        Id="961ac029-6d30-456d-b1ac-e4543604f58e"
+        Id="e9fbc4cd-f475-4bde-b080-c37d7640580d"
+        name="AI"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="84f3c335-0f28-414e-97d0-605178ab1b7c"
+            isDerived="false"
+            sourceEndRoleName="AI"
+            targetEndRoleName="AIExtension"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="6e6a52b2-c740-4645-b175-8f000e740aa8"
+              LastKnownName="AIExtension"
+              LastKnownLocation="Models.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="29b82c47-81bc-4381-9db4-f06b6809cfd9"
+                  name="AI"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="7e9d75a9-4498-4d6b-9de6-c8145960e9a6"
+                      name="Lower"
+                      value="0" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="11974c72-0e2c-4353-aabd-e7ea40b65101"
+                      name="Upper"
+                      value="0" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="72bf724b-927e-48ae-8cc6-9d170db6cdb6"
+                  name="AIExtension"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="8df1c5fa-d409-42ac-9a13-f56039724506"
+                      name="Lower"
+                      value="*" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="63cf1bbb-4dee-400d-bb90-c3540e9e547b"
+                      name="Upper"
+                      value="*" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="96a0afef-5d5c-40e7-8234-24acc6b00d7a"
+            name="board"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="06bacf2f-4c71-40fa-b445-875bc776f0e2"
+                LastKnownName="Models::IBoard*"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="31078980-2006-43e4-a53e-5b8f388e6c15"
+            name="evaluator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="839954ff-34ac-4e60-93cc-218f45d4f46d"
+                LastKnownName="IStaticEvaluator*"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="41d14ee7-08f5-4934-8362-5880dad0c899"
+            name="extensions"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="b8f3ac7a-90ee-4b65-bcf4-39ef38bc89ad"
+                LastKnownName="vector&lt;AIEtension*&gt;"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="d0ef7017-5fe6-4563-9208-646ed70cf087"
+            name="GetBestMove"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a93e6d6d-0a50-47b0-9bfe-9501858205b2"
+                  name="player"
+                  direction="In">
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="56241283-5733-47ed-b2da-b3e62c6f793e"
+                      LastKnownName="Players"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1c4fff38-4a87-458f-91b6-e39d1da91556"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="b0dd07aa-e95d-42d5-8249-b1fd1974c985"
+                      LastKnownName="Move"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="378b4a53-a240-4fa6-a6e4-53525f0f50da"
+            name="AddExtension"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4c215145-39c6-4644-bf18-b2029884857a"
+                  name="extension"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="c3cdb3dd-94cf-48e1-a675-ae98857b1601"
+                      LastKnownName="AIExtension*"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="94f987a0-57b2-4ede-a9f7-4526158b0e85"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="06bacf2f-4c71-40fa-b445-875bc776f0e2"
+        name="Models::IBoard*" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="1c7cc7f0-c159-4c66-ac7e-b762834800e2"
+        name="Static" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="aa97f97a-3b4e-4744-ac82-a2f54d97fc7d"
+        name="IStaticEvaluator" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="839954ff-34ac-4e60-93cc-218f45d4f46d"
+        name="IStaticEvaluator*" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="c3cdb3dd-94cf-48e1-a675-ae98857b1601"
+        name="AIExtension*" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="b8f3ac7a-90ee-4b65-bcf4-39ef38bc89ad"
+        name="vector&lt;AIEtension*&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6e6a52b2-c740-4645-b175-8f000e740aa8"
+        name="AIExtension"
+        isAbstract="true"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedAttributesInternal>
+          <property
+            Id="886bfba6-abf8-452f-b6f5-55d4f7947a57"
+            name="board"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6cb753b3-db5d-46f2-8e00-d24c36657641"
+                LastKnownName="IBoard*"
+                LastKnownLocation="Package_1118.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="3b8f7828-f43c-4ef4-8d37-fd27e5909c0b"
+            name="evalutator"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="839954ff-34ac-4e60-93cc-218f45d4f46d"
+                LastKnownName="IStaticEvaluator*"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="4e8c49c0-5a30-49ad-8ff4-607722a3656c"
+            name="Start"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b4bb91e9-b434-4614-8148-8b11fe04bf33"
+                  name="maxDepth"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="97538012-41dc-4a86-b7d9-e4d47a05091b"
+                      LastKnownName="int"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9d826a4f-feca-405b-b915-e171abf74396"
+                  name="board"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="6cb753b3-db5d-46f2-8e00-d24c36657641"
+                      LastKnownName="IBoard*"
+                      LastKnownLocation="Package_1118.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0488ab0d-3689-4cd1-b581-d0989f97f0c1"
+                  name="eval IStaticEvaluator*"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f3a3f815-806d-4460-bfc0-4cd6156bdfbd"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="ff2ab237-cc62-4250-b75d-8c6771bc9a3b"
+            name="End"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="82b52d0e-d092-4c24-9d0d-e63e78b07c70"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="7a2135e8-cac8-42ed-a971-c56db2629c14"
+            name="Step"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="171f6460-6462-4a9d-a8f2-34c4f11551c4"
+                  name="player"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="56241283-5733-47ed-b2da-b3e62c6f793e"
+                      LastKnownName="Players"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="235b2464-35e4-4f6e-8b5f-f12bbe33f92a"
+                  name="currentDepth"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="97538012-41dc-4a86-b7d9-e4d47a05091b"
+                      LastKnownName="int"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5e5599f4-73d2-4141-89e2-a41c3d6ebd5c"
+                  name="result"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="3de4c3f9-8a7d-4c02-a2f1-60f82cd9f8fb"
+                      LastKnownName="EvalResult"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="114899ce-2dd4-4209-b302-bc5628846da0"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="98073545-eecd-4770-b461-cea9acce0966"
+            name="OnExecuteMove"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d50ef70a-1d0d-48f3-9a4e-a74be007ecd9"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0b27d005-2e03-42c0-84e9-869bcab53406"
+                  name="move"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="b0dd07aa-e95d-42d5-8249-b1fd1974c985"
+                      LastKnownName="Move"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="9a1e57b7-b39b-416b-bc2e-75ed3a91037b"
+            name="OnUndoMove"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="aec37b54-df77-4c4d-b38b-d8ecb5ce6dbd"
+                  name="move"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="b0dd07aa-e95d-42d5-8249-b1fd1974c985"
+                      LastKnownName="Move"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="38283205-fac7-43a6-bb62-27ad4c4dbf18"
+                  name="player"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="56241283-5733-47ed-b2da-b3e62c6f793e"
+                      LastKnownName="Players"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="cbde65b8-8d24-408a-819b-7a89ede54fbd"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f21a9586-bbb4-4f8f-9271-47874b5fd794"
+            name="UpdateMoves"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="aa630462-a714-41e8-9c19-55a96a8ccf5f"
+                  name="moves"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="b94539a8-c4a9-47ff-a101-1e0d6765a519"
+                      LastKnownName="vector&lt;Move&gt;"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4833ab5c-ef48-4329-b1e0-65aeb615ea53"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="dd58430f-f09f-406d-8ff7-5e681338f425"
+            name="UpdateMoves"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7f41d604-1a6f-4682-960d-71da09abcd17"
+                  name="moves"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="b94539a8-c4a9-47ff-a101-1e0d6765a519"
+                      LastKnownName="vector&lt;Move&gt;"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1b2a1839-a890-43d3-ad52-01afd0b2006c"
+                  name="player"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="56241283-5733-47ed-b2da-b3e62c6f793e"
+                      LastKnownName="Players"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d286a3a9-c3e6-417e-9b00-c03e85415666"
+                  name="depth"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="97538012-41dc-4a86-b7d9-e4d47a05091b"
+                      LastKnownName="int"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="530b3ed1-2813-4da7-9e4a-58ef69dd2988"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="5d85dbdd-2f15-498d-8083-fc6a9bf1dbdc"
+            name="ShouldContinue"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="06d1045d-795b-42c8-8248-36399e25d28c"
+                  name="currentResult"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="3de4c3f9-8a7d-4c02-a2f1-60f82cd9f8fb"
+                      LastKnownName="EvalResult"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="333f98c2-715e-416d-934d-fc5365dfc9e9"
+                  name="result"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="3de4c3f9-8a7d-4c02-a2f1-60f82cd9f8fb"
+                      LastKnownName="EvalResult"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a356fd69-ab69-4560-900c-e84261a29f13"
+                  name="player"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="56241283-5733-47ed-b2da-b3e62c6f793e"
+                      LastKnownName="Players"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a8aef9b5-ceeb-4ec4-9e25-f992793d6eae"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="1026481c-1bbb-4edb-872a-6055cf2137fb"
+                      LastKnownName="bool"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d66252f8-697f-4cdf-b7f2-b5652804f417"
+            name="RegisterBoard"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ba1458cc-91b8-4432-8a89-edb880bfc0f6"
+                  name="result"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="3de4c3f9-8a7d-4c02-a2f1-60f82cd9f8fb"
+                      LastKnownName="EvalResult"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="ff22cc62-8f24-45fe-98a1-72952b16e183"
+                  name="depth"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="97538012-41dc-4a86-b7d9-e4d47a05091b"
+                      LastKnownName="int"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2f63c10b-a04b-4f61-8101-86aef0b58263"
+                  name="player"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <enumerationMoniker
+                      Id="56241283-5733-47ed-b2da-b3e62c6f793e"
+                      LastKnownName="Players"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1a3fd11a-77d0-4e06-a2d5-cbba5c5b0c9c"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28"
+                      LastKnownName="void"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="3de4c3f9-8a7d-4c02-a2f1-60f82cd9f8fb"
+        name="EvalResult" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="b94539a8-c4a9-47ff-a101-1e0d6765a519"
+        name="vector&lt;Move&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="1026481c-1bbb-4edb-872a-6055cf2137fb"
+        name="bool" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="96515a51-eeb4-4e6b-b55d-19a88d9dc26f"
+        name="voidd" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="df09bad6-0640-4d97-9618-6b2da93aed03"
+        name="MoveOrderExtension"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="fa8de801-969e-4c41-85f5-ee5c519319ec"
+            isSubstitutable="false">
+            <classMoniker
+              Id="6e6a52b2-c740-4645-b175-8f000e740aa8"
+              LastKnownName="AIExtension"
+              LastKnownLocation="Models.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="45f6c897-c37a-4db0-a7f7-12644aad1bac"
+        name="MoveSwapExtension"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="1d2ac25e-fb84-4dfa-a17b-e3dd2f85c78e"
+            isSubstitutable="false">
+            <classMoniker
+              Id="6e6a52b2-c740-4645-b175-8f000e740aa8"
+              LastKnownName="AIExtension"
+              LastKnownLocation="Models.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="44722c9e-61ec-4759-a94b-5c452c853134"
+        name="TranspositionExtension"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="97ade566-7a91-4162-9c25-7439e5742c1c"
+            isSubstitutable="false">
+            <classMoniker
+              Id="6e6a52b2-c740-4645-b175-8f000e740aa8"
+              LastKnownName="AIExtension"
+              LastKnownLocation="Models.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="320ec021-9fcb-49cf-9d83-4b0cb81cf592"
+        name="MiniMaxExtension"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="a31de924-e5b2-419d-bfcf-214abf302e05"
+            isSubstitutable="false">
+            <classMoniker
+              Id="6e6a52b2-c740-4645-b175-8f000e740aa8"
+              LastKnownName="AIExtension"
+              LastKnownLocation="Models.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ab8e2dd4-4e60-4a3c-b65f-3f09fbb40d1a"
+        name="AlphaBetaExtension"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="262b6de2-9ca5-4968-a90c-61854008cd7f"
+            isSubstitutable="false">
+            <classMoniker
+              Id="6e6a52b2-c740-4645-b175-8f000e740aa8"
+              LastKnownName="AIExtension"
+              LastKnownLocation="Models.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="69d8a5d3-bcfd-4354-bf72-2f65280cd7aa"
+        name="AIFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="796864dc-aa09-4ab5-8187-3a916aa47c1b">
+            <classMoniker
+              Id="320ec021-9fcb-49cf-9d83-4b0cb81cf592"
+              LastKnownName="MiniMaxExtension"
+              LastKnownLocation="Models.uml" />
+          </dependency>
+          <dependency
+            Id="3251b526-3b2e-412b-a465-f4a098ee5f3f">
+            <classMoniker
+              Id="df09bad6-0640-4d97-9618-6b2da93aed03"
+              LastKnownName="MoveOrderExtension"
+              LastKnownLocation="Models.uml" />
+          </dependency>
+          <dependency
+            Id="3d8ff929-a76b-4c40-8392-de4da40b80d3">
+            <classMoniker
+              Id="45f6c897-c37a-4db0-a7f7-12644aad1bac"
+              LastKnownName="MoveSwapExtension"
+              LastKnownLocation="Models.uml" />
+          </dependency>
+          <dependency
+            Id="bf61f5bb-6344-44f4-9804-75da0760c874">
+            <classMoniker
+              Id="ab8e2dd4-4e60-4a3c-b65f-3f09fbb40d1a"
+              LastKnownName="AlphaBetaExtension"
+              LastKnownLocation="Models.uml" />
+          </dependency>
+          <dependency
+            Id="7552b923-04db-4e7a-b8a1-f77fd58f6c84">
+            <classMoniker
+              Id="44722c9e-61ec-4759-a94b-5c452c853134"
+              LastKnownName="TranspositionExtension"
+              LastKnownLocation="Models.uml" />
+          </dependency>
+          <dependency
+            Id="4936e676-60e4-42d6-b08c-8d4ab483f413">
+            <classMoniker
+              Id="e9fbc4cd-f475-4bde-b080-c37d7640580d"
+              LastKnownName="AI"
+              LastKnownLocation="Models.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="048ef729-e221-4d95-96d4-3e0fbd8dcbb3"
+            name="board"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="6cb753b3-db5d-46f2-8e00-d24c36657641"
+                LastKnownName="IBoard*"
+                LastKnownLocation="Package_1118.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="eac7bcb8-6b5d-4366-9ca4-f5c5c16ce2db"
+            name="depth"
+            visibility="Private"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="97538012-41dc-4a86-b7d9-e4d47a05091b"
+                LastKnownName="int"
+                LastKnownLocation="Models.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="50957025-6afe-4f5b-87d7-b0195a868d7a"
+            name="CreateMiniMax"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8cc354bd-bd71-4452-8646-b346d680a1bc"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d9b55d26-4cd1-4b42-bc45-ae248a36c58e"
+                      LastKnownName="AI*"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a249a970-6826-43da-bf6e-f2b89569630a"
+            name="CreateAlphaBeta"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="82116ce3-eb34-472d-94ad-bd0f8764ab04"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d9b55d26-4cd1-4b42-bc45-ae248a36c58e"
+                      LastKnownName="AI*"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="68f0de1b-e206-4c9c-a239-0c063e9e0c66"
+            name="CreateAlphaBetaMoveOrdering"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="166e4a72-b060-4e4a-95ed-2f49bf6b159e"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d9b55d26-4cd1-4b42-bc45-ae248a36c58e"
+                      LastKnownName="AI*"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="2e50e94d-db92-4056-b87f-88fae0102597"
+            name="CreateAlphaBetaMoveOrderingZobrist"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fc850abb-2678-4c96-b828-9da0b8f86f8c"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="d9b55d26-4cd1-4b42-bc45-ae248a36c58e"
+                      LastKnownName="AI*"
+                      LastKnownLocation="Models.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d9b55d26-4cd1-4b42-bc45-ae248a36c58e"
+        name="AI*" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ab4e448b-71a3-4b84-b1d0-5cf13d3e8741"
+        name="string" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="0f3bfee5-4ecf-4506-af14-e46b4ac43fb1"
+        name="vector&lt;RelativeCell&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="a59a315f-c67a-4390-9d2f-82de8175d787"
+        name="RelativeCell" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="841e67fe-b0c4-471d-9948-3d176ac120c7"
         name="Board"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <suppliersInternal>
           <interfaceRealization
-            Id="7396aa70-da1f-4ccd-8913-ddd4a6c5843c">
+            Id="4a14c2c5-b73a-4334-88d3-42d5c8493e93">
             <interfaceMoniker
-              Id="18b4377c-c449-44f7-83f8-82ffbf3e5a0b"
+              Id="30cb261d-afb3-44d2-9f56-c0d3164320e0"
               LastKnownName="IBoard"
               LastKnownLocation="Models.uml" />
           </interfaceRealization>
         </suppliersInternal>
         <targetEnds>
           <association
-            Id="1fe61072-2b50-4bea-8dec-1ec7873ef359"
+            Id="57594c03-e46b-4872-90f8-df962acacdc3"
             isDerived="false"
             sourceEndRoleName=""
             targetEndRoleName=""
             isLeaf="false"
             isAbstract="false">
             <classMoniker
-              Id="72bac488-5a91-4272-9344-01051184103c"
+              Id="9555e3b7-ec76-4345-83ba-fa8d8670b72d"
               LastKnownName="RelativeAbsoluteConverter"
               LastKnownLocation="Models.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="5588c519-93d4-4800-a77b-712b10785f82"
+                  Id="8f2c56cb-1457-4b5e-825b-27f4ea360b20"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -1565,7 +2658,7 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="ae09635d-1614-404b-be7d-473f8d8ea378"
+                  Id="c1d1e69b-1404-4259-b27a-3a3588af442a"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -1579,7 +2672,7 @@
         </targetEnds>
         <ownedOperationsInternal>
           <operation
-            Id="1e5bbd05-e2a7-4b36-b657-918e00c172a3"
+            Id="92fb6fee-4c7f-484f-8229-faf866f1297d"
             name="ToString"
             isLeaf="false"
             isStatic="false"
@@ -1589,12 +2682,12 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="6bd1cf5f-8a6d-469c-9d9e-c57f347c87e4"
+                  Id="fe5f1c96-5b99-47c4-ae85-c98dcbed1bbb"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="82e572c2-2554-423a-9067-66f78f858380"
+                      Id="ab4e448b-71a3-4b84-b1d0-5cf13d3e8741"
                       LastKnownName="string"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1603,7 +2696,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="2b3cce25-11cd-46f1-bd78-72bb88eb703d"
+            Id="179fb514-b68c-405b-85a9-2af1e9527c26"
             name="ToSaneString"
             isLeaf="false"
             isStatic="false"
@@ -1613,12 +2706,12 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="6836e2ba-7d04-4a56-81b7-a99cad91e802"
+                  Id="2573648f-240d-49bd-9659-9e1e0e8bceeb"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="82e572c2-2554-423a-9067-66f78f858380"
+                      Id="ab4e448b-71a3-4b84-b1d0-5cf13d3e8741"
                       LastKnownName="string"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1627,7 +2720,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="33d77d94-48b8-4542-bca3-141749fa3060"
+            Id="3b457219-8bb4-4aeb-ae5e-64c53c82c308"
             name="CreateBoard"
             isLeaf="false"
             isStatic="true"
@@ -1637,13 +2730,13 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="1d7e4014-5270-4294-b1e9-2d1e9689f0dc"
+                  Id="87ece0bd-6b62-48c8-ae20-e2f7ba528615"
                   name="board"
                   direction="In"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="82e572c2-2554-423a-9067-66f78f858380"
+                      Id="ab4e448b-71a3-4b84-b1d0-5cf13d3e8741"
                       LastKnownName="string"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1651,7 +2744,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="38c6795a-7117-46d3-819c-3cd0b89e9895"
+                  Id="32dad0af-e487-492d-880d-31be8f37f70a"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
@@ -1665,7 +2758,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="7ca1580a-e281-4c08-9d12-2823ad0018b4"
+            Id="8ef6f736-f002-4669-bd83-4f3d14fbe48c"
             name="CreateBoard"
             isLeaf="false"
             isStatic="true"
@@ -1675,13 +2768,13 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="634e3120-9cb6-4819-be21-6856b57c407e"
+                  Id="f96a080d-af8d-47d4-84c9-3a943a84f3a9"
                   name="board"
                   direction="In"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="82e572c2-2554-423a-9067-66f78f858380"
+                      Id="ab4e448b-71a3-4b84-b1d0-5cf13d3e8741"
                       LastKnownName="string"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1689,7 +2782,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="f094ff88-c296-4045-9905-091e5e2133d0"
+                  Id="0ed2dfa6-d60a-49e7-bf22-231d992c2ec9"
                   name="topleft"
                   direction="In"
                   isUnique="false">
@@ -1703,7 +2796,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="b656fe29-f4bf-46fa-bcd8-819cd25d169a"
+                  Id="bdf5bbe2-17f1-4787-8710-44f788bf0696"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
@@ -1720,39 +2813,14 @@
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <undefinedType
-        Id="bf69970e-d324-4b8a-b278-304d4b68d77b"
-        name="vector&lt;" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <undefinedType
-        Id="3861b020-8611-450f-895c-751e2fb08f24"
-        name="vector&lt;Move&gt;" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <undefinedType
-        Id="05bfb4c3-820f-41b8-a18e-12db793cdd83"
-        name="vector&lt;RelativeCell&gt;" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <undefinedType
-        Id="4739b125-6b43-4239-b617-8577c9f01f14"
-        name="RelativeCell" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
-      <undefinedType
-        Id="82e572c2-2554-423a-9067-66f78f858380"
-        name="string" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <Interface
-        Id="18b4377c-c449-44f7-83f8-82ffbf3e5a0b"
+        Id="30cb261d-afb3-44d2-9f56-c0d3164320e0"
         name="IBoard"
         isAbstract="false"
         isLeaf="false">
         <ownedOperations>
           <operation
-            Id="22862616-4469-4a96-ac99-2d657ee25609"
+            Id="12407504-03e7-4a02-8e4d-7ae63007f207"
             name="ExecuteMove"
             isLeaf="false"
             isStatic="false"
@@ -1762,7 +2830,7 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="a4853f10-cd43-4d03-b6d8-214847eeaded"
+                  Id="40e339d3-5eb6-4136-8668-6cce38a60c8d"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
@@ -1775,7 +2843,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="0c688ae2-1d60-42cf-b9d3-2da95e54381b"
+                  Id="0320a46b-6587-4993-9130-95ff6a4440b5"
                   name="move"
                   direction="In"
                   isUnique="false">
@@ -1789,7 +2857,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="246146be-bf75-4cd4-bff2-7e8f3ba4b819"
+                  Id="9adcf2be-a43b-4c8b-a3da-2bbd7efc78d8"
                   name="player"
                   direction="In"
                   isUnique="false">
@@ -1804,7 +2872,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="21f82629-d7ab-46c4-aec7-a1b236bb1964"
+            Id="5fea6305-fa8b-448c-8c04-f3c74fcb2c9d"
             name="UndoMove"
             isLeaf="false"
             isStatic="false"
@@ -1814,7 +2882,7 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="d200e384-d79d-42c3-bc8b-013ff1b6b195"
+                  Id="442fab28-9ca3-4723-84bc-0c84703b4df3"
                   name="move"
                   direction="In"
                   isUnique="false">
@@ -1828,7 +2896,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="c4e7ea7d-c904-46af-9226-e30481248585"
+                  Id="f33e05be-622f-4590-bc2c-a9297a92af42"
                   name="player"
                   direction="In"
                   isUnique="false">
@@ -1842,7 +2910,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="c6215125-cb1d-4692-bac8-7f0184d699de"
+                  Id="c3261b1d-42e5-41f2-b0d9-5620be561120"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
@@ -1856,7 +2924,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="19329547-e1e7-42dd-ade1-9e7ca2d9f981"
+            Id="9d50d4a9-6f71-4fe4-b139-84d2612ea81b"
             name="GetOccupiedTiles"
             isLeaf="false"
             isStatic="false"
@@ -1866,12 +2934,12 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="54d3215d-a59c-44c1-938f-abcbb9fdff84"
+                  Id="c42481db-7a36-471c-9076-3f40c350ef01"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="05bfb4c3-820f-41b8-a18e-12db793cdd83"
+                      Id="0f3bfee5-4ecf-4506-af14-e46b4ac43fb1"
                       LastKnownName="vector&lt;RelativeCell&gt;"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1880,7 +2948,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="52e12880-e498-4898-a436-ba85e87dfb94"
+            Id="66327258-9dbf-456f-b4e7-f38dd08be588"
             name="GetEmptyTiles"
             isLeaf="false"
             isStatic="false"
@@ -1890,12 +2958,12 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="67babef8-1b8a-4f4b-8a2f-6a790f90572f"
+                  Id="7316d9ee-a549-4d7a-9a41-7942c181ba15"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="05bfb4c3-820f-41b8-a18e-12db793cdd83"
+                      Id="0f3bfee5-4ecf-4506-af14-e46b4ac43fb1"
                       LastKnownName="vector&lt;RelativeCell&gt;"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1904,7 +2972,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="51cdb3da-7a63-4cab-9bf3-d88260c21c1b"
+            Id="33c46179-74d4-4650-8169-a286126b1d53"
             name="GetLegalMoves"
             isLeaf="false"
             isStatic="false"
@@ -1914,12 +2982,12 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="02d1c070-e644-496e-824e-96a61333118b"
+                  Id="7631e624-a359-4a07-8f13-abadf08028cb"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="3861b020-8611-450f-895c-751e2fb08f24"
+                      Id="b94539a8-c4a9-47ff-a101-1e0d6765a519"
                       LastKnownName="vector&lt;Move&gt;"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1927,7 +2995,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="ab6f0b0b-e50a-4efc-af52-2203d480de06"
+                  Id="9b912462-8d09-4094-95f8-ff411c5347f4"
                   name="player"
                   direction="In"
                   isUnique="false">
@@ -1942,7 +3010,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="a0bc6eec-1c98-4b58-9685-3ba26d8c07d5"
+            Id="d6385b42-724f-47a6-b1f8-700b74565e73"
             name="GetRelativeCellAt:"
             isLeaf="false"
             isStatic="false"
@@ -1952,7 +3020,7 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="8151d6dc-6ffe-4f39-9f74-8165164e6c7e"
+                  Id="21e7a695-ac6e-4530-b20e-db83b21835c3"
                   name="pos"
                   direction="In"
                   isUnique="false">
@@ -1966,12 +3034,12 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="4f64e92e-efa4-4134-b4de-f55779dd4dae"
+                  Id="61737e7f-feac-4f5c-877f-298d958d0661"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="4739b125-6b43-4239-b617-8577c9f01f14"
+                      Id="a59a315f-c67a-4390-9d2f-82de8175d787"
                       LastKnownName="RelativeCell"
                       LastKnownLocation="Models.uml" />
                   </type_NamedElement>
@@ -1984,14 +3052,14 @@
     </packageHasNamedElement>
     <packageHasNamedElement>
       <class
-        Id="72bac488-5a91-4272-9344-01051184103c"
+        Id="9555e3b7-ec76-4345-83ba-fa8d8670b72d"
         name="RelativeAbsoluteConverter"
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false">
         <ownedOperationsInternal>
           <operation
-            Id="740cbd31-cd3d-401c-86cc-0bf21942012b"
+            Id="8ea7001b-e071-4480-afe5-fcb4dcc3ac03"
             name="MoveTile"
             isLeaf="false"
             isStatic="false"
@@ -2001,7 +3069,7 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="87815030-bd2c-489f-af63-ab949f3518c9"
+                  Id="951cfed5-a308-4c4d-9659-5e0c7c07afe3"
                   name="from"
                   direction="In"
                   isUnique="false">
@@ -2015,7 +3083,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="fff5878d-f963-4c2d-9e3e-5371850ab947"
+                  Id="c96cc59c-84e3-4114-9395-7d9f14189c8d"
                   name="to"
                   direction="In"
                   isUnique="false">
@@ -2029,7 +3097,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="3b992e5f-b192-4e5d-b21a-83b7344b59be"
+                  Id="dd7d964e-75c2-4c7a-bacb-3b13adf3ebbc"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
@@ -2043,7 +3111,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="860c256c-9456-4985-b7c0-5b3e4b440ce8"
+            Id="6aefd0fc-e469-40e4-9baa-0e0d0178af28"
             name="ToRelative"
             isLeaf="false"
             isStatic="false"
@@ -2053,7 +3121,7 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="2ac6bd47-f21c-49e9-89cb-c206de791455"
+                  Id="23f6d4af-87a7-4b13-88d8-80a60db78389"
                   name="absolute"
                   direction="In"
                   isUnique="false">
@@ -2067,7 +3135,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="6d062a08-e198-4742-ac10-39eff3c52f4d"
+                  Id="d807f7ac-e3fa-4560-9c74-d9b9ddec970e"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>
@@ -2081,7 +3149,7 @@
             </ownedParameters>
           </operation>
           <operation
-            Id="874fa751-993c-4e32-a55d-eaf11de98c5d"
+            Id="c8e14e79-b36c-4fbc-a6cb-15388b380074"
             name="ToAbsolute"
             isLeaf="false"
             isStatic="false"
@@ -2091,7 +3159,7 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="07d81a8a-fc77-49f8-91ef-77c00f1c3b5b"
+                  Id="09a4656f-e404-4f93-bf48-8baac15517f1"
                   name="relative"
                   direction="In"
                   isUnique="false">
@@ -2105,7 +3173,7 @@
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="617acac3-3b17-42a0-b43e-1b1992c759b5"
+                  Id="f8ed5d69-b569-4aea-b8d2-672ef244939b"
                   direction="Return"
                   isUnique="false">
                   <type_NamedElement>

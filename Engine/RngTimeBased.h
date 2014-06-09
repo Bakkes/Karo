@@ -14,8 +14,6 @@ namespace engine {
 		long long NextInteger() override;
 
 	private:
-		long long CreateLong();
-
 		std::list<long long>* _returnedNumbers;
 		std::mt19937_64* _mersenne;
 

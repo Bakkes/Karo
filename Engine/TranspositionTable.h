@@ -1,5 +1,5 @@
 #pragma once
-#include <map>
+#include <unordered_map>
 #include <queue>
 #include <iostream>
 #include "TranspositionTableData.h"
@@ -11,7 +11,7 @@ namespace engine {
 	class ENGINE_API TranspositionTable
 	{
 	private:
-		map<long long, TranspositionTableData*>* _hashMap;
+		unordered_map<long long, TranspositionTableData*>* _hashMap;
 		queue<long long>* _ageQueue;
 		int _maxSize;
 	public:

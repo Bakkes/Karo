@@ -29,6 +29,13 @@
       <SubType>Content</SubType>
       <DependentUpon>2DFrontend.classdiagram</DependentUpon>
     </Content>
+    <Content Include="AIExtensions.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="AIExtensions.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>AIExtensions.classdiagram</DependentUpon>
+    </Content>
     <Content Include="Board.classdiagram">
       <SubType>Content</SubType>
     </Content>
