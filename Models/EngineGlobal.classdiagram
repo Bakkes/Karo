@@ -24,6 +24,24 @@
             <elementDefinition Id="7396aa70-da1f-4ccd-8913-ddd4a6c5843c" />
           </interfaceRealization>
         </suppliersInternal>
+        <targetEnds>
+          <association Id="55368bff-908c-4410-8037-dbee5850b1cd" isDerived="false" sourceEndRoleName="" targetEndRoleName="" isLeaf="false" isAbstract="false">
+            <classMoniker Id="3597522c-4a72-4ce6-87ac-4d8792b16d15" LastKnownName="RelativeAbsoluteConverter" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="429fa191-e0c2-4693-aeca-93205eeedcb6" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5588c519-93d4-4800-a77b-712b10785f82" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="3a64a17d-0fcb-4dae-a47d-b4b1fb9d5b4b" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ae09635d-1614-404b-be7d-473f8d8ea378" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="1fe61072-2b50-4bea-8dec-1ec7873ef359" />
+          </association>
+        </targetEnds>
         <ownedOperationsInternal>
           <operation Id="8dc4a25b-8bcf-438a-8d77-ec908ef05c61" name="ToString" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="1e5bbd05-e2a7-4b36-b657-918e00c172a3" />
@@ -307,6 +325,84 @@
         <elementDefinition Id="4739b125-6b43-4239-b617-8577c9f01f14" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="3597522c-4a72-4ce6-87ac-4d8792b16d15" name="RelativeAbsoluteConverter" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="72bac488-5a91-4272-9344-01051184103c" />
+        <ownedOperationsInternal>
+          <operation Id="b7f531f6-d7c7-4495-9bc9-8f7b25bf7258" name="MoveTile" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="740cbd31-cd3d-401c-86cc-0bf21942012b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="148f2cfc-4aaa-4254-837e-34476b1521af" name="from" direction="In" isUnique="false">
+                  <elementDefinition Id="87815030-bd2c-489f-af63-ab949f3518c9" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="953a5d13-02cd-410b-8e41-321868f0df52" name="to" direction="In" isUnique="false">
+                  <elementDefinition Id="fff5878d-f963-4c2d-9e3e-5371850ab947" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3640ccb3-1a4b-4eaf-a0e3-3d39f7369cb7" direction="Return" isUnique="false">
+                  <elementDefinition Id="3b992e5f-b192-4e5d-b21a-83b7344b59be" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="90fe5757-d66d-42a6-9c5a-203825923da9" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="4adf241f-84c6-4b86-856e-837d46b18101" name="ToRelative" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="860c256c-9456-4985-b7c0-5b3e4b440ce8" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e9141fea-3d72-424c-8003-8db1bdd04bed" name="absolute" direction="In" isUnique="false">
+                  <elementDefinition Id="2ac6bd47-f21c-49e9-89cb-c206de791455" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="833a1eca-2cfe-42c9-9ebf-2370c322c10d" direction="Return" isUnique="false">
+                  <elementDefinition Id="6d062a08-e198-4742-ac10-39eff3c52f4d" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="95af1f96-874f-4816-b15d-98cacb8bd674" name="ToAbsolute" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="874fa751-993c-4e32-a55d-eaf11de98c5d" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="62e3ca8f-2a76-4cc0-be0f-6190e3749254" name="relative" direction="In" isUnique="false">
+                  <elementDefinition Id="07d81a8a-fc77-49f8-91ef-77c00f1c3b5b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="33360850-2320-4a2e-a259-09890df0ff15" direction="Return" isUnique="false">
+                  <elementDefinition Id="617acac3-3b17-42a0-b43e-1b1992c759b5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="a653d5f9-1095-47af-9dd7-a579f06e99ea" name="Models">
     <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
