@@ -42,6 +42,18 @@
     <Content Include="ModelDefinition\Package1_1119.uml">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="ModelDefinition\Package1_1254.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package1_1314.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package2_1254.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package3_1254.uml">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ModelDefinition\Package_1118.uml">
       <SubType>Content</SubType>
     </Content>
@@ -54,14 +66,29 @@
     <Content Include="ModelDefinition\Package_1220.uml">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="ModelDefinition\Package_1252.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1253.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1254.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1314.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="ModelDefinition\Package_1321.uml">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Projects.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Projects.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Projects.classdiagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
-    <Content Include="GlobalArchitecture.classdiagram">
-      <SubType>Content</SubType>
-    </Content>
-    <Content Include="GlobalArchitecture.classdiagram.layout">
-      <SubType>Content</SubType>
-      <DependentUpon>GlobalArchitecture.classdiagram</DependentUpon>
-    </Content>
     <Content Include="ModelDefinition\Models.uml">
       <SubType>Content</SubType>
     </Content>

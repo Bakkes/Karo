@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="fbf5a1e0-43cf-4a38-a172-a015ecddf7d8"
+  name="KaroManager" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <suppliersInternal>
+    <dependency
+      Id="e1e73bb1-e526-4c8c-aa2a-d300d19ef092">
+      <packageMoniker
+        Id="f88d2856-c084-41f9-b8a1-461e909f34c1"
+        LastKnownName="Engine.Wrapper"
+        LastKnownLocation="Package_1253.uml" />
+    </dependency>
+    <dependency
+      Id="638f8c3e-2838-4928-8cb7-37fe9aa90f80">
+      <packageMoniker
+        Id="80e01008-6919-4f0a-a835-1865bf04afb9"
+        LastKnownName="CommunicationProtocol"
+        LastKnownLocation="Package_1254.uml" />
+    </dependency>
+  </suppliersInternal>
+</package>
