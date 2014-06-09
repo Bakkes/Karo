@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -7,10 +6,10 @@ using engine.wrapper;
 using KaroManager;
 using KaroManager.State;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using XNAFrontend.Services;
-using Microsoft.Xna.Framework.Audio;
 
 namespace XNAFrontend.Components
 {
@@ -36,6 +35,26 @@ namespace XNAFrontend.Components
 		private Vector2DWrapper[] _lastMoveHighlight;
 		private List<string> _cordList;
 
+		private readonly object Key = new object();
+
+		private Dictionary<Vector2, bool> MarkedCache
+		{
+			get
+			{
+				lock (Key)
+				{
+					return _markedCache;
+				}
+			}
+			set
+			{
+				lock (Key)
+				{
+					_markedCache = value;
+				}
+			}
+		}
+
 		private MouseState _previousMouseState;
 
 		private KaroGameManager KaroGameManager
@@ -51,7 +70,7 @@ namespace XNAFrontend.Components
 		public Board(KaroGame game)
 			: base(game)
 		{
-			_markedCache = new Dictionary<Vector2, bool>();
+			MarkedCache = new Dictionary<Vector2, bool>();
 			_lastMoveHighlight = new Vector2DWrapper[2];
 			this.Position = new Vector3((SIZE + GAP) * 2f, 0f, (SIZE + GAP) * 1.5f);
 			game.KaroGameManager.OnMoveExecuted += OnMoveExecuted;
@@ -116,12 +135,9 @@ namespace XNAFrontend.Components
 
 			if (mouseState.RightButton == ButtonState.Pressed && _previousMouseState.RightButton != ButtonState.Pressed)
 			{
-				lock (_markedCache)
-				{
-					_markedCache = new Dictionary<Vector2, bool>();
-				}
+				MarkedCache = new Dictionary<Vector2, bool>();
 				KaroGameManager.Update(new MouseClick(
-						new System.Drawing.Point(-1337 -1337), MouseButton.RIGHT));
+						new System.Drawing.Point(-1337 - 1337), MouseButton.RIGHT));
 			}
 
 			base.Update(gameTime);
@@ -131,10 +147,7 @@ namespace XNAFrontend.Components
 
 		protected Vector2 GetTileAtPixelPosition(int mouseX, int mouseY)
 		{
-			lock (_markedCache)
-			{
-				_markedCache = new Dictionary<Vector2, bool>();
-			}
+			MarkedCache = new Dictionary<Vector2, bool>();
 			ICamera camera = (ICamera)Game.Services.GetService(typeof(ICamera));
 			Vector3 nearSource = new Vector3((float)mouseX, (float)mouseY, 0f);
 			Vector3 farSource = new Vector3((float)mouseX, (float)mouseY, 1f);
@@ -173,8 +186,8 @@ namespace XNAFrontend.Components
 
 		public override void Draw(GameTime gameTime)
 		{
-			Rectangle screenRectangle = new Rectangle(0, 0, 
-				GraphicsDevice.PresentationParameters.BackBufferWidth, 
+			Rectangle screenRectangle = new Rectangle(0, 0,
+				GraphicsDevice.PresentationParameters.BackBufferWidth,
 				GraphicsDevice.PresentationParameters.BackBufferHeight);
 			karoGame.spriteBatch.Begin();
 			karoGame.spriteBatch.Draw(_background, screenRectangle, Color.White);
@@ -227,7 +240,7 @@ namespace XNAFrontend.Components
 				foreach (BasicEffect effect in mesh.Effects)
 				{
 					effect.TextureEnabled = true;
-					effect.Texture = Game.Content.Load<Texture2D>("cords/"+cord);
+					effect.Texture = Game.Content.Load<Texture2D>("cords/" + cord);
 					effect.EnableDefaultLighting();
 					effect.World = world * Matrix.CreateRotationX(MathHelper.ToRadians(90)) * Matrix.CreateScale(0.5f) * Matrix.CreateRotationY(MathHelper.ToRadians(180)) * Matrix.CreateTranslation(new Vector3(x * (SIZE + GAP), 0, y * (SIZE + GAP)));
 					effect.View = camera.View;
@@ -358,13 +371,13 @@ namespace XNAFrontend.Components
 
 		private bool IsMarkedCell(Vector2 position)
 		{
-			lock (_markedCache)
+			lock (Key)
 			{
-				if (_markedCache.ContainsKey(position))
+				if (MarkedCache.ContainsKey(position))
 				{
-					return _markedCache[position];
+					return MarkedCache[position];
 				}
-				_markedCache[position] = false;
+				MarkedCache[position] = false;
 
 				BoardWrapper board = KaroGameManager.Board;
 				MoveWrapper currentMove = KaroGameManager.CurrentMove;
@@ -377,7 +390,7 @@ namespace XNAFrontend.Components
 						Vector2DWrapper wrapperPos = legalMove.GetToCell();
 						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 						{
-							_markedCache[position] = true;
+							MarkedCache[position] = true;
 						}
 					}
 				}
@@ -388,7 +401,7 @@ namespace XNAFrontend.Components
 						Vector2DWrapper wrapperPos = legalMove.GetFromCell();
 						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 						{
-							_markedCache[position] = true;
+							MarkedCache[position] = true;
 						}
 					}
 				}
@@ -400,7 +413,7 @@ namespace XNAFrontend.Components
 						Vector2DWrapper wrapperPos = legalMove.GetToCell();
 						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 						{
-							_markedCache[position] = true;
+							MarkedCache[position] = true;
 						}
 					}
 				}
@@ -413,12 +426,12 @@ namespace XNAFrontend.Components
 						Vector2DWrapper wrapperPos = legalMove.GetUsedCell();
 						if (position == new Vector2((float)wrapperPos.X, (float)wrapperPos.Y))
 						{
-							_markedCache[position] = true;
+							MarkedCache[position] = true;
 						}
 					}
 				}
 
-				return _markedCache[position];
+				return MarkedCache[position];
 			}
 		}
 
@@ -488,17 +501,14 @@ namespace XNAFrontend.Components
 			{
 				Thread.Sleep(5);
 			}
-			
+
 			_lastMoveHighlight[0] = null;
 			_lastMoveHighlight[1] = null;
 		}
 
 		public void ClearMarkCache()
 		{
-			lock (_markedCache)
-			{
-				_markedCache = new Dictionary<Vector2, bool>();
-			}
+			MarkedCache = new Dictionary<Vector2, bool>();
 		}
 	}
 }
