@@ -110,9 +110,6 @@ namespace XNAFrontend.Components
 					_yaw += MathHelper.Pi;
 				}
 			}
-			else if (oldStateR.IsKeyDown(Keys.R) || (oldMouseStateR.MiddleButton == ButtonState.Pressed))
-			{
-			}
 			oldStateR = state;
 			oldMouseStateR = mouseState;
 
@@ -128,16 +125,8 @@ namespace XNAFrontend.Components
 			}
 			oldStateT = state;
 
-
-
-
-
-
 			_pitch = MathHelper.Clamp(_pitch, MinPitch, MaxPitch);
 			_zoom = MathHelper.Clamp(_zoom, MinZoom, MaxZoom);
-
-
-
 
 			RecreateViewMatrix();
 			base.Update(gameTime);
