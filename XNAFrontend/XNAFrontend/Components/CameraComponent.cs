@@ -66,7 +66,6 @@ namespace XNAFrontend.Components
 			RecreateProjectionMatrix();
 
 			base.Initialize();
-
 		}
 
 		/// <summary>
