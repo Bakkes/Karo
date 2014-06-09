@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="1ba845b5-e2cb-4f41-a8ce-693aba497a64" name="EngineGlobal" linkedPackageId="a653d5f9-1095-47af-9dd7-a579f06e99ea" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="f6d9f6ca-3fca-4e48-bbb9-593c249ba59e">
+      <profileInstance Id="cd4001e5-eea3-4816-8815-cb3486db62d9" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="0e8d19f8-aacc-41e5-8dfd-9fc921dc81f7">
+      <profileInstance Id="a9553813-da29-457f-9128-30ffc581bdff" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="6f417deb-9bba-4a76-b63b-6588494d460a" name="Board" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="961ac029-6d30-456d-b1ac-e4543604f58e" />
+        <suppliersInternal>
+          <interfaceRealization Id="8ced7e4e-e668-4b59-8b27-9705cf49e249">
+            <interfaceMoniker Id="f85400ab-2e4b-4e99-8b1c-5e5c82708692" LastKnownName="IBoard" />
+            <elementDefinition Id="7396aa70-da1f-4ccd-8913-ddd4a6c5843c" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="8dc4a25b-8bcf-438a-8d77-ec908ef05c61" name="ToString" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="1e5bbd05-e2a7-4b36-b657-918e00c172a3" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="6549305a-047a-4ad3-bbb1-21637d0b8651" direction="Return" isUnique="false">
+                  <elementDefinition Id="6bd1cf5f-8a6d-469c-9d9e-c57f347c87e4" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="54c2af71-9c52-47a7-9d0a-66da164daff2" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="b6660967-03cf-47c1-bc49-677ac2a0a2f5" name="ToSaneString" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2b3cce25-11cd-46f1-bd78-72bb88eb703d" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1a490422-59f9-489a-ba8c-74e38431df27" direction="Return" isUnique="false">
+                  <elementDefinition Id="6836e2ba-7d04-4a56-81b7-a99cad91e802" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="54c2af71-9c52-47a7-9d0a-66da164daff2" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="843997a5-aa09-45c2-b054-bf4d6dde020c" name="CreateBoard" isLeaf="false" isStatic="true" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="33d77d94-48b8-4542-bca3-141749fa3060" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7cd0699b-3cf7-4f81-8eeb-6b00378f94ad" name="board" direction="In" isUnique="false">
+                  <elementDefinition Id="1d7e4014-5270-4294-b1e9-2d1e9689f0dc" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="54c2af71-9c52-47a7-9d0a-66da164daff2" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d7076fa6-3e14-4833-94e6-8f7e967ee736" direction="Return" isUnique="false">
+                  <elementDefinition Id="38c6795a-7117-46d3-819c-3cd0b89e9895" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="65c51474-79e3-4daf-8b9d-a43c063837f1" LastKnownName="Board" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="6d1e9f44-a93b-45d8-af49-f4ca409ca34a" name="CreateBoard" isLeaf="false" isStatic="true" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7ca1580a-e281-4c08-9d12-2823ad0018b4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3ab79b20-181d-4c74-aa93-a0185d4e651f" name="board" direction="In" isUnique="false">
+                  <elementDefinition Id="634e3120-9cb6-4819-be21-6856b57c407e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="54c2af71-9c52-47a7-9d0a-66da164daff2" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5b5dd5ce-8200-4222-a695-ae49feb4033f" name="topleft" direction="In" isUnique="false">
+                  <elementDefinition Id="f094ff88-c296-4045-9905-091e5e2133d0" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="aa9a1f06-0aa2-4ae5-97a4-8330b90aab85" direction="Return" isUnique="false">
+                  <elementDefinition Id="b656fe29-f4bf-46fa-bcd8-819cd25d169a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="65c51474-79e3-4daf-8b9d-a43c063837f1" LastKnownName="Board" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="1951b81f-01fb-4f28-ac35-5b45fde0db47" name="Vector2D" isAbstract="false" isLeaf="false" cachedFullName="Vector2D">
+        <elementDefinition Id="d44f383f-1bb6-471e-a410-d546eec2a954" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="54c2af71-9c52-47a7-9d0a-66da164daff2" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="82e572c2-2554-423a-9067-66f78f858380" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="65c51474-79e3-4daf-8b9d-a43c063837f1" name="Board" isAbstract="false" isLeaf="false" cachedFullName="Models::Board">
+        <elementDefinition Id="132dd569-718e-4b0e-9aa3-74872203b0cc" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="f85400ab-2e4b-4e99-8b1c-5e5c82708692" name="IBoard" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="18b4377c-c449-44f7-83f8-82ffbf3e5a0b" />
+        <ownedOperations>
+          <operation Id="3862fe5c-fb18-4a2c-a46e-122c060c40c0" name="ExecuteMove" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="22862616-4469-4a96-ac99-2d657ee25609" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b295d4eb-2ea1-4931-a288-5c51e5255714" direction="Return" isUnique="false">
+                  <elementDefinition Id="a4853f10-cd43-4d03-b6d8-214847eeaded" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="90fe5757-d66d-42a6-9c5a-203825923da9" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="55edaa73-1a98-4e92-87bc-9b0497b0b747" name="move" direction="In" isUnique="false">
+                  <elementDefinition Id="0c688ae2-1d60-42cf-b9d3-2da95e54381b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="d2257d4c-86ab-4b99-9a07-51f4b874e7df" LastKnownName="Move" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b8aff28a-33a4-4f89-b889-725ac035d963" name="player" direction="In" isUnique="false">
+                  <elementDefinition Id="246146be-bf75-4cd4-bff2-7e8f3ba4b819" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="91221f88-630c-4682-8f08-097fdff33894" LastKnownName="Players" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="cb92c84c-2910-44a9-9d03-9f248776c82a" name="UndoMove" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="21f82629-d7ab-46c4-aec7-a1b236bb1964" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c30067a2-6390-43dd-bf4d-fcb1759fbcbe" name="move" direction="In" isUnique="false">
+                  <elementDefinition Id="d200e384-d79d-42c3-bc8b-013ff1b6b195" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="04f5a54d-e2c8-4fef-a7a8-69f0bc47364a" LastKnownName="Move" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ee4859e7-3200-4938-a644-dcdad08a4440" name="player" direction="In" isUnique="false">
+                  <elementDefinition Id="c4e7ea7d-c904-46af-9226-e30481248585" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="0f4ad44a-87f8-4fbe-bd8a-44708e545eed" LastKnownName="Players" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0c13b4a0-d90d-4bf4-9b1c-5c27e35d4b86" direction="Return" isUnique="false">
+                  <elementDefinition Id="c6215125-cb1d-4692-bac8-7f0184d699de" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="2f8d0fe9-2fdc-425e-80a7-1069c565cf56" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="d20387de-79c3-40c6-a470-3792c2e373f9" name="GetOccupiedTiles" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="19329547-e1e7-42dd-ade1-9e7ca2d9f981" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="54b04d12-9c71-40b5-968e-247d89b518d3" direction="Return" isUnique="false">
+                  <elementDefinition Id="54d3215d-a59c-44c1-938f-abcbb9fdff84" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c749eeb6-0b85-4e32-99cf-0fe517ea6294" LastKnownName="vector&lt;RelativeCell&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="773b8478-ce1c-4450-981a-cce8cfbadd8d" name="GetEmptyTiles" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="52e12880-e498-4898-a436-ba85e87dfb94" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="57021230-883b-4b8f-a09d-f9a5dd63bd49" direction="Return" isUnique="false">
+                  <elementDefinition Id="67babef8-1b8a-4f4b-8a2f-6a790f90572f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c749eeb6-0b85-4e32-99cf-0fe517ea6294" LastKnownName="vector&lt;RelativeCell&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="dfcd4193-a8e7-4d07-88db-58fe7a749503" name="GetLegalMoves" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="51cdb3da-7a63-4cab-9bf3-d88260c21c1b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ad02ea41-e290-4315-8e52-355ec0ca5a95" direction="Return" isUnique="false">
+                  <elementDefinition Id="02d1c070-e644-496e-824e-96a61333118b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="593c09da-d7a0-42ef-8440-f61ef757a698" LastKnownName="vector&lt;Move&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="be48cd28-0a58-4505-9fb4-0f1f90d5647e" name="player" direction="In" isUnique="false">
+                  <elementDefinition Id="ab6f0b0b-e50a-4efc-af52-2203d480de06" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="248a9eb0-b2c4-4adf-9b23-a5ba35f8863b" LastKnownName="Players" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="ec0763fc-138d-41f9-8920-1515b4068c25" name="GetRelativeCellAt:" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a0bc6eec-1c98-4b58-9685-3ba26d8c07d5" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="25a98487-8e42-4501-ab81-e3aa3e22fdfc" name="pos" direction="In" isUnique="false">
+                  <elementDefinition Id="8151d6dc-6ffe-4f39-9f74-8165164e6c7e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="d74c8a53-a085-451f-be6b-15f79a6a5de4" LastKnownName="Vector2D" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d2c8254a-867e-4d44-a71a-e884b8e138c7" direction="Return" isUnique="false">
+                  <elementDefinition Id="4f64e92e-efa4-4134-b4de-f55779dd4dae" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="fa31e445-11f0-4586-aa74-6b47d6c4385a" LastKnownName="RelativeCell" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="90fe5757-d66d-42a6-9c5a-203825923da9" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d2257d4c-86ab-4b99-9a07-51f4b874e7df" name="Move" isAbstract="false" isLeaf="false" cachedFullName="Move">
+        <elementDefinition Id="b0dd07aa-e95d-42d5-8249-b1fd1974c985" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="91221f88-630c-4682-8f08-097fdff33894" name="Players" isAbstract="false" isLeaf="false" cachedFullName="Models::Players">
+        <elementDefinition Id="56241283-5733-47ed-b2da-b3e62c6f793e" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="04f5a54d-e2c8-4fef-a7a8-69f0bc47364a" name="Move" isAbstract="false" isLeaf="false" cachedFullName="Move">
+        <elementDefinition Id="b0dd07aa-e95d-42d5-8249-b1fd1974c985" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="0f4ad44a-87f8-4fbe-bd8a-44708e545eed" name="Players" isAbstract="false" isLeaf="false" cachedFullName="Models::Players">
+        <elementDefinition Id="56241283-5733-47ed-b2da-b3e62c6f793e" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="2f8d0fe9-2fdc-425e-80a7-1069c565cf56" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="e5a7af0a-b109-467c-ae04-9ce4b1b19a28" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c749eeb6-0b85-4e32-99cf-0fe517ea6294" name="vector&lt;RelativeCell&gt;" isAbstract="false" isLeaf="false" cachedFullName="vector&lt;RelativeCell&gt;">
+        <elementDefinition Id="05bfb4c3-820f-41b8-a18e-12db793cdd83" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="593c09da-d7a0-42ef-8440-f61ef757a698" name="vector&lt;Move&gt;" isAbstract="false" isLeaf="false" cachedFullName="vector&lt;Move&gt;">
+        <elementDefinition Id="3861b020-8611-450f-895c-751e2fb08f24" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="248a9eb0-b2c4-4adf-9b23-a5ba35f8863b" name="Players" isAbstract="false" isLeaf="false" cachedFullName="Models::Players">
+        <elementDefinition Id="56241283-5733-47ed-b2da-b3e62c6f793e" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="d74c8a53-a085-451f-be6b-15f79a6a5de4" name="Vector2D" isAbstract="false" isLeaf="false" cachedFullName="Vector2D">
+        <elementDefinition Id="d44f383f-1bb6-471e-a410-d546eec2a954" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="fa31e445-11f0-4586-aa74-6b47d6c4385a" name="RelativeCell" isAbstract="false" isLeaf="false" cachedFullName="RelativeCell">
+        <elementDefinition Id="4739b125-6b43-4239-b617-8577c9f01f14" />
+      </referencedType>
+    </packageHasNamedElement>
+  </packagedElements>
+  <package Id="a653d5f9-1095-47af-9dd7-a579f06e99ea" name="Models">
+    <elementDefinition Id="5630eedd-7b8e-4bda-b537-886da277cc1c" />
+  </package>
+</logicalClassDesignerModel>
