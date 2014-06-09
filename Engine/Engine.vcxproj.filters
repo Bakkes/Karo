@@ -24,9 +24,6 @@
     <ClCompile Include="EvalResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExportedClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Move.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -78,6 +75,15 @@
     <ClCompile Include="MoveOrderExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AltEval.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RngTimeBased.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TranspositionExtension.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h">
@@ -96,9 +102,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EvalResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ExportedClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Grid.h">
@@ -167,13 +170,22 @@
     <ClInclude Include="AIFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MiniMaxExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MoveOrderExtension.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IRng.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AltEval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RngTimeBased.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TranspositionExtension.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

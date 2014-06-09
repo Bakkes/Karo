@@ -93,7 +93,6 @@
     <ClInclude Include="RelativeAbsoluteConverter.h" />
     <ClInclude Include="DllImportExport.h" />
     <ClInclude Include="EvalResult.h" />
-    <ClInclude Include="ExportedClass.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="IBoard.h" />
     <ClInclude Include="IComputerPlayer.h" />
@@ -104,7 +103,6 @@
     <ClInclude Include="MoveFinder.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="RelativeCell.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="RngTimeBased.h" />
     <ClInclude Include="Size.h" />
     <ClInclude Include="StaticEvaluation.h" />
@@ -125,7 +123,6 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="ComputerPlayerUtils.cpp" />
     <ClCompile Include="EvalResult.cpp" />
-    <ClCompile Include="ExportedClass.cpp" />
     <ClCompile Include="Move.cpp" />
     <ClCompile Include="MoveFinder.cpp" />
     <ClCompile Include="MoveOrderExtension.cpp" />
