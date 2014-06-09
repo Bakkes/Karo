@@ -20,7 +20,7 @@ namespace wrapper {
 		IRng* rand = new RngTimeBased();
 		_hasher = new ZobristHashing(nullptr, rand);
 		delete rand;
-		_prefferedAI = 0;
+		_prefferedAI = 5;
 	}
 
 	void KaroGame::SetAI(int to){

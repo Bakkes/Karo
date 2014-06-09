@@ -182,7 +182,7 @@ namespace XNAFrontend
 				
 				// the other me is configurable but connecto ai always uses the best one
 				// the best one is with the longest name
-				otherMe.Game.SetAI(2);
+				otherMe.Game.SetAI(0);
 				otherMe.name = "Messed up ai";
 				ConnectTo(IPAddress.Parse("127.0.0.1"), 43594);
 			}

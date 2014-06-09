@@ -5,8 +5,8 @@ namespace engine{
 	{
 		_board = board;
 		_maxDepth = maxDepth;
-		ZobristHashing* _hasher = hasher;
-		TranspositionTable* _table = table;
+		_hasher = hasher;
+		_table = table;
 	}
 
 	AIFactory::~AIFactory(void)

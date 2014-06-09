@@ -103,7 +103,7 @@ namespace KaroManager
 			Debug.WriteLine("Converted turn to move: " + _conversion.MoveWrapperToString(received));
 
 			// Get the move with the correct source tile from the last click.
-			Console.WriteLine("Current player: " + CurrentPlayer);
+			Debug.WriteLine("Current player: " + CurrentPlayer);
 			if (!IsMoveLegal(received, CurrentPlayer))
 			{
 				Console.WriteLine("Move is illegal, sending back");
