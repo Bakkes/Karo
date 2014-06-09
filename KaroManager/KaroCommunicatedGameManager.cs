@@ -17,8 +17,8 @@ namespace KaroManager
 		private Random rand = new Random(1340);
 
 		public KaroCommunicatedGameManager(ICommunication communication)
-			: base()
-		{
+			: base(){
+			name = "Computer player";
 			CurrentPlayer = Players.Min;
 			_conversion = new CommunicationProtocolConversionUtility(Game);
 			_communication = communication;
@@ -177,11 +177,12 @@ namespace KaroManager
 		MoveWrapper GetMove() {
             MoveWrapper move = Game.GetBestMove();
 
-            Console.WriteLine("Computer Player - Eval Count = {0}, Nodes Seen = {1}", Game.GetStaticEvalCallCount(), Game.GetNodesSeenCount());
+            Console.WriteLine(name + " - Eval Count = {0}, Nodes Seen = {1}", Game.GetStaticEvalCallCount(), Game.GetNodesSeenCount());
 
 			return move;
 		}
 
+		public String name { get; set; }
 		void Communication_Disconnected(DisconnectReason reason)
 		{
 			Debug.WriteLine("Opponent disconnected, reason: " + reason.ToString());

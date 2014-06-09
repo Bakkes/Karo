@@ -63,6 +63,9 @@ namespace CommunicationProtocol
                 }*/
             }
             DoCommunication();
+	        if(_listener == null){
+		        return;
+	        }
             _listener.Stop();
         }
         /// <summary>

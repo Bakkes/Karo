@@ -20,8 +20,12 @@ namespace wrapper {
 		IRng* rand = new RngTimeBased();
 		_hasher = new ZobristHashing(nullptr, rand);
 		delete rand;
+		_prefferedAI = 0;
 	}
 
+	void KaroGame::SetAI(int to){
+		_prefferedAI = to;
+	}
 	KaroGame::~KaroGame() {
 		this->!KaroGame();
 	}
@@ -46,7 +50,7 @@ namespace wrapper {
 
 	MoveWrapper^ KaroGame::GetBestMove() {
 		IBoard* cpBoard = _board->GetInternalBoardCopy();
-		AI* cPlayer = AIFactory(cpBoard, 3).CreateMoveOrderingAlfaZorbristAI(_hasher, _transpositionTable);
+		AI* cPlayer = AIFactory(cpBoard, _hasher, _transpositionTable, 3).CreateAI(_prefferedAI);
 		_hasher->UpdateBoard(cpBoard);
 		cPlayer->SetEvaluator(new AltEval());
 		Move bestMove = cPlayer->GetBestMove(engine::wrapper::Max);

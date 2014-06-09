@@ -24,6 +24,7 @@ namespace wrapper {
 			BoardWrapper^ GetBoard();
 			int GetStaticEvalCallCount();
 			int GetNodesSeenCount();
+			void SetAI(int to);
 		private:
 			BoardWrapper^ _board;
 			TranspositionTable* _transpositionTable;
@@ -31,6 +32,7 @@ namespace wrapper {
 
 			int _staticEvalCallCount;
 			int _nodesSeen;
+			int _prefferedAI;
 	};
 }
 }

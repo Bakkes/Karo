@@ -166,18 +166,32 @@ namespace XNAFrontend
 				Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
 				return;
 			}
-			if(modus == 2){ // play with yourself
+			if(modus == 2){
+				// play with yourself
 				DisposeCommunication();
-				otherMe = new KaroCommunicatedGameManager(new Server(43594));
+				if(otherMeServer != null){
+					otherMeServer.CleanUp();
+				}
+				otherMeServer = new Server(43594);
+				otherMe = new KaroCommunicatedGameManager(otherMeServer);
+				// change number to change openent
+				// 0: mimax ai (slowest possible)
+				// 1: alfa beta ai
+				// 2: moverordering ab ai
+				// >=3: move ordering alfa beta transpositiontable ai
+				
+				// the other me is configurable but connecto ai always uses the best one
+				// the best one is with the longest name
+				otherMe.Game.SetAI(2);
+				otherMe.name = "Messed up ai";
 				ConnectTo(IPAddress.Parse("127.0.0.1"), 43594);
 			}
 
 		}
 
+		private ICommunication otherMeServer;
 		private KaroCommunicatedGameManager otherMe;
 
-		private void fancyServerStuff(){
-		}
 
 		private void PlayerWon(Players player)
 		{
