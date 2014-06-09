@@ -42,9 +42,6 @@
     <ClCompile Include="BoardRelativity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StaticEvaluationTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StubBoard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,12 +67,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StubRng.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ZobristBugTests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomNumberOutputTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

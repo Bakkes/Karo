@@ -70,17 +70,13 @@ namespace engine {
 
 			bool containsMove = find(moves.begin(), moves.end(), *data->GetBestMove(player)) != moves.end();
 
-			if (containsMove) {
-				std::cout << "zobrist, Nodes saved: " << (moves.size() - 1) << std::endl;
-
-				moves.clear();
-				moves.push_back(Move(*data->GetBestMove(player)));
-				staticCounter2++;
-			} else {
-				staticCounter++;
-				int percentage = (int)((staticCounter / ((double) (staticCounter + staticCounter2)) * 100));
-				std::cout << "zobrist COLLISION DETECTED! Sum: " << staticCounter << " / " << staticCounter2 << "(" << percentage << "%)" << std::endl;
+			if (!containsMove) {
+				// Collision in zobrist hash, ignore this state
+				return;
 			}
+
+			moves.clear();
+			moves.push_back(Move(*data->GetBestMove(player)));
 		} else if (data->GetDepth() > depth) {
 			// We've seen this board before but at a deeper level, this search will improve that
 			// We can use our result from previous search to order the moves a bit

@@ -29,13 +29,10 @@
     <ClCompile Include="MoveDifference.cpp" />
     <ClCompile Include="MoveFinderTests.cpp" />
     <ClCompile Include="MoveInvertionTest.cpp" />
-    <ClCompile Include="RandomNumberOutputTest.cpp" />
-    <ClCompile Include="StaticEvaluationTest.cpp" />
     <ClCompile Include="StubBoard.cpp" />
     <ClCompile Include="StubRng.cpp" />
     <ClCompile Include="StubStaticEval.cpp" />
     <ClCompile Include="TranspositionTableTest.cpp" />
-    <ClCompile Include="ZobristBugTests.cpp" />
     <ClCompile Include="ZobristHashingTest.cpp" />
   </ItemGroup>
   <ItemGroup>
