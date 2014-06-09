@@ -37,7 +37,7 @@ namespace engine{
 		switch (move.GetMoveType()) {
 		case INSERT:
 			// Remove empty tile
-			_hash ^= _hashValues[HasTile | IsEmpty][positionFrom];
+			_hash ^= _hashValues[HasTile | IsEmpty][positionTo];
 			// Insert tile with player
 			_hash ^= _hashValues[HasTile | GetDataForPlayer(move.GetToCell())][positionTo];
 			break;
@@ -80,7 +80,7 @@ namespace engine{
 
 	}
 	
-	void ZobristHashing::UndoMove(const Move& move, Players& player) {
+	void ZobristHashing::UndoMove(const Move& move, Players player) {
 		if (move.HasUsedCell()) {
 			// This move potentially shifts the TopLeft in our relative field
 			// Trying to figure the new hash based on that move is complex
@@ -122,10 +122,10 @@ namespace engine{
 			int cellData = GetCellData(move.GetFromCell());
 
 			// FROM
-			// Remvoe empty tile
+			// Remove empty tile
 			_hash ^= _hashValues[HasTile | IsEmpty][positionFrom];
 			// Insert player
-			_hash ^= _hashValues[cellData][positionFrom];
+			_hash ^= _hashValues[cellData ^ IsFlipped][positionFrom];
 
 			// TO
 			// Remove player

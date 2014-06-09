@@ -60,6 +60,7 @@ namespace Tests {
 
 			Move move(JUMP, from, to, used);
 			board->ExecuteMove(move, Min);
+			hasher.ExecuteMove(move);
 
 			int baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
@@ -81,6 +82,7 @@ namespace Tests {
 			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
+			hasher.UndoMove(move, Min);
 			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
@@ -118,13 +120,14 @@ namespace Tests {
 
 			Move move(STEP, from, to, used);
 			board->ExecuteMove(move, Min);
+			hasher.ExecuteMove(move);
 
-			int baseHash = STARTING_HASH;
+			long long baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = 0;
+			long long expectedHash = 0;
 
 			// Generate board has but shifted
 			for (int x = 0; x < 5; ++x) {
@@ -150,6 +153,7 @@ namespace Tests {
 			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
+			hasher.UndoMove(move, Min);
 			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
@@ -184,13 +188,14 @@ namespace Tests {
 
 			Move move(STEP, from, to, used);
 			board->ExecuteMove(move, Min);
+			hasher.ExecuteMove(move);
 
-			int baseHash = STARTING_HASH;
+			long long baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			long long expectedHash = baseHash;
 
 			// Delete Piece
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -205,6 +210,7 @@ namespace Tests {
 			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
+			hasher.UndoMove(move, Min);
 			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
@@ -238,13 +244,14 @@ namespace Tests {
 
 			Move move(JUMP, from, to);
 			board->ExecuteMove(move, Min);
+			hasher.ExecuteMove(move);
 
-			int baseHash = STARTING_HASH;
+			long long baseHash = STARTING_HASH;
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			long long expectedHash = baseHash;
 			
 			// Delete Piece at (3, 3)
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -257,6 +264,7 @@ namespace Tests {
 			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
+			hasher.UndoMove(move, Min);
 			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
@@ -290,13 +298,14 @@ namespace Tests {
 
 			Move move(STEP, from, to);
 			board->ExecuteMove(move, Min);
+			hasher.ExecuteMove(move);
 
-			int baseHash = STARTING_HASH;	
+			long long baseHash = STARTING_HASH;	
 			// Correct the Starting has based on the standard board
 			baseHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(from)];
 			baseHash ^= _hashValues[HasTile][GetCellPosition(from)];
 
-			int expectedHash = baseHash;
+			long long expectedHash = baseHash;
 
 			// Delete Piece at (3, 3)
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(from)];
@@ -309,6 +318,7 @@ namespace Tests {
 			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
+			hasher.UndoMove(move, Min);
 			Assert::IsTrue(baseHash == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
@@ -316,16 +326,20 @@ namespace Tests {
 			Board* board = CreateStartingBoard();
 			ZobristHashing hasher(board, CreateStubRNG());
 
+			Assert::IsTrue(STARTING_HASH == hasher.GetHash(), L"Invalid starting hash");
+
 			Move move(INSERT, Vector2D(3, 3));
 			board->ExecuteMove(move, Min);
+			hasher.ExecuteMove(move);
 
-			int expectedHash = STARTING_HASH;
+			long long expectedHash = STARTING_HASH;
 			expectedHash ^= _hashValues[HasTile | IsEmpty][GetCellPosition(Vector2D(3, 3))];
 			expectedHash ^= _hashValues[HasTile][GetCellPosition(Vector2D(3, 3))];
 
 			Assert::IsTrue(expectedHash == hasher.GetHash(), L"Invalid hash after Move");
 
 			board->UndoMove(move, Min);
+			hasher.UndoMove(move, Min);
 			Assert::IsTrue(STARTING_HASH == hasher.GetHash(), L"Invalid hash after undo");
 		}
 
@@ -335,7 +349,7 @@ namespace Tests {
 
 		IRng* CreateStubRNG() {
 			long long* values = new long long[6400];
-			for (int i = 0; i < 6400; i++) {
+			for (long long i = 0; i < 6400; i++) {
 				values[i] = i;
 			}
 			return new StubRng(values);

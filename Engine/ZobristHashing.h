@@ -14,7 +14,7 @@ namespace engine {
 		long long GetHash() override;
 		void UpdateBoard(IBoard* board) override;
 		void ExecuteMove(const Move& move) override;
-		void UndoMove(const Move& move, Players& player) override;
+		void UndoMove(const Move& move, Players player) override;
 
 	private:
 		long long _hashValues[16][400];
