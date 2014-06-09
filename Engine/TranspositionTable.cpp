@@ -3,7 +3,7 @@
 namespace engine {
 	TranspositionTable::TranspositionTable(int maxSize)
 	{
-		_hashMap = new map<long long,TranspositionTableData*>();
+		_hashMap = new unordered_map<long long,TranspositionTableData*>();
 		_ageQueue = new queue<long long>();
 		_maxSize = maxSize;
 	}
