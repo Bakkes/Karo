@@ -1,3 +1,6 @@
+using System;
+using System.Net;
+using System.Threading;
 using engine.wrapper;
 using KaroManager;
 using Microsoft.Xna.Framework;
@@ -146,21 +149,34 @@ namespace XNAFrontend
 		}
 		#endregion
 
-		public void StartOnlineGame(bool isClient)
+		public void StartOnlineGame(int modus)
 		{
-			if (isClient)
+			if (modus == 0) // client
 			{
 				Components.Add(new ConnectComponent(this));
 				return;
 			}
+			if(modus == 1){ // server
+				DisposeCommunication();
+				_communication = new Server(43594);
+				_communication.Connected += ConnectionSucceed;
+				AddGlobalHandlers();
+				KaroGameManager = new KaroCommunicatedGameManager(_communication);
+				KaroGameManager.OnPlayerWin += PlayerWon;
+				Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
+				return;
+			}
+			if(modus == 2){ // play with yourself
+				DisposeCommunication();
+				otherMe = new KaroCommunicatedGameManager(new Server(43594));
+				ConnectTo(IPAddress.Parse("127.0.0.1"), 43594);
+			}
 
-			DisposeCommunication();
-			_communication = new Server(43594);
-			_communication.Connected += ConnectionSucceed;
-			AddGlobalHandlers();
-			KaroGameManager = new KaroCommunicatedGameManager(_communication);
-			KaroGameManager.OnPlayerWin += PlayerWon;
-			Components.Add(new MessageComponent(this, "Waiting for opponent...", "Hit enter to cancel", new MenuComponent(this)));
+		}
+
+		private KaroCommunicatedGameManager otherMe;
+
+		private void fancyServerStuff(){
 		}
 
 		private void PlayerWon(Players player)

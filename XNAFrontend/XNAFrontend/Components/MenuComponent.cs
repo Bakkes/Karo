@@ -44,14 +44,12 @@ namespace XNAFrontend.Components
 			if (game.keyState.IsKeyDown(Keys.Down) && game.prevKeyState.IsKeyUp(Keys.Down))
 			{
 				selectedItem++;
-				if (menuDepth == 1 && selectedItem > 1) { selectedItem = 0; }
 				if (selectedItem > 2) { selectedItem = 0; }
 			}
 			if (game.keyState.IsKeyDown(Keys.Up) && game.prevKeyState.IsKeyUp(Keys.Up))
 			{
 				selectedItem--;
 				if (selectedItem < 0) { selectedItem = 2; }
-				if (menuDepth == 1 && selectedItem > 1) { selectedItem = 1; }
 			}
 			if (game.keyState.IsKeyDown(Keys.Enter) && game.prevKeyState.IsKeyUp(Keys.Enter))
 			{
@@ -77,14 +75,9 @@ namespace XNAFrontend.Components
 				game.Exit();
 			}
 
-			if (item == 0 && depth == 1) // Client
+			if (depth == 1) // Client
 			{
-				game.StartOnlineGame(true); 
-				game.Components.Remove(this);
-			}
-			if (item == 1 && depth == 1) // Server
-			{
-				game.StartOnlineGame(false);
+				game.StartOnlineGame(item); 
 				game.Components.Remove(this);
 			}
 
@@ -107,6 +100,7 @@ namespace XNAFrontend.Components
 			{
 				game.spriteBatch.DrawString(font, "Client", new Vector2(100, 175), GetColorForItem(0));
 				game.spriteBatch.DrawString(font, "Server", new Vector2(100, 225), GetColorForItem(1));
+				game.spriteBatch.DrawString(font, "I will Beat myself", new Vector2(100, 275), GetColorForItem(2));
 			}
 
 			game.spriteBatch.End();
